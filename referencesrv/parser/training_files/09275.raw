@@ -1,0 +1,432 @@
+% /proj/ads/references/sources/arXiv/1903/09275.raw
+%R 2019arXiv190309275J
+%Z
+
+% M. Boylan-Kolchin, D. R. Weisz, J. S. Bullock and M. C. Cooper, The Local Group: the ultimate deep field, MNRAS 462 (2016) L51 [1603.02679].
+%
+AUTHOR_FIRST_NAME	M
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Boylan-Kolchin
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	D
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	R
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Weisz
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	J
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	S
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Bullock
+AND	and
+AUTHOR_FIRST_NAME	M
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	C
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Cooper
+PUNCTUATION_COMMA	,
+TITLE	The
+TITLE	Local
+TITLE	Group
+PUNCTUATION_COLON	:
+TITLE	the
+TITLE	ultimate
+TITLE	deep
+TITLE	field
+PUNCTUATION_COMMA	,
+JOURNAL	MNRAS
+VOLUME	462
+PUNCTUATION_PARENTHESIS	(
+YEAR	2016
+PUNCTUATION_PARENTHESIS	)
+PAGE	L51
+PUNCTUATION_BRACKETS [
+ARXIV	1603.02679
+PUNCTUATION_BRACKETS ]
+PUNCTUATION_DOT .
+
+% C. Wheeler, J. I. Phillips, M. C. Cooper, M. Boylan-Kolchin and J. S. Bullock, The surprising inefficiency of dwarf satellite quenching, MNRAS 442 (2014) 1396 [1402.1498].
+%
+AUTHOR_FIRST_NAME	C
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Wheeler
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	J
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	I
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Phillips
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	M
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	C
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Cooper
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	M
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Boylan-Kolchin
+AND	and
+AUTHOR_FIRST_NAME	J
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	S
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Bullock
+PUNCTUATION_COMMA	,
+TITLE	The
+TITLE	surprising
+TITLE	inefficiency
+TITLE	of
+TITLE	dwarf
+TITLE	satellite
+TITLE	quenching
+PUNCTUATION_COMMA	,
+JOURNAL	MNRAS
+VOLUME	442
+PUNCTUATION_PARENTHESIS	(
+YEAR	2014
+PUNCTUATION_PARENTHESIS	)
+PAGE	1396
+PUNCTUATION_BRACKETS [
+ARXIV	1402.1498
+PUNCTUATION_BRACKETS ]
+PUNCTUATION_DOT	.
+
+% E. N. Kirby, J. G. Cohen, G. H. Smith, S. R. Majewski, S. T. Sohn and P. Guhathakurta, Multi-element Abundance Measurements from Medium-resolution Spectra. IV. Alpha Element Distributions in Milky Way Satellite Galaxies, ApJ 727 (2011) 79 [1011.5221].
+%
+AUTHOR_FIRST_NAME	E
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	N
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Kirby
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	J
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	G
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Cohen
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	G
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	H
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Smith
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	S
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	R
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Majewski
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	S
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	T
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Sohn
+AND	and
+AUTHOR_FIRST_NAME	P
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Guhathakurta
+PUNCTUATION_COMMA	,
+TITLE	Multi-element
+TITLE	Abundance
+TITLE	Measurements
+TITLE	from
+TITLE	Medium-resolution
+TITLE	Spectra
+PUNCTUATION_DOT	.
+TITLE	IV
+PUNCTUATION_DOT	.
+JOURNAL	Alpha
+JOURNAL	Element
+JOURNAL	Distributions
+JOURNAL	in
+JOURNAL	Milky
+JOURNAL	Way
+JOURNAL	Satellite
+JOURNAL	Galaxies
+PUNCTUATION_COMMA	,
+JOURNAL	ApJ
+VOLUME	727
+PUNCTUATION_PARENTHESIS	(
+YEAR	2011
+PUNCTUATION_PARENTHESIS	)
+PAGE	79
+PUNCTUATION_BRACKETS [
+ARXIV	1011.5221
+PUNCTUATION_BRACKETS ]
+PUNCTUATION_DOT	.
+
+% A. P. Ji, A. Frebel, A. Chiti and J. D. Simon, R-process enrichment from a single event in an ancient dwarf galaxy, Nature 531 (2016) 610 [1512.01558].
+%
+AUTHOR_FIRST_NAME	A
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	P
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Ji
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	A
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Frebel
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	A
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Chiti
+AND	and
+AUTHOR_FIRST_NAME	J
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	D
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Simon
+PUNCTUATION_COMMA	,
+TITLE	R-process
+TITLE	enrichment
+TITLE	from
+TITLE	a
+TITLE	single
+TITLE	event
+TITLE	in
+TITLE	an
+TITLE	ancient
+TITLE	dwarf
+TITLE	galaxy
+PUNCTUATION_COMMA	,
+JOURNAL	Nature
+VOLUME	531
+PUNCTUATION_PARENTHESIS	(
+YEAR	2016
+PUNCTUATION_PARENTHESIS	)
+PAGE	610
+PUNCTUATION_BRACKETS [
+ARXIV	1512.01558
+PUNCTUATION_BRACKETS ]
+PUNCTUATION_DOT	.
+
+% M. Jeon, G. Besla and V. Bromm, Connecting the First Galaxies with Ultrafaint Dwarfs in the Local Group: Chemical Signatures of Population III Stars, ApJ 848 (2017) 85 [1702.07355].
+%
+AUTHOR_FIRST_NAME	M
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Jeon
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	G
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Besla
+AND	and
+AUTHOR_FIRST_NAME	V
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Bromm
+PUNCTUATION_COMMA	,
+TITLE	Connecting
+TITLE	the
+TITLE	First
+TITLE	Galaxies
+TITLE	with
+TITLE	Ultrafaint
+TITLE	Dwarfs
+TITLE	in
+TITLE	the
+TITLE	Local
+TITLE	Group
+PUNCTUATION_COLON	:
+TITLE	Chemical
+TITLE	Signatures
+TITLE	of
+TITLE	Population
+TITLE	III
+TITLE	Stars
+PUNCTUATION_COMMA	,
+JOURNAL	ApJ
+VOLUME	848
+PUNCTUATION_PARENTHESIS	(
+YEAR	2017
+PUNCTUATION_PARENTHESIS	)
+PAGE	85
+PUNCTUATION_BRACKETS [
+ARXIV	1702.07355
+PUNCTUATION_BRACKETS ]
+PUNCTUATION_DOT	.
+
+% K. Bechtol, A. Drlica-Wagner, E. Balbinot, A. Pieres, J. D. Simon, B. Yanny et al., Eight New Milky Way Companions Discovered in First-year Dark Energy Survey Data, ApJ 807 (2015) 50 [1503.02584].
+%
+AUTHOR_FIRST_NAME	K
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Bechtol
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	A
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Drlica-Wagner
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	E
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Balbinot
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	A
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Pieres
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	J
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	D
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Simon
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	B
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Yanny
+ET_AL	et
+ET_AL	al
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+TITLE	Eight
+TITLE	New
+TITLE	Milky
+TITLE	Way
+TITLE	Companions
+TITLE	Discovered
+TITLE	in
+TITLE	First-year
+TITLE	Dark
+TITLE	Energy
+TITLE	Survey
+TITLE	Data
+PUNCTUATION_COMMA	,
+TITLE	ApJ
+VOLUME	807
+PUNCTUATION_PARENTHESIS	(
+YEAR	2015
+PUNCTUATION_PARENTHESIS	)
+PAGE	50
+PUNCTUATION_BRACKETS [
+ARXIV	1503.02584
+PUNCTUATION_BRACKETS ]
+PUNCTUATION_DOT	.
+
+% S. E. Koposov, V. Belokurov, G. Torrealba and N. W. Evans, Beasts of the Southern Wild: Discovery of Nine Ultra Faint Satellites in the Vicinity of the Magellanic Clouds., ApJ 805 (2015) 130 [1503.02079].
+%
+AUTHOR_FIRST_NAME	S
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	E
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Koposov
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	V
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Belokurov
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	G
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Torrealba
+AND	and
+AUTHOR_FIRST_NAME	N
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	W
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Evans
+PUNCTUATION_COMMA	,
+TITLE	Beasts
+TITLE	of
+TITLE	the
+TITLE	Southern
+TITLE	Wild
+PUNCTUATION_COLON	:
+TITLE	Discovery
+TITLE	of
+TITLE	Nine
+TITLE	Ultra
+TITLE	Faint
+TITLE	Satellites
+TITLE	in
+TITLE	the
+TITLE	Vicinity
+TITLE	of
+TITLE	the
+TITLE	Magellanic
+TITLE	Clouds
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+JOURNAL	ApJ
+VOLUME	805
+PUNCTUATION_PARENTHESIS	(
+YEAR	2015
+PUNCTUATION_PARENTHESIS	)
+PAGE	130
+PUNCTUATION_BRACKETS [
+ARXIV	1503.02079
+PUNCTUATION_BRACKETS ]
+PUNCTUATION_DOT	.
+
+% P. G. van Dokkum, R. Abraham, A. Merritt, J. Zhang, M. Geha and C. Conroy, Forty-seven Milky Way-sized, Extremely Diffuse Galaxies in the Coma Cluster, ApJ 798 (2015) L45 [1410.8141].
+% G. Torrealba, V. Belokurov, S. E. Koposov, T. S. Li, M. G. Walker, J. L. Sanders et al., The hidden giant: discovery of an enormous Galactic dwarf satellite in Gaia DR2, arXiv e-prints (2018) arXiv:1811.04082 [1811.04082].
+% N. F. Martin, R. A. Ibata, A. W. McConnachie, A. D. Mackey, A. M. N. Ferguson, M. J. Irwin et al., The PAndAS View of the Andromeda Satellite System. I. A Bayesian Search for Dwarf Galaxies Using Spatial and Color-Magnitude Information, ApJ 776 (2013) 80 [1307.7626].
+% J. D. Simon, K. Bechtol, A. Drlica-Wagner, M. Geha, V. Gluscevic, A. Ji et al., Dynamical Masses for a Complete Census of Local Dwarf Galaxies, White paper submitted to the Astro2020 Decadal Survey (2019) [1903.04743].
+% K. Bechtol, A. Drlica-Wagner, K. N. Abazajian, M. Abidi, S. Adhikari, Y. Ali-Haimoud et al., Dark Matter Science in the Era of LSST, White paper submitted to the Astro2020 Decadal Survey (2019) [1903.04425].
+% K. A. Venn, M. D. Shetrone, M. J. Irwin, V. Hill, P. Jablonka, E. Tolstoy et al., Nucleosynthesis and the Inhomogeneous Chemical Evolution of the Carina Dwarf Galaxy, ApJ 751 (2012) 102 [1204.0787].
+% A. McWilliam, G. Wallerstein and M. Mottini, Chemistry of the Sagittarius Dwarf Galaxy: A Top-light Initial Mass Function, Outflows, and the R-process, ApJ 778 (2013) 149 [1309.2974].
+% A. Frebel, J. D. Simon and E. N. Kirby, Segue 1: An Unevolved Fossil Galaxy from the Early Universe, ApJ 786 (2014) 74 [1403.6116].
+% I. U. Roederer, M. Mateo, J. I. Bailey, III, Y. Song, E. F. Bell, J. D. Crane et al., Detailed Chemical Abundances in the r-process-rich Ultra-faint Dwarf Galaxy Reticulum 2, AJ 151 (2016) 82 [1601.04070].
+% A. McWilliam, A. L. Piro, C. Badenes and E. Bravo, Evidence for a Sub-Chandrasekhar-mass Type Ia Supernova in the Ursa Minor Dwarf Galaxy, ApJ 857 (2018) 97 [1710.05030].
+% R. Leaman, K. A. Venn, A. M. Brooks, G. Battaglia, A. A. Cole, R. A. Ibata et al., The Resolved Structure and Dynamics of an Isolated Dwarf Galaxy: A VLT and Keck Spectroscopic Survey of WLM, ApJ 750 (2012) 33 [1202.4474].
+% E. J. Tollerud, R. L. Beaton, M. C. Geha, J. S. Bullock, P. Guhathakurta, J. S. Kalirai et al., The SPLASH Survey: Spectroscopy of 15 M31 Dwarf Spheroidal Satellite Galaxies, ApJ 752 (2012) 45 [1112.1067].
+% L. C. Vargas, M. C. Geha and E. J. Tollerud, The Distribution of Alpha Elements in Andromeda Dwarf Galaxies, ApJ 790 (2014) 73 [1406.0510].
+% I. Escala, E. N. Kirby, K. M. Gilbert, E. C. Cunningham and J. Wojno, Detailed Elemental Abundances in the M31 Stellar Halo: Low-Resolution Resolved Stellar Spectroscopy, arXiv e-prints (2018) [1811.09279].
+% E. N. Kirby, L. Rizzi, E. V. Held, J. G. Cohen, A. A. Cole, E. M. Manning et al., Chemistry and Kinematics of the Late-forming Dwarf Irregular Galaxies Leo A, Aquarius, and Sagittarius DIG, ApJ 834 (2017) 9 [1610.08505].
+% S. Taibi, G. Battaglia, N. Kacharov, M. Rejkuba, M. Irwin, R. Leaman et al., Stellar chemo-kinematics of the Cetus dwarf spheroidal galaxy, A&A 618 (2018) A122 [1807.04250].
+% J. D. Simon, M. Geha, Q. E. Minor, G. D. Martinez, E. N. Kirby, J. S. Bullock et al., A Complete Spectroscopic Survey of the Milky Way Satellite Segue 1: The Darkest Galaxy, ApJ 733 (2011) 46 [1007.4198].
+% L. C. Vargas, M. Geha, E. N. Kirby and J. D. Simon, The Distribution of Alpha Elements in Ultra-faint Dwarf Galaxies, ApJ 767 (2013) 134 [1302.6594].
+% N. F. Martin, M. Geha, R. A. Ibata, M. L. M. Collins, B. P. M. Laevens, E. F. Bell et al., Is Draco II one of the faintest dwarf galaxies? First study from Keck/DEIMOS spectroscopy, MNRAS 458 (2016) L59 [1510.01326].
+% E. N. Kirby, J. G. Cohen, J. D. Simon, P. Guhathakurta, A. O. Thygesen and G. E. Duggan, Triangulum II. Not Especially Dense After All, ApJ 838 (2017) 83 [1703.02978].
+% S. E. Koposov, G. Gilmore, M. G. Walker, V. Belokurov, N. W. Evans, M. Fellhauer et al., Accurate Stellar Kinematics at Faint Magnitudes: Application to the Bootes I Dwarf Spheroidal Galaxy, ApJ 736 (2011) 146 [1105.4102].
+% B. Lemasle, V. Hill, E. Tolstoy, K. A. Venn, M. D. Shetrone, M. J. Irwin et al., VLT/FLAMES spectroscopy of red giant branch stars in the Carina dwarf spheroidal galaxy, A&A 538 (2012) A100 [1112.0431].
+% B. Lemasle, T. J. L. de Boer, V. Hill, E. Tolstoy, M. J. Irwin, P. Jablonka et al., VLT/FLAMES spectroscopy of red giant branch stars in the Fornax dwarf spheroidal galaxy, A&A 572 (2014) A88 [1409.7703].
+% G. Kordopatis, N. C. Amorisco, N. W. Evans, G. Gilmore and S. E. Koposov, Chemodynamic subpopulations of the Carina dwarf galaxy, MNRAS 457 (2016) 1299 [1601.01589].
+% D. R. Weisz, A. E. Dolphin, E. D. Skillman, J. Holtzman, K. M. Gilbert, J. J. Dalcanton et al., The Star Formation Histories of Local Group Dwarf Galaxies. I. Hubble Space Telescope/Wide Field Planetary Camera 2 Observations, ApJ 789 (2014) 147 [1404.7144].
+% A. Savino, M. Salaris and E. Tolstoy, Inclusion of horizontal branch stars in the derivation of star formation histories of dwarf galaxies: The Carina dSph, A&A 583 (2015) A126 [1509.04929].
+% T. M. Brown, J. Tumlinson, M. Geha, J. D. Simon, L. C. Vargas, D. A. VandenBerg et al., The Quenching of the Ultra-faint Dwarf Galaxies in the Reionization Era, ApJ 796 (2014) 91 [1410.0681].
+% J. E. Norris, D. Yong, K. A. Venn, G. Gilmore, L. Casagrande and A. Dotter, The Populations of Carina. II. Chemical Enrichment, ApJS 230 (2017) 28 [1705.09023].
+% V. Hill, A. Skuladottir, E. Tolstoy, K. A. Venn, M. D. Shetrone, P. Jablonka et al., VLT/FLAMES high-resolution chemical abundances in Sculptor: a textbook dwarf spheroidal galaxy, arXiv e-prints (2018) [1812.01486].
+% D. R. Weisz and M. Boylan-Kolchin, Near-Field Cosmology with the Lowest-Mass Galaxies, White paper submitted to the Astro2020 Decadal Survey (2019) [1901.07571].
+% T. S. Li, M. Kaplinghat, A. B. Pace et al., Dark Matter Physics with Wide Field Spectroscopic Surveys, White paper submitted to the Astro2020 Decadal Survey (2019) .
+% R. E. Sanderson, J. L. Carlin, E. C. Cunningham, N. Garavito-Camargo, P. Guhathakurta, K. V. Johnston et al., The Multidimensional Milky Way, White paper submitted to the Astro2020 Decadal Survey (2019) [1903.07641].
+% D. Buzasi, A. P. Ji, G. Mace, V. M. Placco, I. U. Roederer and J. S. Sobeck, The First Stars and the Origin of the Elements, White paper submitted to the Astro2020 Decadal Survey (2019) .
+% J. S. Bullock, A. V. Kravtsov and D. H. Weinberg, Reionization and the Abundance of Galactic Satellites, ApJ 539 (2000) 517 [astro-ph/0002214].
+% N. Y. Gnedin, Effect of Reionization on Structure Formation in the Universe, ApJ 542 (2000) 535 [astro-ph/0002151].
+% V. Bromm and N. Yoshida, The First Galaxies, ARA&A 49 (2011) 373 [1102.4638].
+% J. H. Wise, M. J. Turk, M. L. Norman and T. Abel, The Birth of a Galaxy: Primordial Metal Enrichment and Stellar Populations, ApJ 745 (2012) 50 [1011.2632].
+% A. T. P. Schauer, S. C. O. Glover, R. S. Klessen and D. Ceverino, The influence of streaming velocities on the formation of the first stars, MNRAS 484 (2019) 3510 [1811.12920].
+% D. R. Weisz, A. E. Dolphin, E. D. Skillman, J. Holtzman, K. M. Gilbert, J. J. Dalcanton et al., The Star Formation Histories of Local Group Dwarf Galaxies. II. Searching For Signatures of Reionization, ApJ 789 (2014) 148 [1405.3281].
+% G. Gilmore and R. F. G. Wyse, Chemical evolution with bursts of star formation - Element ratios in dwarf galaxies, ApJ 367 (1991) L55.
+% G. E. Duggan, E. N. Kirby, S. M. Andrievsky and S. A. Korotin, Neutron Star Mergers are the Dominant Source of the r-process in the Early Evolution of Dwarf Galaxies, ApJ 869 (2018) 50 [1809.04597].
+% E. N. Kirby, J. G. Cohen, P. Guhathakurta, L. Cheng, J. S. Bullock and A. Gallazzi, The Universal Stellar Mass-Stellar Metallicity Relation for Dwarf Galaxies, ApJ 779 (2013) 102 [1310.0814].
+% E. N. Kirby, J. L. Xie, R. Guo, M. Kovalev and M. Bergemann, Catalog of Chromium, Cobalt, and Nickel Abundances in Globular Clusters and Dwarf Galaxies, ApJS 237 (2018) 18.
+% A. G. Riess, A. V. Filippenko, P. Challis, A. Clocchiatti, A. Diercks, P. M. Garnavich et al., Observational Evidence from Supernovae for an Accelerating Universe and a Cosmological Constant, AJ 116 (1998) 1009 [astro-ph/9805201].
+% K. J. Shen, S. Toonen and O. Graur, The Evolution of the Type Ia Supernova Luminosity Function, ApJ 851 (2017) L50 [1710.09384].
+% W. E. Kerzendorf, B. P. Schmidt, M. Asplund, K. Nomoto, P. Podsiadlowski, A. Frebel et al., Subaru High-Resolution Spectroscopy of Star G in the Tycho Supernova Remnant, ApJ 701 (2009) 1665 [0906.0982].
+% I. R. Seitenzahl, G. Cescutti, F. K. Ropke, A. J. Ruiter and R. Pakmor, Solar abundance of manganese: a case for near Chandrasekhar-mass Type Ia supernova progenitors, A&A 559 (2013) L5 [1309.2397].
+% A. I. Karakas and M. Lugaro, Stellar Yields from Metal-rich Asymptotic Giant Branch Models, ApJ 825 (2016) 26 [1604.02178].
+% U. Frischknecht, R. Hirschi, M. Pignatari, A. Maeder, G. Meynet, C. Chiappini et al., s-process production in rotating massive stars at solar and low metallicities, MNRAS 456 (2016) 1803 [1511.05730].
+% J. M. Lattimer, F. Mackie, D. G. Ravenhall and D. N. Schramm, The decompression of cold neutron star matter, ApJ 213 (1977) 225.
+% B. P. Abbott, R. Abbott, T. D. Abbott, F. Acernese, K. Ackley, C. Adams et al., Multi-messenger Observations of a Binary Neutron Star Merger, ApJ 848 (2017) L12 [1710.05833].
+% P. Mosta, L. F. Roberts, G. Halevi, C. D. Ott, J. Lippuner, R. Haas et al., R-process Nucleosynthesis from Three-Dimensional Magnetorotational Core-Collapse Supernovae, ArXiv e-prints (2017) [1712.09370].
+% D. M. Siegel, J. Barnes and B. D. Metzger, The neutron star merger GW170817 points to collapsars as the main r-process source, arXiv e-prints (2018) [1810.00098].
+% B. Cote, C. L. Fryer, K. Belczynski, O. Korobkin, M. Chruslinska, N. Vassh et al., The Origin of r-process Elements in the Milky Way, ApJ 855 (2018) 99 [1710.05875].
+% C. Conroy and P. G. van Dokkum, The Stellar Initial Mass Function in Early-type Galaxies From Absorption Line Spectroscopy. II. Results, ApJ 760 (2012) 71 [1205.6473].
+% M. Geha, T. M. Brown, J. Tumlinson, J. S. Kalirai, J. D. Simon, E. N. Kirby et al., The Stellar Initial Mass Function of Ultra-faint Dwarf Galaxies: Evidence for IMF Variations with Galactic Environment, ApJ 771 (2013) 29 [1304.7769].
+% M. Gennaro, K. Tchernyshyov, T. M. Brown, M. Geha, R. J. Avila, P. Guhathakurta et al., Evidence of a Non-universal Stellar Initial Mass Function. Insights from HST Optical Imaging of Six Ultra-faint Dwarf Milky Way Satellites, ApJ 855 (2018) 20 [1801.06195].
+% J. L. Carlin, A. A. Sheffield, K. Cunha and V. V. Smith, Chemical Abundances of Hydrostatic and Explosive Alpha-elements in Sagittarius Stream Stars, ApJ 859 (2018) L10 [1805.04120].
+% K. El-Badry, D. R. Weisz and E. Quataert, The statistical challenge of constraining the low-mass IMF in Local Group dwarf galaxies, MNRAS 468 (2017) 319 [1701.02347].
+% G. D. Martinez, Q. E. Minor, J. Bullock, M. Kaplinghat, J. D. Simon and M. Geha, A Complete Spectroscopic Survey of the Milky Way Satellite Segue 1: Dark Matter Content, Stellar Membership, and Binary Properties from a Bayesian Analysis, ApJ 738 (2011) 55 [1008.4585].
+% Q. E. Minor, A. B. Pace, J. L. Marshall and L. E. Strigari, Robust velocity dispersion and binary population modeling of the ultra-faint dwarf galaxy Reticulum II, arXiv e-prints (2018) [1810.12903].
+% M. Moe, K. M. Kratter and C. Badenes, The Close Binary Fraction of Solar-type Stars is Strongly Anti-correlated with Metallicity, arXiv e-prints (2018) [1808.02116].
+% M. E. Spencer, M. Mateo, E. W. Olszewski, M. G. Walker, A. W. McConnachie and E. N. Kirby, The Binary Fraction of Stars in Dwarf Galaxies: The Cases of Draco and Ursa Minor, AJ 156 (2018) 257 [1811.06597].
+% X. Ma, P. F. Hopkins, D. Kasen, E. Quataert, C.-A. Faucher-Giguere, D. Kere et al., s Binary stars can provide the `missing photons' needed for reionization, MNRAS 459 (2016) 3614 [1601.07559].
+% A. L. Strom, C. C. Steidel, G. C. Rudie, R. F. Trainor, M. Pettini and N. A. Reddy, Nebular Emission Line Ratios in z 2-3 Star-forming Galaxies with KBSS-MOSFIRE: Exploring the Impact of Ionization, Excitation, and Nitrogen-to-Oxygen Ratio, ApJ 836 (2017) 164 [1608.02587].
+% V. Bromm, Formation of the first stars, Reports on Progress in Physics 76 (2013) 112901 [1305.5178].
+% A. P. Ji, A. Frebel and V. Bromm, Preserving chemical signatures of primordial star formation in the first low-mass stars, MNRAS 454 (2015) 659 [1508.06137].
+% S. Salvadori, A. Skuladottir and E. Tolstoy, Carbon-enhanced metal-poor stars in dwarf galaxies, MNRAS 454 (2015) 1320 [1506.03451].
+% M. N. Ishigaki, N. Tominaga, C. Kobayashi and K. Nomoto, The Initial Mass Function of the First Stars Inferred from Extremely Metal-poor Stars, ApJ 857 (2018) 46 [1801.07763].
+% A. Stacy and V. Bromm, The First Stars: A Low-mass Formation Mode, ApJ 785 (2014) 73 [1307.1798].
+% M. Magg, T. Hartwig, B. Agarwal, A. Frebel, S. C. O. Glover, B. F. Griffen et al., Predicting the locations of possible long-lived low-mass first stars: importance of satellite dwarf galaxies, MNRAS 473 (2018) 5308 [1706.07054].
+% J. D. Simon, The Faintest Dwarf Galaxies, arXiv e-prints (2019) [1901.05465].
+% A. W. McConnachie, The Observed Properties of Dwarf Galaxies in and around the Local Group, AJ 144 (2012) 4 [1204.1562].
+% A. Dotter, B. Chaboyer, D. Jevremovic, V. Kostov, E. Baron and J. W. Ferguson, The Dartmouth Stellar Evolution Database, ApJS 178 (2008) 89 [0804.4473].

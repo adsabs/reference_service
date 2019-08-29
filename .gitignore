@@ -1,0 +1,5 @@
+*.py[co]
+local_config.py
+python
+# Mac specific files
+.DS_Store

@@ -1,0 +1,702 @@
+<?xml version="1.0"?>
+<doc:document xmlns:doc="http://www.elsevier.com/xml/document/schema" xmlns:dp="http://www.elsevier.com/xml/common/doc-properties/schema" xmlns:cps="http://www.elsevier.com/xml/common/consyn-properties/schema" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dct="http://purl.org/dc/terms/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:oa="http://vtw.elsevier.com/data/ns/properties/OpenAccess-1/" xmlns:cp="http://vtw.elsevier.com/data/ns/properties/Copyright-1/" xmlns:cja="http://www.elsevier.com/xml/cja/schema" xmlns:ja="http://www.elsevier.com/xml/ja/schema" xmlns:bk="http://www.elsevier.com/xml/bk/schema" xmlns:ce="http://www.elsevier.com/xml/common/schema" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:cals="http://www.elsevier.com/xml/common/cals/schema" xmlns:tb="http://www.elsevier.com/xml/common/table/schema" xmlns:sa="http://www.elsevier.com/xml/common/struct-aff/schema" xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/schema" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rdf:RDF>
+        <rdf:Description rdf:about="http://dx.doi.org/10.1016/j.icarus.2018.05.016">
+            <dct:format>application/xml</dct:format>
+            <dct:title>Temperature and para hydrogen gradients on Jupiter observed from the FORCAST camera on SOFIA</dct:title>
+            <dct:creator>Barney J. Conrath</dct:creator>
+            <dct:creator>Peter J. Gierasch</dct:creator>
+            <dct:creator>Terry Herter</dct:creator>
+            <dct:creator>Jason Wang</dct:creator>
+            <dct:description>Icarus 315 (2018) 1-6. doi:10.1016/j.icarus.2018.05.016</dct:description>
+            <prism:aggregationType>journal</prism:aggregationType>
+            <prism:publicationName>Icarus</prism:publicationName>
+            <prism:copyright>&#xA9; 2018 Published by Elsevier Inc.</prism:copyright>
+            <dct:publisher>Elsevier Inc.</dct:publisher>
+            <prism:issn>0019-1035</prism:issn>
+            <prism:volume>315</prism:volume>
+            <prism:coverDisplayDate>15 November 2018</prism:coverDisplayDate>
+            <prism:coverDate>2018-11-15</prism:coverDate>
+            <prism:pageRange>1-6</prism:pageRange>
+            <prism:startingPage>1</prism:startingPage>
+            <prism:endingPage>6</prism:endingPage>
+            <prism:doi>10.1016/j.icarus.2018.05.016</prism:doi>
+            <prism:url>http://dx.doi.org/10.1016/j.icarus.2018.05.016</prism:url>
+            <dct:identifier>doi:10.1016/j.icarus.2018.05.016</dct:identifier>
+        </rdf:Description>
+    </rdf:RDF>
+    <dp:document-properties>
+        <dp:aggregation-type>Journals</dp:aggregation-type>
+        <dp:version-number>S300.1</dp:version-number>
+    </dp:document-properties>
+    <ja:article docsubtype="fla" version="5.5" xml:lang="en">
+        <ja:item-info>
+            <ja:jid>YICAR</ja:jid>
+            <ja:aid>12904</ja:aid>
+            <ce:pii>S0019-1035(17)30244-0</ce:pii>
+            <ce:doi>10.1016/j.icarus.2018.05.016</ce:doi>
+            <ce:copyright type="unknown" year="2018"/>
+        </ja:item-info>
+        <ce:floats>
+            <ce:figure id="fig0001">
+                <ce:label>Fig. 1</ce:label>
+                <ce:caption id="cap0001">
+                    <ce:simple-para id="spara0006" view="all">Fit of Callisto flux measurements to a blackbody taking into account limb darkening. A fit to a perfect blackbody is shown for comparison. 1&#x2013;&#x3C3; errors for the FORCAST fluxes are indicated. The error bars at 5 and 11&#x202F;&#xB5;m are too small to show.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0001" role="short">Fig 1</ce:alt-text>
+                <ce:link id="celink0001" locator="gr1" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517302440/gr1"/>
+            </ce:figure>
+            <ce:figure id="fig0002">
+                <ce:label>Fig. 2</ce:label>
+                <ce:caption id="cap0002">
+                    <ce:simple-para id="spara0007" view="all">Sample FORCAST images of Jupiter at the three wavelengths used for the retrieval of temperature and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic>. The images are rotated so that Jupiter's North Pole points upward.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0002" role="short">Fig 2</ce:alt-text>
+                <ce:link id="celink0002" locator="gr2" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517302440/gr2"/>
+            </ce:figure>
+            <ce:figure id="fig0003">
+                <ce:label>Fig. 3</ce:label>
+                <ce:caption id="cap0003">
+                    <ce:simple-para id="spara0008" view="all">Synthetic spectra calculated from model atmospheres. The two limiting cases of the <ce:italic>ortho</ce:italic>-<ce:italic>para</ce:italic> ratio of molecular H<ce:inf loc="post">2</ce:inf> are shown. The approximate pass bands of the three FORCAST channels are indicated.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0003" role="short">Fig 3</ce:alt-text>
+                <ce:link id="celink0003" locator="gr3" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517302440/gr3"/>
+            </ce:figure>
+            <ce:figure id="fig0004">
+                <ce:label>Fig. 4</ce:label>
+                <ce:caption id="cap0004">
+                    <ce:simple-para id="spara0009" view="all">Functional derivatives of the radiance in three FORCAST channels with respect to temperature (upper panel) and <ce:italic>para</ce:italic>-H<ce:inf loc="post">2</ce:inf> (lower panel).</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0004" role="short">Fig 4</ce:alt-text>
+                <ce:link id="celink0004" locator="gr4" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517302440/gr4"/>
+            </ce:figure>
+            <ce:figure id="fig0005">
+                <ce:label>Fig. 5</ce:label>
+                <ce:caption id="cap0005">
+                    <ce:simple-para id="spara0010" view="all">Correlation between temperature and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> retrievals. The correlation coefficient was calculated using a model jovian atmosphere and is a measure of the correlation introduced by the radiative transfer model and its inversion.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0005" role="short">Fig 5</ce:alt-text>
+                <ce:link id="celink0005" locator="gr5" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517302440/gr5"/>
+            </ce:figure>
+            <ce:figure id="fig0006">
+                <ce:label>Fig. 6</ce:label>
+                <ce:caption id="cap0006">
+                    <ce:simple-para id="spara0011" view="all">Upper panel: Flux from equatorial east-west cuts as functions of the cosine of the emission angle <ce:italic>&#xB5;</ce:italic>. Measurements from either side of the central meridian are shown separately as described in the text. Lower panel: Normalized limb functions calculated from the data shown in the lower panel. The data analyzed in this study are limited to <ce:italic>&#xB5;</ce:italic>&#x202F;&#x2265;&#x202F;0.7, indicated by the solid vertical lines.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0006" role="short">Fig 6</ce:alt-text>
+                <ce:link id="celink0006" locator="gr6" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517302440/gr6"/>
+            </ce:figure>
+            <ce:figure id="fig0007">
+                <ce:label>Fig. 7</ce:label>
+                <ce:caption id="cap0007">
+                    <ce:simple-para id="spara0012" view="all">Upper panel: Brightness temperatures calculated from the deconvolved flux measurements as functions of planetocentric latitude. Lower panel: brightness temperatures corresponding to the flux measurements extrapolated to <ce:italic>&#xB5;</ce:italic>&#x202F;=&#x202F;1.0 at all latitudes using the normalized limb functions from <ce:cross-ref id="crf0036" refid="fig0006">Fig.&#xA0;6</ce:cross-ref>.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0007" role="short">Fig 7</ce:alt-text>
+                <ce:link id="celink0007" locator="gr7" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517302440/gr7"/>
+            </ce:figure>
+            <ce:figure id="fig0008">
+                <ce:label>Fig. 8</ce:label>
+                <ce:caption id="cap0008">
+                    <ce:simple-para id="spara0013" view="all">Retrievals of temperature (upper panel) and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> (lower panel) for an atmospheric layer &#x223C;1.5 pressure scale heights thick centered near 300 mbar. Inversions of both the deconvolved fluxes and deconvolved fluxes extrapolated to <ce:italic>&#xB5;</ce:italic>&#x202F;=&#x202F;1.0 are shown.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0008" role="short">Fig 8</ce:alt-text>
+                <ce:link id="celink0008" locator="gr8" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517302440/gr8"/>
+            </ce:figure>
+            <ce:figure id="fig0009">
+                <ce:label>Fig. 9</ce:label>
+                <ce:caption id="cap0009">
+                    <ce:simple-para id="spara0014" view="all">Upper panel: Temperature at the 300 mbar level retrieved from the <ce:italic>&#xB5;</ce:italic>&#x202F;=&#x202F;1.0 FORCAST measurements compared with Cassini CIRS retrievals at 241 and 388 mbar. Lower panel: <ce:italic>Para</ce:italic> H<ce:inf loc="post">2</ce:inf> retrievals at 300 mbar from FORCAST compared with retrievals from Voyager IRIS spectra. The FORCAST retrieval error bars are based on the formal propagation of an estimate of the precision for the mean fluxes used in the inversions. Estimates of systematic effects are not included. The FORCAST measurements were obtained in December 2010, the Cassini CIRS measurements in December 2000, and the Voyager 1 measurement in March 1979.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0009" role="short">Fig 9</ce:alt-text>
+                <ce:link id="celink0009" locator="gr9" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517302440/gr9"/>
+            </ce:figure>
+        </ce:floats>
+        <ja:head>
+            <ce:title id="tte0002">Temperature and <ce:italic>para</ce:italic> hydrogen gradients on Jupiter observed from the FORCAST camera on SOFIA</ce:title>
+            <ce:author-group id="aut0001">
+                <ce:author id="au0001" author-id="S0019103517302440-28a34fd288a645502614fcd29a80a0da">
+                    <ce:given-name>Barney J.</ce:given-name>
+                    <ce:surname>Conrath</ce:surname>
+                    <ce:cross-ref id="crf0001" refid="cor0001">
+                        <ce:sup loc="post">&#x204E;</ce:sup>
+                    </ce:cross-ref>
+                    <ce:e-address id="ead0001" type="email" xlink:href="mailto:gierasch@astro.cornell.edu">gierasch@astro.cornell.edu</ce:e-address>
+                </ce:author>
+                <ce:author id="au0002" author-id="S0019103517302440-2aac97786d0afab4884c15f6f9ba2966">
+                    <ce:given-name>Peter J.</ce:given-name>
+                    <ce:surname>Gierasch</ce:surname>
+                </ce:author>
+                <ce:author id="au0003" author-id="S0019103517302440-c424281cd64c666b91ef0b9a4c489149">
+                    <ce:given-name>Terry</ce:given-name>
+                    <ce:surname>Herter</ce:surname>
+                </ce:author>
+                <ce:author id="au0004" author-id="S0019103517302440-985bf5e038e9432d26e39f0bd394c17f">
+                    <ce:given-name>Jason</ce:given-name>
+                    <ce:surname>Wang</ce:surname>
+                </ce:author>
+                <ce:affiliation id="aff0001" affiliation-id="S0019103517302440-38fac147deeab9c95f93efe6056f400c">
+                    <ce:textfn id="cetextfn0001">Department of Astronomy, Cornell University, Ithaca, NY 14853, USA</ce:textfn>
+                    <sa:affiliation>
+                        <sa:organization>Department of Astronomy</sa:organization>
+                        <sa:organization>Cornell University</sa:organization>
+                        <sa:city>Ithaca</sa:city>
+                        <sa:state>NY</sa:state>
+                        <sa:postal-code>14853</sa:postal-code>
+                        <sa:country>USA</sa:country>
+                    </sa:affiliation>
+                </ce:affiliation>
+                <ce:correspondence id="cor0001">
+                    <ce:label>&#x204E;</ce:label>
+                    <ce:text id="cetext0001">Corresponding author.</ce:text>
+                </ce:correspondence>
+            </ce:author-group>
+            <ce:date-received day="28" month="3" year="2017"/>
+            <ce:date-revised day="14" month="5" year="2018"/>
+            <ce:date-accepted day="21" month="5" year="2018"/>
+            <ce:abstract id="abs0001" class="author-highlights" view="all">
+                <ce:section-title id="cesectitle0001">Highlights</ce:section-title>
+                <ce:abstract-sec id="abss0001" view="all">
+                    <ce:simple-para id="spara0001" view="all">
+                        <ce:list id="celist0001">
+                            <ce:list-item id="celistitem0001">
+                                <ce:label>&#x2022;</ce:label>
+                                <ce:para id="para0001" view="all">We demonstrate that useful information on latitude gradients of upper tropospheric temperature and the <ce:italic>para</ce:italic> hydrogen fraction &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> can be retrieved.</ce:para>
+                            </ce:list-item>
+                            <ce:list-item id="celistitem0002">
+                                <ce:label>&#x2022;</ce:label>
+                                <ce:para id="para0002" view="all">An inversion algorithm is applied to measurements in three channels to obtain temperature and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> as functions of latitude.</ce:para>
+                            </ce:list-item>
+                            <ce:list-item id="celistitem0003">
+                                <ce:label>&#x2022;</ce:label>
+                                <ce:para id="para0003" view="all">Jupiter was observed on December 8, 2010 with SOFIA using the FORCAST mid-infrared camera with selected spectral channels in the 5&#x2013;40&#x202F;&#xB5;m region.</ce:para>
+                            </ce:list-item>
+                        </ce:list>
+                    </ce:simple-para>
+                </ce:abstract-sec>
+            </ce:abstract>
+            <ce:abstract id="abs0002" view="all" class="author">
+                <ce:section-title id="cesectitle0002">Abstract</ce:section-title>
+                <ce:abstract-sec id="abss0002" view="all">
+                    <ce:simple-para id="spara0005" view="all">Jupiter was observed on December 8, 2010 with SOFIA using the FORCAST mid-infrared camera with selected spectral channels in the 5&#x2013;40&#x202F;&#xB5;m region. Although the channels were not optimized for planetary observations, we demonstrate that useful information on latitude gradients of upper tropospheric temperature and the <ce:italic>para</ce:italic> hydrogen fraction &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> can be retrieved. Calibration of the data is refined using simultaneous measurements of Callisto, along with a simplified model of Callisto's thermal behavior. In this preliminary study, an inversion algorithm is applied to measurements in three channels to obtain temperature and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> as functions of latitude in an atmospheric layer centered near 300&#xA0;mbar. The results are compared with those previously obtained from Voyager IRIS, Cassini CIRS, and ground-based measurements. The low-latitude minimum in &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> is found to be significantly displaced northward from the equatorial minimum in temperature, unlike the gradients found in the earlier Voyager and ground-based measurements. Possible explanations for this behavior are explored.</ce:simple-para>
+                </ce:abstract-sec>
+            </ce:abstract>
+        </ja:head>
+        <ja:body view="all">
+            <ce:sections>
+                <ce:section id="sec0001" role="introduction" view="all">
+                    <ce:label>1</ce:label>
+                    <ce:section-title id="cesectitle0003">Introduction</ce:section-title>
+                    <ce:para id="para0004" view="all">The FORCAST data used in this study was acquired in December 2010. The results demonstrate that with sufficient spectral information the instrument can indeed map the <ce:italic>para</ce:italic> fraction within Jupiter's upper troposphere and thus can determine the pattern of a useful tracer.</ce:para>
+                    <ce:para id="para0005" view="all">Barney Conrath died in 2014 and the preparation of this report has been delayed. In the meantime, a paper by <ce:cross-ref id="crf0002" refid="bib0005">Fletcher&#xA0;et&#xA0;al.&#xA0;(2017)</ce:cross-ref> has reported the next step, which is determination of longitudinal para variations to permit comparison with the 1979 Voyager maps. Calibration and error analysis discussions are important and are treated somewhat differently in the two studies.</ce:para>
+                    <ce:para id="para0006" view="all">The purpose of the analyses described here is to demonstrate the potential usefulness of SOFIA/FORCAST camera measurements for the study of Jupiter's atmosphere as illustrated by new results on low-latitude and <ce:italic>para</ce:italic> hydrogen gradients. Hydrogen is the major component of the atmospheres of giant planets in the solar system, and other systems may be similar. Molecular H<ce:inf loc="post">2</ce:inf> comes in two forms, <ce:italic>para</ce:italic> and <ce:italic>ortho</ce:italic>, with opposite and parallel proton spins. The molecule cannot be symmetric, since this would place the protons in the same state. For asymmetry the molecule must occupy only odd rotational states when the protons are aligned (<ce:italic>ortho</ce:italic>) and even states when anti-parallel (<ce:italic>para</ce:italic>). At low temperatures like those on the outer planets only a few of the rotational levels are occupied and consequently the exact energy values are important. The constraints cause heat capacities of the two constituents to be different by as much as 30.</ce:para>
+                    <ce:para id="para0007" view="all">The important mechanisms for conversion between <ce:italic>ortho</ce:italic> and <ce:italic>para</ce:italic> hydrogen on the planets are not known. Laboratory experiments show that the magnetic interaction during H<ce:inf loc="post">2</ce:inf><ce:glyph name="sbnd"/>H<ce:inf loc="post">2</ce:inf> collisions in the gas phase is extremely slow (<ce:cross-ref id="crf0003" refid="bib0004">Farkas,&#xA0;1935</ce:cross-ref>). It establishes an important minimum to the actual rate. When scaled to jovian conditions at the observable level where the pressure is about 300mb the equilibration time constant is found to be about 10<ce:sup loc="post">8</ce:sup>&#xA0;s. The rate can be enhanced by surfaces with impurities, which can catalyze the reaction. This has led to the suggestion that cloud layers on the planets may quickly establish an equilibrium ratio of <ce:italic>ortho</ce:italic> to <ce:italic>para</ce:italic> (<ce:cross-refs id="crf0004" refid="bib0008 bib0003">Massie and Hunten, 1982; Conrath and Gierasch, 1984</ce:cross-refs>). The high temperature (in practice T&#x202F;&#x2265;&#x202F;200&#x202F;K or so) thermodynamic equilibrium ratio is three <ce:italic>ortho</ce:italic> molecules per <ce:italic>para</ce:italic>, because the <ce:italic>ortho</ce:italic> protons with spin 1 produce a triplet ground state. At low temperatures the <ce:italic>para</ce:italic> molecules dominate because they can drop to the lowest rotational state and <ce:italic>ortho</ce:italic> cannot.</ce:para>
+                    <ce:para id="para0008" view="all">Voyager observations show global variations in the <ce:italic>para</ce:italic> to <ce:italic>ortho</ce:italic> ratio on all four of the giant planets (<ce:cross-ref id="crf0006" refid="bib0002">Conrath&#xA0;et&#xA0;al., 1998</ce:cross-ref>). The data refers to the few hundred millibar pressure region, and the latitudinal scale of variation is 10&#x2013;20&#xB0;. This height level is of particular interest because it is approximately the emission to space level. The presence of latitudinal gradients shows that whatever the equilibration time scale, it is of the correct order to match global patterns of the atmospheric dynamics, because it is neither homogenized nor in equilibrium. Thus the principal component of the outer planet atmospheres undergoes a state change near the emission to space level suitable for tracing the atmospheric advection properties. In addition, the state change involves a conversion energy that is large enough to play an important role as a &#x2018;latent heat&#x2019; that influences meteorology.</ce:para>
+                    <ce:para id="para0009" view="all">Unfortunately observations are extremely difficult. The Voyager IRIS instrument determined global patterns on all four of the giants, but only during brief periods of closest approach during flybys. For Jupiter this represents global gradients in late 1979. Smaller scales can be discerned, but even a large structure like the Great Red Spot is not mapped in detail. The next spacecraft with the necessary infrared capability was Cassini en route to Saturn in 2001, but the flyby range was too large for useful spatial resolution. Ground-based observations are extremely difficult because of atmospheric opacity in the infrared. Recently <ce:cross-ref id="crf0007" refid="bib0006">Fletcher&#xA0;et&#xA0;al.&#xA0;(2009)</ce:cross-ref> have described an analysis program with improved retrieval techniques. If this is successful it will be extremely valuable by enabling continuous time coverage. Fletcher et&#xA0;al. have reported results obtained in 2009 and 2014. Our retrievals use a different reduction technique and arrive at the same latitudinal distribution as <ce:cross-refs id="crf0008" refid="bib0006 bib0005">Fletcher et&#xA0;al. (2009, 2017)</ce:cross-refs>.</ce:para>
+                    <ce:para id="para0010" view="all">The SOFIA aircraft operates above most of the water vapor in the Earth's atmosphere, and the FORCAST camera covers the mid-infrared band needed for retrieval of temperature and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> (the <ce:italic>para</ce:italic> fraction). In this paper we report successful retrieval of zonal mean latitude profiles of both quantities. The test flight that obtained the data was during December of 2010. It was fitted with a general set of wavelength filters not particularly optimized for &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> retrieval and was successful in spite of this. When combined with the Voyager observations of 1979 and the Fletcher et&#xA0;al observations of 2000, the new retrievals from 2010 give new insight into changes of circulation patterns on Jupiter. The next section describes the SOFIA data. <ce:cross-ref id="crf0010" refid="sec0003">Section&#xA0;3</ce:cross-ref> presents retrieval techniques and results. <ce:cross-ref id="crf0011" refid="sec0004">Section&#xA0;4</ce:cross-ref> offers conjectures and interpretation.</ce:para>
+                </ce:section>
+                <ce:section id="sec0002" view="all">
+                    <ce:label>2</ce:label>
+                    <ce:section-title id="cesectitle0004">Forcast measurements</ce:section-title>
+                    <ce:para id="para0011" view="all">SOFIA observed Jupiter on 2010 December 8 using FORCAST, a dual-channel mid-infrared camera operating between 5 and 40&#x202F;&#xB5;m (<ce:cross-ref id="crf0012" refid="bib0001">Adams&#xA0;et&#xA0;al., 2010</ce:cross-ref>). Data were taken at three different times: 2:05&#x2013;2:45 UTC at an altitude of 12,400&#x202F;m, 3:56&#x2013;4:08 UTC at an altitude of 13,000&#x202F;m, and 6:25&#x2013;6:56 UTC at an altitude of 13,600&#x202F;m. At each time interval, data were obtained with the 5.4, 11.1, 19.7, 24.2, 31.5 and 37.1&#x202F;&#xB5;m filters. With the exception of the 5.4&#x202F;&#xB5;m filter, all observations were taken with a dichroic beam splitter in the following filter pairs: 19.7&#x202F;&#xB5;m/37.1&#x202F;&#xB5;m, 24.2&#x202F;&#xB5;m/31.5&#x202F;&#xB5;m, and 11.1&#x202F;&#xB5;m/37.1&#x202F;&#xB5;m.</ce:para>
+                    <ce:para id="para0012" view="all">The technique of chopping the secondary mirror and nodding the telescope was used to remove thermal effects in the images. Each of FORCAST's two 256&#x202F;&#xD7;&#x202F;256 arrays has a pixel scale of 0.768&#x2033;&#xA0;pixel<ce:sup loc="post">&#x2013;1</ce:sup> and a field of view 3.4&#x2032;&#xA0;&#xD7;&#xA0;3.2&#x2032;. With a chopping secondary driven at 5&#x202F;Hz with chop throw of 60&#x2033; and a nod throw of the telescope of 100&#x2033;, Jupiter (41&#x2033;.8 in diameter) was able to remain in the field of view of FORCAST for the entire length of the integration. Io and Callisto were also detected, but only appear in one or two of the four chop and nod positions. The total integration time on Jupiter after removing bad images was 165&#x202F;s at 5.4&#x202F;&#xB5;m, 170&#x202F;s at 19.7&#x202F;&#xB5;m, 165&#x202F;s at 24&#x202F;&#xB5;m, 140&#x202F;s at 31.5&#x202F;&#xB5;m, and 270&#x202F;s at 37.1&#x202F;&#xB5;m.</ce:para>
+                    <ce:para id="para0013" view="all">The data were first processed with a general set of reduction and calibration steps designed for all FORCAST images (<ce:cross-ref id="crf0013" refid="bib0007">Herter&#xA0;et&#xA0;al., 2010</ce:cross-ref>). The images were rotated to orient Jupiter's North Pole upwards. Due to a short-wavelength light leak in the 24&#x202F;&#xB5;m filter, we used Callisto to further calibrate Jupiter. We assumed Callisto to be a blackbody with a correction applied for limb darkening. Because the Sun&#x2013;Callisto&#x2013;Earth angle was small during our observations, we assumed the center of Callisto to be the brightest point on the disk. In <ce:cross-ref id="crf0014" refid="fig0001">Fig.&#xA0;1</ce:cross-ref><ce:float-anchor refid="fig0001"/>, we show our fit of Callisto to a central disk temperature of 175.75&#x202F;K, and compare it to a pure blackbody of 154.4&#x202F;K.</ce:para>
+                    <ce:para id="para0014" view="all">While Callisto was able to mitigate the light leak effect, Callisto also introduced more noise into the data: photometry of Callisto was affected by Jupiter, the background, and artifacts on the array, causing our measured fluxes to have a 1&#x2013;&#x3C3; variation of approximately 3&#x2013;5%. Because the noisy effects on Callisto were not main contributors to noise of Jupiter, this caused the 1&#x2013;&#x3C3; pixel-to-pixel flux variation on Jupiter to increase from 2 to 5% after the calibration.</ce:para>
+                    <ce:para id="para0015" view="all">To have a more accurate mapping of Jupiter, we made an attempt to sharpen the images. The two major effects on image quality were pointing stability and diffraction (<ce:cross-ref id="crf0015" refid="bib0007">Herter&#xA0;et&#xA0;al., 2010</ce:cross-ref>). We applied a five-iteration deconvolution routine on each image of Jupiter using the MAX_LIKELIHOOD procedure provided by the Goddard IDL Astronomy Library. Since the effects of pointing stability varied significantly between exposures due to telescope vibrations, we did not adopt a standard point spread function (PSF) to deconvolve all of the images. Instead, we used the shape of Callisto that appeared alongside each exposure of Jupiter as the PSF. We show a comparison between the deconvolved images with the original in <ce:cross-ref id="crf0016" refid="fig0002">Fig.&#xA0;2</ce:cross-ref><ce:float-anchor refid="fig0002"/>. We estimate the effect of the deconvolution by applying the same process on Callisto itself (a point source for FORCAST) and find improvements of approximately 30% in the Full Width Half Maximum (FWHM). We interpret this as a 30% reduction in beam width.</ce:para>
+                </ce:section>
+                <ce:section id="sec0003" view="all">
+                    <ce:label>3</ce:label>
+                    <ce:section-title id="cesectitle0005">Retrievals</ce:section-title>
+                    <ce:para id="para0016" view="all">To extract information on jovian atmospheric parameters from FORCAST flux measurements, a radiative transfer model of Jupiter's upper troposphere and lower stratosphere is required. Given profiles of temperature <ce:italic>T</ce:italic> and the optically active gases in this spectral region as functions of atmospheric pressure <ce:italic>p</ce:italic>, the spectral radiance <ce:italic>I<ce:inf loc="post">v</ce:inf></ce:italic> at the top of the atmosphere can be calculated. An example of a synthetic spectrum obtained in this way for the spectral region of interest is shown in <ce:cross-ref id="crf0017" refid="fig0003">Fig.&#xA0;3</ce:cross-ref><ce:float-anchor refid="fig0003"/><ce:float-anchor refid="fig0004"/><ce:float-anchor refid="fig0005"/>, where the approximate pass bands of three of the FORCAST filters are indicated. Typical jovian temperature and NH<ce:inf loc="post">3</ce:inf> profiles were assumed (<ce:cross-ref id="crf0018" refid="bib0002">Conrath&#xA0;et&#xA0;al., 1998</ce:cross-ref>). This portion of the spectrum is dominated by the broad S(0) and S(1) collision-induced lines of molecular H<ce:inf loc="post">2</ce:inf> and rotation lines of NH<ce:inf loc="post">3</ce:inf>. Both H<ce:inf loc="post">2-</ce:inf> H<ce:inf loc="post">2</ce:inf> and H<ce:inf loc="post">2</ce:inf><ce:glyph name="sbnd"/>He contributions to the collision-induced absorption are included in the model. The S(0) and S(1) lines result from <ce:italic>para-para</ce:italic> and <ce:italic>ortho-ortho</ce:italic> transitions respectively. As a consequence, this portion of the spectrum is sensitive to the H<ce:inf loc="post">2</ce:inf><ce:italic>ortho-para</ce:italic> ratio, which we express in terms of the <ce:italic>para</ce:italic> fraction &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic>. The two limiting cases of thermal equilibrium and the &#x201C;normal&#x201D; high-temperature limit are shown.</ce:para>
+                    <ce:para id="para0017" view="all">In our analyses, we attempt to extract information on <ce:italic>T</ce:italic> and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> using the three channels shown in <ce:cross-ref id="crf0019" refid="fig0003">Fig.&#xA0;3</ce:cross-ref>. The possibility of obtaining information on NH<ce:inf loc="post">3</ce:inf> from the longer wavelength channels will not be considered here. To convert the measured spectral fluxes <ce:italic>F<ce:inf loc="post">v</ce:inf></ce:italic> to radiances at the top of Jupiter's atmosphere <ce:italic>I<ce:inf loc="post">v</ce:inf></ce:italic>, we used a field-of-view of 0.768&#x2033; defined by the individual pixels of he array to obtain <ce:italic>I<ce:inf loc="post">v</ce:inf></ce:italic>(Wcm<ce:sup loc="post">&#x2013;2</ce:sup>ster<ce:sup loc="post">&#x2013;1</ce:sup>/cm<ce:sup loc="post">&#x2013;1</ce:sup>)&#x202F;=&#x202F;2.1645&#x202F;&#xD7;&#x202F;10<ce:sup loc="post">&#x2013;9</ce:sup>&#xA0;<ce:italic>F<ce:inf loc="post">v</ce:inf></ce:italic> (J<ce:inf loc="post">y</ce:inf>). To correctly synthesize the FORCAST measurements, the calculated monochromatic radiance was averaged over the known total spectral response of each channel.</ce:para>
+                    <ce:para id="para0018" view="all">The sensitivity of the measurements to atmospheric temperature and <ce:italic>para</ce:italic>-H<ce:inf loc="post">2</ce:inf> can be quantitatively evaluated by calculating the functional derivatives of the radiances with respect to <ce:italic>T</ce:italic>(<ce:italic>p</ce:italic>) and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic>(<ce:italic>p</ce:italic>) as shown in <ce:cross-ref id="crf0020" refid="fig0004">Fig.&#xA0;4</ce:cross-ref>. Since the measurements are sensitive to rather thick, overlapping atmospheric layers, we can expect to obtain information only on average values of <ce:italic>T</ce:italic> and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic>. Quantitatively, this differential sensitivity is also dependent on the temperature lapse rate in the sensed portion of the atmosphere. (For example, if the atmosphere were isothermal, there would be no sensitivity.) Consequently, a third measurement, preferably with low sensitivity to &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> is needed. The three measurements marginally satisfy the requirements for providing useful information. The analysis would be enhanced if an additional channel centered on the S(1) line were also available (<ce:cross-ref id="crf0021" refid="fig0003">Fig.&#xA0;3</ce:cross-ref>).</ce:para>
+                    <ce:para id="para0019" view="all">The computational approach used here is an adaptation of an inversion algorithm that has been used extensively to retrieve information from planetary thermal infrared spectra obtained from Voyager IRIS and Cassini CIRS and is described in detail by <ce:cross-ref id="crf0022" refid="bib0002">Conrath&#xA0;et&#xA0;al.&#xA0;(1998)</ce:cross-ref>. A similar approach has been used by <ce:cross-ref id="crf0023" refid="bib0006">Fletcher&#xA0;et&#xA0;al.&#xA0;(2009)</ce:cross-ref> for the analysis of both Cassini and ground-based thermal infrared measurements. The inversion problem is strongly &#x201C;ill-posed&#x201D; (<ce:cross-refs id="crf0023a" refid="bib0009a bib0009b">Bertero and Boccacci, 1998; Craig and Brown, 1986</ce:cross-refs>) as are most atmospheric retrieval problems. From the many profiles that can satisfy the measurements, additional constraints must be invoked to obtain physically meaningful information. We impose low-pass Gaussian filtering constraints on the retrieved profiles with 1/<ce:italic>e</ce:italic> half&#x2013;widths of 1.5 pressure scale heights. Since little deconvolution of the vertical profiles is possible with three measurements, this width is consistent with that of the functional derivatives in <ce:cross-ref id="crf0024" refid="fig0004">Fig.&#xA0;4</ce:cross-ref>. Applications to simulated data calculated from assumed values of <ce:italic>T</ce:italic>(<ce:italic>p</ce:italic>) and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic>(<ce:italic>p</ce:italic>) were used to characterize the retrieval algorithm and to determine the required filter strengths. The radiative transfer process and the constrained inversion algorithm can introduce correlations between the retrieved <ce:italic>T</ce:italic>(<ce:italic>p</ce:italic>) and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> profiles. To examine this issue, we calculate the cross-correlation coefficient to be zero, indicating complete independence of the retrieved T and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic>. Based on <ce:cross-ref id="crf0025" refid="fig0005">Fig.&#xA0;5</ce:cross-ref>, we choose to take the retrieved values near 300 mbar as representative of averages within the layer with minimum cross correlation.</ce:para>
+                    <ce:para id="para0020" view="all">For inversion of the FORCAST measurements, use is made of two orthogonal cuts through the averaged spectral flux arrays, one in the north-south direction along the central meridian, and one east-west along the equator. The north-south sequence can be used to retrieve zonal mean structure as a function of latitude. However near the equator the emission angle associated with the observations is near zero (normal viewing), but at higher latitudes in each hemisphere, the emission angle increases. As the emission angle increases, the peaks of the functional derivatives (<ce:cross-ref id="crf0026" refid="fig0004">Fig.&#xA0;4</ce:cross-ref>) move upward in the atmosphere (toward lower pressures). With only three measurements available, this can result in a mixing of vertical gradients <ce:italic>T</ce:italic> and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> with true latitude gradients. We can attempt to deal with this problem to a first approximation by making use of the equatorial east-west cut through the data (<ce:cross-ref id="crf0027" refid="fig0006">Fig.&#xA0;6</ce:cross-ref><ce:float-anchor refid="fig0006"/>). The average east-west fluxes should be dependent on emission angle only and represent true limb functions. It is then assumed that these limb functions are valid at all latitudes and they are used to extrapolate all fluxes to normal viewing. This can be partly justified by noting that limb functions are most sensitive to detailed thermal structure primarily at high emission angles, while in the present case we are dealing with emission angles in the range &#x223C; 0&#xB0;&#x2013;45&#xB0;. Brightness temperatures from fluxes not corrected for emission angle are shown in the upper panel <ce:cross-ref id="crf0028" refid="fig0007">Fig.&#xA0;7</ce:cross-ref><ce:float-anchor refid="fig0007"/>, and those based on fluxes extrapolated to normal viewing at each latitude are shown in the lower panel.</ce:para>
+                    <ce:para id="para0021" view="all">The algorithm was applied to both the flux measurements before emission angle corrections and the emission-angle-corrected fluxes. In <ce:cross-ref id="crf0029" refid="fig0008">Fig.&#xA0;8</ce:cross-ref><ce:float-anchor refid="fig0008"/>, the retrieved values of <ce:italic>T</ce:italic> and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> are shown as functions of latitude for the 300 mbar level. In the upper panel of <ce:cross-ref id="crf0030" refid="fig0009">Fig.&#xA0;9</ce:cross-ref><ce:float-anchor refid="fig0009"/>, the temperature retrievals from SOFIA are compared with temperature inversions of Cassini CIRS spectra obtained in 2000. The two sets of retrievals show qualitatively similar structure; however, the gradients in the FORCAST retrievals are significantly smaller. This may be in part due to the more limited spatial resolution of FORCAST. Taking into account both diffraction and telescope jitter, the effective latitude resolution on Jupiter is &#x223C;10&#xB0; near the equator, increasing to &#x223C;15&#xB0; at 45&#xB0; north and south latitude. For the CIRS measurements, the latitude resolution was 5&#xB0; or better.</ce:para>
+                    <ce:para id="para0022" view="all">Since it was not possible to retrieve &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> from the Cassini CIRS spectra because the field of view (FOV) of the focal plane covering the required spectral region was too large to give adequate spatial resolution during the distant flyby of Jupiter, the FORCAST <ce:italic>para</ce:italic> H<ce:inf loc="post">2</ce:inf> retrievals are compared in the lower panel of <ce:cross-ref id="crf0031" refid="fig0009">Fig.&#xA0;9</ce:cross-ref> with retrievals from Voyager IRIS data acquired in 1979 (<ce:cross-ref id="crf0032" refid="bib0002">Conrath&#xA0;et&#xA0;al., 1998</ce:cross-ref>). The FORCAST &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> retrievals show a broad local minimum displaced approximately 5&#xB0; northward of the equator, while the temperature structure has a local minimum essentially at the equator, consistent with thermal wind constraints. In contrast the Voyager IRIS retrievals show local minima at the equator for both &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> and <ce:italic>T</ce:italic>. <ce:cross-ref id="crf0033" refid="bib0006">Fletcher&#xA0;et&#xA0;al.&#xA0;(2009)</ce:cross-ref> retrieved temperature and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> along with other atmospheric parameters from ground-based thermal infrared images obtained primarily from IRTF/MERLIN in 2000, close in time to the Cassini Jupiter flyby. These results show local minima in both <ce:italic>T</ce:italic> and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> near the equator, qualitatively similar to the Voyager results.</ce:para>
+                    <ce:para id="para0023" view="all">The strong hemispheric asymmetry in the retrieved &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> relative to earlier measurements raises the possibility of artifacts that might be introduced in the analysis. The sensitivity of the measured fluxes to &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> is substantially less than the sensitivity to temperature. The &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> retrieval can be influenced more strongly by a number of factors including our approach to the correction for changing emission angle. The emission angle is near zero at the equator, and the <ce:italic>&#xB5;</ce:italic>-correction is essentially symmetric about the equator. Any errors introduced by the correction process are expected to be larger at the higher latitudes. As shown in <ce:cross-ref id="crf0034" refid="fig0008">Fig.&#xA0;8</ce:cross-ref>, the differences between retrievals using uncorrected and <ce:italic>&#xB5;</ce:italic>-corrected fluxes is negligible for latitudes within &#x223C;&#xB1;15&#xB0; of the equator is consistent with thermal wind considerations, supporting the correctness of the location of the data on the planet.</ce:para>
+                </ce:section>
+                <ce:section id="sec0004" role="discussion" view="all">
+                    <ce:label>4</ce:label>
+                    <ce:section-title id="cesectitle0006">Discussion</ce:section-title>
+                    <ce:para id="para0024" view="all">Three features stand out in the global structure of &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic>: a minimum at low latitudes, a slight asymmetry in the north-south profile near the equator, and oscillations of &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> that correlate with the temperature pattern over the latitude range from about 20S to 20N. In addition, the profile of temperature with latitude is remarkably flat on the equator. This is not unexpected. The Coriolis parameter is zero on the equator, and therefore the thermal wind equation forces the temperature gradient to be zero. As remarked previously this result gives confidence that the mapping is correct.</ce:para>
+                    <ce:para id="para0025" view="all">We conjecture that the three features of the zonal mean &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> profiles are all due to the influence of deep circulations on the stable upper troposphere. The temperature rises with increasing depth on Jupiter at all levels where the pressure is greater than about 100&#xA0;mb. The equilibrium <ce:italic>para</ce:italic> fraction is a decreasing function of temperature. The time constants for adjustment of both quantities are about the same. The equilibrium <ce:italic>para</ce:italic> fraction is a function only of pressure and varies from about 0.25 to about 0.35 as the temperature drops from about 170&#x202F;K&#x2013;110&#x202F;K. These are typical <ce:italic>T</ce:italic> and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> ranges of interest at the pressures sampled by FORCAST.</ce:para>
+                    <ce:para id="para0026" view="all">The most straightforward explanation for the global-scale low latitude minimum in the <ce:italic>para</ce:italic> fraction is enhanced vertical transport near the equator. This could come about by small-scale diffusive mixing or by large-scale upwelling as part of a Hadley circulation. It will be interesting to monitor the latitudinal profile of <ce:italic>T</ce:italic> and &#x192;<ce:italic><ce:inf loc="post">p</ce:inf></ce:italic> to discover whether the equatorial offset depends on season. <ce:cross-refs id="crf0035" refid="bib0006 bib0056a bib0005">Fletcher&#xA0;et&#xA0;al. (2009, 2016, 2017</ce:cross-refs>) have put forward the same hypothesis for the origin of latitudinal gradients.</ce:para>
+                </ce:section>
+            </ce:sections>
+            <ce:appendices view="all">
+                <ce:section id="sec0005" view="compact-standard">
+                    <ce:section-title id="cesectitle9001">Supplementary materials</ce:section-title>
+                    <ce:para id="para0004a" view="all">Supplementary material associated with this article can be found, in the online version, at <ce:inter-ref id="interref0001" xlink:href="https://doi.org/10.1016/j.icarus.2018.05.016" xlink:type="simple">doi:10.1016/j.icarus.2018.05.016</ce:inter-ref>.</ce:para>
+                </ce:section>
+                <ce:section id="sec0006" view="extended">
+                    <ce:label>Appendix</ce:label>
+                    <ce:section-title id="cesectitle9002">Supplementary materials</ce:section-title>
+                    <ce:para id="para0027a" view="all">
+                        <ce:display>
+                            <ce:e-component id="ecom0001">
+                                <ce:alt-text id="alt0010" role="short">Image, application 1</ce:alt-text>
+                                <ce:link id="celink0010" locator="mmc1" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/46.1" xlink:href="pii:S0019103517302440/mmc1"/>
+                            </ce:e-component>
+                        </ce:display>
+                    </ce:para>
+                </ce:section>
+            </ce:appendices>
+        </ja:body>
+        <ja:tail view="all">
+            <ce:bibliography id="cebibl1" view="all">
+                <ce:section-title id="cesectitle0007">References</ce:section-title>
+                <ce:bibliography-sec id="cebibsec1" view="all">
+                    <ce:bib-reference id="bib0001">
+                        <ce:label>Adams et&#xA0;al., 2010</ce:label>
+                        <sb:reference id="sbref0001">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>J.D.</ce:given-name>
+                                        <ce:surname>Adams</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>T.L.</ce:given-name>
+                                        <ce:surname>Herter</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>G.E.</ce:given-name>
+                                        <ce:surname>Gull</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>J.</ce:given-name>
+                                        <ce:surname>Shoenwald</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>C.P.</ce:given-name>
+                                        <ce:surname>Henderson</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>L.D.</ce:given-name>
+                                        <ce:surname>Keller</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>J.M.</ce:given-name>
+                                        <ce:surname>DeBuizer</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>G.J.</ce:given-name>
+                                        <ce:surname>Stacey</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>T.</ce:given-name>
+                                        <ce:surname>Nikola</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>FORCAST: A first light facility instrument for SOFIA</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Proc. SPIE</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>7735</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2010</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>eid7735 1U</sb:first-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0009a">
+                        <ce:label>Bertero and Boccacci, 1998</ce:label>
+                        <sb:reference id="sbref0009a">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:surname>Bertero</ce:surname>
+                                        <ce:given-name>M.</ce:given-name>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:surname>Boccacci</ce:surname>
+                                        <ce:given-name>P.</ce:given-name>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Introduction to Inverse Problems in Imaging</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:book>
+                                    <sb:date>1998</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>CRC Press</sb:name>
+                                    </sb:publisher>
+                                </sb:book>
+                                <sb:pages>
+                                    <sb:first-page>352</sb:first-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0002">
+                        <ce:label>Conrath et&#xA0;al., 1998</ce:label>
+                        <sb:reference id="sbref0002">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>B.J.</ce:given-name>
+                                        <ce:surname>Conrath</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.J.</ce:given-name>
+                                        <ce:surname>Gierasch</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>E.A.</ce:given-name>
+                                        <ce:surname>Ustinov</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Thermal structure and <ce:italic>para</ce:italic> hydrogen fraction on the outer planets from Voyager IRIS measurements</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>135</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1998</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>501</sb:first-page>
+                                    <sb:last-page>517</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0003">
+                        <ce:label>Conrath and Gierasch, 1984</ce:label>
+                        <sb:reference id="sbref0003">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>B.J.</ce:given-name>
+                                        <ce:surname>Conrath</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.J.</ce:given-name>
+                                        <ce:surname>Gierasch</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Global variation of the <ce:italic>para</ce:italic> hydrogen fraction in Jupiter's atmosphere and implications for dynamics on the outer planets</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>57</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1984</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>184</sb:first-page>
+                                    <sb:last-page>204</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0009b">
+                        <ce:label>Craig and Brown, 1986</ce:label>
+                        <sb:reference id="sbref0009b">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:surname>Craig</ce:surname>
+                                        <ce:given-name>I.J.D</ce:given-name>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:surname>Brown</ce:surname>
+                                        <ce:given-name>J.C.</ce:given-name>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Inverse Problems in Astronomy: A Guide to Inversion Strategies for Remotely Sensed Data</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:book>
+                                    <sb:date>1986</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>CRC Press</sb:name>
+                                    </sb:publisher>
+                                </sb:book>
+                                <sb:pages>
+                                    <sb:first-page>160</sb:first-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0004">
+                        <ce:label>Farkas, 1935</ce:label>
+                        <sb:reference id="sbref0004">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>A.</ce:given-name>
+                                        <ce:surname>Farkas</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Orthohydrogen, Parahydrogen and Heavy Hydrogen</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:book>
+                                    <sb:date>1935</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>Cambridge University Press</sb:name>
+                                    </sb:publisher>
+                                </sb:book>
+                                <sb:pages>
+                                    <sb:first-page>215</sb:first-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0056a">
+                        <ce:label>Fletcher et al. 2016</ce:label>
+                        <sb:reference id="sbref0005aa">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:surname>Fletcher</ce:surname>
+                                        <ce:given-name>L.</ce:given-name>
+                                    </sb:author>
+                                    <sb:et-al/>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Seasonal variability of Saturn&#x2019;s tropospheric temperatures, winds and para-H2 from Cassini far-IR spectroscopy</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>264</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2016</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>137</sb:first-page>
+                                    <sb:last-page>159</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0005">
+                        <ce:label>Fletcher et&#xA0;al., 2017</ce:label>
+                        <sb:reference id="sbref0005">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>L.</ce:given-name>
+                                        <ce:surname>Fletcher</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>I.</ce:given-name>
+                                        <ce:surname>de Pater</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>W.T.</ce:given-name>
+                                        <ce:surname>Reach</ce:surname>
+                                    </sb:author>
+                                    <sb:et-al/>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Jupiter's para-H2 distribution from SOFIA/FORCAST and Voyager/IRIS 17-37&#xA0;&#x3BC;m spectroscopy</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>286</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2017</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>223</sb:first-page>
+                                    <sb:last-page>240</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0006">
+                        <ce:label>Fletcher et&#xA0;al., 2009</ce:label>
+                        <sb:reference id="sbref0006">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>L.N.</ce:given-name>
+                                        <ce:surname>Fletcher</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>G.S.</ce:given-name>
+                                        <ce:surname>Orton</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.</ce:given-name>
+                                        <ce:surname>Yanamandra-Fisher</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>B.M.</ce:given-name>
+                                        <ce:surname>Fisher</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>B.D.</ce:given-name>
+                                        <ce:surname>Parrish</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.G.J.</ce:given-name>
+                                        <ce:surname>Irwin</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Retrievals of atmospheric variables on the gas giants from ground-based mid-infrared imaging</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>200</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2009</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>154</sb:first-page>
+                                    <sb:last-page>175</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0007">
+                        <ce:label>Herter et&#xA0;al., 2010</ce:label>
+                        <sb:reference id="sbref0007">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>T.L.</ce:given-name>
+                                        <ce:surname>Herter</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>J.D.</ce:given-name>
+                                        <ce:surname>Adams</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>J.M.</ce:given-name>
+                                        <ce:surname>DeBuizer</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>G.E.</ce:given-name>
+                                        <ce:surname>Gull</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>J.</ce:given-name>
+                                        <ce:surname>Shoenwald</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>C.P.</ce:given-name>
+                                        <ce:surname>Henderson</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>L.D.</ce:given-name>
+                                        <ce:surname>Keller</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>T.</ce:given-name>
+                                        <ce:surname>Nikola</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>G.J.</ce:given-name>
+                                        <ce:surname>Stacey</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>W.D.</ce:given-name>
+                                        <ce:surname>Vacca</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>FORCAST: a first light facility instrument for SOFIA</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Proc. SPIE</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>7735</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2010</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>eid7735 1U</sb:first-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0008">
+                        <ce:label>Massie and Hunten, 1982</ce:label>
+                        <sb:reference id="sbref0008">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>S.T.</ce:given-name>
+                                        <ce:surname>Massie</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>D.M.</ce:given-name>
+                                        <ce:surname>Hunten</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Conversion of <ce:italic>para</ce:italic> and <ce:italic>ortho</ce:italic> hydrogen in the Jovian planets</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>49</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1982</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>213</sb:first-page>
+                                    <sb:last-page>226</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                </ce:bibliography-sec>
+            </ce:bibliography>
+        </ja:tail>
+    </ja:article>
+</doc:document>
