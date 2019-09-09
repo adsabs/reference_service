@@ -1,0 +1,90 @@
+% /proj/ads/references/sources/arXiv/1806/02589.raw
+%R 2018arXiv180602589A
+%Z
+% [1] A. Kleyn, Metric-affine manifold, gr-qc/0405028.
+%
+% [2] M. Blagojevic and F. W. Hehl, eds., Gauge Theories of Gravitation. World Scientific, Singapore, 2013.
+%
+AUTHOR_FIRST_NAME	M
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Blagojevic
+AND	and
+AUTHOR_FIRST_NAME	F
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	W
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Hehl
+PUNCTUATION_COMMA	,
+EDITOR	eds.
+PUNCTUATION_COMMA	,
+TITLE	Gauge
+TITLE	Theories
+TITLE	of
+TITLE	Gravitation
+PUNCTUATION_DOT	.
+PUBLISHER	World
+PUBLISHER	Scientific
+PUNCTUATION_COMMA	,
+PUBLISHER_LOCATION	Singapore
+PUNCTUATION_COMMA	,
+YEAR	2013
+PUNCTUATION_DOT	.
+%
+% [3] G. Giachetta and L. Mangiarotti, Projective invariance and einstein's equations, General Relativity and Gravitation 29 (1997) 5-18.
+% [4] T. P. Sotiriou, f(R) gravity, torsion and non-metricity, Class. Quant. Grav. 26 (2009) 152001, [0904.2774].
+% [5] N. Dadhich and J. M. Pons, On the equivalence of the Einstein-Hilbert and the Einstein-Palatini formulations of general relativity for an arbitrary connection, Gen. Rel. Grav. 44 (2012) 2337-2352, [1010.0869].
+% [6] T. P. Sotiriou and S. Liberati, Metric-affine f(R) theories of gravity, Annals Phys. 322 (2007) 935-966, [gr-qc/0604006].
+% [7] A. De Felice and S. Tsujikawa, f(R) theories, Living Rev. Rel. 13 (2010) 3, [1002.4928].
+% [8] G. J. Olmo, Palatini Approach to Modified Gravity: f(R) Theories and Beyond, Int. J. Mod. Phys. D20 (2011) 413-462, [1101.3864].
+% [9] A. Borowiec, M. Ferraris, M. Francaviglia and I. Volovich, Universality of Einstein equations for the Ricci squared Lagrangians, Class. Quant. Grav. 15 (1998) 43-55, [gr-qc/9611067].
+% [10] E. Barrientos, F. S. N. Lobo, S. Mendoza, G. J. Olmo and D. Rubiera-Garcia, Metric-affine f(R,T) theories of gravity and their applications, Phys. Rev. D97 (2018) 104041, [1803.05525].
+% [11] T. Harko, T. S. Koivisto, F. S. N. Lobo and G. J. Olmo, Metric-Palatini gravity unifying local constraints and late-time cosmic acceleration, Phys. Rev. D85 (2012) 084016, [1110.1049].
+% [12] G. W. Horndeski, Second-order scalar-tensor field equations in a four-dimensional space, Int. J. Theor. Phys. 10 (1974) 363-384.
+% [13] C. Charmousis, E. J. Copeland, A. Padilla and P. M. Saffin, General second order scalar-tensor theory, self tuning, and the Fab Four, Phys. Rev. Lett. 108 (2012) 051101, [1106.2000].
+% [14] C. Deffayet, X. Gao, D. A. Steer and G. Zahariade, From k-essence to generalised Galileons, Phys. Rev. D84 (2011) 064039, [1103.3260].
+% [15] T. Kobayashi, M. Yamaguchi and J. Yokoyama, Generalized G-inflation: Inflation with the most general second-order field equations, Prog. Theor. Phys. 126 (2011) 511-529, [1105.5723].
+% [16] J. M. Ezquiaga, J. Garcia-Bellido and M. Zumalacarregui, Towards the most general scalar-tensor theories of gravity: a unified approach in the language of differential forms, Phys. Rev. D94 (2016) 024005, [1603.01269].
+% [17] J. Gleyzes, D. Langlois, F. Piazza and F. Vernizzi, Healthy theories beyond Horndeski, Phys. Rev. Lett. 114 (2015) 211101, [1404.6495].
+% [18] J. Gleyzes, D. Langlois, F. Piazza and F. Vernizzi, Exploring gravitational theories beyond Horndeski, JCAP 1502 (2015) 018, [1408.1952].
+% [19] D. Langlois and K. Noui, Degenerate higher derivative theories beyond Horndeski: evading the Ostrogradski instability, JCAP 1602 (2016) 034, [1510.06930].
+% [20] J. Ben Achour, M. Crisostomi, K. Koyama, D. Langlois, K. Noui and G. Tasinato, Degenerate higher order scalar-tensor theories beyond Horndeski up to cubic order, JHEP 12 (2016) 100, [1608.08135].
+% [21] M. Zumalacarregui and J. Garcia-Bellido, Transforming gravity: from derivative couplings to matter to second-order scalar-tensor theories beyond the Horndeski Lagrangian, Phys. Rev. D89 (2014) 064046, [1308.4685].
+% [22] M. Li and X.-L. Wang, Metric-Affine Formalism of Higher Derivative Scalar Fields in Cosmology, JCAP 1207 (2012) 010, [1205.0841].
+% [23] V. I. Afonso, C. Bejarano, J. Beltran Jimenez, G. J. Olmo and E. Orazi, The trivial role of torsion in projective invariant theories of gravity with non-minimally coupled matter fields, Class. Quant. Grav. 34 (2017) 235003, [1705.03806].
+% [24] M. Crisostomi, K. Koyama and G. Tasinato, Extended Scalar-Tensor Theories of Gravity, JCAP 1604 (2016) 044, [1602.03119].
+% [25] J. Ben Achour, D. Langlois and K. Noui, Degenerate higher order scalar-tensor theories beyond Horndeski and disformal transformations, Phys. Rev. D93 (2016) 124005, [1602.08398].
+%
+% [26] J. A. Schouten, Ricci-Calculus. Springer, Berlin, Heidelberg, 1954.
+%
+AUTHOR_FIRST_NAME	J
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	A
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Schouten
+PUNCTUATION_COMMA	,
+TITLE	Ricci-Calculus
+PUNCTUATION_DOT	.
+PUBLISHER	Springer
+PUNCTUATION_COMMA	,
+PUBLISHER	Berlin
+PUNCTUATION_COMMA	,
+PUBLISHER	Heidelberg
+PUNCTUATION_COMMA	,
+YEAR	1954
+PUNCTUATION_DOT	.
+%
+% [27] O. Veblen and J. M. Thomas, Projective invariants of affine geometry of paths, Annals of Mathematics (1926) 279-296.
+% [28] F. W. Hehl, P. Von Der Heyde, G. D. Kerlick and J. M. Nester, General Relativity with Spin and Torsion: Foundations and Prospects, Rev. Mod. Phys. 48 (1976) 393-416.
+% [29] S. Hojman, M. Rosenbaum, M. P. Ryan and L. C. Shepley, Gauge Invariance, Minimal Coupling, and Torsion, Phys. Rev. D17 (1978) 3141-3146.
+% [30] A. Nicolis, R. Rattazzi and E. Trincherini, The Galileon as a local modification of gravity, Phys. Rev. D79 (2009) 064036, [0811.2197].
+% [31] C. Deffayet, G. Esposito-Farese and A. Vikman, Covariant Galileon, Phys. Rev. D79 (2009) 084003, [0901.1314].
+% [32] F. Bauer and D. A. Demir, Inflation with Non-Minimal Coupling: Metric versus Palatini Formulations, Phys. Lett. B665 (2008) 222-226, [0803.2664].
+% [33] Virgo, LIGO Scientific collaboration, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star Inspiral, Phys. Rev. Lett. 119 (2017) 161101, [1710.05832].
+% [34] Virgo, Fermi-GBM, INTEGRAL, LIGO Scientific collaboration, B. P. Abbott et al., Gravitational Waves and Gamma-rays from a Binary Neutron Star Merger: GW170817 and GRB 170817A, Astrophys. J. 848 (2017) L13, [1710.05834].
+% [35] P. Creminelli and F. Vernizzi, Dark Energy after GW170817 and GRB170817A, Phys. Rev. Lett. 119 (2017) 251302, [1710.05877].
+% [36] J. Sakstein and B. Jain, Implications of the Neutron Star Merger GW170817 for Cosmological Scalar-Tensor Theories, Phys. Rev. Lett. 119 (2017) 251303, [1710.05893].
+% [37] J. M. Ezquiaga and M. Zumalacarregui, Dark Energy After GW170817: Dead Ends and the Road Ahead, Phys. Rev. Lett. 119 (2017) 251304, [1710.05901].
+% [38] M. Crisostomi and K. Koyama, Vainshtein mechanism after GW170817, Phys. Rev. D97 (2018) 021301, [1711.06661].
+% [39] D. Langlois, R. Saito, D. Yamauchi and K. Noui, Scalar-tensor theories and modified gravity in the wake of GW170817, Phys. Rev. D97 (2018) 061501, [1711.07403].
+% [40] A. Dima and F. Vernizzi, Vainshtein Screening in Scalar-Tensor Theories before and after GW170817: Constraints on Theories beyond Horndeski, Phys. Rev. D97 (2018) 101302, [1712.04731].
+% [41] D. Langlois, M. Mancarella, K. Noui and F. Vernizzi, Effective Description of Higher-Order Scalar-Tensor Theories, JCAP 1705 (2017) 033, [1703.03797].

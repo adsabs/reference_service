@@ -1,0 +1,16 @@
+git+https://github.com/adsabs/ADSMicroserviceUtils.git@v1.0.10
+adsutils==1.0.33
+beautifulsoup==3.2.1
+cvxopt==1.2.3
+editdistance==0.3.1
+flask-discoverer==0.0.5
+Flask-RESTful==0.3.6
+Flask-Testing==0.6.2
+nltk==3.4.1
+numpy==1.16.4
+pystruct==0.3.2
+scikit-learn==0.20.3
+scipy==1.2.1
+Unidecode==1.0.23
+Werkzeug==0.11.15
+xmltodict==0.12.0

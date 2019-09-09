@@ -1,0 +1,2236 @@
+<?xml version="1.0"?>
+<doc:document xmlns:doc="http://www.elsevier.com/xml/document/schema" xmlns:dp="http://www.elsevier.com/xml/common/doc-properties/schema" xmlns:cps="http://www.elsevier.com/xml/common/consyn-properties/schema" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dct="http://purl.org/dc/terms/" xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/" xmlns:oa="http://vtw.elsevier.com/data/ns/properties/OpenAccess-1/" xmlns:cp="http://vtw.elsevier.com/data/ns/properties/Copyright-1/" xmlns:cja="http://www.elsevier.com/xml/cja/schema" xmlns:ja="http://www.elsevier.com/xml/ja/schema" xmlns:bk="http://www.elsevier.com/xml/bk/schema" xmlns:ce="http://www.elsevier.com/xml/common/schema" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:cals="http://www.elsevier.com/xml/common/cals/schema" xmlns:tb="http://www.elsevier.com/xml/common/table/schema" xmlns:sa="http://www.elsevier.com/xml/common/struct-aff/schema" xmlns:sb="http://www.elsevier.com/xml/common/struct-bib/schema" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <rdf:RDF>
+        <rdf:Description rdf:about="http://dx.doi.org/10.1016/j.icarus.2018.06.015">
+            <dct:format>application/xml</dct:format>
+            <dct:title>Analysis of meteoritic activity in the Vth&#x2013;XVth centuries using an extended survey of European Medieval sources</dct:title>
+            <dct:creator>Mar&#xED;a Jos&#xE9; Mart&#xED;nez</dct:creator>
+            <dct:creator>Francisco J. Marco</dct:creator>
+            <dct:subject>
+                <rdf:Bag>
+                    <rdf:li>History and philosophy of astronomy</rdf:li>
+                    <rdf:li>Meteors</rdf:li>
+                    <rdf:li>Meteoroids</rdf:li>
+                </rdf:Bag>
+            </dct:subject>
+            <dct:description>Icarus 315 (2018) 20-29. doi:10.1016/j.icarus.2018.06.015</dct:description>
+            <prism:aggregationType>journal</prism:aggregationType>
+            <prism:publicationName>Icarus</prism:publicationName>
+            <prism:copyright>&#xA9; 2018 Elsevier Inc. All rights reserved.</prism:copyright>
+            <dct:publisher>Elsevier Inc.</dct:publisher>
+            <prism:issn>0019-1035</prism:issn>
+            <prism:volume>315</prism:volume>
+            <prism:coverDisplayDate>15 November 2018</prism:coverDisplayDate>
+            <prism:coverDate>2018-11-15</prism:coverDate>
+            <prism:pageRange>20-29</prism:pageRange>
+            <prism:startingPage>20</prism:startingPage>
+            <prism:endingPage>29</prism:endingPage>
+            <prism:doi>10.1016/j.icarus.2018.06.015</prism:doi>
+            <prism:url>http://dx.doi.org/10.1016/j.icarus.2018.06.015</prism:url>
+            <dct:identifier>doi:10.1016/j.icarus.2018.06.015</dct:identifier>
+        </rdf:Description>
+    </rdf:RDF>
+    <dp:document-properties>
+        <dp:aggregation-type>Journals</dp:aggregation-type>
+        <dp:version-number>S300.1</dp:version-number>
+    </dp:document-properties>
+    <ja:article docsubtype="fla" version="5.5" xml:lang="en">
+        <ja:item-info>
+            <ja:jid>YICAR</ja:jid>
+            <ja:aid>12936</ja:aid>
+            <ce:pii>S0019-1035(17)30347-0</ce:pii>
+            <ce:doi>10.1016/j.icarus.2018.06.015</ce:doi>
+            <ce:copyright type="full-transfer" year="2018">Elsevier Inc.</ce:copyright>
+        </ja:item-info>
+        <ce:floats>
+            <ce:figure id="fig0001">
+                <ce:label>Fig. 1</ce:label>
+                <ce:caption id="cap0001">
+                    <ce:simple-para id="spara0031" view="all">Meteors records in Europe in periods of about 300 years. The data include sporadic meteors as well as meteors showers.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0001" role="short">Fig 1</ce:alt-text>
+                <ce:link id="celink0001" locator="gr1" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr1"/>
+            </ce:figure>
+            <ce:figure id="fig0002">
+                <ce:label>Fig. 2</ce:label>
+                <ce:caption id="cap0002">
+                    <ce:simple-para id="spara0032" view="all">Temporal variation of the number of meteor records throughout V-XVth centuries. The solid line represents the totality of data, the dashed line stands for the European&#x202F;+&#x202F;Arabic data. The dotted line is used for the oriental data in which Biot's data of sporadic meteors have been excluded.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0002" role="short">Fig 2</ce:alt-text>
+                <ce:link id="celink0002" locator="gr2" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr2"/>
+            </ce:figure>
+            <ce:figure id="fig0003">
+                <ce:label>Fig. 3</ce:label>
+                <ce:caption id="cap0003">
+                    <ce:simple-para id="spara0033" view="all">Distribution along the year of European data. The bars represent the showers. The red solid line represents the number of accounts of sporadic meteors. The black solid line is the fitting curve of the annual variation of sporadic meteors. (For interpretation of the references to color in this figure legend, the reader is referred to the web version of this article.)</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0003" role="short">Fig 3</ce:alt-text>
+                <ce:link id="celink0003" locator="gr3" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr3"/>
+            </ce:figure>
+            <ce:figure id="fig0004">
+                <ce:label>Fig. 4</ce:label>
+                <ce:caption id="cap0004">
+                    <ce:simple-para id="spara0034" view="all">Annual sporadic meteoric activity during the considered period. On the horizontal axis, we represent the solar longitude at the time of that year when meteors appear. The vertical axis is the number of events. The solid line represents the totality of data, the dashed line stands for the European&#x202F;+&#x202F;Arabic data. The dotted line is used for the oriental data. The red line represents the calculated curve given by <ce:cross-ref id="crf0140" refid="eqn0002">(2)</ce:cross-ref>. (For interpretation of the references to color in this figure legend, the reader is referred to the web version of this article.)</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0004" role="short">Fig 4</ce:alt-text>
+                <ce:link id="celink0004" locator="gr4" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr4"/>
+            </ce:figure>
+            <ce:figure id="fig0005">
+                <ce:label>Fig. 5</ce:label>
+                <ce:caption id="cap0005">
+                    <ce:simple-para id="spara0035" view="all">Annual meteoric showers during the considered period. On the horizontal axis, we represent the solar longitude. The vertical axis is the number of events. The solid line represents the totality of data, the dashed line stands for the European&#x202F;+&#x202F;Arabic data. The dotted line is used for the oriental data. In red, we have plotted the European&#x202F;+&#x202F;Arabic sporadic meteors and the blue dashed line represents the total reports of sporadic meteors. In order to maintain the scale, these last values have been divided by 4. (For interpretation of the references to color in this figure legend, the reader is referred to the web version of this article.)</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0005" role="short">Fig 5</ce:alt-text>
+                <ce:link id="celink0005" locator="gr5" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr5"/>
+            </ce:figure>
+            <ce:figure id="fig0006">
+                <ce:label>Fig. 6</ce:label>
+                <ce:caption id="cap0006">
+                    <ce:simple-para id="spara0036" view="all">Distribution of the reported meteor showers and comparison with the modern dates of the currently established main meteors showers.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0006" role="short">Fig 6</ce:alt-text>
+                <ce:link id="celink0006" locator="gr6" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr6"/>
+            </ce:figure>
+            <ce:figure id="fig0007">
+                <ce:label>Fig. 7</ce:label>
+                <ce:caption id="cap0007">
+                    <ce:simple-para id="spara0037" view="all">Distribution in centuries of the total of meteors showers. Sporadic meteors are disregarded in this figure.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0007" role="short">Fig 7</ce:alt-text>
+                <ce:link id="celink0007" locator="gr7" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr7"/>
+            </ce:figure>
+            <ce:figure id="fig0008">
+                <ce:label>Fig. 8</ce:label>
+                <ce:caption id="cap0008">
+                    <ce:simple-para id="spara0038" view="all">Distance from the nucleus of comet 109&#xA0;P at the moment when the Earth is in its ascending node. The asterisks represent a reported Perseids meteor storm.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0008" role="short">Fig 8</ce:alt-text>
+                <ce:link id="celink0008" locator="gr8" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr8"/>
+            </ce:figure>
+            <ce:figure id="fig0009">
+                <ce:label>Fig. 9</ce:label>
+                <ce:caption id="cap0009">
+                    <ce:simple-para id="spara0039" view="all">Distribution of Perseids showers from 400 to 1500. The solid red line represents the linear regression. (For interpretation of the references to color in this figure legend, the reader is referred to the web version of this article.)</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0009" role="short">Fig 9</ce:alt-text>
+                <ce:link id="celink0009" locator="gr9" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr9"/>
+            </ce:figure>
+            <ce:figure id="fig0010">
+                <ce:label>Fig. 10</ce:label>
+                <ce:caption id="cap0010">
+                    <ce:simple-para id="spara0040" view="all">Distance from the nucleus of comet 55&#xA0;P to the Earth at the moment when the Earth is in its descending node. The asterisks represent a reported Leonid meteor storm.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0010" role="short">Fig 10</ce:alt-text>
+                <ce:link id="celink0010" locator="gr10" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr10"/>
+            </ce:figure>
+            <ce:figure id="fig0011">
+                <ce:label>Fig. 11</ce:label>
+                <ce:caption id="cap0011">
+                    <ce:simple-para id="spara0041" view="all">The shift of appearance dates of the Leonid Meteor showers. The red solid line corresponds to the linear regression. (For interpretation of the references to color in this figure legend, the reader is referred to the web version of this article.)</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0011" role="short">Fig 11</ce:alt-text>
+                <ce:link id="celink0011" locator="gr11" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr11"/>
+            </ce:figure>
+            <ce:figure id="fig0012">
+                <ce:label>Fig. 12</ce:label>
+                <ce:caption id="cap0012">
+                    <ce:simple-para id="spara0042" view="all">Minimum distance between the comet 55P/Tempel-Tuttle and the Earth's orbit at the time of the comet's passage through its descending node (modified from <ce:cross-ref id="crf0141" refid="bib0057">Yeomans&#xA0;et&#xA0;al.&#xA0;(1996)</ce:cross-ref>). The circles represent the date of the perihelion and the asterisk is a reported meteor shower. A red square represents an outstanding meteor shower (meteors outbursts). (For interpretation of the references to color in this figure legend, the reader is referred to the web version of this article.)</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0012" role="short">Fig 12</ce:alt-text>
+                <ce:link id="celink0012" locator="gr12" xlink:type="simple" xlink:role="http://data.elsevier.com/vocabulary/ElsevierContentTypes/23.4" xlink:href="pii:S0019103517303470/gr12"/>
+            </ce:figure>
+            <ce:table id="tbl0001" rowsep="0" colsep="0" frame="topbot">
+                <ce:label>Table 1</ce:label>
+                <ce:caption id="cap0013">
+                    <ce:simple-para id="spara0043" view="all">Peaks in <ce:cross-ref id="crf0142" refid="fig0005">Fig.&#xA0;5</ce:cross-ref> and possible identifications. The numbers of the showers correspond to the IAU nomenclature.</ce:simple-para>
+                </ce:caption>
+                <ce:alt-text id="alt0013" role="short">Table 1</ce:alt-text>
+                <cals:tgroup cols="4">
+                    <cals:colspec colnum="1" colname="col1" align="left"/>
+                    <cals:colspec colnum="2" colname="col2" align="left"/>
+                    <cals:colspec colnum="3" colname="col3" align="left"/>
+                    <cals:colspec colnum="4" colname="col4" align="left"/>
+                    <cals:thead>
+                        <cals:row>
+                            <ce:entry id="en0001" rowsep="1" align="left" namest="col1" nameend="col4" valign="top">Major Peaks</ce:entry>
+                        </cals:row>
+                        <cals:row rowsep="1">
+                            <ce:entry id="en0002" colname="col1" valign="top"><ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf>min</ce:entry>
+                            <ce:entry id="en0003" colname="col2" valign="top"><ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf>peak</ce:entry>
+                            <ce:entry id="en0004" colname="col3" valign="top"><ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf>max</ce:entry>
+                            <ce:entry id="en0005" colname="col4" valign="top">Tentative identification</ce:entry>
+                        </cals:row>
+                    </cals:thead>
+                    <cals:tbody>
+                        <cals:row>
+                            <ce:entry id="en0006" colname="col1" valign="top">20&#xB0;</ce:entry>
+                            <ce:entry id="en0007" colname="col2" valign="top">30&#xB0;</ce:entry>
+                            <ce:entry id="en0008" colname="col3" valign="top">50&#xB0;</ce:entry>
+                            <ce:entry id="en0009" colname="col4" valign="top">6 April Lyrids 31 eta Aquariids</ce:entry>
+                        </cals:row>
+                        <cals:row>
+                            <ce:entry id="en0010" colname="col1" valign="top">130&#xB0;</ce:entry>
+                            <ce:entry id="en0011" colname="col2" valign="top">140&#xB0;</ce:entry>
+                            <ce:entry id="en0012" colname="col3" valign="top">150&#xB0;</ce:entry>
+                            <ce:entry id="en0013" colname="col4" valign="top">7 Perseids</ce:entry>
+                        </cals:row>
+                        <cals:row>
+                            <ce:entry id="en0014" colname="col1" valign="top">200&#xB0;</ce:entry>
+                            <ce:entry id="en0015" colname="col2" valign="top">220&#xB0;</ce:entry>
+                            <ce:entry id="en0016" colname="col3" valign="top">230&#xB0;</ce:entry>
+                            <ce:entry id="en0017" colname="col4" valign="top">13 Leonids 17 Northern Taurids</ce:entry>
+                        </cals:row>
+                        <cals:row>
+                            <ce:entry id="en0018" colname="col1" valign="top">250&#xB0;</ce:entry>
+                            <ce:entry id="en0019" colname="col2" valign="top">260&#xB0;</ce:entry>
+                            <ce:entry id="en0020" colname="col3" valign="top">270&#xB0;</ce:entry>
+                            <ce:entry id="en0021" colname="col4" valign="top">256 Northern Chi Orionids 4 Geminids 19 December Monocerotids</ce:entry>
+                        </cals:row>
+                        <cals:row rowsep="1">
+                            <ce:entry id="en0022" align="left" namest="col1" nameend="col4" valign="top">Minor Peaks</ce:entry>
+                        </cals:row>
+                        <cals:row>
+                            <ce:entry id="en0023" colname="col1" valign="top"><ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf>min</ce:entry>
+                            <ce:entry id="en0024" colname="col2" valign="top"><ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf>peak</ce:entry>
+                            <ce:entry id="en0025" colname="col3" valign="top"><ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf>max</ce:entry>
+                            <ce:entry id="en0026" colname="col4" valign="top">Prob Ident.</ce:entry>
+                        </cals:row>
+                        <cals:row>
+                            <ce:entry id="en0027" colname="col1" valign="top">50</ce:entry>
+                            <ce:entry id="en0028" colname="col2" valign="top">60</ce:entry>
+                            <ce:entry id="en0029" colname="col3" valign="top">70</ce:entry>
+                            <ce:entry id="en0030" colname="col4" valign="top">31 eta Aquariids 145 eta Lyrids</ce:entry>
+                        </cals:row>
+                        <cals:row>
+                            <ce:entry id="en0031" colname="col1" valign="top">100</ce:entry>
+                            <ce:entry id="en0032" colname="col2" valign="top">110</ce:entry>
+                            <ce:entry id="en0033" colname="col3" valign="top">120</ce:entry>
+                            <ce:entry id="en0034" colname="col4" valign="top">175 July Pegasids 326 Epsilon Pegasis 328 Alpha Lacertis 411 c Andromedids 444 zeta Casiopeiids</ce:entry>
+                        </cals:row>
+                        <cals:row>
+                            <ce:entry id="en0035" colname="col1" valign="top">190</ce:entry>
+                            <ce:entry id="en0036" colname="col2" valign="top">200</ce:entry>
+                            <ce:entry id="en0037" colname="col3" valign="top">210</ce:entry>
+                            <ce:entry id="en0038" colname="col4" valign="top">9 October Draconids 23 Epsilon Geminids</ce:entry>
+                        </cals:row>
+                        <cals:row>
+                            <ce:entry id="en0039" colname="col1" valign="top">270</ce:entry>
+                            <ce:entry id="en0040" colname="col2" valign="top">280</ce:entry>
+                            <ce:entry id="en0041" colname="col3" valign="top">290</ce:entry>
+                            <ce:entry id="en0042" colname="col4" valign="top">10 Quadrantids 15 Ursids</ce:entry>
+                        </cals:row>
+                        <cals:row>
+                            <ce:entry id="en0043" colname="col1" valign="top">290</ce:entry>
+                            <ce:entry id="en0044" colname="col2" valign="top">300</ce:entry>
+                            <ce:entry id="en0045" colname="col3" valign="top">310</ce:entry>
+                            <ce:entry id="en0046" colname="col4" valign="top">90 January Comae Berenicids 530 Eta Corvids 404 Gamma Ursae Minoris.</ce:entry>
+                        </cals:row>
+                        <cals:row>
+                            <ce:entry id="en0047" colname="col1" valign="top">330</ce:entry>
+                            <ce:entry id="en0048" colname="col2" valign="top">340</ce:entry>
+                            <ce:entry id="en0049" colname="col3" valign="top">360</ce:entry>
+                            <ce:entry id="en0050" colname="col4" valign="top">733 Lambda Leonids 346 eta Aquariids</ce:entry>
+                        </cals:row>
+                    </cals:tbody>
+                </cals:tgroup>
+            </ce:table>
+        </ce:floats>
+        <ja:head>
+            <ce:title id="tte0002">Analysis of meteoritic activity in the Vth&#x2013;XVth centuries using an extended survey of European Medieval sources</ce:title>
+            <ce:author-group id="aut0001">
+                <ce:author id="au0001" author-id="S0019103517303470-ddb1122fdb527a27d107302adefe9acc">
+                    <ce:given-name>Mar&#xED;a Jos&#xE9;</ce:given-name>
+                    <ce:surname>Mart&#xED;nez</ce:surname>
+                    <ce:cross-ref id="crf0001" refid="aff0001">
+                        <ce:sup loc="post">a</ce:sup>
+                    </ce:cross-ref>
+                    <ce:cross-ref id="crf0002" refid="cor0001">
+                        <ce:sup loc="post">&#x204E;</ce:sup>
+                    </ce:cross-ref>
+                    <ce:e-address id="ead0001" type="email" xlink:href="mailto:mjmartin@mat.upv.es">mjmartin@mat.upv.es</ce:e-address>
+                </ce:author>
+                <ce:author id="au0002" author-id="S0019103517303470-83014e91955ea56335127c0d690468c0">
+                    <ce:given-name>Francisco J.</ce:given-name>
+                    <ce:surname>Marco</ce:surname>
+                    <ce:cross-ref id="crf0003" refid="aff0002">
+                        <ce:sup loc="post">b</ce:sup>
+                    </ce:cross-ref>
+                </ce:author>
+                <ce:affiliation id="aff0001" affiliation-id="S0019103517303470-2afe28843c7facf464c18e37e19471d9">
+                    <ce:label>a</ce:label>
+                    <ce:textfn id="cetextfn0001">Universidad Polit&#xE9;cnica de Valencia, Deptartment Matem&#xE0;tica Aplicada. IUMPA, Camino de Vera SN. 46022, Valencia, Spain</ce:textfn>
+                    <sa:affiliation>
+                        <sa:organization>Universidad Polit&#xE9;cnica de Valencia</sa:organization>
+                        <sa:organization>Deptartment Matem&#xE0;tica Aplicada. IUMPA</sa:organization>
+                        <sa:address-line>Camino de Vera SN. 46022</sa:address-line>
+                        <sa:city>Valencia</sa:city>
+                        <sa:country>Spain</sa:country>
+                    </sa:affiliation>
+                </ce:affiliation>
+                <ce:affiliation id="aff0002" affiliation-id="S0019103517303470-fa09a3650a9486bb02577afe652d158d">
+                    <ce:label>b</ce:label>
+                    <ce:textfn id="cetextfn0002">Universitat Jaume I, Department Matem&#xE0;tiques, IMAC, Campus de Riu Sec. 12071, Castell&#xF3;n, Spain</ce:textfn>
+                    <sa:affiliation>
+                        <sa:organization>Universitat Jaume I, Department Matem&#xE0;tiques, IMAC</sa:organization>
+                        <sa:address-line>Campus de Riu Sec. 12071</sa:address-line>
+                        <sa:city>Castell&#xF3;n</sa:city>
+                        <sa:country>Spain</sa:country>
+                    </sa:affiliation>
+                </ce:affiliation>
+                <ce:correspondence id="cor0001">
+                    <ce:label>&#x204E;</ce:label>
+                    <ce:text id="cetext0001">Corresponding author.</ce:text>
+                </ce:correspondence>
+            </ce:author-group>
+            <ce:date-received day="6" month="5" year="2017"/>
+            <ce:date-revised day="26" month="10" year="2017"/>
+            <ce:date-accepted day="13" month="6" year="2018"/>
+            <ce:abstract id="abs0001" class="author-highlights" view="all">
+                <ce:section-title id="cesectitle0001">Hightlights</ce:section-title>
+                <ce:abstract-sec id="abss0001" view="all">
+                    <ce:simple-para id="spara0001" view="all">
+                        <ce:list id="celist0001">
+                            <ce:list-item id="celistitem0001">
+                                <ce:label>&#x2022;</ce:label>
+                                <ce:para id="para0001" view="all">An exhaustive review of the written sources from Medieval Europe (V-XV centuries) has been made searching for new records of meteors and meteor showers.</ce:para>
+                            </ce:list-item>
+                            <ce:list-item id="celistitem0002">
+                                <ce:label>&#x2022;</ce:label>
+                                <ce:para id="para0002" view="all">Using the new records, the distribution and evolution of meteor showers throughout the mentioned period has been studied.</ce:para>
+                            </ce:list-item>
+                            <ce:list-item id="celistitem0003">
+                                <ce:label>&#x2022;</ce:label>
+                                <ce:para id="para0003" view="all">The inconsistencies that appeared in previous studies that used European sources have been reduced.</ce:para>
+                            </ce:list-item>
+                        </ce:list>
+                    </ce:simple-para>
+                </ce:abstract-sec>
+            </ce:abstract>
+            <ce:abstract id="abs0002" view="all" class="author">
+                <ce:section-title id="cesectitle0002">Abstract</ce:section-title>
+                <ce:abstract-sec id="abss0002" view="all">
+                    <ce:simple-para id="spara0008" view="all">The distribution of meteors streams throughout a year from the 5th to the 15th century is investigated, based on a new compilation of meteor records in the diverse European Medieval sources. The records of meteor showers and storms in the chronicles of Korea, Japan, China and Arab have also been considered, and compare their appearance dates with those of showers obtained above, as well as with modern observations. We found that the three sets of data are in agreement with each other, the Perseids, Leonids, and Lyrids being best represented.</ce:simple-para>
+                </ce:abstract-sec>
+            </ce:abstract>
+            <ce:keywords id="keys0001" view="all" class="keyword">
+                <ce:section-title id="cesectitle0003">Keywords</ce:section-title>
+                <ce:keyword id="key0001">
+                    <ce:text id="cetext0002">History and philosophy of astronomy</ce:text>
+                </ce:keyword>
+                <ce:keyword id="key0002">
+                    <ce:text id="cetext0003">Meteors</ce:text>
+                </ce:keyword>
+                <ce:keyword id="key0003">
+                    <ce:text id="cetext0004">Meteoroids</ce:text>
+                </ce:keyword>
+            </ce:keywords>
+        </ja:head>
+        <ja:body view="all">
+            <ce:sections>
+                <ce:section id="sec0001" role="introduction" view="all">
+                    <ce:label>1</ce:label>
+                    <ce:section-title id="cesectitle0004">Introduction</ce:section-title>
+                    <ce:para id="para0007" view="all">Meteors, meteor showers and, in particular, meteor outbursts are one of the most outstanding astronomical phenomena visible to the naked eye. Ancient and medieval observers were aware of such astronomical events and soon began to take records of them, being the oldest known account linked to a modern shower the Lyrids outburst seen in China on March 16, 687BC (Julian calendar, see <ce:cross-ref id="crf0005" refid="bib0024">Hasegawa,&#xA0;1993</ce:cross-ref>). They were considered mainly as omens or signals from heaven for a long time. In fact, it was not until the last half of the XVth century when scientific questions about meteors began to be answered. But still, systematic studies had to wait until the famous Leonids outburst of 1799 and 1833. Since then, the progress has been continuous and a popular current account of our understanding can be found in <ce:cross-ref id="crf0006" refid="bib0050">Williams&#xA0;(2011)</ce:cross-ref>. A working list of Meteor showers is maintained at the IAU's meteor data center (<ce:cross-ref id="crf0007" refid="bib0035a">Jopek&#xA0;and Ka&#x148;uchov&#xE1;, 2017</ce:cross-ref>) with 701 proposed showers, 112 of them established.</ce:para>
+                    <ce:para id="para0008" view="all">Ancient records of meteoritic activity are found worldwide but they come mainly from Asia, particularly China, Japan and Korea focusing the attention of researchers from the XIXth century. The most recent study of these data may be found in <ce:cross-ref id="crf0008" refid="bib0055">Yang&#xA0;et&#xA0;al.&#xA0;(2005)</ce:cross-ref>.</ce:para>
+                    <ce:para id="para0009" view="all">The first wide compilation of Chinese accounts was carried out by <ce:cross-ref id="crf0009" refid="bib0010">Biot&#xA0;(1841)</ce:cross-ref> and then it has been enlarged and corrected by other authors, especially <ce:cross-ref id="crf0010" refid="bib0029">Imoto and Hasegawa&#xA0;(1958)</ce:cross-ref> and <ce:cross-refs id="crf0011" refid="bib0023 bib0024">Hasegawa (1992, 1993</ce:cross-refs>) Some partial studies regarding to specific meteors showers have also been arranged, see for example <ce:cross-ref id="crf0013" refid="bib0021">Fujiiwara &amp; Hasegawa&#xA0;(2001)</ce:cross-ref>. All meteor observations in the Chinese chronicles are included in the General compilation of Chinese Ancient Astronomical records (<ce:cross-ref id="crf0014" refid="bib0009">Beijin&#xA0;Observatory,&#xA0;1988</ce:cross-ref>). More recently <ce:cross-ref id="crf0015" refid="bib0044">Pankenier&#xA0;et&#xA0;al.&#xA0;(2008)</ce:cross-ref> provided new translations for the Chinese text and corrected some errors of dating.</ce:para>
+                    <ce:para id="para0010" view="all">Japan has only a small amount of records of meteors occurrences and they are mainly compiled in three books: Japanese Historical Astronomical Records, General Inventory of Japanese Historical Astronomical records and Japanese Historical Astronomical records since 1600. <ce:cross-refs id="crf0016" refid="bib0029 bib0026">Imoto and Hasegawa (1958), Hasegawa (1999a)</ce:cross-refs> and then <ce:cross-ref id="crf0018" refid="bib0055">Yang&#xA0;et&#xA0;al.&#xA0;(2005)</ce:cross-ref> have studied them.</ce:para>
+                    <ce:para id="para0011" view="all">The previously mentioned authors, together with <ce:cross-refs id="crf0019" refid="bib0002 bib0004">Ahn (2003, 2005</ce:cross-refs>) researched the Korean area. Korean records come mainly from three official History books: Samguksaki, Goryeosa and Joseonwangjosillok that have been analyzed by <ce:cross-ref id="crf0021" refid="bib0055">Yang&#xA0;et&#xA0;al.&#xA0;(2005)</ce:cross-ref>. These books cover long periods of time and contain astronomical phenomena that were systematically recorded by court astronomers.</ce:para>
+                    <ce:para id="para0012" view="all">As for other parts of the world, Medieval Arabic data have been compiled by <ce:cross-ref id="crf0022" refid="bib0047">Rada &amp; Stephenson&#xA0;(1992)</ce:cross-ref>, and then corrected by <ce:cross-refs id="crf0023" refid="bib0037 bib0025">Kidger (1993), Hasegawa (1996)</ce:cross-refs> and <ce:cross-ref id="crf0025" refid="bib0013">Cook&#xA0;(1999)</ce:cross-ref>, representing a small but significant collection.</ce:para>
+                    <ce:para id="para0013" view="all">Lastly, the compilation of accounts from European sources has been carried out by several authors, such as <ce:cross-refs id="crf0026" refid="bib0012 bib0046 bib0043">Chasles (1841), Quetelet (1841), Newton (1864)</ce:cross-refs> and more recently focusing on Medieval sources, by <ce:cross-ref id="crf0029" refid="bib0014">Dall'Olmo&#xA0;(1978)</ce:cross-ref>. <ce:cross-ref id="crf0030" refid="bib0032">Jenniskens&#xA0;(2006)</ce:cross-ref> lists a large number or meteor showers based mainly on Asian records and where European records were under-represented, mainly because of the scarce data; the largest survey was provided by <ce:cross-ref id="crf0031" refid="bib0014">Dall'Olmo&#xA0;(1978)</ce:cross-ref> but only a few entries can be used for analysis, even including meteor showers and sporadic meteors. This scarcity of data caused strange results as, for example, the fact that Perseids seemed not to have been observed in Europe. The problem arises in European records because, unlike Korean, Chinese and Japanese, no book of ancient astronomical records has been so far compiled. The search of new records is hard because these accounts are found in chronicles, annals and diaries that have no astronomical function and that are not systematically published so, a complete compilation of all such astronomical phenomena remains a hopeless task.</ce:para>
+                    <ce:para id="para0014" view="all">In this paper, we will carry out a study of the meteor showers covering the Vth&#x2013;XVth centuries. Several authors have already arranged this task but always with a focus on the Asian records, due to the already mentioned small accounts of records from Europe, that we have significantly expanded in a recent paper <ce:cross-ref id="crf0032" refid="bib0039">Mart&#xED;nez&#xA0;and Marco&#xA0;(2017)</ce:cross-ref>. Throughout this paper, we briefly study this new European data separately and then we consider them together with all the available data from other parts of the world, including the new records provided by <ce:cross-ref id="crf0033" refid="bib0055">Yang&#xA0;et&#xA0;al.&#xA0;(2005)</ce:cross-ref> for the Asian area and <ce:cross-ref id="crf0034" refid="bib0008">Basurah&#xA0;(2012)</ce:cross-ref> for the Arabic area. We focus on four main objectives:<ce:list id="celist0002"><ce:list-item id="celistitem0007"><ce:label>1.</ce:label><ce:para id="para0015" view="all">The verification of whether the current active meteor showers have their counterpart in medieval ages.</ce:para></ce:list-item><ce:list-item id="celistitem0008"><ce:label>2.</ce:label><ce:para id="para0016" view="all">To study whether the current pattern of meteor phenomena has been maintained over time.</ce:para></ce:list-item><ce:list-item id="celistitem0009"><ce:label>3.</ce:label><ce:para id="para0017" view="all">To discuss some particular results regarding Leonids and Perseids.</ce:para></ce:list-item><ce:list-item id="celistitem0010"><ce:label>4.</ce:label><ce:para id="para0018" view="all">The comparison with the results provided by other authors.</ce:para></ce:list-item></ce:list></ce:para>
+                    <ce:para id="para0019" view="all">To this aim, we must refer in the first place to an indispensable and already completed, previous work: the enlargement of the list of European medieval meteor activity reports. A new revision of <ce:cross-ref id="crf0035" refid="bib0014">Dall'Olmo&#xA0;(1978)</ce:cross-ref> survey of European showers has been carried out by <ce:cross-ref id="crf0036" refid="bib0039">Mart&#xED;nez&#xA0;and Marco&#xA0;(2017)</ce:cross-ref>. In this regard, the plan of work consisted of three parts: first, a of review the original list of sporadic meteors and meteor showers. Second, a completely new search in all sources used by this author using the new computer resources available was performed. Thirdly, the addition of a large number of new sources, including those from Western Europe that had remained, in this respect, almost unexplored. These are mainly Spanish and Portuguese, as well as some others from Easter Europe with available English translation. In the next paragraphs, an expanded explanation for each stage is provided.</ce:para>
+                    <ce:para id="para0020" view="all">Regarding the first step, namely the revision of the list given by Dall&#x2019; Olmo, it should be noted that this author provided a total of 133 observations, 62 of which are completely dated, including year, month and day. For other 17 reports it was possible to determine the year and the month, but not the day. The first objective was to locate the events in the sources given by <ce:cross-ref id="crf0037" refid="bib0014">Dall'Olmo&#xA0;(1978)</ce:cross-ref> and, if necessary, correct any errors or typos. As an example of such corrections, the shower listed on April 4, 1040 actually happened on April 4, 1094. Finally, the study of the context allowed us to provide a complete date to some records, such as the observations of the meteors of 1187 or those in August 1287.</ce:para>
+                    <ce:para id="para0021" view="all">Secondly, the performance of a search as exhaustive as possible in the sources already used by Dall'Olmo, employing the new computer resources, in order to complete his list. In this phase, the sources were limited to those used by this author: <ce:italic>MGH, RIS, Rer. Brit. M.A. Script</ce:italic>. and some other isolated French, English and Italian chronicles. Then, the third step consisted of an expansion of the study by adding other sources lesser known or never used, from Spain, Portugal and Russia among others, collected both from collections or particular sources and that, sometimes, have not been transcribed into modern writing. In addition, other compilations such as <ce:italic>Historia Sagrada,</ce:italic> or the <ce:italic>Portugalia Monumenta Historica</ce:italic> together with many minor documents were also included. Most of them were written in Latin, but we also found them in Castilian, Catalan, Portuguese or Italian. For geographical reasons, the records that refer to meteoritic phenomena seen in Andalusia (southern Spain) were also included, in spite of the fact that this area was, in whole or in part, under Arab domination between the V-XVth centuries and, therefore, belongs to a different cultural field. Further details will be provided in the next section.</ce:para>
+                    <ce:para id="para0023" view="all">With all the steps above accomplished, we finally offered a list of the observations in which we include the date (the Julian date, but in the case of Arabic observations, we also give the Anno Hegirae or AH), sometimes deduced through the historical context because the original author did not provide any. We included a brief translation of the phenomena and, in some exceptional cases, details such as the place, the time of the day or the path followed by the meteor could be provided. In total, we listed more than 350 observations, most of them dated at least monthly. The main goal of this paper is to include these new records in the analysis of ancient showers, focusing on the V-XVth centuries. In order to obtain higher reliability, through this paper we consider suitable data only those that provide a precise date and, in addition, that can be identified as meteors or meteor showers with security.</ce:para>
+                    <ce:para id="para0024" view="all">As for the rest of the paper, we perform an analysis of the European records for both major showers and sporadic meteors, then we compare the results with those obtained by other authors. We also consider the totality of the worldwide data. Most of the accounts can be identified as belonging to major showers such as Perseids or Leonids, but many have no present-day counterpart.</ce:para>
+                </ce:section>
+                <ce:section id="sec0002" view="all">
+                    <ce:label>2</ce:label>
+                    <ce:section-title id="cesectitle0005">The European records</ce:section-title>
+                    <ce:para id="para0025" view="all">A typical European complete record includes the date, the approximate hour of the observation and seldom some other additional details such as the velocity, color, duration or even the presence of sound. However, most of them are merely variations of a descriptive paragraph such as &#x201C;stars fell like rain&#x201D;. The data on which we are going to work can be classified into two broad categories: star showers and sporadic meteors. A more detailed subclassification, for example, in bolides or meteor outbursts, is generally not possible given the general lack of data in the descriptions.</ce:para>
+                    <ce:para id="para0026" view="all">In contrast to many Asian and Arabic accounts, medieval European observations regarding meteors were not recorded by professional astronomers. We can generally expect poor accuracy and they do not have a divinatory aim although, sometimes, they are seen as omens that predict an important death, a plague epidemic or foresee the result of a battle. Observations are never systematic and they depend on the perception of the observer, the climate or, simply, the luck. When working with ancient observations of meteors, we must take into account that naked-eye observers can only see those meteors with magnitudes brighter than 5. So that when an observer speaks of the appearance of many shooting stars, the phenomenon probably included many more elements that went unnoticed.</ce:para>
+                    <ce:para id="para0027" view="all">Unlike the cases treated by authors who study the sources from Asia, in Europa we do not have works that narrate the evolution of a dynasty of rulers over hundreds of years, with successive scribes aiming to the same objective. In the European case, as a general rule, the primary sources cover short periods of time, and they are usually written by a single author or, in any case, a few of them. On multiple occasions, they are reworkings or copies of older works, because an important characteristic of the European Medieval literate tradition is its cumulative character. The authority of any work was enhanced by grounding in the works of previous writers.</ce:para>
+                    <ce:para id="para0028" view="all">Most scholars have obtained their data from the well-known compilations of works such as the MGH and RIS. Monumenta Germaniae Historica (MGH) is a comprehensive series of primary sources, including chronicles and archives, for the study of mainly German history although many sources from other countries are also included (Britain, Czech lands, Poland, Austria, France, Low Countries, Italy, Spain, etc.). More information can be found in (<ce:inter-ref id="interref0001" xlink:href="http://www.mgh.de/" xlink:type="simple">http://www.mgh.de/</ce:inter-ref>, in German). On the other hand, the Rerum Italicarum Scriptores (RIS) is a compilation of texts and literary sources regarding the Italian history from the VIth to the XVth centuries. The initial idea of this work was due to L. A. Muratori in the XVIIth century and the first series was already published in 28 vol from 1723 to 1751. The work is currently ongoing. We have used the two first series of Muratori (<ce:cross-ref id="crf0038" refid="bib0041">RIS&#xA0;1723</ce:cross-ref> and <ce:cross-ref id="crf0039" refid="bib0042">RIS<ce:sup loc="post">2</ce:sup> 1900</ce:cross-ref>).</ce:para>
+                    <ce:para id="para0029" view="all">As previously stated, the initial investigations in such compilations only provided a reduced amount of data. In <ce:cross-ref id="crf0040" refid="bib0039">Mart&#xED;nez&#xA0;and Marco&#xA0;(2017)</ce:cross-ref> we made a wider research including other less known compilations such as the Portugaliae Monumenta Historica (<ce:cross-ref id="crf0041" refid="bib0045">PMH,&#xA0;1856</ce:cross-ref>) and <ce:cross-ref id="crf0042" refid="bib0016">Espa&#xF1;a&#xA0;Sagrada&#xA0;(1747)</ce:cross-ref> together with other local documents such as minor annals, chronicles, and even personal diaries. Annals are simple listing, year by year, of the significant events which have happened in them. The concepts of annals and chronicles are somehow overlapped, but generally, the term annals relates to writing up events as they happen, rather than a long retrospective look into the events of the past, which is more in line with the definition of chronicle. Their origin is grounded in the monastic practice of recording the events of the past year in the spaces and margins of the tables of the date of Easter.</ce:para>
+                    <ce:para id="para0030" view="all">Many historical words followed a format consisting of providing a brief summary of the events of the world from the first days of creation up to some relatively recent time, followed by a chronicle or annal format of the events of the writer's own time. This genre has a long history. In the early V<ce:sup loc="post">th</ce:sup> century a Spanish writer, Paulus Orosius, wrote his Historiae Adversus Paganos that was considered as the first history of the world from a Christian viewpoint, and consequently to its great significance for the missionising monks of the Dark Ages, it was transcribed and translated over the centuries.</ce:para>
+                    <ce:para id="para0031" view="all">Chronicles in any vernacular language were almost unknown before 1200, as the monastic scribes followed the literate tradition of writing in Latin. A special case of such documents is the so-called &#x201C;dietaris&#x201D;. The Catalan word &#x201C;Dietari&#x201D; refers to a historiographical genre that provides news with a higher frequency and volume than annals and chronicles. For an explanation of the term, see the Diccionari de la Llengua Catalana (Institut d'estudis Catalans, <ce:inter-ref id="interref0002" xlink:href="http://dlc.iec.cat/" xlink:type="simple">http://dlc.iec.cat/</ce:inter-ref>). In a wider sense, a &#x201C;dietary&#x201D; is simply a document where daily facts are recorded. Most of these recordings are written by particular individuals from the nobility, clergy, but also commoners. Writing is not rigid, nor is it subject to formalities. No phenomenon, familiar or political, is exempt from being collected in a dietari. The events that caught the attention of the writer were conveniently recorded, so they represent a source of astronomical phenomena: eclipses of sun and moon, comets, meteors &#x2026;</ce:para>
+                    <ce:para id="para0032" view="all">All the new European data come from the sources that have been mentioned and commented previously and, given the enormity of the existent sources, it is not intended that the list is complete. For a complete exposition of the problems found regarding the translation and the adjudication of a report to a given phenomenon, see <ce:cross-ref id="crf0043" refid="bib0015">Dall'Olmo&#xA0;(1980)</ce:cross-ref>.</ce:para>
+                </ce:section>
+                <ce:section id="sec0003" role="results" view="all">
+                    <ce:label>3</ce:label>
+                    <ce:section-title id="cesectitle0006">Results</ce:section-title>
+                    <ce:section id="sec0004" view="all">
+                        <ce:label>3.1</ce:label>
+                        <ce:section-title id="cesectitle0007">General overview, including new European data</ce:section-title>
+                        <ce:para id="para0033" view="all">The new survey of European data provides an amount of 80 showers and 113 isolated meteors for the considered period. The original list of <ce:cross-ref id="crf0044" refid="bib0014">Dall'Olmo&#xA0;(1978)</ce:cross-ref> contained 22 showers and 37 sporadic meteors. If we consider together all the published data: European, Arabian (17 showers, 24 meteors), Chinese, Japanese and Korean (146 showers, 1499 meteors) and eliminate duplicate showers, we have a total amount of 233 meteor showers and 1606 isolated meteors for the period between the Vth and the XVth century. The new European accounts suppose a significant increase of the observations of these centuries and a 34% of the showers. In <ce:cross-ref id="crf0045" refid="fig0001">Fig.&#xA0;1</ce:cross-ref><ce:float-anchor refid="fig0001"/> we display the observations distributed in four periods of about three centuries. Most observations belong to the XI&#x2013;XIV centuries period, and the least observations are in the 400&#x2013;700 period, as one could expect. At first sight, if we identify the prominent peaks to major meteor showers, Perseids seem to be missed in the 700&#x2013;1000 period while they are easily identified in the rest of periods. Leonids seem to have been a constant and Lyrids appear in the 700&#x2013;1000 periods and seem to have experimented an increment in the 1000&#x2013;1300 period.</ce:para>
+                        <ce:para id="para0034" view="all">A meteor shower is caused by the meteoroid stream provided by the debris of a comet. If the stream remains in time and position, the meteor shower appears with a radiant at the same constellation each time that the Earth crosses the stream in successive years. The meteors caused by a shower or stream are likely to fall at nearly the same time of year, while sporadic meteors fall randomly. However, any concentration in appearance dates of meteors in can be thought of as a sign of a meteor shower.</ce:para>
+                        <ce:para id="para0035" view="all">The period of an annual shower is one sidereal year. The differences between a sidereal year and tropical and anomalistic year are cumulative so all the observations should be corrected. In this paper, we first locate meteor showers ranging the Vth&#x2013;XVth centuries and then compare their appearance dates with the modern observations to identify them. For meteor showers, astronomers usually rely on the solar ecliptic longitude (&#x3BB;<ce:inf loc="post">&#x2299;</ce:inf>) which is defined by the angle in degrees along the ecliptic from the Vernal equinox to the position of the Earth. This has been also used as the first criterion of identification of a meteor shower when we compare the solar longitude of the date with the list provided by <ce:cross-ref id="crf0046" refid="bib0033">Jenniskens&#xA0;et&#xA0;al&#xA0;(2016)</ce:cross-ref>.</ce:para>
+                        <ce:para id="para0036" view="all">In <ce:cross-ref id="crf0047" refid="fig0002">Fig.&#xA0;2</ce:cross-ref><ce:float-anchor refid="fig0002"/> we see a comparison of the data obtained from European&#x202F;+&#x202F;Arabic sources and Asian sources along the range of time. Biot's data of sporadic meteors (<ce:cross-ref id="crf0048" refid="bib0010">Biot,&#xA0;1841</ce:cross-ref>) have been initially excluded because they create a distorted image. As when we consider only European data, in <ce:cross-ref id="crf0049" refid="fig0001">Fig.&#xA0;1</ce:cross-ref>, we see that the peak of observations is sited around the XIIth century.</ce:para>
+                        <ce:para id="para0037" view="all">In <ce:cross-ref id="crf0050" refid="fig0003">Fig.&#xA0;3</ce:cross-ref><ce:float-anchor refid="fig0003"/> we see the distribution along the year of the European data. The bars represent the showers. At first sight, three identifications seem clear: April Lyrids / eta Aquariids, Perseids, and Leonids in April, August and November, respectively. The red line represents the accounts of sporadic meteors. The black solid line is the fitting curve of the annual variation of sporadic meteors. The seasonal variation of the historical meteors roughly agrees with that of current observations if we disregard the bias caused by the observations of sporadic meteors around the dates of the main showers. It has been stated by <ce:cross-ref id="crf0051" refid="bib0058">Yrj&#xF6;l&#xE4; and Jenniskens&#xA0;(1998)</ce:cross-ref> that this sporadic activity is well represented by the equation:<ce:display><ce:formula id="eqn0001"><ce:label>(1)</ce:label><mml:math altimg="si1.gif" display="inline" overflow="scroll"><mml:mrow><mml:mi>N</mml:mi><mml:mrow><mml:mo stretchy="true">(</mml:mo><mml:mrow><mml:mi>H</mml:mi><mml:mo>,</mml:mo><mml:msub><mml:mi>&#x3BB;</mml:mi><mml:mo>&#x2299;</mml:mo></mml:msub></mml:mrow><mml:mo stretchy="true">)</mml:mo></mml:mrow><mml:mo>=</mml:mo><mml:mrow><mml:mo stretchy="true">&#x3008;</mml:mo><mml:msub><mml:mi>N</mml:mi><mml:mrow><mml:mi>s</mml:mi><mml:mi>p</mml:mi><mml:mi>o</mml:mi></mml:mrow></mml:msub><mml:mo stretchy="true">&#x3009;</mml:mo></mml:mrow><mml:mrow><mml:mo stretchy="true">(</mml:mo><mml:mi>H</mml:mi><mml:mo stretchy="true">)</mml:mo></mml:mrow><mml:mo>&#x2212;</mml:mo><mml:mstyle mathvariant="normal"><mml:mi>&#x394;</mml:mi></mml:mstyle><mml:msub><mml:mi>N</mml:mi><mml:mrow><mml:mi>s</mml:mi><mml:mi>p</mml:mi><mml:mi>o</mml:mi></mml:mrow></mml:msub><mml:mrow><mml:mo stretchy="true">(</mml:mo><mml:mi>H</mml:mi><mml:mo stretchy="true">)</mml:mo></mml:mrow><mml:mi>cos</mml:mi><mml:mrow><mml:mo stretchy="true">(</mml:mo><mml:msub><mml:mi>&#x3BB;</mml:mi><mml:mo>&#x2299;</mml:mo></mml:msub><mml:mo stretchy="true">)</mml:mo></mml:mrow></mml:mrow></mml:math></ce:formula></ce:display>where &lt;<ce:italic>N<ce:inf loc="post">spo</ce:inf></ce:italic>&gt; is the mean daily sporadic hourly count at the summer solstice and &#x394;<ce:italic>N<ce:inf loc="post">spo</ce:inf></ce:italic> is the yearly amplitude due to seasonal variation at a given local time (H) and &#x3BB;<ce:inf loc="post">&#x2299;</ce:inf> is the solar longitude. Rates are expected to peak around the Autumnal Equinox and to be lowest around the Vernal Equinox in the Northern Hemisphere. We have included in <ce:cross-ref id="crf0052" refid="fig0003">Fig.&#xA0;3</ce:cross-ref>a fitting curve of the annual variation of sporadic meteors. Most records do not have the detailed description that is needed to apply formula <ce:cross-ref id="crf0053" refid="eqn0001">(1)</ce:cross-ref> so we have used a simplified form of this equation given by:<ce:display><ce:formula id="eqn0002"><ce:label>(2)</ce:label><mml:math altimg="si2.gif" display="inline" overflow="scroll"><mml:mrow><mml:mi>N</mml:mi><mml:mrow><mml:mo stretchy="true">(</mml:mo><mml:msub><mml:mi>&#x3BB;</mml:mi><mml:mo>&#x2299;</mml:mo></mml:msub><mml:mo stretchy="true">)</mml:mo></mml:mrow><mml:mo>=</mml:mo><mml:mrow><mml:mo stretchy="true">&#x3008;</mml:mo><mml:msub><mml:mi>N</mml:mi><mml:mrow><mml:mi>s</mml:mi><mml:mi>p</mml:mi><mml:mi>o</mml:mi></mml:mrow></mml:msub><mml:mo stretchy="true">&#x3009;</mml:mo></mml:mrow><mml:mo>&#x2212;</mml:mo><mml:mstyle mathvariant="normal"><mml:mi>&#x394;</mml:mi></mml:mstyle><mml:msub><mml:mi>N</mml:mi><mml:mrow><mml:mi>s</mml:mi><mml:mi>p</mml:mi><mml:mi>o</mml:mi></mml:mrow></mml:msub><mml:mi>cos</mml:mi><mml:mrow><mml:mo stretchy="true">(</mml:mo><mml:msub><mml:mi>&#x3BB;</mml:mi><mml:mo>&#x2299;</mml:mo></mml:msub><mml:mo stretchy="true">)</mml:mo></mml:mrow></mml:mrow></mml:math></ce:formula></ce:display></ce:para>
+                        <ce:para id="para0038" view="all">When we are dealing with such long periods of time, we must take into account that historical records are affected by the climate of the place of observation. <ce:cross-ref id="crf0054" refid="bib0055">Yang&#xA0;et&#xA0;al.&#xA0;(2005)</ce:cross-ref> stated that climate reasons there is an excess of observations from September to March relative to from May to August in Korea. Mediterranean countries are usually affected by covered skies around the equinoxes and Northern countries have difficult observation conditions in winter.</ce:para>
+                        <ce:para id="para0039" view="all">Regarding the sporadic meteors, we are now going to consider the totality of data from Korean, Japanese, Chinese and Arabian sources. We see in <ce:cross-ref id="crf0055" refid="fig0004">Fig.&#xA0;4</ce:cross-ref><ce:float-anchor refid="fig0004"/> its distribution along the year. The seasonal variation in the sporadic meteor activity is caused by the seasonal variation of the highest rising radiant due to the changing direction of the apex of the Earth's orbit. On the horizontal axis, we represent the solar longitude at the time of that year to the appearance of meteors. The vertical axis is the number of events. The solid line represents the totality of data, the dashed line stands for the European&#x202F;+&#x202F;Arabic data. The dotted line is used for the oriental data. The peaks for Perseids and Leonids give a significant maximum for those longitudes, but we see that the mean activity is roughly in agreement with the expected rates as given by <ce:cross-ref id="crf0056" refid="eqn0002">Eq.&#xA0;(2)</ce:cross-ref>. It is worth remarking that as seen from the northern hemisphere, March (&#x3BB;<ce:inf loc="post">&#x2299;&#x202F;</ce:inf>&#x2248;&#x202F;0&#xB0;) is the slowest month for meteor activity. No major annual showers are active and only a few very weak minor showers produce activity this month. The sporadic rates are also near their annual minimum so there is not much to look forward to this month except for the evening fireballs that seem to peak this time of year as seen from the northern hemisphere.</ce:para>
+                        <ce:para id="para0040" view="all">In <ce:cross-ref id="crf0057" refid="fig0005">Fig.&#xA0;5</ce:cross-ref><ce:float-anchor refid="fig0005"/> we see the distributions of the showers along the year using the solar longitude as the parameter. The names at the top of the figure correspond to the established positions of the current major showers: LYR, ETA, PER, ORI, TAU,LEO, GEM, URS, QUA stands for Lyrids, Eta Aquarids, Perseids, Orionids, Leonids, Geminids, Ursids, and Quadrantids, respectively. Initially, it seems clear that Lyrids, Orionids, Taurids, Leonids, Ursids, and Quadrantids are present, while Eta Aquarids and Geminids are absent. We will deal with this issue in the next section.</ce:para>
+                        <ce:para id="para0041" view="all">A first approximation to the results provide significant differences with respect those studies by other authors: <ce:cross-ref id="crf0058" refid="bib0023">Hasegawa&#xA0;(1992)</ce:cross-ref>, <ce:cross-refs id="crf0059" refid="bib0002 bib0055">Ahn (2003), Yang et&#xA0;al. (2005)</ce:cross-refs> and <ce:cross-ref id="crf0061" refid="bib0032">Jenniskens (2006</ce:cross-ref>, p. 7) identify Perseids and Leonids, but do not record the Quadrantids (at the beginning of January). The complex Leonids&#x202F;+&#x202F;Taurids gains relevance in our results with respect to the others authors and some minor peaks appear more clearly. On the contrary, other significant minor peaks seem to have been missed.</ce:para>
+                        <ce:para id="para0042" view="all">These authors use different methodology to analyze their results: <ce:cross-ref id="crf0062" refid="bib0023">Hasegawa&#xA0;(1992)</ce:cross-ref>, plotted monthly variations of meteors for each century after 1001AD, using the tropical year as the unity of time. <ce:cross-ref id="crf0063" refid="bib0002">Ahn&#xA0;(2003)</ce:cross-ref> define the number of days after the perihelion passage time of the year i.e. the anomalistic year and plots the results using a bin size on the horizontal axis of 4 days. <ce:cross-ref id="crf0064" refid="bib0055">Yang&#xA0;et&#xA0;al.&#xA0;(2005)</ce:cross-ref> use the sidereal year as the basic period for yearly meteor showers and plot their results with a bin of 5 days and when the reports given in their data only provide year and month (without the day) they smooth all records over the corresponding lunar month. <ce:cross-ref id="crf0065" refid="bib0032">Jenniskens&#xA0;(2006)</ce:cross-ref> gathers together all the information obtained from several authors and plots them using months as the bin for the horizontal axis. He reaches the conclusion that Quadrantids and Geminids were absent in the Middle Age. In some cases, when the complete date of the event is missed, these authors take approximate dates.</ce:para>
+                        <ce:para id="para0043" view="all">In our case, we only consider those events with complete date (year, month and day) and we take the solar longitude as the basic unit of the horizontal axis and take bins of 10&#xB0;, that roughly mean 10 days, in order to avoid undesired oscillations that, due to the relatively small quantity of data we consider of minor significance. In next section, we will study each peak separately and compare our results with those of these authors.</ce:para>
+                    </ce:section>
+                    <ce:section id="sec0005" view="all">
+                        <ce:label>3.2</ce:label>
+                        <ce:section-title id="cesectitle0008">Meteor showers</ce:section-title>
+                        <ce:para id="para0044" view="all">Annual streams are those streams that occur each year when the Earth passes the orbit of the parent comet. The meteor's rates are variable in function of the position of the Earth. They increase until they reach a peak and then decreases. A very good description of the ideal observation conditions and the corrections that should be applied to the observations is given by <ce:cross-ref id="crf0066" refid="bib0030">Jenniskens&#xA0;(1994)</ce:cross-ref> However, our data lack of information such as the time of the day, altitude of the radiant and ZHR (Zenital Hourly Rate) in the case of star showers and meteorological conditions, so our analysis is, necessary, limited.</ce:para>
+                        <ce:para id="para0045" view="all">We will focus on <ce:cross-ref id="crf0067" refid="fig0005">Figs.&#xA0;5</ce:cross-ref> and <ce:cross-ref id="crf0068" refid="fig0006">6</ce:cross-ref><ce:float-anchor refid="fig0006"/> to propose identifications of meteor showers. From <ce:cross-ref id="crf0069" refid="fig0006">Fig.&#xA0;6</ce:cross-ref> some identifications seem evident because most reported events fall in the maximum of a current meteor shower; while in <ce:cross-ref id="crf0070" refid="fig0005">Fig.&#xA0;5</ce:cross-ref>, if we consider the total amount of meteor showers (red line), we distinguish three major peaks and other two minor peaks of activity. However, in a further analysis, we will consider other major peaks taking into account the sporadic meteors, as seen in <ce:cross-ref id="crf0071" refid="tbl0001">Table&#xA0;1</ce:cross-ref><ce:float-anchor refid="tbl0001"/>, where we summarize the results. We provide the interval of solar longitude where the increment of meteoritic activity was observed in <ce:cross-ref id="crf0072" refid="fig0005">Fig.&#xA0;5</ce:cross-ref>, the solar longitude of the maxima and the tentative identification. The number next to the name of the shower corresponds to the IAU identification (<ce:cross-ref id="crf0007a" refid="bib0035a">Jopek &amp; Ka&#x148;uchov&#xE1;, 2017</ce:cross-ref>).</ce:para>
+                        <ce:para id="para0046" view="all">In order to study possible evolutions of the meteor showers, we have included in <ce:cross-ref id="crf0073" refid="fig0007">Fig.&#xA0;7</ce:cross-ref><ce:float-anchor refid="fig0007"/> the distribution of all the data, not only European, for the 400&#x2013;700, 700&#x2013;1000, 1000&#x2013;1300 and 1300&#x2013;1500 years periods. Only the showers have been included.</ce:para>
+                        <ce:section id="sec0006" view="all">
+                            <ce:label>3.2.1</ce:label>
+                            <ce:section-title id="cesectitle0009">Major showers</ce:section-title>
+                            <ce:para id="para9001" view="all">
+                                <ce:list id="celist0003">
+                                    <ce:list-item id="celistitem0011">
+                                        <ce:label>1.</ce:label>
+                                        <ce:para id="para0047" view="all">The first important peak corresponds to a solar longitude of <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;20&#xB0;&#x2212;50&#xB0; with a maximum at <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf>&#x202F;=&#x202F;30&#xB0;. <ce:cross-ref id="crf0074" refid="bib0002">Ahn&#xA0;(2003)</ce:cross-ref> detected this peak and assigned it to the eta Aquariids. In our opinion, the length of the maximum is too broad in time to be assigned to a lonely shower. In addition, the maximum of the peak occurs at <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;30&#xB0;, too early to be the eta Aquariids, but then there is a change of the slope at <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;40&#xB0; that roughly coincides with their maximum. So, in this case, our proposed identification is the overlapping April Lyrids and eta Aquariids.</ce:para>
+                                    </ce:list-item>
+                                </ce:list>
+                                <ce:list id="celist0004">
+                                    <ce:list-item id="celistitem0012">
+                                        <ce:para id="para0048" view="all">The Lyrids belong to the group of well established showers associated with a long period comet , C/1861 G1 Thatcher and are currently active around April 18&#x2013;25 with a Peak Activity on April 22&#x2013;23. <ce:cross-ref id="crf0075" refid="bib0006">Arter&#xA0;and Williams&#xA0;(1997b)</ce:cross-ref> give a recent account of its orbit and characteristics, suggesting a stream orbital period not dissimilar to that of the comet. <ce:cross-ref id="crf0076" refid="bib0007">Astapovic&#xA0;and Terenteva&#xA0;(1968)</ce:cross-ref> concluded that there was no significant evolution of the node with time. The peak rates of activity have remained relatively consistent from year to year with values generally between 5 and 10 per hour, although there have been unexpected outbursts. The 20th-century outburst dates suggest that they occur at time intervals that are multiples of about 12 years, an interval of 60 years was suggested by <ce:cross-ref id="crf0077" refid="bib0031">Jenniskens&#xA0;(1997)</ce:cross-ref> while <ce:cross-ref id="crf0078" refid="bib0011">Brown&#xA0;et&#xA0;al.&#xA0;(2010)</ce:cross-ref> determined a period of about 36 years. Outbursts of activity are also known in other meteor showers, the best known being the Leonids and the Draconids. In both these showers, the general explanation is that outbursts are correlated to the close proximity of the parent comet to the Earth. This explanation cannot be used for the April Lyrids because their parent comet C/1861 G1 (Thatcher) has an orbital period of several hundred years. A recent explanation, by <ce:cross-ref id="crf0079" refid="bib0005">Arter&#xA0;and Williams&#xA0;(1997a)</ce:cross-ref> suggests the presence of clumps of meteoroids spread about the mean orbit, possibly caused by resonances with Jupiter. The Earth then intersects a clump at intervals that are multiples of 12 years. It is out of the scope of this paper, but from <ce:cross-ref id="crf0080" refid="fig0006">Fig.&#xA0;6</ce:cross-ref> we can see several clear outburst periods, some of them fitting the proposed 60 years period. Very noticeable ones are around years 460, 1095 and 1122 with a <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;26&#xB0; maybe a further careful examination of these dates could provide light to the issue of the Lyrids period.</ce:para>
+                                    </ce:list-item>
+                                    <ce:list-item id="celistitem0013">
+                                        <ce:para id="para0049" view="all"><ce:cross-ref id="crf0081" refid="bib0055">Yang&#xA0;et&#xA0;al.&#xA0;(2005)</ce:cross-ref> also identify this peak in their Chinese and Korean records, but they disregarded its association to the eta Aquariids, because of its disappearance after the XIVth century and the awakening of the shower in the IX&#x2013;XIIIth centuries. We have not found such weakening, and, although the disappearance of the shower in later dates is visible in <ce:cross-ref id="crf0082" refid="fig0007">Fig.&#xA0;7</ce:cross-ref>, this may be explained by the diminution of the quantity of data. <ce:cross-ref id="crf0083" refid="bib0007">Astapovic&#xA0;and Terenteva&#xA0;(1968)</ce:cross-ref> concluded very low activity for the eta Aquarids in the VIII&#x2013;XIth centuries, but our data seem to point out to some outburst around years 450, 700,850, 900&#x2013;950 and 1040. It is of special interest the reports around the years 451 and 837 (see <ce:cross-ref id="crf0084" refid="fig0006">Fig.&#xA0;6</ce:cross-ref>) when Halley's comet reached its perihelion. With the exception of years 900&#x2013;950, they do not seem to have their counterpart as Orionids but it is possible that a minor peak around <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;200&#xB0; belongs to observations of the Orionids. In any case, this peak appears only for the European data (see <ce:cross-ref id="crf0085" refid="fig0005">Fig.&#xA0;5</ce:cross-ref>) although the rise provided by the maximum of the Perseids may mask these observations.</ce:para>
+                                    </ce:list-item>
+                                </ce:list>
+                                <ce:list id="celist0005">
+                                    <ce:list-item id="celistitem0014">
+                                        <ce:label>2.</ce:label>
+                                        <ce:para id="para0050" view="all">In the second place, we find a peak at <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;140&#xB0; corresponding to the Perseids, whose parent body is comet 109P/Swift-Tuttle. They are currently active from July 13 to August 26 with a peak of activity on August 11&#x2013;12.</ce:para>
+                                    </ce:list-item>
+                                </ce:list>
+                                <ce:list id="celist0006">
+                                    <ce:list-item id="celistitem0015">
+                                        <ce:para id="para0051" view="all">European observations of Perseids seemed absent in all the previous studies of ancient meteor showers. We have found a number of showers and isolated meteors from the Vth to the XVth century (<ce:cross-ref id="crf0086" refid="bib0039">Martinez&#xA0;and Marco 2017</ce:cross-ref>) that could correspond to this shower. This peak also appears in the studies of all the considered authors and all of them suggested a reduction of the Perseids activity that is also noticeable in our data (see <ce:cross-ref id="crf0087" refid="fig0007">Fig.&#xA0;7</ce:cross-ref>)</ce:para>
+                                    </ce:list-item>
+                                    <ce:list-item id="celistitem0016">
+                                        <ce:para id="para0052" view="all">A study of the past and future orbit of comet 109P/Swift-Tuttle was carried out by <ce:cross-ref id="crf0088" refid="bib0056">Yau&#xA0;et&#xA0;al.&#xA0;(1994)</ce:cross-ref>. In <ce:cross-ref id="crf0089" refid="fig0008">Fig.&#xA0;8</ce:cross-ref><ce:float-anchor refid="fig0008"/> we see the distance from the nucleus of this comet to the Earth at the position of the ascending node. The asterisk represents a reported meteor storm. The distance has been computed using HORIZONS Web interface (<ce:inter-ref id="interref0003" xlink:href="http://ssd.jpl.nasa.gov" xlink:type="simple">http://ssd.jpl.nasa.gov</ce:inter-ref>) from the JPL. We see that the showers do not always coincide with the moment of the maximum proximity of the comet to the Earth, showing a non-uniform distribution of the debris in its orbit.</ce:para>
+                                    </ce:list-item>
+                                    <ce:list-item id="celistitem0017">
+                                        <ce:para id="para0053" view="all"><ce:cross-ref id="crf0090" refid="bib0007">Astapovic&#xA0;and Terenteva&#xA0;(1968)</ce:cross-ref> found no significant change in the node from the IX to this century. <ce:cross-ref id="crf0091" refid="bib0028">Hughes&#xA0;and Emerson&#xA0;(1982)</ce:cross-ref> proposed a rate of 0.038&#x202F;&#xB1;&#x202F;0.027&#xB0;/cent <ce:cross-ref id="crf0092" refid="bib0030">Jenniskens&#xA0;(1994)</ce:cross-ref> provides 0.47&#x202F;&#xB1;&#x202F;0.05&#xB0;/cent for recent years. Using our data (see <ce:cross-ref id="crf0093" refid="fig0009">Fig.&#xA0;9</ce:cross-ref><ce:float-anchor refid="fig0009"/>) from year 400 onwards we have obtained a rate of 0.09&#x202F;&#xB1;&#x202F;0.2&#xB0;/cent with a solar longitude for the maximum of <mml:math altimg="si3.gif" display="inline" overflow="scroll"><mml:mrow><mml:msubsup><mml:mi>&#x3BB;</mml:mi><mml:mo>&#x2299;</mml:mo><mml:mi>max</mml:mi></mml:msubsup><mml:mo>=</mml:mo><mml:msup><mml:mn>138</mml:mn><mml:mo>&#x2218;</mml:mo></mml:msup><mml:mo>.</mml:mo><mml:mn>32</mml:mn><mml:mo>&#xB1;</mml:mo><mml:mn>0</mml:mn><mml:mo>.</mml:mo><mml:msup><mml:mn>68</mml:mn><mml:mo>&#x2218;</mml:mo></mml:msup><mml:mo>/</mml:mo><mml:mi>c</mml:mi></mml:mrow></mml:math> for year 400.</ce:para>
+                                    </ce:list-item>
+                                </ce:list>
+                                <ce:list id="celist0007">
+                                    <ce:list-item id="celistitem0018">
+                                        <ce:label>3.</ce:label>
+                                        <ce:para id="para0054" view="all">The third peak belongs to the overlapping Leonids and Taurids (Northern Taurids). It is displaced from the current maximum of the Leonids due to the nodal displacement. This is one of the best-known and studied annual showers. Its outburst the night of 12 November 1833 represented not only its official discovery but also the beginning of the systematic study of the meteors.</ce:para>
+                                    </ce:list-item>
+                                </ce:list>
+                                <ce:list id="celist0008">
+                                    <ce:list-item id="celistitem0019">
+                                        <ce:para id="para0055" view="all">The existence of the November shower for the Medieval period was already studied and demonstrated by <ce:cross-ref id="crf0094" refid="bib0002">Ahn&#xA0;(2003)</ce:cross-ref> who concluded that the overlapping Leonids and Taurids were the responsible of these showers. <ce:cross-refs id="crf0095a" refid="bib0023 bib0061">Hasegawa (1992, 1999b)</ce:cross-refs> studied the November meteors shower using Chinese observations and then including the Koryo dinasty meteor records and proposed that they correspond to the Taurids. Leonids and Taurids are also present in Korean and Chinese records studied by <ce:cross-ref id="crf0096" refid="bib0055">Yang&#xA0;et&#xA0;al.&#xA0;(2005)</ce:cross-ref>.</ce:para>
+                                    </ce:list-item>
+                                    <ce:list-item id="celistitem0020">
+                                        <ce:para id="para0056" view="all">Currently, Leonid Meteor shower is visible around Middle November, peak activity occurs from November 17&#x2013;18, with a solar longitude of 235.3&#xB0;. The periods of enhanced activity occur in intervals of approximately 33.2 years, in agreement with the orbit of its parent comet 55P/Tempel-Tuttle. These periods of great activity usually extend from two years before to five years after the comet's perihelion passage, due to planetary perturbations and the uneven dust distribution on the orbit of the parent comet. However, the parent body of the Leonids has a retrograde orbit that it is close to the ecliptic plane. Its orbit precesses by no more than <mml:math altimg="si4.gif" display="inline" overflow="scroll"><mml:mrow><mml:mstyle scriptlevel="0" displaystyle="false"><mml:mfrac><mml:mrow><mml:mi>d</mml:mi><mml:mstyle mathvariant="normal"><mml:mi>&#x3A9;</mml:mi></mml:mstyle></mml:mrow><mml:mrow><mml:mi>d</mml:mi><mml:mi>t</mml:mi></mml:mrow></mml:mfrac></mml:mstyle><mml:mo>=</mml:mo><mml:mo>+</mml:mo><mml:mn>0</mml:mn><mml:mo>.</mml:mo><mml:msup><mml:mn>0008</mml:mn><mml:mo>&#x2218;</mml:mo></mml:msup><mml:mo>/</mml:mo><mml:mi>y</mml:mi><mml:mi>r</mml:mi></mml:mrow></mml:math>, according to <ce:cross-ref id="crf0066a" refid="bib0030">Jenniskens (1994)</ce:cross-ref>, and this causes the shift of its nodal point along the Earth's orbit. A consequence of this is the date of the occurrence of the Leonids changes in time, from the current middle November to October. <ce:cross-ref id="crf0097" refid="bib0057">Yeomans&#xA0;et&#xA0;al.&#xA0;(1996)</ce:cross-ref> recomputed the orbit of this comet for two millennia. We have computed the distance of the nucleus of comet 55P to the Earth for the years 800&#x2013;1500 at the moment when the Earth is in the descending node using the HORIZON program of the JPL (see <ce:cross-ref id="crf0098" refid="fig0010">Fig.&#xA0;10</ce:cross-ref><ce:float-anchor refid="fig0010"/>). The asterisks represent a reported meteor shower.</ce:para>
+                                    </ce:list-item>
+                                    <ce:list-item id="celistitem0021">
+                                        <ce:para id="para0057" view="all">There is no definitive observation of comet Tempel-Tuttle prior to 1366, with a possible Japanese record on 1234 October 30 (<ce:cross-ref id="crf0099" refid="bib0027">Ho,&#xA0;1962</ce:cross-ref>) but the comet debris has been observable since at least 902AD and we have found a few more possible observations of Leonids before this date.</ce:para>
+                                    </ce:list-item>
+                                    <ce:list-item id="celistitem0022">
+                                        <ce:para id="para0058" view="all">We plot in <ce:cross-ref id="crf0100" refid="fig0011">Fig.&#xA0;11</ce:cross-ref><ce:float-anchor refid="fig0011"/> the historical records of the Leonid Meteor showers and outbursts for the period between year 800 and 1500. We have fitted a least squares line (red line in <ce:cross-ref id="crf0101" refid="fig0011">Fig.&#xA0;11</ce:cross-ref>) and we have obtained that<ce:display><ce:formula id="eqn0003"><mml:math altimg="si5.gif" display="inline" overflow="scroll"><mml:mrow><mml:mstyle mathvariant="normal"><mml:mi>&#x3A9;</mml:mi></mml:mstyle><mml:mrow><mml:mo stretchy="true">(</mml:mo><mml:mi>t</mml:mi><mml:mo stretchy="true">)</mml:mo></mml:mrow><mml:mo>=</mml:mo><mml:mrow><mml:mo stretchy="true">(</mml:mo><mml:mrow><mml:msup><mml:mn>1</mml:mn><mml:mo>&#x2218;</mml:mo></mml:msup><mml:mo>.</mml:mo><mml:mn>42</mml:mn><mml:mo>&#xB1;</mml:mo><mml:mn>0</mml:mn><mml:mo>.</mml:mo><mml:msup><mml:mn>62</mml:mn><mml:mo>&#x2218;</mml:mo></mml:msup></mml:mrow><mml:mo stretchy="true">)</mml:mo></mml:mrow><mml:mi>t</mml:mi><mml:mo>+</mml:mo><mml:mrow><mml:mo stretchy="true">(</mml:mo><mml:mrow><mml:msup><mml:mn>201</mml:mn><mml:mo>&#x2218;</mml:mo></mml:msup><mml:mo>.</mml:mo><mml:mn>95</mml:mn><mml:mo>&#xB1;</mml:mo><mml:msup><mml:mn>1</mml:mn><mml:mo>&#x2218;</mml:mo></mml:msup><mml:mo>.</mml:mo><mml:mn>14</mml:mn></mml:mrow><mml:mo stretchy="true">)</mml:mo></mml:mrow></mml:mrow></mml:math></ce:formula></ce:display></ce:para>
+                                    </ce:list-item>
+                                    <ce:list-item id="celistitem0023">
+                                        <ce:para id="para0059" view="all">where <ce:italic>t</ce:italic> represents the year. The solar longitude obtained for the maximum in year 800 is <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;213&#xB0; and for the middle of the XI century, we obtain <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf>=217&#xB0;, in agreement with the work of <ce:cross-ref id="crf0076a" refid="bib0007">Astapovic and Terenteva (1968)</ce:cross-ref> who obtained a value of 220&#xB0; (B1950.0). The nodal advancement rate of the meteor stream is estimated in 1<ce:sup loc="post"><ce:italic>d</ce:italic></ce:sup>.457&#x202F;&#xB1;&#x202F;0<ce:sup loc="post"><ce:italic>d</ce:italic></ce:sup>.027 per century by <ce:cross-ref id="crf0102" refid="bib0048">Toth&#xA0;(1999)</ce:cross-ref> and <ce:cross-ref id="crf0103" refid="bib0043">Newton&#xA0;(1864)</ce:cross-ref> estimated the nodal advancement of the comet 55P to be 1<ce:sup loc="post"><ce:italic>d</ce:italic></ce:sup>.475per century. From historical and recent observations, <ce:cross-ref id="crf0104" refid="bib0048">Toth&#xA0;(1999)</ce:cross-ref> obtained a value of 1&#xB0;.4360&#x202F;&#xB1;&#x202F;0&#xB0;.0268 per century. <ce:cross-ref id="crf0076b" refid="bib0007">Astapovic and Terenteva (1968)</ce:cross-ref> analyzed the trajectories of fireballs recorded in the &#x2018;General study of the literary remains&#x2019; and obtained the radiants or ancient meteor showers between the 1st and the XVth centuries. Their value for the shift of the orbital node of the Leonids was 1.6&#xB0; per century.</ce:para>
+                                    </ce:list-item>
+                                    <ce:list-item id="celistitem0024">
+                                        <ce:para id="para0060" view="all">We can also make a further study taking into account the work of <ce:cross-ref id="crf0076c" refid="bib0007">Astapovic and Terenteva (1968)</ce:cross-ref> and <ce:cross-ref id="crf0105" refid="bib0023">Hasegawa&#xA0;(1992)</ce:cross-ref> who suggest that the activity of the Taurids may have been comparable to the Perseids of today. We can try to discriminate between them and to this aim we have also performed a simple weighted least squares computation assigning minor weights to those observations that had a solar longitude coincident with the Taurids. In this case, we have obtained a value of 1&#xB0;.2&#x202F;&#xB1;&#x202F;0.1&#xB0; with an initial solar longitude of <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf>=213&#xB0; for the year 800. A good review of the most prominent studies on this meteor shower is can be found in <ce:cross-ref id="crf0106" refid="bib0038">Kronk&#xA0;(2014)</ce:cross-ref>.</ce:para>
+                                    </ce:list-item>
+                                    <ce:list-item id="celistitem0025">
+                                        <ce:para id="para0061" view="all"><ce:cross-ref id="crf0107" refid="bib0057">Yeomans&#xA0;et&#xA0;al.&#xA0;(1996)</ce:cross-ref> stated that no Leonid meteors shower should have been visible prior to the eighth century because the comet's orbit passed too far away that of the Earth and our data does not contradict this statement. In addition, significant Leonid appearances are possible around 2500 days before or after the perihelion, but only if the comet passes closer than 0.025 AU inside or 0.010 AU outside the Earth's orbit. In <ce:cross-ref id="crf0108" refid="fig0012">Fig.&#xA0;12</ce:cross-ref><ce:float-anchor refid="fig0012"/> we have checked that this assumption is verified. We have plotted the minimum distance between the comet Tempel-Tuttle and the Earth's orbit at the time of the comet's passage through its descending node. The circles represent the date of the perihelion and the asterisk is a reported meteor shower. A red square represents an outstanding meteor shower (meteors outbursts).</ce:para>
+                                    </ce:list-item>
+                                </ce:list>
+                                <ce:list id="celist0009">
+                                    <ce:list-item id="celistitem0026">
+                                        <ce:label>4.</ce:label>
+                                        <ce:para id="para0062" view="all">Not many meteor showers were reported around <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;260&#xB0; but there is a sharp increment in the observations of sporadic meteors and bolides. In fact, a conspicuous peak appears that almost coincides with that currently expected for the Geminids. Current active showers point to Geminids and &#x3C7; Orionids. Geminids has 3200 Phaeton as the parent body. According to <ce:cross-ref id="crf0076d" refid="bib0007">Astapovic and Terenteva (1968)</ce:cross-ref>, Gem&#xED;nids reached its peak of activity about the 13&#x2013;14th December in the XIth century. <ce:cross-ref id="crf0109" refid="bib0030">Jenniskens&#xA0;(1994)</ce:cross-ref> states that there is not a significant shift from its discovery at the beginning of the XIX century which is in agreement with <ce:cross-ref id="crf0076e" refid="bib0007">Astapovic and Terenteva (1968)</ce:cross-ref>. The current rate of activity is 120&#xA0;meteors/h. However, further studies have shown that the orbits of the Geminids stream and the Earths had no intersection at the time that we are studying, so no observable meteor shower could have happened (see <ce:cross-refs id="crf0110" refid="bib0019 bib0020">Fox et&#xA0;al., 1982, 1985</ce:cross-refs>).</ce:para>
+                                    </ce:list-item>
+                                </ce:list>
+                                <ce:list id="celist0010">
+                                    <ce:list-item id="celistitem0027">
+                                        <ce:para id="para0063" view="all">Also according to <ce:cross-ref id="crf0112" refid="bib0020">Fox&#xA0;et&#xA0;al.&#xA0;(1985)</ce:cross-ref> and <ce:cross-ref id="crf0113" refid="bib0026">Hasegawa&#xA0;(1999a)</ce:cross-ref>, December Monocerotids and not Geminids were responsible for most of the bolids observed in December in the XIth centuries. <ce:cross-ref id="crf0114" refid="bib0020">Fox&#xA0;et&#xA0;al.&#xA0;(1985)</ce:cross-ref> reached this conclusion after integrating the orbit of comet Mellish. And <ce:cross-ref id="crf0115" refid="bib0026">Hasegawa&#xA0;(1999a)</ce:cross-ref> concluded that this shower was active in medieval and ancient times. The authors concluded that an explanation should be found to the inactivity of this shower from the XIth century. But in <ce:cross-ref id="crf0116" refid="fig0001">Fig.&#xA0;1</ce:cross-ref>, we see that this shower was already detected in the period 1000&#x2013;1300 and reached a considerable activity in the 1300&#x2013;1500 period.</ce:para>
+                                    </ce:list-item>
+                                    <ce:list-item id="celistitem0028">
+                                        <ce:para id="para0064" view="all">In addition to December Monocerotids,&#xA0;&#x3C7; Orionids (<ce:cross-ref id="crf0117" refid="bib0002">Ahn,&#xA0;2003</ce:cross-ref>) and December Alpha Draconids are also two sources of possible meteors for this date.</ce:para>
+                                    </ce:list-item>
+                                </ce:list>
+                            </ce:para>
+                        </ce:section>
+                        <ce:section id="sec0007" view="all">
+                            <ce:label>3.2.2</ce:label>
+                            <ce:section-title id="cesectitle0010">Minor showers</ce:section-title>
+                            <ce:para id="para0065" view="all">Other minor peaks appear in <ce:cross-ref id="crf0118" refid="fig0005">Fig.&#xA0;5</ce:cross-ref> that could correspond to minor or now extinct showers. The first one is around <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;60&#xB0;. According to <ce:cross-ref id="crf0119" refid="bib0033">Jenniskens&#xA0;et&#xA0;al&#xA0;(2016)</ce:cross-ref>, two possible recent showers could fit this solar longitude: eta Lyrids and epsilon Aquilids. But the existence of these weak showers is uncertain and also other authors have not detected it.</ce:para>
+                            <ce:para id="para0066" view="all">Next peak appears around <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;110&#xB0;. This could also be a spurious maximum. However, as the solar longitude do not correspond to the June Bootids, the possible identification according to de data from to <ce:cross-ref id="crf0120" refid="bib0033">Jenniskens&#xA0;et&#xA0;al&#xA0;(2016)</ce:cross-ref>, with current meteor showers are 175 July Pegasids, 326 Epsilon Pegasi, 328 Alpha Lacertis, 420 c Andromedids and 444 zeta Casiopeiids.</ce:para>
+                            <ce:para id="para0067" view="all">Next maximum is only evident for European data, at a solar longitude of <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;200&#xB0;. As previously stated, this could be the Orionids, but we can also take into account the possibility of the Draconids or Giacobinids, which are associated to comet P/Giacobini-Zinner 1913&#x202F;V, but they reach its maximum at about <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;195&#xB0; and have a small activity window. <ce:cross-ref id="crf0121" refid="bib0054">Wu&#xA0;andWilliam&#xA0;(1996)</ce:cross-ref> pointed out that the characteristics of the Draconids suggested a relatively new shower so that it would not have detected as early as the Vth-XVth centuries. However, <ce:cross-ref id="crf0122" refid="bib0017">Fisher&#xA0;(1934)</ce:cross-ref> investigated the relative positions of the Earth and the comet and concluded that some showers could have been already recorded in the VIth century.</ce:para>
+                            <ce:para id="para0068" view="all">The maximum at&#x202F;<ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf>=&#x202F;280&#xB0; may be assigned to Quadrantids and Ursids. Quadrantids are controversial in the sense that there is no complete agreement about the age of the meteor stream, but this is the best fit from the list given by <ce:cross-ref id="crf0123" refid="bib0033">Jenniskens&#xA0;(2016)</ce:cross-ref>. Its parent body is 2003 EH1 (<ce:cross-ref id="crf0124" refid="bib0032">Jenniskens,&#xA0;2006</ce:cross-ref> and the approved by the IAU in 2008). Until its discovery, the parent of the Quadrantid shower was thought to be lost from the stream. At the beginning, some authors (<ce:cross-ref id="crf0076f" refid="bib0007">Astapovic and Terenteva, 1968</ce:cross-ref>), (<ce:cross-ref id="crf0006a" refid="bib0060">Williams et&#xA0;al. 1979</ce:cross-ref>) claimed that Quadrantids is an old shower. Others credit it an age of only four centuries (<ce:cross-ref id="crf0125" refid="bib0034">Jenniskens&#xA0;et&#xA0;al., 1997</ce:cross-ref>), <ce:cross-ref id="crf0126" refid="bib0049">Wieger&#xA0;and Brown&#xA0;(2004)</ce:cross-ref> stated that the core of the Quadrantid was no more than 200 years old, <ce:cross-ref id="crf0127" refid="bib0001">Abedin&#xA0;et&#xA0;al.&#xA0;(2015)</ce:cross-ref> stated that the central portion of the Quadrantid meteor stream was indeed 200 years old.</ce:para>
+                            <ce:para id="para0069" view="all"><ce:cross-ref id="crf0128" refid="bib0022">Hasegawa&#xA0;(1979)</ce:cross-ref> pointed out that Chinese, Korean and Japanese observers recorded a bright comet in January of 1491 (C/1490 Y1) with an orbit similar to that of the Quadrantids. This possibility was investigated by <ce:cross-refs id="crf0129" refid="bib0053 bib0051">Williams and Wu (1993), Williams and Collander-Brown (1998)</ce:cross-refs> and <ce:cross-ref id="crf0131" refid="bib0052">Williams&#xA0;et&#xA0;al.&#xA0;(2004)</ce:cross-ref>. This link, as well as the connection to comet 96P/Machholz could provide a much older shower. The possibility of the Quadrantid having a broad old background and a young core was also proposed by <ce:cross-ref id="crf0132" refid="bib0036">Jopek&#xA0;and Williams&#xA0;(2013)</ce:cross-ref>.</ce:para>
+                            <ce:para id="para0070" view="all">Ursids is another possibility for the showers sited at the lower part of this period. <ce:cross-ref id="crf0133" refid="bib0018">Fox&#xA0;(1986)</ce:cross-ref> concluded that in year 950 the shower's maximum would have occurred 6 days later than at present, which means at about the date of our peak.</ce:para>
+                            <ce:para id="para0071" view="all">Next peak corresponds to <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;300&#xB0;, that seems to fit the Northern Delta Cranquids and Southern Delta Cranquids. <ce:cross-ref id="crf0134" refid="bib0002">Ahn&#xA0;(2003)</ce:cross-ref> doubts about the identification, but proposes February eta Draconids, even when the most likely possibility is that these weak peaks are aged and depleted showers or relics of dead comets. The end of January and February are currently bad months for meteor showers so our guess for the sharp increment observed for this date would also be an extinct shower. However, three possible minor showers would also be January Comae Berenicids, Eta Corvids, and Gamma Ursae Minoris, but in this case, the responsible shower should have experimented an increment in its ZHR.</ce:para>
+                            <ce:para id="para0072" view="all">The last peak corresponds to <ce:italic>&#x3BB;</ce:italic><ce:inf loc="post">&#x2299;</ce:inf><ce:inf loc="post">&#x202F;</ce:inf>=&#x202F;340&#xB0;, again a part of the year when meteor showers are scarce nowadays. Our guess is again an extinct shower. Current showers for this epoch Lambda Leonids and eta Aquariids even when this last shower is mainly a southern shower and observers in the Northern Hemisphere do not usually obtain good rates of meteors.</ce:para>
+                        </ce:section>
+                    </ce:section>
+                </ce:section>
+                <ce:section id="sec0008" role="conclusion" view="all">
+                    <ce:label>4</ce:label>
+                    <ce:section-title id="cesectitle0011">Conclusions</ce:section-title>
+                    <ce:para id="para0073" view="all">We have investigated the sporadic meteors and showers in the Medieval European records for the years 400&#x2013;1500. We have found that the seasonal activity of sporadic meteors shows rough agreement with modern observation. We have also found that there were a few prominent meteor showers and storms that correspond to the current ones: Perseids, Leonids, Lyrids and, possibly, eta Aquarids/Orionids pair. There were also weak and aged meteor showers. The meteor showers are in good agreement with the meteor storms compiled from the worldwide chronicles, as well as with modern observation.</ce:para>
+                    <ce:para id="para0074" view="all">We have compared our results with those of <ce:cross-ref id="crf0135" refid="bib0023">Hasegawa&#xA0;(1992)</ce:cross-ref>, <ce:cross-ref id="crf0136" refid="bib0003">Ahn&#xA0;(2004)</ce:cross-ref> and <ce:cross-ref id="crf0137" refid="bib0055">Yang&#xA0;et&#xA0;al.&#xA0;(2005)</ce:cross-ref>. All these authors took into account mainly Asian records, mainly because of the little amount of data from European and Arabian sources. We have carried out a study with the new enlarged European data provided by <ce:cross-ref id="crf0138" refid="bib0039">Mart&#xED;nez&#xA0;and Marco&#xA0;(2017)</ce:cross-ref>.</ce:para>
+                    <ce:para id="para0075" view="all">We have arranged a more careful study of the Perseids and Leonids, obtaining the regression of the nodes and we have checked that our results coincide with the expected values. Our conclusions are that the major meteor showers and storms for the V&#x2013;XV period might be caused by the same short-period comets as the current ones, and the data seem to point to at least two extinct meteor showers with a peak of activity around the end of January and the beginning of March. In addition, most of the weaker (but still important) showers such as Geminids and Ursids, seem to have a lower activity range or have not been observed at all.</ce:para>
+                </ce:section>
+            </ce:sections>
+            <ce:acknowledgment id="ack0001" view="all">
+                <ce:section-title id="cesectitle0013">Acknowledgment</ce:section-title>
+                <ce:para id="para0077" view="all">Work of this paper was partially supported by the UJI-B2016-18, 16I356 project.</ce:para>
+            </ce:acknowledgment>
+        </ja:body>
+        <ja:tail view="all">
+            <ce:bibliography id="cebibl1" view="all">
+                <ce:section-title id="cesectitle0014">References</ce:section-title>
+                <ce:bibliography-sec id="cebibsec1" view="all">
+                    <ce:bib-reference id="bib0001">
+                        <ce:label>Abedin et&#xA0;al., 2015</ce:label>
+                        <sb:reference id="sbref0001">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>A.</ce:given-name>
+                                        <ce:surname>Abedin</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.</ce:given-name>
+                                        <ce:surname>Spurn&#xFD;</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.</ce:given-name>
+                                        <ce:surname>Wiegert</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P</ce:given-name>
+                                        <ce:surname>Pokorn&#xFD;</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>J.</ce:given-name>
+                                        <ce:surname>Borovicka</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.</ce:given-name>
+                                        <ce:surname>Brown</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>261</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2015</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>100</sb:first-page>
+                                    <sb:last-page>117</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0002">
+                        <ce:label>Ahn, 2003</ce:label>
+                        <sb:reference id="sbref0002">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>S.H.</ce:given-name>
+                                        <ce:surname>Ahn</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>343</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2003</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>1095</sb:first-page>
+                                    <sb:last-page>1100</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0003">
+                        <ce:label>Ahn, 2004</ce:label>
+                        <sb:reference id="sbref0003">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>S.H.</ce:given-name>
+                                        <ce:surname>Ahn</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Earth Moon Planets</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>95</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2004</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>63</sb:first-page>
+                                    <sb:last-page>68</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0004">
+                        <ce:label>Ahn, 2005</ce:label>
+                        <sb:reference id="sbref0004">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>S.H.</ce:given-name>
+                                        <ce:surname>Ahn</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>358</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2005</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>1105</sb:first-page>
+                                    <sb:last-page>1115</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0005">
+                        <ce:label>Arter and Williams, 1997a</ce:label>
+                        <sb:reference id="sbref0005">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>T.R</ce:given-name>
+                                        <ce:surname>Arter</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>286</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1997</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>163</sb:first-page>
+                                    <sb:last-page>172</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0006">
+                        <ce:label>Arter and Williams, 1997b</ce:label>
+                        <sb:reference id="sbref0006">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>T.R</ce:given-name>
+                                        <ce:surname>Arter</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>288</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1997</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>721</sb:first-page>
+                                    <sb:last-page>728</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0007">
+                        <ce:label>Astapovic and Terenteva, 1968</ce:label>
+                        <ce:other-ref id="othref0001">
+                            <ce:textref>Astapovic I.S., Terenteva A.K. (1968) in Kres&#xE1;c and Millman (eds) Physics and Dynamics of Meteors., 308&#x2013;319.</ce:textref>
+                        </ce:other-ref>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0008">
+                        <ce:label>Basurah, 2012</ce:label>
+                        <ce:other-ref id="othref0002">
+                            <ce:textref>Basurah, H.M., 2012, arXiv:<ce:inter-ref id="interref0004" xlink:href="http://arxiv.org/abs/arXiv:1210.3941" xlink:role="http://www.elsevier.com/xml/linking-roles/preprint" xlink:type="simple">1210.3941</ce:inter-ref> [physics.hist-ph].</ce:textref>
+                        </ce:other-ref>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0009">
+                        <ce:label>Beijing Observatory 1988</ce:label>
+                        <sb:reference id="sbref0007">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:collaboration>Beijing Observatory</sb:collaboration>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>General Compilation of Chinese ancient Astronomical Records</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:book>
+                                    <sb:date>1988</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>Beijing Observatory</sb:name>
+                                        <sb:location>Beijing</sb:location>
+                                    </sb:publisher>
+                                </sb:book>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0010">
+                        <ce:label>Biot, 1841</ce:label>
+                        <ce:other-ref id="othref0003">
+                            <ce:textref>Biot E., 1841, Catalogue G&#xE9;n&#xE9;ral Des &#xC9;toiles Filantes Et Des Autres M&#xE9;t&#xE9;ores Observ&#xE9;s en China. M&#xE9;mories pr&#xE9;sentes par divers savants &#xE0; l'academie royale des sciences. x. p 129 and p 415.</ce:textref>
+                        </ce:other-ref>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0011">
+                        <ce:label>Brown et&#xA0;al., 2010</ce:label>
+                        <sb:reference id="sbref0008">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>P.</ce:given-name>
+                                        <ce:surname>Brown</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>D.K.</ce:given-name>
+                                        <ce:surname>Wong</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>R.J.</ce:given-name>
+                                        <ce:surname>Weryk</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.</ce:given-name>
+                                        <ce:surname>Wiegert</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>207</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:issue-nr>1</sb:issue-nr>
+                                    <sb:date>2010</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>66</sb:first-page>
+                                    <sb:last-page>81</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0012">
+                        <ce:label>Chasles, 1841</ce:label>
+                        <sb:reference id="sbref0009">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>M.</ce:given-name>
+                                        <ce:surname>Chasles</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Catalogue d'aparitions d&#x2019;&#xE9;toiles filantes pendant six si&#xE8;cles; de 538 a 1123</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Comptes rendus de l'academie des Sci.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>12</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1841</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>499</sb:first-page>
+                                    <sb:last-page>509</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0013">
+                        <ce:label>Cook, 1999</ce:label>
+                        <sb:reference id="sbref0010">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>D.</ce:given-name>
+                                        <ce:surname>Cook</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>JHA</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>xxx</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1999</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>131</sb:first-page>
+                                    <sb:last-page>160</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0014">
+                        <ce:label>Dall'Olmo, 1978</ce:label>
+                        <sb:reference id="sbref0011">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>U.</ce:given-name>
+                                        <ce:surname>Dall'Olmo</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>JHA</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>ix</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1978</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>123</sb:first-page>
+                                    <sb:last-page>134</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0015">
+                        <ce:label>Dall'Olmo, 1980</ce:label>
+                        <sb:reference id="sbref0012">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>U.</ce:given-name>
+                                        <ce:surname>Dall'Olmo</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>JHA</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>xi</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1980</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>10</sb:first-page>
+                                    <sb:last-page>27</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0016">
+                        <ce:label>Espa&#xF1;a Sagrada, 1747</ce:label>
+                        <ce:other-ref id="othref0003a">
+                            <ce:textref>Espa&#xF1;a Sagrada. Teatro Geogr&#xE1;fico Hist&#xF3;rico De La Iglesia de Espa&#xF1;a (51 Volumes Flores etc, Madrid. 1747&#x2013;1957).</ce:textref>
+                        </ce:other-ref>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0017">
+                        <ce:label>Fisher, 1934</ce:label>
+                        <sb:reference id="sbref0014">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>W.J.</ce:given-name>
+                                        <ce:surname>Fisher</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Bull. Harvard Coll. Obs</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>894</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1934</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>15</sb:first-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0018">
+                        <ce:label>Fox, 1986</ce:label>
+                        <sb:reference id="sbref0015">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>K.</ce:given-name>
+                                        <ce:surname>Fox</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Asteroids, Comets and Meteors</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:edited-book>
+                                    <sb:editors>
+                                        <sb:editor>
+                                            <ce:given-name>H.</ce:given-name>
+                                            <ce:surname>Rickman</ce:surname>
+                                        </sb:editor>
+                                        <sb:editor>
+                                            <ce:surname>Langerkvist</ce:surname>
+                                        </sb:editor>
+                                    </sb:editors>
+                                    <sb:date>1986</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>C.-I. Uppsala, University of Uppsala</sb:name>
+                                    </sb:publisher>
+                                </sb:edited-book>
+                                <sb:pages>
+                                    <sb:first-page>521</sb:first-page>
+                                    <sb:last-page>525</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0019">
+                        <ce:label>Fox et&#xA0;al., 1982</ce:label>
+                        <sb:reference id="sbref0016">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>K.</ce:given-name>
+                                        <ce:surname>Fox</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>D.W.</ce:given-name>
+                                        <ce:surname>Hughes</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>199</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1982</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>313</sb:first-page>
+                                    <sb:last-page>324</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0020">
+                        <ce:label>Fox et&#xA0;al., 1985</ce:label>
+                        <sb:reference id="sbref0017">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>K.</ce:given-name>
+                                        <ce:surname>Fox</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>D.W</ce:given-name>
+                                        <ce:surname>Hughes</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>217</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1985</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>407</sb:first-page>
+                                    <sb:last-page>411</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0021">
+                        <ce:label>Fujiwara and Hasegawa, 2001</ce:label>
+                        <sb:reference id="sbref0018">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>Y.</ce:given-name>
+                                        <ce:surname>Fujiwara</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>I.</ce:given-name>
+                                        <ce:surname>Hasegawa</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:edited-book>
+                                    <sb:editors>
+                                        <sb:editor>
+                                            <ce:given-name>B.</ce:given-name>
+                                            <ce:surname>Warmbein</ce:surname>
+                                        </sb:editor>
+                                    </sb:editors>
+                                    <sb:title>
+                                        <sb:maintitle>Proceedings of the Meteoroids 2001 Conference</sb:maintitle>
+                                    </sb:title>
+                                    <sb:conference>Kiruna, Sweden</sb:conference>
+                                    <sb:date>2001</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>Swedish Institute of Space Physics</sb:name>
+                                    </sb:publisher>
+                                </sb:edited-book>
+                                <sb:pages>
+                                    <sb:first-page>209</sb:first-page>
+                                    <sb:last-page>214</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0022">
+                        <ce:label>Hasegawa, 1979</ce:label>
+                        <sb:reference id="sbref0019">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.</ce:given-name>
+                                        <ce:surname>Hasegawa</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Publ. Astron. Soc. Japan</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>31</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1979</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>257</sb:first-page>
+                                    <sb:last-page>270</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0023">
+                        <ce:label>Hasegawa, 1992</ce:label>
+                        <sb:reference id="sbref0020">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.</ce:given-name>
+                                        <ce:surname>Hasegawa</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Cel. Mech.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>54</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1992</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>129</sb:first-page>
+                                    <sb:last-page>142</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0024">
+                        <ce:label>Hasegawa, 1993</ce:label>
+                        <sb:reference id="sbref0021">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.</ce:given-name>
+                                        <ce:surname>Hasegawa</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Meteors and Their Parent Bodies</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:edited-book>
+                                    <sb:editors>
+                                        <sb:editor>
+                                            <ce:given-name>J.</ce:given-name>
+                                            <ce:surname>Stohl</ce:surname>
+                                        </sb:editor>
+                                        <sb:editor>
+                                            <ce:given-name>I.P</ce:given-name>
+                                            <ce:surname>Williams</ce:surname>
+                                        </sb:editor>
+                                    </sb:editors>
+                                    <sb:date>1993</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>Astronomical Inst., Slovk Acad. Sci.</sb:name>
+                                        <sb:location>Bratislava</sb:location>
+                                    </sb:publisher>
+                                </sb:edited-book>
+                                <sb:pages>
+                                    <sb:first-page>209</sb:first-page>
+                                    <sb:last-page>223</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0025">
+                        <ce:label>Hasegawa., 1996</ce:label>
+                        <sb:reference id="sbref0022">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.</ce:given-name>
+                                        <ce:surname>Hasegawa.</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Q. J.R. Astron. Soc.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>37</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1996</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>75</sb:first-page>
+                                    <sb:last-page>78</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0026">
+                        <ce:label>Hasegawa, 1999a</ce:label>
+                        <sb:reference id="sbref0023">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.</ce:given-name>
+                                        <ce:surname>Hasegawa</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>In Meteoroids 1998</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:book>
+                                    <sb:date>1999</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>Astron. Inst., Slovak Acad. Sci.</sb:name>
+                                        <sb:location>Bratislava</sb:location>
+                                    </sb:publisher>
+                                </sb:book>
+                                <sb:pages>
+                                    <sb:first-page>177</sb:first-page>
+                                    <sb:last-page>184</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0061">
+                        <ce:label>Hasegawa, 1999b</ce:label>
+                        <sb:reference id="sbref0061">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.</ce:given-name>
+                                        <ce:surname>Hasegawa</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Meteoroids 1998</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:edited-book>
+                                    <sb:editors>
+                                        <sb:editor>
+                                            <ce:given-name>W.J.</ce:given-name>
+                                            <ce:surname>Baggaley</ce:surname>
+                                        </sb:editor>
+                                        <sb:editor>
+                                            <ce:given-name>V.</ce:given-name>
+                                            <ce:surname>Porubcan</ce:surname>
+                                        </sb:editor>
+                                    </sb:editors>
+                                    <sb:book-series>
+                                        <sb:series>
+                                            <sb:title>
+                                                <sb:maintitle>Proceedings of the International Conference held at Tatranska Lomnica, Slovakia, August 17-21, 1998</sb:maintitle>
+                                            </sb:title>
+                                        </sb:series>
+                                    </sb:book-series>
+                                    <sb:date>1999</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>Astronomical Institute of the Slovak Academy of Sciences</sb:name>
+                                    </sb:publisher>
+                                </sb:edited-book>
+                                <sb:pages>
+                                    <sb:first-page>153</sb:first-page>
+                                    <sb:last-page>156</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0027">
+                        <ce:label>Yoke, 1962</ce:label>
+                        <sb:reference id="sbref0024">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>H.P.</ce:given-name>
+                                        <ce:surname>Yoke</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Vistas Astron.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>5</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1962</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>127</sb:first-page>
+                                    <sb:last-page>225</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0028">
+                        <ce:label>Hughes and Emerson, 1982</ce:label>
+                        <sb:reference id="sbref0025">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>D.W.</ce:given-name>
+                                        <ce:surname>Hughes</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>B.</ce:given-name>
+                                        <ce:surname>Emerson</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Observatory</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>102</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1982</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>39</sb:first-page>
+                                    <sb:last-page>42</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0029">
+                        <ce:label>Imoto and Hasegawa, 1958</ce:label>
+                        <sb:reference id="sbref0026">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>S.</ce:given-name>
+                                        <ce:surname>Imoto</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>I.</ce:given-name>
+                                        <ce:surname>Hasegawa</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Smithsonian Contrib. Astrophys.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>2</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1958</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>131</sb:first-page>
+                                    <sb:last-page>144</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0030">
+                        <ce:label>Jenniskens, 1994</ce:label>
+                        <sb:reference id="sbref0027">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>J.</ce:given-name>
+                                        <ce:surname>Jenniskens</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>A&amp;A</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>287</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1994</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>990</sb:first-page>
+                                    <sb:last-page>1013</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0031">
+                        <ce:label>Jenniskens, 1997</ce:label>
+                        <sb:reference id="sbref0028">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>J.</ce:given-name>
+                                        <ce:surname>Jenniskens</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>A&amp;A</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>317</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1997</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>953</sb:first-page>
+                                    <sb:last-page>961</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0032">
+                        <ce:label>Jenniskens, 2006</ce:label>
+                        <sb:reference id="sbref0029">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>J.</ce:given-name>
+                                        <ce:surname>Jenniskens</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Meteor Showers and Their Parent Comets</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:book>
+                                    <sb:date>2006</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>Cambridge University Press</sb:name>
+                                    </sb:publisher>
+                                </sb:book>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0033">
+                        <ce:label>Jenniskens et&#xA0;al., 2016</ce:label>
+                        <sb:reference id="sbref0030">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>J.</ce:given-name>
+                                        <ce:surname>Jenniskens</ce:surname>
+                                    </sb:author>
+                                    <sb:et-al/>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>266</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2016</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>331</sb:first-page>
+                                    <sb:last-page>354</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0034">
+                        <ce:label>Jenniskens et&#xA0;al., 1997</ce:label>
+                        <sb:reference id="sbref0031">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>P.</ce:given-name>
+                                        <ce:surname>Jenniskens</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>H.</ce:given-name>
+                                        <ce:surname>Betlem</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>M.</ce:given-name>
+                                        <ce:surname>de Lignie</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>M.</ce:given-name>
+                                        <ce:surname>Langbroek</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>M</ce:given-name>
+                                        <ce:surname>van Vliet</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>A A</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>327</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1997</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>1242</sb:first-page>
+                                    <sb:last-page>1252</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0035a">
+                        <ce:label>Jopek&#xA0;and Ka&#x148;uchov&#xE1;, 2017</ce:label>
+                        <sb:reference id="sbref0035aa">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>T.J.</ce:given-name>
+                                        <ce:surname>Jopek</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>Z.</ce:given-name>
+                                        <ce:surname>Ka&#x148;uchov&#xE1;</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Planetary Space Sci.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>143</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2017</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>2</sb:first-page>
+                                    <sb:last-page>6</sb:last-page>
+                                </sb:pages>
+                                <ce:doi>10.1016/j.pss.2016.11.003</ce:doi>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0036">
+                        <ce:label>Jopek and Williams, 2013</ce:label>
+                        <sb:reference id="sbref0033">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>T.J.</ce:given-name>
+                                        <ce:surname>Jopek</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>430</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2013</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>2377</sb:first-page>
+                                    <sb:last-page>2389</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0037">
+                        <ce:label>Kidger, 1993</ce:label>
+                        <sb:reference id="sbref0034">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>M.R.</ce:given-name>
+                                        <ce:surname>Kidger</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Q. J.R. Astron. Soc.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>34</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1993</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>331</sb:first-page>
+                                    <sb:last-page>334</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0038">
+                        <ce:label>Kronk, 2014</ce:label>
+                        <sb:reference id="sbref0035">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>G.W.</ce:given-name>
+                                        <ce:surname>Kronk</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Meteor Showers. An annotated Catalog</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:book>
+                                    <sb:date>2014</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>Springer</sb:name>
+                                        <sb:location>New York</sb:location>
+                                    </sb:publisher>
+                                </sb:book>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0039">
+                        <ce:label>Mart&#xED;nez and Marco, 2017</ce:label>
+                        <sb:reference id="sbref0036">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>M.J.</ce:given-name>
+                                        <ce:surname>Mart&#xED;nez</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>F.J.</ce:given-name>
+                                        <ce:surname>Marco</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>J. History Astron.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>48</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2017</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>62</sb:first-page>
+                                    <sb:last-page>120</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0041">
+                        <ce:label>Muratori, RIS</ce:label>
+                        <ce:other-ref id="othref0004">
+                            <ce:textref>Muratori, RIS: Rerum Italicarum Scriptores ab anno aerae christianae 500 ad 1500. 25 vols Mediolani, 1723-1751.</ce:textref>
+                        </ce:other-ref>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0042">
+                        <ce:label>Muratori, RIS2</ce:label>
+                        <ce:other-ref id="othref0005">
+                            <ce:textref>Muratori, RIS<ce:sup loc="post">2</ce:sup>: Rerum Italicarum Scriptores ab anno aerae christianae 500 ad 1500. Editio altera. Citt&#xE0; di Castello, etc, 1900.</ce:textref>
+                        </ce:other-ref>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0043">
+                        <ce:label>Newton, 1864</ce:label>
+                        <sb:reference id="sbref0038">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>H.A.</ce:given-name>
+                                        <ce:surname>Newton</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>The original accounts of the displays in former times of the November star-shower</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Am. J. Sci Arts.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>37</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1864</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>377</sb:first-page>
+                                    <sb:last-page>389</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                            <sb:comment>2nd Series</sb:comment>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0044">
+                        <ce:label>Pankenier et&#xA0;al., 2008</ce:label>
+                        <sb:reference id="sbref0039">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>D.</ce:given-name>
+                                        <ce:surname>Pankenier</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>Zhentao</ce:given-name>
+                                        <ce:surname>Xu</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>Yaotiao</ce:given-name>
+                                        <ce:surname>Jiang</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Archaeoastronomy in East Asia: Historical Observational Records of Comets and Meteor Showers from China</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:book>
+                                    <sb:date>2008</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>Cambria Press</sb:name>
+                                        <sb:location>Japan, and Korea</sb:location>
+                                    </sb:publisher>
+                                </sb:book>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0045">
+                        <ce:label>PMH 1856</ce:label>
+                        <sb:reference id="sbref0040">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:collaboration>PMH</sb:collaboration>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Portugale Monumenta Historica</sb:maintitle>
+                                        </sb:title>
+                                    </sb:series>
+                                    <sb:date>1856</sb:date>
+                                </sb:issue>
+                            </sb:host>
+                            <sb:comment>Olisipone</sb:comment>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0046">
+                        <ce:label>Quetelet, 1841</ce:label>
+                        <sb:reference id="sbref0041">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>A.</ce:given-name>
+                                        <ce:surname>Quetelet</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Catalogue Nouveau des principals aparitions d&#x2019;&#xE9;toiles filantes</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Memoires de I'Academie Royale des Sciences et Belles-Lettres de Bruxelles</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>15</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1841</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>21</sb:first-page>
+                                    <sb:last-page>60</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0047">
+                        <ce:label>Rada and Stephenson, 1992</ce:label>
+                        <sb:reference id="sbref0042">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>W.S.</ce:given-name>
+                                        <ce:surname>Rada</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>F.R.</ce:given-name>
+                                        <ce:surname>Stephenson</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Q. J.R. Astron. Soc.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>33</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1992</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>5</sb:first-page>
+                                    <sb:last-page>16</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0048">
+                        <ce:label>Toth, 1999</ce:label>
+                        <sb:reference id="sbref0043">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>J</ce:given-name>
+                                        <ce:surname>Toth</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                                <sb:title>
+                                    <sb:maintitle>Meteoroids 1998</sb:maintitle>
+                                </sb:title>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:edited-book>
+                                    <sb:editors>
+                                        <sb:editor>
+                                            <ce:given-name>W.J.</ce:given-name>
+                                            <ce:surname>Baggaley</ce:surname>
+                                        </sb:editor>
+                                        <sb:editor>
+                                            <ce:given-name>V.</ce:given-name>
+                                            <ce:surname>Porubcan</ce:surname>
+                                        </sb:editor>
+                                    </sb:editors>
+                                    <sb:date>1999</sb:date>
+                                    <sb:publisher>
+                                        <sb:name>Astron. Inst. Slovak Acad. Sci.</sb:name>
+                                        <sb:location>Bratislava</sb:location>
+                                    </sb:publisher>
+                                </sb:edited-book>
+                                <sb:pages>
+                                    <sb:first-page>223</sb:first-page>
+                                    <sb:last-page>226</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0049">
+                        <ce:label>Wiegert and Brown, 2004</ce:label>
+                        <sb:reference id="sbref0044">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>P.</ce:given-name>
+                                        <ce:surname>Wiegert</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.</ce:given-name>
+                                        <ce:surname>Brown</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Earth Moon Planets</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>95</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2004</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>81</sb:first-page>
+                                    <sb:last-page>88</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0050">
+                        <ce:label>Williams, 2011</ce:label>
+                        <sb:reference id="sbref0045">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Astron. Geophys.</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>52</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:issue-nr>2</sb:issue-nr>
+                                    <sb:date>2011</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>20</sb:first-page>
+                                    <sb:last-page>26</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0051">
+                        <ce:label>Williams and Collander-Brown, 1998</ce:label>
+                        <sb:reference id="sbref0046">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>S.</ce:given-name>
+                                        <ce:surname>Collander-Brown</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>294</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1998</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>127</sb:first-page>
+                                    <sb:last-page>138</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0052">
+                        <ce:label>Williams et&#xA0;al., 2004</ce:label>
+                        <sb:reference id="sbref0047">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>G.O.</ce:given-name>
+                                        <ce:surname>Ryabovs</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>A.P.</ce:given-name>
+                                        <ce:surname>Baturin</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>A.M.</ce:given-name>
+                                        <ce:surname>Chernitsov</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>355</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2004</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>1171</sb:first-page>
+                                    <sb:last-page>1181</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0053">
+                        <ce:label>Williams and Wu, 1993</ce:label>
+                        <sb:reference id="sbref0048">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>Z.</ce:given-name>
+                                        <ce:surname>Wu</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>264</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1993</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>659</sb:first-page>
+                                    <sb:last-page>664</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0060">
+                        <ce:label>Williams et&#xA0;al., 1979</ce:label>
+                        <sb:reference id="sbref0060a">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>C.D.</ce:given-name>
+                                        <ce:surname>Murray</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>D.W.</ce:given-name>
+                                        <ce:surname>Hughes</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>189</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1979</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>483</sb:first-page>
+                                    <sb:last-page>492</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0054">
+                        <ce:label>Wu and Williams, 1996</ce:label>
+                        <sb:reference id="sbref0049">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>Z.</ce:given-name>
+                                        <ce:surname>Wu</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>I.P.</ce:given-name>
+                                        <ce:surname>Williams</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>280</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1996</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>1210</sb:first-page>
+                                    <sb:last-page>1218</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0055">
+                        <ce:label>Yang et&#xA0;al., 2005</ce:label>
+                        <sb:reference id="sbref0050">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>H.J.</ce:given-name>
+                                        <ce:surname>Yang</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>Ch.</ce:given-name>
+                                        <ce:surname>Park</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>M.</ce:given-name>
+                                        <ce:surname>Park</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>175</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>2005</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>215</sb:first-page>
+                                    <sb:last-page>225</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0056">
+                        <ce:label>Yau et&#xA0;al., 1994</ce:label>
+                        <sb:reference id="sbref0051">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>K</ce:given-name>
+                                        <ce:surname>Yau</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>D.</ce:given-name>
+                                        <ce:surname>Yeomans</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.</ce:given-name>
+                                        <ce:surname>Weismann</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>MNRAS</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>266</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1994</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>305</sb:first-page>
+                                    <sb:last-page>316</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0057">
+                        <ce:label>Yeomans et&#xA0;al., 1996</ce:label>
+                        <sb:reference id="sbref0052">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>D.K.</ce:given-name>
+                                        <ce:surname>Yeomans</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>K.K.</ce:given-name>
+                                        <ce:surname>Yau</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>P.R.</ce:given-name>
+                                        <ce:surname>Weismann</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>Icarus</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>124</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1996</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>407</sb:first-page>
+                                    <sb:last-page>413</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                    <ce:bib-reference id="bib0058">
+                        <ce:label>Yrj&#xF6;la and Jenniskens, 1998</ce:label>
+                        <sb:reference id="sbref0053">
+                            <sb:contribution langtype="en">
+                                <sb:authors>
+                                    <sb:author>
+                                        <ce:given-name>L.</ce:given-name>
+                                        <ce:surname>Yrj&#xF6;la</ce:surname>
+                                    </sb:author>
+                                    <sb:author>
+                                        <ce:given-name>J.</ce:given-name>
+                                        <ce:surname>Jenniskens</ce:surname>
+                                    </sb:author>
+                                </sb:authors>
+                            </sb:contribution>
+                            <sb:host>
+                                <sb:issue>
+                                    <sb:series>
+                                        <sb:title>
+                                            <sb:maintitle>A A</sb:maintitle>
+                                        </sb:title>
+                                        <sb:volume-nr>330</sb:volume-nr>
+                                    </sb:series>
+                                    <sb:date>1998</sb:date>
+                                </sb:issue>
+                                <sb:pages>
+                                    <sb:first-page>739</sb:first-page>
+                                    <sb:last-page>752</sb:last-page>
+                                </sb:pages>
+                            </sb:host>
+                        </sb:reference>
+                    </ce:bib-reference>
+                </ce:bibliography-sec>
+            </ce:bibliography>
+        </ja:tail>
+    </ja:article>
+</doc:document>
