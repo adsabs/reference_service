@@ -1,7 +1,5 @@
 # encoding=utf8
-import sys
-reload(sys)
-sys.setdefaultencoding('utf8')
+# included included for the presense of unicode, for example `Akademiai Kiadò, in list of academic publishers
 
 LOGGING_LEVEL = 'DEBUG'
 

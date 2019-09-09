@@ -2,9 +2,6 @@ import sys, os
 project_home = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../'))
 if project_home not in sys.path:
     sys.path.insert(0, project_home)
-# encoding=utf8
-reload(sys)
-sys.setdefaultencoding('utf8')
 
 from flask_testing import TestCase
 import unittest
@@ -143,6 +140,31 @@ class TestCRFClassifierText(TestCase):
         """
         reference_str = 'Trujillo and Sheppard, 2014. Nature 507, p. 471-474.'
         self.assertEqual(CRFClassifierText().identify_authors(reference_str), 'Trujillo and Sheppard')
+
+    def test_identify_volume_page_issue(self):
+        """
+
+        :return:
+        """
+        reference_str = 'Arzoumanian, D., Andre, P., et al., 2019. Astronomy & Astrophysics, 621:A42'
+        token_dict = CRFClassifierText().identify_numeric_tokens(reference_str)
+        self.assertEqual(token_dict['volume'], '621')
+        self.assertEqual(token_dict['page'], 'A42')
+        self.assertEqual(token_dict['issue'], '')
+
+        reference_str = 'J. P. Perez-Beaupuits, R. Gusten, M. Spaans, V. Ossenkopf, K. M. Menten, M. A. Requena-Torres, et al. Disentangling the excitation conditions of the dense gas in M17 SW. "A&A", 10 583:A107, November 2015.'
+        token_dict = CRFClassifierText().identify_numeric_tokens(reference_str)
+        self.assertEqual(token_dict['volume'], '10')
+        self.assertEqual(token_dict['page'], 'A107')
+        self.assertEqual(token_dict['issue'], '583')
+
+        # test page range
+        reference_str = 'M. Houde, P. Bastien, J. L. Dotson, C. D. Dowell, R. H. Hildebrand, R. Peng, et al. On the Measurement of the Magnitude and Orientation of the Magnetic Field in Molecular Clouds. "ApJ", 569:803-814, April 2002.'
+        token_dict = CRFClassifierText().identify_numeric_tokens(reference_str)
+        self.assertEqual(token_dict['volume'], '569')
+        self.assertEqual(token_dict['page'], '803-814')
+        self.assertEqual(token_dict['issue'], '')
+
 
 class TestCRFClassifierXML(TestCase):
     def create_app(self):

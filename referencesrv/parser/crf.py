@@ -45,24 +45,60 @@ class CRFClassifier(object):
 
     STOPWORD_TAGS = ['AND', 'IN', 'OF', 'THE']
     
-    REMOVE_WORD_BREAKER = [re.compile(r'[A-Za-z]*(-\s+)[A-Za-z]*'),
+    WORD_BREAKER_REMOVE = [re.compile(r'[A-Za-z]*(-\s+)[A-Za-z]*'),
                            re.compile(r'\d+(,)\d+')]
-    BEGIN_CAPITAL_LETTER = re.compile(r'([A-Z].*$)')
+    CAPITAL_FIRST_CHAR = re.compile(r'([A-Z].*$)')
 
     TITLE_JOURNAL_EXTRACTOR = [re.compile(r'^[.\s]*(?P<title>[A-Za-z].*)\.\s*(?P<journal>[A-Za-z].*)[\d,]\d*\s*.*,'),
                                re.compile(r'^\s*"(?P<title>[A-Za-z].*),"\s*"(?P<journal>[A-Za-z].*)"')]
+    TITLE_JOURNAL_PUNCTUATION_REMOVER = re.compile(r'[:\(\)\-\[\]]')
     JOURNAL_ONLY_EXTRACTOR = re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>[A-Z][A-Za-z&\-]*)[\d,][\s\d\w,]*$')
     EDITOR_EXTRACTOR = re.compile(r'(:?[Ii][Nn][":\s]{1,2})(.*)$')
     EDITOR_RESIDUE = re.compile(r'(I[Nn]+[:\s]{1,2}?\s+([\(]?[Ee]+d[s\.\)\s]+)?)')
     ARXIV_ID_EXTRACTOR = re.compile(r'(\w+\-\w+/\d+|\d{4}\.\d{4,5})')
-    DOI_PATTERN = r'(?P<doi>10\.\s*\d{4}[\d\:\.\-\/A-Za-z\s]+)'
     DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>[doi|DOI]{3}[\s\.\:]{0,2}10\.\s*\d{4}[\d\:\.\-\/A-Za-z\s]+)')
-    NUMERIC_EXTRACTOR = [re.compile(r'(?P<volume>\d+):(?P<page>\d+)(?P<issue>)'),
-                         re.compile(r'(?P<volume>\d+)\s(?P<issue>\d+)\s:(?P<page>\d+)')]
+    # two specific formats for matching volume, page, issue
+    # note that in the first expression issue matches a space, there is no issue in this format,
+    # it is included to have all three groups present
+    FORMATTED_MULTI_NUMERIC_EXTRACTOR = [re.compile(r'(?P<volume>\d+)\s+(?P<issue>\d+)\s*:(?P<page>[A-Z]?\d+\-?[A-Z]?\d*)'),
+                                         re.compile(r'(?P<volume>\d+):(?P<page>[A-Z]?\d+\-?[A-Z]?\d*)(?P<issue>\s*)')]
     ETAL_PAT_EXTRACTOR = re.compile(r"([\w\W]+(?i)[\s,]*et\.?\s*al\.?)")
     LAST_NAME_EXTRACTOR = re.compile(r"([\w\W]+)[\.,\s]*[12][089]\d\d")
 
-    REFERENCE_TOKENIZER = r'([\s,.():\[\]"#])'
+    PAGE_EXTRACTOR = re.compile(r'(?=.*[0-9])(?P<page>[BHPL0-9]+[-.][BHPL0-9]+)')
+    VOLUME_EXTRACTOR = re.compile(r'(vol|volume)[.\s]+(?P<volume>\d+)')
+    YEAR_EXTRACTOR = re.compile(r'[(\s]*([12][089]\d\d[a-z]?)[)\s.,]+')
+    
+    REFERENCE_TOKENIZER = re.compile(r'([\s,.():\[\]"#])')
+    TAGGED_MULTI_WORD_TOKENIZER = re.compile(r'([\s.,])')
+
+    # is all capital
+    IS_CAPITAL = re.compile(r'^([A-Z]+)$')
+    # is alphabet only, consider hyphenated words also
+    IS_ALPHABET = re.compile(r'^(?=.*[a-zA-Z])([a-zA-Z\-]+)$')
+    # is numeric only, consider the page range with - being also numeric
+    # also include arxiv id with a dot to be numeric
+    # note that this differs from function is_numeric in the
+    # sense that this recognizes numeric even if it was not identified/tagged
+    IS_NUMERIC = re.compile(r'^(?=.*[0-9])([0-9\-\.]+)$')
+    # is alphanumeric, must have at least one digit and one alphabet character
+    IS_ALPHANUMERIC = re.compile(r'^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')
+
+    # should star with a digit, or end with a digit, or be all digits
+    IS_MOSTLY_DIGIT = re.compile(r'(\b[A-Za-z0-9]+[0-9]\b|\b[0-9]+[0-9A-Za-z]\b|\b[0-9]\b)')
+
+    SPACE_BEFORE_DOT_REMOVER = re.compile(r'\s+(\.)')
+    SPACE_AROUND_AMPERSAND_REMOVER = re.compile(r'\b(\w)\s&\s(\w+)')
+
+    JOURNAL_ABBREVIATED_EXTRACTOR = re.compile(r'^([A-Za-z]+\.\s*)+$|(^[A-Za-z]$)')
+    
+    MATCH_A_WORD = re.compile(r'\w+')
+    MATCH_A_NONE_WORD = re.compile(r'\W+')
+    MATCH_PARENTHESIS = re.compile(r'[()]')
+
+    PUNCTUATION_REMOVER_FOR_NUMERIC_ID = re.compile(r'[(),"]')
+    
+    REGEX_PATTERN_WHOLE_WORD_ONLY = r'\b%s\b'
 
     def __init__(self):
         """
@@ -162,15 +198,38 @@ class CRFClassifier(object):
                     label_code[l] = numeric
         return label_code
 
-    def tokenize(self, str):
+    def substitute(self, pattern, replace, text):
         """
+        replace whole word only in the text
 
-        :param str:
+        :param patten:
+        :param repalce:
+        :param text:
         :return:
         """
-        return filter(None, [w.strip() for w in re.split(r'([\s.,])', str)])
+        return re.sub(self.REGEX_PATTERN_WHOLE_WORD_ONLY % pattern, replace, text)
 
-    def get_multi_label_words(self, words, labels, current_label):
+    def search(self, pattern, text):
+        """
+        search whole word only in the text
+        :param pattern:
+        :param text:
+        :return:
+        """
+        return re.search(self.REGEX_PATTERN_WHOLE_WORD_ONLY % pattern, text.lower())
+
+    def tokenize_identified_multi_words(self, text):
+        """
+        tokenzie section of reference that has been identified, these include author, title, journal, and publisher
+        basically this is used to be able to tell if word is the beginning of identified section, in the middle, or the
+        last word
+        
+        :param text:
+        :return:
+        """
+        return filter(None, [w.strip() for w in self.TAGGED_MULTI_WORD_TOKENIZER.split(text)])
+
+    def get_labeled_multi_words(self, words, labels, current_label):
         """
         get all the words that have the same label (ie, journal, title, publisher can be multiple words, compared
         to numeric words, year, volume, that are single words)
@@ -480,7 +539,7 @@ class CRFClassifier(object):
         """
         for i, word in enumerate(self.IDENTIFYING_WORDS.values()):
             for w in word:
-                if re.search(r"\b%s\b"%(w), ref_data_word.lower()):
+                if self.search(w, ref_data_word):
                     return i+1
         return 0
 
@@ -547,7 +606,7 @@ class CRFClassifier(object):
             return 0
 
         if len(segment_dict.get('authors', '')) > 0:
-            token = self.tokenize(segment_dict.get('authors', ''))
+            token = self.tokenize_identified_multi_words(segment_dict.get('authors', ''))
             if ref_data[index] == token[0]:
                 return 1
             if ref_data[index] == token[-1]:
@@ -581,7 +640,7 @@ class CRFClassifier(object):
             return 0
 
         if len(segment_dict.get('title', '')) > 0:
-            token = self.tokenize(segment_dict.get('title', ''))
+            token = self.tokenize_identified_multi_words(segment_dict.get('title', ''))
             # compare two words for the beginning and the end if possible
             if len(token) >= 2 and index > 1 and index < len(ref_data)-1:
                 if ref_data[index] == token[0] and ref_data[index+1] == token[1]:
@@ -622,7 +681,7 @@ class CRFClassifier(object):
             return 0
 
         if len(segment_dict.get('journal', '')) > 0:
-            token = self.tokenize(segment_dict.get('journal', ''))
+            token = self.tokenize_identified_multi_words(segment_dict.get('journal', ''))
             if ref_data[index] == token[0]:
                 return 1
             if ref_data[index] == token[-1]:
@@ -644,31 +703,31 @@ class CRFClassifier(object):
             len(ref_data[index]),                                                                                       # length of element
             len(ref_data[index-1]) if index > 0 else 0,                                                                 # length of previous element if any
             len(ref_data[index+1]) if index < len(ref_data) - 1 else 0,                                                 # length of next element if any
-            int(bool(re.match('^([A-Z]+)$', ref_data[index]))),                                                         # is element all capital
+            int(self.IS_CAPITAL.match(ref_data[index]) is not None),                                                    # is element all capital
             1 if index > 0 and ref_data[index-1][0].isupper() else 0,                                                   # is previous element, if any, all capital
             1 if index < len(ref_data) - 1 and ref_data[index+1][0].isupper() else 0,                                   # is next element, if any, all capital
             int(ref_data[index][0].isupper()),                                                                          # is first character capital
             int(ref_data[index-1][0].isupper()) if index > 0 else 0,                                                    # is previous element, if any, first character capital
             int(ref_data[index+1][0].isupper()) if index < len(ref_data) - 1 else 0,                                    # is next element's, if any, first character capital
-            int(bool(re.match('^(?=.*[a-zA-Z])([a-zA-Z\-]+)$', ref_data[index]))),                                      # is alphabet only, consider hyphenated words also
-            int(bool(re.match('^(?=.*[a-zA-Z])([a-zA-Z\-]+)$', ref_data[index-1]))) if index > 0 else 0,                # what about previous word, if any
-            int(bool(re.match('^(?=.*[a-zA-Z])([a-zA-Z\-]+)$', ref_data[index+1]))) if index < len(ref_data) - 1 else 0,# and next word, if any
-            int(bool(re.match('^(?=.*[0-9])([0-9\-]+)$', ref_data[index]))),                                            # is numeric only, consider the page range with - being also numeric
-            int(bool(re.match('^(?=.*[0-9])([0-9\-]+)$', ref_data[index-1]))) if index > 0 else 0,                      # what about previous word, if any
-            int(bool(re.match('^(?=.*[0-9])([0-9\-]+)$', ref_data[index+1]))) if index < len(ref_data) - 1 else 0,      # and next word, if any
+            int(self.IS_ALPHABET.match(ref_data[index]) is not None),                                                   # is alphabet only, consider hyphenated words also
+            int(self.IS_ALPHABET.match(ref_data[index-1]) is not None) if index > 0 else 0,                             # what about previous word, if any
+            int(self.IS_ALPHABET.match(ref_data[index+1]) is not None) if index < len(ref_data) - 1 else 0,             # and next word, if any
+            int(self.IS_NUMERIC.match(ref_data[index]) is not None),                                                    # is numeric only, consider the page range with - being also numeric
+            int(self.IS_NUMERIC.match(ref_data[index-1]) is not None) if index > 0 else 0,                              # what about previous word, if any
+            int(self.IS_NUMERIC.match(ref_data[index+1]) is not None) if index < len(ref_data) - 1 else 0,              # and next word, if any
             self.is_numeric(ref_data, index, ref_label, segment_dict),                                                  # is numeric only
             self.is_numeric(ref_data, index-1, ref_label, segment_dict) if index > 0 else 0,                            # what about previous word, if any
             self.is_numeric(ref_data, index+1, ref_label, segment_dict) if index < len(ref_data) - 1 else 0,            # and next word, if any
-            int(bool(re.match('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$', ref_data[index]))),                          # is alphanumeric, must at least one digit and one alphabet character
-            int(bool(re.match('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$', ref_data[index-1]))) if index > 0 else 0,    # what about previous word, if any
-            int(bool(re.match('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$', ref_data[index+1]))) if index < len(ref_data) - 1 else 0,    # and next word, if any
+            int(self.IS_ALPHANUMERIC.match(ref_data[index]) is not None),                                               # is alphanumeric, must at least one digit and one alphabet character
+            int(self.IS_ALPHANUMERIC.match(ref_data[index-1]) is not None) if index > 0 else 0,                         # what about previous word, if any
+            int(self.IS_ALPHANUMERIC.match(ref_data[index+1]) is not None) if index < len(ref_data) - 1 else 0,         # and next word, if any
             self.is_stopword(ref_data, index, ref_label),                                                               # is it stopword
             self.is_stopword(ref_data, index-1, ref_label) if index > 0 else 0,                                         # what about previous word, if any
             self.is_stopword(ref_data, index+1, ref_label) if index < len(ref_data) - 1 else 0,                         # and next word, if any
             self.is_author(ref_data, index, ref_label, segment_dict),                                                   # is it more likey author
-            1 if self.where_in_author(ref_data, index, ref_label, segment_dict) == 1 else 0,
-            1 if self.where_in_author(ref_data, index, ref_label, segment_dict) == 2 else 0,
-            1 if self.where_in_author(ref_data, index, ref_label, segment_dict) == 3 else 0,
+            1 if self.where_in_author(ref_data, index, ref_label, segment_dict) == 1 else 0,                            # if it is author determeine if first word (usually lastname, but can be firstname or first intial, or collabrator)
+            1 if self.where_in_author(ref_data, index, ref_label, segment_dict) == 2 else 0,                            # any of the middle words
+            1 if self.where_in_author(ref_data, index, ref_label, segment_dict) == 3 else 0,                            # or the last (could be et al)
             self.is_year_tag(ref_data, index, ref_label, segment_dict),                                                 # is it a year?
             self.is_page_tag(ref_data, index, ref_label, segment_dict),                                                 # is it a page?
             self.is_volume_tag(ref_data, index, ref_label, segment_dict),                                               # is it more likely volume?
@@ -818,10 +877,10 @@ class CRFClassifierXML(CRFClassifier):
 
         segment_dict = {}
         segment_dict['authors'] = self.merge_authors(reference_list)
-        ref_words = self.tokenize(segment_dict.get('authors', '')) if len(segment_dict.get('authors', ''))>0 else []
+        ref_words = self.tokenize_identified_multi_words(segment_dict.get('authors', '')) if len(segment_dict.get('authors', ''))>0 else []
         for key in self.SEGMENT_DICT_KEYS:
             if key.upper() in labels:
-                words_for_label = self.get_multi_label_words(words, labels, key.upper())
+                words_for_label = self.get_labeled_multi_words(words, labels, key.upper())
                 segment_dict[key] = ' '.join(words_for_label)
                 ref_words += words_for_label
             else:
@@ -866,6 +925,7 @@ class CRFClassifierXML(CRFClassifier):
 
 
 class CRFClassifierText(CRFClassifier):
+
     def __init__(self):
         CRFClassifier.__init__(self)
 
@@ -903,13 +963,13 @@ class CRFClassifierText(CRFClassifier):
         # need to split on `.` but not when it is part of arXiv ID, doi, or page number
         # if there is a arXiv ID, doi, or page remove it, split input, and then put it back
         if len(segment_dict.get('doi', '')) > 0:
-            reference_str = re.sub(r'\b%s\b'%(segment_dict.get('doi', '')), 'doi_id', reference_str)
+            reference_str = self.substitute(segment_dict.get('doi', ''), 'doi_id', reference_str)
         if len(segment_dict.get('arxiv', '')) > 0:
-            reference_str = re.sub(r'\b%s\b'%(segment_dict.get('arxiv', '')), 'arXiv_id', reference_str)
+            reference_str = self.substitute(segment_dict.get('arxiv', ''), 'arXiv_id', reference_str)
         if len(segment_dict.get('page', '')) > 0:
-            reference_str = re.sub(r'\b%s\b'%(segment_dict.get('page', '')), 'page_num', reference_str)
+            reference_str = self.substitute(segment_dict.get('page', ''), 'page_num', reference_str)
         ref_words = []
-        for w in re.split(self.REFERENCE_TOKENIZER, reference_str):
+        for w in self.REFERENCE_TOKENIZER.split(reference_str):
             if w == 'page_num':
                 ref_words.append(segment_dict.get('page', ''))
             elif w == 'arXiv_id':
@@ -965,87 +1025,106 @@ class CRFClassifierText(CRFClassifier):
         :param reference_str:
         :return:
         """
-        # if there is page in the form of start-end or eid in the format of number.number
-        page = re.search(r'(?=.*[0-9])([BHPL0-9]+[-.][BHPL0-9]+)', reference_str)
-        if page:
-            page = page.group()
-            reference_str = re.sub(r'\b%s\b'%page, '', reference_str)
-        else:
-            page = ''
+        # see if can extract numeric based on a patters
+        for ne in self.FORMATTED_MULTI_NUMERIC_EXTRACTOR:
+            extractor = ne.search(reference_str)
+            if extractor:
+                volume = extractor.group('volume')
+                page = extractor.group('page')
+                issue = extractor.group('issue').strip()
+                if len(volume) > 0:
+                    reference_str = self.substitute(volume, '', reference_str)
+                if len(page) > 0:
+                    reference_str = self.substitute(page, '', reference_str)
+                if len(issue) > 0:
+                    reference_str = self.substitute(issue, '', reference_str)
+                break
+            else:
+                volume = page = issue = ''
 
         # find the year, could be alphanumeric, so accept them
         # if more than one match found, then remove alphanumeric and see if there is only one to accept
-        year = list(OrderedDict.fromkeys(re.findall(r'[(\s]*([12][089]\d\d[a-z]?)[)\s.,]+', reference_str)))
+        year = list(OrderedDict.fromkeys(self.YEAR_EXTRACTOR.findall(reference_str)))
         if len(year) > 1:
             year = [y for y in year if y.isnumeric()]
         if len(year) == 1:
             year = year[0]
-            reference_str = re.sub(r'\b%s\b'%year, '', reference_str)
+            reference_str = self.substitute(year, '', reference_str)
 
-        # if there is a volume indicator
-        volume = re.search(r'(vol|volume)[.\s]+(?P<volume>\d+)', reference_str)
-        if volume:
-            volume = volume.group('volume')
-            reference_str = re.sub(r'\b%s\b'%volume, '', reference_str)
-        else:
-            volume = ''
-
-        issue = ''
-        the_rest = re.findall(r'(\b[A-Za-z0-9]+[0-9]\b|\b[0-9]+[0-9A-Za-z]\b|\b[0-9]\b)', reference_str)
-        unknown = ' '.join([elem for elem in re.findall(r'\w+', reference_str) if elem not in the_rest and
-                                                                                       not self.is_identifying_word(elem)])
-        if the_rest:
-            # if volume is not detected since it has to be an integer, throw everthing else before it out
-            if len(volume) == 0:
-                try:
-                    the_rest_numeric = the_rest[the_rest.index(next(elem for elem in the_rest if elem.isdigit())):]
-                    unknown = unknown + ' '.join([non_numeric for non_numeric in the_rest if non_numeric not in the_rest_numeric])
-                    the_rest = the_rest_numeric
-                except:
-                    unknown = unknown + ' '.join(the_rest)
-                    the_rest = ''
-            # how many numeric value do we have? if more than 3, we have no guesses so return
-            if len(the_rest) <= 3:
-                # if we have three elements, both volume and page need to be empty
-                # in this case in order of most likely fields we have volume, issue, page
-                if len(the_rest) == 3 and len(volume) == 0 and len(page) == 0:
-                    volume = the_rest[0]
-                    issue = the_rest[1]
-                    page = the_rest[2]
-                # if we have two elements, either volume or page need to be empty
-                elif len(the_rest) == 2 and (len(volume) == 0 or len(page) == 0):
-                    if len(volume) == 0:
-                        volume = the_rest[0]
-                        if len(page) == 0:
-                            page = the_rest[1]
-                        else:
-                            issue = the_rest[1]
-                    else:
-                        issue = the_rest[0]
-                        page = the_rest[1]
-                elif len(the_rest) == 1:
-                    if len(volume) == 0:
-                        volume = the_rest[0]
-                    elif len(page) == 0:
-                        page = the_rest[0]
-                    else:
-                        issue = the_rest[0]
+        # if there is page in the form of start-end or eid in the format of number.number
+        if len(page) == 0:
+            page = self.PAGE_EXTRACTOR.search(reference_str)
+            if page:
+                page = page.group('page')
+                reference_str = self.substitute(page, '', reference_str)
             else:
-                # see if can extract numeric based on a patters
-                for ne in self.NUMERIC_EXTRACTOR:
-                    extractor = ne.search(reference_str)
-                    if extractor:
-                        volume = extractor.group('volume')
-                        page = extractor.group('page')
-                        issue = extractor.group('issue')
-                        if len(volume) > 0:
-                            the_rest.remove(volume)
-                        if len(page) > 0:
-                            the_rest.remove(page)
-                        if len(issue) > 0:
-                            the_rest.remove(issue)
-                        break
-                unknown = ' '.join(the_rest)
+                page = ''
+
+       # if there is a volume indicator
+        if len(volume) == 0:
+            volume = self.VOLUME_EXTRACTOR.search(reference_str)
+            if volume:
+                volume = volume.group('volume')
+                reference_str = self.substitute(volume, '', reference_str)
+            else:
+                volume = ''
+
+        # the rest, also remove duplicates
+        the_rest = list(OrderedDict.fromkeys(self.IS_MOSTLY_DIGIT.findall(reference_str)))
+        unknown = ''
+
+        # continue only if need to guess values for one of these fields, otherwise return
+        if len(volume) == 0 or len(page) == 0 or len(issue) == 0:
+            unknown = ' '.join([elem for elem in self.MATCH_A_WORD.findall(reference_str) if elem not in the_rest and
+                                                                                                  not self.is_identifying_word(elem)])
+            if len(the_rest) > 0:
+                # if volume is not detected yet since it is the first entity and since it has to be an integer,
+                # throw every alphanumeric element before it out to start with a numeric value and guess it is
+                # volume
+                if len(volume) == 0:
+                    try:
+                        the_rest_numeric = the_rest[the_rest.index(next(elem for elem in the_rest if elem.isdigit())):]
+                        unknown = unknown + ' '.join([non_numeric for non_numeric in the_rest if non_numeric not in the_rest_numeric])
+                        the_rest = the_rest_numeric
+                    except:
+                        unknown = unknown + ' '.join(the_rest)
+                        the_rest = ''
+
+                # how many numeric value do we have? if more than 3, we have no guesses so return
+                if len(the_rest) <= 3:
+                    # if we have three elements, both volume and page need to be empty
+                    # in this case in order of most likely fields we have volume, issue, page
+                    if len(the_rest) == 3 and len(volume) == 0 and len(issue) == 0 and len(page) == 0:
+                        volume = the_rest[0]
+                        issue = the_rest[1]
+                        page = the_rest[2]
+                    # if we have two elements, one of volume or page need to be empty
+                    elif len(the_rest) == 2 and (len(volume) == 0 or len(page) == 0):
+                        # if volume is empty, then most likely the first element is volume
+                        # and then depending on if page is empty or not the next element is either page or issue respectively
+                        if len(volume) == 0:
+                            volume = the_rest[0]
+                            if len(page) == 0:
+                                page = the_rest[1]
+                            else:
+                                issue = the_rest[1]
+                        # if volume is set, then if page is empty, assign the two elements to page and issue respectively
+                        # however if page is set, and there are two elements remaining, cannot tell which could be issue
+                        elif len(page) == 0:
+                            page = the_rest[1]
+                            issue = the_rest[0]
+                        else:
+                            unknown = ' '.join(the_rest)
+                    # if one element is left, the order of most likely is volume if not set, is page if not set, is issue
+                    elif len(the_rest) == 1:
+                        if len(volume) == 0:
+                            volume = the_rest[0]
+                        elif len(page) == 0:
+                            page = the_rest[0]
+                        else:
+                            issue = the_rest[0]
+                    else:
+                        unknown = ' '.join(the_rest)
 
         return {'page': page, 'year': year, 'volume': volume, 'issue': issue, 'unknown': unknown}
 
@@ -1091,8 +1170,8 @@ class CRFClassifierText(CRFClassifier):
         NPChunker = nltk.RegexpParser(patterns)
 
         # prepare the a_reference
-        reference_str = self.BEGIN_CAPITAL_LETTER.search(reference_str).group()
-        reference_str = re.sub(r'[:\(\)\-\[\]]', ' ', reference_str).replace(',', '.')
+        reference_str = self.CAPITAL_FIRST_CHAR.search(reference_str).group()
+        reference_str = self.TITLE_JOURNAL_PUNCTUATION_REMOVER.sub(' ', reference_str).replace(',', '.')
         reference_tokenize = nltk.sent_tokenize(reference_str)
         reference_tokenize = [nltk.word_tokenize(ref) for ref in reference_tokenize]
         reference_tokenize = [nltk.pos_tag(ref) for ref in reference_tokenize]
@@ -1107,13 +1186,13 @@ class CRFClassifierText(CRFClassifier):
                     picks = ' '.join(word
                                  if not is_page_number(word) and not bool(self.is_identifying_word(word))
                                      else '' for word, tag in subtree.leaves())
-                    aleaf = re.sub(r'\s([.](?:\s|$))', r'\1', re.sub(r'\s{2,}\.', r'', re.sub(r'(\w)\s(&)\s(\w{1,2})', r'\1\2\3', picks))).strip(' ')
+                    aleaf = self.SPACE_BEFORE_DOT_REMOVER.sub(r'\1', self.SPACE_AROUND_AMPERSAND_REMOVER.sub(r'\1&\2', picks)).strip(' ')
                     if len(aleaf) >= 1 and self.is_punctuation(aleaf) == 0:
                         nps.append(aleaf)
 
         # attempt to combine abbreviated words that represent journal mostly
         nps_merge = []
-        for k, g in groupby(nps, lambda x: bool(re.match('^([A-Za-z]+\.\s*)+$|(^[A-Za-z]$)', x))):
+        for k, g in groupby(nps, lambda x: bool(self.JOURNAL_ABBREVIATED_EXTRACTOR.match(x))):
             if k:
                 nps_merge.append(' '.join(g))
             else:
@@ -1202,17 +1281,16 @@ class CRFClassifierText(CRFClassifier):
         reference_str = reference_str.replace(authors, '')
         segment_dict = {'authors':authors.replace("&", "and")}
         segment_dict.update(self.identify_ids(reference_str))
-        reference_str = re.sub(r'\b%s\b' % segment_dict.get('arxiv', ''), '', re.sub(r'\b%s\b' % segment_dict.get('doi', ''), '', reference_str))
+        reference_str = self.substitute(segment_dict.get('arxiv', ''), '', self.substitute(segment_dict.get('doi', ''), '', reference_str))
         # remove the guessed author section and attempt to identify title/journal/publisher
         reference_str = reference_str.replace(authors, '')
         # also remove any editors if any
         reference_str, segment_dict = self.identify_editors(reference_str, segment_dict)
         segment_dict.update(self.identify_multi_word_entity(reference_str))
         # now remove what has been guessed to be part of title/journal/publisher to attempt to identify alphanumeric values
-        remove = '\\b|\\b'.join(filter(None, re.split('\W+', re.sub(r'[()]', '', segment_dict.get('title', ''))) +
-                                             re.split('\W+', re.sub(r'[()]', '', segment_dict.get('journal', ''))) +
-                                             re.split('\W+', re.sub(r'[()]', '', segment_dict.get('publisher', '')))))
-        reference_str = re.sub(r'(\b%s\b)'%(remove), '', re.sub(r'[(),"]', ' ', reference_str))
+        identified = segment_dict.get('title', '') + segment_dict.get('journal', '') + segment_dict.get('journal', '')
+        remove = '\\b|\\b'.join(filter(None, self.MATCH_A_NONE_WORD.split(self.MATCH_PARENTHESIS.sub('', identified))))
+        reference_str = self.substitute(remove, '', self.PUNCTUATION_REMOVER_FOR_NUMERIC_ID.sub(' ', reference_str))
         segment_dict.update(self.identify_numeric_tokens(reference_str))
         return segment_dict
 
@@ -1223,9 +1301,9 @@ class CRFClassifierText(CRFClassifier):
         :return: list of words and the corresponding list of labels
         """
         # remove any numbering that appears before the reference to start with Captial letter
-        reference_str = self.BEGIN_CAPITAL_LETTER.search(reference_str).group()
+        reference_str = self.CAPITAL_FIRST_CHAR.search(reference_str).group()
 
-        for rwb in self.REMOVE_WORD_BREAKER:
+        for rwb in self.WORD_BREAKER_REMOVE:
             reference_str = rwb.sub('', reference_str)
         # attempt to remove any spaces in doi
         doi = self.extract_doi(reference_str)
@@ -1237,7 +1315,7 @@ class CRFClassifierText(CRFClassifier):
         if len(segment_dict.get('arxiv', '')) > 0 or len(segment_dict.get('doi', '')) > 0 or len(segment_dict.get('page', '')) > 0:
             ref_words = self.split_reference(reference_str, segment_dict)
         else:
-            ref_words = filter(None, [w.strip() for w in re.split(self.REFERENCE_TOKENIZER, reference_str)])
+            ref_words = filter(None, [w.strip() for w in self.REFERENCE_TOKENIZER.split(reference_str)])
 
         features = []
         for i in range(len(ref_words)):
