@@ -25,6 +25,13 @@ On your desktop run:
     $ py.test
     
 
+To resolve references, edit `test_reference_service.py` and add authorization token. 
+Next run the script with one reference per line.
+
+    $ python test_reference_service.py "Adler, I., et al. 1972, Science, 175, 436
+    Anders, E. 1989, Nature, 342, 255"
+
+
 ## API
 
 
