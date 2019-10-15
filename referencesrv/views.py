@@ -121,7 +121,7 @@ def text_get(reference):
     :param reference:
     :return:
     """
-    reference = urllib.unquote(reference)
+    reference = urllib.unquote(reference).encode('ascii', 'ignore').decode('ascii')
     current_app.logger.info('received GET request with reference=`{reference}` to resolve in text mode'.format(reference=reference))
     try:
         if bool(re.search(r'\d', reference)):

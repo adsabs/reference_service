@@ -79,7 +79,52 @@ PUNCTUATION_DOT	.
 % [30] A. Nicolis, R. Rattazzi and E. Trincherini, The Galileon as a local modification of gravity, Phys. Rev. D79 (2009) 064036, [0811.2197].
 % [31] C. Deffayet, G. Esposito-Farese and A. Vikman, Covariant Galileon, Phys. Rev. D79 (2009) 084003, [0901.1314].
 % [32] F. Bauer and D. A. Demir, Inflation with Non-Minimal Coupling: Metric versus Palatini Formulations, Phys. Lett. B665 (2008) 222-226, [0803.2664].
+%
 % [33] Virgo, LIGO Scientific collaboration, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star Inspiral, Phys. Rev. Lett. 119 (2017) 161101, [1710.05832].
+%
+AUTHOR_COLLABORATION	Virgo
+PUNCTUATION_COMMA	,
+AUTHOR_COLLABORATION	LIGO
+AUTHOR_COLLABORATION	Scientific
+AUTHOR_COLLABORATION	collaboration
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	B
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Abbott
+ET_AL	et
+ET_AL	al
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+TITLE	GW170817
+PUNCTUATION_COLON	:
+TITLE	Observation
+TITLE	of
+TITLE	Gravitational
+TITLE	Waves
+TITLE	from
+TITLE	a
+TITLE	Binary
+TITLE	Neutron
+TITLE	Star
+TITLE	Inspiral
+PUNCTUATION_COMMA	,
+JOURNAL	Phys
+PUNCTUATION_DOT	.
+JOURNAL	Rev
+PUNCTUATION_DOT	.
+JOURNAL	Lett
+PUNCTUATION_DOT	.
+VOLUME	119
+PUNCTUATION_PARENTHESIS	(
+YEAR	2017
+PUNCTUATION_PARENTHESIS	)
+PAGE	161101
+PUNCTUATION_COMMA	,
+PUNCTUATION_BRACKETS	[
+ARXIV	1710.05832
+PUNCTUATION_BRACKETS	]
+PUNCTUATION_DOT	.
+
 % [34] Virgo, Fermi-GBM, INTEGRAL, LIGO Scientific collaboration, B. P. Abbott et al., Gravitational Waves and Gamma-rays from a Binary Neutron Star Merger: GW170817 and GRB 170817A, Astrophys. J. 848 (2017) L13, [1710.05834].
 % [35] P. Creminelli and F. Vernizzi, Dark Energy after GW170817 and GRB170817A, Phys. Rev. Lett. 119 (2017) 251302, [1710.05877].
 % [36] J. Sakstein and B. Jain, Implications of the Neutron Star Merger GW170817 for Cosmological Scalar-Tensor Theories, Phys. Rev. Lett. 119 (2017) 251303, [1710.05893].

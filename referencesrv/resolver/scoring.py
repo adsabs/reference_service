@@ -158,7 +158,7 @@ def get_score_for_reference_identifier(result_record, hypothesis):
 
     input_fields = hypothesis.get_detail("input_fields")
 
-    if input_fields.get("doi", "not in ref") in result_record.get("doi", ["not in ads"]):
+    if compare_doi(input_fields.get("doi", "not in ref"), result_record.get("doi", ["not in ads"])):
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
     elif input_fields.get("arxiv", "not in ref") == get_arxiv_id(result_record):
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
@@ -226,4 +226,20 @@ def get_arxiv_id(result_record):
     for identifier in identifiers:
         if "arXiv:" in identifier:
             return identifier.replace("arXiv:", "")
+        if "ascl:" in identifier:
+            return identifier.replace("ascl:", "")
     return ""
+
+def compare_doi(ref_doi, ads_doi):
+    """
+    doi is case insensitive
+
+    :param ref_doi: single doi
+    :param ads_doi: list of dois
+    :return:
+    """
+    ref_doi = ref_doi.lower()
+    for doi in ads_doi:
+        if ref_doi == doi.lower():
+            return True
+    return False

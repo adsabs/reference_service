@@ -28,20 +28,21 @@ class CRFClassifier(object):
         [('ARXIV_IDENTIFIER', ['arxiv']), ('EDITOR', ['editor', 'eds']), ('ET_AL', ['et', 'al']),
          ('DOI_IDENTIFIER', ['doi']), ('ISSUE_IDENTIFIER', ['issue']), ('ISSN__IDENTIFIER', ['issn']),
          ('PAGE_IDENTIFIER', ['page', 'pages', 'pp', 'p']), ('VERSION_IDENTIFIER', ['version']),
-         ('VOLUME_IDENTIFIER', ['volume', 'vol']), ('ISBN_IDENTIFIER', ['isbn'])])
+         ('VOLUME_IDENTIFIER', ['volume', 'vol']), ('ISBN_IDENTIFIER', ['isbn']), ('ASCL_IDENTIFIER', ['ascl'])])
 
     PUNCTUATIONS = OrderedDict(
         [('PUNCTUATION_BRACKETS', ['[', ']']), ('PUNCTUATION_COLON', [':']), ('PUNCTUATION_COMMA', [',']),
          ('PUNCTUATION_DOT', ['.']), ('PUNCTUATION_PARENTHESIS', ['(', ')']), ('PUNCTUATION_QUOTES', ['"', '\'']),
-         ('PUNCTUATION_NUM', ['#'])])
+         ('PUNCTUATION_NUM', ['#']), ('PUNCTUATION_HYPEN', ['-']), ('PUNCTUATION_FORWARD_SLASH', ['/']),
+         ('PUNCTUATION_SEMICOLON', [':'])])
 
-    SEGMENT_DICT_KEYS = ['year', 'title', 'journal', 'publisher', 'volume', 'issue', 'page', 'doi', 'arxiv', 'issn', 'unknown', 'version']
+    SEGMENT_DICT_KEYS = ['year', 'title', 'journal', 'publisher', 'volume', 'issue', 'page', 'doi', 'arxiv', 'issn', 'unknown', 'version', 'ascl']
 
-    # these are used to tagg training references and so crf decodes identify words to these labels
+    # these are used to tag training references and so crf decodes identify words to these labels
     # author labels
-    AUTHOR_TAGS = ['AUTHOR_LAST_NAME', 'PUNCTUATION_COMMA', 'AUTHOR_FIRST_NAME', 'PUNCTUATION_DOT', 'AUTHOR_MIDDLE_NAME', 'AND', 'ET_AL']
+    AUTHOR_TAGS = ['AUTHOR_LAST_NAME', 'PUNCTUATION_COMMA', 'AUTHOR_FIRST_NAME', 'PUNCTUATION_DOT', 'AUTHOR_MIDDLE_NAME', 'AND', 'ET_AL', 'PUNCTUATION_HYPEN', 'AUTHOR_COLLABORATION']
     # numeric labels
-    NUMERIC_TAGS = ['ARXIV', 'DOI', 'ISSUE', 'PAGE', 'VERSION', 'VOLUME', 'ISSN', 'YEAR']
+    NUMERIC_TAGS = ['ARXIV', 'DOI', 'ISSUE', 'PAGE', 'VERSION', 'VOLUME', 'ISSN', 'YEAR', 'ASCL']
 
     STOPWORD_TAGS = ['AND', 'IN', 'OF', 'THE']
     
@@ -49,27 +50,36 @@ class CRFClassifier(object):
                            re.compile(r'\d+(,)\d+')]
     CAPITAL_FIRST_CHAR = re.compile(r'([A-Z].*$)')
 
-    TITLE_JOURNAL_EXTRACTOR = [re.compile(r'^[.\s]*(?P<title>[A-Za-z].*)\.\s*(?P<journal>[A-Za-z].*)[\d,]\d*\s*.*,'),
-                               re.compile(r'^\s*"(?P<title>[A-Za-z].*),"\s*"(?P<journal>[A-Za-z].*)"')]
+    QUOTES_AROUND_ETAL_REMOVE = re.compile(r'(.*)(")(et al\.?)(")(.*)', re.IGNORECASE)
+
+    TITLE_JOURNAL_EXTRACTOR = [re.compile(r'^[.\s]*(?P<title>[A-Z]+[A-za-z\'\s:-]+)[.,()\s\d\w]+"(?P<journal>[A-Z]+[A-Za-z\s.]+)".*'),
+                               re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*"(?P<journal>[A-Z]*[A-Za-z\s.]*)"?'),
+                               re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*(?P<journal>[A-Z]+[A-Za-z\.\s]+)+.*'),
+                               re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"[.,\s]+[Ii][Nn]:\s*(?P<journal>[A-Za-z\.\s]+)+.*'),
+                               re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*(?P<journal>\s*)')]
     TITLE_JOURNAL_PUNCTUATION_REMOVER = re.compile(r'[:\(\)\-\[\]]')
-    JOURNAL_ONLY_EXTRACTOR = re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>[A-Z][A-Za-z&\-]*)[\d,][\s\d\w,]*$')
-    EDITOR_EXTRACTOR = re.compile(r'(:?[Ii][Nn][":\s]{1,2})(.*)$')
+    JOURNAL_ONLY_EXTRACTOR = re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>[A-Z][A-Za-z&\-]*)[\d,.\s][\s\d\w,]*$')
+    EDITOR_EXTRACTOR = re.compile(r'(:?[Ii][Nn][":\s]+)([A-Z].*)$')
     EDITOR_RESIDUE = re.compile(r'(I[Nn]+[:\s]{1,2}?\s+([\(]?[Ee]+d[s\.\)\s]+)?)')
-    ARXIV_ID_EXTRACTOR = re.compile(r'(\w+\-\w+/\d+|\d{4}\.\d{4,5})')
-    DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>[doi|DOI]{3}[\s\.\:]{0,2}10\.\s*\d{4}[\d\:\.\-\/A-Za-z\s]+)')
+    ARXIV_ID_EXTRACTOR = re.compile(r'(\w+\-\w+/\d+|\w+/\d{7}|\d{4}\.\d{4,5})(v?\d*)')
+    ASCL_ID_EXTRACTOR = re.compile(r'((ascl\s*:\s*)([\d.]+))')
+    DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>[doi|DOI]{3}[\s\.\:]{0,2}10\.\s*\d{4}[\d\:\.\-\/\(\)A-Za-z\s]+)')
     # two specific formats for matching volume, page, issue
     # note that in the first expression issue matches a space, there is no issue in this format,
     # it is included to have all three groups present
     FORMATTED_MULTI_NUMERIC_EXTRACTOR = [re.compile(r'(?P<volume>\d+)\s+(?P<issue>\d+)\s*:(?P<page>[A-Z]?\d+\-?[A-Z]?\d*)'),
                                          re.compile(r'(?P<volume>\d+):(?P<page>[A-Z]?\d+\-?[A-Z]?\d*)(?P<issue>\s*)')]
     ETAL_PAT_EXTRACTOR = re.compile(r"([\w\W]+(?i)[\s,]*et\.?\s*al\.?)")
-    LAST_NAME_EXTRACTOR = re.compile(r"([\w\W]+)[\.,\s]*[12][089]\d\d")
+    # to capture something like `Trujillo and Sheppard, 2014. Nature 507, p. 471-474.`
+    LAST_NAME_EXTRACTOR = re.compile(r"(^([A-Z]+[a-z]+\s*(?:and|&)?\s*(?:[A-Z]+[a-z]*)[\s,]*)+)(:?[\.,\s]*\(?[12][089]\d\d\)?)|(^[A-Z]+[a-z]+\s*(?:and|&)?\s*(?:[A-Z]+[a-z]*))[\.,\s]*[12][089]\d\d")
+    # to capture something like `CS Casari, M Tommasini, RR Tykwinski, A Milani, Carbon-atom wires: 1-D systems with tunable properties, Nanoscale 2016; 8: 4414-35. DOI:10.1039/C5NR06175J.`
+    INITIALS_NO_DOT_EXTRACTOR = re.compile(r"([A-Z]+\s*[A-Z]+[a-z]+[,\s]*)+")
 
     PAGE_EXTRACTOR = re.compile(r'(?=.*[0-9])(?P<page>[BHPL0-9]+[-.][BHPL0-9]+)')
-    VOLUME_EXTRACTOR = re.compile(r'(vol|volume)[.\s]+(?P<volume>\d+)')
+    VOLUME_EXTRACTOR = re.compile(r'(vol|volume)[.\s]+(?P<volume>\w+)')
     YEAR_EXTRACTOR = re.compile(r'[(\s]*([12][089]\d\d[a-z]?)[)\s.,]+')
     
-    REFERENCE_TOKENIZER = re.compile(r'([\s,.():\[\]"#])')
+    REFERENCE_TOKENIZER = re.compile(r'([\s,.():\[\]"#\/\-])')
     TAGGED_MULTI_WORD_TOKENIZER = re.compile(r'([\s.,])')
 
     # is all capital
@@ -90,8 +100,8 @@ class CRFClassifier(object):
     SPACE_BEFORE_DOT_REMOVER = re.compile(r'\s+(\.)')
     SPACE_AROUND_AMPERSAND_REMOVER = re.compile(r'\b(\w)\s&\s(\w+)')
 
-    JOURNAL_ABBREVIATED_EXTRACTOR = re.compile(r'^([A-Za-z]+\.\s*)+$|(^[A-Za-z]$)')
-    
+    JOURNAL_ABBREVIATED_EXTRACTOR = re.compile(r'^([A-Z][A-Za-z\.]*\s*)+$')
+
     MATCH_A_WORD = re.compile(r'\w+')
     MATCH_A_NONE_WORD = re.compile(r'\W+')
     MATCH_PARENTHESIS = re.compile(r'[()]')
@@ -207,7 +217,10 @@ class CRFClassifier(object):
         :param text:
         :return:
         """
-        return re.sub(self.REGEX_PATTERN_WHOLE_WORD_ONLY % pattern, replace, text)
+        if isinstance(pattern, list):
+            pattern_escape = '\\b|\\b'.join([re.escape(p) for p in pattern])
+            return re.sub(self.REGEX_PATTERN_WHOLE_WORD_ONLY % pattern_escape, replace, text)
+        return re.sub(self.REGEX_PATTERN_WHOLE_WORD_ONLY % re.escape(pattern), replace, text)
 
     def search(self, pattern, text):
         """
@@ -246,6 +259,27 @@ class CRFClassifier(object):
             return [words[indices[0]]]
         return [words[i] for i in indices]
 
+    def identifier_arxiv_or_ascl(self, words, labels):
+        """
+
+        :param words:
+        :param labels:
+        :return:
+        """
+        if 'ARXIV' in labels:
+            # just to be sure, verify what has been tagged as arxiv is actually arxiv id
+            arXiv = self.ARXIV_ID_EXTRACTOR.search(words[labels.index('ARXIV')])
+            if arXiv:
+                return arXiv.group(1)
+        # crf sometimes mistaken ascl for arxiv, makes no difference
+        # since we are going to compare with identifier field
+        if 'ASCL' in labels or 'ARXIV' in labels:
+            ascl = self.ASCL_ID_EXTRACTOR.search(words[labels.index('ASCL' if 'ASCL' in labels else 'ARXIV')])
+            # does not make any difference if this is ASCL id or arXiv id, so assign it to arxiv field
+            if ascl:
+                return ascl.group(3)
+        return ''
+
     def reference(self, refstr, words, labels):
         """
         put identified words into a dict to be passed out
@@ -259,7 +293,7 @@ class CRFClassifier(object):
         for i, (w, l) in enumerate(zip(words, labels)):
             if l in self.AUTHOR_TAGS:
                 if (l.startswith('AUTHOR_') or l in ['AND', '&', 'ET_AL']) and len(name) > 0:
-                    if 'PUNCTUATION_COMMA' in labels:
+                    if 'PUNCTUATION_COMMA' in labels and labels[i - 1] != 'PUNCTUATION_HYPEN':
                         name.append(' ')
                     elif labels[i - 1] == 'AUTHOR_LAST_NAME':
                         name.append(', ')
@@ -281,16 +315,15 @@ class CRFClassifier(object):
             ref_dict['page'] = words[labels.index('PAGE')]
         if 'ISSUE' in labels:
             ref_dict['issue'] = words[labels.index('ISSUE')]
-        if 'ARXIV' in labels:
-            # just to be sure, verify what has been tagged as arxiv is actually arxiv id
-            arXiv = self.ARXIV_ID_EXTRACTOR.search(words[labels.index('ARXIV')])
-            if arXiv:
-                ref_dict['arxiv'] = arXiv.group()
+        if 'ARXIV' in labels or 'ASCL' in labels:
+            identifier = self.identifier_arxiv_or_ascl(words, labels)
+            if len(identifier) > 0:
+                ref_dict['arxiv'] = identifier
         if 'DOI' in labels:
             # just to be sure, verify what has been tagged as doi is actually doi
             doi = self.extract_doi(words[labels.index('DOI')])
             if len(doi) > 0:
-                ref_dict['doi'] = doi
+                ref_dict['doi'] = doi[doi.find('10'):]
         if 'ISSN' in labels:
             ref_dict['ISSN'] = words[labels.index('ISSN')]
         if 'JOURNAL' in labels:
@@ -398,6 +431,18 @@ class CRFClassifier(object):
         """
         return self.is_numeric_tag(ref_data, index, ref_label, 'ISSN', segment_dict)
 
+    def is_ascl_tag(self, ref_data, index, ref_label, segment_dict):
+        """
+
+        :param ref_data:
+        :param index:
+        :param ref_label:
+        :param segment_dict:
+        :return:
+        """
+        return self.is_numeric_tag(ref_data, index, ref_label, 'ASCL', segment_dict)
+
+
     def compare_string(self, sub_str, str):
         """
 
@@ -405,7 +450,7 @@ class CRFClassifier(object):
         :param string:
         :return:
         """
-        return any(sub_str == token for token in str.split(' '))
+        return any(sub_str == token for token in self.MATCH_A_WORD.findall(str))
 
     def is_numeric(self, ref_data, index, ref_label, segment_dict):
         """
@@ -459,7 +504,9 @@ class CRFClassifier(object):
         """
         if len(ref_label) > 0:
             return 1 if ref_label[index] == 'JOURNAL' else 0
-        return 1 if self.compare_string(ref_data[index], segment_dict.get('journal', '')) else 0
+        # let crf decide if for example J. is first/middle initials or stands for journal
+        return 1 if self.compare_string(ref_data[index], segment_dict.get('journal', '')) and \
+                not self.compare_string(ref_data[index], segment_dict.get('authors', '')) else 0
 
     def is_location(self, location):
         """
@@ -490,7 +537,19 @@ class CRFClassifier(object):
         :return:
         """
         return int(publisher in self.academic_publishers)
-    
+
+    def is_publisher_or_location(self, words):
+        """
+
+        :param words:
+        :return:
+        """
+        either_one = []
+        for word in self.MATCH_A_WORD.findall(words):
+            if self.is_publisher(word) > 0 or self.is_location(word) > 0:
+                either_one.append(word)
+        return ' '.join(either_one)
+
     def is_publisher_name(self, ref_data, index, ref_label, segment_dict):
         """
 
@@ -503,7 +562,7 @@ class CRFClassifier(object):
             if ref_label[index] == 'PUBLISHER':
                 return 1
             return 0
-        return 1 if self.compare_string(ref_data[index], segment_dict.get('publisher', ''))else 0
+        return 1 if self.compare_string(ref_data[index], segment_dict.get('publisher', '')) else 0
 
     def is_stopword(self, ref_data, index, ref_label):
         """
@@ -529,7 +588,9 @@ class CRFClassifier(object):
         """
         if len(ref_label) > 0:
             return 1 if ref_label[index] in self.AUTHOR_TAGS else 0
-        return 1 if ref_data[index] in segment_dict.get('authors', '') else 0
+        # let crf decide if for example J. is first/middle initials or stands for journal
+        return 1 if self.compare_string(ref_data[index], segment_dict.get('authors', '')) and \
+                not self.compare_string(ref_data[index], segment_dict.get('journal', '')) else 0
 
     def is_identifying_word(self, ref_data_word):
         """
@@ -550,7 +611,7 @@ class CRFClassifier(object):
         :param index:
         :param ref_label:
         :return: 1 if arXiv, 2 if editor, 3 if et al, 4 if doi, 5 if issue, 6 if issn, 7 if page,
-                 8 if version, 9 if volume, 10 if isbn
+                 8 if version, 9 if volume, 10 if isbn, 11 if ascl
         """
         if len(ref_label) > 0:
             return self.IDENTIFYING_WORDS.keys().index(ref_label[index])+1 \
@@ -563,7 +624,8 @@ class CRFClassifier(object):
         :param punctuation:
         :return: 0 if not a punctuation
                  1 if brackets, 2 if colon, 3 if comma, 4 if dot, 5 if parenthesis,
-                 6 if quotes (both single and double), 7 if num sign
+                 6 if quotes (both single and double), 7 if num sign, 8 if hypen, 9 if forward slash,
+                 10 if semicolon
         """
         found = [i for i, p in enumerate(self.PUNCTUATIONS.values()) if punctuation in p]
         return found[0]+1 if len(found) > 0 else 0
@@ -607,6 +669,9 @@ class CRFClassifier(object):
 
         if len(segment_dict.get('authors', '')) > 0:
             token = self.tokenize_identified_multi_words(segment_dict.get('authors', ''))
+            # let crf decide if for example J. is first/middle initials or stands for journal
+            if ref_data[index] in token and ref_data[index] in self.tokenize_identified_multi_words(segment_dict.get('journal', '')):
+                return 0
             if ref_data[index] == token[0]:
                 return 1
             if ref_data[index] == token[-1]:
@@ -682,6 +747,9 @@ class CRFClassifier(object):
 
         if len(segment_dict.get('journal', '')) > 0:
             token = self.tokenize_identified_multi_words(segment_dict.get('journal', ''))
+            # let crf decide if for example J. is first/middle initials or stands for journal
+            if ref_data[index] in token and ref_data[index] in self.tokenize_identified_multi_words(segment_dict.get('authors', '')):
+                return 0
             if ref_data[index] == token[0]:
                 return 1
             if ref_data[index] == token[-1]:
@@ -735,6 +803,7 @@ class CRFClassifier(object):
             self.is_arxiv_tag(ref_data, index, ref_label, segment_dict),                                                # is it more likely arXiv id?
             self.is_doi_tag(ref_data, index, ref_label, segment_dict),                                                  # is it more likely doi?
             self.is_issn_tag(ref_data, index, ref_label, segment_dict),                                                 # is it more likely issn?
+            self.is_ascl_tag(ref_data, index, ref_label, segment_dict),                                                 # is it more likely ascl?
             self.is_title(ref_data, index, ref_label, segment_dict),                                                    # is it more likely part of title?
             1 if self.where_in_title(ref_data, index, ref_label, segment_dict) == 1 else 0,                             # first word in title
             1 if self.where_in_title(ref_data, index, ref_label, segment_dict) == 2 else 0,                             # last word in title
@@ -754,16 +823,20 @@ class CRFClassifier(object):
             1 if self.which_identifying_word(ref_data, index, ref_label) == 6 else 0,                                   # 6 if issn
             1 if self.which_identifying_word(ref_data, index, ref_label) == 7 else 0,                                   # 7 if page,
             1 if self.which_identifying_word(ref_data, index, ref_label) == 8 else 0,                                   # 8 if version,
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 9 else 0,                                   # 9 if volume
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 10 else 0,                                  # 10 if isbn
+            1 if self.which_identifying_word(ref_data, index, ref_label) == 9 else 0,                                   # 9 if volume,
+            1 if self.which_identifying_word(ref_data, index, ref_label) == 10 else 0,                                  # 10 if isbn,
+            1 if self.which_identifying_word(ref_data, index, ref_label) == 11 else 0,                                  # 11 if ascl,
             int(self.is_punctuation(ref_data[index]) > 0),
             1 if self.which_punctuation(ref_data, index, ref_label) == 1 else 0,                                        # 1 if brackets,
             1 if self.which_punctuation(ref_data, index, ref_label) == 2 else 0,                                        # 2 if colon,
             1 if self.which_punctuation(ref_data, index, ref_label) == 3 else 0,                                        # 3 if comma,
             1 if self.which_punctuation(ref_data, index, ref_label) == 4 else 0,                                        # 4 if dot,
             1 if self.which_punctuation(ref_data, index, ref_label) == 5 else 0,                                        # 5 if parenthesis,
-            1 if self.which_punctuation(ref_data, index, ref_label) == 6 else 0,                                        # 6 if quotes (both single and double)
-            1 if self.which_punctuation(ref_data, index, ref_label) == 7 else 0,                                        # 7 if num signs
+            1 if self.which_punctuation(ref_data, index, ref_label) == 6 else 0,                                        # 6 if quotes (both single and double),
+            1 if self.which_punctuation(ref_data, index, ref_label) == 7 else 0,                                        # 7 if num signs,
+            1 if self.which_punctuation(ref_data, index, ref_label) == 8 else 0,                                        # 8 if hypen,
+            1 if self.which_punctuation(ref_data, index, ref_label) == 9 else 0,                                        # 9 if forward slash,
+            1 if self.which_punctuation(ref_data, index, ref_label) == 10 else 0,                                       # 10 if semicolon,
         ]
 
     def format_training_data(self, the_data):
@@ -872,8 +945,17 @@ class CRFClassifierXML(CRFClassifier):
             return []
 
         # get label, words from the tagged list
-        labels = [elem[0] for elem in reference_list]
-        words = [elem[1] for elem in reference_list]
+        labels = []
+        words = []
+        for elem in reference_list:
+            # in xml format the dot at the end of first/middle initial and journal is attached to the field
+            # separate them here
+            if elem[0] in ['AUTHOR_FIRST_NAME', 'AUTHOR_MIDDLE_NAME', 'JOURNAL'] and elem[1].endswith('.'):
+                labels += [elem[0], 'PUNCTUATION_DOT']
+                words += [elem[1][:-1], '.']
+            else:
+                labels.append(elem[0])
+                words.append(elem[1])
 
         segment_dict = {}
         segment_dict['authors'] = self.merge_authors(reference_list)
@@ -935,12 +1017,15 @@ class CRFClassifierText(CRFClassifier):
         :return:
         """
         training_files_path = os.path.dirname(__file__) + '/training_files/'
-        arXiv_text_ref_filenames = [training_files_path + '01789.raw',
+        arXiv_text_ref_filenames = [training_files_path + '00144.raw',
                                     training_files_path + '00961.raw',
+                                    training_files_path + '01789.raw',
                                     training_files_path + '02589.raw',
-                                    training_files_path + '10669.raw',
+                                    training_files_path + '08036.raw',
+                                    training_files_path + '08042.raw',
+                                    training_files_path + '09275.raw',
                                     training_files_path + '09356.raw',
-                                    training_files_path + '09275.raw']
+                                    training_files_path + '10669.raw']
         references= []
         for f in arXiv_text_ref_filenames:
             references = references + get_arxiv_tagged_data(f)
@@ -968,6 +1053,8 @@ class CRFClassifierText(CRFClassifier):
             reference_str = self.substitute(segment_dict.get('arxiv', ''), 'arXiv_id', reference_str)
         if len(segment_dict.get('page', '')) > 0:
             reference_str = self.substitute(segment_dict.get('page', ''), 'page_num', reference_str)
+        if len(segment_dict.get('ascl', '')) > 0:
+            reference_str = self.substitute(segment_dict.get('ascl', ''), 'ascl_id', reference_str)
         ref_words = []
         for w in self.REFERENCE_TOKENIZER.split(reference_str):
             if w == 'page_num':
@@ -976,6 +1063,8 @@ class CRFClassifierText(CRFClassifier):
                 ref_words.append(segment_dict.get('arxiv', ''))
             elif w == 'doi_id':
                 ref_words.append(segment_dict.get('doi', ''))
+            elif w == 'ascl_id':
+                ref_words.append(segment_dict.get('ascl', ''))
             elif len(w.strip()) > 0:
                 ref_words.append(w.strip())
         return ref_words
@@ -992,8 +1081,11 @@ class CRFClassifierText(CRFClassifier):
             if doi:
                 # becasue the doi format varies we are considering everything after the the word doi
                 # so far doi and arxiv always came at the end, we are ok if arxiv is first
-                # however if arxiv appears after doi it gets matched, in this case split
-                doi = doi.split('arXiv:', 1)[0]
+                # however if arxiv appears after doi it gets matched as part of doi, in this case split
+                if 'arXiv:' in doi:
+                    doi = doi.split('arXiv:', 1)[0]
+                if 'ascl:' in doi:
+                    doi = doi.split('ascl:', 1)[0]
                 if doi.endswith('.'):
                     doi = doi[:-1]
             return doi
@@ -1013,11 +1105,16 @@ class CRFClassifierText(CRFClassifier):
             arXiv_id = arXiv_id.group()
         else:
             arXiv_id = ''
+        ascl_id = self.ASCL_ID_EXTRACTOR.search(reference_str.replace(arXiv_id, ''))
+        if ascl_id:
+            ascl_id = ascl_id.group(3)
+        else:
+            ascl_id = ''
         # TODO: once seen issn in the text reference implement it,
         # for now just included it to be compatible with the xml side
         # TODO: version has been tagged in a training file, we are not
         # using that to identifiy reference yet, so have the placeholder for it now
-        return {'arxiv': arXiv_id, 'doi': doi_id, 'issn': '', 'version': ''}
+        return {'arxiv': arXiv_id, 'doi': doi_id, 'ascl': ascl_id, 'issn': '', 'version': ''}
 
     def identify_numeric_tokens(self, reference_str):
         """
@@ -1060,7 +1157,7 @@ class CRFClassifierText(CRFClassifier):
             else:
                 page = ''
 
-       # if there is a volume indicator
+        # if there is a volume indicator
         if len(volume) == 0:
             volume = self.VOLUME_EXTRACTOR.search(reference_str)
             if volume:
@@ -1156,15 +1253,17 @@ class CRFClassifierText(CRFClassifier):
         if extractor:
             journal = extractor.group('journal')
             if len(journal) > 0:
-                return {'title':'', 'journal':journal, 'publisher':''}
+                publisher = self.is_publisher_or_location(reference_str.replace(journal, ''))
+                return {'title':'', 'journal':journal, 'publisher':publisher}
         # attempt to split on dot and comma, if found try these
-        for tje in self.TITLE_JOURNAL_EXTRACTOR:
+        for i, tje in enumerate(self.TITLE_JOURNAL_EXTRACTOR):
             extractor = tje.match(reference_str)
             if extractor:
                 title = extractor.group('title')
-                journal = extractor.group('journal')
-                if len(title) > 0 and len(journal) > 0 and journal.count(',') == 0:
-                    return {'title':title, 'journal':journal, 'publisher':''}
+                journal = extractor.group('journal').strip('"') if extractor.group('journal') is not None else ''
+                if len(title) > 0 or (len(journal) > 0 and journal.count(',') == 0):
+                    publisher = self.is_publisher_or_location(reference_str.replace(journal, '').replace(title, ''))
+                    return {'title':title, 'journal':journal, 'publisher':publisher}
 
         patterns = "NP:{<DT|TO|IN|CC|JJ.?|NN.?|NN..?|VB.?|.>*}"
         NPChunker = nltk.RegexpParser(patterns)
@@ -1213,7 +1312,7 @@ class CRFClassifierText(CRFClassifier):
 
         # more than likely, if there are two fields, first is title, and second is journal
         if len(nps_merge) == 2:
-            return {'title': nps_merge[0], 'journal': nps_merge[1], 'publisher': publisher}
+            return {'title': nps_merge[0].rstrip('.').rstrip(','), 'journal': nps_merge[1], 'publisher': publisher}
 
         # unable to guess
         return {'title': '', 'journal': '', 'publisher':''}
@@ -1239,9 +1338,24 @@ class CRFClassifierText(CRFClassifier):
                 match = self.LAST_NAME_EXTRACTOR.match(reference_str)
                 if match:
                     authors = match.group(1).strip()
+                else:
+                    match = self.INITIALS_NO_DOT_EXTRACTOR.match(reference_str)
+                    if match:
+                        authors = match.group().strip()
             if authors:
                 if authors.endswith(','):
                     authors = authors[:-1]
+
+        # if there is no punctuation in the author list and it did not end with `et al.`,
+        # whatever comes after authors are included as author.
+        # ie, M. Bander Fractional quantum hall effect in nonuniform magnetic fields (1990) Phys. Rev. B41 9028
+        # authors= M. Bander Fractional quantum hall effect in nonuniform magnetic fields
+        if not authors.endswith('et al.') and authors.count(',') == 0 and authors.count(';') == 0:
+            words = authors.replace('.', '').split()
+            upper = len([x for x in words if x[0].isupper()])
+            if upper < len(words) - upper:
+                return ''
+
         return authors
 
     def identify_editors(self, reference_str, segment_dict):
@@ -1251,19 +1365,18 @@ class CRFClassifierText(CRFClassifier):
         :param segment_dict:
         :return:
         """
+        editors = ''
         match = self.EDITOR_EXTRACTOR.search(reference_str)
         if match:
             editors = get_editors(match.group(2))
             if editors:
                 if editors.endswith(','):
                     editors = editors[:-1]
-            else:
-                editors = ''
-            segment_dict.update({'editors':editors})
-            reference_str = reference_str.replace(editors, '')
-            match = self.EDITOR_RESIDUE.search(reference_str)
-            if match:
-                reference_str = reference_str.replace(match.group(), '. ')
+                reference_str = reference_str.replace(editors, '')
+                match = self.EDITOR_RESIDUE.search(reference_str)
+                if match:
+                    reference_str = reference_str.replace(match.group(), '. ')
+        segment_dict.update({'editors':editors})
         return reference_str, segment_dict
 
     def segment(self, reference_str):
@@ -1281,15 +1394,17 @@ class CRFClassifierText(CRFClassifier):
         reference_str = reference_str.replace(authors, '')
         segment_dict = {'authors':authors.replace("&", "and")}
         segment_dict.update(self.identify_ids(reference_str))
-        reference_str = self.substitute(segment_dict.get('arxiv', ''), '', self.substitute(segment_dict.get('doi', ''), '', reference_str))
+        reference_str = self.substitute(segment_dict.get('arxiv', ''), '',
+                            self.substitute(segment_dict.get('ascl', ''), '',
+                                self.substitute(segment_dict.get('doi', ''), '', reference_str)))
         # remove the guessed author section and attempt to identify title/journal/publisher
         reference_str = reference_str.replace(authors, '')
         # also remove any editors if any
         reference_str, segment_dict = self.identify_editors(reference_str, segment_dict)
         segment_dict.update(self.identify_multi_word_entity(reference_str))
         # now remove what has been guessed to be part of title/journal/publisher to attempt to identify alphanumeric values
-        identified = segment_dict.get('title', '') + segment_dict.get('journal', '') + segment_dict.get('journal', '')
-        remove = '\\b|\\b'.join(filter(None, self.MATCH_A_NONE_WORD.split(self.MATCH_PARENTHESIS.sub('', identified))))
+        identified = '%s %s %s'%(segment_dict.get('title', ''), segment_dict.get('journal', ''), segment_dict.get('publisher', ''))
+        remove = filter(None, self.MATCH_A_NONE_WORD.split(self.MATCH_PARENTHESIS.sub('', identified)))
         reference_str = self.substitute(remove, '', self.PUNCTUATION_REMOVER_FOR_NUMERIC_ID.sub(' ', reference_str))
         segment_dict.update(self.identify_numeric_tokens(reference_str))
         return segment_dict
@@ -1300,11 +1415,14 @@ class CRFClassifierText(CRFClassifier):
         :param reference_str:
         :return: list of words and the corresponding list of labels
         """
-        # remove any numbering that appears before the reference to start with Captial letter
+        # remove any numbering that appears before the reference to start with authors
         reference_str = self.CAPITAL_FIRST_CHAR.search(reference_str).group()
+        # also if for some reason et al. has been put in double quoted! remove them
+        reference_str = self.QUOTES_AROUND_ETAL_REMOVE.sub(r"\1\3\5", reference_str)
 
         for rwb in self.WORD_BREAKER_REMOVE:
             reference_str = rwb.sub('', reference_str)
+
         # attempt to remove any spaces in doi
         doi = self.extract_doi(reference_str)
         if doi:
@@ -1312,7 +1430,8 @@ class CRFClassifierText(CRFClassifier):
 
         segment_dict = self.segment(reference_str)
 
-        if len(segment_dict.get('arxiv', '')) > 0 or len(segment_dict.get('doi', '')) > 0 or len(segment_dict.get('page', '')) > 0:
+        if len(segment_dict.get('arxiv', '')) > 0 or len(segment_dict.get('ascl', '')) > 0 or \
+           len(segment_dict.get('doi', '')) > 0 or len(segment_dict.get('page', '')) > 0:
             ref_words = self.split_reference(reference_str, segment_dict)
         else:
             ref_words = filter(None, [w.strip() for w in self.REFERENCE_TOKENIZER.split(reference_str)])
@@ -1330,4 +1449,6 @@ class CRFClassifierText(CRFClassifier):
         :return:
         """
         words, labels = self.classify(reference_str)
-        return self.reference(reference_str, words, labels)
+        parsed = self.reference(reference_str, words, labels)
+        return parsed
+        # return self.reference(reference_str, words, labels)

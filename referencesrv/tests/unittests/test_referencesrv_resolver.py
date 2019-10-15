@@ -415,7 +415,7 @@ class TestResolver(TestCase):
                          'author:("Traven, B" AND "d\'Vaucouleurs, D")')
         self.assertEqual(make_solr_condition("first_author~", "frisken gibson, s"),
                          'first_author~:("frisken gibson, s")')
-        self.assertEqual(make_solr_condition("arxiv", "0910.4887"), 'arxiv:"0910.4887"')
+        self.assertEqual(make_solr_condition("arxiv", "0910.4887"), 'identifier:("arxiv:0910.4887" OR "ascl:0910.4887")')
         self.assertEqual(make_solr_condition("doi","10.1364/JOSAA.9.000154"), 'doi:"10.1364/JOSAA.9.000154"')
         # self.assertEqual(make_solr_condition("page", "154"), 'page:("?54" or "1?4" or "15?")')
         # for now since wildcard ? has been turned off when preceding any character, use this expanded version

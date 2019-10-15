@@ -20,7 +20,7 @@ LAST_NAME_SUFFIX = r"([,\s]*[Jj]r[.]*)?"
 
 # This pattern should match author names with initials behind the last
 # name
-TRAILING_INIT_PAT = re.compile(r"(?P<last>%s),\s+"
+TRAILING_INIT_PAT = re.compile(r"(?P<last>%s)\s*,\s+"
                                r"(?P<inits>(?:[A-Z]\.[\s-]*)+%s)" % (LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
 # This pattern should match author names with initals in front of the
 # last name

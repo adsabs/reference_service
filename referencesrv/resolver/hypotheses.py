@@ -27,6 +27,7 @@ class Hypotheses(object):
     ]
 
     ETAL_PAT = re.compile(r"((?i)[\s,]*et\.?\s*al\.?)")
+    JOURNAL_LETTER_ATTACHED_VOLUME = re.compile(r"^([ABCDEFGIT])\d+$")
 
     def __init__(self, ref):
         """
@@ -58,6 +59,19 @@ class Hypotheses(object):
         if "year" in self.digested_record and len(self.digested_record["year"]) > 4:
             # the extra character(s) are at the end, just to be smart about it let's go with RE
             self.digested_record["year"] = re.findall(r'^([12][089]\d\d)', self.digested_record["year"])[0]
+
+        if "-" in self.digested_record.get("page", ""):
+            # we are querying on page stat, for now through out the page end
+            self.digested_record["page"] = self.digested_record["page"].split("-")[0]
+
+        if "volume" in self.digested_record and "pub" in self.digested_record:
+            # if volume has a alpha character at the beginning, remove it and attach it to the journal
+            # ie. A. Arvanitaki, S. Dimopoulos, S. Dubovsky, N. Kaloper, and J. March-Russell, "String Axiverse," "Phys. Rev.", vol. D81, p. 123530, 2010.
+            # which is in fact Journal `Phys. Rev. D.` Volume `81`
+            match = self.JOURNAL_LETTER_ATTACHED_VOLUME.match(self.digested_record["volume"])
+            if match:
+                self.digested_record["pub"] = '%s %s'%(self.digested_record["pub"], self.digested_record["volume"][0])
+                self.digested_record["volume"] = self.digested_record["volume"][1:]
 
     def has_keys(self, *keys):
         """
@@ -242,4 +256,17 @@ class Hypotheses(object):
                 page_qualifier='',
                 has_etal=False,
                 normalized_authors='')
+
+        # if no year!
+        if self.has_keys("author", "pub", "volume", "page"):
+            yield Hypothesis("fielded-no-year", {
+                "author": self.normalized_authors,
+                "bibstem": get_best_bibstem_for(self.digested_record["pub"]),
+                "volume": self.digested_record["volume"],
+                "page": self.digested_record["page"]},
+                             get_serial_score_for_input_fields,
+                             input_fields=self.digested_record,
+                             page_qualifier=self.digested_record.get("qualifier", ""),
+                             has_etal=has_etal,
+                             normalized_authors=self.normalized_authors)
 
