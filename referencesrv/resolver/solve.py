@@ -60,10 +60,17 @@ def make_solr_condition(key, value):
     if 'author' in key:
         return '%s:(%s)' % (key, make_solr_condition_author(value).replace('.',''))
 
-    if key == 'identifier' or key == 'arxiv':
-        return '%s:"%s"'%(key, urllib.quote(value))
+    if key == 'identifier':
+        return 'identifier:"%s"'%(urllib.quote(value))
+
+    # both ascl and arxi ids are assigned to arxiv field, both appear in identifier
+    # with their correspounding prefix
+    if key == 'arxiv':
+        return 'identifier:("arxiv:%s" OR "ascl:%s")'%(urllib.quote(value), urllib.quote(value))
 
     if key=='page':
+        if len(value) == 1:
+            return "page:(%s)"%value
         # return "page:(%s)"%(" or ".join('"%s"'%(value[:i]+'?'+value[i+1:]) for i in range(len(value))))
         # 8/22 wildcard ? preceding any character has gone away
         # as per Roman setup query with all lower and single digits

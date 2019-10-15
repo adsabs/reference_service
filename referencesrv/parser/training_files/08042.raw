@@ -1,0 +1,50 @@
+% /proj/ads/references/sources/arXiv/1909/08042.raw
+%R 2019arXiv190908042M
+%Z
+%
+% J. Murugan, J. P. Shock and R. P. Slayen, ""Astrophysical Quantum Matter: Spinless charged particles on a magnetic dipole sphere"," arXiv:1811.03109 [hep-th].
+% F. D. M. Haldane, ""Fractional quantization of the Hall effect: A Hierarchy of incompressible quantum fluid states"," Phys. Rev. Lett. 51, 605 (1983). doi:10.1103/PhysRevLett.51.605
+% G. V. Dunne, ""Hilbert space for charged particles in perpendicular magnetic fields"," Annals Phys. 215, 233 (1992). doi:10.1016/0003-4916(92)90112-Y
+% S. Klevtsov, ""Random normal matrices, Bergman kernel and projective embeddings"," JHEP 1401, 133 (2014) doi:10.1007/JHEP01(2014)133 [arXiv:1309.7333 [hepth]].
+% T. Can, M. Laskin and P. Wiegmann, ""Geometry of quantum Hall states: Gravitational anomaly and transport coefficients"," Annals Phys. 362, 752 (2015) doi:10.1016/j.aop.2015.02.013 [arXiv:1411.3105 [cond-mat.str-el]].
+% F. Haldane and E. Rezayi, Periodic Laughlin-Jastrow wave functions for the fractional quantized Hall effect Phys. Rev. B 31, no. 4, 2529 (1985). doi:10.1103/PhysRevB.31.2529
+% S. Bellucci and P. Onorato, Landau levels and edge states in a cylindrical twodimensional electron gas: A semiclassical approach, Phys. Rev. B 82, no. 20, 205305 (2010). doi:10.1103/PhysRevB.82.205305
+% X. G. Wen and Q. Niu, Ground-state degeneracy of the fractional quantum Hall states in the presence of a random potential and on high-genus Riemann surfaces (1990) Phys. Rev. B 41, 9377. doi:10.1103/PhysRevB.41.9377
+% J. E. Avron, R. Seiler and P. G. Zograf, Phys. Rev. Lett. 75, 697 (1995) doi:10.1103/PhysRevLett.75.697 [cond-mat/9502011].
+% P. Levay, Berry phases for Landau Hamiltonians on deformed tori, J. Math. Phys. 36 (6) (1995).
+% C. Stormer, Arch. Sci. Phys. Nat, 24 (1907)
+% M. Bander Fractional quantum hall effect in nonuniform magnetic fields (1990) Phys. Rev. B41 9028
+% H. Grosse, A. Martin and J. Stubbe, Splitting of Landau levels in nonconstant magnetic fields (1993) Phys. Lett. A 181, 7. doi:10.1016/0375-9601(93)91115-L
+% Y. Aharonov and A. Casher Ground state of a spin-1/2 particle in a twodimensional magnetic field. Phys. Rev. A 19 (1979)
+% S. Klevtsov Random normal matrices, Bergman Kernel and projective embeddings. (2014) JHEP 1-19
+%
+% R. Iengo and D. Li Quantum mechanics and quantum Hall effect on Riemann surfaces. (1993) arXiv:hep-th/9307011v1
+%
+AUTHOR_FIRST_NAME	R
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Iengo
+AND	and
+AUTHOR_FIRST_NAME	D
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Li
+TITLE	Quantum
+TITLE	mechanics
+TITLE	and
+TITLE	quantum
+TITLE	Hall
+TITLE	effect
+TITLE	on
+TITLE	Riemann
+TITLE	surfaces
+PUNCTUATION_DOT	.
+PUNCTUATION_PARENTHESIS	(
+YEAR	1993
+PUNCTUATION_PARENTHESIS	)
+ARXIV_IDENTIFIER	arXiv
+PUNCTUATION_COLON	:
+ARXIV	hep-th/9307011v1
+%
+% Y. Deng and H.W.J Blote Conformal invariance and the Ising model on a spheroid. (2003) Phys. Rev. E 67, 036107
+% D.B. Thompson, M.P. Mepham and R.R. Steeves The Stereographic Double Projection (1977) Department of Geodesy and Geomatics Engineering, University of new Brunswick
+% J. Maldacena and X. L. Qi, ""Eternal traversable wormhole,"" arXiv:1804.00491 [hep-th].
+% J. Maldacena, A. Milekhin and F. Popov, ""Traversable wormholes in four dimensions,"" arXiv:1807.04726 [hep-th].

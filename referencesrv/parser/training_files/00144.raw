@@ -1,0 +1,155 @@
+% /proj/ads/references/sources/arXiv/1909/00144.raw
+%R 2019arXiv190900144Z
+%Z
+% Alatalo K., et al., 2013, MNRAS, 432, 1796
+% Alatalo K., et al., 2015, ApJ, 798, 31
+% Astropy Collaboration et al., 2013, A&A, 558, A33
+% Astropy Collaboration et al., 2018, AJ, 156, 123
+% Baldwin J. A., Phillips M. M., Terlevich R., 1981, PASP, 93, 5
+% Belfiore F., et al., 2016, MNRAS, 461, 3111
+% Bender R., 1988, A&A, 202, L5
+% Bicknell G. V., Begelman M. C., 1996, ApJ, 467, 597
+% Bicknell G. V., Mukherjee D., Wagner A. Y., Sutherland R. S., Nesvadba N. P. H., 2018, MNRAS, 475, 3493
+% Calzetti D., 2013, Star Formation Rate Indicators. p. 419
+% Cheng X.-P., An T., 2018, ApJ, 863, 155
+% Croton D. J., et al., 2006, MNRAS, 365, 11
+% Dabrowski I., 1984, Canadian Journal of Physics, 62, 1639
+% Davies R. I., 2007, Monthly Notices of the Royal Astronomical Society, 375, 1099
+% Fabian A. C., 2012, ARA&A, 50, 455
+% Falco E. E., et al., 1999, Publications of the Astronomical Society of the Pacific, 111, 438
+% Federrath C., Klessen R. S., 2012, ApJ, 761, 156
+% Fitzpatrick E. L., Massa D., 2007, ApJ, 663, 320
+% Fomalont E. B., Kellermann K. I., Partridge R. B., Windhorst R. A., Richards E. A., 2002, AJ, 123, 2402
+
+% Gildas Team 2013, GILDAS: Grenoble Image and Line Data Analysis Software, Astrophysics Source Code Library (ascl:1305.010)
+%
+AUTHOR_COLLABORATION	Gildas
+AUTHOR_COLLABORATION	Team
+YEAR	2013
+PUNCTUATION_COMMA	,
+TITLE	GILDAS
+PUNCTUATION_COLON	:
+TITLE	Grenoble
+TITLE	Image
+TITLE	and
+TITLE	Line
+TITLE	Data
+TITLE	Analysis
+TITLE	Software
+PUNCTUATION_COMMA	,
+JOURNAL	Astrophysics
+JOURNAL	Source
+JOURNAL	Code
+JOURNAL	Library
+PUNCTUATION_PARENTHESIS	(
+ASCL_IDENTIFIER	ascl
+PUNCTUATION_COLON	:
+ASCL	1305.010
+PUNCTUATION_PARENTHESIS	)
+
+% Giroletti M., Giovannini G., Taylor G. B., Conway J. E., Lara L., Venturi T., 2003, A&A, 399, 889
+% Guillard P., Boulanger F., Lehnert M. D., Pineau des Forets G., Combes F., Falgarone E., Bernard-Salas J., 2015, A&A, 574, A32
+% Gultekin K., et al., 2009, ApJ, 698, 198
+% Guver T., Ozel F., 2009, MNRAS, 400, 2050
+% Holt J., Tadhunter C. N., Morganti R., 2008, MNRAS, 387, 639
+% Ineson J., Croston J. H., Hardcastle M. J., Mingo B., 2017, MNRAS, 467, 1586
+% Jeyakumar S., 2016, MNRAS, 458, 3786
+% Jones E., Oliphant T., Peterson P., et al., 2001, SciPy: Open source scientific tools for Python, http://www.scipy.org/
+% Kauffmann G., et al., 2003, MNRAS, 346, 1055
+% Kennicutt Jr. R. C., 1998, ApJ, 498, 541
+% Kewley L. J., Dopita M. A., Sutherland R. S., Heisler C. A., Trevena J., 2001, ApJ, 556, 121
+% Kewley L. J., Groves B., Kauffmann G., Heckman T., 2006, MNRAS, 372, 961
+% Lanz L., Ogle P. M., Alatalo K., Appleton P. N., 2016, ApJ, 826, 29
+% Larkin J., et al., 2006, in Society of Photo-Optical Instrumentation Engineers (SPIE) Conference Series. p. 62691A, doi:10.1117/12.672061
+% Leitherer C., et al., 1999, ApJS, 123, 3
+% Markwardt C. B., 2009, in Bohlender D. A., Durand D., Dowler P., eds, Astronomical Society of the Pacific Conference Series Vol. 411, Astronomical Data Analysis Software and Systems XVIII. p. 251 (arXiv:0902.2850)
+% Martig M., et al., 2013, MNRAS, 432, 1914
+% McNamara B. R., Nulsen P. E. J., 2012, New Journal of Physics, 14, 055023
+% Merloni A., Heinz S., di Matteo T., 2003, MNRAS, 345, 1057
+% More J. J., 1978, The Levenberg-Marquardt algorithm: Im plementation and theory. Springer Berlin Heidelberg, Berlin, Heidelberg, pp 105-116, doi:10.1007/BFb0067700, https:// doi.org/10.1007/BFb0067700
+% Morganti R., Fogasy J., Paragi Z., Oosterloo T., Orienti M., 2013, Science, 341, 1082
+% Morganti R., Oosterloo T., Oonk J. B. R., Frieswijk W., Tadhunter C., 2015, A&A, 580, A1
+% Mukherjee D., Bicknell G. V., Sutherland R., Wagner A., 2016, MNRAS, 461, 967
+% Mukherjee D., Wagner A. Y., Bicknell G. V., Morganti R., Oosterloo T., Nesvadba N., Sutherland R. S., 2018a, MNRAS, 476, 80
+% Mukherjee D., Bicknell G. V., Wagner A. Y., Sutherland R. S., Silk J., 2018b, MNRAS, 479, 5544
+% Murgia M., 2003, Publ. Astron. Soc. Australia, 20, 19
+% Nesvadba N. P. H., Lehnert M. D., Eisenhauer F., Gilbert A., Tecza M., Abuter R., 2006, ApJ, 650, 693
+% Nesvadba N. P. H., et al., 2010, A&A, 521, A65
+% Nesvadba N. P. H., Boulanger F., Lehnert M. D., Guillard P., Salome P., 2011, A&A, 536, L5
+% Neugebauer G., et al., 1984, The Astrophysical Journal, 278, L1
+% Nordlund K., Padoan P., 1999, in Franco J., CarramiA. nana A., eds, Interstellar Turbulence. p. 218 (arXiv:astro-ph/9810074)
+% O'Dea C. P., 1998, PASP, 110, 493
+% O'Dea C. P., 2016, Astronomische Nachrichten, 337, 141
+% O'Dea C. P., Baum S. A., 1997, AJ, 113, 148
+% Ocana Flaquer B., Leon S., Combes F., Lim J., 2010, A&A, 518, A9
+% Ogle P., Boulanger F., Guillard P., Evans D. A., Antonucci R., Appleton P. N., Nesvadba N., Leipski C., 2010, ApJ, 724, 1193
+% Oh K., Sarzi M., Schawinski K., Yi S. K., 2011, ApJS, 195, 13
+% Orienti M., 2016, Astronomische Nachrichten, 337, 9
+% Puxley P. J., Hawarden T. G., Mountain C. M., 1990, ApJ, 364, 77
+% Rosenberg M. J. F., van der Werf P. P., Israel F. P., 2012, A&A, 540, A116
+% Rosenberg M. J. F., van der Werf P. P., Israel F. P., 2013, A&A, 550, A12
+% Roth M. M., et al., 2005, PASP, 117, 620
+% Rowan-Robinson M., et al., 1997, Monthly Notices of the Royal Astronomical Society, 289, 490
+% Salim S., et al., 2007, ApJS, 173, 267
+% Sanchez S. F., et al., 2012, A&A, 538, A8
+% Sanchez S. F., et al., 2016, Rev. Mex. Astron. Astrofis., 52, 171
+% Saulder C., van Kampen E., Chilingarian I. V., Mieske S., Zeilinger W. W., 2016, A&A, 596, A14
+% Silk J., Rees M. J., 1998, A&A, 331, L1
+% Singh R., et al., 2013, A&A, 558, A43
+% Snellen I. A. G., Mack K.-H., Schilizzi R. T., Tschager W., 2004, MNRAS, 348, 227
+% Solomon P. M., Downes D., Radford S. J. E., Barrett J. W., 1997, ApJ, 478, 144
+% Sutherland R. S., Bicknell G. V., 2007, ApJS, 173, 37
+
+% Sutherland R., Dopita M., Binette L., Groves B., 2013, MAPPINGS III: Modelling And Prediction in PhotoIonized Nebulae and Gasdynamical Shocks, Astrophysics Source Code Library (ascl:1306.008)
+%
+AUTHOR_LAST_NAME	Sutherland
+AUTHOR_FIRST_NAME	R
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AUTHOR_LAST_NAME	Dopita
+AUTHOR_FIRST_NAME	M
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AUTHOR_LAST_NAME	Binette
+AUTHOR_FIRST_NAME	L
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AUTHOR_LAST_NAME	Groves
+AUTHOR_FIRST_NAME	B
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+YEAR	2013
+PUNCTUATION_COMMA	,
+TITLE	MAPPINGS
+TITLE	III
+PUNCTUATION_COLON	:
+TITLE	Modelling
+TITLE	And
+TITLE	Prediction
+TITLE	in
+TITLE	PhotoIonized
+TITLE	Nebulae
+TITLE	and
+TITLE	Gasdynamical
+TITLE	Shocks
+PUNCTUATION_COMMA	,
+JOURNAL	Astrophysics
+JOURNAL	Source
+JOURNAL	Code
+JOURNAL	Library
+ASCL_IDENTIFIER	ascl
+PUNCTUATION_COLON	:
+ASCL	1306.008
+
+% Tadhunter C., Morganti R., Rose M., Oonk J. B. R., Oosterloo T., 2014, Nature, 511, 440
+% Terzic B., Graham A. W., 2005, MNRAS, 362, 197
+% Turner J., Kirby-Docken K., Dalgarno A., 1977, ApJS, 35, 281
+% Veilleux S., Osterbrock D. E., 1987, ApJS, 63, 295
+% Wagner A. Y., Bicknell G. V., Umemura M., Sutherland R. S., Silk J., 2016, Astronomische Nachrichten, 337, 167
+% Walcher C. J., et al., 2014, A&A, 569, A1
+% Willett K. W., Stocke J. T., Darling J., Perlman E. S., 2010, ApJ, 713, 1393
+% Wizinowich P. L., et al., 2006, PASP, 118, 297
+% Wolniewicz L., Simbotin I., Dalgarno A., 1998, ApJS, 115, 293
+% Zovaro H. R. M., Sharp R., Nesvadba N. P. H., Bicknell G. V., Mukherjee D., Wagner A. Y., Groves B., Krishna S., 2019, MNRAS, 484, 3393
+% de Vries N., Snellen I. A. G., Schilizzi R. T., Mack K.-H., Kaiser C. R., 2009, A&A, 498, 641
+% van Dam M. A., et al., 2006, PASP, 118, 310

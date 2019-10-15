@@ -47,7 +47,7 @@ class TestCRFClassifierText(TestCase):
                           'issue': '512',
                           'page': '1479-1490'})
 
-    def test_get_ready(self):
+    def test_get_ready_with_arxiv_id(self):
         """
 
         :return:
@@ -64,19 +64,17 @@ class TestCRFClassifierText(TestCase):
                               'authors': 'C. Virgo, B. Abbott et al.',
                               'year': '2017',
                               'page': '161101'})
-            # with no identifiers
-            reference_str = "C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017)."
-            self.assertEqual(crf_text.parse(reference_str),
-                             {'title': 'GW170817 Observation of Gravitational Waves from a Binary Neutron Star',
-                              'journal': 'Phys Rev Lett',
-                              'authors': 'C. Virgo, B. Abbott et al.',
-                              'refstr': 'C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017).',
-                              'volume': '119',
-                              'year': '2017'})
-            # space in doi
+
+    def test_get_ready_with_doi(self):
+        """
+
+        :return:
+        """
+        crf_text = CRFClassifierText()
+        if crf_text.get_ready():
             reference_str = 'Elisabete da Cunha et al. "The Taipan Galaxy Survey: Scientific Goals and Observing Strat- egy". In: Publications of the Astronomical Society of Australia 34, e047 (2017), e047. DOI: 10. 1017/ pasa. 2017.41. arXiv: 1706.01246.'
             self.assertEqual(crf_text.parse(reference_str),
-                             {'doi': 'DOI:10.1017/pasa.2017.41',
+                             {'doi': '10.1017/pasa.2017.41',
                               'title': 'The Taipan Galaxy Survey Scientific Goals and Observing',
                               'journal': 'Publications of the Astronomical Society of Australia',
                               'arxiv': '1706.01246',
@@ -86,7 +84,30 @@ class TestCRFClassifierText(TestCase):
                               'year': '2017',
                               'page': 'e047'})
 
-            # with just journal, no title
+
+    def test_get_ready_no_identifier(self):
+        """
+
+        :return:
+        """
+        crf_text = CRFClassifierText()
+        if crf_text.get_ready():
+            reference_str = "C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017)."
+            self.assertEqual(crf_text.parse(reference_str),
+                             {'title': 'GW170817 Observation of Gravitational Waves from a Binary Neutron Star',
+                              'journal': 'Phys Rev Lett',
+                              'authors': 'C. Virgo, B. Abbott et al.',
+                              'refstr': 'C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017).',
+                              'volume': '119',
+                              'year': '2017'})
+
+    def test_get_ready_no_title(self):
+        """
+
+        :return:
+        """
+        crf_text = CRFClassifierText()
+        if crf_text.get_ready():
             reference_str = 'Trujillo et al., 2018. Division for Planetary Sciences, vol 50, #311.09.'
             self.assertEqual(crf_text.parse(reference_str),
                              {'journal': 'Division for Planetary Sciences',
@@ -99,7 +120,7 @@ class TestCRFClassifierText(TestCase):
     def test_get_num_states(self):
         crf_text = CRFClassifierText()
         if crf_text.get_ready():
-            self.assertEqual(crf_text.get_num_states(), 31)
+            self.assertEqual(crf_text.get_num_states(), 37)
 
     def test_split_reference(self):
         """
@@ -124,7 +145,7 @@ class TestCRFClassifierText(TestCase):
         """
         reference_str = "K.E. Mesick, W.C. Feldman, E.R. Mullin, L.C. Stonehill, 2020, Icarus, 335, 113397, arXiv:1904.09036, doi:10.1016/j.icarus.2019.113397."
         self.assertEqual(CRFClassifierText().identify_ids(reference_str),
-                         {'arxiv': '1904.09036', 'doi': 'doi:10.1016/j.icarus.2019.113397', 'issn': '', 'version': ''})
+                         {'arxiv': '1904.09036', 'ascl': '', 'doi': 'doi:10.1016/j.icarus.2019.113397', 'issn': '', 'version': ''})
 
     def test_identify_editors(self):
         """
@@ -188,7 +209,7 @@ class TestCRFClassifierXML(TestCase):
 
         self.assertEqual(crf_xml.parse(raw_references),
                          [{'refplaintext': u'Bemporad, A., Mancuso, S.: 2010, Astrophys. J. 720, 130. doi: 10.1088/0004-637X/720/1/130 .',
-                           'journal': u'Astrophys. J.',
+                           'journal': u'Astrophys J',
                            'refstr': "{u'unstructured_citation': u'Bemporad, A., Mancuso, S.: 2010, Astrophys. J. 720, 130. doi: 10.1088/0004-637X/720/1/130 .', u'author': u'A. Bemporad', u'journal_title': u'Astrophys. J.', u'cyear': u'2010', u'volume': u'720', u'@key': u'88_CR1', u'first_page': u'130'}",
                            'volume': u'720',
                            'authors': u'Bemporad, A',
