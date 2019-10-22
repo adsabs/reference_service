@@ -35,9 +35,26 @@ Next run the script with one reference per line.
 ## API
 
 
-### GET a request:
+#### Make a GET request with a reference to score and resolved bibcode:
 
+    curl -H "Authorization: Bearer <your API token>" -X GET https://dev.adsabs.harvard.edu/v1/reference/text/<reference>
 
+For example to return resolved the reference `Giraud et al., 1986, A&A, 170, 1`, you would do   
+
+    curl -H "Authorization: Bearer <your API token>" -X GET https://dev.adsabs.harvard.edu/v1/reference/text/Giraud%20et%20al.%2C%201986%2C%20A%26A%2C%20170%2C%201
+
+which returns the confidence score, followed by resolved bibcode, also returns the requested reference:
+
+    {"resolved": "0.9 1986A&A...170....1G -- Giraud et al., 1986, A&A, 170, 1"}
+    
+To return the results as fielded json, include `Accept: application/json` in the header. For example
+
+    curl -H "Authorization: Bearer <your API token>" -H "Accept: application/json" -X GET https://dev.adsabs.harvard.edu/v1/reference/text/Giraud%20et%20al.%2C%201986%2C%20A%26A%2C%20170%2C%201
+
+which returns
+
+    {"resolved": {"score": "0.9", "bibcode": "1986A&A...170....1G", "reference": "Giraud et al., 1986, A&A, 170, 1"}}
+       
 ### POST a request:
     
 

@@ -44,6 +44,7 @@ def xml_parser(reference_buffer):
         return xml_parser.crf.parse(reference_buffer)
     raise Exception
 
+
 def return_response(results, status, content_type='application/json'):
     """
 
@@ -70,6 +71,46 @@ def return_response(results, status, content_type='application/json'):
     return r
 
 
+def format_resolved_reference(returned_format, resolved, reference):
+    """
+
+    :param returned_format:
+    :param resolved:
+    :param reference:
+    :return:
+    """
+    if returned_format == 'application/json':
+        resolved = resolved.split()
+        return {'score': resolved[0], 'bibcode': resolved[1], 'reference': reference}
+    return '%s -- %s' % (resolved, reference)
+
+
+@advertise(scopes=[], rate_limit=[1000, 3600 * 24])
+@bp.route('/text/<reference>', methods=['GET'])
+def text_get(reference):
+    """
+
+    :param reference:
+    :return:
+    """
+    returned_format = request.headers.get('Accept', '')
+    print '.....returned_format=', returned_format
+
+    reference = urllib.unquote(reference).encode('ascii', 'ignore').decode('ascii')
+    current_app.logger.info('received GET request with reference=`{reference}` to resolve in text mode'.format(reference=reference))
+    try:
+        if bool(re.search(r'\d', reference)):
+            parsed_ref = text_parser(reference)
+            result = format_resolved_reference(returned_format,
+                                               resolved=str(solve_reference(Hypotheses(parsed_ref))),
+                                               reference=reference)
+            return return_response({'resolved': result}, 200, 'application/json; charset=UTF8')
+        raise ValueError('Reference with no year and volume cannot be resolved.')
+    except Exception as e:
+        current_app.logger.error('Exception: %s', str(e))
+        return return_response({'error': 'unable to resolve the reference'}, 400, 'text/plain; charset=UTF8')
+
+
 @advertise(scopes=[], rate_limit=[1000, 3600 * 24])
 @bp.route('/text', methods=['POST'])
 def text_post():
@@ -92,48 +133,30 @@ def text_post():
     current_app.logger.info('received POST request with references={references} to resolve in text mode'.
         format(references=','.join(references)))
 
+    returned_format = request.headers.get('Accept', 'text/plain')
+
     results = []
     for reference in references:
         try:
             if bool(re.search(r'\d', reference)):
                 parsed_ref = text_parser(reference)
-                bibcode = str(solve_reference(Hypotheses(parsed_ref)))
-                result = '%s -- %s'%(bibcode, reference)
+                result = format_resolved_reference(returned_format,
+                                                   resolved=str(solve_reference(Hypotheses(parsed_ref))),
+                                                   reference=reference)
             else:
                 raise ValueError('Reference with no year and volume cannot be resolved.')
         except Exception as e:
             current_app.logger.error('Exception: %s' %(str(e)))
-            result = '0.0 %s -- %s'%(19*'.', reference)
+            result = format_resolved_reference(returned_format, resolved='0.0 %s'%(19*'.'), reference=reference)
             continue
         finally:
             results.append(result)
 
-    if len(results) == len(results):
+    if len(results) == len(references):
+        if returned_format == 'application/json':
+            return return_response({'resolved': results}, 200, 'application/json; charset=UTF8')
         return return_response({'resolved':'\n'.join(results)}, 200, 'application/json; charset=UTF8')
-    return return_response({'error': 'none of the references got resolved'}, 400, 'text/plain; charset=UTF8')
-
-
-@advertise(scopes=[], rate_limit=[1000, 3600 * 24])
-@bp.route('/text/<reference>', methods=['GET'])
-def text_get(reference):
-    """
-
-    :param reference:
-    :return:
-    """
-    reference = urllib.unquote(reference).encode('ascii', 'ignore').decode('ascii')
-    current_app.logger.info('received GET request with reference=`{reference}` to resolve in text mode'.format(reference=reference))
-    try:
-        if bool(re.search(r'\d', reference)):
-            parsed_ref = text_parser(reference)
-            bibcode = str(solve_reference(Hypotheses(parsed_ref)))
-            result = '%s -- %s'%(bibcode, reference)
-            return return_response(result, 200, 'text/plain; charset=UTF8')
-        raise ValueError('Reference with no year and volume cannot be resolved.')
-    except Exception as e:
-        current_app.logger.error('Exception: %s', str(e))
-        result = '%s -- %s'%(19*'.', reference)
-        return return_response(result, 400, 'text/plain; charset=UTF8')
+    return return_response({'error': 'unable to resolve any references'}, 400, 'text/plain; charset=UTF8')
 
 
 @advertise(scopes=[], rate_limit=[1000, 3600 * 24])
@@ -158,14 +181,16 @@ def xml_post():
     current_app.logger.debug('received POST request with references={references} to resolve in xml mode'.
         format(references=' '.join(references)[:250]))
 
+    returned_format = request.headers.get('Accept', 'text/plain')
+
     results = []
     parsed_references = xml_parser(references)
     for parsed_reference in parsed_references:
         try:
-            bibcode = str(solve_reference(Hypotheses(parsed_reference)))
-            if bibcode.startswith('0.0'):
+            resolved = str(solve_reference(Hypotheses(parsed_reference)))
+            if resolved.startswith('0.0'):
                 raise
-            result = '%s -- %s'%(bibcode, parsed_reference['refstr'])
+            result = format_resolved_reference(returned_format, resolved=resolved, reference=parsed_reference['refstr'])
         except Exception as e:
             current_app.logger.error('Exception: %s' %(str(e)))
             # lets attempt to resolve using the text model
@@ -174,18 +199,21 @@ def xml_post():
                 current_app.logger.info('attempting to resolve the reference=`{reference}` in text mode now'.format(reference=reference))
                 try:
                     parsed_ref = text_parser(reference)
-                    bibcode = str(solve_reference(Hypotheses(parsed_ref)))
-                    result = '%s -- %s' % (bibcode, reference)
+                    result = format_resolved_reference(returned_format,
+                                                       resolved=str(solve_reference(Hypotheses(parsed_ref))),
+                                                       reference=reference)
                 except Exception as e:
                     current_app.logger.error('Exception: %s', str(e))
-                    result = '0.0 %s -- %s' % (19 * '.', reference)
+                    result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
                     continue
             else:
-                result = '0.0 %s -- %s'%(19*'.', parsed_reference['refstr'])
+                result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=parsed_reference['refstr'])
             continue
         finally:
             results.append(result)
 
-    if len(results) == len(results):
+    if len(results) == len(references):
+        if returned_format == 'application/json':
+            return return_response({'resolved': results}, 200, 'application/json; charset=UTF8')
         return return_response({'resolved':'\n'.join(results)}, 200, 'application/json; charset=UTF8')
-    return return_response({'error': 'none of the references got resolved'}, 400, 'text/plain; charset=UTF8')
+    return return_response({'error': 'unable to resolve any references'}, 400, 'text/plain; charset=UTF8')
