@@ -79,7 +79,7 @@ def format_resolved_reference(returned_format, resolved, reference):
     :param reference:
     :return:
     """
-    if returned_format == 'application/json':
+    if 'application/json' in returned_format:
         resolved = resolved.split()
         return {'score': resolved[0], 'bibcode': resolved[1], 'reference': reference}
     return '%s -- %s' % (resolved, reference)
@@ -94,7 +94,6 @@ def text_get(reference):
     :return:
     """
     returned_format = request.headers.get('Accept', '')
-    print '.....returned_format=', returned_format
 
     reference = urllib.unquote(reference).encode('ascii', 'ignore').decode('ascii')
     current_app.logger.info('received GET request with reference=`{reference}` to resolve in text mode'.format(reference=reference))
