@@ -1449,6 +1449,4 @@ class CRFClassifierText(CRFClassifier):
         :return:
         """
         words, labels = self.classify(reference_str)
-        parsed = self.reference(reference_str, words, labels)
-        return parsed
-        # return self.reference(reference_str, words, labels)
+        return self.reference(reference_str, words, labels)
