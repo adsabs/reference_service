@@ -27,6 +27,8 @@ POSTPAGE_CHARS = "BHPL"
 ADS_NUMERIC_PAGE_PATTERN = re.compile("(?P<lchar>[%s])?(?P<pageno>\d+\.?\d*)(?P<postchar>[%s])?(?:-[%s]?\d+[%s]?)?"
                                       %(LETTER_CHARS, POSTPAGE_CHARS, LETTER_CHARS, POSTPAGE_CHARS))
 
+YEAR_PATTERN = re.compile(r'^([12][089]\d\d)')
+
 def get_best_bibstem_for(sourceSpec):
     """
     returns a "unique" bibstem that could match for sourceName.
@@ -43,7 +45,7 @@ def get_best_bibstem_for(sourceSpec):
         raise KeyError(sourceSpec)
 
 
-def add_volume_evidence(evidences, ref_volume, ads_volume):
+def add_volume_evidence(evidences, ref_volume, ads_volume, ads_issue):
     """
     adds evidence from comparing volume specifications from
     the reference and from ADS.
@@ -51,9 +53,10 @@ def add_volume_evidence(evidences, ref_volume, ads_volume):
     :param evidences: 
     :param ref_volume: 
     :param ads_volume: 
-    :return: 
+    :param ads_issue:
+    :return:
     """
-    if not ref_volume and not ads_volume:
+    if not ref_volume and not (ads_volume or ads_issue):
         return
 
     nonzeros = [a for a in [ref_volume, ads_volume] if a]
@@ -64,8 +67,11 @@ def add_volume_evidence(evidences, ref_volume, ads_volume):
         return
 
     try:
-        delta = int(ref_volume)==int(ads_volume)
-        if delta == True:
+        delta_volume = int(ref_volume)==int(ads_volume)
+        # sometimes ads_volume holds conference year, and references include the issue
+        # see if ads_volume is a year, if so then check the reference against issue
+        delta_issue = int(ref_volume)==int(ads_issue) if YEAR_PATTERN.findall(ads_volume) else False
+        if delta_volume == True or delta_issue == True:
             score = current_app.config['EVIDENCE_SCORE_RANGE'][1]
         else:
             score = current_app.config['EVIDENCE_SCORE_RANGE'][0]

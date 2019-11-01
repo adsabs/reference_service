@@ -111,7 +111,7 @@ def get_serial_score_for_input_fields(result_record, hypothesis):
 
     input_fields = hypothesis.get_detail("input_fields")
 
-    add_volume_evidence(evidences, input_fields.get("volume"), result_record.get("volume"))
+    add_volume_evidence(evidences, input_fields.get("volume"), result_record.get("volume"), result_record.get("issue"))
 
     return evidences
 

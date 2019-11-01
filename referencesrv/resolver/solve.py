@@ -68,6 +68,9 @@ def make_solr_condition(key, value):
     if key == 'arxiv':
         return 'identifier:("arxiv:%s" OR "ascl:%s")'%(urllib.quote(value), urllib.quote(value))
 
+    if key == 'doi':
+        return 'doi:"%s"'%urllib.quote_plus(value)
+
     if key=='page':
         if len(value) == 1:
             return "page:(%s)"%value
