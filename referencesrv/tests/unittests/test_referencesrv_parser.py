@@ -186,6 +186,17 @@ class TestCRFClassifierText(TestCase):
         self.assertEqual(token_dict['page'], '803-814')
         self.assertEqual(token_dict['issue'], '')
 
+    def test_identify_authors(self):
+        """
+
+        :return:
+        """
+        reference_str = "M. Bander Fractional quantum hall effect in nonuniform magnetic fields (1990) Phys. Rev. B41 9028"
+        self.assertEqual(CRFClassifierText().identify_authors(reference_str), "")
+
+        reference_str = "van der Klis 2000, ARA&A 38, 717"
+        self.assertEqual(CRFClassifierText().identify_authors(reference_str), "van der Klis")
+
 
 class TestCRFClassifierXML(TestCase):
     def create_app(self):
