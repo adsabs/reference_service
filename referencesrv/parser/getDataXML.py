@@ -4,6 +4,8 @@ from json import loads, dumps
 import xmltodict
 from BeautifulSoup import BeautifulStoneSoup
 from collections import OrderedDict
+from HTMLParser import HTMLParser
+
 
 from flask import current_app
 
@@ -50,8 +52,12 @@ def add_authors(author, first_name_tag, last_name_tag, tagged_reference):
         tagged_reference.append(('AUTHOR_LAST_NAME', author[last_name_tag].encode('ascii', 'ignore').decode('ascii')))
     elif isinstance(author, list):
         for a in author:
-            tagged_reference.append(('AUTHOR_FIRST_NAME', a[first_name_tag].encode('ascii', 'ignore').decode('ascii')))
-            tagged_reference.append(('AUTHOR_LAST_NAME', a[last_name_tag].encode('ascii', 'ignore').decode('ascii')))
+            first = a.get(first_name_tag, None)
+            last = a.get(last_name_tag, None)
+            if first:
+                tagged_reference.append(('AUTHOR_FIRST_NAME', first.encode('ascii', 'ignore').decode('ascii')))
+            if last:
+                tagged_reference.append(('AUTHOR_LAST_NAME', last.encode('ascii', 'ignore').decode('ascii')))
     elif isinstance(author, basestring):
         for regex in REGEX_AUTHORS:
             match = regex.match(author)
@@ -94,7 +100,8 @@ def add_multi_word_fields(tag, field, tagged_reference):
     :param tagged_reference:
     :return:
     """
-    for f in field.split():
+    # attached -/+ to the previous word and break the words
+    for f in field.replace('-', '- ').replace('+', '+ ').split():
         tagged_reference.append((tag, f))
 
 def add_title(title, sub_title, tagged_reference):
@@ -110,7 +117,6 @@ def add_title(title, sub_title, tagged_reference):
         if sub_title:
             title_str = title_str + ': ' + ''.join(sub_title)
         add_multi_word_fields('TITLE', title_str.encode('ascii', 'ignore').decode('ascii'), tagged_reference)
-
 
 def add_article(journal, year, volume, issue, tagged_reference):
     """
@@ -307,13 +313,17 @@ def get_crossref_tagged_data(buffer, include_refstr):
                     doi = citation['doi']['#text']
                 else:
                     doi = citation['doi']
-                tagged_reference.append(('DOI', 'doi:%s'%doi))
+                tagged_reference.append(('DOI', '%s'%doi))
             if 'issn' in citation:
                 tagged_reference.append(('ISSN', citation['issn']))
             if include_refstr:
                 if 'unstructured_citation' in citation:
                     tagged_reference.append(('REFPLAINTEXT', citation['unstructured_citation']))
                 tagged_reference.append(('REFSTR', str(loads(dumps(citation)))))
+            else:
+                # we dont need these to be classified
+                tagged_reference.append(('REFPLAINTEXT', '?!?!'))
+                tagged_reference.append(('REFSTR', '?!?!'))
             the_data.append(tagged_reference)
     except Exception as e:
         current_app.logger.error('Exception: %s' % (str(e)))
@@ -351,6 +361,25 @@ def get_springer_doi(node):
                         return values[1]
     return ''
 
+REGEX_ARXIV_ID = re.compile(r"arXiv[\s:](\d+)(\.)(\d+)|([a-z]+\-[a-z]+)(/)(\d+)|arxiv.org/abs/([a-z\-]+)(/)(\d+)|arxiv.org/abs/(\d+)(\.)(\d+)", re.IGNORECASE)
+def get_springer_arxiv_id(node):
+    """
+    return arxiv id from the node which can have the following formats:
+    arXiv:1406.1759
+    hep-ph/0502047
+    arxiv.org/abs/1406.1759
+    arxiv.org/abs/hep-ph/0602144
+
+    :param node:
+    :return:
+    """
+    node_str = str(loads(dumps(node)).values())
+    match = REGEX_ARXIV_ID.findall(node_str)
+    if len(match) > 0:
+        match = match[0]
+        return ''.join(match)
+    return ''
+
 def get_springer_ref_plain_text(node):
     """
 
@@ -366,18 +395,20 @@ def get_springer_ref_plain_text(node):
     return ''
 
 
-def get_springer_tagged_data(buffer):
+def get_springer_tagged_data(buffer, include_refstr):
     """
 
     :param buffer:
+    :param include_refstr: during training do not need refstr
     :return:
     """
+    html_parser = HTMLParser()
     the_data = []
     try:
-        clean_buffer = unicode(BeautifulStoneSoup(buffer, convertEntities=BeautifulStoneSoup.ALL_ENTITIES))
+        clean_buffer = unicode(BeautifulStoneSoup(html_parser.unescape(buffer), convertEntities=BeautifulStoneSoup.ALL_ENTITIES))
         doc = xmltodict.parse(clean_buffer, encoding='utf-8')
         citation_list = doc['citationlist']
-        for citation in citation_list['citation']:
+        for i, citation in enumerate(citation_list['citation']):
             if citation is None:
                 continue
             tagged_reference = []
@@ -392,14 +423,21 @@ def get_springer_tagged_data(buffer):
             add_pages(get_springer_field_value(citation, 'firstpage'), None, tagged_reference)
             doi = get_springer_doi(citation)
             if len(doi) > 0:
-                tagged_reference.append(('DOI', 'doi:%s'%doi))
+                tagged_reference.append(('DOI', '%s'%doi))
             book = get_springer_field_value(citation, 'booktitle')
             if len(book) > 0:
                 add_book(book, None, get_springer_field_value(citation, 'editionnumber'), tagged_reference)
-            unstructured = get_springer_ref_plain_text(citation)
-            if len(unstructured) > 0:
-                tagged_reference.append(('REFPLAINTEXT', unstructured))
-            tagged_reference.append(('REFSTR', str(loads(dumps(citation)))))
+            arxiv = get_springer_arxiv_id(citation)
+            if len(arxiv) > 0:
+                tagged_reference.append(('ARXIV', '%s'%arxiv))
+            if include_refstr:
+                unstructured = get_springer_ref_plain_text(citation)
+                if len(unstructured) > 0:
+                    tagged_reference.append(('REFPLAINTEXT', unstructured.replace('[]', '')))
+                tagged_reference.append(('REFSTR', str(loads(dumps(citation)))))
+            else:
+                tagged_reference.append(('REFPLAINTEXT', '?!?!'))
+                tagged_reference.append(('REFSTR', '?!?!'))
             the_data.append(tagged_reference)
     except Exception as e:
         current_app.logger.error('Exception: %s' % (str(e)))
@@ -409,19 +447,20 @@ def get_springer_tagged_data(buffer):
     return the_data
 
 REGEX_XML_TAG_FORMAT = re.compile(r'<ce:italic>|</ce:italic>')
-def get_xml_tagged_data(buffer):
+def get_xml_tagged_data(buffer, include_refstr=True):
     """
     figure out what format file it is and call the
     respective function to return data for training
 
     :param buffer:
+    :param include_refstr: during training do not need refstr
     :return:
     """
     if len(buffer) > 1 and 'http://www.elsevier.com/xml/document' in buffer[1]:
         return get_elsevier_tagged_data(REGEX_XML_TAG_FORMAT.sub('', ' '.join(buffer)))
     if len(buffer) > 1 and 'ADSBIBCODE' in buffer[0] and 'citation_list' in buffer[1]:
         buffer = '<?xml version="1.0"?>' + ' '.join(buffer[1:])
-        return get_crossref_tagged_data(buffer, True)
+        return get_crossref_tagged_data(buffer, include_refstr)
     if len(buffer) > 1 and 'ADSBIBCODE' in buffer[0] and 'Citation ID' in buffer[1]:
         selected_buffer = ['<?xml version="1.0"?>', '<CitationList>']
         for line in buffer:
@@ -429,7 +468,7 @@ def get_xml_tagged_data(buffer):
             if line.startswith('<Citation ID='):
                 selected_buffer.append(line)
         selected_buffer.append('</CitationList>')
-        return get_springer_tagged_data('\n'.join(selected_buffer))
+        return get_springer_tagged_data('\n'.join(selected_buffer), include_refstr)
     return None
 
 def get_xml_tagged_data_training(filename):
@@ -440,4 +479,4 @@ def get_xml_tagged_data_training(filename):
     """
     with open(filename) as f:
         reader = f.read().splitlines()
-        return get_xml_tagged_data(reader)
+        return get_xml_tagged_data(reader, False)

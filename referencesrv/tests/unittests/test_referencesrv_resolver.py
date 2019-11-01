@@ -416,7 +416,7 @@ class TestResolver(TestCase):
         self.assertEqual(make_solr_condition("first_author~", "frisken gibson, s"),
                          'first_author~:("frisken gibson, s")')
         self.assertEqual(make_solr_condition("arxiv", "0910.4887"), 'identifier:("arxiv:0910.4887" OR "ascl:0910.4887")')
-        self.assertEqual(make_solr_condition("doi","10.1364/JOSAA.9.000154"), 'doi:"10.1364/JOSAA.9.000154"')
+        self.assertEqual(make_solr_condition("doi","10.1364/JOSAA.9.000154"), 'doi:"10.1364%2FJOSAA.9.000154"')
         # self.assertEqual(make_solr_condition("page", "154"), 'page:("?54" or "1?4" or "15?")')
         # for now since wildcard ? has been turned off when preceding any character, use this expanded version
         page_query = '"a54" or "b54" or "c54" or "d54" or "e54" or "f54" or "g54" or "h54" or "i54" or "j54" or ' \
@@ -628,31 +628,35 @@ class TestResolver(TestCase):
         test add_volume_evidence
         """
         # both reference and ads missing volume values
-        self.assertEqual(add_volume_evidence(Evidences(), None, None), None)
-        self.assertEqual(add_volume_evidence(Evidences(), '', ''), None)
+        self.assertEqual(add_volume_evidence(Evidences(), None, None, None), None)
+        self.assertEqual(add_volume_evidence(Evidences(), '', '', ''), None)
         # when one is missing
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '233', ''), None)
+        self.assertEqual(add_volume_evidence(evidences, '233', '', ''), None)
         self.assertEqual(evidences.get_score(), -1)
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '', '233'), None)
+        self.assertEqual(add_volume_evidence(evidences, '', '233', ''), None)
         self.assertEqual(evidences.get_score(), -1)
         # when matched
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '233', '233'), None)
+        self.assertEqual(add_volume_evidence(evidences, '233', '233', ''), None)
         self.assertEqual(evidences.get_score(), 1)
         # when unmatched
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '223', '233'), None)
+        self.assertEqual(add_volume_evidence(evidences, '223', '233', ''), None)
         self.assertEqual(evidences.get_score(), -1)
         # when not integer, but matched
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '233-3', '233-3'), None)
+        self.assertEqual(add_volume_evidence(evidences, '233-3', '233-3', ''), None)
         self.assertEqual(evidences.get_score(), 1)
         # when not integer, unmatched
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '223-3', '233-3'), None)
+        self.assertEqual(add_volume_evidence(evidences, '223-3', '233-3', ''), None)
         self.assertEqual(evidences.get_score(), -1)
+        # when volume is year and there is an issue
+        evidences = Evidences()
+        self.assertEqual(add_volume_evidence(evidences, '233', '2018', '233'), None)
+        self.assertEqual(evidences.get_score(), 1)
 
 
     def test_clean_ads_page(self):

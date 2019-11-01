@@ -48,6 +48,7 @@ class CRFClassifier(object):
     
     WORD_BREAKER_REMOVE = [re.compile(r'[A-Za-z]*(-\s+)[A-Za-z]*'),
                            re.compile(r'\d+(,)\d+')]
+    START_WITH_AUTHOR = re.compile(r'([A-Za-z].*$)')
     CAPITAL_FIRST_CHAR = re.compile(r'([A-Z].*$)')
 
     QUOTES_AROUND_ETAL_REMOVE = re.compile(r'(.*)(")(et al\.?)(")(.*)', re.IGNORECASE)
@@ -56,7 +57,8 @@ class CRFClassifier(object):
                                re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*"(?P<journal>[A-Z]*[A-Za-z\s.]*)"?'),
                                re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*(?P<journal>[A-Z]+[A-Za-z\.\s]+)+.*'),
                                re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"[.,\s]+[Ii][Nn]:\s*(?P<journal>[A-Za-z\.\s]+)+.*'),
-                               re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*(?P<journal>\s*)')]
+                               re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*(?P<journal>\s*)'),
+                               re.compile(r'^[.\s]*(?P<title>[A-Z]+[A-za-z\'\s:-]+)[.,\s]+(?P<journal>[A-Z\s\.]+)[\s\d,]+.*'),]
     TITLE_JOURNAL_PUNCTUATION_REMOVER = re.compile(r'[:\(\)\-\[\]]')
     JOURNAL_ONLY_EXTRACTOR = re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>[A-Z][A-Za-z&\-]*)[\d,.\s][\s\d\w,]*$')
     EDITOR_EXTRACTOR = re.compile(r'(:?[Ii][Nn][":\s]+)([A-Z].*)$')
@@ -71,7 +73,14 @@ class CRFClassifier(object):
                                          re.compile(r'(?P<volume>\d+):(?P<page>[A-Z]?\d+\-?[A-Z]?\d*)(?P<issue>\s*)')]
     ETAL_PAT_EXTRACTOR = re.compile(r"([\w\W]+(?i)[\s,]*et\.?\s*al\.?)")
     # to capture something like `Trujillo and Sheppard, 2014. Nature 507, p. 471-474.`
-    LAST_NAME_EXTRACTOR = re.compile(r"(^([A-Z]+[a-z]+\s*(?:and|&)?\s*(?:[A-Z]+[a-z]*)[\s,]*)+)(:?[\.,\s]*\(?[12][089]\d\d\)?)|(^[A-Z]+[a-z]+\s*(?:and|&)?\s*(?:[A-Z]+[a-z]*))[\.,\s]*[12][089]\d\d")
+    # also capture `van der Klis 2000, ARA&A 38, 717`
+    LAST_NAME_PREFIX = "d|de|De|des|Des|van|van der|von|Mc|der"
+    SINGLE_LAST_NAME = "(?:(?:%s|[A-Z]')[' ]?)?[A-Z][a-z][A-Za-z]*"%LAST_NAME_PREFIX
+    MULTI_LAST_NAME = "%s(?:[- ]%s)*" % (SINGLE_LAST_NAME, SINGLE_LAST_NAME)
+    YEAR_PATTERN = "[12][089]\d\d"
+    AUTHOR_PATTERN = r"(^({MULTI_LAST_NAME}\s*(?:and|&)?\s*(?:{MULTI_LAST_NAME})?[\s,]*))(:?[\.,\s]*\(?{YEAR_PATTERN}\)?)|(^{MULTI_LAST_NAME}\s*(?:and|&)?\s*(?:{MULTI_LAST_NAME})?)[\.,\s]*{YEAR_PATTERN}".format(MULTI_LAST_NAME=MULTI_LAST_NAME, YEAR_PATTERN=YEAR_PATTERN)
+    LAST_NAME_EXTRACTOR = re.compile(AUTHOR_PATTERN)
+
     # to capture something like `CS Casari, M Tommasini, RR Tykwinski, A Milani, Carbon-atom wires: 1-D systems with tunable properties, Nanoscale 2016; 8: 4414-35. DOI:10.1039/C5NR06175J.`
     INITIALS_NO_DOT_EXTRACTOR = re.compile(r"([A-Z]+\s*[A-Z]+[a-z]+[,\s]*)+")
 
@@ -910,6 +919,7 @@ class CRFClassifierXML(CRFClassifier):
             references = references + get_xml_tagged_data_training(f)
 
         X, y, label_code = self.format_training_data(references)
+
         # folds = list(np.random.choice(range(0, 9), len(y)))
         # for now use static division. see comments in foldModelText.dat
         folds = self.get_folds_array(training_files_path + 'foldModelXML.dat')
@@ -934,6 +944,15 @@ class CRFClassifierXML(CRFClassifier):
         if len(name) > 0 and name[-1] == ' ':
             name.pop()
         return ''.join(name)
+
+    def extract_doi(self, reference_str):
+        """
+        just need this to be compatible to the text model
+        in the xml side, just need to return the string
+        :param reference_str:
+        :return:
+        """
+        return reference_str
 
     def segment(self, reference_list):
         """
@@ -1351,9 +1370,10 @@ class CRFClassifierText(CRFClassifier):
         # ie, M. Bander Fractional quantum hall effect in nonuniform magnetic fields (1990) Phys. Rev. B41 9028
         # authors= M. Bander Fractional quantum hall effect in nonuniform magnetic fields
         if not authors.endswith('et al.') and authors.count(',') == 0 and authors.count(';') == 0:
+            last_name_prefix = self.LAST_NAME_PREFIX.split('|')
             words = authors.replace('.', '').split()
-            upper = len([x for x in words if x[0].isupper()])
-            if upper < len(words) - upper:
+            last_name = len([x for x in words if x[0].isupper() or x in last_name_prefix])
+            if last_name < len(words) - last_name:
                 return ''
 
         return authors
@@ -1416,7 +1436,7 @@ class CRFClassifierText(CRFClassifier):
         :return: list of words and the corresponding list of labels
         """
         # remove any numbering that appears before the reference to start with authors
-        reference_str = self.CAPITAL_FIRST_CHAR.search(reference_str).group()
+        reference_str = self.START_WITH_AUTHOR.search(reference_str).group()
         # also if for some reason et al. has been put in double quoted! remove them
         reference_str = self.QUOTES_AROUND_ETAL_REMOVE.sub(r"\1\3\5", reference_str)
 

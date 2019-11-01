@@ -103,11 +103,12 @@ def text_get(reference):
             result = format_resolved_reference(returned_format,
                                                resolved=str(solve_reference(Hypotheses(parsed_ref))),
                                                reference=reference)
-            return return_response({'resolved': result}, 200, 'application/json; charset=UTF8')
         raise ValueError('Reference with no year and volume cannot be resolved.')
     except Exception as e:
         current_app.logger.error('Exception: %s', str(e))
-        return return_response({'error': 'unable to resolve the reference'}, 400, 'text/plain; charset=UTF8')
+        result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
+    finally:
+        return return_response({'resolved': result}, 200, 'application/json; charset=UTF8')
 
 
 @advertise(scopes=[], rate_limit=[1000, 3600 * 24])
@@ -207,7 +208,7 @@ def xml_post():
                     continue
             else:
                 result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=parsed_reference['refstr'])
-            continue
+                continue
         finally:
             results.append(result)
 
