@@ -103,7 +103,8 @@ def text_get(reference):
             result = format_resolved_reference(returned_format,
                                                resolved=str(solve_reference(Hypotheses(parsed_ref))),
                                                reference=reference)
-        raise ValueError('Reference with no year and volume cannot be resolved.')
+        else:
+            raise ValueError('Reference with no year and volume cannot be resolved.')
     except Exception as e:
         current_app.logger.error('Exception: %s', str(e))
         result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
