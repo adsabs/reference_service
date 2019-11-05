@@ -14,6 +14,7 @@ from referencesrv.resolver.hypotheses import Hypotheses
 
 bp = Blueprint('reference_service', __name__)
 
+RE_NUMERIC_VALUE = re.compile(r'\d')
 
 def text_parser(reference):
     """
@@ -84,21 +85,15 @@ def format_resolved_reference(returned_format, resolved, reference):
         return {'score': resolved[0], 'bibcode': resolved[1], 'reference': reference}
     return '%s -- %s' % (resolved, reference)
 
-
-@advertise(scopes=[], rate_limit=[1000, 3600 * 24])
-@bp.route('/text/<reference>', methods=['GET'])
-def text_get(reference):
+def text_resolve(reference, returned_format):
     """
 
     :param reference:
+    :param returned_format:
     :return:
     """
-    returned_format = request.headers.get('Accept', '')
-
-    reference = urllib.unquote(reference).encode('ascii', 'ignore').decode('ascii')
-    current_app.logger.info('received GET request with reference=`{reference}` to resolve in text mode'.format(reference=reference))
     try:
-        if bool(re.search(r'\d', reference)):
+        if bool(RE_NUMERIC_VALUE.search(reference)):
             parsed_ref = text_parser(reference)
             result = format_resolved_reference(returned_format,
                                                resolved=str(solve_reference(Hypotheses(parsed_ref))),
@@ -108,8 +103,25 @@ def text_get(reference):
     except Exception as e:
         current_app.logger.error('Exception: %s', str(e))
         result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
-    finally:
-        return return_response({'resolved': result}, 200, 'application/json; charset=UTF8')
+
+    return result
+
+@advertise(scopes=[], rate_limit=[1000, 3600 * 24])
+@bp.route('/text/<reference>', methods=['GET'])
+def text_get(reference):
+    """
+
+    :param reference:
+    :return:
+    """
+    returned_format = request.headers.get('Accept', 'text/plain')
+
+    reference = urllib.unquote(reference)
+
+    current_app.logger.info('received GET request with reference=`{reference}` to resolve in text mode'.format(reference=reference))
+
+    result = text_resolve(reference, returned_format)
+    return return_response({'resolved': result}, 200, 'application/json; charset=UTF8')
 
 
 @advertise(scopes=[], rate_limit=[1000, 3600 * 24])
@@ -138,26 +150,11 @@ def text_post():
 
     results = []
     for reference in references:
-        try:
-            if bool(re.search(r'\d', reference)):
-                parsed_ref = text_parser(reference)
-                result = format_resolved_reference(returned_format,
-                                                   resolved=str(solve_reference(Hypotheses(parsed_ref))),
-                                                   reference=reference)
-            else:
-                raise ValueError('Reference with no year and volume cannot be resolved.')
-        except Exception as e:
-            current_app.logger.error('Exception: %s' %(str(e)))
-            result = format_resolved_reference(returned_format, resolved='0.0 %s'%(19*'.'), reference=reference)
-            continue
-        finally:
-            results.append(result)
+        results.append(text_resolve(reference, returned_format))
 
-    if len(results) == len(references):
-        if returned_format == 'application/json':
-            return return_response({'resolved': results}, 200, 'application/json; charset=UTF8')
-        return return_response({'resolved':'\n'.join(results)}, 200, 'application/json; charset=UTF8')
-    return return_response({'error': 'unable to resolve any references'}, 400, 'text/plain; charset=UTF8')
+    if returned_format == 'application/json':
+        return return_response({'resolved': results}, 200, 'application/json; charset=UTF8')
+    return return_response({'resolved':'\n'.join(results)}, 200, 'application/json; charset=UTF8')
 
 
 @advertise(scopes=[], rate_limit=[1000, 3600 * 24])
