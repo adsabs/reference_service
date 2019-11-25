@@ -243,3 +243,11 @@ class TrigdictSourceMatcher(SourceMatcher):
         :return:
         """
         return self.source_dict[source_spec]
+
+    def has_key(self, stem):
+        """
+
+        :param stem:
+        :return:
+        """
+        return self.source_dict.has_key(stem)

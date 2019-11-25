@@ -4,6 +4,7 @@ Evaluating hypotheses and working out which is acceptable.
 
 import re
 import urllib
+import time
 
 from flask import current_app
 
@@ -227,6 +228,8 @@ def solve_for_fields(hypothesis):
     :param hypothesis:
     :return:
     """
+    start_time = time.time()
+
     if not hasattr(solve_for_fields, "query"):
         QUERIER = Querier()
         query = QUERIER.query
@@ -251,6 +254,8 @@ def solve_for_fields(hypothesis):
         score, sol = choose_solution(scored, query_string, hypothesis)
 
         return Solution(sol["bibcode"], score, hypothesis.name)
+
+    current_app.logger.debug("Query, matching, and scoring took %s ms" % ((time.time() - start_time) * 1000))
 
     raise Overflow("Solr too many record")
 

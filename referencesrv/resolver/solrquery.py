@@ -1,6 +1,7 @@
 import unidecode
 import json
 import requests
+import time
 
 from flask import current_app
 from referencesrv.client import client
@@ -16,6 +17,7 @@ class Querier(object):
         self.query_fields = current_app.config['REFERENCE_SERVICE_QUERY_FIELDS_SOLR']
         self.max_rows = current_app.config['REFERENCE_SERVICE_MAX_RECORDS_SOLR']
         self.standard_headers = {'Authorization': 'Bearer ' + current_app.config['REFERENCE_SERVICE_ADSWS_API_TOKEN']}
+        self.connect_solr = current_app.config['SOLR_CONNECTION_LIVE']
 
     def make_params(self, query):
         """
@@ -43,11 +45,13 @@ class Querier(object):
         current_app.logger.debug('Query is %s' % (query))
         solutions = []
 
-        if current_app.config['SOLR_CONNECTION_LIVE']:
+        if self.connect_solr:
+            start_time = time.time()
             response = client().get(
                 url=self.endpoint,
                 headers=self.standard_headers,
                 params=self.make_params(query))
+            current_app.logger.debug("Query executed in %s ms" % ((time.time() - start_time)*1000))
 
             # all non-200 responses
             if response.status_code != 200:

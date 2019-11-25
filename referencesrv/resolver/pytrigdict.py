@@ -219,3 +219,14 @@ class Trigdict(object):
         :return: 
         """
         return self.all_values
+
+    def has_key(self, key):
+        """
+
+        :param key:
+        :return:
+        """
+        try:
+            return self.val_dict.has_key(key)
+        except:
+            return None

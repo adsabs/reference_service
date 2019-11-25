@@ -96,6 +96,31 @@ class Hypotheses(object):
                 return False
         return True
 
+    def construct_bibcode(self):
+        """
+        BIBCODE_FIELDS = [
+            ('year', 0, 4, 'r', int),
+            ('journal', 4, 9, 'l', str),
+            ('volume', 9, 13, 'r', str),
+            ('qualifier', 13, 14, 'r', str),
+            ('page', 14, 18, 'r', str),
+            ('initial', 18, 19, 'r', str)
+        ]
+        :return:
+        """
+        year = self.digested_record["year"]
+        journal = get_best_bibstem_for(self.digested_record["pub"])
+        journal = journal + (5-len(journal)) * '.'
+        volume = self.digested_record.get("volume", "")
+        volume = (4 - len(volume)) * '.' + volume
+        page_qualifier = self.digested_record.get("qualifier", ".")
+        page = self.digested_record.get("page", "")[:4]
+        page = (4 - len(page)) * '.' + page
+        initial = self.normalized_authors[0] if self.normalized_authors else '.'
+        self.digested_record["bibcode"] = '{year}{journal}{volume}{page_qualifier}{page}{initial}'.format(
+                                            year=year,journal=journal,volume=volume,page_qualifier=page_qualifier,page=page,initial=initial)
+        return self.digested_record["bibcode"]
+
     def iter_hypotheses(self):
         match = self.ETAL_PAT.search(str(self.ref))
         has_etal = match is not None
@@ -114,6 +139,14 @@ class Hypotheses(object):
         if self.has_keys("arxiv"):
             yield Hypothesis("fielded-arxiv", {
                     "arxiv": self.digested_record["arxiv"]},
+                get_score_for_reference_identifier,
+                input_fields=self.digested_record)
+
+        # try the old way, construct bibcode
+        if self.has_keys("author", "year", "pub"):
+            self.construct_bibcode()
+            yield Hypothesis("fielded-bibcode", {
+                    "bibcode": self.digested_record["bibcode"]},
                 get_score_for_reference_identifier,
                 input_fields=self.digested_record)
 

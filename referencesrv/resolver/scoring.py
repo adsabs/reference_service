@@ -162,6 +162,8 @@ def get_score_for_reference_identifier(result_record, hypothesis):
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
     elif input_fields.get("arxiv", "not in ref") == get_arxiv_id(result_record):
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
+    elif input_fields.get("bibcode", "not in ref") == result_record.get("bibcode", ["not in ads"]):
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
     else:
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "bibcode")
 
