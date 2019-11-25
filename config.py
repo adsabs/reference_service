@@ -9,8 +9,8 @@ REFERENCE_SERVICE_SOLRQUERY_URL = "https://api.adsabs.harvard.edu/v1/search/quer
 REFERENCE_SERVICE_ADSWS_API_TOKEN = 'this is a secret api token!'
 REFERENCE_SERVICE_MAX_RECORDS_SOLR = 100
 
-REFERENCE_SERVICE_QUERY_FIELDS_SOLR = "author_norm,first_author_norm,year,title,thesis,pub,bibstem,doi," \
-                                      "volume,issue,page,page_range,bibcode,identifier,author,pub_raw,doctype"
+REFERENCE_SERVICE_QUERY_FIELDS_SOLR = "author,author_norm,first_author_norm,year,title,pub,pub_raw," \
+                                      "volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype"
 
 EVIDENCE_SCORE_RANGE = [-1,1]
 

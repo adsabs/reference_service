@@ -41,6 +41,9 @@ TRAILING_INIT_AUTHORS_PAT = re.compile("%s(%s%s)*(%s)?"%(
 
 COLLABORATION_PAT = re.compile(r"(?P<collaboration>[A-Za-z\s\-]*Collaboration,)")
 
+REFERENCE_LAST_NAME_EXTRACTOR = re.compile(r"(\w\w+\s*\w\w+\s*\w{0,1}\w+)")
+SINGLE_WORD_EXTRACTOR = re.compile(r"\w+")
+
 def get_author_pattern(ref_string):
     """
     returns a pattern matching authors in ref_string.
@@ -234,11 +237,11 @@ def count_matching_authors(ref_authors, ads_authors, ads_first_author=None):
     # clean up ADS authors to only contain surnames and be lowercased
     # golnaz: remove the punctuations,
     # also if there is etal or and or ed (editor) in ref_authors remove them too
-    ads_authors_lastname = [a.split(",")[0].strip().lower().replace(',', ' ').replace('-', ' ')
+    ads_authors_lastname = [a.split(',')[0].strip().lower().replace('-', ' ')
                             for a in ads_authors]
 
     ref_authors = EXTRAS_PAT.sub('', ref_authors.lower().replace('.', ' ').replace('-', ' '))
-    ref_authors_lastname = re.findall('(\w\w+\s*\w\w+\s*\w{0,1}\w+)', ref_authors)
+    ref_authors_lastname = REFERENCE_LAST_NAME_EXTRACTOR.findall(ref_authors)
 
     if ads_first_author is None:
         ads_first_author = ads_authors_lastname[0]
@@ -274,7 +277,7 @@ def count_matching_authors(ref_authors, ads_authors, ads_first_author=None):
     # be fixed)
     ads_authors_lastname_pattern = re.sub("[()]", "", ads_authors_lastname_pattern)
 
-    wordsNotInADS = re.findall(r"\w+", re.sub(ads_authors_lastname_pattern, "", '; '.join(ref_authors_lastname)))
+    wordsNotInADS = SINGLE_WORD_EXTRACTOR.findall(re.sub(ads_authors_lastname_pattern, "", '; '.join(ref_authors_lastname)))
     # remove recognized misspelled authors
     wordsNotInADS = [word for word in wordsNotInADS if word not in different]
     missing_in_ads = len(wordsNotInADS)

@@ -7,20 +7,23 @@ class DeferredSourceMatcher(object):
     # Defer loading of the actual source matcher to runtime to save on
     # startup time when we don't need it.
     """
+    def __init__(self):
+        self.source_matcher = None
+
     def __getattr__(self, att_name):
         """
 
         :param att_name:
         :return:
         """
-        global SOURCE_MATCHER
         if att_name=='__bases__':
             return (object,)
         elif att_name=='__name__':
             return 'Unready source matcher'
-        
-        SOURCE_MATCHER = TrigdictSourceMatcher()
-        return getattr(SOURCE_MATCHER, att_name)
+
+        if self.source_matcher is None:
+            self.source_matcher = TrigdictSourceMatcher()
+        return getattr(self.source_matcher, att_name)
 
 SOURCE_MATCHER = DeferredSourceMatcher()
 

@@ -72,6 +72,7 @@ class CRFClassifier(object):
     FORMATTED_MULTI_NUMERIC_EXTRACTOR = [re.compile(r'(?P<volume>\d+)\s+(?P<issue>\d+)\s*:(?P<page>[A-Z]?\d+\-?[A-Z]?\d*)'),
                                          re.compile(r'(?P<volume>\d+):(?P<page>[A-Z]?\d+\-?[A-Z]?\d*)(?P<issue>\s*)')]
     ETAL_PAT_EXTRACTOR = re.compile(r"([\w\W]+(?i)[\s,]*et\.?\s*al\.?)")
+    ETAL_PAT_ENDSWITH = re.compile(r"(.*et\.?\s*al\.?\s*)$")
     # to capture something like `Trujillo and Sheppard, 2014. Nature 507, p. 471-474.`
     # also capture `van der Klis 2000, ARA&A 38, 717`
     LAST_NAME_PREFIX = "d|de|De|des|Des|van|van der|von|Mc|der"
@@ -1369,7 +1370,7 @@ class CRFClassifierText(CRFClassifier):
         # whatever comes after authors are included as author.
         # ie, M. Bander Fractional quantum hall effect in nonuniform magnetic fields (1990) Phys. Rev. B41 9028
         # authors= M. Bander Fractional quantum hall effect in nonuniform magnetic fields
-        if not authors.endswith('et al.') and authors.count(',') == 0 and authors.count(';') == 0:
+        if not self.ETAL_PAT_ENDSWITH.search(authors) and authors.count(',') == 0 and authors.count(';') == 0:
             last_name_prefix = self.LAST_NAME_PREFIX.split('|')
             words = authors.replace('.', '').split()
             last_name = len([x for x in words if x[0].isupper() or x in last_name_prefix])

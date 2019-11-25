@@ -45,6 +45,20 @@ def get_best_bibstem_for(sourceSpec):
         raise KeyError(sourceSpec)
 
 
+def get_bibstem(stem):
+    """
+    checks to see if bibstem stem exist.
+
+    :param sourceSpec:
+    :return:
+    """
+    current_app.logger.debug("stem=%s" % (stem))
+    bibstem = SOURCE_MATCHER.has_key(stem.upper())
+    if bibstem:
+        return bibstem[0].strip('.')
+    return None
+
+
 def add_volume_evidence(evidences, ref_volume, ads_volume, ads_issue):
     """
     adds evidence from comparing volume specifications from

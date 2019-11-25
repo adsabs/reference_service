@@ -6,6 +6,7 @@ from flask_discoverer import advertise
 import json
 import urllib
 import re
+import time
 
 from referencesrv.parser.crf import CRFClassifierText, CRFClassifierXML
 from referencesrv.resolver.solve import solve_reference
@@ -25,9 +26,14 @@ def text_parser(reference):
         text_parser.status = False
         text_parser.crf = CRFClassifierText()
     if not text_parser.status:
+        start_time = time.time()
         text_parser.status = text_parser.crf.get_ready()
+        current_app.logger.debug("Text reference trained in %s ms" % ((time.time() - start_time) * 1000))
     if text_parser.status:
-        return text_parser.crf.parse(reference)
+        start_time = time.time()
+        result = text_parser.crf.parse(reference)
+        current_app.logger.debug("Text reference tagged in %s ms" % ((time.time() - start_time) * 1000))
+        return result
     raise Exception
 
 

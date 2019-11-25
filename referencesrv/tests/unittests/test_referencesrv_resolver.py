@@ -962,7 +962,7 @@ class TestResolver(TestCase):
         self.assertEqual(solrquery.make_params('author:("Accomazzi, A") AND year:"2019" AND bibstem:(AAS)'),
                          {'q': 'author:("Accomazzi, A") AND year:"2019" AND bibstem:(AAS)',
                           'rows': '100',
-                          'fl': u'author_norm,first_author_norm,year,title,thesis,pub,bibstem,doi,volume,issue,page,page_range,bibcode,identifier,author,pub_raw,doctype'})
+                          'fl': u'author,author_norm,first_author_norm,year,title,pub,pub_raw,volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype'})
 
         # no author_norm
         solution = {u'bibcode': u'2013JARS....7.3461V',
