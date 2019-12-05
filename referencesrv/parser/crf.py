@@ -13,8 +13,14 @@ from pystruct.models import ChainCRF
 from pystruct.learners import FrankWolfeSSVM
 from itertools import groupby
 from collections import OrderedDict
+import time
 
 from flask import current_app
+
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 from referencesrv.parser.getDataXML import get_xml_tagged_data_training, get_xml_tagged_data
 from referencesrv.parser.getDataText import get_arxiv_tagged_data
@@ -128,9 +134,30 @@ class CRFClassifier(object):
         self.academic_publishers = ' '.join(current_app.config['REFERENCE_SERVICE_ACADEMIC_PUBLISHERS'])
         self.stopwords = current_app.config['REFERENCE_SERVICE_STOP_WORDS']
 
-        self.clf = FrankWolfeSSVM(model=ChainCRF(), C=1.0, max_iter=50)
+    def create_crf(self):
+        """
 
-        self.X, self.y, self.label_code, self.folds = self.load_training_data()
+        :return:
+        """
+        self.crf = FrankWolfeSSVM(model=ChainCRF(), C=1.0, max_iter=50)
+        self.X, self.y, self.label_code, self.folds, generate_fold = self.load_training_data()
+
+        score = 0
+        # only need to iterate through if fold was generated
+        num_tries = 10 if generate_fold else 1
+        while (score <= 0.90) and (num_tries > 0):
+            try:
+                X_train, y_train = self.get_train_data()
+                self.train(X_train, y_train)
+
+                X_test, y_test = self.get_test_data()
+                score = self.evaluate(X_test, y_test)
+            except Exception as e:
+                current_app.logger.error('Exception: %s'%(str(e)))
+                current_app.logger.error(traceback.format_exc())
+                pass
+            num_tries -= 1
+        return (score > 0)
 
     def get_num_states(self):
         """
@@ -177,7 +204,7 @@ class CRFClassifier(object):
         :param y_train: is numpy array of labels
         :return:
         """
-        self.clf.fit(X_train, y_train)
+        self.crf.fit(X_train, y_train)
 
     def evaluate(self, X_test, y_test):
         """
@@ -186,7 +213,7 @@ class CRFClassifier(object):
         :param y_test:
         :return:
         """
-        return self.clf.score(X_test, y_test)
+        return self.crf.score(X_test, y_test)
 
     def decoder(self, numeric_label):
         """
@@ -217,6 +244,37 @@ class CRFClassifier(object):
                     numeric = numeric + 1
                     label_code[l] = numeric
         return label_code
+
+    def save(self, filename):
+        """
+        save object to a pickle file
+        :return:
+        """
+        try:
+            with open(filename, "wb") as f:
+                pickler = pickle.Pickler(f, -1)
+                pickler.dump(self.crf)
+                pickler.dump(self.label_code)
+            current_app.logger.info("saved crf in %s."%filename)
+        except Exception as e:
+            current_app.logger.error('Exception: %s' % (str(e)))
+            current_app.logger.error(traceback.format_exc())
+
+    def load(self, filename):
+        """
+
+        :return:
+        """
+        try:
+            with open(self.filename, "rb") as f:
+                unpickler = pickle.Unpickler(f)
+                self.crf = unpickler.load()
+                self.label_code = unpickler.load()
+            current_app.logger.info("loaded crf from %s."%filename)
+            return self.crf
+        except Exception as e:
+            current_app.logger.error('Exception: %s' % (str(e)))
+            current_app.logger.error(traceback.format_exc())
 
     def substitute(self, pattern, replace, text):
         """
@@ -878,27 +936,6 @@ class CRFClassifier(object):
             features.append(np.array(feature))
         return features, numeric_labels, label_code
 
-    def get_ready(self):
-        """
-
-        :return:
-        """
-        score = 0
-        num_tries = 10
-        while (score <= 0.90) and (num_tries > 0):
-            try:
-                X_train, y_train = self.get_train_data()
-                self.train(X_train, y_train)
-
-                X_test, y_test = self.get_test_data()
-                score = self.evaluate(X_test, y_test)
-            except Exception as e:
-                current_app.logger.error('Exception: %s'%(str(e)))
-                current_app.logger.error(traceback.format_exc())
-                pass
-            num_tries -= 1
-        return (score > 0)
-
 
 class CRFClassifierXML(CRFClassifier):
     def __init__(self):
@@ -921,11 +958,14 @@ class CRFClassifierXML(CRFClassifier):
 
         X, y, label_code = self.format_training_data(references)
 
-        # folds = list(np.random.choice(range(0, 9), len(y)))
         # for now use static division. see comments in foldModelText.dat
-        folds = self.get_folds_array(training_files_path + 'foldModelXML.dat')
+        generate_fold = False
+        if generate_fold:
+            folds = list(np.random.choice(range(0, 9), len(y)))
+        else:
+            folds = self.get_folds_array(training_files_path + 'foldModelXML.dat')
 
-        return np.array(X), np.array(y), label_code, np.array(folds)
+        return np.array(X), np.array(y), label_code, np.array(folds), generate_fold
 
     def merge_authors(self, reference_list):
         """
@@ -1002,7 +1042,7 @@ class CRFClassifierXML(CRFClassifier):
         if len(ref_words) > 0:
             for i in range(len(ref_words)):
                 features.append(self.get_data_features(ref_words, i, [], segment_dict))
-            ref_labels = self.decoder(self.clf.predict([np.array(features)])[0])
+            ref_labels = self.decoder(self.crf.predict([np.array(features)])[0])
             return segment_dict['refstr'], segment_dict['refplaintext'], ref_words, ref_labels
         return segment_dict['refstr'], segment_dict['refplaintext'], None, None
 
@@ -1030,6 +1070,7 @@ class CRFClassifierText(CRFClassifier):
 
     def __init__(self):
         CRFClassifier.__init__(self)
+        self.filename = os.path.dirname(__file__) + '/serialized_files/crfModelText.pkl'
 
     def load_training_data(self):
         """
@@ -1052,11 +1093,28 @@ class CRFClassifierText(CRFClassifier):
 
         X, y, label_code = self.format_training_data(references)
 
-        # folds = list(np.random.choice(range(0, 9), len(y)))
+        generate_fold = False
         # for now use static division. see comments in foldModelText.dat
-        folds = self.get_folds_array(training_files_path + 'foldModelText.dat')
+        if generate_fold:
+            folds = list(np.random.choice(range(0, 9), len(y)))
+        else:
+            folds = self.get_folds_array(training_files_path + 'foldModelText.dat')
 
-        return np.array(X), np.array(y), label_code, np.array(folds)
+        return np.array(X), np.array(y), label_code, np.array(folds), generate_fold
+
+    def save(self):
+        """
+
+        :return:
+        """
+        return CRFClassifier.save(self, self.filename)
+
+    def load(self):
+        """
+
+        :return:
+        """
+        return CRFClassifier.load(self, self.filename)
 
     def split_reference(self, reference_str, segment_dict):
         """
@@ -1460,7 +1518,7 @@ class CRFClassifierText(CRFClassifier):
         features = []
         for i in range(len(ref_words)):
             features.append(self.get_data_features(ref_words, i, [], segment_dict))
-        ref_labels = self.decoder(self.clf.predict([np.array(features)])[0])
+        ref_labels = self.decoder(self.crf.predict([np.array(features)])[0])
         return ref_words, ref_labels
 
     def parse(self, reference_str):
@@ -1469,5 +1527,47 @@ class CRFClassifierText(CRFClassifier):
         :param reference_str:
         :return:
         """
+        start_time = time.time()
         words, labels = self.classify(reference_str)
-        return self.reference(reference_str, words, labels)
+        current_app.logger.debug("Text reference classified in %s ms" % ((time.time() - start_time) * 1000))
+        start_time = time.time()
+        result = self.reference(reference_str, words, labels)
+        current_app.logger.debug("Text reference identified in %s ms" % ((time.time() - start_time) * 1000))
+        return result
+
+
+def create_text_model():
+    """
+    create a crf text model and save it to a pickle file
+
+    :return:
+    """
+    try:
+        start_time = time.time()
+        crf = CRFClassifierText()
+        if not (crf.create_crf() and crf.save()):
+            raise
+        current_app.logger.debug("Text reference trained and saved in %s ms" % ((time.time() - start_time) * 1000))
+        return crf
+    except Exception as e:
+        current_app.logger.error('Exception: %s' % (str(e)))
+        current_app.logger.error(traceback.format_exc())
+        return None
+
+def load_text_model():
+    """
+    load the text model from pickle file
+
+    :return:
+    """
+    try:
+        start_time = time.time()
+        crf = CRFClassifierText()
+        if not (crf.load()):
+            raise
+        current_app.logger.debug("Text reference loaded in %s ms" % ((time.time() - start_time) * 1000))
+        return crf
+    except Exception as e:
+        current_app.logger.error('Exception: %s' % (str(e)))
+        current_app.logger.error(traceback.format_exc())
+        return None

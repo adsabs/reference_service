@@ -28,6 +28,7 @@ class TestCRFClassifierText(TestCase):
 
         """
         crf_text = CRFClassifierText()
+        crf_text.create_crf()
         X_train, y_train = crf_text.get_train_data()
         crf_text.train(X_train, y_train)
 
@@ -53,17 +54,18 @@ class TestCRFClassifierText(TestCase):
         :return:
         """
         crf_text = CRFClassifierText()
-        if crf_text.get_ready():
-            reference_str = "C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017) 161101, [1710.05832]."
-            self.assertEqual(crf_text.parse(reference_str),
-                             {'title': 'GW170817 Observation of Gravitational Waves from a Binary Neutron Star',
-                              'journal': 'Phys Rev Lett',
-                              'arxiv': '1710.05832',
-                              'refstr': 'C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017) 161101, [1710.05832].',
-                              'volume': '119',
-                              'authors': 'C. Virgo, B. Abbott et al.',
-                              'year': '2017',
-                              'page': '161101'})
+        crf_text.create_crf()
+
+        reference_str = "C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017) 161101, [1710.05832]."
+        self.assertEqual(crf_text.parse(reference_str),
+                         {'title': 'GW170817 Observation of Gravitational Waves from a Binary Neutron Star',
+                          'journal': 'Phys Rev Lett',
+                          'arxiv': '1710.05832',
+                          'refstr': 'C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017) 161101, [1710.05832].',
+                          'volume': '119',
+                          'authors': 'C. Virgo, B. Abbott et al.',
+                          'year': '2017',
+                          'page': '161101'})
 
     def test_get_ready_with_doi(self):
         """
@@ -71,19 +73,19 @@ class TestCRFClassifierText(TestCase):
         :return:
         """
         crf_text = CRFClassifierText()
-        if crf_text.get_ready():
-            reference_str = 'Elisabete da Cunha et al. "The Taipan Galaxy Survey: Scientific Goals and Observing Strat- egy". In: Publications of the Astronomical Society of Australia 34, e047 (2017), e047. DOI: 10. 1017/ pasa. 2017.41. arXiv: 1706.01246.'
-            self.assertEqual(crf_text.parse(reference_str),
-                             {'doi': '10.1017/pasa.2017.41',
-                              'title': 'The Taipan Galaxy Survey Scientific Goals and Observing',
-                              'journal': 'Publications of the Astronomical Society of Australia',
-                              'arxiv': '1706.01246',
-                              'refstr': 'Elisabete da Cunha et al. "The Taipan Galaxy Survey: Scientific Goals and Observing Strat- egy". In: Publications of the Astronomical Society of Australia 34, e047 (2017), e047. DOI: 10. 1017/ pasa. 2017.41. arXiv: 1706.01246.',
-                              'volume': '34',
-                              'authors': 'Elisabete da Cunha et al.',
-                              'year': '2017',
-                              'page': 'e047'})
+        crf_text.create_crf()
 
+        reference_str = 'Elisabete da Cunha et al. "The Taipan Galaxy Survey: Scientific Goals and Observing Strat- egy". In: Publications of the Astronomical Society of Australia 34, e047 (2017), e047. DOI: 10. 1017/ pasa. 2017.41. arXiv: 1706.01246.'
+        self.assertEqual(crf_text.parse(reference_str),
+                         {'doi': '10.1017/pasa.2017.41',
+                          'title': 'The Taipan Galaxy Survey Scientific Goals and Observing',
+                          'journal': 'Publications of the Astronomical Society of Australia',
+                          'arxiv': '1706.01246',
+                          'refstr': 'Elisabete da Cunha et al. "The Taipan Galaxy Survey: Scientific Goals and Observing Strat- egy". In: Publications of the Astronomical Society of Australia 34, e047 (2017), e047. DOI: 10. 1017/ pasa. 2017.41. arXiv: 1706.01246.',
+                          'volume': '34',
+                          'authors': 'Elisabete da Cunha et al.',
+                          'year': '2017',
+                          'page': 'e047'})
 
     def test_get_ready_no_identifier(self):
         """
@@ -91,15 +93,16 @@ class TestCRFClassifierText(TestCase):
         :return:
         """
         crf_text = CRFClassifierText()
-        if crf_text.get_ready():
-            reference_str = "C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017)."
-            self.assertEqual(crf_text.parse(reference_str),
-                             {'title': 'GW170817 Observation of Gravitational Waves from a Binary Neutron Star',
-                              'journal': 'Phys Rev Lett',
-                              'authors': 'C. Virgo, B. Abbott et al.',
-                              'refstr': 'C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017).',
-                              'volume': '119',
-                              'year': '2017'})
+        crf_text.create_crf()
+
+        reference_str = "C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017)."
+        self.assertEqual(crf_text.parse(reference_str),
+                         {'title': 'GW170817 Observation of Gravitational Waves from a Binary Neutron Star',
+                          'journal': 'Phys Rev Lett',
+                          'authors': 'C. Virgo, B. Abbott et al.',
+                          'refstr': 'C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017).',
+                          'volume': '119',
+                          'year': '2017'})
 
     def test_get_ready_no_title(self):
         """
@@ -107,20 +110,22 @@ class TestCRFClassifierText(TestCase):
         :return:
         """
         crf_text = CRFClassifierText()
-        if crf_text.get_ready():
-            reference_str = 'Trujillo et al., 2018. Division for Planetary Sciences, vol 50, #311.09.'
-            self.assertEqual(crf_text.parse(reference_str),
-                             {'journal': 'Division for Planetary Sciences',
-                              'authors': 'Trujillo et al.',
-                              'refstr': 'Trujillo et al., 2018. Division for Planetary Sciences, vol 50, #311.09.',
-                              'volume': '50',
-                              'year': '2018',
-                              'page': '311.09'})
+        crf_text.create_crf()
+
+        reference_str = 'Trujillo et al., 2018. Division for Planetary Sciences, vol 50, #311.09.'
+        self.assertEqual(crf_text.parse(reference_str),
+                         {'journal': 'Division for Planetary Sciences',
+                          'authors': 'Trujillo et al.',
+                          'refstr': 'Trujillo et al., 2018. Division for Planetary Sciences, vol 50, #311.09.',
+                          'volume': '50',
+                          'year': '2018',
+                          'page': '311.09'})
 
     def test_get_num_states(self):
         crf_text = CRFClassifierText()
-        if crf_text.get_ready():
-            self.assertEqual(crf_text.get_num_states(), 37)
+        crf_text.create_crf()
+
+        self.assertEqual(crf_text.get_num_states(), 37)
 
     def test_split_reference(self):
         """
@@ -208,6 +213,8 @@ class TestCRFClassifierXML(TestCase):
 
         """
         crf_xml = CRFClassifierXML()
+        crf_xml.create_crf()
+
         X_train, y_train = crf_xml.get_train_data()
         crf_xml.train(X_train, y_train)
 
