@@ -16,6 +16,15 @@ bp = Blueprint('reference_service', __name__)
 
 RE_NUMERIC_VALUE = re.compile(r'\d')
 
+@bp.before_app_first_request
+def text_model():
+    """
+
+    :return:
+    """
+    current_app.extensions['text_crf'] = load_text_model()
+
+
 def text_parser(reference):
     """
 
@@ -24,8 +33,6 @@ def text_parser(reference):
     # to save a new text model
     # create_text_model()
 
-    if 'text_crf' not in current_app.extensions:
-        current_app.extensions['text_crf'] = load_text_model()
     return current_app.extensions['text_crf'].parse(reference)
 
 
