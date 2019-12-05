@@ -6,9 +6,8 @@ from flask_discoverer import advertise
 import json
 import urllib
 import re
-import time
 
-from referencesrv.parser.crf import CRFClassifierText, CRFClassifierXML
+from referencesrv.parser.crf import CRFClassifierText, CRFClassifierXML, create_text_model, load_text_model
 from referencesrv.resolver.solve import solve_reference
 from referencesrv.resolver.hypotheses import Hypotheses
 
@@ -22,19 +21,12 @@ def text_parser(reference):
 
     :return:
     """
-    if not hasattr(text_parser, "crf"):
-        text_parser.status = False
-        text_parser.crf = CRFClassifierText()
-    if not text_parser.status:
-        start_time = time.time()
-        text_parser.status = text_parser.crf.get_ready()
-        current_app.logger.debug("Text reference trained in %s ms" % ((time.time() - start_time) * 1000))
-    if text_parser.status:
-        start_time = time.time()
-        result = text_parser.crf.parse(reference)
-        current_app.logger.debug("Text reference tagged in %s ms" % ((time.time() - start_time) * 1000))
-        return result
-    raise Exception
+    # to save a new text model
+    # create_text_model()
+
+    if 'text_crf' not in current_app.extensions:
+        current_app.extensions['text_crf'] = load_text_model()
+    return current_app.extensions['text_crf'].parse(reference)
 
 
 def xml_parser(reference_buffer):

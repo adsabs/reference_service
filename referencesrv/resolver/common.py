@@ -21,9 +21,9 @@ class DeferredSourceMatcher(object):
         elif att_name=='__name__':
             return 'Unready source matcher'
 
-        if self.source_matcher is None:
-            self.source_matcher = TrigdictSourceMatcher()
-        return getattr(self.source_matcher, att_name)
+        if 'source_matcher' not in current_app.extensions:
+            current_app.extensions['source_matcher'] = TrigdictSourceMatcher()
+        return getattr(current_app.extensions['source_matcher'], att_name)
 
 SOURCE_MATCHER = DeferredSourceMatcher()
 
