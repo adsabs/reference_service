@@ -256,9 +256,11 @@ class CRFClassifier(object):
                 pickler.dump(self.crf)
                 pickler.dump(self.label_code)
             current_app.logger.info("saved crf in %s."%filename)
+            return True
         except Exception as e:
             current_app.logger.error('Exception: %s' % (str(e)))
             current_app.logger.error(traceback.format_exc())
+            return False
 
     def load(self, filename):
         """
@@ -826,6 +828,104 @@ class CRFClassifier(object):
                 return 3
         return 0
 
+    def get_data_features_author(self, ref_data, index, ref_label, segment_dict):
+        """
+
+        :param ref_data:
+        :param index:
+        :param ref_label:
+        :param segment_dict:
+        :return:
+        """
+        where = self.where_in_author(ref_data, index, ref_label, segment_dict)
+        return [
+            self.is_author(ref_data, index, ref_label, segment_dict),  # is it more likely author
+            1 if where == 1 else 0,  # if it is author determine if first word (usually lastname, but can be firstname or first initial, or collaborator)
+            1 if where == 2 else 0,  # any of the middle words
+            1 if where == 3 else 0,  # or the last (could be et al)
+        ]
+
+    def get_data_features_title(self, ref_data, index, ref_label, segment_dict):
+        """
+
+        :param ref_data:
+        :param index:
+        :param ref_label:
+        :param segment_dict:
+        :return:
+        """
+        where = self.where_in_title(ref_data, index, ref_label, segment_dict)
+        return [
+            self.is_title(ref_data, index, ref_label, segment_dict),  # is it more likely part of title?
+            1 if where == 1 else 0,  # first word in title
+            1 if where == 2 else 0,  # last word in title
+            1 if where == 3 else 0,  # middle words in title
+        ]
+
+    def get_data_features_journal(self, ref_data, index, ref_label, segment_dict):
+        """
+
+        :param ref_data:
+        :param index:
+        :param ref_label:
+        :param segment_dict:
+        :return:
+        """
+        where = self.where_in_journal(ref_data, index, ref_label, segment_dict)
+        return [
+            self.is_journal(ref_data, index, ref_label, segment_dict),  # is it more likely part of journal?
+            1 if where == 1 else 0,  # first word in journal
+            1 if where == 2 else 0,  # last word in journal
+            1 if where == 3 else 0,  # middle words in journal
+        ]
+
+    def get_data_features_identifying_word(self, ref_data, index, ref_label):
+        """
+
+        :param ref_data:
+        :param index:
+        :param ref_label:
+        :return:
+        """
+        which = self.which_identifying_word(ref_data, index, ref_label)
+        return [
+            int(self.is_identifying_word(ref_data[index]) > 0),
+            1 if which == 1 else 0,   # 1 if arXiv,
+            1 if which == 2 else 0,   # 2 if editor,
+            1 if which == 3 else 0,   # 3 if et al,
+            1 if which == 4 else 0,   # 4 if doi,
+            1 if which == 5 else 0,   # 5 if issue,
+            1 if which == 6 else 0,   # 6 if issn
+            1 if which == 7 else 0,   # 7 if page,
+            1 if which == 8 else 0,   # 8 if version,
+            1 if which == 9 else 0,   # 9 if volume,
+            1 if which == 10 else 0,  # 10 if isbn,
+            1 if which == 11 else 0,  # 11 if ascl,
+        ]
+
+    def get_data_features_punctuation(self, ref_data, index, ref_label):
+        """
+
+        :param ref_data:
+        :param index:
+        :param ref_label:
+        :return:
+        """
+        which = self.which_punctuation(ref_data, index, ref_label)
+        return [
+            int(self.is_punctuation(ref_data[index]) > 0),
+            1 if which == 1 else 0,   # 1 if brackets,
+            1 if which == 2 else 0,   # 2 if colon,
+            1 if which == 3 else 0,   # 3 if comma,
+            1 if which == 4 else 0,   # 4 if dot,
+            1 if which == 5 else 0,   # 5 if parenthesis,
+            1 if which == 6 else 0,   # 6 if quotes (both single and double),
+            1 if which == 7 else 0,   # 7 if num signs,
+            1 if which == 8 else 0,   # 8 if hypen,
+            1 if which == 9 else 0,   # 9 if forward slash,
+            1 if which == 10 else 0,  # 10 if semicolon,
+        ]
+
     def get_data_features(self, ref_data, index, ref_label=[], segment_dict={}):
         """
 
@@ -835,77 +935,51 @@ class CRFClassifier(object):
         :param noun_phrase
         :return:
         """
-        return [
-            len(ref_data[index]),                                                                                       # length of element
-            len(ref_data[index-1]) if index > 0 else 0,                                                                 # length of previous element if any
-            len(ref_data[index+1]) if index < len(ref_data) - 1 else 0,                                                 # length of next element if any
-            int(self.IS_CAPITAL.match(ref_data[index]) is not None),                                                    # is element all capital
-            1 if index > 0 and ref_data[index-1][0].isupper() else 0,                                                   # is previous element, if any, all capital
-            1 if index < len(ref_data) - 1 and ref_data[index+1][0].isupper() else 0,                                   # is next element, if any, all capital
-            int(ref_data[index][0].isupper()),                                                                          # is first character capital
-            int(ref_data[index-1][0].isupper()) if index > 0 else 0,                                                    # is previous element, if any, first character capital
-            int(ref_data[index+1][0].isupper()) if index < len(ref_data) - 1 else 0,                                    # is next element's, if any, first character capital
-            int(self.IS_ALPHABET.match(ref_data[index]) is not None),                                                   # is alphabet only, consider hyphenated words also
-            int(self.IS_ALPHABET.match(ref_data[index-1]) is not None) if index > 0 else 0,                             # what about previous word, if any
-            int(self.IS_ALPHABET.match(ref_data[index+1]) is not None) if index < len(ref_data) - 1 else 0,             # and next word, if any
-            int(self.IS_NUMERIC.match(ref_data[index]) is not None),                                                    # is numeric only, consider the page range with - being also numeric
-            int(self.IS_NUMERIC.match(ref_data[index-1]) is not None) if index > 0 else 0,                              # what about previous word, if any
-            int(self.IS_NUMERIC.match(ref_data[index+1]) is not None) if index < len(ref_data) - 1 else 0,              # and next word, if any
-            self.is_numeric(ref_data, index, ref_label, segment_dict),                                                  # is numeric only
-            self.is_numeric(ref_data, index-1, ref_label, segment_dict) if index > 0 else 0,                            # what about previous word, if any
-            self.is_numeric(ref_data, index+1, ref_label, segment_dict) if index < len(ref_data) - 1 else 0,            # and next word, if any
-            int(self.IS_ALPHANUMERIC.match(ref_data[index]) is not None),                                               # is alphanumeric, must at least one digit and one alphabet character
-            int(self.IS_ALPHANUMERIC.match(ref_data[index-1]) is not None) if index > 0 else 0,                         # what about previous word, if any
-            int(self.IS_ALPHANUMERIC.match(ref_data[index+1]) is not None) if index < len(ref_data) - 1 else 0,         # and next word, if any
-            self.is_stopword(ref_data, index, ref_label),                                                               # is it stopword
-            self.is_stopword(ref_data, index-1, ref_label) if index > 0 else 0,                                         # what about previous word, if any
-            self.is_stopword(ref_data, index+1, ref_label) if index < len(ref_data) - 1 else 0,                         # and next word, if any
-            self.is_author(ref_data, index, ref_label, segment_dict),                                                   # is it more likey author
-            1 if self.where_in_author(ref_data, index, ref_label, segment_dict) == 1 else 0,                            # if it is author determeine if first word (usually lastname, but can be firstname or first intial, or collabrator)
-            1 if self.where_in_author(ref_data, index, ref_label, segment_dict) == 2 else 0,                            # any of the middle words
-            1 if self.where_in_author(ref_data, index, ref_label, segment_dict) == 3 else 0,                            # or the last (could be et al)
-            self.is_year_tag(ref_data, index, ref_label, segment_dict),                                                 # is it a year?
-            self.is_page_tag(ref_data, index, ref_label, segment_dict),                                                 # is it a page?
-            self.is_volume_tag(ref_data, index, ref_label, segment_dict),                                               # is it more likely volume?
-            self.is_issue_tag(ref_data, index, ref_label, segment_dict),                                                # is it more likely issue?
-            self.is_arxiv_tag(ref_data, index, ref_label, segment_dict),                                                # is it more likely arXiv id?
-            self.is_doi_tag(ref_data, index, ref_label, segment_dict),                                                  # is it more likely doi?
-            self.is_issn_tag(ref_data, index, ref_label, segment_dict),                                                 # is it more likely issn?
-            self.is_ascl_tag(ref_data, index, ref_label, segment_dict),                                                 # is it more likely ascl?
-            self.is_title(ref_data, index, ref_label, segment_dict),                                                    # is it more likely part of title?
-            1 if self.where_in_title(ref_data, index, ref_label, segment_dict) == 1 else 0,                             # first word in title
-            1 if self.where_in_title(ref_data, index, ref_label, segment_dict) == 2 else 0,                             # last word in title
-            1 if self.where_in_title(ref_data, index, ref_label, segment_dict) == 3 else 0,                             # middle words in title
-            self.is_journal(ref_data, index, ref_label, segment_dict),                                                  # is it more likey part of journal?
-            1 if self.where_in_journal(ref_data, index, ref_label, segment_dict) == 1 else 0,                           # first word in journal
-            1 if self.where_in_journal(ref_data, index, ref_label, segment_dict) == 2 else 0,                           # last word in journal
-            1 if self.where_in_journal(ref_data, index, ref_label, segment_dict) == 3 else 0,                           # middle words in journal
-            self.is_publisher_location(ref_data, index, ref_label),                                                     # is it city or country name
-            self.is_publisher_name(ref_data, index, ref_label, segment_dict),
-            int(self.is_identifying_word(ref_data[index]) > 0),
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 1 else 0,                                   # 1 if arXiv,
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 2 else 0,                                   # 2 if editor,
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 3 else 0,                                   # 3 if et al,
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 4 else 0,                                   # 4 if doi,
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 5 else 0,                                   # 5 if issue,
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 6 else 0,                                   # 6 if issn
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 7 else 0,                                   # 7 if page,
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 8 else 0,                                   # 8 if version,
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 9 else 0,                                   # 9 if volume,
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 10 else 0,                                  # 10 if isbn,
-            1 if self.which_identifying_word(ref_data, index, ref_label) == 11 else 0,                                  # 11 if ascl,
-            int(self.is_punctuation(ref_data[index]) > 0),
-            1 if self.which_punctuation(ref_data, index, ref_label) == 1 else 0,                                        # 1 if brackets,
-            1 if self.which_punctuation(ref_data, index, ref_label) == 2 else 0,                                        # 2 if colon,
-            1 if self.which_punctuation(ref_data, index, ref_label) == 3 else 0,                                        # 3 if comma,
-            1 if self.which_punctuation(ref_data, index, ref_label) == 4 else 0,                                        # 4 if dot,
-            1 if self.which_punctuation(ref_data, index, ref_label) == 5 else 0,                                        # 5 if parenthesis,
-            1 if self.which_punctuation(ref_data, index, ref_label) == 6 else 0,                                        # 6 if quotes (both single and double),
-            1 if self.which_punctuation(ref_data, index, ref_label) == 7 else 0,                                        # 7 if num signs,
-            1 if self.which_punctuation(ref_data, index, ref_label) == 8 else 0,                                        # 8 if hypen,
-            1 if self.which_punctuation(ref_data, index, ref_label) == 9 else 0,                                        # 9 if forward slash,
-            1 if self.which_punctuation(ref_data, index, ref_label) == 10 else 0,                                       # 10 if semicolon,
-        ]
+        start_time = time.time()
+        last_index = len(ref_data) - 1
+        result = [
+            len(ref_data[index]),                                                                           # length of element
+            len(ref_data[index-1]) if index > 0 else 0,                                                     # length of previous element if any
+            len(ref_data[index+1]) if index < last_index else 0,                                            # length of next element if any
+            int(self.IS_CAPITAL.match(ref_data[index]) is not None),                                        # is element all capital
+            int(self.IS_CAPITAL.match(ref_data[index-1]) is not None) if index > 0 else 0,                  # is previous element, if any, all capital
+            int(self.IS_CAPITAL.match(ref_data[index+1]) is not None) if index < last_index else 0,         # is next element, if any, all capital
+            int(ref_data[index][0].isupper()),                                                              # is first character capital
+            int(ref_data[index-1][0].isupper()) if index > 0 else 0,                                        # is previous element, if any, first character capital
+            int(ref_data[index+1][0].isupper()) if index < last_index else 0,                               # is next element's, if any, first character capital
+            int(self.IS_ALPHABET.match(ref_data[index]) is not None),                                       # is alphabet only, consider hyphenated words also
+            int(self.IS_ALPHABET.match(ref_data[index-1]) is not None) if index > 0 else 0,                 # what about previous word, if any
+            int(self.IS_ALPHABET.match(ref_data[index+1]) is not None) if index < last_index else 0,        # and next word, if any
+            int(self.IS_NUMERIC.match(ref_data[index]) is not None),                                        # is numeric only, consider the page range with - being also numeric
+            int(self.IS_NUMERIC.match(ref_data[index-1]) is not None) if index > 0 else 0,                  # what about previous word, if any
+            int(self.IS_NUMERIC.match(ref_data[index+1]) is not None) if index < last_index else 0,         # and next word, if any
+            self.is_numeric(ref_data, index, ref_label, segment_dict),                                      # is numeric only
+            self.is_numeric(ref_data, index-1, ref_label, segment_dict) if index > 0 else 0,                # what about previous word, if any
+            self.is_numeric(ref_data, index+1, ref_label, segment_dict) if index < last_index else 0,       # and next word, if any
+            int(self.IS_ALPHANUMERIC.match(ref_data[index]) is not None),                                   # is alphanumeric, must at least one digit and one alphabet character
+            int(self.IS_ALPHANUMERIC.match(ref_data[index-1]) is not None) if index > 0 else 0,             # what about previous word, if any
+            int(self.IS_ALPHANUMERIC.match(ref_data[index+1]) is not None) if index < last_index else 0,    # and next word, if any
+            self.is_stopword(ref_data, index, ref_label),                                                   # is it stopword
+            self.is_stopword(ref_data, index-1, ref_label) if index > 0 else 0,                             # what about previous word, if any
+            self.is_stopword(ref_data, index+1, ref_label) if index < last_index else 0,                    # and next word, if any
+            self.is_year_tag(ref_data, index, ref_label, segment_dict),                                     # is it a year?
+            self.is_page_tag(ref_data, index, ref_label, segment_dict),                                     # is it a page?
+            self.is_volume_tag(ref_data, index, ref_label, segment_dict),                                   # is it more likely volume?
+            self.is_issue_tag(ref_data, index, ref_label, segment_dict),                                    # is it more likely issue?
+            self.is_arxiv_tag(ref_data, index, ref_label, segment_dict),                                    # is it more likely arXiv id?
+            self.is_doi_tag(ref_data, index, ref_label, segment_dict),                                      # is it more likely doi?
+            self.is_issn_tag(ref_data, index, ref_label, segment_dict),                                     # is it more likely issn?
+            self.is_ascl_tag(ref_data, index, ref_label, segment_dict),                                     # is it more likely ascl?
+            self.is_publisher_location(ref_data, index, ref_label),                                         # is it city or country name
+            self.is_publisher_name(ref_data, index, ref_label, segment_dict),                               # is it the publisher name
+        ] \
+            + self.get_data_features_author(ref_data, index, ref_label, segment_dict) \
+            + self.get_data_features_title(ref_data, index, ref_label, segment_dict) \
+            + self.get_data_features_journal(ref_data, index, ref_label, segment_dict) \
+            + self.get_data_features_identifying_word(ref_data, index, ref_label) \
+            + self.get_data_features_punctuation(ref_data, index, ref_label)
+        current_app.logger.debug("Features extracted in %s ms" % ((time.time() - start_time) * 1000))
+        return result
 
     def format_training_data(self, the_data):
         """

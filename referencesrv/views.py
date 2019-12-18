@@ -10,6 +10,7 @@ import re
 from referencesrv.parser.crf import CRFClassifierText, CRFClassifierXML, create_text_model, load_text_model
 from referencesrv.resolver.solve import solve_reference
 from referencesrv.resolver.hypotheses import Hypotheses
+from referencesrv.resolver.sourcematchers import create_source_matcher, load_source_matcher
 
 
 bp = Blueprint('reference_service', __name__)
@@ -23,15 +24,13 @@ def text_model():
     :return:
     """
     current_app.extensions['text_crf'] = load_text_model()
-
+    current_app.extensions['source_matcher'] = load_source_matcher()
 
 def text_parser(reference):
     """
 
     :return:
     """
-    # to save a new text model
-    # create_text_model()
 
     return current_app.extensions['text_crf'].parse(reference)
 
@@ -220,3 +219,28 @@ def xml_post():
             return return_response({'resolved': results}, 200, 'application/json; charset=UTF8')
         return return_response({'resolved':'\n'.join(results)}, 200, 'application/json; charset=UTF8')
     return return_response({'error': 'unable to resolve any references'}, 400, 'text/plain; charset=UTF8')
+
+
+@bp.route('/pickle_crf', methods=['GET'])
+def pickle_crf():
+    """
+    endpoint to be called locally only whenever the models (either text or xml) has been changed
+
+    :return:
+    """
+    # to save a new text model
+    create_text_model()
+
+    return return_response({'OK': 'objects saved'}, 200, 'text/plain; charset=UTF8')
+
+@bp.route('/pickle_source_matcher', methods=['GET'])
+def pickle_source_matcher():
+    """
+    endpoint to be called locally only whenever the files of source matcher has been updated
+
+    :return:
+    """
+    # to save a new source matcher()
+    create_source_matcher()
+
+    return return_response({'OK': 'objects saved'}, 200, 'text/plain; charset=UTF8')

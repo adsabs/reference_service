@@ -1,7 +1,5 @@
 from flask import current_app
 
-from referencesrv.resolver.sourcematchers import TrigdictSourceMatcher
-
 class DeferredSourceMatcher(object):
     """
     # Defer loading of the actual source matcher to runtime to save on
@@ -21,8 +19,6 @@ class DeferredSourceMatcher(object):
         elif att_name=='__name__':
             return 'Unready source matcher'
 
-        if 'source_matcher' not in current_app.extensions:
-            current_app.extensions['source_matcher'] = TrigdictSourceMatcher()
         return getattr(current_app.extensions['source_matcher'], att_name)
 
 SOURCE_MATCHER = DeferredSourceMatcher()

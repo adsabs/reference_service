@@ -27,6 +27,7 @@ from referencesrv.resolver.solve import make_solr_condition, inspect_doubtful_so
 from referencesrv.resolver.hypotheses import Hypotheses
 from referencesrv.resolver.solrquery import Querier
 from referencesrv.resolver.specialrules import iter_journal_specific_hypotheses, get_score_for_baas_match
+from referencesrv.resolver.sourcematchers import load_source_matcher
 
 
 class TestResolver(TestCase):
@@ -36,6 +37,12 @@ class TestResolver(TestCase):
            })
         return self.current_app
 
+
+    def setUp(self):
+        """
+        load the necessary objects
+        """
+        self.current_app.extensions['source_matcher'] = load_source_matcher()
 
     def test_get_author_pattern(self):
         """
@@ -397,7 +404,6 @@ class TestResolver(TestCase):
                        input_fields=input_fields,
                        has_etal=False)
         evidences = get_serial_score_for_input_fields(result_record, hypothesis)
-        print evidences
         # matches are authors, year, pub, and volume
         self.assertEqual(evidences.get_score(), 4)
 
