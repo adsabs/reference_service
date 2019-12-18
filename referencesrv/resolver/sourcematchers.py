@@ -6,6 +6,13 @@ people use to reference publications into bibstems.
 
 import os
 import re
+import time
+import traceback
+
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 from flask import current_app
 from referencesrv.resolver import pytrigdict
@@ -84,10 +91,10 @@ class TrigdictSourceMatcher(SourceMatcher):
     If constucted without an argument, this uses the default ADS bibstem
     definitions.
     """
-    def __init__(self, authority_files=None):
+    def __init__(self, authority_files=None, load_sources=True):
         """
-        
-        :param authority_files: 
+
+        :param authority_files:
         """
         if authority_files is not None:
             self.authority_files = authority_files
@@ -100,8 +107,9 @@ class TrigdictSourceMatcher(SourceMatcher):
                               'preprints.dat',
                               'aps_abbrev.dat',
                               'bibstems.dat' ]]
-        self.bibstem_words = {}
-        self.load_sources()
+        if load_sources:
+            self.bibstem_words = {}
+            self.load_sources()
 
     def add_pub(self, stem, source):
         """
@@ -251,3 +259,49 @@ class TrigdictSourceMatcher(SourceMatcher):
         :return:
         """
         return self.source_dict.has_key(stem)
+
+source_matcher_pickle_file = os.path.dirname(__file__) + '/serialized_files/sourceMatcher.pkl'
+
+def create_source_matcher():
+    """
+    create TrigdictSourceMatcher object and save it to a pickle file
+
+    :return:
+    """
+    try:
+        start_time = time.time()
+        source_matcher = TrigdictSourceMatcher()
+        with open(source_matcher_pickle_file, "wb") as f:
+            pickler = pickle.Pickler(f, -1)
+            pickler.dump(source_matcher.source_dict)
+            pickler.dump(source_matcher.bibstem_words)
+            pickler.dump(source_matcher.confstems)
+            current_app.logger.info("saved source_matcher in %s."%source_matcher_pickle_file)
+            current_app.logger.debug("source matcher files processed and saved in %s ms" % ((time.time() - start_time) * 1000))
+            return source_matcher
+    except Exception as e:
+        current_app.logger.error('Exception: %s' % (str(e)))
+        current_app.logger.error(traceback.format_exc())
+        return None
+
+def load_source_matcher():
+    """
+    load TrigdictSourceMatcher object from pickle file
+
+    :return:
+    """
+    try:
+        start_time = time.time()
+        source_matcher = TrigdictSourceMatcher(load_sources=False)
+        with open(source_matcher_pickle_file, "rb") as f:
+            unpickler = pickle.Unpickler(f)
+            source_matcher.source_dict = unpickler.load()
+            source_matcher.bibstem_words = unpickler.load()
+            source_matcher.confstems = unpickler.load()
+            current_app.logger.info("loaded source_matcher from %s."%source_matcher_pickle_file)
+            current_app.logger.debug("source matcher loaded in %s ms" % ((time.time() - start_time) * 1000))
+            return source_matcher
+    except Exception as e:
+        current_app.logger.error('Exception: %s' % (str(e)))
+        current_app.logger.error(traceback.format_exc())
+        return None
