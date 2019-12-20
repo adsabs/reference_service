@@ -1,3 +1,5 @@
+import time
+
 from flask import current_app
 
 class DeferredSourceMatcher(object):
@@ -19,7 +21,10 @@ class DeferredSourceMatcher(object):
         elif att_name=='__name__':
             return 'Unready source matcher'
 
-        return getattr(current_app.extensions['source_matcher'], att_name)
+        start_time = time.time()
+        result = getattr(current_app.extensions['source_matcher'], att_name)
+        current_app.logger.debug("source_matcher found a match in %s ms" % ((time.time() - start_time) * 1000))
+        return result
 
 SOURCE_MATCHER = DeferredSourceMatcher()
 
