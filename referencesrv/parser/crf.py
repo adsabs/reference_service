@@ -66,7 +66,7 @@ class CRFClassifier(object):
                                re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*(?P<journal>\s*)'),
                                re.compile(r'^[.\s]*(?P<title>[A-Z]+[A-za-z\'\s:-]+)[.,\s]+(?P<journal>[A-Z\s\.]+)[\s\d,]+.*'),]
     TITLE_JOURNAL_PUNCTUATION_REMOVER = re.compile(r'[:\(\)\-\[\]]')
-    JOURNAL_ONLY_EXTRACTOR = re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>[A-Z][A-Za-z&\-]*)[\d,.\s][\s\d\w,]*$')
+    JOURNAL_ONLY_EXTRACTOR = re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>[A-Z][A-Za-z&\-]*)[\d,.\s\w-]*$')
     EDITOR_EXTRACTOR = re.compile(r'(:?[Ii][Nn][":\s]+)([A-Z].*)$')
     EDITOR_RESIDUE = re.compile(r'(I[Nn]+[:\s]{1,2}?\s+([\(]?[Ee]+d[s\.\)\s]+)?)')
     ARXIV_ID_EXTRACTOR = re.compile(r'(\w+\-\w+/\d+|\w+/\d{7}|\d{4}\.\d{4,5})(v?\d*)')
@@ -139,6 +139,7 @@ class CRFClassifier(object):
 
         :return:
         """
+        self.nltk_tagger = nltk.tag._get_tagger()
         self.crf = FrankWolfeSSVM(model=ChainCRF(), C=1.0, max_iter=50)
         self.X, self.y, self.label_code, self.folds, generate_fold = self.load_training_data()
 
@@ -255,6 +256,7 @@ class CRFClassifier(object):
                 pickler = pickle.Pickler(f, -1)
                 pickler.dump(self.crf)
                 pickler.dump(self.label_code)
+                pickler.dump(self.nltk_tagger)
             current_app.logger.info("saved crf in %s."%filename)
             return True
         except Exception as e:
@@ -272,6 +274,7 @@ class CRFClassifier(object):
                 unpickler = pickle.Unpickler(f)
                 self.crf = unpickler.load()
                 self.label_code = unpickler.load()
+                self.nltk_tagger = unpickler.load()
             current_app.logger.info("loaded crf from %s."%filename)
             return self.crf
         except Exception as e:
@@ -935,9 +938,8 @@ class CRFClassifier(object):
         :param noun_phrase
         :return:
         """
-        start_time = time.time()
         last_index = len(ref_data) - 1
-        result = [
+        return [
             len(ref_data[index]),                                                                           # length of element
             len(ref_data[index-1]) if index > 0 else 0,                                                     # length of previous element if any
             len(ref_data[index+1]) if index < last_index else 0,                                            # length of next element if any
@@ -978,8 +980,6 @@ class CRFClassifier(object):
             + self.get_data_features_journal(ref_data, index, ref_label, segment_dict) \
             + self.get_data_features_identifying_word(ref_data, index, ref_label) \
             + self.get_data_features_punctuation(ref_data, index, ref_label)
-        current_app.logger.debug("Features extracted in %s ms" % ((time.time() - start_time) * 1000))
-        return result
 
     def format_training_data(self, the_data):
         """
@@ -1407,7 +1407,7 @@ class CRFClassifierText(CRFClassifier):
             if len(journal) > 0:
                 publisher = self.is_publisher_or_location(reference_str.replace(journal, ''))
                 return {'title':'', 'journal':journal, 'publisher':publisher}
-        # attempt to split on dot and comma, if found try these
+        # attempt to split on dot and comma, if found, attempt to extract title and journal
         for i, tje in enumerate(self.TITLE_JOURNAL_EXTRACTOR):
             extractor = tje.match(reference_str)
             if extractor:
@@ -1417,29 +1417,28 @@ class CRFClassifierText(CRFClassifier):
                     publisher = self.is_publisher_or_location(reference_str.replace(journal, '').replace(title, ''))
                     return {'title':title, 'journal':journal, 'publisher':publisher}
 
-        patterns = "NP:{<DT|TO|IN|CC|JJ.?|NN.?|NN..?|VB.?|.>*}"
+        patterns = "NP:{<DT|TO|IN|CC|JJ.?|NN.?|NN..?|VB.?>*}"
         NPChunker = nltk.RegexpParser(patterns)
 
         # prepare the a_reference
         reference_str = self.CAPITAL_FIRST_CHAR.search(reference_str).group()
         reference_str = self.TITLE_JOURNAL_PUNCTUATION_REMOVER.sub(' ', reference_str).replace(',', '.')
-        reference_tokenize = nltk.sent_tokenize(reference_str)
-        reference_tokenize = [nltk.word_tokenize(ref) for ref in reference_tokenize]
-        reference_tokenize = [nltk.pos_tag(ref) for ref in reference_tokenize]
-        reference_tokenize = [NPChunker.parse(ref) for ref in reference_tokenize]
+        start_time = time.time()
+        tree = NPChunker.parse(nltk.tag._pos_tag(nltk.word_tokenize(reference_str), tagger=self.nltk_tagger, lang='eng'))
+        current_app.logger.debug("nltk chunker (inside classification) executed in %s ms" % ((time.time() - start_time) * 1000))
 
+        start_time = time.time()
         # identify noun phrases
         nps = []
-        for ref in reference_tokenize:
-            tree = NPChunker.parse(ref)
-            for subtree in tree.subtrees():
-                if subtree.label() == 'NP':
-                    picks = ' '.join(word
-                                 if not is_page_number(word) and not bool(self.is_identifying_word(word))
-                                     else '' for word, tag in subtree.leaves())
-                    aleaf = self.SPACE_BEFORE_DOT_REMOVER.sub(r'\1', self.SPACE_AROUND_AMPERSAND_REMOVER.sub(r'\1&\2', picks)).strip(' ')
-                    if len(aleaf) >= 1 and self.is_punctuation(aleaf) == 0:
-                        nps.append(aleaf)
+        for subtree in tree:
+            if type(subtree) == nltk.tree.Tree and subtree.label() == 'NP':
+                picks = ' '.join(word
+                             if not is_page_number(word) and not bool(self.is_identifying_word(word))
+                                 else '' for word, tag in subtree.leaves())
+                aleaf = self.SPACE_BEFORE_DOT_REMOVER.sub(r'\1', self.SPACE_AROUND_AMPERSAND_REMOVER.sub(r'\1&\2', picks)).strip(' ')
+                if len(aleaf) >= 1 and self.is_punctuation(aleaf) == 0:
+                    nps.append(aleaf)
+        current_app.logger.debug("identify noun phrases executed in %s ms" % ((time.time() - start_time) * 1000))
 
         # attempt to combine abbreviated words that represent journal mostly
         nps_merge = []
@@ -1589,9 +1588,12 @@ class CRFClassifierText(CRFClassifier):
         else:
             ref_words = filter(None, [w.strip() for w in self.REFERENCE_TOKENIZER.split(reference_str)])
 
+        start_time = time.time()
         features = []
         for i in range(len(ref_words)):
             features.append(self.get_data_features(ref_words, i, [], segment_dict))
+        current_app.logger.debug("Features extracted in %s ms" % ((time.time() - start_time) * 1000))
+
         ref_labels = self.decoder(self.crf.predict([np.array(features)])[0])
         return ref_words, ref_labels
 
