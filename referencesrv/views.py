@@ -99,10 +99,14 @@ def text_resolve(reference, returned_format):
     """
     try:
         if bool(RE_NUMERIC_VALUE.search(reference)):
+            start_time = time.time()
             parsed_ref = text_parser(reference)
+            current_app.logger.debug("parsed in %s ms" % ((time.time() - start_time) * 1000))
+            start_time = time.time()
             result = format_resolved_reference(returned_format,
                                                resolved=str(solve_reference(Hypotheses(parsed_ref))),
                                                reference=reference)
+            current_app.logger.debug("resolved in %s ms" % ((time.time() - start_time) * 1000))
         else:
             raise ValueError('Reference with no year and volume cannot be resolved.')
     except Exception as e:
