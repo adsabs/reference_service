@@ -6,6 +6,7 @@ from flask_discoverer import advertise
 import json
 import urllib
 import re
+import time
 
 from referencesrv.parser.crf import CRFClassifierText, CRFClassifierXML, create_text_model, load_text_model
 from referencesrv.resolver.solve import solve_reference
@@ -124,7 +125,10 @@ def text_get(reference):
 
     current_app.logger.info('received GET request with reference=`{reference}` to resolve in text mode'.format(reference=reference))
 
+    start_time = time.time()
     result = text_resolve(reference, returned_format)
+    current_app.logger.debug("GET request processed in %s ms" % ((time.time() - start_time) * 1000))
+
     return return_response({'resolved': result}, 200, 'application/json; charset=UTF8')
 
 
@@ -147,14 +151,15 @@ def text_post():
 
     references = payload['reference']
 
-    current_app.logger.info('received POST request with references={references} to resolve in text mode'.
-        format(references=','.join(references)))
+    current_app.logger.info('received POST request with references={references} to resolve in text mode'. format(references=','.join(references)))
 
     returned_format = request.headers.get('Accept', 'text/plain')
 
+    start_time = time.time()
     results = []
     for reference in references:
         results.append(text_resolve(reference, returned_format))
+    current_app.logger.debug("POST request with %d reference(s) processed in %s ms" % (len(references), (time.time() - start_time) * 1000))
 
     if returned_format == 'application/json':
         return return_response({'resolved': results}, 200, 'application/json; charset=UTF8')
