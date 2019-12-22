@@ -271,6 +271,8 @@ def create_source_matcher():
     try:
         start_time = time.time()
         source_matcher = TrigdictSourceMatcher()
+        # to build the index, a time consuming, one time needed operation
+        source_matcher.bestmatches('', 1)
         with open(source_matcher_pickle_file, "wb") as f:
             pickler = pickle.Pickler(f, -1)
             pickler.dump(source_matcher.source_dict)
@@ -298,8 +300,6 @@ def load_source_matcher():
             source_matcher.source_dict = unpickler.load()
             source_matcher.bibstem_words = unpickler.load()
             source_matcher.confstems = unpickler.load()
-            # to build the index, a time consuming, one time needed operation
-            source_matcher.bestmatches('', 1)
             current_app.logger.info("loaded source_matcher from %s."%source_matcher_pickle_file)
             current_app.logger.debug("source matcher loaded in %s ms" % ((time.time() - start_time) * 1000))
             return source_matcher
