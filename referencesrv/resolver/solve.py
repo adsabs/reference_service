@@ -4,7 +4,6 @@ Evaluating hypotheses and working out which is acceptable.
 
 import re
 import urllib
-import time
 
 from flask import current_app
 
@@ -240,8 +239,6 @@ def solve_for_fields(hypothesis):
     solutions = query(query_string)
 
     if solutions:
-        start_time = time.time()
-
         if len(solutions) > 0:
             current_app.logger.debug("solutions: %s"%(solutions))
 
@@ -252,8 +249,6 @@ def solve_for_fields(hypothesis):
             current_app.logger.debug("score %s %s %s"%(sol['bibcode'], score.get_score(), score))
 
         score, sol = choose_solution(scored, query_string, hypothesis)
-
-        current_app.logger.debug("Matching, and scoring took %s ms" % ((time.time() - start_time) * 1000))
 
         return Solution(sol["bibcode"], score, hypothesis.name)
 
