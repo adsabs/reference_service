@@ -1,5 +1,3 @@
-import time
-
 from flask import current_app
 
 class DeferredSourceMatcher(object):
@@ -7,9 +5,6 @@ class DeferredSourceMatcher(object):
     # Defer loading of the actual source matcher to runtime to save on
     # startup time when we don't need it.
     """
-    def __init__(self):
-        self.source_matcher = None
-
     def __getattr__(self, att_name):
         """
 
@@ -21,10 +16,7 @@ class DeferredSourceMatcher(object):
         elif att_name=='__name__':
             return 'Unready source matcher'
 
-        start_time = time.time()
-        result = getattr(current_app.extensions['source_matcher'], att_name)
-        current_app.logger.debug("source_matcher found a match in %s ms" % ((time.time() - start_time) * 1000))
-        return result
+        return getattr(current_app.extensions['source_matcher'], att_name)
 
 SOURCE_MATCHER = DeferredSourceMatcher()
 

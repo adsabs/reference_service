@@ -9,11 +9,11 @@ import traceback
 import numpy as np
 import re
 import nltk
+import time
 from pystruct.models import ChainCRF
 from pystruct.learners import FrankWolfeSSVM
 from itertools import groupby
 from collections import OrderedDict
-import time
 
 from flask import current_app
 
@@ -139,6 +139,7 @@ class CRFClassifier(object):
 
         :return:
         """
+        # to load nltk tagger, a time consuming, one time needed operation
         self.nltk_tagger = nltk.tag._get_tagger()
         self.crf = FrankWolfeSSVM(model=ChainCRF(), C=1.0, max_iter=50)
         self.X, self.y, self.label_code, self.folds, generate_fold = self.load_training_data()
@@ -1423,11 +1424,8 @@ class CRFClassifierText(CRFClassifier):
         # prepare the a_reference
         reference_str = self.CAPITAL_FIRST_CHAR.search(reference_str).group()
         reference_str = self.TITLE_JOURNAL_PUNCTUATION_REMOVER.sub(' ', reference_str).replace(',', '.')
-        start_time = time.time()
         tree = NPChunker.parse(nltk.tag._pos_tag(nltk.word_tokenize(reference_str), tagger=self.nltk_tagger, lang='eng'))
-        current_app.logger.debug("nltk chunker (inside classification) executed in %s ms" % ((time.time() - start_time) * 1000))
 
-        start_time = time.time()
         # identify noun phrases
         nps = []
         for subtree in tree:
@@ -1438,7 +1436,6 @@ class CRFClassifierText(CRFClassifier):
                 aleaf = self.SPACE_BEFORE_DOT_REMOVER.sub(r'\1', self.SPACE_AROUND_AMPERSAND_REMOVER.sub(r'\1&\2', picks)).strip(' ')
                 if len(aleaf) >= 1 and self.is_punctuation(aleaf) == 0:
                     nps.append(aleaf)
-        current_app.logger.debug("identify noun phrases executed in %s ms" % ((time.time() - start_time) * 1000))
 
         # attempt to combine abbreviated words that represent journal mostly
         nps_merge = []
@@ -1588,11 +1585,9 @@ class CRFClassifierText(CRFClassifier):
         else:
             ref_words = filter(None, [w.strip() for w in self.REFERENCE_TOKENIZER.split(reference_str)])
 
-        start_time = time.time()
         features = []
         for i in range(len(ref_words)):
             features.append(self.get_data_features(ref_words, i, [], segment_dict))
-        current_app.logger.debug("Features extracted in %s ms" % ((time.time() - start_time) * 1000))
 
         ref_labels = self.decoder(self.crf.predict([np.array(features)])[0])
         return ref_words, ref_labels
@@ -1603,14 +1598,8 @@ class CRFClassifierText(CRFClassifier):
         :param reference_str:
         :return:
         """
-        start_time = time.time()
         words, labels = self.classify(reference_str)
-        current_app.logger.debug("Text reference classified in %s ms" % ((time.time() - start_time) * 1000))
-        start_time = time.time()
-        result = self.reference(reference_str, words, labels)
-        current_app.logger.debug("Text reference identified in %s ms" % ((time.time() - start_time) * 1000))
-        return result
-
+        return self.reference(reference_str, words, labels)
 
 def create_text_model():
     """
@@ -1623,7 +1612,7 @@ def create_text_model():
         crf = CRFClassifierText()
         if not (crf.create_crf() and crf.save()):
             raise
-        current_app.logger.debug("Text reference trained and saved in %s ms" % ((time.time() - start_time) * 1000))
+        current_app.logger.debug("crf text model trained and saved in %s ms" % ((time.time() - start_time) * 1000))
         return crf
     except Exception as e:
         current_app.logger.error('Exception: %s' % (str(e)))
@@ -1641,7 +1630,7 @@ def load_text_model():
         crf = CRFClassifierText()
         if not (crf.load()):
             raise
-        current_app.logger.debug("Text reference loaded in %s ms" % ((time.time() - start_time) * 1000))
+        current_app.logger.debug("crf text model loaded in %s ms" % ((time.time() - start_time) * 1000))
         return crf
     except Exception as e:
         current_app.logger.error('Exception: %s' % (str(e)))
