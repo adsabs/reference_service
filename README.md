@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/adsabs/reference_service.svg)](https://travis-ci.org/adsabs/export_service)
+[![Build Status](https://travis-ci.org/adsabs/reference_service.svg)](https://travis-ci.org/adsabs/reference_service)
 [![Coverage Status](https://coveralls.io/repos/adsabs/reference_service/badge.svg)](https://coveralls.io/r/adsabs/reference_service?branch=master)
 
 
