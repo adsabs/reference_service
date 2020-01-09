@@ -94,6 +94,8 @@ class CRFClassifier(object):
     PAGE_EXTRACTOR = re.compile(r'(?=.*[0-9])(?P<page>[BHPL0-9]+[-.][BHPL0-9]+)')
     VOLUME_EXTRACTOR = re.compile(r'(vol|volume)[.\s]+(?P<volume>\w+)')
     YEAR_EXTRACTOR = re.compile(r'[(\s]*([12][089]\d\d[a-z]?)[)\s.,]+')
+    START_WITH_YEAR = re.compile(r'(^[12][089]\d\d)')
+
     
     REFERENCE_TOKENIZER = re.compile(r'([\s,.():\[\]"#\/\-])')
     TAGGED_MULTI_WORD_TOKENIZER = re.compile(r'([\s.,])')
@@ -1546,9 +1548,7 @@ class CRFClassifierText(CRFClassifier):
         reference_str = self.substitute(segment_dict.get('arxiv', ''), '',
                             self.substitute(segment_dict.get('ascl', ''), '',
                                 self.substitute(segment_dict.get('doi', ''), '', reference_str)))
-        # remove the guessed author section and attempt to identify title/journal/publisher
-        reference_str = reference_str.replace(authors, '')
-        # also remove any editors if any
+        # also identify editors if any
         reference_str, segment_dict = self.identify_editors(reference_str, segment_dict)
         segment_dict.update(self.identify_multi_word_entity(reference_str))
         # now remove what has been guessed to be part of title/journal/publisher to attempt to identify alphanumeric values
@@ -1565,7 +1565,9 @@ class CRFClassifierText(CRFClassifier):
         :return: list of words and the corresponding list of labels
         """
         # remove any numbering that appears before the reference to start with authors
-        reference_str = self.START_WITH_AUTHOR.search(reference_str).group()
+        # exception is the year
+        if self.START_WITH_YEAR.search(reference_str) is None:
+            reference_str = self.START_WITH_AUTHOR.search(reference_str).group()
         # also if for some reason et al. has been put in double quoted! remove them
         reference_str = self.QUOTES_AROUND_ETAL_REMOVE.sub(r"\1\3\5", reference_str)
 
