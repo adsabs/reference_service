@@ -10,7 +10,7 @@ the same, though.
 """
 
 import editdistance
-
+from itertools import chain
 
 def get_trigrams(a_string):
     """
@@ -148,7 +148,6 @@ class Trigdict(object):
         
         """
         self.val_dict = {}
-        self.all_values = set()
         self.shortdict = {}
         self.index = None
 
@@ -164,7 +163,6 @@ class Trigdict(object):
             self.shortdict.setdefault(expansion, []).append(value)
         else:
             self.val_dict.setdefault(expansion, []).append(value)
-            self.all_values.add(value)
         self.index = None
 
     def exactmatch(self, expansion):
@@ -218,7 +216,7 @@ class Trigdict(object):
         
         :return: 
         """
-        return self.all_values
+        return set(list(chain(*self.val_dict.values())))
 
     def has_key(self, key):
         """

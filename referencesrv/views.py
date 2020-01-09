@@ -226,7 +226,8 @@ def xml_post():
     return return_response({'error': 'unable to resolve any references'}, 400, 'text/plain; charset=UTF8')
 
 
-@bp.route('/pickle_crf', methods=['GET'])
+@advertise(scopes=['ads:reference-service'], rate_limit=[1000, 3600 * 24])
+@bp.route('/pickle_crf', methods=['PUT'])
 def pickle_crf():
     """
     endpoint to be called locally only whenever the models (either text or xml) has been changed
@@ -238,7 +239,8 @@ def pickle_crf():
 
     return return_response({'OK': 'objects saved'}, 200, 'text/plain; charset=UTF8')
 
-@bp.route('/pickle_source_matcher', methods=['GET'])
+@advertise(scopes=['ads:reference-service'], rate_limit=[1000, 3600 * 24])
+@bp.route('/pickle_source_matcher', methods=['PUT'])
 def pickle_source_matcher():
     """
     endpoint to be called locally only whenever the files of source matcher has been updated
