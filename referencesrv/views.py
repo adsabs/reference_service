@@ -18,7 +18,7 @@ bp = Blueprint('reference_service', __name__)
 
 RE_NUMERIC_VALUE = re.compile(r'\d')
 
-@bp.before_app_first_request
+# @bp.before_app_first_request
 def text_model():
     """
 
