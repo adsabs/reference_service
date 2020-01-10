@@ -22,8 +22,8 @@ def create_app(**config):
 
     Discoverer(app)
 
-    with  app.app_context() as ac:
-        text_model()
+    # with  app.app_context() as ac:
+    #     text_model()
 
     app.register_blueprint(bp)
     return app
