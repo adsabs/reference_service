@@ -33,7 +33,7 @@ from referencesrv.resolver.sourcematchers import load_source_matcher
 class TestResolver(TestCase):
     def create_app(self):
         self.current_app = app.create_app(**{
-            'SOLR_CONNECTION_LIVE': False
+            'REFERENCE_SERVICE_LIVE': False
            })
         return self.current_app
 
@@ -1094,7 +1094,7 @@ class TestResolverSolrQueryCase(TestCase):
     """
     def create_app(self):
         self.current_app = app.create_app(**{
-            'SOLR_CONNECTION_LIVE': False,
+            'REFERENCE_SERVICE_LIVE': False,
             'REFERENCE_SERVICE_MAX_RECORDS_SOLR': 2
            })
         return self.current_app

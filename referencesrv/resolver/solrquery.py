@@ -17,7 +17,7 @@ class Querier(object):
         self.query_fields = current_app.config['REFERENCE_SERVICE_QUERY_FIELDS_SOLR']
         self.max_rows = current_app.config['REFERENCE_SERVICE_MAX_RECORDS_SOLR']
         self.standard_headers = {'Authorization': 'Bearer ' + current_app.config['REFERENCE_SERVICE_ADSWS_API_TOKEN']}
-        self.connect_solr = current_app.config['SOLR_CONNECTION_LIVE']
+        self.connect_solr = current_app.config['REFERENCE_SERVICE_LIVE']
 
     def make_params(self, query):
         """
