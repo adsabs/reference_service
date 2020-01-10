@@ -71,7 +71,7 @@ MIN_SCORE_FIRST_ROUND = 0.7
 SOLR_KEYS_TO_JOIN = ["year', u'title', u'thesis', u'pub', u'volume', u'page', u'bibcode"]
 
 # this is false if testing mode
-SOLR_CONNECTION_LIVE = True
+REFERENCE_SERVICE_LIVE = True
 
 # source http://www.apsstylemanual.org/oldmanual/resources/publishers.htm
 REFERENCE_SERVICE_ACADEMIC_PUBLISHERS = [

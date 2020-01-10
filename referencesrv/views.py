@@ -24,8 +24,11 @@ def text_model():
 
     :return:
     """
-    current_app.extensions['text_crf'] = load_text_model()
-    current_app.extensions['source_matcher'] = load_source_matcher()
+    # load only if in production mode
+    if current_app.config['REFERENCE_SERVICE_LIVE']:
+        current_app.extensions['text_crf'] = load_text_model()
+        current_app.extensions['source_matcher'] = load_source_matcher()
+
 
 def text_parser(reference):
     """
