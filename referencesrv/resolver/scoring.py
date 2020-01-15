@@ -158,11 +158,11 @@ def get_score_for_reference_identifier(result_record, hypothesis):
 
     input_fields = hypothesis.get_detail("input_fields")
 
-    if compare_doi(input_fields.get("doi", "not in ref"), result_record.get("doi", ["not in ads"])):
+    if compare_doi(input_fields.get("doi", None), result_record.get("doi", [])):
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
     elif input_fields.get("arxiv", "not in ref") == get_arxiv_id(result_record):
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
-    elif input_fields.get("bibcode", "not in ref") == result_record.get("bibcode", ["not in ads"]):
+    elif compare_bibcode(input_fields.get("bibcode", None), result_record.get("bibcode", None)):
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
     else:
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "bibcode")
@@ -240,8 +240,56 @@ def compare_doi(ref_doi, ads_doi):
     :param ads_doi: list of dois
     :return:
     """
+    if ref_doi is None or len(ads_doi) == 0:
+        return False
+
     ref_doi = ref_doi.lower()
     for doi in ads_doi:
         if ref_doi == doi.lower():
             return True
     return False
+
+def compare_bibcode(ref_bibcode, ads_bibcode):
+    """
+    BIBCODE_FIELDS = [
+        ('year', 0, 4, 'r', int),
+        ('journal', 4, 9, 'l', str),
+        ('volume', 9, 13, 'r', str),
+        ('qualifier', 13, 14, 'r', str),
+        ('page', 14, 18, 'r', str),
+        ('initial', 18, 19, 'r', str)
+    ]
+
+    compare bibcodes from reference and from solr
+    allow wildcard for volume page or author, however, only one can be missing at at a time
+    :param ref_bibcode:
+    :param ads_bibcode:
+    :return:
+    """
+    if ref_bibcode is None or ads_bibcode is None:
+        return False
+
+    score = 0
+    # year has to match
+    if ref_bibcode[0:4] == ads_bibcode[0:4]:
+        score = score + 1
+    # journal has to match
+    if ref_bibcode[4:9] == ads_bibcode[4:9]:
+        score = score + 1
+    # volume can be wildcard, if not penalize
+    if ref_bibcode[9:13] == ads_bibcode[9:13]:
+        score = score + 1
+    elif ref_bibcode[9:13] != '????':
+        score = score -1
+    # page can be wildcard, if not penalize
+    if ref_bibcode[13:18] == ads_bibcode[13:18]:
+        score = score + 1
+    elif ref_bibcode[13:18] != '???':
+        score = score -1
+    # first author initial can be wildcard, if not penalize
+    if ref_bibcode[18] == ads_bibcode[18]:
+        score = score + 1
+    elif ref_bibcode[18] != '?':
+        score = score - 1
+    return score >= 4
+

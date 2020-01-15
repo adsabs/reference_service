@@ -28,6 +28,7 @@ class Hypotheses(object):
 
     ETAL_PAT = re.compile(r"((?i)[\s,]*et\.?\s*al\.?)")
     JOURNAL_LETTER_ATTACHED_VOLUME = re.compile(r"^([ABCDEFGIT])\d+$")
+    VOLUME_EXTRACTOR = re.compile(r"\d+")
 
     def __init__(self, ref):
         """
@@ -110,15 +111,23 @@ class Hypotheses(object):
         """
         year = self.digested_record["year"]
         journal = get_best_bibstem_for(self.digested_record["pub"])
-        journal = journal + (5-len(journal)) * '.'
+        journal = journal + (5 - len(journal)) * '.'
         volume = self.digested_record.get("volume", "")
+        # if no volume is identified, use wildcard
+        if len(volume) == 0:
+            volume = "????"
         volume = (4 - len(volume)) * '.' + volume
-        page_qualifier = self.digested_record.get("qualifier", ".")
-        page = self.digested_record.get("page", "")[:4]
-        page = (4 - len(page)) * '.' + page
-        initial = self.normalized_authors[0] if self.normalized_authors else '.'
-        self.digested_record["bibcode"] = '{year}{journal}{volume}{page_qualifier}{page}{initial}'.format(
-                                            year=year,journal=journal,volume=volume,page_qualifier=page_qualifier,page=page,initial=initial)
+        page_qualifier = self.digested_record.get("qualifier", "")
+        # eid can have a dot, remove it
+        page = page_qualifier + self.digested_record.get("page", "").replace('.','')[:5 if len(page_qualifier) == 0 else 4]
+        # if no page is identified, use wildcard
+        if len(page) == 0:
+            page = "?????"
+        page = (5 - len(page)) * '.' + page
+        # allow missing author as well
+        initial = self.normalized_authors[0] if self.normalized_authors else '?'
+        self.digested_record["bibcode"] = '{year}{journal}{volume}{page}{initial}'.format(
+                                            year=year,journal=journal,volume=volume,page=page,initial=initial)
         return self.digested_record["bibcode"]
 
     def iter_hypotheses(self):
@@ -143,7 +152,7 @@ class Hypotheses(object):
                 input_fields=self.digested_record)
 
         # try the old way, construct bibcode
-        if self.has_keys("author", "year", "pub"):
+        if self.has_keys("year", "pub"):
             self.construct_bibcode()
             yield Hypothesis("fielded-bibcode", {
                     "bibcode": self.digested_record["bibcode"]},
