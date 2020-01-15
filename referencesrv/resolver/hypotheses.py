@@ -28,7 +28,6 @@ class Hypotheses(object):
 
     ETAL_PAT = re.compile(r"((?i)[\s,]*et\.?\s*al\.?)")
     JOURNAL_LETTER_ATTACHED_VOLUME = re.compile(r"^([ABCDEFGIT])\d+$")
-    VOLUME_EXTRACTOR = re.compile(r"\d+")
 
     def __init__(self, ref):
         """
