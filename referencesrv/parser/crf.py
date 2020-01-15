@@ -66,7 +66,8 @@ class CRFClassifier(object):
                                re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*(?P<journal>\s*)'),
                                re.compile(r'^[.\s]*(?P<title>[A-Z]+[A-za-z\'\s:-]+)[.,\s]+(?P<journal>[A-Z\s\.]+)[\s\d,]+.*'),]
     TITLE_JOURNAL_PUNCTUATION_REMOVER = re.compile(r'[:\(\)\-\[\]]')
-    JOURNAL_ONLY_EXTRACTOR = re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>[A-Z][A-Za-z&\-]*)[\d,.\s\w-]*$')
+    JOURNAL_ONLY_EXTRACTOR = [re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>([A-Z][A-Za-z\s]+)[,\s]+(\d+[th]*\s[A-Z]+\s[Mm]eeting))[\d,.\s\w-]*$'),
+                              re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>[A-Z|of|the|and|as|at|a|in|by]+[A-Za-z&\-\s]*)[\d,.\s\w-]*$'),]
     EDITOR_EXTRACTOR = re.compile(r'(:?[Ii][Nn][":\s]+)([A-Z].*)$')
     EDITOR_RESIDUE = re.compile(r'(I[Nn]+[:\s]{1,2}?\s+([\(]?[Ee]+d[s\.\)\s]+)?)')
     ARXIV_ID_EXTRACTOR = re.compile(r'(\w+\-\w+/\d+|\w+/\d{7}|\d{4}\.\d{4,5})(v?\d*)')
@@ -1404,12 +1405,13 @@ class CRFClassifierText(CRFClassifier):
         :return: [title, journal]
         """
         # attempt to extract journal abbreviation
-        extractor = self.JOURNAL_ONLY_EXTRACTOR.match(reference_str)
-        if extractor:
-            journal = extractor.group('journal')
-            if len(journal) > 0:
-                publisher = self.is_publisher_or_location(reference_str.replace(journal, ''))
-                return {'title':'', 'journal':journal, 'publisher':publisher}
+        for i, je in enumerate(self.JOURNAL_ONLY_EXTRACTOR):
+            extractor = je.match(reference_str)
+            if extractor:
+                journal = extractor.group('journal')
+                if len(journal) > 0:
+                    publisher = self.is_publisher_or_location(reference_str.replace(journal, ''))
+                    return {'title':'', 'journal':journal, 'publisher':publisher}
         # attempt to split on dot and comma, if found, attempt to extract title and journal
         for i, tje in enumerate(self.TITLE_JOURNAL_EXTRACTOR):
             extractor = tje.match(reference_str)

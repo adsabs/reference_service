@@ -63,6 +63,9 @@ def make_solr_condition(key, value):
     if key == 'identifier':
         return 'identifier:"%s"'%(urllib.quote(value))
 
+    if key == 'bibcode':
+        return 'identifier:"%s"' %value
+
     # both ascl and arxi ids are assigned to arxiv field, both appear in identifier
     # with their correspounding prefix
     if key == 'arxiv':
