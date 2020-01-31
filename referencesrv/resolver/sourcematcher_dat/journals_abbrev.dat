@@ -252,6 +252,7 @@ APh......	Astropart. Phys.
 ApJ......	Ap. J.
 ApJ......	Ap. J. Lett.
 ApJ......	ApJ Letters
+ApJ......	ApJL
 ApJ......	Astrophy. J.
 ApJ......	Astrophys J.
 ApJ......	Astrophys. J
@@ -260,7 +261,7 @@ ApJ......	Astrophys. J. :
 ApJ......	Astrophys. J. Let.
 ApJ......	Astrophys. J. Lett.
 ApJ......	Astrophys. J. Letters
-ApJ......	Astrophys. Journ.
+ApJ......	Astrophys. Journ. 
 ApJ......	Astrophysic. J.
 ApJ......	Astrophysical J.
 ApJ......	Astrophysical J. US
@@ -322,8 +323,8 @@ ARA&A....	ARAA
 ARA&A....	ARA__amp__amp;A
 ArA......	Ark. Astron.
 ArBB.....	Archive of Biochemistry and Biophysics
-Arch.....	Archaeoastronomy
-Arch.....	Archaeoastronomy &amp; Ethnoastronomy News
+Arch.....	Archaeoastronomy 
+Arch.....	Archaeoastronomy &amp; Ethnoastronomy News 
 Archa....	Archaeometry
 ARCP.....	Annual Reviews of Computational Physics
 ARep.....	ASTR. REPORTS (TR:A.ZHURN.)
@@ -421,17 +422,17 @@ BAAA.....	Bol. Asoc. Argent. Astron.
 BAAPG....	Bull. Am. Assoc. Petrol. Geol.
 BAAS.....	AMER. ASTRON. SOC. BULLETIN
 BAAS.....	Bull Am. Astron. Soc.
-BAAS.....	Bull American Astron. Soc.
+BAAS.....	Bull American Astron. Soc. 
 BAAS.....	Bull. A. A. S.
 BAAS.....	Bull. Am. Ast. Soc.
 BAAS.....	Bull. Am. Astron. Assoc.
 BAAS.....	Bull. Am. Astron. Soc
 BAAS.....	Bull. Am. Astronom. Soc.
-BAAS.....	Bull. Amer. Astr. Soc.
+BAAS.....	Bull. Amer. Astr. Soc. 
 BAAS.....	Bull. Amer. Astron.
 BAAS.....	Bull. Amer. Astron. Soc.
 BAAS.....	Bull. Amer. Astron. Society
-BAAS.....	Bull. American Astron. Soc.
+BAAS.....	Bull. American Astron. Soc. 
 BAAVS....	Brit. Astron. Assoc. Var. Star Circ.
 BAICz....	Astron. Inst. Czech. Bull.
 BAICz....	ASTRON. INST. CZECHOSLOVAKIA. BULL.
@@ -466,7 +467,7 @@ BIBGI....	Bull. Inf., Bureau Grav. Int., Paris
 BIBGI....	bureau gravimetrique international bulletin d information
 BICDS....	Bull. C.D.S.
 BICDS....	BULL. D'INF. CENT. DONNEES STELLAIRES
-BICDS....	Bull. Inf. Du CDS
+BICDS....	Bull. Inf. Du CDS 
 BICDS....	BULLETIN D'INF. CENT. DONNEES STELLAIRES
 BICDS....	BULLETIN D'INFORMATION. CENT.DONN.STELL.
 BICDS....	Inform. Bull. Strasbourg Stellar Data Centre
@@ -560,9 +561,9 @@ CeMDA....	CELESTIAL MECHANICS & DYNAMICAL ASTRON.
 CeMDA....	Cell. Mech. Dynam. Astron.
 CeMec....	Celes. Mech.
 CeMec....	Celest. Mech.
-CeMec....	Celestial Mech.
+CeMec....	Celestial Mech. 
 CeMec....	CELESTIAL MECHANICS
-CeMec....	Celestial Mechanics
+CeMec....	Celestial Mechanics 
 CERDA....	Chemical Engineering Research & Design. Part A, Transactions of the Institution of Chemical Engineers
 CEyeR....	Current Eye Research
 CfAPr....	Center for Astrophysics Cambridge Mass Preprint Series
@@ -572,6 +573,7 @@ ChA&A....	CHINESE ASTRONOMY AND ASTROPHYS.
 ChA&A....	CHINESE ASTRONOMY AND ASTROPHYSICS
 ChEdu....	Chemical Educator
 ChEnC....	Chem. Eng. Commun.
+CheIn....	Chemistry International
 ChGeo....	Chem. Geol.
 ChiLP....	Chicago Lectures in Physics
 ChJAA....	Chin. J. Astron. Astrophys.
@@ -742,12 +744,12 @@ EOSTr....	EOS
 EOSTr....	EOS (Trans. AGU)
 EOSTr....	EOS Trans.
 EOSTr....	Eos Trans. AGU
-EOSTr....	Eos Trans. Am Geophys. Union
-EOSTr....	Eos Trans. Am. Geophys. Union
+EOSTr....	Eos Trans. Am Geophys. Union 
+EOSTr....	Eos Trans. Am. Geophys. Union 
 EOSTr....	EOS Trans. Amer. Geophys. Union
-EOSTr....	EOS Trans. Amer. Geophys. Union
+EOSTr....	EOS Trans. Amer. Geophys. Union 
 EOSTr....	EOS Trans. Amer. Geophys. Union  Suppl.
-EOSTr....	Eos Trans. Amer. Geophysical Union
+EOSTr....	Eos Trans. Amer. Geophysical Union 
 EOSTr....	Eos Trans. Geophys. Union  Suppl.
 EOSTr....	EOS, Transactions of the American Geophysical Union
 EOSTr....	Eos-Trans. Am. Geophys. Union
@@ -819,7 +821,7 @@ GeoJ.....	Geophys. J. R. Astr. Soc.
 GeoJ.....	Geophys. J. R. Astron. Soc.
 GeoJ.....	Geophys. J. Roy. Astron. Soc.
 GeoJ.....	Geophys. Journ.
-GeoJ.....	Geophysical Journal Of The Royal Astronomical Society.
+GeoJ.....	Geophysical Journal Of The Royal Astronomical Society. 
 GeoJI....	Geophys. J. Int.
 GeoJI....	Geophys. J. International
 Geokh....	Geokhimiya
@@ -846,7 +848,7 @@ GrCoS....	Grav. Cosmol. Suppl.
 GrCoS....	Gravitation and Cosmology Supplement
 GReGr....	Gen. Rel. Grav.
 GriO.....	GRIFFITH OBSERVER
-GriO.....	Griffith Observer
+GriO.....	Griffith Observer 
 GroR.....	Kapteyn Astronomical Laboratory Groningen Reports
 GSAMB....	Geol. Soc. Am.
 GSAMB....	Geol. Soc. Am. Bull.
@@ -866,7 +868,7 @@ HelOB....	Helwan Institute of Astronomy and Geophysics Bulletins
 HGE......	Handbook of Geophysical Exploration
 HGeo.....	History of Geophysics
 HGT......	Human Gene Therapy
-HiA......	IAU Highlights Of Astron.
+HiA......	IAU Highlights Of Astron. 
 Holz.....	Holzforschung
 HPlPh....	Handbook of Plasma Physics
 HPP......	High Performance Polymers
@@ -890,7 +892,7 @@ ICAE.....	Integrated Computer-Aided Engineering
 Icar.....	ICARUS
 IDAQP....	Infinite Dimensional Analysis, Quantum Probability and Related Topics
 IEAEE....	Institution Engineers Australia Electrical Engineering Transactions
-IEEEP....	I.E.E.E. Proc.
+IEEEP....	I.E.E.E. Proc. 
 IEEEP....	IEEE Proc.
 IEEEP....	Proc. IEEE
 IEIEE....	IEICE Electronics Express
@@ -950,7 +952,7 @@ InJBB....	Indian Journal of Biochemistry and Biophysics
 InJPS....	Indian Journal of Physics Section B B
 InMat....	Inv. Mat.
 InMat....	Inventiones Math.
-Inter....	Interface
+Inter....	Interface 
 IORA.....	Anuario publicado pelo Imperial Observatorio do Rio de Janeiro
 IORP.....	Revista do observatorio : publicacao mensal do Imperial Observatorio do Rio de Janeiro
 IPASA....	Institute of Physics Academia Sinica Annual Report
@@ -960,7 +962,7 @@ IPSC.....	Italian Physical Society Conference Proceedings
 IrAJ.....	IAJ
 IrAJ.....	Ir. Astron. J.
 IrAJ.....	Irish Astron. J.
-IrAJ.....	Irish Astron. Journ. (Special Issue)
+IrAJ.....	Irish Astron. Journ. (Special Issue) 
 IrAJ.....	IRISH ASTRONOMICAL JOURNAL
 IrPh.....	International Conference Infrared Physics Zurich Switzerland
 IsJAP....	JRN. ASTRONOMY AND PHYSICS. UNIV.ISTANBUL
@@ -973,9 +975,9 @@ ITDEI....	IEEE Transactions on Dielectrics and Electrical Insulation
 ITGE.....	IEEE Trans. Geosci. Elec.
 ITGRS....	IEEE Trans. Geosci. Remote Sens.
 ITGRS....	IEEE Trans. Geosci. Remote Sensing
-ITIM.....	Ieee Trans. Instrumentation And Measurement
-ITIM.....	Ieee Trans. On Instrum. Meas.
-ITIM.....	Ieee Trans. On Instrum. Measurement
+ITIM.....	Ieee Trans. Instrumentation And Measurement 
+ITIM.....	Ieee Trans. On Instrum. Meas. 
+ITIM.....	Ieee Trans. On Instrum. Measurement 
 ITMI.....	IEEE Transactions on Medical Imaging
 ITNS.....	IEEE Trans. Nucl. Sci.
 ITPD.....	IEEE Transactions on Power Delivery
@@ -1009,7 +1011,7 @@ JAlgC....	Journal of Algebraic Combinatorics
 JAlgo....	Journal of Algorithms
 JAllC....	J. Alloys Compd.
 JALPO....	J. Assoc. Lunar Planet. Obs.
-JALPO....	Journ. Assoc. Lunar &amp; Planetary Obs.
+JALPO....	Journ. Assoc. Lunar &amp; Planetary Obs. 
 JAMP.....	ZAMP Journal of Applied Mathematics and Physics
 JAMTP....	J. Appl. Mech. Tech. Phys.
 JAP......	J. Appl. Phys.
@@ -1132,7 +1134,7 @@ JGR......	J. Geophys. Res.
 JGR......	J. Geophys. Rev.
 JGR......	J. _Geophys. Res.
 JGR......	JNL. GEOPHYSICAL RESEARCH
-JGR......	Journ. Geophys. Res.
+JGR......	Journ. Geophys. Res. 
 JGR......	JOURNAL OF GEOPHYSICAL RES.
 JGR......	Proc. 17th Lunar Planet. Sci. Conf., J. Geophys. Res.
 JGR......	Proc. Lunar Planet. Sci. Conf. 13th J. Geophys. Res.
@@ -1171,7 +1173,7 @@ JHA......	ARCHAEOASTRONOMY. JNL.HIST.ASTR. SUPPL.
 JHA......	ARCHAEOASTRONOMY. JNL.HIST.ASTR.:
 JHA......	ARCHAEOASTRONOMY. JNL.HIST.ASTR.:SUPP
 JHA......	ARCHAEOASTRONOMY. JNL.HIST.ASTR.:SUPPL.
-JHA......	J. Hist. Astron.
+JHA......	J. Hist. Astron. 
 JHA......	J. Hist. Astronomy :
 JHA......	JOURN. HISTORY OF ASTRONOMY
 JHA......	JOURNAL FOR THE HISTORY OF ASTRONOMY
@@ -1459,7 +1461,7 @@ MISRI....	Moscow Izdatel Sovetskoe Radio Ionosfernye Issledovaniia
 MitAG....	Mitt. Astron. Ges.
 MitAG....	MITTEILUNGEN. ASTRON. GESELLSCHAFT
 MitVS....	MITT. VERANDER. STERNE: SONNEBERG
-MitVS....	Mitt. Vern?nderl. Sterne Sonneberg
+MitVS....	Mitt. Vernänderl. Sterne Sonneberg
 MiWie....	Mitt. Sternw. Wien
 MiZur....	Astron Mitt. Zurich
 MiZur....	Astron. Mitt. Zurich
@@ -1477,7 +1479,7 @@ MmSAI....	Mem. S.A. It.
 MmSAI....	Mem. Soc. Astron. It.
 MmSAI....	Mem. Soc. Astron. Ital.
 MmSAI....	Memorie SAIt
-MmSAI....	S. A. Memorie SAIt
+MmSAI....	S. A. Memorie SAIt 
 MmSAI....	SOC. ASTR. ITALIANA. MEM.
 MmSAI....	SOCIETA ASTRON. ITALIANA. MEMORIE
 MmSAI....	SOCIETA ASTRONOMICA ITALIANA. MEMORIE
@@ -1492,7 +1494,7 @@ MNRAS....	Mon. Not. R. Astron. Soc
 MNRAS....	Mon. Not. R. Astron. Soc.
 MNRAS....	Mon. Not. Roy. Astron. Soc.
 MNRAS....	Mon. Not. Royal Ast. Soc.
-MNRAS....	Monthly Not. R. Astron. Soc.
+MNRAS....	Monthly Not. R. Astron. Soc. 
 MNRAS....	Monthly Notices Roy. Astron. Soc.
 MNRAS....	R. Astron. Soc. Month. Not.
 MNRAS....	R.A.S. MONTHLY NOTICES
@@ -1557,16 +1559,16 @@ NAR......	Nucleic Acids Research
 NASSP....	NASA Sp-
 NASSP....	NASA Spec. Publ.
 NatCo....	Sci. Comm.
-NatH.....	Natural History
+NatH.....	Natural History 
 NatSR....	Sci. Rep.
 Natur....	NAT
 Natur....	Nat.
 Natur....	NATURE
 Natur....	Nature (London)
 Natur....	Nature; Physical Science (London)
-Navig....	Navigation
-Navig....	Navigation (USA)
-Navig....	Navigation.
+Navig....	Navigation 
+Navig....	Navigation (USA) 
+Navig....	Navigation. 
 NCimB....	Nuovo Cimento della Societa Italiana di Fisica B
 NCimC....	Il Nuovo Cimento
 NCimC....	Il Nuovo Cimento C
@@ -1677,7 +1679,7 @@ PASP.....	ASTRON. SOCIETY OF THE PACIFIC. PUBL.
 PASP.....	Proc. Astron. Soc. Pac.
 PASP.....	Pub. A. S. P.
 PASP.....	Pub. Ast. Soc. Pac.
-PASP.....	Pub. Ast. Soc. Pac.
+PASP.....	Pub. Ast. Soc. Pac. 
 PASP.....	Pub. Astron. Soc. Pac.
 PASP.....	Pub. Astron. Soc. Pacif.
 PASP.....	Pub. Astron. Soc. Pacific
@@ -1685,7 +1687,7 @@ PASP.....	Publ. A. S. Pacific
 PASP.....	Publ. Astron. Soc. Pac.
 PASP.....	Publ. Astron. Soc. Pacif.
 PASP.....	Publ. Astron. Soc. Pacific
-PASP.....	Publ. Astron. Soc. Pacific
+PASP.....	Publ. Astron. Soc. Pacific 
 PASPS....	Publications of the Astronomical Society of the Pacific Supplement
 PATi.....	Popular Astronomisk Tidsskrift
 PAUTx....	PUBLICATIONS IN ASTRONOMY. UNIV. TEXAS
@@ -1799,7 +1801,7 @@ PMagA....	Phil. Mag. A
 PMagB....	Phil. Mag B
 PMagB....	Phil. Mag. B
 PMagL....	Phil. Mag Lett
-PMagL....	Phil. Mag. Lett.
+PMagL....	Phil. Mag. Lett. 
 PMHu.....	Periodica Mathematica Hungarica
 PMPES....	Proceedings: Mathematical, Physical and Engineering Sciences
 PNAOJ....	Pub. Natl. Astron. Obs. Japan
@@ -1810,7 +1812,7 @@ PNAS.....	Proc. Natl Acad. Sci.
 PNAS.....	Proc. Natl Acad. Sci. USA
 PNAS.....	Proceedings of the National Academy of Sciences
 POBeo....	Publ. Astron. Obs. Belgrade
-POBeo....	Publ. Obs. Astron. Beograd
+POBeo....	Publ. Obs. Astron. Beograd 
 POBor....	Publications de l'Observatoire de l'Universite de Bordeaux
 POClu....	Publicatiile Observatorului Astronomical Universitatii din Cluj
 POHP.....	Pub. Obs. Haute-Prov.
@@ -1842,7 +1844,7 @@ PrPh.....	Fortschritte der Physik
 PrPh.....	Progress of Physics
 PrPNP....	Prog. Part. Nucl. Phys.
 PrSS.....	Prog. Surf. Sci.
-PSA......	Photog. Soc. America
+PSA......	Photog. Soc. America 
 PSA......	Princeton Series in Astrophysics
 PSD......	Physical Sciences Data
 PSEBM....	Proceedings of The Society for Experimental Biology and Medicine
@@ -1873,10 +1875,10 @@ PZP......	Perem. Zvezdy Suppl.
 PZP......	PEREMENNYE ZVEZD. PROLOZHENIE
 PZP......	PEREMENNYE ZVEZDY. PRILOZHENIE
 QJMat....	Quart J. Math.
-QJRAS....	Q. J. R. Astron. Soc.
+QJRAS....	Q. J. R. Astron. Soc. 
 QJRAS....	Q.J.R. Astron. Soc.
 QJRAS....	Quart. J.R.A.S.
-QJRAS....	Quarterly Journal Royal Astron. Society
+QJRAS....	Quarterly Journal Royal Astron. Society 
 QJRAS....	R.A.S. QUARTERLY JOURNAL
 QJRAS....	ROYAL ASTRON. SOC. QUART. JRN.
 QJRAS....	ROYAL ASTRON. SOC. QUARTERLY JOURNAL
@@ -1970,9 +1972,9 @@ RvMP.....	Rev. Mod. Phys.
 RvMP.....	Rev. Modern Phys.
 RvPCJ....	Review of Physical Chemistry of Japan
 S&T......	Sky & Tel.
-S&T......	Sky &amp; Tel.
+S&T......	Sky &amp; Tel. 
 S&T......	SKY AND TELESCOPE
-S&T......	Sky And Telescope
+S&T......	Sky And Telescope 
 S&T......	Sky Telesc.
 S&T......	Sky Telesc. (November)
 S&T......	Sky Telescope
@@ -1980,6 +1982,9 @@ S&W......	Sterne und Weltraum
 SAA......	Stochastic Analysis and Applications
 SAAOC....	CIRCULARS. SOUTH AFRICAN ASTRON. OBS.
 SAAOC....	SAAO Circular
+SADM.....	Statistical Analysis and Data Mining
+SADM.....	Stat. Anal. Data Min.
+SADM.....	Rev. Stat. Anal. Data Mining
 SAMS.....	Systems Analysis Modelling Simulation
 SAOCo....	Smithsonian Contr. Ap.
 SAOSR....	SAO Special Report
@@ -2029,7 +2034,7 @@ SoSyR....	SOLAR SYST. RESEARCH (TR. ASTR. VESTNIK)
 SoSyR....	SOLAR SYST. RESEARCH (TR: ASTR.VEST.)
 SoSyR....	SOLAR SYST. RESEARCH (TR:A.VESTNIK)
 SoSyR....	Solar System Res.
-SouSt....	Southern Stars
+SouSt....	Southern Stars 
 SpEng....	Sports Engineering
 SPIE.....	Proceedings of the SPIE
 SPIE.....	SPIE Conference Series
@@ -2123,7 +2128,7 @@ TokAB....	TOKYO ASTRONOMICAL BULLETIN. 2ND SER.
 TokAB....	TOKYO ASTRONOMICAL BULLETIN. SECOND SERIES
 ToxiL....	Toxicol. Lett.
 TPM......	Transport in Porous Media
-TrFiL....	Trudy Fiz. Inst. P. N. Lebedeva
+TrFiL....	Trudy Fiz. Inst. P. N. Lebedeva	
 TriL.....	Tribology Letters
 TrITA....	TRUDY. INST. TEORETICHESKOI ASTRONOMII
 TrLen....	TRUDY. ASTRON. OBS. LENINGRAD ST. UNIV.
@@ -2143,19 +2148,19 @@ UppAn....	Uppsala Astron. Obs. Ann.
 USM......	Upravliaiushchie Sistemy i Mashiny
 USNOC....	CIRCULAR. U.S. NAVAL OBSERVATORY
 USNOC....	U. S. nav. Obs. Circ.
-USNOM....	U. S. Nbs Monograph
+USNOM....	U. S. Nbs Monograph 
 USNOR....	U.S. Naval Observatory Reports
 USNOY....	Observations made at the U.S. Naval Observatory during the Year
 VA.......	Vistas Astron.
-VA.......	Vistas Astron.
-VA.......	Vistas In Astron.
+VA.......	Vistas Astron. 
+VA.......	Vistas In Astron. 
 VA.......	VISTAS IN ASTRONOMY
 VatOP....	Publ. Vatican Obs.
 VatRA....	Ric. Astr. Specola Astr. Vaticana
 VCFD.....	VKI Computational Fluid Dynamics
 VeMFA....	Vestn. Mosk. univ. Fiz., astron.
 VeMFA....	Vestnik Moskovskogo universiteta, Serii Fizika, astronomii
-VeSon....	Ver?ffentl. Sonneberg
+VeSon....	Veröffentl. Sonneberg 
 VilCo....	VILLANOVA UNIVERSITY OBSERVATORY CONTRIBUTIONS
 VilOB....	BIULETENIS. VILNIAUS ASTRONOMIJOS OBS.
 VilOB....	Bull. Vilnius Obs.

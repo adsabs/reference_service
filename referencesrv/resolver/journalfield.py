@@ -10,10 +10,11 @@ ADS gives a field (i.e., not None or empty string) while the other does.
 import re
 import editdistance
 import unidecode
+import math
 
 from flask import current_app
 
-from referencesrv.resolver.common import SOURCE_MATCHER
+from referencesrv.resolver.common import SOURCE_MATCHER, round_two_significant_digits
 
 
 # A string containing all "modifiers" to page numbers from
@@ -81,14 +82,16 @@ def add_volume_evidence(evidences, ref_volume, ads_volume, ads_issue):
         return
 
     try:
-        delta_volume = int(ref_volume)==int(ads_volume)
+        if int(ref_volume) == int(ads_volume):
+            score = current_app.config['EVIDENCE_SCORE_RANGE'][1]
         # sometimes ads_volume holds conference year, and references include the issue
         # see if ads_volume is a year, if so then check the reference against issue
-        delta_issue = int(ref_volume)==int(ads_issue) if YEAR_PATTERN.findall(ads_volume) else False
-        if delta_volume == True or delta_issue == True:
+        elif YEAR_PATTERN.findall(ads_volume) and int(ref_volume)==int(ads_issue):
             score = current_app.config['EVIDENCE_SCORE_RANGE'][1]
         else:
-            score = current_app.config['EVIDENCE_SCORE_RANGE'][0]
+            delta_volume = compute_closeness_two_numbers(ref_volume, ads_volume)
+            delta_issue = compute_closeness_two_numbers(ref_volume, ads_issue) if YEAR_PATTERN.findall(ads_volume) else 0
+            score = current_app.config['EVIDENCE_SCORE_RANGE'][1] * max(delta_volume, delta_issue)
     except ValueError:
         # Some weird format -- we should probably use some edit distance here
         if ref_volume==ads_volume:
@@ -97,6 +100,7 @@ def add_volume_evidence(evidences, ref_volume, ads_volume, ads_issue):
             score = current_app.config['EVIDENCE_SCORE_RANGE'][0]
 
     evidences.add_evidence(score, 'volume')
+    return
 
 
 def is_page_number(page_spec):
@@ -130,6 +134,29 @@ def clean_ads_page(page_spec):
     return page_spec
 
 
+def compute_closeness_two_numbers(num1, num2):
+    """
+
+    :param num1:
+    :param num2:
+    :return:
+    """
+    diff = abs(int(num1) - int(num2))
+
+    # perhaps marginal: it catches single-digit
+    # typos in longer numbers, though...
+    if diff % 10 == 0:
+        # if only one digit is different
+        if len(num1) == len(num2) and sum(a!=b for a, b in zip(num1, num2)) == 1:
+            return round_two_significant_digits((len(num1) - 1.0) / len(num1))
+        return 0.5
+    elif int(num2) == 0:
+        return 0
+    else:
+        closeness = 0.03 - diff / float(int(num2))
+        return round_two_significant_digits(closeness * 10) if closeness > 0 else 0
+
+
 def compute_page_delta_plain_number(ref_page, ads_match, ref_qualifier):
     """
     helps compute_page_delta for actual numeric page numbers.
@@ -157,21 +184,8 @@ def compute_page_delta_plain_number(ref_page, ads_match, ref_qualifier):
         if ads_letter or ref_qualifier:
             if ads_letter!=ref_qualifier:
                 delta += current_app.config['NO_LETTER_DEMERIT']
-
     else:
-        # We'd need here is a proper error model.  I'm assuming
-        # a "dropped leading numbers" and "noise in the last digits"
-        # approach for now, but that really should be improved.
-        diff = abs(int(ads_page)-int(ref_page))
-        # perhaps marginal: it catches single-digit 
-        # typos in longer numbers, though...
-        if diff % 10 == 0:
-            return 0.5
-        elif int(ads_page) == 0:
-            return 0
-        else:
-            closeness = 0.03-diff/float(int(ads_page))
-            return closeness*10 if closeness>0 else 0
+        return compute_closeness_two_numbers(ref_page, ads_page)
 
     return delta
 

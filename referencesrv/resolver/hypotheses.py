@@ -28,6 +28,8 @@ class Hypotheses(object):
 
     ETAL_PAT = re.compile(r"((?i)[\s,]*et\.?\s*al\.?)")
     JOURNAL_LETTER_ATTACHED_VOLUME = re.compile(r"^([ABCDEFGIT])\d+$")
+    PAGE_QUALIFIER_AND_PAGE = re.compile(r"([A-Z])(\d+)")
+    DETECT_APJL_QUALIFIER = re.compile(r"(ApJL|Let)")
 
     def __init__(self, ref):
         """
@@ -36,6 +38,30 @@ class Hypotheses(object):
         """
         self.ref = ref
         self.make_digested_record()
+
+    def tokenize_page(self, page):
+        """
+        see if there is a qualifier attached to the page
+
+        :param page:
+        :return:
+        """
+        match = self.PAGE_QUALIFIER_AND_PAGE.match(page)
+        if match:
+            return match.group(1), match.group(2)
+        return None, page
+
+    def any_qualifier(self, bibstem, pub):
+        """
+        if qualifier was send in as part of publication
+
+        :param bibstem:
+        :return:
+        """
+        if bibstem == 'ApJ':
+            if self.DETECT_APJL_QUALIFIER.search(pub):
+                return 'L'
+        return '.'
 
     def make_digested_record(self):
         """
@@ -60,9 +86,13 @@ class Hypotheses(object):
             # the extra character(s) are at the end, just to be smart about it let's go with RE
             self.digested_record["year"] = re.findall(r'^([12][089]\d\d)', self.digested_record["year"])[0]
 
-        if "-" in self.digested_record.get("page", ""):
-            # we are querying on page stat, for now through out the page end
-            self.digested_record["page"] = self.digested_record["page"].split("-")[0]
+        if self.digested_record.get("page", None):
+            if "-" in self.digested_record.get("page"):
+                # we are querying on page stat, for now through out the page end
+                self.digested_record["page"] = self.digested_record["page"].split("-")[0]
+            qualifier, self.digested_record["page"] = self.tokenize_page(self.digested_record["page"])
+            if qualifier is not None:
+                self.digested_record["qualifier"] = qualifier
 
         if "volume" in self.digested_record and "pub" in self.digested_record:
             # if volume has a alpha character at the beginning, remove it and attach it to the journal
@@ -109,24 +139,24 @@ class Hypotheses(object):
         :return:
         """
         year = self.digested_record["year"]
-        journal = get_best_bibstem_for(self.digested_record["pub"])
-        journal = journal + (5 - len(journal)) * '.'
+        bibstem = get_best_bibstem_for(self.digested_record["pub"])
+        journal = bibstem + (5 - len(bibstem)) * '.'
         volume = self.digested_record.get("volume", "")
         # if no volume is identified, use wildcard
         if len(volume) == 0:
             volume = "????"
         volume = (4 - len(volume)) * '.' + volume
-        page_qualifier = self.digested_record.get("qualifier", "")
-        # eid can have a dot, remove it
-        page = page_qualifier + self.digested_record.get("page", "").replace('.','')[:5 if len(page_qualifier) == 0 else 4]
+        page_qualifier = self.digested_record.get("qualifier", self.any_qualifier(bibstem, self.digested_record["pub"]))
+        # eid can have a dot, remove it first
+        page = self.digested_record.get("page", "").replace('.','')[:4]
         # if no page is identified, use wildcard
         if len(page) == 0:
-            page = "?????"
-        page = (5 - len(page)) * '.' + page
+            page = "????"
+        page = (4 - len(page)) * '.' + page
         # allow missing author as well
         initial = self.normalized_authors[0] if self.normalized_authors else '?'
-        self.digested_record["bibcode"] = '{year}{journal}{volume}{page}{initial}'.format(
-                                            year=year,journal=journal,volume=volume,page=page,initial=initial)
+        self.digested_record["bibcode"] = '{year}{journal}{volume}{page_qualifier}{page}{initial}'.format(
+                                            year=year,journal=journal,volume=volume,page_qualifier=page_qualifier,page=page,initial=initial)
         return self.digested_record["bibcode"]
 
     def iter_hypotheses(self):
