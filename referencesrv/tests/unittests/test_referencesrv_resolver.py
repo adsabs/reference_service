@@ -650,7 +650,7 @@ class TestResolver(TestCase):
         # when unmatched
         evidences = Evidences()
         self.assertEqual(add_volume_evidence(evidences, '223', '233', ''), None)
-        self.assertEqual(evidences.get_score(), -1)
+        self.assertEqual(evidences.get_score(), 0.7)
         # when not integer, but matched
         evidences = Evidences()
         self.assertEqual(add_volume_evidence(evidences, '233-3', '233-3', ''), None)

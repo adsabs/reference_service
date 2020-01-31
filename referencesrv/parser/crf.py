@@ -9,7 +9,7 @@ import traceback
 import numpy as np
 import re
 import nltk
-import time
+import time, datetime
 from pystruct.models import ChainCRF
 from pystruct.learners import FrankWolfeSSVM
 from itertools import groupby
@@ -52,12 +52,14 @@ class CRFClassifier(object):
 
     STOPWORD_TAGS = ['AND', 'IN', 'OF', 'THE']
     
-    WORD_BREAKER_REMOVE = [re.compile(r'[A-Za-z]*(-\s+)[A-Za-z]*'),
-                           re.compile(r'\d+(,)\d+')]
+    WORD_BREAKER_REMOVE = [re.compile(r'[A-Za-z]*(-\s+)[A-Za-z]*')]
+
     START_WITH_AUTHOR = re.compile(r'([A-Za-z].*$)')
     CAPITAL_FIRST_CHAR = re.compile(r'([A-Z].*$)')
 
     QUOTES_AROUND_ETAL_REMOVE = re.compile(r'(.*)(")(et al\.?)(")(.*)', re.IGNORECASE)
+    TO_ADD_DOT_AFTER_SINGLE_CAPITAL_LETTER = re.compile(r'\b([A-Z])([\s,]+)')
+    TO_ADD_COMMA_AFTER_LAST_NAME = re.compile(r'([^|\s|,][A-Za-z]+)(\s+[A-Z]\.)+')
 
     TITLE_JOURNAL_EXTRACTOR = [re.compile(r'^[.\s]*(?P<title>[A-Z]+[A-za-z\'\s:-]+)[.,()\s\d\w]+"(?P<journal>[A-Z]+[A-Za-z\s.]+)".*'),
                                re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*"(?P<journal>[A-Z]*[A-Za-z\s.]*)"?'),
@@ -94,8 +96,8 @@ class CRFClassifier(object):
 
     PAGE_EXTRACTOR = re.compile(r'(?=.*[0-9])(?P<page>[BHPL0-9]+[-.][BHPL0-9]+)')
     VOLUME_EXTRACTOR = re.compile(r'(vol|volume)[.\s]+(?P<volume>\w+)')
-    YEAR_EXTRACTOR = re.compile(r'[(\s]*([12][089]\d\d[a-z]?)[)\s.,]+')
-    START_WITH_YEAR = re.compile(r'(^[12][089]\d\d)')
+    YEAR_EXTRACTOR = re.compile(r'[(\s]*(%s[a-z]?)[)\s.,]+'%YEAR_PATTERN)
+    START_WITH_YEAR = re.compile(r'(^%s)'%YEAR_PATTERN)
 
     
     REFERENCE_TOKENIZER = re.compile(r'([\s,.():\[\]"#\/\-])')
@@ -136,6 +138,9 @@ class CRFClassifier(object):
         self.academic_publishers_locations = current_app.config['REFERENCE_SERVICE_ACADEMIC_PUBLISHERS_LOCATIONS']
         self.academic_publishers = ' '.join(current_app.config['REFERENCE_SERVICE_ACADEMIC_PUBLISHERS'])
         self.stopwords = current_app.config['REFERENCE_SERVICE_STOP_WORDS']
+
+        self.year_now = datetime.datetime.now().year
+        self.year_earliest =  1400
 
     def create_crf(self):
         """
@@ -387,7 +392,10 @@ class CRFClassifier(object):
         if 'YEAR' in labels:
             ref_dict['year'] = words[labels.index('YEAR')]
         if 'VOLUME' in labels:
-            ref_dict['volume'] = words[labels.index('VOLUME')]
+            # volume must be numeric, saw a false positive, so catch it here
+            for vol in [words[i] for i, value in enumerate(labels) if value == 'VOLUME']:
+                if vol.isdigit():
+                    ref_dict['volume'] = vol
         if 'PAGE' in labels:
             ref_dict['page'] = words[labels.index('PAGE')]
         if 'ISSUE' in labels:
@@ -1278,6 +1286,15 @@ class CRFClassifierText(CRFClassifier):
         :param reference_str:
         :return:
         """
+        # find the year, could be alphanumeric, so accept them
+        # if more than one match found, then remove alphanumeric and see if there is only one to accept
+        year = list(OrderedDict.fromkeys(self.YEAR_EXTRACTOR.findall(reference_str)))
+        if len(year) > 1:
+            year = [y for y in year if y.isnumeric() and int(y) >= self.year_earliest and int(y) <= self.year_now]
+        if len(year) == 1:
+            year = year[0]
+            reference_str = self.substitute(year, '', reference_str)
+
         # see if can extract numeric based on a patters
         for ne in self.FORMATTED_MULTI_NUMERIC_EXTRACTOR:
             extractor = ne.search(reference_str)
@@ -1294,15 +1311,6 @@ class CRFClassifierText(CRFClassifier):
                 break
             else:
                 volume = page = issue = ''
-
-        # find the year, could be alphanumeric, so accept them
-        # if more than one match found, then remove alphanumeric and see if there is only one to accept
-        year = list(OrderedDict.fromkeys(self.YEAR_EXTRACTOR.findall(reference_str)))
-        if len(year) > 1:
-            year = [y for y in year if y.isnumeric()]
-        if len(year) == 1:
-            year = year[0]
-            reference_str = self.substitute(year, '', reference_str)
 
         # if there is page in the form of start-end or eid in the format of number.number
         if len(page) == 0:
@@ -1572,6 +1580,10 @@ class CRFClassifierText(CRFClassifier):
             reference_str = self.START_WITH_AUTHOR.search(reference_str).group()
         # also if for some reason et al. has been put in double quoted! remove them
         reference_str = self.QUOTES_AROUND_ETAL_REMOVE.sub(r"\1\3\5", reference_str)
+        # make sure there is a dot after initials
+        reference_str = self.TO_ADD_DOT_AFTER_SINGLE_CAPITAL_LETTER.sub(r"\1.\2", reference_str)
+        # make sure there is a comma after last name
+        reference_str = self.TO_ADD_COMMA_AFTER_LAST_NAME.sub(r"\1,\2", reference_str)
 
         for rwb in self.WORD_BREAKER_REMOVE:
             reference_str = rwb.sub('', reference_str)

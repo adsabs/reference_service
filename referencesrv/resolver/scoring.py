@@ -269,6 +269,9 @@ def compare_bibcode(ref_bibcode, ads_bibcode):
     if ref_bibcode is None or ads_bibcode is None:
         return False
 
+    ref_bibcode = ref_bibcode.upper()
+    ads_bibcode = ads_bibcode.upper()
+
     score = 0
     # year has to match
     if ref_bibcode[0:4] == ads_bibcode[0:4]:

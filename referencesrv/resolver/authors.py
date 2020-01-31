@@ -40,6 +40,7 @@ TRAILING_INIT_AUTHORS_PAT = re.compile("%s(%s%s)*(%s)?"%(
     NAMED_GROUP_PAT.sub("?:", TRAILING_INIT_PAT.pattern), ETAL_PAT.pattern))
 
 COLLABORATION_PAT = re.compile(r"(?P<collaboration>[A-Za-z\s\-]*Collaboration,)")
+COLLEAGUES_PAT = re.compile(r"(?P<andcolleagues>and\s\d+\s(co-authors|colleagues))")
 
 REFERENCE_LAST_NAME_EXTRACTOR = re.compile(r"(\w\w+\s*\w\w+\s*\w{0,1}\w+)")
 SINGLE_WORD_EXTRACTOR = re.compile(r"\w+")
@@ -68,6 +69,26 @@ def get_author_pattern(ref_string):
     else:
         return LEADING_INIT_PAT
 
+def get_authors_recursive(ref_string, start_idx, author_pat):
+    """
+    if there is a comma missing between the authors, RE gets confused,
+    once substring is identified as author, continue on with the rest of ref_string
+    to make sure all the authors are identified
+
+    :param ref_string:
+    :param start_idx:
+    :param author_pat:
+    :return:
+    """
+    author_len = 0
+    while True:
+        author_match = author_pat.match(ref_string[start_idx+author_len:])
+        if author_match:
+            author_len += len(author_match.group())
+        else:
+            break
+        author_len += len(ref_string) - len(ref_string.lstrip())
+    return author_len
 
 def get_authors(ref_string):
     """
@@ -87,18 +108,18 @@ def get_authors(ref_string):
     # remove them to be able to decide if the author list is trailing or ending
     collaborators_len = get_collabration_length(ref_string)
 
-    lead_match = LEADING_INIT_AUTHORS_PAT.match(ref_string[collaborators_len:])
-    trail_match = TRAILING_INIT_AUTHORS_PAT.match(ref_string[collaborators_len:])
-    lead_len = trail_len = 0
+    # if there is a xxx colleagues or xxx co-authors
+    # that would signal the end of author
+    and_colleagues = get_and_colleagues(ref_string)
+    if len(and_colleagues) > 0:
+        authors_len = ref_string.find(and_colleagues) + len(and_colleagues)
+    else:
+        lead_len = get_authors_recursive(ref_string, collaborators_len, LEADING_INIT_AUTHORS_PAT)
+        trail_len = get_authors_recursive(ref_string, collaborators_len, TRAILING_INIT_AUTHORS_PAT)
 
-    if lead_match:
-        lead_len = len(lead_match.group())
-    if trail_match:
-        trail_len = len(trail_match.group())
-
-    authors_len = max(lead_len, trail_len)
-    if authors_len < 3:
-        raise Undecidable("No discernible authors in '%s'"%ref_string)
+        authors_len = max(lead_len, trail_len) + len(and_colleagues)
+        if authors_len < 3:
+            raise Undecidable("No discernible authors in '%s'"%ref_string)
 
     return ref_string[:collaborators_len+authors_len]
 
@@ -134,9 +155,22 @@ def get_collabration_length(ref_string):
     """
     match = COLLABORATION_PAT.match(ref_string)
     if match:
-        return len(match.group())
+        return len(match.group('collaboration'))
 
     return 0
+
+
+def get_and_colleagues(ref_string):
+    """
+
+    :param ref_string:
+    :return:
+    """
+    match = COLLEAGUES_PAT.search(ref_string)
+    if match:
+        return match.group('andcolleagues')
+
+    return ''
 
 
 def normalize_single_author(author_string):

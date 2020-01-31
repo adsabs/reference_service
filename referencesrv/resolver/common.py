@@ -377,3 +377,11 @@ class Overflow(Error):
 
     It should be taken as "please try another, more specific hypothesis".
     """
+
+def round_two_significant_digits(num):
+    """
+
+    :param num:
+    :return:
+    """
+    return float('%s' % float('%.1g' % num))
