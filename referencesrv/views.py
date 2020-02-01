@@ -74,9 +74,10 @@ def return_response(results, status, content_type='application/json'):
         r.headers['content-type'] = content_type
         return r
 
-    current_app.logger.info('sending response status={status}'.format(status=status))
+    current_app.logger.debug('response length={length} with content_type={content_type}'.format(length=len(response), content_type=content_type))
     r = Response(response=response, status=status)
     r.headers['content-type'] = content_type
+    current_app.logger.info('sending response status={status}'.format(status=status))
     return r
 
 

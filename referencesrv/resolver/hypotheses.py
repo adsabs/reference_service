@@ -148,7 +148,12 @@ class Hypotheses(object):
         volume = (4 - len(volume)) * '.' + volume
         page_qualifier = self.digested_record.get("qualifier", self.any_qualifier(bibstem, self.digested_record["pub"]))
         # eid can have a dot, remove it first
-        page = self.digested_record.get("page", "").replace('.','')[:4]
+        page = self.digested_record.get("page", "").replace('.','')
+        # if page is more than 4 characters and there is no qualifier,
+        # use the qualifier space for the page as well
+        if len(page) > 4 and page_qualifier == '.':
+            page = page[:5]
+            page_qualifier = ''
         # if no page is identified, use wildcard
         if len(page) == 0:
             page = "????"
