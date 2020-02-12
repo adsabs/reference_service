@@ -58,7 +58,7 @@ class CRFClassifier(object):
     CAPITAL_FIRST_CHAR = re.compile(r'([A-Z].*$)')
 
     QUOTES_AROUND_ETAL_REMOVE = re.compile(r'(.*)(")(et al\.?)(")(.*)', re.IGNORECASE)
-    TO_ADD_DOT_AFTER_SINGLE_CAPITAL_LETTER = re.compile(r'\b([A-Z])([\s,]+)')
+    TO_ADD_DOT_AFTER_INITIALS = re.compile(r'\b([A-Z])(\s,?[A-Z][A-Za-z]+,)')
     TO_ADD_COMMA_AFTER_LAST_NAME = re.compile(r'([^|\s|,][A-Za-z]+)(\s+[A-Z]\.)+')
 
     TITLE_JOURNAL_EXTRACTOR = [re.compile(r'^[.\s]*(?P<title>[A-Z]+[A-za-z\'\s:-]+)[.,()\s\d\w]+"(?P<journal>[A-Z]+[A-Za-z\s.]+)".*'),
@@ -66,7 +66,7 @@ class CRFClassifier(object):
                                re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*(?P<journal>[A-Z]+[A-Za-z\.\s]+)+.*'),
                                re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"[.,\s]+[Ii][Nn]:\s*(?P<journal>[A-Za-z\.\s]+)+.*'),
                                re.compile(r'^[.,\s]*"(?P<title>[A-Z]+[\w\.\'\s:-]+)[.,\s]+"\s*(?P<journal>\s*)'),
-                               re.compile(r'^[.\s]*(?P<title>[A-Z]+[A-za-z\'\s:-]+)[.,\s]+(?P<journal>[A-Z\s\.]+)[\s\d,]+.*'),]
+                               re.compile(r'^[.\s]*(?P<title>[A-Z]+[A-za-z\'\s:-]+)[.,]+(?P<journal>[A-Z]+[\s\.]+)[\s\d,]+.*'),]
     TITLE_JOURNAL_PUNCTUATION_REMOVER = re.compile(r'[:\(\)\-\[\]]')
     JOURNAL_ONLY_EXTRACTOR = [re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>([A-Z][A-Za-z\s]+)[,\s]+(\d+[th]*\s[A-Z]+\s[Mm]eeting))[\d,.\s\w-]*$'),
                               re.compile(r'^[\s\d,]+[a-z\s]*(?P<journal>[A-Z|of|the|and|as|at|a|in|by]+[A-Za-z&\-\s]*)[\d,.\s\w-]*$'),]
@@ -75,6 +75,9 @@ class CRFClassifier(object):
     ARXIV_ID_EXTRACTOR = re.compile(r'(\w+\-\w+/\d+|\w+/\d{7}|\d{4}\.\d{4,5})(v?\d*)')
     ASCL_ID_EXTRACTOR = re.compile(r'((ascl\s*:\s*)([\d.]+))')
     DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>[doi|DOI]{3}[\s\.\:]{0,2}10\.\s*\d{4}[\d\:\.\-\/\(\)A-Za-z\s]+)')
+
+    URL_TO_DOI = re.compile(r'(.*)((https://)(doi.org/))(.*)')
+
     # two specific formats for matching volume, page, issue
     # note that in the first expression issue matches a space, there is no issue in this format,
     # it is included to have all three groups present
@@ -99,7 +102,6 @@ class CRFClassifier(object):
     YEAR_EXTRACTOR = re.compile(r'[(\s]*(%s[a-z]?)[)\s.,]+'%YEAR_PATTERN)
     START_WITH_YEAR = re.compile(r'(^%s)'%YEAR_PATTERN)
 
-    
     REFERENCE_TOKENIZER = re.compile(r'([\s,.():\[\]"#\/\-])')
     TAGGED_MULTI_WORD_TOKENIZER = re.compile(r'([\s.,])')
 
@@ -1459,12 +1461,19 @@ class CRFClassifierText(CRFClassifier):
 
         # check for possible publisher
         publisher = ''
-        if len(nps_merge) >= 3:
+        while True:
             idx = self.if_publisher_get_idx(nps_merge)
             if idx >= 0:
                 # ided publisher, assign it and remove it
-                publisher = nps_merge[idx]
+                publisher = publisher + ' ' + nps_merge[idx]
                 nps_merge.pop(idx)
+            else:
+                break
+        if len(publisher) > 0:
+            title = ' '.join(nps_merge)
+            # when there is a publisher, it is more than likely we have a book
+            # assign everything to title
+            return {'title': title, 'journal': '', 'publisher': publisher.strip()}
 
         # more than likely, if there is one field it is journal
         if len(nps_merge) == 1:
@@ -1473,6 +1482,12 @@ class CRFClassifierText(CRFClassifier):
         # more than likely, if there are two fields, first is title, and second is journal
         if len(nps_merge) == 2:
             return {'title': nps_merge[0].rstrip('.').rstrip(','), 'journal': nps_merge[1], 'publisher': publisher}
+
+        # if still three fields, and publisher is not identified to be one of them
+        # more than likely the first one is title, and the last one is journal
+        # the middle can be either so leave it alone and let CRF figure it out
+        if len(nps_merge) == 3:
+            return {'title': nps_merge[0].rstrip('.').rstrip(','), 'journal': nps_merge[2], 'publisher': ''}
 
         # unable to guess
         return {'title': '', 'journal': '', 'publisher':''}
@@ -1581,9 +1596,11 @@ class CRFClassifierText(CRFClassifier):
         # also if for some reason et al. has been put in double quoted! remove them
         reference_str = self.QUOTES_AROUND_ETAL_REMOVE.sub(r"\1\3\5", reference_str)
         # make sure there is a dot after initials
-        reference_str = self.TO_ADD_DOT_AFTER_SINGLE_CAPITAL_LETTER.sub(r"\1.\2", reference_str)
+        reference_str = self.TO_ADD_DOT_AFTER_INITIALS.sub(r"\1.\2", reference_str)
         # make sure there is a comma after last name
         reference_str = self.TO_ADD_COMMA_AFTER_LAST_NAME.sub(r"\1,\2", reference_str)
+        # if there is a url for DOI turned it to recognizable DOI
+        reference_str = self.URL_TO_DOI.sub(r"\1DOI:\5", reference_str)
 
         for rwb in self.WORD_BREAKER_REMOVE:
             reference_str = rwb.sub('', reference_str)

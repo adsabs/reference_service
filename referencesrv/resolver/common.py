@@ -378,6 +378,11 @@ class Overflow(Error):
     It should be taken as "please try another, more specific hypothesis".
     """
 
+class Solr(Error):
+    """
+    is raised when solr returns an error.
+    """
+
 def round_two_significant_digits(num):
     """
 

@@ -7,7 +7,7 @@ import urllib
 
 from flask import current_app
 
-from referencesrv.resolver.common import Undecidable, NoSolution, Solution, Overflow
+from referencesrv.resolver.common import Undecidable, NoSolution, Solution, Overflow, Solr
 from referencesrv.resolver.solrquery import Querier
 from referencesrv.resolver.hypotheses import Hypotheses
 from referencesrv.resolver.authors import normalize_author_list
@@ -275,7 +275,7 @@ def solve_reference(ref):
             possible_solutions.extend(ex.considered_solutions)
         except (NoSolution, Overflow), ex:
             current_app.logger.debug("(%s)"%ex.__class__.__name__)
-        except KeyboardInterrupt:
+        except (Solr, KeyboardInterrupt):
             raise
         except:
             current_app.logger.error("Unhandled exception killing a single hypothesis.")

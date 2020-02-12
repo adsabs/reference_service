@@ -46,6 +46,22 @@ def get_best_bibstem_for(sourceSpec):
         raise KeyError(sourceSpec)
 
 
+def get_exact_bibstem_for(sourceSpec):
+    """
+    returns a "unique" bibstem that could match for sourceName.
+
+    If we cannot come up with anything, this raises a KeyError
+
+    :param sourceSpec:
+    :return:
+    """
+    current_app.logger.debug("sourceSpec=%s" % (sourceSpec))
+    try:
+        return SOURCE_MATCHER.exactmatch(sourceSpec.upper())
+    except IndexError:
+        raise KeyError(sourceSpec)
+
+
 def get_bibstem(stem):
     """
     checks to see if bibstem stem exist.
@@ -86,18 +102,15 @@ def add_volume_evidence(evidences, ref_volume, ads_volume, ads_issue):
             score = current_app.config['EVIDENCE_SCORE_RANGE'][1]
         # sometimes ads_volume holds conference year, and references include the issue
         # see if ads_volume is a year, if so then check the reference against issue
-        elif YEAR_PATTERN.findall(ads_volume) and int(ref_volume)==int(ads_issue):
+        elif ads_issue and YEAR_PATTERN.findall(ads_volume) and int(ref_volume)==int(ads_issue):
             score = current_app.config['EVIDENCE_SCORE_RANGE'][1]
         else:
             delta_volume = compute_closeness_two_numbers(ref_volume, ads_volume)
-            delta_issue = compute_closeness_two_numbers(ref_volume, ads_issue) if YEAR_PATTERN.findall(ads_volume) else 0
+            delta_issue = compute_closeness_two_numbers(ref_volume, ads_issue) if ads_issue and YEAR_PATTERN.findall(ads_volume) else 0
             score = current_app.config['EVIDENCE_SCORE_RANGE'][1] * max(delta_volume, delta_issue)
     except ValueError:
-        # Some weird format -- we should probably use some edit distance here
-        if ref_volume==ads_volume:
-            score = current_app.config['EVIDENCE_SCORE_RANGE'][1]
-        else:
-            score = current_app.config['EVIDENCE_SCORE_RANGE'][0]
+        # Some weird format, so use edit distance
+        score = string_similarity(ref_volume, ads_volume)
 
     evidences.add_evidence(score, 'volume')
     return

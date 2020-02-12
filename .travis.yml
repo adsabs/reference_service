@@ -14,6 +14,9 @@ install:
 script:
   - "py.test"
 
+services:
+  - redis-server
+
 after_success:
   - "coveralls"
 

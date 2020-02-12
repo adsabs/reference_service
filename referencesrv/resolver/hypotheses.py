@@ -139,7 +139,7 @@ class Hypotheses(object):
         :return:
         """
         year = self.digested_record["year"]
-        bibstem = get_best_bibstem_for(self.digested_record["pub"])
+        bibstem = get_best_bibstem_for(self.digested_record["pub"])[:5]
         journal = bibstem + (5 - len(bibstem)) * '.'
         volume = self.digested_record.get("volume", "")
         # if no volume is identified, use wildcard

@@ -6,6 +6,7 @@ import time
 from flask import current_app
 from referencesrv.client import client
 
+from referencesrv.resolver.common import Solr
 from referencesrv.resolver.solrtestdata import get_test_data
 
 class Querier(object):
@@ -56,7 +57,7 @@ class Querier(object):
             # all non-200 responses
             if response.status_code != 200:
                 current_app.logger.error('Solr returned {response}.'.format(response=response))
-                return None
+                raise Solr("status_code %s"%response.status_code)
             else:
                 from_solr = json.loads(response.text)
         else:
