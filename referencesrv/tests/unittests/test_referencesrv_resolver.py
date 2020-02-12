@@ -658,7 +658,7 @@ class TestResolver(TestCase):
         # when not integer, unmatched
         evidences = Evidences()
         self.assertEqual(add_volume_evidence(evidences, '223-3', '233-3', ''), None)
-        self.assertEqual(evidences.get_score(), -1)
+        self.assertEqual(evidences.get_score(), 0.8)
         # when volume is year and there is an issue
         evidences = Evidences()
         self.assertEqual(add_volume_evidence(evidences, '233', '2018', '233'), None)
