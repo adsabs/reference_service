@@ -14,6 +14,7 @@ from referencesrv.parser.crf import CRFClassifierText, CRFClassifierXML, create_
 from referencesrv.resolver.solve import solve_reference
 from referencesrv.resolver.hypotheses import Hypotheses
 from referencesrv.resolver.sourcematchers import create_source_matcher, load_source_matcher
+from referencesrv.resolver.common import NoSolution
 
 
 bp = Blueprint('reference_service', __name__)
@@ -151,6 +152,8 @@ def text_resolve(reference, returned_format):
                                              cache=True)
         else:
             raise ValueError('Reference with no year and volume cannot be resolved.')
+    except NoSolution:
+        return format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
     except Exception as e:
         current_app.logger.error('Exception: %s', str(e))
         raise
