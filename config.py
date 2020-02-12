@@ -162,3 +162,11 @@ REFERENCE_SERVICE_STOP_WORDS = [
      't', 'can', 'will', 'just', 'don', 'should', 'now', 'id', 'var', 'in',
      'function', 'js', 'd', 'script', '\'script', 'fjs', 'document', 'r',
      'b', 'g', 'e', '\'s', 'c', 'f', 'h', 'l', 'k']
+
+# For caching
+REDIS_URL = "redis://localhost:6379/0"
+REDIS_NAME_PREFIX = "reference_service_"
+# save to cache for a day
+# REDIS_EXPIRATION_TIME = 86400
+# eventually a day, for debug purposes, for now lets keep it for one hour
+REDIS_EXPIRATION_TIME = 3600

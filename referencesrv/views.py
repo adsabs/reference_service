@@ -2,6 +2,8 @@
 
 from flask import current_app, request, Blueprint, Response
 from flask_discoverer import advertise
+from flask_redis import FlaskRedis
+from redis import RedisError
 
 import json
 import urllib
@@ -15,6 +17,7 @@ from referencesrv.resolver.sourcematchers import create_source_matcher, load_sou
 
 
 bp = Blueprint('reference_service', __name__)
+redis_db = FlaskRedis()
 
 RE_NUMERIC_VALUE = re.compile(r'\d')
 
@@ -81,18 +84,49 @@ def return_response(results, status, content_type='application/json'):
     return r
 
 
-def format_resolved_reference(returned_format, resolved, reference):
+def cache_resolved_set(reference, resolved):
+    """
+
+    :param reference:
+    :param resolved
+    :return:
+    """
+    try:
+        # save it to cache
+        redis_db.set(name=current_app.config['REDIS_NAME_PREFIX'] + reference, value=resolved,
+                     ex=current_app.config['REDIS_EXPIRATION_TIME'])
+    except RedisError as e:
+        current_app.logger.error('exception on caching reference=%s: %s' % (reference, str(e)))
+
+def cache_resolved_get(reference):
+    """
+
+    :param reference:
+    :return:
+    """
+    try:
+        resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference)
+    except RedisError:
+        resolved = None
+
+    return resolved
+
+def format_resolved_reference(returned_format, resolved, reference, cache=True):
     """
 
     :param returned_format:
     :param resolved:
     :param reference:
+    :param cache:
     :return:
     """
+    if cache:
+        cache_resolved_set(reference, resolved)
     if 'application/json' in returned_format:
         resolved = resolved.split()
         return {'score': resolved[0], 'bibcode': resolved[1], 'reference': reference}
     return '%s -- %s' % (resolved, reference)
+
 
 def text_resolve(reference, returned_format):
     """
@@ -102,18 +136,25 @@ def text_resolve(reference, returned_format):
     :return:
     """
     try:
+        resolved = cache_resolved_get(reference)
+        if resolved:
+            return format_resolved_reference(returned_format,
+                                             resolved=resolved,
+                                             reference=reference,
+                                             cache=False)
+
         if bool(RE_NUMERIC_VALUE.search(reference)):
             parsed_ref = text_parser(reference)
             return format_resolved_reference(returned_format,
                                              resolved=str(solve_reference(Hypotheses(parsed_ref))),
-                                             reference=reference)
+                                             reference=reference,
+                                             cache=True)
         else:
             raise ValueError('Reference with no year and volume cannot be resolved.')
     except Exception as e:
         current_app.logger.error('Exception: %s', str(e))
-        result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
+        raise
 
-    return result
 
 @advertise(scopes=[], rate_limit=[1000, 3600 * 24])
 @bp.route('/text/<reference>', methods=['GET'])
@@ -242,6 +283,7 @@ def pickle_crf():
     create_text_model()
 
     return return_response({'OK': 'objects saved'}, 200, 'text/plain; charset=UTF8')
+
 
 @advertise(scopes=['ads:reference-service'], rate_limit=[1000, 3600 * 24])
 @bp.route('/pickle_source_matcher', methods=['PUT'])

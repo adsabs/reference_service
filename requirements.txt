@@ -4,6 +4,7 @@ beautifulsoup==3.2.1
 cvxopt==1.2.3
 editdistance==0.3.1
 flask-discoverer==0.1.4
+Flask-Redis==0.3.0
 Flask-RESTful==0.3.6
 Flask-Testing==0.6.2
 html==1.16.0
@@ -13,5 +14,6 @@ pystruct==0.3.2
 scikit-learn==0.20.3
 scipy==1.2.1
 Unidecode==1.0.23
+redis==2.10.6
 Werkzeug==0.11.15
 xmltodict==0.12.0

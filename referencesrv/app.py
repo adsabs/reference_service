@@ -5,7 +5,7 @@ from flask_discoverer import Discoverer
 
 from adsmutils import ADSFlask
 
-from referencesrv.views import bp, text_model
+from referencesrv.views import bp, redis_db, text_model
 
 def create_app(**config):
     """
@@ -26,6 +26,9 @@ def create_app(**config):
         text_model()
 
     app.register_blueprint(bp)
+
+    redis_db.init_app(app)
+
     return app
 
 if __name__ == '__main__':
