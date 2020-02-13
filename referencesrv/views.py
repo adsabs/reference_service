@@ -152,7 +152,7 @@ def text_resolve(reference, returned_format):
                                              cache=True)
         else:
             raise ValueError('Reference with no year and volume cannot be resolved.')
-    except NoSolution:
+    except (NoSolution, ValueError):
         return format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
     except Exception as e:
         current_app.logger.error('Exception: %s', str(e))

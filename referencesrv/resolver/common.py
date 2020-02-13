@@ -252,7 +252,7 @@ class Solution(object):
         """
         if isinstance(self.score, Evidences):
             return '%.1f %s'%(self.score.avg(),self.cited_bibcode)
-        return NotResolved(raw_ref='', citing_bibcode=self.cited_bibcode)
+        raise NoSolution("NotResolved")
 
     def __repr__(self):
         return repr(self.cited_bibcode)
