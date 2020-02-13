@@ -258,7 +258,7 @@ class Hypotheses(object):
             if has_thesis_indicators(self.digested_record["refstr"]):
                 yield Hypothesis("fielded-thesis", {
                     "author": self.normalized_authors,
-                    "pub_escaped": "(%s)"%" or ".join(current_app.config["THESIS_INDICATOR_WORDS"]),
+                    "pub": "(%s)"%" or ".join(current_app.config["THESIS_INDICATOR_WORDS"]),
                     "year": self.digested_record["year"]},
                 get_thesis_score_for_input_fields,
                 input_fields=self.digested_record,

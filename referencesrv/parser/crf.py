@@ -394,10 +394,16 @@ class CRFClassifier(object):
         if 'YEAR' in labels:
             ref_dict['year'] = words[labels.index('YEAR')]
         if 'VOLUME' in labels:
-            # volume must be numeric, saw a false positive, so catch it here
-            for vol in [words[i] for i, value in enumerate(labels) if value == 'VOLUME']:
-                if vol.isdigit():
-                    ref_dict['volume'] = vol
+            # TODO: figure out why multiple words are marked as volume by CRF
+            # for now if there are multiple volumes return the first numeric value
+            volume = [words[i] for i, value in enumerate(labels) if value == 'VOLUME']
+            if len(volume) == 1:
+                ref_dict['volume'] = volume[0]
+            else:
+                for v in volume:
+                    if v.isdigit():
+                        ref_dict['volume'] = v
+                        break
         if 'PAGE' in labels:
             ref_dict['page'] = words[labels.index('PAGE')]
         if 'ISSUE' in labels:
