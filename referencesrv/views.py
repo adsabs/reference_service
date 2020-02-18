@@ -4,6 +4,7 @@ from flask import current_app, request, Blueprint, Response
 from flask_discoverer import advertise
 from flask_redis import FlaskRedis
 from redis import RedisError
+from hashlib import md5
 
 import json
 import urllib
@@ -78,7 +79,6 @@ def return_response(results, status, content_type='application/json'):
         r.headers['content-type'] = content_type
         return r
 
-    current_app.logger.debug('response length={length} with content_type={content_type}'.format(length=len(response), content_type=content_type))
     r = Response(response=response, status=status)
     r.headers['content-type'] = content_type
     current_app.logger.info('sending response status={status}'.format(status=status))
@@ -93,11 +93,12 @@ def cache_resolved_set(reference, resolved):
     :return:
     """
     try:
-        # save it to cache
-        redis_db.set(name=current_app.config['REDIS_NAME_PREFIX'] + reference, value=resolved,
+        # save it to cache in MD5 format
+        reference_md5 = md5(reference).hexdigest()
+        redis_db.set(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5, value=resolved,
                      ex=current_app.config['REDIS_EXPIRATION_TIME'])
     except RedisError as e:
-        current_app.logger.error('exception on caching reference=%s: %s' % (reference, str(e)))
+        current_app.logger.error('exception on caching reference={reference}: {error}'.format(reference=reference, error=str(e)))
 
 def cache_resolved_get(reference):
     """
@@ -106,7 +107,9 @@ def cache_resolved_get(reference):
     :return:
     """
     try:
-        resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference)
+        reference_md5 = md5(reference).hexdigest()
+        resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5)
+        current_app.logger.debug('fetched reference={reference} from cache'.format(reference=reference))
     except RedisError:
         resolved = None
 
@@ -152,10 +155,11 @@ def text_resolve(reference, returned_format):
                                              cache=True)
         else:
             raise ValueError('Reference with no year and volume cannot be resolved.')
-    except (NoSolution, ValueError):
+    except (NoSolution, ValueError) as e:
+        current_app.logger.error('Exception: {error}'.format(error=str(e)))
         return format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
     except Exception as e:
-        current_app.logger.error('Exception: %s', str(e))
+        current_app.logger.error('Exception: {error}'.format(error=str(e)))
         raise
 
 
@@ -175,7 +179,7 @@ def text_get(reference):
 
     start_time = time.time()
     result = text_resolve(reference, returned_format)
-    current_app.logger.debug("GET request processed in %s ms" % ((time.time() - start_time) * 1000))
+    current_app.logger.debug("GET request processed in {duration} ms".format(duration=(time.time() - start_time) * 1000))
 
     return return_response({'resolved': result}, 200, 'application/json; charset=UTF8')
 
@@ -199,7 +203,7 @@ def text_post():
 
     references = payload['reference']
 
-    current_app.logger.info('received POST request with references={references} to resolve in text mode'. format(references=','.join(references)))
+    current_app.logger.info('received POST request with references={references} to resolve in text mode'.format(references=','.join(references)[:250]))
 
     returned_format = request.headers.get('Accept', 'text/plain')
 
@@ -207,7 +211,8 @@ def text_post():
     results = []
     for reference in references:
         results.append(text_resolve(reference, returned_format))
-    current_app.logger.debug("POST request with %d reference(s) processed in %s ms" % (len(references), (time.time() - start_time) * 1000))
+    current_app.logger.debug("POST request with {num} reference(s) processed in {duration} ms".format(num=len(references),
+                                                                                                      duration=(time.time() - start_time) * 1000))
 
     if returned_format == 'application/json':
         return return_response({'resolved': results}, 200, 'application/json; charset=UTF8')
@@ -233,8 +238,7 @@ def xml_post():
 
     references = payload['reference']
 
-    current_app.logger.debug('received POST request with references={references} to resolve in xml mode'.
-        format(references=' '.join(references)[:250]))
+    current_app.logger.debug('received POST request with references={references} to resolve in xml mode'.format(references=' '.join(references)[:250]))
 
     returned_format = request.headers.get('Accept', 'text/plain')
 
@@ -247,7 +251,7 @@ def xml_post():
                 raise
             result = format_resolved_reference(returned_format, resolved=resolved, reference=parsed_reference['refstr'])
         except Exception as e:
-            current_app.logger.error('Exception: %s' %(str(e)))
+            current_app.logger.error('Exception: {error}'.format(error=str(e)))
             # lets attempt to resolve using the text model
             if 'refplaintext' in parsed_reference:
                 reference = urllib.unquote(parsed_reference['refplaintext'])
@@ -258,7 +262,7 @@ def xml_post():
                                                        resolved=str(solve_reference(Hypotheses(parsed_ref))),
                                                        reference=reference)
                 except Exception as e:
-                    current_app.logger.error('Exception: %s', str(e))
+                    current_app.logger.error('Exception: {error}'.format(error=str(e)))
                     result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
                     continue
             else:
