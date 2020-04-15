@@ -1,6 +1,7 @@
 A&A......	A & A
 A&A......	A&A
 A&A......	AA
+A&A......	AAp
 A&A......	AP&A
 A&A......	Astr. & Ap.
 A&A......	Astr. and Ap.
@@ -578,6 +579,7 @@ ChGeo....	Chem. Geol.
 ChiLP....	Chicago Lectures in Physics
 ChJAA....	Chin. J. Astron. Astrophys.
 ChJAA....	ChJAA
+ChJGC....	Chinese Journal of Geophysics - Chinese Edition
 ChJPR....	Chinese Journal of Polar Research
 ChPhA....	Chin. Phys. A
 ChPhB....	Chin. Phys. B
@@ -698,6 +700,7 @@ DokPC....	Doklady Physical Chemistry
 DPS......	DPS
 DRM......	Diamond And Related Materials
 DSEG.....	Developments in Solid Earth Geophysics
+DPSc.....	Dataset Papers in Science
 DSSys....	Dynamics and Stability of Systems
 DTr......	Dalton Transactions
 DurOO....	Durham Observatory Observations
@@ -771,6 +774,7 @@ ESOAR....	European Southern Observatory Annual Reports
 ETDS.....	Ergodic Theory and Dynamical Systems
 ExA......	Exp. Astron.
 ExA......	EXPERIMENTAL ASTRONOMY
+ExA......	ExA
 ExMPS....	Experimental Methods in the Physical Sciences
 Exper....	Experientia
 FAAp.....	Functional Analysis and Its Applications
@@ -790,8 +794,12 @@ FizAt....	Fiziki Atmosfery
 FliIn....	Flight International
 FMAG.....	Fluid Mechanics of Astrophysics and Geophysics
 FNL......	Fluctuation and Noise Letters
+FrASS....	Front. Ast. Sp. Sci.
+FrCh.....	Front. Chem.
 FrInJ....	J. Franklin Inst.
 FrInJ....	J.Franklin Inst.
+FrMat....	Front. Mat. Sci.
+FrPhy....	Front. Phys.
 GalEl....	Galilean Electrodyn.
 GApFD....	Geophys. Ap. Fluid Dyn.
 GApFD....	Geophys. Astrophys. Fluid Dyn.
@@ -1526,6 +1534,14 @@ MPhy.....	Monographs in Physique
 MRMed....	Magnetic Resonance in Medicine
 MRMPB....	Magnetic Resonance Materials in Physics Biology and Medicine
 MRSSP....	Mater. Res. Soc. Symp. Proc.
+MSAIS....	Mem. S.A. It. Suppl.
+MSAIS....	Mem. Soc. Astron. It. Suppl.
+MSAIS....	Mem. Soc. Astron. Ital. Suppl.
+MSAIS....	Memorie SAIt Suppl
+MSAIS....	S. A. Memorie SAIt Suppl.
+MSAIS....	SOC. ASTR. ITALIANA. MEM. SUPPL.
+MSAIS....	SOCIETA ASTRON. ITALIANA. MEMORIE SUPPL.
+MSAIS....	Mem. Soc. Astron. It. Suppl.
 MSEnR....	Materials Science and Engineering R Reports
 Msngr....	Messenger
 Msngr....	MESSENGER. EUROPEAN SOUTHERN OBS.
@@ -1905,6 +1921,7 @@ RamJ.....	The Ramanujan Journal
 RaPC.....	Radiat. Phys. Chem.
 RaSc.....	Radio Sci.
 RaSc.....	RADIO SCIENCE
+RaScB....	Radio Science Bulletin
 RDR......	Review of Derivatives Research
 REB......	Radiation and Environmental Biophysics
 REEP.....	Radio Engineering and Electronic Physics
@@ -2141,6 +2158,7 @@ TrSht....	TRUDY. GOS.ASTRON.INST. PK.STERNBERGA
 TsShe....	TSIRKULYAR. SHEMAKHA ASTROFIZ. OBS.
 TTPhy....	Teubner Texte zur Physik
 TvOC.....	Transvaal Obs. Circ.
+UAdAs....	Urania Advances in Astronomy
 UAPET....	Updates in Applied Physics and Electrical Technology
 UkMJ.....	Ukranian Mathematical Journal
 Unpub....	Unpublished

@@ -56,6 +56,9 @@ THESIS_INDICATOR_WORDS = [u'thesis', u'ms', u'ph', u'phd', u'dissert*']
 # A factor by which matching authors are discounted if the first author is missing
 MISSING_FIRST_AUTHOR_FACTOR = 0.3
 
+# A factor by which matching volume is discounted if there is no volume in solr
+MISSING_VOLUME_FACTORY = 0.4
+
 # A negative confidence when one page has a "qualifier" (the L for
 # letter, or a P for the pink pages) and the other doesn't.
 NO_LETTER_DEMERIT = -0.3
@@ -121,47 +124,52 @@ REFERENCE_SERVICE_ACADEMIC_PUBLISHERS = [
     "Van Nostrand Reinhold","Vincent","Vital Raoul Lataste","Washington State University Press","Whitefriars",
     "Wiley-Interscience","Wiley-Liss","Williams & Wilkins","Winston","Wirsiers","Wissenschaftliche","Wistar",
     "Wolters-Noordhoff","Worth","Wright","Yale University Press","Year Book","Yorke"
+] + [
+    "Springer", "World Scientific"
 ]
 
 # source: http://www.apsstylemanual.org/oldmanual/resources/publishers.htm
 REFERENCE_SERVICE_ACADEMIC_PUBLISHERS_LOCATIONS = [
-    'Aberdeen', 'AL', 'Ames', 'Amsterdam', 'Ann Arbor', 'Assen', 'Austin', 'Australia', 'Baltimore', 'Bari', 'Basel',
-    'Baton Rouge', 'Beijing', 'Belgium', 'Belmont', 'Berkeley', 'Berlin', 'Bern', 'Bethesda', 'Birmingham',
-    'Bloomington', 'Boca Raton', 'Bologna', 'Boston', 'Bristol', 'Brunswick', 'Brussels', 'Budapest', 'Buenos Aires',
-    'Burlington', 'CA', 'Cadillac', 'Cambridge', 'Canada', 'Cape Town', 'Champaign', 'Chicago', 'Chichester',
-    'Cleveland', 'Clifton', 'Cold Spring Harbor', 'Copenhagen', 'CT', 'Danville', 'DC', 'Delhi', 'Don Mills', 'Dublin',
-    'Edinburgh', 'Elmsford', 'Englewood Cliffs', 'Evanston', 'FL', 'France', 'Frankfurt', 'Geneva', 'Germany',
-    'Glenview', 'Gottingen', 'Greenbelt', 'Groningen', 'Grosse Point Park', 'Groves', 'Halifax', 'Heidelberg',
-    'Hillsdale', 'Hingham', 'Homewood', 'IA', 'Ibaraki', 'IL', 'IN', 'Italy', 'Japan', 'Jena', 'Kalamazoo', 'Kiel',
-    'KY', 'LA', 'La Jolla', 'Lancaster', 'Leiden', 'Leipzig', 'Leningrad', 'Lexington', 'Liege', 'Lincoln', 'Lisse',
-    'London', 'London', 'Los Angeles', 'Lyons', 'MA', 'Madison', 'Madrid', 'MD', 'Menlo Park', 'MI', 'Miami',
-    'Minneapolis', 'MN', 'MO', 'Montreal', 'Moscow', 'Mount Kisco', 'Munich', 'N. Scituate', 'Nashville', 'NE',
-    'New Delhi', 'New Haven', 'New London', 'New York', 'NJ', 'Norwood', 'NY', 'O\'Hare', 'OH', 'Orlando', 'Oslo',
-    'Oss', 'Oxford', 'PA', 'Padua', 'Palo Alto', 'Paris', 'Philadelphia', 'Pittsburgh', 'Prague', 'Princeton',
-    'Providence', 'Pullman', 'Quebec', 'Rabway', 'Reading', 'RI', 'Rochester', 'Rockford', 'Rome',
-    'Royal Tunbridge Wells', 'Rutgers', 'San Francisco', 'Seattle', 'South Africa', 'Springfield', 'St.Albans',
-    'St.Joseph', 'St.Louis', 'Stanford', 'Stockholm', 'Stroudsburg', 'Stuttgart', 'Sunderland', 'Sweden',
-    'Sydney', 'The Hague', 'The Netherlands', 'Thorofare', 'TN', 'Tokyo', 'Torino', 'Toronto', 'TX', 'UK',
-    'Uppsala', 'Urbana', 'Utrecht', 'Vienna', 'VT', 'WA', 'Warsaw', 'Washington', 'Westport', 'WI', 'Wiesbaden']
+    "Aberdeen", "AL", "Ames", "Amsterdam", "Ann Arbor", "Assen", "Austin", "Australia", "Baltimore", "Bari", "Basel",
+    "Baton Rouge", "Beijing", "Belgium", "Belmont", "Berkeley", "Berlin", "Bern", "Bethesda", "Birmingham",
+    "Bloomington", "Boca Raton", "Bologna", "Boston", "Bristol", "Brunswick", "Brussels", "Budapest", "Buenos Aires",
+    "Burlington", "CA", "Cadillac", "Cambridge", "Canada", "Cape Town", "Champaign", "Chicago", "Chichester",
+    "Cleveland", "Clifton", "Cold Spring Harbor", "Copenhagen", "CT", "Danville", "DC", "Delhi", "Don Mills", "Dublin",
+    "Edinburgh", "Elmsford", "Englewood Cliffs", "Evanston", "FL", "France", "Frankfurt", "Geneva", "Germany",
+    "Glenview", "Gottingen", "Greenbelt", "Groningen", "Grosse Point Park", "Groves", "Halifax", "Heidelberg",
+    "Hillsdale", "Hingham", "Homewood", "IA", "Ibaraki", "IL", "IN", "Italy", "Japan", "Jena", "Kalamazoo", "Kiel",
+    "KY", "LA", "La Jolla", "Lancaster", "Leiden", "Leipzig", "Leningrad", "Lexington", "Liege", "Lincoln", "Lisse",
+    "London", "London", "Los Angeles", "Lyons", "MA", "Madison", "Madrid", "MD", "Menlo Park", "MI", "Miami",
+    "Minneapolis", "MN", "MO", "Montreal", "Moscow", "Mount Kisco", "Munich", "N. Scituate", "Nashville", "NE",
+    "New Delhi", "New Haven", "New London", "New York", "NJ", "Norwood", "NY", "O\"Hare", "OH", "Orlando", "Oslo",
+    "Oss", "Oxford", "PA", "Padua", "Palo Alto", "Paris", "Philadelphia", "Pittsburgh", "Prague", "Princeton",
+    "Providence", "Pullman", "Quebec", "Rabway", "Reading", "RI", "Rochester", "Rockford", "Rome",
+    "Royal Tunbridge Wells", "Rutgers", "San Francisco", "Seattle", "South Africa", "Springfield", "St.Albans",
+    "St.Joseph", "St.Louis", "Stanford", "Stockholm", "Stroudsburg", "Stuttgart", "Sunderland", "Sweden",
+    "Sydney", "The Hague", "The Netherlands", "Thorofare", "TN", "Tokyo", "Torino", "Toronto", "TX", "UK",
+    "Uppsala", "Urbana", "Utrecht", "Vienna", "VT", "WA", "Warsaw", "Washington", "Westport", "WI", "Wiesbaden"
+] + [
+    "Singapore"
+]
 
 REFERENCE_SERVICE_STOP_WORDS = [
-     'i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you',
-     'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his',
-     'himself', 'she', 'her', 'hers', 'herself', 'it', 'its', 'itself',
-     'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which',
-     'who', 'whom', 'this', 'that', 'these', 'those', 'am', 'is', 'are',
-     'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having',
-     'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if',
-     'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for',
-     'with', 'about', 'against', 'between', 'into', 'through', 'during',
-     'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in',
-     'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then',
-     'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any',
-     'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no',
-     'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's',
-     't', 'can', 'will', 'just', 'don', 'should', 'now', 'id', 'var', 'in',
-     'function', 'js', 'd', 'script', '\'script', 'fjs', 'document', 'r',
-     'b', 'g', 'e', '\'s', 'c', 'f', 'h', 'l', 'k']
+     "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you",
+     "your", "yours", "yourself", "yourselves", "he", "him", "his",
+     "himself", "she", "her", "hers", "herself", "it", "its", "itself",
+     "they", "them", "their", "theirs", "themselves", "what", "which",
+     "who", "whom", "this", "that", "these", "those", "am", "is", "are",
+     "was", "were", "be", "been", "being", "have", "has", "had", "having",
+     "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if",
+     "or", "because", "as", "until", "while", "of", "at", "by", "for",
+     "with", "about", "against", "between", "into", "through", "during",
+     "before", "after", "above", "below", "to", "from", "up", "down", "in",
+     "out", "on", "off", "over", "under", "again", "further", "then",
+     "once", "here", "there", "when", "where", "why", "how", "all", "any",
+     "both", "each", "few", "more", "most", "other", "some", "such", "no",
+     "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s",
+     "t", "can", "will", "just", "don", "should", "now", "id", "var", "in",
+     "function", "js", "d", "script", "\"script", "fjs", "document", "r",
+     "b", "g", "e", "'s", "c", "f", "h", "l", "k"]
 
 # For caching
 REDIS_URL = "redis://localhost:6379/0"

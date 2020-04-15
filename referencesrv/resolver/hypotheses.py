@@ -2,8 +2,8 @@ import re
 
 from referencesrv.resolver.common import Hypothesis
 from referencesrv.resolver.authors import normalize_author_list, get_first_author_last_name
-from referencesrv.resolver.scoring import get_score_for_reference_identifier, get_thesis_score_for_input_fields, \
-    get_serial_score_for_input_fields, get_book_score_for_input_fields
+from referencesrv.resolver.scoring import get_score_for_reference_identifier, get_score_for_input_fields, \
+    get_thesis_score_for_input_fields, get_book_score_for_input_fields
 from referencesrv.resolver.specialrules import iter_journal_specific_hypotheses
 from referencesrv.resolver.journalfield import get_best_bibstem_for, cook_title_string, has_thesis_indicators
 
@@ -61,7 +61,7 @@ class Hypotheses(object):
         if bibstem == 'ApJ':
             if self.DETECT_APJL_QUALIFIER.search(pub):
                 return 'L'
-        return '.'
+        return '?'
 
     def make_digested_record(self):
         """
@@ -103,6 +103,12 @@ class Hypotheses(object):
                 self.digested_record["pub"] = '%s %s'%(self.digested_record["pub"], self.digested_record["volume"][0])
                 self.digested_record["volume"] = self.digested_record["volume"][1:]
 
+        if "pub" in self.digested_record:
+            try:
+                self.digested_record["bibstem"] = get_best_bibstem_for(self.digested_record["pub"])
+            except:
+                self.digested_record["bibstem"] = ''
+
     def has_keys(self, *keys):
         """
         returns True if the digested record has at least all the fields in keys.
@@ -139,7 +145,7 @@ class Hypotheses(object):
         :return:
         """
         year = self.digested_record["year"]
-        bibstem = get_best_bibstem_for(self.digested_record["pub"])[:5]
+        bibstem = self.digested_record["bibstem"][:5]
         journal = bibstem + (5 - len(bibstem)) * '.'
         volume = self.digested_record.get("volume", "")
         # if no volume is identified, use wildcard
@@ -157,6 +163,7 @@ class Hypotheses(object):
         # if no page is identified, use wildcard
         if len(page) == 0:
             page = "????"
+            page_qualifier = "?"
         page = (4 - len(page)) * '.' + page
         # allow missing author as well
         initial = self.normalized_authors[0] if self.normalized_authors else '?'
@@ -186,12 +193,59 @@ class Hypotheses(object):
                 input_fields=self.digested_record)
 
         # try the old way, construct bibcode
+        # if we have solid bibcode make a comprison with bibcode from solr
+        # otherwise compare metadata for scoring
         if self.has_keys("year", "pub"):
-            self.construct_bibcode()
+            bibcode = self.construct_bibcode()
             yield Hypothesis("fielded-bibcode", {
                     "bibcode": self.digested_record["bibcode"]},
-                get_score_for_reference_identifier,
-                input_fields=self.digested_record)
+                get_score_for_reference_identifier if '?' not in bibcode
+                                                   else get_score_for_input_fields,
+                input_fields=self.digested_record,
+                page_qualifier=self.digested_record.get("qualifier", ""),
+                has_etal=has_etal,
+                normalized_authors=self.normalized_authors)
+
+        # try resolving as book, is title in the pub
+        if self.has_keys("author", "pub", "year"):
+            cleaned_title = cook_title_string(self.digested_record["pub"])
+            # if what's left the the title is too short, revert the cleanup.
+            if len(cleaned_title)<15:
+                cleaned_title = self.digested_record["pub"]
+
+            if self.lacks_keys("title", "volume"):
+                yield Hypothesis("fielded-book-pub", {
+                       "author": self.normalized_authors,
+                        "title": cleaned_title,
+                        "year": self.digested_record["year"]},
+                    get_book_score_for_input_fields,
+                    input_fields=self.digested_record,
+                    page_qualifier=self.digested_record.get("qualifier", ""),
+                    has_etal=False,
+                    normalized_authors=self.normalized_authors)
+
+        # is it inproceedings that is incomplete
+        if self.has_keys("author", "year") and (self.lacks_keys("volume", "page") or self.lacks_keys("volume") or self.lacks_keys("page")):
+            yield Hypothesis("fielded-inproceedings", {
+                   "author": self.normalized_authors,
+                    "year": self.digested_record["year"]},
+                get_score_for_input_fields,
+                input_fields=self.digested_record,
+                page_qualifier=self.digested_record.get("qualifier", ""),
+                has_etal=False,
+                normalized_authors=self.normalized_authors)
+
+        # try resolving as book, however, sometimes publication is inbook and hence should check title
+        if self.has_keys("author", "title", "year"):
+            yield Hypothesis("fielded-book-title", {
+                   "author": self.normalized_authors,
+                    "title": self.digested_record["title"],
+                    "year": self.digested_record["year"]},
+                get_book_score_for_input_fields,
+                input_fields=self.digested_record,
+                page_qualifier=self.digested_record.get("qualifier", ""),
+                has_etal=False,
+                normalized_authors=self.normalized_authors)
 
         # try author, year, pub, volume, and page
         if self.has_keys("author", "year", "volume", "page"):
@@ -200,7 +254,7 @@ class Hypotheses(object):
                 "year": self.digested_record["year"],
                 "volume": self.digested_record["volume"],
                 "page": self.digested_record["page"]},
-                             get_serial_score_for_input_fields,
+                             get_score_for_input_fields,
                              input_fields=self.digested_record,
                              page_qualifier=self.digested_record.get("qualifier", ""),
                              has_etal=has_etal,
@@ -210,9 +264,9 @@ class Hypotheses(object):
         if self.has_keys("author", "pub", "year"):
             yield Hypothesis("fielded-auth/pub/year", {
                     "author": self.normalized_authors,
-                    "bibstem": get_best_bibstem_for(self.digested_record["pub"]),
+                    "bibstem": self.digested_record["bibstem"],
                     "year": self.digested_record["year"]},
-                get_serial_score_for_input_fields,
+                get_score_for_input_fields,
                 input_fields=self.digested_record,
                 page_qualifier=self.digested_record.get("qualifier", ""),
                 has_etal=has_etal,
@@ -220,32 +274,15 @@ class Hypotheses(object):
 
         # pull out titles
         if self.has_keys("author", "year", "title"):
-            yield Hypothesis("fielded-title", {
+            yield Hypothesis("fielded-title/author/year", {
                 "first_author_norm": self.normalized_first_author,
                 "year": self.digested_record["year"],
                 "title": self.digested_record["title"],},
-            get_serial_score_for_input_fields,
+            get_score_for_input_fields,
             input_fields=self.digested_record,
             page_qualifier='',
             has_etal=False,
             normalized_authors='')
-
-        # try resolving as book, is title in the pub
-        if self.has_keys("author", "pub", "year") and self.lacks_keys("title"):
-            cleaned_title = cook_title_string(self.digested_record["pub"])
-            # if what's left the the title is too short, revert the cleanup.
-            if len(cleaned_title)<15:
-                cleaned_title = self.digested_record["pub"]
-
-            yield Hypothesis("fielded-book", {
-                   "author": self.normalized_authors,
-                    "title": cleaned_title,
-                    "year": self.digested_record["year"]},
-                get_book_score_for_input_fields,
-                input_fields=self.digested_record,
-                page_qualifier=self.digested_record.get("qualifier", ""),
-                has_etal=False,
-                normalized_authors=self.normalized_authors)
 
         # could this be a thesis?
         if self.has_keys("author", "year", "refstr") and self.lacks_keys("volume", "page"):
@@ -266,7 +303,6 @@ class Hypotheses(object):
 
         # try some reference type-specific hypotheses
         if "pub" in self.digested_record:
-            self.digested_record["bibstem"] = get_best_bibstem_for(self.digested_record["pub"])
             for hypo in iter_journal_specific_hypotheses(
                     self.digested_record.get("bibstem"),
                     self.digested_record.get("year"),
@@ -283,7 +319,7 @@ class Hypotheses(object):
             yield Hypothesis("fielded-author/page", {
                 "author": self.normalized_authors,
                 "page": self.digested_record["page"].split("-")[0]},
-                get_serial_score_for_input_fields,
+                get_score_for_input_fields,
                 input_fields=self.digested_record)
 
         # now try query on first author norm and year only.
@@ -291,7 +327,7 @@ class Hypotheses(object):
             yield Hypothesis("fielded-first-author-norm/year", {
                 "first_author_norm": self.normalized_first_author,
                 "year": self.digested_record["year"]},
-                get_serial_score_for_input_fields,
+                get_score_for_input_fields,
                 input_fields=self.digested_record,
                 page_qualifier=self.digested_record.get("qualifier", ""),
                 has_etal=has_etal,
@@ -302,7 +338,7 @@ class Hypotheses(object):
             yield Hypothesis("fielded-first-author-norm~/year", {
                 "first_author_norm~": self.normalized_first_author,
                 "year": self.digested_record["year"]},
-                get_serial_score_for_input_fields,
+                get_score_for_input_fields,
                 input_fields=self.digested_record,
                 page_qualifier=self.digested_record.get("qualifier", ""),
                 has_etal=has_etal,
@@ -313,7 +349,7 @@ class Hypotheses(object):
             yield Hypothesis("fielded-author-norm/year~", {
                 "author": self.normalized_authors,
                 "year~": self.digested_record["year"]},
-                get_serial_score_for_input_fields,
+                get_score_for_input_fields,
                 input_fields=self.digested_record,
                 page_qualifier=self.digested_record.get("qualifier", ""),
                 has_etal=has_etal,
@@ -323,11 +359,11 @@ class Hypotheses(object):
         # try bibstem-year-volume-page
         if self.has_keys("year", "pub", "volume", "page"):
             yield Hypothesis("fielded-no-author", {
-                    "bibstem": get_best_bibstem_for(self.digested_record["pub"]),
+                    "bibstem": self.digested_record["bibstem"],
                     "year": self.digested_record["year"],
                     "volume": self.digested_record["volume"],
                     "page": self.digested_record.get("qualifier", "")+self.digested_record["page"]},
-                get_serial_score_for_input_fields,
+                get_score_for_input_fields,
                 input_fields=self.digested_record,
                 page_qualifier='',
                 has_etal=False,
@@ -337,10 +373,10 @@ class Hypotheses(object):
         if self.has_keys("author", "pub", "volume", "page"):
             yield Hypothesis("fielded-no-year", {
                 "author": self.normalized_authors,
-                "bibstem": get_best_bibstem_for(self.digested_record["pub"]),
+                "bibstem": self.digested_record["bibstem"],
                 "volume": self.digested_record["volume"],
                 "page": self.digested_record["page"]},
-                             get_serial_score_for_input_fields,
+                             get_score_for_input_fields,
                              input_fields=self.digested_record,
                              page_qualifier=self.digested_record.get("qualifier", ""),
                              has_etal=has_etal,

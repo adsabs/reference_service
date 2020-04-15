@@ -48,7 +48,7 @@ class TestCRFClassifierText(TestCase):
                           'issue': '512',
                           'page': '1479-1490'})
 
-    def test_get_ready_with_arxiv_id(self):
+    def test_arxiv_id(self):
         """
 
         :return:
@@ -67,7 +67,7 @@ class TestCRFClassifierText(TestCase):
                           'year': '2017',
                           'page': '161101'})
 
-    def test_get_ready_with_doi(self):
+    def test_doi(self):
         """
 
         :return:
@@ -87,7 +87,7 @@ class TestCRFClassifierText(TestCase):
                           'year': '2017',
                           'page': 'e047'})
 
-    def test_get_ready_no_identifier(self):
+    def test_no_identifier(self):
         """
 
         :return:
@@ -104,7 +104,21 @@ class TestCRFClassifierText(TestCase):
                           'volume': '119',
                           'year': '2017'})
 
-    def test_get_ready_no_title(self):
+    def test_title_journal_variations(self):
+        """
+
+        :return:
+        """
+        crf_text = CRFClassifierText()
+        crf_text.create_crf()
+
+        # when both title and journal exists and journal is in double quotes
+        # when both title and journal exists and both are in double quotes
+        # when both title and journal exits and title is in double quotes with journal possibly followed by In
+        # when only title exits => book, phd thesis
+        # when both title and journal exists and journal is abbreviated
+
+    def test_no_title(self):
         """
 
         :return:
@@ -125,7 +139,7 @@ class TestCRFClassifierText(TestCase):
         crf_text = CRFClassifierText()
         crf_text.create_crf()
 
-        self.assertEqual(crf_text.get_num_states(), 37)
+        self.assertEqual(crf_text.get_num_states(), 34)
 
     def test_split_reference(self):
         """

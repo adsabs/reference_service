@@ -111,7 +111,8 @@ def get_serial_score_for_input_fields(result_record, hypothesis):
 
     input_fields = hypothesis.get_detail("input_fields")
 
-    add_volume_evidence(evidences, input_fields.get("volume"), result_record.get("volume"), result_record.get("issue"))
+    add_volume_evidence(evidences, input_fields.get("volume"), result_record.get("volume"),
+                            result_record.get("issue"), result_record.get("pub_raw"))
 
     return evidences
 
@@ -130,10 +131,10 @@ def get_book_score_for_input_fields(result_record, hypothesis):
     """
     evidences = get_author_year_score_for_input_fields(result_record, hypothesis)
 
-    if result_record["doctype"]=="book":
-        evidences.add_evidence(1, "doctype")
+    if result_record["doctype"] in ["book", "inbook", "techreport"]:
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "doctype")
     else:
-        evidences.add_evidence(-1, "doctype")
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "doctype")
 
     input_fields = hypothesis.get_detail("input_fields")
 
@@ -143,6 +144,45 @@ def get_book_score_for_input_fields(result_record, hypothesis):
         result_record.get("title", ""),
         result_record.get("bibcode", ""),
         result_record.get("bibstem", ""))
+
+    return evidences
+
+
+def get_author_year_pub_score_for_input_fields(result_record, hypothesis):
+    """
+    returns evidences based on just author, year and publication.
+
+    For most sources, you should rather use get_basic_score_for_input_fields
+    -- see there for more information.
+
+    :param result_record:
+    :param hypothesis:
+    :return:
+    """
+    input_fields = hypothesis.get_detail('input_fields')
+
+    evidences = Evidences()
+
+    normalized_authors = hypothesis.get_detail('normalized_authors')
+    if normalized_authors is None:
+        normalized_authors = normalize_author_list(input_fields.get('author', ''))
+
+    add_author_evidence(evidences,
+        normalized_authors,
+        result_record['author_norm'],
+        result_record['first_author_norm'],
+        has_etal=hypothesis.get_detail('has_etal'))
+
+    add_publication_evidence(evidences,
+        input_fields.get('pub'),
+        input_fields.get('bibstem',''),
+        result_record.get('pub', ''),
+        result_record.get('bibcode', ''),
+        result_record.get('bibstem', ''))
+
+    add_year_evidence(evidences,
+        input_fields.get('year'),
+        result_record.get('year'))
 
     return evidences
 
@@ -217,6 +257,75 @@ def get_thesis_score_for_input_fields(result_record, hypothesis):
     # evidence.
 
     return evidences
+
+
+def get_inproceedings_score_for_input_fields(result_record, hypothesis):
+    """
+    returns evidences based on author, year, volume or page, and publication or title,
+    when solr record is inproceedings
+
+    :param result_record:
+    :param hypothesis:
+    :return:
+    """
+    evidences = get_author_year_score_for_input_fields(result_record, hypothesis)
+
+    input_fields = hypothesis.get_detail("input_fields")
+
+    # inproceedings references can eliminate either or both page or volume
+    # to be able to find a match
+    # assign the single available value to both volume and page before computing the score
+    # if neither is available skip the score for volume and page
+    if bool("volume" in input_fields) + bool("page" in input_fields) == 1:
+        if "volume" in input_fields:
+            input_fields["page"] = input_fields["volume"]
+        if "page" in input_fields:
+            input_fields["volume"] = input_fields["page"]
+        add_volume_evidence(evidences, input_fields.get("volume"),
+                            result_record.get("volume"),
+                            result_record.get("issue"),
+                            result_record.get("pub_raw"))
+        add_page_evidence(evidences,
+                          input_fields.get('page'),
+                          result_record.get('page', []),
+                          result_record.get('page_range', ''),
+                          ref_qualifier=hypothesis.get_detail('page_qualifier'))
+
+    # if comparing against inproceedigns record in solr, compare both pub and title
+    # aginst both pub and title in solr
+    # inproceedings reference string, depending on the publications, interchanges the order of title and journal
+    # include the one with the highest score in the final score
+    ref_pubs = [input_fields.get("pub", ""), input_fields.get("pub", ""), input_fields.get("title", ""), input_fields.get("title", "")]
+    ads_pubs = [result_record.get("title", ""), result_record.get("pub", ""), result_record.get("title", ""), result_record.get("pub", "")]
+    pubstring_score = current_app.config['EVIDENCE_SCORE_RANGE'][0]
+    for ref_pub, ads_pub in zip(ref_pubs, ads_pubs):
+        tmp_evidence = Evidences()
+        add_publication_evidence(tmp_evidence,
+                                 ref_pub,
+                                 input_fields.get("bibstem"),
+                                 ads_pub,
+                                 result_record.get("bibcode", ""),
+                                 result_record.get("bibstem", ""))
+        if tmp_evidence > pubstring_score:
+            pubstring_score = tmp_evidence.sum()
+    evidences.add_evidence(pubstring_score, 'pubstring')
+    return evidences
+
+
+def get_score_for_input_fields(result_record, hypothesis):
+    """
+    computes the score based on the solr record doctype
+
+    :param result_record:
+    :param hypothesis:
+    :return:
+    """
+    if result_record["doctype"] == "inproceedings":
+        return get_inproceedings_score_for_input_fields(result_record, hypothesis)
+    if result_record["doctype"] == "catalog":
+        return get_author_year_pub_score_for_input_fields(result_record, hypothesis)
+    return get_serial_score_for_input_fields(result_record, hypothesis)
+
 
 def get_arxiv_id(result_record):
     """

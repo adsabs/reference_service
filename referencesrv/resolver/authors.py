@@ -13,14 +13,14 @@ from referencesrv.resolver.common import Undecidable
 ETAL_PAT = re.compile(r"(?i)[\s,]*et\.?\s*al\.?")
 # all author lists coming in need to be case-folded
 # replaced van(?: der) with van|van der
-SINGLE_NAME_RE = "(?:(?:d|de|De|des|Des|van|van der|von|Mc|[A-Z]')[' ]?)?[A-Z][a-z][A-Za-z]*"
+SINGLE_NAME_RE = "(?:(?:d|de|De|des|Des|in '[a-z]|van|van der|van den|von|Mc|[A-Z]')[' ]?)?[A-Z][a-z][A-Za-z]*"
 LAST_NAME_PAT = re.compile(r"%s(?:[- ]%s)*" % (SINGLE_NAME_RE, SINGLE_NAME_RE))
 
 LAST_NAME_SUFFIX = r"([,\s]*[Jj]r[.]*)?"
 
 # This pattern should match author names with initials behind the last
 # name
-TRAILING_INIT_PAT = re.compile(r"(?P<last>%s)\s*,\s+"
+TRAILING_INIT_PAT = re.compile(r"(?P<last>%s)\s*,?\s+"
                                r"(?P<inits>(?:[A-Z]\.[\s-]*)+%s)" % (LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
 # This pattern should match author names with initals in front of the
 # last name

@@ -61,8 +61,8 @@ class TestResolver(TestCase):
         self.assertEqual(get_authors(u'S. Kung and F. Bayer: "Collected Junk", A&A 2009'), 'S. Kung and F. Bayer')
         self.assertEqual(get_authors(u'Przybilla, N., & Maeder, A. 2010'), 'Przybilla, N., & Maeder, A. ')
         with self.assertRaises(Exception) as context:
-            get_authors('Przybilla N. & Maeder A. 2010')
-        self.assertTrue("No discernible authors in 'Przybilla N. & Maeder A. 2010'" in context.exception)
+            get_authors('Przybilla N & Maeder A 2010')
+        self.assertTrue("No discernible authors in 'Przybilla N & Maeder A 2010'" in context.exception)
 
 
     def test_normalize_single_author(self):
@@ -422,7 +422,7 @@ class TestResolver(TestCase):
         self.assertEqual(make_solr_condition("first_author~", "frisken gibson, s"),
                          'first_author~:("frisken gibson, s")')
         self.assertEqual(make_solr_condition("arxiv", "0910.4887"), 'identifier:("arxiv:0910.4887" OR "ascl:0910.4887")')
-        self.assertEqual(make_solr_condition("doi","10.1364/JOSAA.9.000154"), 'doi:"10.1364%2FJOSAA.9.000154"')
+        self.assertEqual(make_solr_condition("doi","10.1364/JOSAA.9.000154"), 'doi:"10.1364/JOSAA.9.000154"')
         # self.assertEqual(make_solr_condition("page", "154"), 'page:("?54" or "1?4" or "15?")')
         # for now since wildcard ? has been turned off when preceding any character, use this expanded version
         page_query = '"a54" or "b54" or "c54" or "d54" or "e54" or "f54" or "g54" or "h54" or "i54" or "j54" or ' \
@@ -623,7 +623,8 @@ class TestResolver(TestCase):
         ref = {'authors': 'Accomazzi, A., et al',
                'journal': 'AAS233 Meeting',
                'volume': '233',
-               'year': '2019'}
+               'year': '2019',
+               'page': '0'}
         with self.assertRaises(Exception) as context:
             solve_reference(Hypotheses(ref))
         self.assertTrue('Hypotheses exhausted' in context.exception)
@@ -634,34 +635,34 @@ class TestResolver(TestCase):
         test add_volume_evidence
         """
         # both reference and ads missing volume values
-        self.assertEqual(add_volume_evidence(Evidences(), None, None, None), None)
-        self.assertEqual(add_volume_evidence(Evidences(), '', '', ''), None)
+        self.assertEqual(add_volume_evidence(Evidences(), None, None, None, None), None)
+        self.assertEqual(add_volume_evidence(Evidences(), '', '', '', ''), None)
         # when one is missing
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '233', '', ''), None)
+        self.assertEqual(add_volume_evidence(evidences, '233', '', '', ''), None)
         self.assertEqual(evidences.get_score(), -1)
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '', '233', ''), None)
+        self.assertEqual(add_volume_evidence(evidences, '', '233', '', ''), None)
         self.assertEqual(evidences.get_score(), -1)
         # when matched
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '233', '233', ''), None)
+        self.assertEqual(add_volume_evidence(evidences, '233', '233', '', ''), None)
         self.assertEqual(evidences.get_score(), 1)
         # when unmatched
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '223', '233', ''), None)
+        self.assertEqual(add_volume_evidence(evidences, '223', '233', '', ''), None)
         self.assertEqual(evidences.get_score(), 0.7)
         # when not integer, but matched
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '233-3', '233-3', ''), None)
+        self.assertEqual(add_volume_evidence(evidences, '233-3', '233-3', '', ''), None)
         self.assertEqual(evidences.get_score(), 1)
         # when not integer, unmatched
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '223-3', '233-3', ''), None)
+        self.assertEqual(add_volume_evidence(evidences, '223-3', '233-3', '', ''), None)
         self.assertEqual(evidences.get_score(), 0.8)
         # when volume is year and there is an issue
         evidences = Evidences()
-        self.assertEqual(add_volume_evidence(evidences, '233', '2018', '233'), None)
+        self.assertEqual(add_volume_evidence(evidences, '233', '2018', '233', ''), None)
         self.assertEqual(evidences.get_score(), 1)
 
 

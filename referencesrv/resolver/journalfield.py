@@ -76,7 +76,7 @@ def get_bibstem(stem):
     return None
 
 
-def add_volume_evidence(evidences, ref_volume, ads_volume, ads_issue):
+def add_volume_evidence(evidences, ref_volume, ads_volume, ads_issue, ads_pub_raw):
     """
     adds evidence from comparing volume specifications from
     the reference and from ADS.
@@ -94,6 +94,11 @@ def add_volume_evidence(evidences, ref_volume, ads_volume, ads_issue):
     if len(nonzeros)==1:
         # one of the two has no volume, while the other does 
         # -- that's a bad sign
+        if not ads_volume:
+            # see if reference volume appears in ads pub_raw
+            if re.search(r'\b(%s)\b'%ref_volume, ads_pub_raw):
+                evidences.add_evidence(current_app.config['EVIDENCE_SCORE_RANGE'][1] * current_app.config['MISSING_VOLUME_FACTORY'], 'volume')
+                return
         evidences.add_evidence(current_app.config['EVIDENCE_SCORE_RANGE'][0], 'volume')
         return
 

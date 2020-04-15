@@ -7,7 +7,8 @@ import re
 from flask import current_app
 
 from referencesrv.resolver.common import Evidences, Hypothesis
-from referencesrv.resolver.scoring import get_basic_score_for_input_fields, get_serial_score_for_input_fields
+from referencesrv.resolver.scoring import get_basic_score_for_input_fields, get_serial_score_for_input_fields, \
+    get_author_year_pub_score_for_input_fields
 from referencesrv.resolver.authors import add_author_evidence, normalize_author_list
 
 
@@ -162,6 +163,16 @@ def iter_journal_specific_hypotheses(bibstem, year, author, journal, volume, pag
             get_basic_score_for_input_fields,
             input_fields=change_dict(input_fields, ['volume']),
             expected_bibstem='LPSC')
+
+    if bibstem=='JOSS':
+        # These are software records and hence sometimes author skip including volume and page
+        # that is why we are here, incomplete record, and
+        # so try to match author, year, and publication only
+        # if more than one record with these specification is found, no matched is returned
+        yield Hypothesis('JOSS-ignore-volume-page',
+            change_dict(input_fields, ['volume', 'page'], bibstem='JOSS'),
+            get_author_year_pub_score_for_input_fields,
+            input_fields=change_dict(input_fields, ['volume', 'page']))
 
     if bibstem=='ApJ':
         yield Hypothesis('extra-ApJ->ApJL',
