@@ -127,6 +127,17 @@ class Querier(object):
         if 'bibstem' in raw_sol:
             raw_sol['bibstem'] = raw_sol.get('bibstem')[0]
 
+        # about 199 bibstems start off being published online only, without volume, having tmp for volume, and with eid
+        # later they are included in the volume of the publication, with page number that is different then eid, and correct volume
+        # see if we have one of those here and included the eid field, since some references use outdated eid
+        if 'identifier' in raw_sol:
+            bibcode_with_eid = next((b for b in
+                                     [i for i in raw_sol['identifier'] if len(i) == len(raw_sol['bibcode'])]
+                                     if 'tmp' in b), None)
+            if bibcode_with_eid:
+                # ('page', 14, 18, 'r', str)
+                raw_sol['eid'] = bibcode_with_eid[14:18].strip('.')
+
         # When you add query keys via resconfig, it's probably wise to add
         # them here, too
         for key in current_app.config['SOLR_KEYS_TO_JOIN']:

@@ -10,24 +10,24 @@ from flask import current_app
 
 from referencesrv.resolver.common import Undecidable
 
-ETAL_PAT = re.compile(r"(?i)[\s,]*et\.?\s*al\.?")
+ETAL_PAT = re.compile(r"(?i)[\s,&]*et\.?\s*al\.?")
 # all author lists coming in need to be case-folded
 # replaced van(?: der) with van|van der
 SINGLE_NAME_RE = "(?:(?:d|de|De|des|Des|in '[a-z]|van|van der|van den|von|Mc|[A-Z]')[' ]?)?[A-Z][a-z][A-Za-z]*"
 LAST_NAME_PAT = re.compile(r"%s(?:[- ]%s)*" % (SINGLE_NAME_RE, SINGLE_NAME_RE))
 
-LAST_NAME_SUFFIX = r"([,\s]*[Jj]r[.]*)?"
+LAST_NAME_SUFFIX = r"([,\s]*[Jj]r[.]*[,\s]*)?"
 
 # This pattern should match author names with initials behind the last
 # name
-TRAILING_INIT_PAT = re.compile(r"(?P<last>%s)\s*,?\s+"
-                               r"(?P<inits>(?:[A-Z]\.[\s-]*)+%s)" % (LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
+TRAILING_INIT_PAT = re.compile(r"(?P<last>%s%s)\s*,?\s+"
+                               r"(?P<inits>(?:[A-Z]\.[\s-]*)+)" % (LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
 # This pattern should match author names with initals in front of the
 # last name
-LEADING_INIT_PAT = re.compile(r"(?P<inits>(?:[A-Z]\.[\s-]*)+%s) "
-                              r"(?P<last>%s),?" % (LAST_NAME_SUFFIX, LAST_NAME_PAT.pattern))
+LEADING_INIT_PAT = re.compile(r"(?P<inits>(?:[A-Z]\.[\s-]*)+) "
+                              r"(?P<last>%s%s),?" % (LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
 
-EXTRAS_PAT = re.compile('\\b\s*(and|et al|ed|jr)\\b', re.I)
+EXTRAS_PAT = re.compile(r"\b\s*(and|et\.? al\.?|jr)\b", re.I)
 
 REF_GLUE_RE = r"[,;]?(\s*(?:and|&))?\s+"
 NAMED_GROUP_PAT = re.compile(r"\?P<\w+>")
@@ -44,6 +44,18 @@ COLLEAGUES_PAT = re.compile(r"(?P<andcolleagues>and\s\d+\s(co-authors|colleagues
 
 REFERENCE_LAST_NAME_EXTRACTOR = re.compile(r"(\w\w+\s*\w\w+\s*\w{0,1}\w+)")
 SINGLE_WORD_EXTRACTOR = re.compile(r"\w+")
+
+FIRST_CAPTIAL = re.compile(r"^([^A-Z]*[A-Z])")
+
+# when first name is spelled out
+FIRST_NAME_PAT = r"[A-Z][a-z][A-Za-z]*"
+FULLNAME_PAT = re.compile(r"(?P<first>%s\s+(?:[A-Z]\.[\s-]*)?)"
+                          r"(?P<last>%s%s),?" %(FIRST_NAME_PAT, LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
+FULLNAME_AUTHORS_PAT = re.compile("%s(%s%s)*(%s)?"%(
+    NAMED_GROUP_PAT.sub("?:", FULLNAME_PAT.pattern), REF_GLUE_RE,
+    NAMED_GROUP_PAT.sub("?:", FULLNAME_PAT.pattern), ETAL_PAT.pattern))
+
+
 
 def get_author_pattern(ref_string):
     """
@@ -62,6 +74,7 @@ def get_author_pattern(ref_string):
 
     n_trailing = len(TRAILING_INIT_PAT.findall(ref_string[collaborators_len:]))
     n_leading = len(LEADING_INIT_PAT.findall(ref_string[collaborators_len:]))
+
     if n_leading == n_trailing:
         raise Undecidable('Both leading and trailing found without a majority')
     if n_trailing > n_leading:
@@ -82,6 +95,9 @@ def get_authors_recursive(ref_string, start_idx, author_pat):
     """
     author_len = 0
     while True:
+        first_capital = FIRST_CAPTIAL.match(ref_string[start_idx+author_len:])
+        if first_capital:
+            start_idx += len(first_capital.group()) - 1
         author_match = author_pat.match(ref_string[start_idx+author_len:])
         if author_match:
             author_len += len(author_match.group())
@@ -89,6 +105,18 @@ def get_authors_recursive(ref_string, start_idx, author_pat):
             break
         author_len += len(ref_string) - len(ref_string.lstrip())
     return author_len
+
+def get_authors_fullnames(ref_string):
+    """
+    if first name is not initial
+
+    :param ref_string:
+    :return:
+    """
+    author_match = FULLNAME_AUTHORS_PAT.match(ref_string)
+    if author_match:
+        return len(author_match.group())
+    return 0
 
 def get_authors(ref_string):
     """
@@ -111,17 +139,18 @@ def get_authors(ref_string):
     # if there is a xxx colleagues or xxx co-authors
     # that would signal the end of author
     and_colleagues = get_and_colleagues(ref_string)
+
     if len(and_colleagues) > 0:
         authors_len = ref_string.find(and_colleagues) + len(and_colleagues)
     else:
         lead_len = get_authors_recursive(ref_string, collaborators_len, LEADING_INIT_AUTHORS_PAT)
         trail_len = get_authors_recursive(ref_string, collaborators_len, TRAILING_INIT_AUTHORS_PAT)
-
-        authors_len = max(lead_len, trail_len) + len(and_colleagues)
+        full_len = get_authors_fullnames(ref_string[collaborators_len:])
+        authors_len = max(full_len, max(lead_len, trail_len))
         if authors_len < 3:
             raise Undecidable("No discernible authors in '%s'"%ref_string)
-
-    return ref_string[:collaborators_len+authors_len]
+        authors_len += collaborators_len
+    return ref_string[:authors_len].strip(',')
 
 
 def get_editors(ref_string):
@@ -143,7 +172,7 @@ def get_editors(ref_string):
     if trail_match:
         trail_len = len(trail_match.group())
 
-    return lead_match.group() if lead_len > trail_len else trail_match.group() if lead_len < trail_len else None
+    return lead_match.group().strip(',') if lead_len > trail_len else trail_match.group().strip(',') if lead_len < trail_len else None
 
 def get_collabration_length(ref_string):
     """
@@ -201,6 +230,11 @@ def normalize_author_list(authorString, initials=True):
     try:
         pat = get_author_pattern(authorString)
     except Undecidable:
+        if not initials:
+            # is it first name spelled out
+            if get_authors_fullnames(authorString) > 0:
+                return "; ".join("%s, %s" % (mat.group("last"), mat.group("first")[0])
+                                 for mat in FULLNAME_PAT.finditer(authorString)).strip()
         return authorString
 
     if initials:

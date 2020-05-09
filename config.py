@@ -14,25 +14,26 @@ REFERENCE_SERVICE_QUERY_FIELDS_SOLR = "author,author_norm,first_author_norm,year
 
 EVIDENCE_SCORE_RANGE = [-1,1]
 
-REFERENCE_STOP_WORDS = [
-    'i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you',
-    'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his',
-    'himself', 'she', 'her', 'hers', 'herself', 'it', 'its', 'itself',
-    'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which',
-    'who', 'whom', 'this', 'that', 'these', 'those', 'am', 'is', 'are',
-    'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having',
-    'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if',
-    'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for',
-    'with', 'about', 'against', 'between', 'into', 'through', 'during',
-    'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in',
-    'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then',
-    'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any',
-    'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no',
-    'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's',
-    't', 'can', 'will', 'just', 'don', 'should', 'now', 'id', 'var', 'in',
-    'function', 'js', 'd', 'script', '\'script', 'fjs', 'document', 'r',
-    'b', 'g', 'e', '\'s', 'c', 'f', 'h', 'l', 'k'
+REFERENCE_SERVICE_STOP_WORDS = [
+     "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you",
+     "your", "yours", "yourself", "yourselves", "he", "him", "his",
+     "himself", "she", "her", "hers", "herself", "it", "its", "itself",
+     "they", "them", "their", "theirs", "themselves", "what", "which",
+     "who", "whom", "this", "that", "these", "those", "am", "is", "are",
+     "was", "were", "be", "been", "being", "have", "has", "had", "having",
+     "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if",
+     "or", "because", "as", "until", "while", "of", "at", "by", "for",
+     "with", "about", "against", "between", "into", "through", "during",
+     "before", "after", "above", "below", "to", "from", "up", "down", "in",
+     "out", "on", "off", "over", "under", "again", "further", "then",
+     "once", "here", "there", "when", "where", "why", "how", "all", "any",
+     "both", "each", "few", "more", "most", "other", "some", "such", "no",
+     "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s",
+     "t", "can", "will", "just", "don", "should", "now", "id", "var", "in",
+     "function", "js", "d", "script", "\"script", "fjs", "document", "r",
+     "b", "g", "e", "'s", "c", "f", "h", "l", "k", "&"
 ]
+
 
 # common abbreviations in references; ADS has these expanded,
 # so we want to expand them, too.
@@ -125,7 +126,7 @@ REFERENCE_SERVICE_ACADEMIC_PUBLISHERS = [
     "Wiley-Interscience","Wiley-Liss","Williams & Wilkins","Winston","Wirsiers","Wissenschaftliche","Wistar",
     "Wolters-Noordhoff","Worth","Wright","Yale University Press","Year Book","Yorke"
 ] + [
-    "Springer", "World Scientific"
+    "Springer", "World Scientific", "Kluwer", "Chicago Univ. Press", "Chicago University Press", "Imperial College Press",
 ]
 
 # source: http://www.apsstylemanual.org/oldmanual/resources/publishers.htm
@@ -149,27 +150,8 @@ REFERENCE_SERVICE_ACADEMIC_PUBLISHERS_LOCATIONS = [
     "Sydney", "The Hague", "The Netherlands", "Thorofare", "TN", "Tokyo", "Torino", "Toronto", "TX", "UK",
     "Uppsala", "Urbana", "Utrecht", "Vienna", "VT", "WA", "Warsaw", "Washington", "Westport", "WI", "Wiesbaden"
 ] + [
-    "Singapore"
+    "Singapore", "Dordrecht"
 ]
-
-REFERENCE_SERVICE_STOP_WORDS = [
-     "i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you",
-     "your", "yours", "yourself", "yourselves", "he", "him", "his",
-     "himself", "she", "her", "hers", "herself", "it", "its", "itself",
-     "they", "them", "their", "theirs", "themselves", "what", "which",
-     "who", "whom", "this", "that", "these", "those", "am", "is", "are",
-     "was", "were", "be", "been", "being", "have", "has", "had", "having",
-     "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if",
-     "or", "because", "as", "until", "while", "of", "at", "by", "for",
-     "with", "about", "against", "between", "into", "through", "during",
-     "before", "after", "above", "below", "to", "from", "up", "down", "in",
-     "out", "on", "off", "over", "under", "again", "further", "then",
-     "once", "here", "there", "when", "where", "why", "how", "all", "any",
-     "both", "each", "few", "more", "most", "other", "some", "such", "no",
-     "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s",
-     "t", "can", "will", "just", "don", "should", "now", "id", "var", "in",
-     "function", "js", "d", "script", "\"script", "fjs", "document", "r",
-     "b", "g", "e", "'s", "c", "f", "h", "l", "k"]
 
 # For caching
 REDIS_URL = "redis://localhost:6379/0"

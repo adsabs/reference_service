@@ -10,7 +10,7 @@
 % having multi-part last name with/without hyphen
 
 
-%
+% --1
 % Airapetian, V. S., Glocer, A., Khazanov, G. V., et al. 2017, ApJL, 836, L3
 %
 AUTHOR_LAST_NAME	Airapetian
@@ -43,7 +43,8 @@ VOLUME	836
 PUNCTUATION_COMMA	,
 PAGE	L3
 
-%
+
+% --2
 % Bisikalo, D., Kaygorodov, P., Ionov, D., et al. 2013, ApJ, 764, 19
 %
 AUTHOR_LAST_NAME	Bisikalo
@@ -72,7 +73,8 @@ VOLUME	764
 PUNCTUATION_COMMA	,
 PAGE	19
 
-%
+
+% --3
 % Audard, M., Gudel, M., Drake, J. J., & Kashyap, V. L. 2000, ApJ, 541, 396
 %
 AUTHOR_LAST_NAME	Audard
@@ -107,7 +109,8 @@ VOLUME	541
 PUNCTUATION_COMMA	,
 PAGE	396
 
-%
+
+% --4
 % Bourrier, V., & Lecavelier des Etangs, A. 2013, A&A, 557, A124
 %
 AUTHOR_LAST_NAME	Bourrier
@@ -130,7 +133,8 @@ VOLUME	557
 PUNCTUATION_COMMA	,
 PAGE	A124
 
-%
+
+% --5
 % Bourrier, V., Lecavelier des Etangs, A., Ehrenreich, D., Tanaka, Y. A., & Vidotto, A. A. 2016, A&A, 591, A121
 %
 AUTHOR_LAST_NAME	Bourrier
@@ -172,7 +176,8 @@ VOLUME	591
 PUNCTUATION_COMMA	,
 PAGE	A121
 
-%
+
+% --6
 % Garcia-Sage, K., Glocer, A., Drake, J. J., Gronoff, G., & Cohen, O. 2017, ApJL, 844, L13
 %
 AUTHOR_LAST_NAME	Garcia-Sage
@@ -210,7 +215,8 @@ VOLUME	844
 PUNCTUATION_COMMA	,
 PAGE	L13
 
-%
+
+% --7
 % Sanchis-Ojeda, R., Rappaport, S., Winn, J. N., et al. 2014, ApJ, 787, 47
 %
 AUTHOR_LAST_NAME	Sanchis-Ojeda
@@ -253,7 +259,8 @@ PAGE	47
 % having triple of volume(issue):page_range
 % having word `volume` before volume
 
-%
+
+% --8
 % Bhadra, A., Datta, J., Li, Y., Polson, N., and Willard, B. (2017). Prediction risk for the horseshoe regression. Unpublished manuscript, arXiv:1605.04796.
 %
 AUTHOR_LAST_NAME	Bhadra
@@ -300,7 +307,8 @@ PUNCTUATION_COLON	:
 ARXIV	1605.04796
 PUNCTUATION_DOT	.
 
-%
+
+% --9
 % Bhattacharya, A., Pati, D., Pillai, N. S., and Dunson, D. B. (2015). DirichletLaplace priors for optimal shrinkage. "J. Amer. Statist. Assoc.", 110(512):1479-1490.
 %
 AUTHOR_LAST_NAME	Bhattacharya
@@ -357,7 +365,7 @@ PAGE	1479-1490
 PUNCTUATION_DOT	.
 
 
-%
+% --10
 % Carvalho, C. M., Polson, N. G., and Scott, J. G. (2010). The horseshoe estimator for sparse signals. "Biometrika", 97(2):465-480.
 %
 AUTHOR_LAST_NAME	Carvalho
@@ -404,7 +412,8 @@ PUNCTUATION_COLON	:
 PAGE	465-480
 PUNCTUATION_DOT	.
 
-%
+
+% --11
 % Castillo, I., Schmidt-Hieber, J., and van der Vaart, A. (2015). Bayesian linear regression with sparse priors. "Ann. Statist.", 43(5):1986-2018.
 %
 AUTHOR_LAST_NAME	Castillo
@@ -449,7 +458,8 @@ PUNCTUATION_COLON	:
 PAGE	1986-2018
 PUNCTUATION_DOT	.
 
-%
+
+% --12
 % Ghosal, S. and van der Vaart, A. (2017). "Fundamentals of Nonparametric Bayesian Inference", volume 44 of "Cambridge Series in Statistical and Probabilistic Mathematics". Cambridge University Press, Cambridge.
 %
 AUTHOR_LAST_NAME	Ghosal
@@ -495,7 +505,8 @@ PUNCTUATION_COMMA	,
 PUBLISHER_LOCATION	Cambridge
 PUNCTUATION_DOT	.
 
-%
+
+% --13
 % Leeb, H. (2006). The distribution of a linear predictor after model selection: unconditional finite-sample distributions and asymptotic approximations. In "Optimality", volume 49 of "IMS Lecture Notes Monogr. Ser.", pages 291-311. Inst. Math. Statist., Beachwood, OH.
 %
 AUTHOR_LAST_NAME	Leeb
@@ -556,7 +567,8 @@ PUNCTUATION_COMMA	,
 PUBLISHER_LOCATION	OH
 PUNCTUATION_DOT	.
 
-%
+
+% --14
 % Leeb, H. (2009). Conditional predictive inference post model selection. "Ann. Statist.", 37(5B):2838-2876.
 %
 AUTHOR_LAST_NAME	Leeb
@@ -589,7 +601,8 @@ PUNCTUATION_COLON	:
 PAGE	2838-2876
 PUNCTUATION_DOT	.
 
-%
+
+% --15
 % Liu, C., Yang, Y., Bondell, H., and Martin, R. (2018). Bayesian inference in highdimensional linear models using an empirical correlation-adaptive prior. Unpublished manuscript, arXiv:1810.00739.
 %
 AUTHOR_LAST_NAME	Liu
@@ -635,7 +648,8 @@ PUNCTUATION_COLON	:
 ARXIV	1810.00739
 PUNCTUATION_DOT	.
 
-%
+
+% --16
 % Ptscher, B. M. and Leeb, H. (2009). On the distribution of penalized maximum o likelihood estimators: the LASSO, SCAD, and thresholding. "J. Multivariate Anal.", 100(9):2065-2082.
 %
 AUTHOR_LAST_NAME	Ptscher
@@ -687,7 +701,8 @@ PUNCTUATION_COLON	:
 PAGE	2065-2082
 PUNCTUATION_DOT	.
 
-%
+
+% --17
 % Syring, N. and Martin, R. (2017). Calibrating general posterior credible regions. "Biometrika", to appear, arXiv:1509.00922.
 %
 AUTHOR_LAST_NAME	Syring
@@ -731,6 +746,8 @@ PUNCTUATION_DOT	.
 % having team/collaboration for author
 % having ascl id following the word `ascl`
 
+
+% --18
 % Astropy Collaboration et al., 2013, A&A, 558, A33
 %
 AUTHOR_COLLABORATION	Astropy
@@ -748,6 +765,7 @@ PUNCTUATION_COMMA	,
 PAGE	A33
 
 
+% --19
 % Baldwin J. A., Phillips M. M., Terlevich R., 1981, PASP, 93, 5
 %
 AUTHOR_LAST_NAME	Baldwin
@@ -778,6 +796,7 @@ PUNCTUATION_COMMA	,
 PAGE	5
 
 
+% --20
 % Belfiore F., et al., 2016, MNRAS, 461, 3111
 %
 AUTHOR_LAST_NAME	Belfiore
@@ -797,6 +816,8 @@ VOLUME	461
 PUNCTUATION_COMMA	,
 PAGE	3111
 
+
+% --21
 % Gildas Team 2013, GILDAS: Grenoble Image and Line Data Analysis Software, Astrophysics Source Code Library (ascl:1305.010)
 %
 AUTHOR_COLLABORATION	Gildas
@@ -823,6 +844,8 @@ PUNCTUATION_COLON	:
 ASCL	1305.010
 PUNCTUATION_PARENTHESIS	)
 
+
+% --22
 % Sutherland R., Dopita M., Binette L., Groves B., 2013, MAPPINGS III: Modelling And Prediction in PhotoIonized Nebulae and Gasdynamical Shocks, Astrophysics Source Code Library (ascl:1306.008)
 %
 AUTHOR_LAST_NAME	Sutherland
@@ -881,6 +904,8 @@ ASCL	1306.008
 % having book with publisher name and locations
 % having hyphen in publisher (only one sample here)
 
+
+% --23
 % N. D. Mermin and H. Wagner, Phys. Rev. Lett. 17, 1133 (1966)
 %
 AUTHOR_FIRST_NAME	N
@@ -906,6 +931,8 @@ PUNCTUATION_PARENTHESIS	(
 YEAR	1966
 PUNCTUATION_PARENTHESIS	)
 
+
+% --24
 % B. Huang, G. Clark, D. R. Klein, D. MacNeill, E. Navarro-Moratalla, K. L. Seyler, N. Wilson, M. A. McGuire, D. H. Cobden, D. Xiao, W. Yao, P. Jarillo-Herrero, and X. Xu, Nature Nano. 13, 544 (2018)
 %
 AUTHOR_FIRST_NAME	B
@@ -983,6 +1010,8 @@ PUNCTUATION_PARENTHESIS	(
 YEAR	2018
 PUNCTUATION_PARENTHESIS	)
 
+
+% --25
 % W. Xing, Y. Chen, P. M. Odenthal, X. Zhang, W. Yuan, T. Su, Q. Song, T. Wang, J. Zhong, S. Jia, X. C. Xie, Y. Li, and W. Han, 2D Materials 4, 024009 (2017)
 %
 AUTHOR_FIRST_NAME	W
@@ -1051,6 +1080,8 @@ PUNCTUATION_PARENTHESIS	(
 YEAR	2017
 PUNCTUATION_PARENTHESIS	)
 
+
+% --26
 % K. S. Burch, D. Mandrus, and J.-G. Park, Nature 563, 47 (2018)
 %
 AUTHOR_FIRST_NAME	K
@@ -1079,6 +1110,8 @@ PUNCTUATION_PARENTHESIS	(
 YEAR	2018
 PUNCTUATION_PARENTHESIS	)
 
+
+% --27
 % Y. Feng, X. Wu, J. Han, and G. Gao, J. Mater. Chem. C 6, 4087 (2018)
 %
 AUTHOR_FIRST_NAME	Y
@@ -1112,6 +1145,8 @@ PUNCTUATION_PARENTHESIS	(
 YEAR	2018
 PUNCTUATION_PARENTHESIS	)
 
+
+% --28
 % A. Wasey, A. Karmakar, and D. Das, J. Phys. Condens. Matter 25, 476001 (2013)
 %
 AUTHOR_FIRST_NAME	A
@@ -1141,6 +1176,8 @@ PUNCTUATION_PARENTHESIS	(
 YEAR	2013
 PUNCTUATION_PARENTHESIS	)
 
+
+% --29
 % P. Blaha, K. Schwarz, G. K. H. Madsen, D. Kvasnicka, and J. Luitz, WIEN2k, An Augmented Plane Wave Plus Local Orbitals Program for Calculating Crystal Properties., Vienna University of Technology, Austria (2001)
 %
 AUTHOR_FIRST_NAME	P
@@ -1194,6 +1231,8 @@ PUNCTUATION_PARENTHESIS	(
 YEAR	2001
 PUNCTUATION_PARENTHESIS	)
 
+
+% --30
 % D. J. Singh and L. Nordstrom, Plane Waves, Pseudopotentials and LAPW Method (Springer, 2006)
 %
 AUTHOR_FIRST_NAME	D
@@ -1219,6 +1258,8 @@ PUNCTUATION_COMMA	,
 YEAR	2006
 PUNCTUATION_PARENTHESIS	)
 
+
+% --31
 % J. B. Goodenough, Magnetism and the Chemical Bond (Interscience-Wiley, 1963)
 %
 AUTHOR_FIRST_NAME	J
@@ -1241,6 +1282,7 @@ YEAR	1963
 PUNCTUATION_PARENTHESIS	)
 
 
+% --32
 % M. Niel, C. Cros, G. Le Flem, M. Pouchard, and P. Hagenmuller, Physica B+C 86-88, 702 (1977)
 %
 AUTHOR_FIRST_NAME	M
@@ -1274,6 +1316,8 @@ PUNCTUATION_PARENTHESIS	(
 YEAR	1977
 PUNCTUATION_PARENTHESIS	)
 
+
+% --33
 % M. K. Wilkinson, J. W. Cable, E. O. Wollan, and W. C. Koehler, Oak Ridge National Laboratory Report ORNL 2430, 65 (1958)
 %
 AUTHOR_FIRST_NAME	M
@@ -1326,6 +1370,8 @@ PUNCTUATION_PARENTHESIS	)
 % having publisher and location for book references
 % having alphanumeric and colon and hyphen in title
 
+
+% --34
 % [1] A. Kleyn, Metric-affine manifold, gr-qc/0405028.
 %
 AUTHOR_FIRST_NAME	A
@@ -1339,6 +1385,8 @@ TITLE	manifold
 PUNCTUATION_COMMA	,
 ARXIV	gr-qc/0405028
 
+
+% --35
 % [2] M. Blagojevic and F. W. Hehl, eds., Gauge Theories of Gravitation. World Scientific, Singapore, 2013.
 %
 AUTHOR_FIRST_NAME	M
@@ -1367,6 +1415,8 @@ PUNCTUATION_COMMA	,
 YEAR	2013
 PUNCTUATION_DOT	.
 
+
+% --36
 % [6] T. P. Sotiriou and S. Liberati, Metric-affine f(R) theories of gravity, Annals Phys. 322 (2007) 935-966, [gr-qc/0604006].
 %
 AUTHOR_FIRST_NAME	T
@@ -1404,6 +1454,8 @@ ARXIV	gr-qc/0604006
 PUNCTUATION_BRACKETS	]
 PUNCTUATION_DOT	.
 
+
+% --37
 % [26] J. A. Schouten, Ricci-Calculus. Springer, Berlin, Heidelberg, 1954.
 %
 AUTHOR_FIRST_NAME	J
@@ -1425,6 +1477,8 @@ PUNCTUATION_COMMA	,
 YEAR	1954
 PUNCTUATION_DOT	.
 
+
+% --38
 % [33] Virgo, LIGO Scientific collaboration, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star Inspiral, Phys. Rev. Lett. 119 (2017) 161101, [1710.05832].
 %
 AUTHOR_COLLABORATION	Virgo
@@ -1470,6 +1524,8 @@ ARXIV	1710.05832
 PUNCTUATION_BRACKETS	]
 PUNCTUATION_DOT	.
 
+
+% --39
 % [34] Virgo, Fermi-GBM, INTEGRAL, LIGO Scientific collaboration, B. P. Abbott et al., Gravitational Waves and Gamma-rays from a Binary Neutron Star Merger: GW170817 and GRB 170817A, Astrophys. J. 848 (2017) L13, [1710.05834].
 %
 AUTHOR_COLLABORATION	Virgo
@@ -1533,6 +1589,8 @@ PUNCTUATION_DOT	.
 % having year appear after journal
 % having title, journal, and publisher  (only one sample here)
 
+
+% --40
 % [2] CS Casari, M Tommasini, RR Tykwinski, A Milani, Carbon-atom wires: 1-D systems with tunable properties, Nanoscale 2016; 8: 4414-35. DOI:10.1039/C5NR06175J.
 %
 AUTHOR_FIRST_NAME	C
@@ -1578,6 +1636,8 @@ PUNCTUATION_DOT	.
 DOI	DOI:10.1039/C5NR06175J
 PUNCTUATION_DOT	.
 
+
+% --41
 % [3] CS Casari, A Milani, Carbyne: from the elusive allotrope to stable carbon atom wires, MRS Comm. 2018; 8(2): 207-19. DOI:10.1557/mrc.2018.48.
 %
 AUTHOR_FIRST_NAME	C
@@ -1617,6 +1677,8 @@ PUNCTUATION_DOT	.
 DOI	DOI:10.1557/mrc.2018.48
 PUNCTUATION_DOT	.
 
+
+% --42
 % [27] RB Heimann, SE Evsyukov, L Kavan, Carbyne and Carbynoid Structures, Physics and Chemistry of Materizls with Low-dimensional Structures, Springer Science+Business Media, Dordrecht; 1999. DOI:10.1007/978-94-011- 4742-2.
 %
 AUTHOR_FIRST_NAME	R
@@ -1671,6 +1733,8 @@ PUNCTUATION_DOT	.
 % having both doi and arxiv id, and in addition to id arxiv class
 % having arxiv id with version (only one sample here)
 
+
+% --43
 % S. Klevtsov, ""Random normal matrices, Bergman kernel and projective embeddings"," JHEP 1401, 133 (2014) doi:10.1007/JHEP01(2014)133 [arXiv:1309.7333 [hepth]].
 %
 AUTHOR_FIRST_NAME	S
@@ -1709,6 +1773,8 @@ PUNCTUATION_BRACKETS	]
 PUNCTUATION_BRACKETS	]
 PUNCTUATION_DOT	.
 
+
+% --44
 % T. Can, M. Laskin and P. Wiegmann, ""Geometry of quantum Hall states: Gravitational anomaly and transport coefficients"," Annals Phys. 362, 752 (2015) doi:10.1016/j.aop.2015.02.013 [arXiv:1411.3105 [cond-mat.str-el]].
 %
 AUTHOR_FIRST_NAME	T
@@ -1765,6 +1831,8 @@ PUNCTUATION_BRACKETS	]
 PUNCTUATION_BRACKETS	]
 PUNCTUATION_DOT	.
 
+
+% --45
 % R. Iengo and D. Li Quantum mechanics and quantum Hall effect on Riemann surfaces. (1993) arXiv:hep-th/9307011v1
 %
 AUTHOR_FIRST_NAME	R
@@ -1800,6 +1868,8 @@ ARXIV	hep-th/9307011v1
 % having order of numeric entities be volume, year in parenthesis, page
 % having period in title that is not signaling the end
 
+
+% --46
 % M. Boylan-Kolchin, D. R. Weisz, J. S. Bullock and M. C. Cooper, The Local Group: the ultimate deep field, MNRAS 462 (2016) L51 [1603.02679].
 %
 AUTHOR_FIRST_NAME	M
@@ -1846,6 +1916,8 @@ ARXIV	1603.02679
 PUNCTUATION_BRACKETS	]
 PUNCTUATION_DOT	.
 
+
+% --47
 % E. N. Kirby, J. G. Cohen, G. H. Smith, S. R. Majewski, S. T. Sohn and P. Guhathakurta, Multi-element Abundance Measurements from Medium-resolution Spectra. IV. Alpha Element Distributions in Milky Way Satellite Galaxies, ApJ 727 (2011) 79 [1011.5221].
 %
 AUTHOR_FIRST_NAME	E
@@ -1904,7 +1976,7 @@ TITLE	Way
 TITLE	Satellite
 TITLE	Galaxies
 PUNCTUATION_COMMA	,
-VOLUME_IDENTIFIER	ApJ
+JOURNAL	ApJ
 VOLUME	727
 PUNCTUATION_PARENTHESIS	(
 YEAR	2011
@@ -1915,6 +1987,8 @@ ARXIV	1011.5221
 PUNCTUATION_PARENTHESIS	]
 PUNCTUATION_DOT	.
 
+
+% --48
 % N. F. Martin, R. A. Ibata, A. W. McConnachie, A. D. Mackey, A. M. N. Ferguson, M. J. Irwin et al., The PAndAS View of the Andromeda Satellite System. I. A Bayesian Search for Dwarf Galaxies Using Spatial and Color-Magnitude Information, ApJ 776 (2013) 80 [1307.7626].
 %
 AUTHOR_FIRST_NAME	N
@@ -1993,3 +2067,365 @@ PUNCTUATION_PARENTHESIS	[
 ARXIV	1307.7626
 PUNCTUATION_PARENTHESIS	]
 PUNCTUATION_DOT	.
+
+
+% /proj/ads/references/sources/arXiv/2003/00195.raw
+%R 2020arXiv200300195V
+% training for
+% having list of editors in addition to authors
+
+
+% --49
+% Maravelias G., Zezas A., Antoniou V., Hatzidimitriou D., Haberl F., 2019, in Oskinova L. M., Bozzo E., Bulik T., Gies D. R., eds, IAU Symposium Vol. 346, IAU Symposium. pp 350-352, doi:10.1017/S1743921319000048
+%
+AUTHOR_LAST_NAME	Maravelias
+AUTHOR_FIRST_NAME	G
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AUTHOR_LAST_NAME	Zezas
+AUTHOR_FIRST_NAME	A
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AUTHOR_LAST_NAME	Antoniou
+AUTHOR_FIRST_NAME	V
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AUTHOR_LAST_NAME	Hatzidimitriou
+AUTHOR_FIRST_NAME	D
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AUTHOR_LAST_NAME	Haberl
+AUTHOR_FIRST_NAME	F
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+YEAR	2019
+PUNCTUATION_COMMA	,
+IN	in
+EDITOR_LAST_NAME	Oskinova
+EDITOR_FIRST_NAME	L
+PUNCTUATION_DOT	.
+EDITOR_MIDDLE_NAME	M
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+EDITOR_LAST_NAME	Bozzo
+EDITOR_FIRST_NAME	E
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+EDITOR_LAST_NAME	Bulik
+EDITOR_FIRST_NAME	T
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+EDITOR_LAST_NAME	Gies
+EDITOR_FIRST_NAME	D
+PUNCTUATION_DOT	.
+AUTHOR_MIDDLE_NAME	R
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+EDITOR_IDENTIFIER	eds
+PUNCTUATION_COMMA	,
+JOURNAL	IAU
+JOURNAL	Symposium
+VOLUME_IDENTIFIER	Vol
+PUNCTUATION_DOT	.
+VOLUME	346
+PUNCTUATION_COMMA	,
+JOURNAL	IAU
+JOURNAL	Symposium
+PUNCTUATION_DOT	.
+PAGE_IDENTIFIER	pp
+PAGE	350-352
+PUNCTUATION_COMMA	,
+DOI	doi:10.1017/S1743921319000048
+
+
+% --50
+% Martayan C., Hubert A.-M., Floquet M., et al., 2007, in Okazaki A. T., Owocki S. P., Stefl S., eds, Astronomical Society of the Pacific Conference Series Vol. 361, Active OB-Stars: Laboratories for Stellare and Circumstellar Physics. p. 356 (arXiv:astro-ph/0602149)
+%
+AUTHOR_LAST_NAME	Martayan
+AUTHOR_FIRST_NAME	C
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AUTHOR_LAST_NAME	Hubert
+AUTHOR_FIRST_NAME	A
+PUNCTUATION_DOT	.
+PUNCTUATION_HYPEN	-
+AUTHOR_MIDDLE_NAME	M
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AUTHOR_LAST_NAME	Floquet
+AUTHOR_FIRST_NAME	M
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+ET_AL	et
+ET_AL	al
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+YEAR	2007
+PUNCTUATION_COMMA	,
+IN	in
+EDITOR_LAST_NAME	Okazaki
+EDITOR_FIRST_NAME	A
+PUNCTUATION_DOT	.
+EDITOR_MIDDLE_NAME	T
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+EDITOR_LAST_NAME	Owocki
+EDITOR_FIRST_NAME	S
+PUNCTUATION_DOT	.
+EDITOR_MIDDLE_NAME	P
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+EDITOR_LAST_NAME	Stefl
+EDITOR_FIRST_NAME	S
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+EDITOR_IDENTIFIER	eds
+PUNCTUATION_COMMA	,
+JOURNAL	Astronomical
+JOURNAL	Society
+JOURNAL	of
+JOURNAL	the
+JOURNAL	Pacific
+JOURNAL	Conference
+JOURNAL	Series
+VOLUME_IDENTIFIER	Vol
+PUNCTUATION_DOT	.
+VOLUME	361
+PUNCTUATION_COMMA	,
+TITLE	Active
+TITLE	OB
+PUNCTUATION_HYPEN	-
+TITLE	Stars
+PUNCTUATION_COLON	:
+TITLE	Laboratories
+TITLE	for
+TITLE	Stellare
+TITLE	and
+TITLE	Circumstellar
+TITLE	Physics
+PUNCTUATION_DOT	.
+PAGE_IDENTIFIER	p
+PUNCTUATION_DOT	.
+PAGE	356
+PUNCTUATION_PARENTHESIS	(
+ARXIV_IDENTIFIER	arXiv
+PUNCTUATION_COLON	:
+ARXIV	astro-ph/0602149
+PUNCTUATION_PARENTHESIS	)
+
+
+% /proj/ads/references/sources/arXiv/2003/00173.raw
+%R 2020arXiv200300173P
+% and
+% /proj/ads/references/sources/arXiv/2003/00254.raw
+%R 2020arXiv200300254A
+% training for
+% having NA tags (portion of reference that does not add any new information to help resolving)
+
+
+% --51
+% [17] Murayama, M., Nakahashi, K., and Obayashi, S., "Numerical simulation of vortical flows using vorticity confinement with unstructured grid." In 39th Aerospace Sciences Meeting and Exhibit, Reno, NV, Jan. 2001, AIAA paper 2001-0606.
+%
+AUTHOR_LAST_NAME	Murayama
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	M
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AUTHOR_LAST_NAME	Nakahashi
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	K
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+AND	and
+AUTHOR_LAST_NAME	Obayashi
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	S
+PUNCTUATION_DOT	.
+PUNCTUATION_COMMA	,
+PUNCTUATION_QUOTES	"
+TITLE	Numerical
+TITLE	simulation
+TITLE	of
+TITLE	vortical
+TITLE	flows
+TITLE	using
+TITLE	vorticity
+TITLE	confinement
+TITLE	with
+TITLE	unstructured
+TITLE	grid
+PUNCTUATION_DOT	.
+PUNCTUATION_QUOTES	"
+IN	In
+JOURNAL	39th
+JOURNAL	Aerospace
+JOURNAL	Sciences
+JOURNAL	Meeting
+JOURNAL	and
+JOURNAL	Exhibit
+PUNCTUATION_COMMA	,
+NA	Reno
+PUNCTUATION_COMMA	,
+NA	NV
+PUNCTUATION_COMMA	,
+NA	Jan
+PUNCTUATION_DOT	.
+YEAR	2001
+PUNCTUATION_COMMA	,
+NA	AIAA
+NA	paper
+NA	2001
+PUNCTUATION_HYPEN	-
+NA	0606
+PUNCTUATION_DOT	.
+
+
+% --52
+% [57] X. Guan, Q. Zhai, and A. Papalexopoulos, "Optimization based methods for unit commitment: Lagrangian relaxation versus general mixed integer programming," presented at the 2003 IEEE Power Engineering Society General Meeting (IEEE Cat. No.03CH37491), 2003.
+%
+AUTHOR_FIRST_NAME	X
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Guan
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME	Q
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Zhai
+PUNCTUATION_COMMA	,
+AND	and
+AUTHOR_FIRST_NAME	A
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Papalexopoulos
+PUNCTUATION_COMMA	,
+PUNCTUATION_QUOTES	"
+TITLE	Optimization
+TITLE	based
+TITLE	methods
+TITLE	for
+TITLE	unit
+TITLE	commitment
+PUNCTUATION_COLON	:
+TITLE	Lagrangian
+TITLE	relaxation
+TITLE	versus
+TITLE	general
+TITLE	mixed
+TITLE	integer
+TITLE	programming
+PUNCTUATION_COMMA	,
+PUNCTUATION_QUOTES	"
+JOURNAL	presented
+JOURNAL	at
+JOURNAL	the
+JOURNAL	2003
+JOURNAL	IEEE
+JOURNAL	Power
+JOURNAL	Engineering
+JOURNAL	Society
+JOURNAL	General
+JOURNAL	Meeting
+PUNCTUATION_PARENTHESIS	(
+NA	IEEE
+NA	Cat
+PUNCTUATION_DOT	.
+NA	No
+PUNCTUATION_DOT	.
+NA	03CH37491
+PUNCTUATION_PARENTHESIS	)
+PUNCTUATION_COMMA	,
+YEAR	2003
+PUNCTUATION_DOT	.
+
+
+% /proj/ads/references/sources/arXiv/2003/00026.raw
+%R 2020arXiv200300026A
+% training for having
+% full first name
+
+
+% --53
+% Evan H. Anders, Benjamin P. Brown, and Jeffrey S. Oishi, "Accelerated evolution of convective simulations," Phys. Rev. Fluids 3, 083502 (2018)
+%
+AUTHOR_FIRST_NAME_FULL	Evan
+AUTHOR_MIDDLE_NAME	H
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Anders
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME_FULL	Benjamin
+AUTHOR_MIDDLE_NAME	P
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Brown
+PUNCTUATION_COMMA	,
+AND	and
+AUTHOR_FIRST_NAME_FULL	Jeffrey
+AUTHOR_MIDDLE_NAME	S
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Oishi
+PUNCTUATION_COMMA	,
+PUNCTUATION_QUOTES	"
+TITLE	Accelerated
+TITLE	evolution
+TITLE	of
+TITLE	convective
+TITLE	simulations
+PUNCTUATION_COMMA	,
+PUNCTUATION_QUOTES	"
+JOURNAL	Phys
+PUNCTUATION_DOT	.
+JOURNAL	Rev
+PUNCTUATION_DOT	.
+JOURNAL	Fluids
+VOLUME	3
+PUNCTUATION_COMMA	,
+PAGE	083502
+PUNCTUATION_PARENTHESIS	(
+YEAR	2018
+PUNCTUATION_PARENTHESIS	)
+
+
+% --54
+% Keith Julien, Edgar Knobloch, Antonio M. Rubio, and Geoffrey M. Vasil, "Heat Transport in Low-Rossby-Number Rayleigh-Benard Convection," Phys. Rev. Lett. 109, 254503 (2012)
+%
+AUTHOR_FIRST_NAME_FULL	Keith
+AUTHOR_LAST_NAME	Julien
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME_FULL	Edgar
+AUTHOR_LAST_NAME	Knobloch
+PUNCTUATION_COMMA	,
+AUTHOR_FIRST_NAME_FULL	Antonio
+AUTHOR_MIDDLE_NAME	M
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Rubio
+PUNCTUATION_COMMA	,
+AND	and
+AUTHOR_FIRST_NAME_FULL	Geoffrey
+AUTHOR_MIDDLE_NAME	M
+PUNCTUATION_DOT	.
+AUTHOR_LAST_NAME	Vasil
+PUNCTUATION_COMMA	,
+PUNCTUATION_QUOTES	"
+TITLE	Heat
+TITLE	Transport
+TITLE	in
+TITLE	Low
+PUNCTUATION_HYPEN	-
+TITLE	Rossby
+PUNCTUATION_HYPEN	-
+TITLE	Number
+TITLE	Rayleigh
+PUNCTUATION_HYPEN	-
+TITLE	Benard
+TITLE	Convection
+PUNCTUATION_COMMA	,
+PUNCTUATION_QUOTES	"
+JOURNAL	Phys
+PUNCTUATION_DOT	.
+JOURNAL	Rev
+PUNCTUATION_DOT	.
+JOURNAL	Lett
+PUNCTUATION_DOT	.
+VOLUME	109
+PUNCTUATION_COMMA	,
+PAGE	254503
+PUNCTUATION_PARENTHESIS	(
+YEAR	2012
+PUNCTUATION_PARENTHESIS	)

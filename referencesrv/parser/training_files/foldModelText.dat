@@ -7,4 +7,4 @@
 # if the first training and testing sample is one of the longest references it would work
 # hence the following static division of training and test works and shall be used for now
 # instead of random number generator that usually is used in dividing train and test sample in ML
-STATIC_FOLD = [5, 8, 6, 8, 4, 4, 5, 1, 4, 4, 3, 5, 6, 3, 0, 7, 8, 8, 8, 1, 6, 1, 8, 2, 1, 8, 1, 8, 4, 6, 6, 5, 3, 6, 7, 2, 5, 1, 4, 5, 7, 1, 0, 2, 4, 0, 4, 7]
+STATIC_FOLD = [2, 1, 3, 2, 2, 4, 0, 7, 0, 4, 8, 5, 4, 1, 3, 3, 0, 1, 3, 4, 6, 7, 5, 7, 0, 1, 1, 2, 7, 2, 1, 3, 4, 2, 6, 0, 5, 3, 6, 0, 6, 8, 3, 1, 5, 6, 1, 8, 2, 5, 2, 1, 3, 2]
