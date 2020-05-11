@@ -101,7 +101,7 @@ class CRFClassifier(object):
                                                                 r'|\d{7}\s*\[?\w+-\w+\]?|\d{7}\s*\[?\w+\]?)'    # old format with class name in wrong place
                                                                 r'(v?\d*))')                                    # version
     ASCL_ID_EXTRACTOR = re.compile(r'(?P<ascl>(ascl)[\s\:]*(\d{4}\.\d{3}))')
-    DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>(doi|DOI)?[\s\.\:]{0,2}\b10\.\s*\d{4}[\d\:\.\-\_\/\(\)A-Za-z\s]+)')
+    DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>(doi)?[\s\.\:]{0,2}\b10\.\s*\d{4}[\d\:\.\-\_\/\(\)A-Za-z\s]+)', flags=re.IGNORECASE)
     DOI_INDICATOR = re.compile(r'doi:', flags=re.IGNORECASE)
 
     URL_TO_DOI = re.compile(r'((url\s*)?(https://|http://)(dx.doi.org/|doi.org/))', flags=re.IGNORECASE)

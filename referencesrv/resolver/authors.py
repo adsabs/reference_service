@@ -114,7 +114,7 @@ def get_authors_fullnames(ref_string):
     :return:
     """
     author_match = FULLNAME_AUTHORS_PAT.match(ref_string)
-    if author_match:
+    if author_match and len(author_match.group()) != len(ref_string):
         return len(author_match.group())
     return 0
 
@@ -231,7 +231,7 @@ def normalize_author_list(authorString, initials=True):
         pat = get_author_pattern(authorString)
     except Undecidable:
         if not initials:
-            # is it first name spelled out
+            # is first name spelled out
             if get_authors_fullnames(authorString) > 0:
                 return "; ".join("%s, %s" % (mat.group("last"), mat.group("first")[0])
                                  for mat in FULLNAME_PAT.finditer(authorString)).strip()

@@ -54,10 +54,11 @@ def make_solr_condition(key, value):
     # 2/23 hold off on this for now and use first_author_norm
     # 5/21 remove the initials dots if any
     # 7/15/2019 first_author_norm cannot be approximated, go back to first_author
-    if key =='first_author_norm~':
+    # 5/7/2020 for now map both first_author_norm and first_author approximation to first_author approximation
+    if key =='first_author_norm~' or key == 'first_author~':
         return 'first_author:"%s"~'%(value)
     if key == 'first_author_norm':
-        return 'first_author:"%s"'%(value)
+        return 'first_author_norm:"%s"'%(value)
 
     # both author and author_norm
     if 'author' in key:

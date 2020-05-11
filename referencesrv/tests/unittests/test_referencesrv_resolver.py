@@ -17,7 +17,7 @@ from referencesrv.resolver.common import Evidences, NotResolved, Undecidable, No
     SOURCE_MATCHER, Solution, Hypothesis
 from referencesrv.resolver.pytrigdict import get_trigrams, TrigIndex, Trigdict
 from referencesrv.resolver.sourcematchers import TrigdictSourceMatcher, SourceMatcher
-from referencesrv.resolver.scoring import get_score_for_reference_identifier, get_serial_score_for_input_fields, \
+from referencesrv.resolver.scoring import get_score_for_reference_identifier, get_score_for_input_fields, \
     get_score_for_reference_identifier, get_book_score_for_input_fields, get_thesis_score_for_input_fields
 from referencesrv.resolver.journalfield import get_best_bibstem_for, add_volume_evidence, clean_ads_page, \
     compute_page_delta, add_page_evidence, compute_pubstring_statistics, string_similarity, add_publication_evidence, \
@@ -58,11 +58,20 @@ class TestResolver(TestCase):
         """
         test get_authors
         """
+        # when there is no comma before the and
         self.assertEqual(get_authors(u'S. Kung and F. Bayer: "Collected Junk", A&A 2009'), 'S. Kung and F. Bayer')
+        # when there is a comma after both lasat name and first initials
         self.assertEqual(get_authors(u'Przybilla, N., & Maeder, A. 2010'), 'Przybilla, N., & Maeder, A. ')
         with self.assertRaises(Exception) as context:
             get_authors('Przybilla N & Maeder A 2010')
         self.assertTrue("No discernible authors in 'Przybilla N & Maeder A 2010'" in context.exception)
+        # where there is a `Collaboration` and also `and xxx colleagues` in the list of authors
+        self.assertEqual(get_authors(u'Gaia Collaboration, and 625 colleagues 2016. The Gaia mission. Astronomy and Astrophysics 595, A1.'),
+                         'Gaia Collaboration, and 625 colleagues')
+        # where there is a `co-authors` in the list of authors
+        self.assertEqual(get_authors(u'N., Zhao, Y., Diaz-Santos, T., and 18 co-authors, 2017, "ApJS" 230, 1'),
+                         'N., Zhao, Y., Diaz-Santos, T., and 18 co-authors')
+
 
 
     def test_normalize_single_author(self):
@@ -87,7 +96,7 @@ class TestResolver(TestCase):
         self.assertEqual(normalize_author_list("N.A. Foo and C. K. Bar", initials=False), 'Foo; Bar')
         self.assertEqual(normalize_author_list("M. de Alembert & K.V.U. vanBeuren", initials=False), 'de Alembert; vanBeuren')
         self.assertEqual(normalize_author_list("L. von Beethoven-Tschaikowski et al.", initials=False), 'von Beethoven-Tschaikowski')
-        self.assertEqual(normalize_author_list("Unable to decide"), "Unable to decide")
+        self.assertEqual(normalize_author_list("Unable to decide", initials=False), "Unable to decide")
 
     def test_get_first_author(self):
         """
@@ -374,9 +383,9 @@ class TestResolver(TestCase):
         self.assertEqual(str(ns),'In Testing Mode: test reference')
 
 
-    def test_get_serial_score_for_input_fields(self):
+    def test_get_score_for_input_fields(self):
         """
-        test scoring function get_serial_score_for_input_fields
+        test scoring function get_score_for_input_fields
         """
         result_record= {u'bibcode': u'1992JOSAA...9..154F',
                         u'author': [u'Frisken Gibson, Sarah', u'Lanni, Frederick'],
@@ -400,10 +409,10 @@ class TestResolver(TestCase):
                             "year": input_fields["year"],
                             "volume": input_fields["volume"],
                             "pub": input_fields["pub"]},
-                       get_serial_score_for_input_fields,
+                            get_score_for_input_fields,
                        input_fields=input_fields,
                        has_etal=False)
-        evidences = get_serial_score_for_input_fields(result_record, hypothesis)
+        evidences = get_score_for_input_fields(result_record, hypothesis)
         # matches are authors, year, pub, and volume
         self.assertEqual(evidences.get_score(), 4)
 
@@ -419,9 +428,10 @@ class TestResolver(TestCase):
         self.assertEqual(make_solr_condition("title", ""), None)
         self.assertEqual(make_solr_condition("author", "B. Traven and D. d'Vaucouleurs"),
                          'author:("Traven, B" AND "d\'Vaucouleurs, D")')
-        self.assertEqual(make_solr_condition("first_author~", "frisken gibson, s"),
-                         'first_author~:("frisken gibson, s")')
-        self.assertEqual(make_solr_condition("arxiv", "0910.4887"), 'identifier:("arxiv:0910.4887" OR "ascl:0910.4887")')
+        self.assertEqual(make_solr_condition("first_author_norm~", "frisken gibson, s"),
+                         'first_author:"frisken gibson, s"~')
+        self.assertEqual(make_solr_condition("arxiv", "1904.07238"), 'identifier:("arxiv:1904.07238")')
+        self.assertEqual(make_solr_condition("ascl", "1906.010"), 'identifier:("ascl:1906.010")')
         self.assertEqual(make_solr_condition("doi","10.1364/JOSAA.9.000154"), 'doi:"10.1364/JOSAA.9.000154"')
         # self.assertEqual(make_solr_condition("page", "154"), 'page:("?54" or "1?4" or "15?")')
         # for now since wildcard ? has been turned off when preceding any character, use this expanded version
@@ -455,10 +465,10 @@ class TestResolver(TestCase):
         input_fields = {u'bibcode': u'1992JOSAA...9..154F',
                         u'author': [u'Frisken Gibson, Sarah', u'Lanni, Frederick'],
                         u'year': u'1992'}
-        hypothesis = Hypothesis("testing", {
+        hypothesis = Hypothesis("testing-fielded-author/year", {
                             "author": input_fields["author"],
                             "year": input_fields["year"]},
-                       get_serial_score_for_input_fields,
+                       get_score_for_input_fields,
                        input_fields=input_fields,
                        has_etal=False)
 
@@ -499,10 +509,10 @@ class TestResolver(TestCase):
                         u'author': [u'Frisken Gibson, Sarah', u'Lanni, Frederick'],
                         u'year': u'1992',
                         u'volume': u'9'}
-        hypothesis = Hypothesis("testing", {
+        hypothesis = Hypothesis("testing-fielded-author/year", {
                             "author": input_fields["author"],
                             "year": input_fields["year"]},
-                       get_serial_score_for_input_fields,
+                       get_score_for_input_fields,
                        input_fields=input_fields,
                        has_etal=False)
         scored_solutions = [(e1, {u'bibcode': u'1992JOSAA...9..154F'})]
@@ -566,10 +576,10 @@ class TestResolver(TestCase):
                     u'identifier': [u'2013JARS....7.3461V', u'10.1117/1.JRS.7.073461', u'10.1117/1.JRS.7.073461'],
                     u'page': u'073461'}
 
-        hypothesis = Hypothesis("testing", {
+        hypothesis = Hypothesis("testing-fielded-author/year", {
                                     "author": solution["author"],
                                     "year": solution["year"]},
-                                get_serial_score_for_input_fields,
+                                get_score_for_input_fields,
                                 input_fields=solution,
                                 has_etal=False)
 
@@ -690,7 +700,7 @@ class TestResolver(TestCase):
         self.assertEqual(compute_page_delta("23", None), 0)
         self.assertEqual(compute_page_delta(":M20", "23"), 0)
         self.assertEqual(compute_page_delta(":M20", ":M20"), 1)
-        self.assertEqual(compute_page_delta("233", "23"), 0.5)
+        self.assertEqual(compute_page_delta("233", "23"), 0)
         self.assertEqual(compute_page_delta("23", "0"), 0)
 
 
@@ -799,7 +809,7 @@ class TestResolver(TestCase):
                     u"doi":[u"10.1038/s41565-018-0319-4"]}
 
         ref = {"doi":"10.1038/s41565-018-0319-4"}
-        hypothesis = Hypothesis("testing", {
+        hypothesis = Hypothesis("testing-fielded-DOI", {
                                     "doi": ref["doi"]},
                                 get_score_for_reference_identifier,
                                 input_fields=ref)
@@ -807,7 +817,7 @@ class TestResolver(TestCase):
 
         # if it does not match
         ref = {"doi":"no match"}
-        hypothesis = Hypothesis("testing", {
+        hypothesis = Hypothesis("testing-fielded-DOI", {
                                     "doi": ref["doi"]},
                                 get_score_for_reference_identifier,
                                 input_fields=ref)
@@ -819,7 +829,7 @@ class TestResolver(TestCase):
                     u"identifier": [u"arXiv:1905.01258"]}
 
         ref = {"arxiv":"1905.01258"}
-        hypothesis = Hypothesis("testing", {
+        hypothesis = Hypothesis("testing-fielded-arxiv", {
                                     "arxiv": ref["arxiv"]},
                                 get_score_for_reference_identifier,
                                 input_fields=ref)
@@ -827,7 +837,7 @@ class TestResolver(TestCase):
 
         # if it does not match
         ref = {"arxiv":"no match"}
-        hypothesis = Hypothesis("testing", {
+        hypothesis = Hypothesis("testing-fielded-arxiv", {
                                     "arxiv": ref["arxiv"]},
                                 get_score_for_reference_identifier,
                                 input_fields=ref)
@@ -858,7 +868,7 @@ class TestResolver(TestCase):
         normalized_authors = normalize_author_list(ref["authors"], initials=True)
         # note that specifying hints here is useless since we are passing the solution in already
         # put it here to know what information was used in the query corresponding to the scare function called
-        hypothesis = Hypothesis("test-book", {
+        hypothesis = Hypothesis("test-fielded-book-title", {
                            "author": normalized_authors,
                             "title": ref["title"],
                             "year": ref["year"]},
@@ -890,7 +900,7 @@ class TestResolver(TestCase):
         # note that specifying hints here is useless since we are passing the solution in already
         # put it here to know what information was used in the query corresponding to the scare function called
         normalized_authors = normalize_author_list(ref["authors"], initials=True)
-        hypothesis = Hypothesis("test-thesis", {
+        hypothesis = Hypothesis("test-fielded-thesis", {
                             "author": normalized_authors,
                             "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
                             "year": ref["year"]},
@@ -904,7 +914,7 @@ class TestResolver(TestCase):
         # note that specifying hints here is useless since we are passing the solution in already
         # put it here to know what information was used in the query corresponding to the scare function called
         normalized_authors = normalize_author_list(ref["authors"], initials=True)
-        hypothesis = Hypothesis("test-thesis", {
+        hypothesis = Hypothesis("test-fielded-thesis", {
                             "author": normalized_authors,
                             "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
                             "year": ref["year"]},
@@ -916,7 +926,7 @@ class TestResolver(TestCase):
         # mistaken year
         ref = {"authors": "Rowden, P.", "year": "2018", "refstr": "PhD These, The Open University, 2019"}
         normalized_authors = normalize_author_list(ref["authors"], initials=True)
-        hypothesis = Hypothesis("test-thesis", {
+        hypothesis = Hypothesis("test-fielded-thesis", {
                             "author": normalized_authors,
                             "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
                             "year": ref["year"]},
@@ -939,7 +949,7 @@ class TestResolver(TestCase):
             u"author_norm":[u"Rowden, P"]
         }
         ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
-        hypothesis = Hypothesis("test-thesis", {
+        hypothesis = Hypothesis("test-fielded-thesis", {
                             "author": normalized_authors,
                             "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
                             "year": ref["year"]},
@@ -963,6 +973,45 @@ class TestResolver(TestCase):
         }
         self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.9)
 
+
+    def test_add_publication_evidence(self):
+        """
+        test add_publication_evidence for when there is a typo in the reference journal
+        """
+        solution = {u'bibcode': u'2018AJ....156..102S',
+                    u'author': [u'Stassun, Keivan G.', u'Oelkers, Ryan J.', u'Pepper, Joshua', u'Paegert, Martin', u'De Lee, Nathan', u'Torres, Guillermo', u'Latham, David W.', u'Charpinet, St\xe9phane', u'Dressing, Courtney D.', u'Huber, Daniel', u'Kane, Stephen R.', u'L\xe9pine, S\xe9bastien', u'Mann, Andrew', u'Muirhead, Philip S.', u'Rojas-Ayala, B\xe1rbara', u'Silvotti, Roberto', u'Fleming, Scott W.', u'Levine, Al', u'Plavchan, Peter'],
+                    u'bibstem': u'AJ',
+                    u'doctype': u'article',
+                    u'pub': u'The Astronomical Journal',
+                    u'pub_raw': u'The Astronomical Journal, Volume 156, Issue 3, article id. 102, <NUMPAGES>39</NUMPAGES> pp. (2018).',
+                    u'volume': u'156',
+                    u'doi': [u'10.3847/1538-3881/aad050'],
+                    u'author_norm': ['stassun, k', 'oelkers, r', 'pepper, j', 'paegert, m', 'de lee, n', 'torres, g', 'latham, d', 'charpinet, s', 'dressing, c', 'huber, d', 'kane, s', 'lepine, s', 'mann, a', 'muirhead, p', 'rojas ayala, b', 'silvotti, r', 'fleming, s', 'levine, a', 'plavchan, p'],
+                    u'year': u'2018',
+                    u'first_author_norm': 'stassun, k',
+                    u'title': u'The TESS Input Catalog and Candidate Target List',
+                    u'identifier': [u'2017arXiv170600495S', u'2018AJ....156..102S', u'10.3847/1538-3881/aad050', u'2017arXiv170600495S', u'arXiv:1706.00495', u'10.3847/1538-3881/aad050'],
+                    u'issue': u'3',
+                    u'page': u'102'}
+        # note that journal was supposed to be AJ
+        ref = {'journal': u'ApJ',
+               'authors': u'Stassun, K. G., Oelkers, R. J., Pepper, J., et al.',
+               'refstr': u'Stassun, K. G., Oelkers, R. J., Pepper, J., et al. 2018, ApJ, 156, 102',
+               'volume': u'156',
+               'year': u'2018',
+               'page': u'102'}
+        normalized_authors = normalize_author_list(ref["authors"], initials=True)
+        hypothesis = Hypothesis("testing-fielded-author/year/volume/page", {
+                            "author": normalized_authors,
+                            "year": ref["year"],
+                            "volume": ref["volume"],
+                            "page": ref["page"]},
+                        get_score_for_input_fields,
+                        input_fields=ref,
+                        page_qualifier='',
+                        has_etal='et al' in ref["authors"],
+                        normalized_authors=normalized_authors)
+        self.assertEqual(get_score_for_input_fields(solution, hypothesis).get_score(), 4.0)
 
     def test_Querier(self):
         solrquery = Querier()
@@ -1076,17 +1125,27 @@ class TestResolver(TestCase):
                         'pub': "Bulletin of the American Astronomical Society",
                         'refstr': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R. (2019). Studying the Reionization Epoch with QSO Absorption Lines. Bulletin of the American Astronomical Society, Vol. 51, p.440."}
         hypothesis = Hypothesis("testing", None,
-                       get_serial_score_for_input_fields,
+                       get_score_for_input_fields,
                        input_fields=input_fields,
                        expected_bibstem=get_best_bibstem_for(input_fields["pub"]))
         self.assertEqual(get_score_for_baas_match(solution, hypothesis).get_score(), 0.8)
         # no matching expected_bibcode
         hypothesis = Hypothesis("testing", None,
-                       get_serial_score_for_input_fields,
+                       get_score_for_input_fields,
                        input_fields=input_fields,
                        expected_bibstem="no match")
         self.assertEqual(get_score_for_baas_match(solution, hypothesis), -1)
 
+
+    def test_build_bibcode(self):
+        """
+
+        :return:
+        """
+
+        # Verela et al., 2016, a&a, 589, 37
+        # Shakura N. I., Sunyaev R. A., 1973, A&A, 24, 337
+        # and one with qualifier
 
 class TestResolverSolrQueryCase(TestCase):
     """
