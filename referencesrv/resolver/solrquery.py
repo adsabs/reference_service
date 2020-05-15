@@ -49,7 +49,7 @@ class Querier(object):
             start_time = time.time()
             response = client().get(
                 url=self.endpoint,
-                headers={'Authorization': 'Bearer %s' % request.headers.get('X-Forwarded-Authorization', request.headers.get('Authorization', ''))},
+                headers={'Authorization': request.headers.get('X-Forwarded-Authorization', request.headers.get('Authorization', ''))},
                 params=self.make_params(query))
             current_app.logger.debug("Query executed in %s ms" % ((time.time() - start_time)*1000))
 

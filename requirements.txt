@@ -1,4 +1,4 @@
-git+https://github.com/adsabs/ADSMicroserviceUtils.git@v1.1.4
+git+https://github.com/adsabs/ADSMicroserviceUtils.git@v1.1.5
 adsutils==1.0.33
 beautifulsoup==3.2.1
 cvxopt==1.2.3
