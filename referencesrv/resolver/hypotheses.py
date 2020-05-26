@@ -82,7 +82,7 @@ class Hypotheses(object):
         if self.digested_record.get("page", None):
             if "-" in self.digested_record.get("page"):
                 # we are querying on page stat, for now through out the page end
-                self.digested_record["page"] = self.digested_record["page"].split("-")[0]
+                pages = self.digested_record["page"].split("-")[0]
             qualifier, self.digested_record["page"] = self.tokenize_page(self.digested_record["page"])
             if qualifier is not None:
                 self.digested_record["qualifier"] = qualifier
@@ -121,7 +121,6 @@ class Hypotheses(object):
         if "ascl" in self.digested_record:
             # remove the ascl prefix if included
             self.digested_record["ascl"] = self.digested_record["ascl"].split(":")[-1]
-
 
     def has_keys(self, *keys):
         """
@@ -202,15 +201,24 @@ class Hypotheses(object):
         elif len(page) == 0:
             page = ["????"]
             page_qualifier = ["?"]
-        else:
+        elif page_qualifier is None:
             page = [(4 - len(page)) * '.' + page] * 2
             page_qualifier = ['.', '?']
+        else:
+            page = [(4 - len(page)) * '.' + page]
+            page_qualifier = [page_qualifier]
         # allow missing author as well
-        initial = self.normalized_authors[0] if self.normalized_authors else '?'
+        author = self.normalized_authors[0] if self.normalized_authors else '?'
+        collaboration = "collaboration" in self.normalized_authors.lower()
         bibcode = []
         for p, q in zip(page, page_qualifier):
-            bibcode.append('{year}{journal}{volume}{page_qualifier}{page}{initial}'.format(
-                           year=year,journal=journal,volume=volume,page_qualifier=q,page=p,initial=initial))
+            bibcode.append('{year}{journal}{volume}{page_qualifier}{page}{author}'.format(
+                           year=year,journal=journal,volume=volume,page_qualifier=q,page=p,author=author))
+            # if there is Collaborations in author list add wildcard bibcode for author,
+            # since name of collabration might have been used in bibcode but listed in the reference as second
+            if collaboration:
+                bibcode.append('{year}{journal}{volume}{page_qualifier}{page}?'.format(
+                           year=year,journal=journal,volume=volume,page_qualifier=q,page=p))
         return bibcode
 
     def iter_hypotheses(self):
@@ -255,6 +263,25 @@ class Hypotheses(object):
                     has_etal=has_etal,
                     normalized_authors=self.normalized_authors)
 
+        # could this be a thesis?
+        if self.has_keys("author", "year", "refstr") and \
+                (self.lacks_keys("volume", "page") or self.has_thesis_indicator_words(
+                    self.digested_record["refstr"])):
+            # we're checking if any thesis indicators are in pub
+            # and later pass on all thesis indicators to solr since we're
+            # not sure if the ref thesis words have anything to do with
+            # what the ADS thesis words are, plus we don't want any stopwords
+            # or other junk in a disjunction, so just oring the words from
+            # pub together is not a good idea either.
+            if has_thesis_indicators(self.digested_record["refstr"]):
+                yield Hypothesis("fielded-thesis", {
+                    "author": self.normalized_authors,
+                    "pub": "(%s)" % " OR ".join(current_app.config["THESIS_INDICATOR_WORDS"]),
+                    "year": self.digested_record["year"]},
+                                 get_thesis_score_for_input_fields,
+                                 input_fields=self.digested_record,
+                                 normalized_authors=self.normalized_authors)
+
         # try resolving as book, is title in the pub
         if self.has_keys("author", "pub", "year") and self.lacks_keys("title", "volume"):
             cleaned_title = cook_title_string(self.digested_record["pub"])
@@ -272,9 +299,9 @@ class Hypotheses(object):
                 has_etal=False,
                 normalized_authors=self.normalized_authors)
 
-        # is it inproceedings that is incomplete
-        if self.has_keys("author", "year") and (self.lacks_keys("volume", "page") or self.lacks_keys("volume") or
-                                                                                     self.lacks_keys("page")):
+        # is it inproceedings that with incomplete metadata (either both volume and page, or either missing)
+        if self.has_keys("author", "year") and (self.lacks_keys("volume", "page") or
+                                                    self.lacks_keys("volume") or self.lacks_keys("page")):
             yield Hypothesis("fielded-author/year", {
                    "author": self.normalized_authors,
                     "year": self.digested_record["year"]},
@@ -285,7 +312,7 @@ class Hypotheses(object):
                 normalized_authors=self.normalized_authors)
 
         # try resolving as book, however, sometimes publication is inbook and hence should check title
-        if self.has_keys("author", "title", "year"):
+        if self.has_keys("author", "title", "year") and self.lacks_keys("volume"):
             yield Hypothesis("fielded-book-title", {
                    "author": self.normalized_authors,
                     "title": self.digested_record["title"],
@@ -302,7 +329,7 @@ class Hypotheses(object):
                 "author": self.normalized_authors,
                 "year": self.digested_record["year"],
                 "volume": self.digested_record["volume"],
-                "page": self.digested_record["page"]},
+                "page": self.digested_record.get("qualifier", "")+self.digested_record["page"]},
                              get_score_for_input_fields,
                              input_fields=self.digested_record,
                              page_qualifier=self.digested_record.get("qualifier", ""),
@@ -333,24 +360,6 @@ class Hypotheses(object):
             has_etal=False,
             normalized_authors='')
 
-        # could this be a thesis?
-        if self.has_keys("author", "year", "refstr") and \
-                (self.lacks_keys("volume", "page") or self.has_thesis_indicator_words(self.digested_record["refstr"])):
-            # we're checking if any thesis indicators are in pub
-            # and later pass on all thesis indicators to solr since we're
-            # not sure if the ref thesis words have anything to do with
-            # what the ADS thesis words are, plus we don't want any stopwords
-            # or other junk in a disjunction, so just oring the words from
-            # pub together is not a good idea either.
-            if has_thesis_indicators(self.digested_record["refstr"]):
-                yield Hypothesis("fielded-thesis", {
-                    "author": self.normalized_authors,
-                    "pub": "(%s)"%" OR ".join(current_app.config["THESIS_INDICATOR_WORDS"]),
-                    "year": self.digested_record["year"]},
-                get_thesis_score_for_input_fields,
-                input_fields=self.digested_record,
-                normalized_authors=self.normalized_authors)
-
         # try some reference type-specific hypotheses
         if "pub" in self.digested_record:
             for hypo in iter_journal_specific_hypotheses(
@@ -363,29 +372,27 @@ class Hypotheses(object):
                     self.digested_record.get("refstr")):
                 yield hypo
 
-        # if we have sufficient entropy in the page, it might be good for
-        # a hypothesis
-        if self.has_keys("author") and len(self.digested_record.get("page", ""))>2:
-            yield Hypothesis("fielded-author/page", {
-                "author": self.normalized_authors,
-                "page": self.digested_record["page"].split("-")[0]},
-                get_score_for_input_fields,
-                input_fields=self.digested_record)
+        # try author search with either volume or page
+        if self.has_keys("author"):
+            # with volume
+            if self.has_keys("volume"):
+                yield Hypothesis("fielded-author/volume", {
+                    "author": self.normalized_authors,
+                    "volume": self.digested_record["volume"]},
+                    get_score_for_input_fields,
+                    input_fields=self.digested_record)
+            # with page
+            if self.has_keys("page"):
+                yield Hypothesis("fielded-author/page", {
+                    "author": self.normalized_authors,
+                    "page": self.digested_record["page"]},
+                    get_score_for_input_fields,
+                    input_fields=self.digested_record)
 
-        # now try query on first author norm and year only.
+        # now fuzzy search
         if self.has_keys("author", "year"):
-            yield Hypothesis("fielded-first-author-norm/year", {
-                "first_author_norm": self.normalized_first_author,
-                "year": self.digested_record["year"]},
-                get_score_for_input_fields,
-                input_fields=self.digested_record,
-                page_qualifier=self.digested_record.get("qualifier", ""),
-                has_etal=has_etal,
-                normalized_authors=self.normalized_authors)
-
-        # now try query on approximate first author norm and year only.
-        if self.has_keys("author", "year"):
-            yield Hypothesis("fielded-first-author-norm~/year", {
+            # approximate first author
+            yield Hypothesis("fielded-first-author~/year", {
                 "first_author_norm~": self.normalized_first_author,
                 "year": self.digested_record["year"]},
                 get_score_for_input_fields,
@@ -393,10 +400,8 @@ class Hypotheses(object):
                 page_qualifier=self.digested_record.get("qualifier", ""),
                 has_etal=has_etal,
                 normalized_authors=self.normalized_authors)
-
-        # now try query on authors and approximate year only.
-        if self.has_keys("author", "year"):
-            yield Hypothesis("fielded-author-norm/year~", {
+            # and now approximate year
+            yield Hypothesis("fielded-author/year~", {
                 "author": self.normalized_authors,
                 "year~": self.digested_record["year"]},
                 get_score_for_input_fields,
@@ -405,7 +410,7 @@ class Hypotheses(object):
                 has_etal=has_etal,
                 normalized_authors=self.normalized_authors)
 
-        # if no author!
+        # last effort, if no author!
         # try bibstem-year-volume-page
         if self.has_keys("year", "pub", "volume", "page"):
             yield Hypothesis("fielded-no-author", {
@@ -419,7 +424,8 @@ class Hypotheses(object):
                 has_etal=False,
                 normalized_authors='')
 
-        # if no year!
+        # last effort, if no year!
+        # try author-bibstem-volume-page
         if self.has_keys("author", "pub", "volume", "page"):
             yield Hypothesis("fielded-no-year", {
                 "author": self.normalized_authors,

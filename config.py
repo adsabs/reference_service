@@ -28,10 +28,9 @@ REFERENCE_SERVICE_STOP_WORDS = [
      "out", "on", "off", "over", "under", "again", "further", "then",
      "once", "here", "there", "when", "where", "why", "how", "all", "any",
      "both", "each", "few", "more", "most", "other", "some", "such", "no",
-     "nor", "not", "only", "own", "same", "so", "than", "too", "very", "s",
+     "nor", "not", "only", "own", "same", "so", "than", "too", "very",
      "t", "can", "will", "just", "don", "should", "now", "id", "var", "in",
-     "function", "js", "d", "script", "\"script", "fjs", "document", "r",
-     "b", "g", "e", "'s", "c", "f", "h", "l", "k", "&"
+     "function", "js", "script", "script", "fjs", "document", "&"
 ]
 
 
