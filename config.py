@@ -3,6 +3,10 @@
 
 LOGGING_LEVEL = 'INFO'
 
+# must be here for adsmutils to override it using env vars
+# but if left empty (resolving to False) it won't be used
+SERVICE_TOKEN = None
+
 # configuration for accessing solr db
 # these values can be overwritten by local_config values
 REFERENCE_SERVICE_SOLRQUERY_URL = "https://api.adsabs.harvard.edu/v1/search/query"
