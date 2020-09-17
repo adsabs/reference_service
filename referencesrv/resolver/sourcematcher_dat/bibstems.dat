@@ -1,4 +1,4 @@
- 29544
+ 29838
 ....A&A......	R	Astronomy and Astrophysics
 ....A&AA.....	J	Astronomy and Astrophysics Abstracts Heidelberg
 ....A&AC.....	R	Astronomy &amp; Astrophysics (Caucasus)
@@ -57,6 +57,7 @@
 ....AcAri....	R	Acta Arithmetica
 ....AcArm....	R	Acta Armamentarii
 ....AcASn....	R	Acta Astronomica Sinica
+....AcAT.....	R	Acta Astrophysica Taurica
 ....AcAuS....	R	Acta Automatica Sinica
 ....AcBu.....	J	Acoust. Bull.
 ....AcC......	R	Acta Cosmologica
@@ -68,9 +69,10 @@
 ....ACESJ....	R	Applied Computational Electromagnetics Society Journal
 ....AcESn....	R	Acta Electron. Sinica
 ....AcGdG....	R	Acta Geodynamica et Geomaterialia
+....ACGE.....	C	Advances in Cryogenic Engineering
 ....AcGeo....	R	Acta Geophysica
 ....AcGeP....	R	Acta Geophysica Polonica
-....AcGG.....	R	Acta Geod. Geophys.
+....AcGG.....	R	Acta Geodaetica et Geophysica
 ....ACGIS....	R	Advances in Cartography and GIScience of the ICA
 ....AcGSn....	R	Acta Geophys. Sinica
 ....AcHA.....	R	Acta Historica Astronomiae
@@ -84,7 +86,6 @@
 ....AcMaS....	R	Acta Mathematica Sinica
 ....AcMat....	R	Acta Materialia
 ....AcMCS....	R	Acta Materiae Compositae Sinica
-....AMCE.....	R	Archiveds of Civil and Mechanical Engineering
 ....AcMec....	R	Acta Mechanica
 ....AcMeS....	R	Acta Meteorologica Sinica
 ....AcMet....	R	Acta Metallurgica
@@ -266,6 +267,7 @@
 ....ALMAN....	J	ALMA Newsletter
 ....AMat.....	R	Applied Mathematics
 ....Ambio....	J	Ambio
+....AMCE.....	R	Archiveds of Civil and Mechanical Engineering
 ....ames.rept	C	NASA Ames Research Center Technical Report
 ....AMGBA....	R	Archives for Meteorology Geophysics and Bioclimatology Series A Meteorology and Atmopsheric Physics
 ....AMGBB....	R	Archives for Meteorology Geophysics and Bioclimatology Series B Theoretical and Applied Climatology
@@ -342,7 +344,7 @@
 ....AnRE.....	R	Annual Review of Energy
 ....AnRFM....	R	Annual Review of Fluid Mechanics
 ....AnRio....	J	Annales de l'Observatoire Imperial de Rio de Janeiro
-....AnRMS....	R	Annual Review of Materials Science
+....AnRMS....	R	Annual Review of Materials Research
 ....AnRS.....	C	Antarctic Research Series
 ....AnRSA....	R	Annual Review of Statistics and Its Application
 ....ANS......	J	Astronomische Nachrichten Supplement
@@ -509,8 +511,8 @@
 ....AsDyn....	R	Astrodynamics
 ....ASFAS....	J	Academia Scientiarum Fennica Annales Series Physica
 ....ASHRA....	R	ASHRAE Journal
-....ASIB.....	C	NATO Advanced Science Institutes (ASI) Series B
-....ASIC.....	C	NATO Advanced Science Institutes (ASI) Series C
+....ASIB.....	C	NATO Advanced Study Institute (ASI) Series B
+....ASIC.....	C	NATO Advanced Study Institute (ASI) Series C
 ....ASInC....	C	Astronomical Society of India Conference Series
 ....AsJES....	R	Austrian Journal of Earth Sciences
 ....AsJPh....	R	Asian Journal of Physics
@@ -530,7 +532,7 @@
 ....AsSch....	J	Astronomie in der Schule
 ....ASSF.....	R	Acta Societatis Scientarum Fennicae
 ....ASSFA....	R	Acta Societatis Scientarum Fennicae Series A
-....ASSL.....	C	Astrophysics and Space Science Library
+....ASSL.....	J	Astrophysics and Space Science Library
 ....ASSP.....	R	Astrophysics and Space Science Proceedings
 ....Ast......	J	Astronomy
 ....AstAp....	R	Astronomy and Astro-Physics (formerly The Sidereal Messenger)
@@ -556,23 +558,24 @@
 ....AtEn.....	R	Atomnaia Energiia
 ....AtERv....	R	Atomic Energy Review
 ....ATi......	J	Astronomisk Tidsskrift
-....ATJAM....	R	ASME Transactions Series E Journal of Applied Mechanics
-....ATJDS....	R	ASME Transactions Journal of Dynamic Systems and Measurement Control B
-....ATJEG....	R	ASME Transactions Journal of Engineering Gas Turbines and Power
-....ATJEl....	R	ASME Transactions Journal of Electronic Packaging
-....ATJEM....	R	ASME Transactions Journal Engineering Materials and Technology
-....ATJEP....	J	ASME Transactions Journal of Engineering Power
-....ATJFE....	R	ASME Transactions Journal of Fluids Engineering
-....ATJHT....	R	ASME Transactions Journal of Heat Transfer
-....ATJLT....	R	ASME Transactions Journal of Lubrication Technology
-....ATJSE....	R	ASME Transactions Journal of Solar Energy and Engineering
-....ATJTr....	R	ASME Transactions Journal of Tribology
-....ATJTu....	R	ASME Transactions Journal of Turbomachinery
-....ATJVA....	R	ASME Transactions Journal of Vibration Acoustics
+....ATJAM....	R	ASME Journal of Applied Mechanics
+....ATJDS....	R	ASME Journal of Dynamic Systems and Measurement Control B
+....ATJEG....	R	ASME Journal of Engineering Gas Turbines and Power
+....ATJEl....	R	ASME Journal of Electronic Packaging
+....ATJEM....	R	ASME Journal Engineering Materials and Technology
+....ATJEP....	J	ASME Journal of Engineering Power
+....ATJFE....	R	ASME Journal of Fluids Engineering
+....ATJHT....	R	ASME Journal of Heat Transfer
+....ATJLT....	R	ASME Journal of Lubrication Technology
+....ATJSE....	R	ASME Journal of Solar Energy and Engineering
+....ATJTr....	R	ASME Journal of Tribology
+....ATJTu....	R	ASME Journal of Turbomachinery
+....ATJVA....	R	ASME Journal of Vibration Acoustics
 ....AtKe.....	J	Atomkernenergie
 ....AtlVS....	J	Atlas Poiskovykh Kart Peremennykh Zvezd
 ....ATMAB....	J	Association Technique Maritime et Aeronautique Bulletin
 ....ATMAS....	J	Association Technique Maritime et Aeronautique Session Paris France ONERA TP
+....AtmEB....	R	Atmospheric Environment Part B
 ....AtmEn....	R	Atmospheric Environment
 ....Atmos....	R	Atmosphere
 ....AtmRe....	R	Atmospheric Research
@@ -754,9 +757,9 @@
 ....BpJ......	R	Biophysical Journal
 ....BpRL.....	R	Biophysical Reviews and Letters
 ....BRASP....	J	Bulletin of the Russian Academy of Sciences, Physics
+....BRIOA....	J	Boletin Real Instituto y Observatorio de la Armada (San Fernando, Cadiz)
 ....BrJPh....	R	Brazilian Journal of Physics
 ....BRMIC....	J	Behavior Research Methods Instruments and Computers
-....BROA.....	J	Boletin Real Instituto y Observatorio de la Armada (San Fernando, Cadiz)
 ....BROGS....	J	Belgian Royal Observatory Communications Series Geophysics Series
 ....BrWK.....	J	Brennstoff Waerme Kraft
 ....BSAE.....	J	Bulletin of the Soviet Antarctic Expedition
@@ -801,6 +804,7 @@
 ....BuMat....	J	Bulletin Mathematique
 ....BuONC....	J	Bulletin of the Special Astrophysical Observatory, Northern Caucasus
 ....BuSSA....	J	The Bulletin of the Seismological Society of America
+....BuYer....	J	Bulletin of the Yerevan Astronomical Observatory
 ....BVol.....	R	Bulletin of Volcanology
 ....BVVSA....	J	Bratislava Veda Vydavatelstvo Slovenskej Akademie Vied
 ....BYam.....	J	Bulletin of the Yamagata University Yamagata Japan
@@ -1070,8 +1074,9 @@
 ....CRMat....	R	Comptes Rendus Mathematique
 ....CRMec....	R	Comptes Rendus Mecanique
 ....CRPhy....	R	Comptes Rendus Physique
+....CRPS.....	R	Cell Reports Physical Science
 ....CRSPH....	R	Compte Rendu des Seances de la Societe de Physique et d'Histoire Naturelle de Geneve
-....CRSSM....	R	Critical Reviews in Solid State & Materials Sciences
+....CRSSM....	R	Critical Reviews in Solid State & Material Sciences
 ....Cryo.....	R	Cryogenics
 ....CryRp....	R	Crystallography Reports
 ....CS&D.....	R	Computational Science and Discovery
@@ -1090,6 +1095,7 @@
 ....CSSP.....	R	Circuits Systems and Signal Processing
 ....csss.....	C	Cambridge Workshop on Cool Stars, Stellar Systems, and the Sun
 ....CST......	R	Combustion Science and Technology
+....CTBio....	R	Current Topics in Biophysics
 ....CTE......	J	Ciencias de la Tierra y del Espacio
 ....CTGeo....	R	Contemporary Trends in Geoscience
 ....CTM......	R	Combustion Theory and Modelling
@@ -1105,6 +1111,7 @@
 ....CzJPh....	R	Czechoslovak Journal of Physics
 ....CzJPS....	R	Czechoslovak Journal of Physics Supplement
 ....CzMJ.....	R	Czechoslovak Mathematical Journal
+....DAOAR....	J	Dominion Astrophysical Observatory Annual Report
 ....DatSJ....	R	Data Science Journal
 ....dchn.rept	C	Dartmouth College, Report
 ....DDA......	C	AAS/Division of Dynamical Astronomy Meeting
@@ -1254,6 +1261,7 @@
 ....EnSci....	R	Engineering and Science
 ....EnST.....	R	Environmental Science and Technology
 ....EntIS....	R	Enterprise Information Systems
+....EnTox....	R	Environmental Toxicology
 ....EnTR.....	R	Energy Technology Review
 ....Entro....	R	Entropie
 ....Entrp....	R	Entropy
@@ -1542,6 +1550,7 @@
 ....HadJS....	J	Hadronic Journal Supplement
 ....HamS.....	J	Hamburger Sternwarte Sonderdrucke
 ....HarAC....	J	Harvard College Observatory Announcement Card
+....HarAR....	J	Harvard College Observatory Annual Report
 ....HarCi....	J	Harvard College Observatory Circular
 ....HarMo....	J	Harvard Observatory Monographs
 ....HarOR....	J	Report of the Committee of the Overseers of Harvard College appointed to visit the Observatory
@@ -1620,7 +1629,7 @@
 ....IAUIB....	J	IAU Information Bulletin
 ....IAUIn....	J	IAU Commission on Instruments
 ....IAUJD....	C	IAU Joint Discussion
-....IAUS.....	C	IAU Symposium
+....IAUS.....	J	IAU Symposium
 ....IAUSS....	J	IAU Special Session
 ....IAUTA....	J	Transactions of the International Astronomical Union, Series A
 ....IAUTB....	J	Transactions of the International Astronomical Union, Series B
@@ -1858,6 +1867,7 @@
 ....InvPr....	J	Inverse Problems
 ....IonIs....	R	Ionosfernye Issledovaniia
 ....Iono.....	J	Ionosphere
+....IOPSN....	R	IOP SciNotes
 ....IORAS....	J	Anuario publicado pelo Imperial Observatorio do Rio de Janeiro Suplemento
 ....iowa.rept	C	Iowa University Progress Report
 ....IPAUC....	J	INTERKOSMOS Prague Astronomicky Ustav Ceskoslovenske Akademie Ved
@@ -1911,8 +1921,8 @@
 ....ISKZ.....	J	Issledovaniya Solntsa i Krasnykh Zvezd
 ....IsMTD....	J	Issledovaniia Mekhanike i Teploobmenu Dvukhfaznykh Sred
 ....ISNL.....	J	Information Systems Newsletter
-....ISPAn....	J	ISPRS Annals of Photogrammetry, Remote Sensing and Spatial Information Sciences
-....ISPAr....	J	ISPRS - International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences
+....ISPAn....	R	ISPRS Annals of Photogrammetry, Remote Sensing and Spatial Information Sciences
+....ISPAr....	R	ISPRS - International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences
 ....ISPL.....	R	IEEE Signal Processing Letters
 ....ISPM.....	R	IEEE Signal Processing Magazine
 ....ISRAA....	R	ISRN Astronomy and Astrophysics
@@ -2384,6 +2394,7 @@
 ....JPCA.....	R	Journal of Physical Chemistry A
 ....JPCB.....	R	Journal of Physical Chemistry B
 ....JPCM.....	R	Journal of Physics Condensed Matter
+....JPCom....	R	Journal of Physics: Complexity
 ....JPCRD....	R	Journal of Physical and Chemical Reference Data
 ....JPCS.....	R	Journal of Physics and Chemistry of Solids
 ....JPDC.....	R	Journal of Parallel and Distributed Computing
@@ -2397,6 +2408,7 @@
 ....JPhA.....	R	Journal of Physics A Mathematical General
 ....JPhB.....	R	Journal of Physics B Atomic Molecular Physics
 ....JPhC.....	R	Journal of Physics C Solid State Physics
+....JPhCB....	R	Journal of Physical Chemistry B
 ....JPhCh....	R	Journal of Physical Chemistry
 ....JPhCo....	R	Journal of Physics Communications
 ....JPhCS....	C	Journal of Physics Conference Series
@@ -2517,6 +2529,7 @@
 ....JSSat....	R	Journal of Small Satellites
 ....JSSCh....	R	Journal of Solid State Chemistry France
 ....JSSED....	R	IEE Journal of Solid-State Electron Devices
+....JSSS.....	R	Journal of Sensors and Sensor Systems
 ....JSSST....	R	Journal of Solid State Science and Technology
 ....JStA.....	R	Journal of Strain Analysis and Engineering Design
 ....JSTEd....	R	Journal of Science Teacher Education
@@ -2760,6 +2773,7 @@
 ....MeAut....	R	Meres es Automatika
 ....Mecc.....	R	Meccanica
 ....MecEn....	R	Mechanical Engineering
+....MecSc....	R	Mechanical Sciences
 ....MecSM....	R	Mechanics of Soft Materials
 ....MedPh....	R	Medical Physics
 ....MEdRJ....	R	Mathematics Education Research Journal
@@ -2774,6 +2788,7 @@
 ....MekKM....	R	Mekhanika Kompozitnykh Materialov
 ....MekP.....	R	Mekhanika Polimerov
 ....MekTT....	R	Mekhanika Tverdogo Tela
+....MelAR....	J	Melbourne Observatory Annual Reports
 ....MeLeu....	J	Mededelingen van het Astronomisch Instituut van de Katholieke Universiteit Leuven
 ....MelOO....	J	Melbourne Observatory Observations
 ....MeLuF....	J	Meddelanden fran Lunds Astronomiska Observatorium Serie I
@@ -2872,6 +2887,7 @@
 ....MiPot....	J	Mitteilungen des Astrophysikalischen Observatoriums Potsdam
 ....MiPul....	J	Mitteilungen der Nikolai-Hauptsternwarte zu Pulkowo
 ....MiRe.....	R	Microelectronics Reliability
+....Mirro....	J	The Mirror
 ....MiSon....	J	Mitteilungen der Sternwarte zu Sonneberg
 ....MisSp....	R	Missiles Spacecraft
 ....MISST....	J	Moscow Izdatel Sviaz Statisticheskaia Teoriia sviazi
@@ -3042,11 +3058,13 @@
 ....NanoR....	R	Nanoscale Reports
 ....Nanos....	R	Nanoscale
 ....Nanot....	R	Nanotechnology
+....NanRe....	R	Nanoscale Research
 ....Nansp....	R	Nanospectroscopy
 ....NanSy....	R	Nanoelectromechanical Systems
 ....Nanth....	R	Nanothermoelectrics
 ....NapCo....	J	Osservatorio Astronomico di Capodimonte Napoli Contributi Astronomici
 ....NaPho....	R	Nature Photonics
+....NaRes....	R	Nano Research
 ....nasa..crs	C	NASA Contractor Report Series
 ....nasa..tms	C	NASA Technical Memorandum Series
 ....nasa.rept	C	National Aeronautics and Space Administration Report
@@ -3335,6 +3353,7 @@
 ....oxun.rept	C	Oxford Univ Report
 ....P&SS.....	R	Planetary and Space Science
 ....PA.......	R	Popular Astronomy
+....PAAAS....	R	Proceedings of the American Academy of Arts and Sciences
 ....PAAS.....	C	Publications of the American Astronomical Society
 ....PAASR....	C	Polish Amateur Astronomical Society - The Astronomical Reports
 ....PAB......	J	Publications of The Astrophysics Branch Ottawa
@@ -3435,7 +3454,6 @@
 ....PhaTr....	R	Phase Transitions, A Multinational Journal
 ....PhB......	R	Physics Bulletin
 ....PhBio....	R	Physical Biology
-....PhChE....	R	Physics and Chemistry of Earth
 ....PhChH....	R	PhysicoChemical Hydrodynamics
 ....PhDT.....	R	Ph.D. Thesis
 ....PhFl.....	R	Physics of Fluids
@@ -3745,6 +3763,7 @@
 ....QuIP.....	R	Quantum Information Processing
 ....QuOpt....	R	Quantum Optics
 ....QuRes....	R	Quaternary Research
+....QuSOp....	R	Quantum and Semiclassical Optics
 ....R&QE.....	R	Radiophysics and Quantum Electronics
 ....RA.......	R	Ricerche Astronomiche
 ....RAA......	R	Research in Astronomy and Astrophysics
@@ -3869,6 +3888,7 @@
 ....RRP......	J	Research Reports in Physics
 ....RRPRA....	R	Russian Radio Physics and Radio Astronomy
 ....RSAI.....	C	Riunione della Societa Astronomica Italiana
+....RSCAd....	R	RSC Advances
 ....RScEd....	R	Research in Science Education
 ....RScI.....	R	Review of Scientific Instruments
 ....RSCT.....	J	Transactions of the Royal Society of Canada
@@ -3991,6 +4011,7 @@
 ....SCoA.....	R	Smithsonian Contributions to Astrophysics
 ....SCoK.....	J	Smithsonian Contributions to Knowledge
 ....SCPMA....	R	Science China Physics, Mechanics, and Astronomy
+....ScPA.....	R	SciPost Astronomy
 ....ScPP.....	R	SciPost Physics
 ....ScPPL....	R	SciPost Physics Lecture Notes
 ....ScPPP....	R	SciPost Physics Proceedings
@@ -4566,6 +4587,7 @@
 ....wfpc.rept	J	Space Telescope WFPC2 Instrument Science Report
 ....WiEn.....	R	Wind Energy
 ....WiEng....	R	Wind Engineering
+....WiEnS....	R	Wind Energy Science
 ....WinAR....	J	Annual Report of the Windsor Observatory, New South Wales
 ....WisBB....	J	Monatsber. Deutsch. Akad Wissenschaftliche Berlin 
 ....WisBT....	J	Wissenschaftliche Berichte AEG Telefunken
@@ -5678,6 +5700,11 @@
 1974amst.iafc	C	Amsterdam International Astronautical Federation Congress
 1974apoi.conf	C	Astrophysics. Part A: Optical and Infrared
 1974asgr.proc	C	Astrophysics and Gravitation
+1974ASIB....3	C	Photon Correlation and Light Beating Spectroscopy
+1974ASIC....6	C	The Interstellar Medium
+1974ASIC....7	C	Group Theory in Non-Linear Problems
+1974ASIC....9	C	Scattering Theory in Mathematical Physics
+1974ASIC...10	C	ELF-VLF Radio Wave Propogation
 1974asme.meet	C	American Society of Mechanical Engineers, Winter Annual Meeting
 1974ASSL...42	C	Correlated Interplanetary and Magnetospheric Observations
 1974ASSL...43	C	X-ray Astronomy
@@ -5719,7 +5746,6 @@
 1974esr..nasa	C	Equipment for Space Research
 1974esrs.conf	C	European Sounding-Rocket and Scientific-Balloon Activity at High Latitudes
 1974eumw.conf	C	4th European Microwave Conference
-1974evrw.conf	C	ELF-VLF Radio Wave Propogation
 1974exgr.conf	C	Experimental Gravitation
 1974fimc.conf	C	Flow: Its measurement and control in science and industry
 1974fisv.book	C	Flow-induced structural vibrations
@@ -5731,8 +5757,6 @@
 1974gpe..conf	C	Geodesy and Physics of the Earth
 1974gra..conf	C	Galaxies and Relativistic Astrophysics
 1974gru..conf	C	Geod. Raboty na Urale. Sverdlovsk
-1974gtnl.conf	C	NATO ASIC Proc. 7: Group Theory in Non-Linear Problems
-1974gtnp.conf	C	Group Theory in Non-Linear Problems
 1974gwr..conf	C	Gravitational Waves and Radiations
 1974gydy.proc	C	Gyrodynamics
 1974hcft.conf	C	In honor of Carlo Ferrari
@@ -5773,7 +5797,6 @@
 1974imra.conf	C	Infrared and Millimeter Range Astronomy
 1974inas.conf	C	Instrumentation in Astronomy II
 1974inbe.conf	C	In the beginning
-1974inme.conf	C	The Interstellar Medium
 1974iovi.conf	C	Issled. Obl. F i Vnesh. Ionosfery
 1974ips..symp	C	9th International Power Sources Symposium Committee
 1974iran.conf	C	4th Iranian Congress of Electrical Engineering, Volume 2
@@ -5827,7 +5850,6 @@
 1974oroa.conf	C	Optimization of the Reduction of Observations of Artificial Earth Satellites and Time
 1974osa..meet	C	Optical Propagation through Turbulence
 1974papp.book	C	Problems in Astrophysics and the Physics of Planetary Atmospheres
-1974pclb.conf	C	NATO ASIB Proc. 3: Photon Correlation and Light Beating Spectroscopy
 1974pcp..conf	C	Problems of Cosmic Physics. Vypusk 9
 1974pes..conf	C	Power Electronics Specialists Conference
 1974phas.book	C	The Physics of Hydrogenated Amorphous Silicon I: Structure, Preparation, and Devices
@@ -5888,7 +5910,6 @@
 1974spop.conf	C	Space Optics
 1974spre.conf	C	Space Research XIV
 1974spre.meet	C	Space research XIV
-1974stmp.conf	C	Scattering Theory in Mathematical Physics
 1974stp.....1	C	Solar-Terrestrial Physics, Volume 1
 1974stp.....2	C	Solar-Terrestrial Physics, Volume 2
 1974stp.....3	C	Solar-Terrestrial Physics
@@ -5916,7 +5937,7 @@
 1974zlms.nasa	C	Basic Models for Interpretation of Zodiacal Light Measures and Light Scattering by Dust Particles of Different Shapes
 1975aasc.conf	C	Antennas for Aircraft and Spacecraft
 1975abnc.conf	C	The 500th Anniversary of the Birth of Nicholas Copernicus
-1975acge...20	C	Advances in Cryogenic Engineering. Volume 20
+1975ACGE...20	C	Advances in Cryogenic Engineering. Volume 20
 1975acmp.proc	C	Advances in Computer Methods for Partial Differential Equations
 1975acmw.work	C	Active Microwave Workshop Report
 1975acoc.nasa	C	Acoustics of the Ocean
@@ -5938,6 +5959,8 @@
 1975asdm.proc	C	Active semiconductor devices for microwaves and integrated optics
 1975ase..proc	C	Application of solar energy
 1975asge.conf	C	Astronomy and Geodesy Vypusk 5
+1975ASIC...14	C	Origin of Cosmic Rays
+1975ASIC...21	C	Structure and Evolution of Galaxies
 1975aso..conf	C	Conference on Scientific Research by Artificial Satellites Observations
 1975aspg.meet	C	41st American Society of Photogrammetry Annual Meeting
 1975ASSL...48	C	Neutron Stars, Black Holes and Binary X-ray Sources
@@ -6087,7 +6110,6 @@
 1975NYASA.257	C	Role of Magnetic Fields in Physics and Astrophysics
 1975NYASA.262	C	Seventh Texas Symposium on Relativistic Astrophysics
 1975oams.conf	C	Optical Astronomy with Moderate Size Telescopes
-1975ocr..proc	C	NATO ASIC Proc. 14: Origin of Cosmic Rays
 1975odka.conf	C	Opredelenie Dvizheniya Kosmich. Apparatov. Moskva
 1975oedp.book	C	Optical and Electrooptical Data Processing
 1975oopg.conf	C	Optical Observing Programs on Galactic Structure and Dynamics
@@ -6142,7 +6164,6 @@
 1975scea.conf	C	The Solar Constant and the Earth's Atmosphere
 1975sece.conf	C	Space Exploration: Conversion and Exploitation of Solar Energy
 1975see..rept	C	Solar Energy for Earth: An AIAA assessment
-1975seg..conf	C	NATO ASIC Proc. 21: Structure and Evolution of Galaxies
 1975sens.meet	C	Society of Engineering Science, 12th Annual Meeting
 1975snms.conf	C	Sb. Nauch.-Metod. Statej po Teor. Mekh
 1975soam.proc	C	Symposium on Optical and Acoustical Micro-Electronics
@@ -6222,6 +6243,8 @@
 1976arm..symp	C	Annual Reliability and Maintainability Symposium
 1976arsa.conf	C	Arbeiten zur Satellitengeod&auml;sie
 1976asex.conf	C	Astronomia Extragalactica
+1976ASIC...26	C	Long-Time Predictions in Dynamics
+1976ASIC...28	C	The Physics of Non-Thermal Radio Sources
 1976asme.meet	C	ASME Numerical/Laboratory Computer Methods in Fluid Mechanics
 1976aspg.meet	C	American Society of Photogrammetry, 42nd Annual Meeting
 1976ASSL...58	C	Magnetospheric Particles and Fields
@@ -6380,8 +6403,6 @@
 1976LPICo.262	C	Comparisons of Mercury and the Moon
 1976lsam.book	C	Laser Spectroscopy of Atoms and Molecules
 1976lsam.conf	C	Laser Spectroscopy of Atoms and Molecules
-1976ltpd.conf	C	Long-time Prediction in Dynamics
-1976ltpd.proc	C	Long-Time Predictions in Dynamics
 1976mgpa.proc	C	Magnetospheric Particles and Fields
 1976mhtm.rept	C	Methods for Heat Transfer Measure
 1976mmcm.conf	C	Mathematical Methods in Celestial Mechanics
@@ -6425,7 +6446,6 @@
 1976pmas.conf	C	Physique des Mouvements dans les Atmospheres
 1976pmp..book	C	Physics of the Moon and Planets
 1976pmpt.conf	C	Problems of Meteoritics. The problem of the Tunguska Meteorite
-1976pntr.conf	C	NATO ASIC Proc. 28: The Physics of Non-Thermal Radio Sources
 1976poso.symp	C	27th Power Sources Symposium
 1976ppt..book	C	Problems in Plasma Theory
 1976prgr.conf	C	Probl. Gravitatsii. Tbilisi
@@ -6552,6 +6572,8 @@
 1977apee.rept	C	ATS-6 Propagation Expts. in Europe
 1977apul....7	C	Practical Alternatives to Present Urban Life
 1977arm..symp	C	Annual Reliability and Maintainability Symposium
+1977ASIB...27	C	Topics in Theoretical and Experimental Gravitation Physics
+1977ASIC...35	C	Dynamical and Chemical Coupling Between the Neutral and Ionized Atmosphere
 1977aska.rept	C	Astronomiskais Kalendars 1978
 1977asme.proc	C	Noise and Fluids Engineering
 1977asob.conf	C	Conf&eacute;rences d'Astronomie de l'Observatoire
@@ -6598,7 +6620,6 @@
 1977ctao.rept	C	Calendar of the Tartu Astronomical Observatory for the year 1978
 1977ctep.conf	C	Cretaceous-Tertiary Extinctions and Possible Terrestrial and Extraterrestrial Causes
 1977davs.conf	C	2nd Digital Avionics Systems Conference
-1977dccb.conf	C	NATO ASIC Proc. 35: Dynamical and Chemical Coupling Between the Neutral and Ionized Atmosphere
 1977deco.conf	C	16th Conference on Decision and Control
 1977dglr.meet	C	Deutsche Gesellschaft fuer Luft- und Raumfahrt
 1977dpas.book	C	Dynamics and Physics of Astrophysical Systems
@@ -6855,7 +6876,6 @@
 1977tras.conf	C	O Telesc&oacute;pio Refractor e a Astrometria ao Servi&ccedil;o das Estrelas Duplas
 1977tsct.rept	C	Measurement Technology in Transonic and Supersonic Cascades and Turbomachines
 1977tsf.....1	C	Symposium on Turbulent Shear Flows
-1977tteg.conf	C	NATO ASIB Proc. 27: Topics in Theoretical and Experimental Gravitation Physics
 1977tubc.rept	C	Contributions on Transport Phenomena in Fluid Mechanics and Related Topics
 1977tuli.proc	C	Turbulence in Liquids
 1977turb.book	C	Handbook of Turbulence. Volume 1 - Fundamentals and Applications
@@ -6869,7 +6889,7 @@
 1977xri..conf	C	X-ray Imaging
 1977xro..book	C	X-Ray Optics: Applications to Solids
 1977xros.conf	C	X-Ray Optics: Applications to Solids
-1978acge...23	C	Advances in Cryogenic Engineering. Volume 23
+1978ACGE...23	C	Advances in Cryogenic Engineering. Volume 23
 1978acme.conf	C	Symposium on Applications of Computer Methods in Engineering
 1978act..conf	C	Applications of Cryogenic Technology
 1978aeas.conf	C	Atmospheric Environment of Aerospace Systems and Applied Meteorology
@@ -6912,6 +6932,8 @@
 1978apuo.conf	C	Avtomatiz. Protsessov Upr. i Obrab. Inf. Leningrad
 1978arm..symp	C	Annual Reliability and Maintainability Symposium
 1978ascs.rept	C	Advanced Satellite Communication Systems using the 20 to 30 GHz Bands
+1978ASIB...36	C	Strongly Coupled Plasmas
+1978ASIC...38	C	Infrared Astronomy
 1978aska.rept	C	Astronomiskais Kalendars 1979
 1978asoe.proc	C	Aerial and spaceborne observations of the earth: Computer processing of video data
 1978aspg.meet	C	American Society of Photogrammetry, Fall Technical Meeting
@@ -7019,7 +7041,6 @@
 1978iht.....5	C	6th International Heat Transfer Conference, Volume 5
 1978iht.....6	C	6th International Heat Transfer Conference, Volume 6
 1978iig..book	C	Instruments for Inertial Gravimetry
-1978infa.proc	C	NATO ASIC Proc. 38: Infrared Astronomy
 1978inov.conf	C	INOVA: Industrial Innovation
 1978insp.proc	C	The Industrialization of Space
 1978ipip.symp	C	Image Processing - Interactions with Photogrammetry and Remote Sensing
@@ -7146,7 +7167,6 @@
 1978sbc..conf	C	Sistemas Bin&aacute;rios Cerrados (Close Binary Systems)
 1978scha.conf	C	Solar Cooling and Heating: Architectural, Engineering, and Legal Aspects
 1978scia.conf	C	Structure and Collisions of Ions and Atoms
-1978scp..conf	C	NATO ASIB Proc. 36: Strongly Coupled Plasmas
 1978scp..rept	C	Strongly Coupled Plasmas
 1978seam.proc	C	17th Symposium on the Engineering Aspects of Magnetohydrodynamics
 1978semc.rept	C	Spacecraft Electromagnetic Compatibility
@@ -7247,6 +7267,8 @@
 1979apsi.conf	C	Ap-Stars in the Infrared
 1979apuo.conf	C	Avtomatiz. Protsessov Upr. i Obrab. Inf.
 1979asan.book	C	Astronomy of the Ancients
+1979ASIB...44	C	Recent Developments in Gravitation
+1979ASIC...47	C	Instabilities in Dynamical Systems. Applications to Celestial Mechanics
 1979asmm.conf	C	Astron. Metodol. Mirovozzrenie. Moskva
 1979ASSL...74	C	Wave Instabilities in Space Plasmas
 1979ASSL...75	C	Stars and star systems
@@ -7353,7 +7375,6 @@
 1979ICRC...16	C	16th International Cosmic Ray Conference (ICRC16)
 1979icrm.conf	C	Interaction of Cosmic Rays with Matter
 1979idpu.book	C	Investigation of Dynamic Processes in the Upper Atmosphere
-1979idsa.conf	C	NATO ASIC Proc. 47: Instabilities in Dynamical Systems. Applications to Celestial Mechanics
 1979iece.conf	C	14th Intersociety Energy Conversion Engineering Conference
 1979ieee.conf	C	AUTOTESTCON '79
 1979igsg.conf	C	Isolated Gravitating Systems in General Relativity
@@ -7482,7 +7503,6 @@
 1979pvse.conf	C	2nd Photovoltaic Solar Energy Conference
 1979RA......9	C	IAU Colloq. 47: Spectral Classification of the Future
 1979rarl.conf	C	Reunion Astronomica Regional Latinoamericana
-1979rdg..conf	C	NATO ASIB Proc. 44: Recent Developments in Gravitation
 1979rdte.book	C	Recent Developments in Theoretical and Experimental Fluid Mechanics: Compressible and Incompressible Flows
 1979recy.conf	C	Recycling Berlin '79
 1979rela.conf	C	Relativity, Quanta and Cosmology in the Development of the Scientific Thought of Albert Einstein
@@ -7587,7 +7607,7 @@
 1979xras.proc	C	X-ray Astronomy
 1979xrgr.conf	C	X-ray and Gamma-ray Astronomy in the 1980's
 1980aars.conf	C	Astronomy. Automatic Registration of Star Transit Moments
-1980acge...25	C	Advances in Cryogenic Engineering. Volume 25
+1980ACGE...25	C	Advances in Cryogenic Engineering. Volume 25
 1980acim.conf	C	Acoustical Imaging. Volume 9 - Visualization and characterization
 1980aeac.book	C	Aeroacoustics
 1980aeew.proc	C	Acoustic, Electromagnetic and Elastic Wave Scattering - Focus on the T-Matrix Approach
@@ -7604,7 +7624,6 @@
 1980AIPC...63	C	Supernovae Spectra
 1980AIPC...64	C	Laboratory EXAFS Facilities
 1980AIPC...65	C	Optics in Four Dimensions-1980
-1980ampc.conf	C	NATO ASIB Proc. 53: Atomic and Molecular Processes in Controlled Thermonuclear Fusion
 1980aooe....6	C	Applied Optics and Optical Engineering, Volume VI
 1980aooe....8	C	Applied Optics and Optical Engineering, Volume VIII
 1980aovh.conf	C	Atmospheric Ozone and its Variation and Human Influences
@@ -7616,6 +7635,9 @@
 1980asdy.conf	C	Astrodynamics
 1980asfr.symp	C	The Ancient Sun: Fossil Record in the Earth, Moon and Meteorites
 1980asi..nasa	C	Astron. Soc. Inform.
+1980ASIB...53	C	Atomic and Molecular Processes in Controlled Thermonuclear Fusion
+1980ASIB...58	C	Cosmology and Gravitation: Spin, Torsion, Rotation, and Supergravity
+1980ASIC...60	C	X-Ray Astronomy
 1980asme.conf	C	American Society of Mechanical Engineers, Energy Technology Conference and Exhibition
 1980asme.symp	C	20th Anniversary of Fluidics Symposium
 1980aspg.meet	C	American Society of Photogrammetry, 46th Annual Meeting
@@ -7634,7 +7656,6 @@
 1980cchf.nasa	C	Contributions to the Colloquium on High Frequency Technology in Aerospace Res.
 1980ceht.conf	C	American Society of Mechanical Engineers and American Institute of Chemical Engineers, Joint National Heat Transfer Conference
 1980cfpp.conf	C	9th European Conference on Controlled Fusion and Plasma Physics
-1980cgst.conf	C	NATO ASIB Proc. 58: Cosmology and Gravitation: Spin, Torsion, Rotation, and Supergravity
 1980char.rept	C	On Climatology, Hydrology, Atmospheric Research and Meteorology (CHARM) from Space
 1980cilu.conf	C	Century 2 International Lubrication Conference
 1980cmes.rept	C	Cooperation Mediterraneenne pour l'Energie Solaire
@@ -7948,7 +7969,6 @@
 1980wien.work	C	Wind Energy Workshop
 1980wip..conf	C	International Conference on Plasma Physics; Kiev International Conference on Plasma Theory
 1980wmo..rept	C	In WMO  Orographic Effects in Planetary Flows
-1980xras.proc	C	NATO ASIC Proc. 60: X-Ray Astronomy
 1981aao..conf	C	Automation of Astronomical Observations
 1981abe..symp	C	5th International Symposium on Air Breathing Engines
 1981aes.....1	C	Alternative energy sources II, Volume 1
@@ -7986,6 +8006,9 @@
 1981apns.conf	C	Atomic Physics at the National Synchrotron Light Source
 1981aram.conf	C	Archaeoastronomy in the Americas
 1981asge.conf	C	Astronomical Geodynamics
+1981ASIB...75	C	Nonlinear Phenomena in Physics and Biology
+1981ASIC...68	C	Solar Phenomena in Stars and Stellar Systems
+1981ASIC...69	C	Photometric and Spectroscopic Binary Systems
 1981asin.book	C	Astrometric investigations
 1981asme.rept	C	ASME Solar Eng., 1981
 1981asph.conf	C	Astronomical Photography 1981
@@ -8143,7 +8166,6 @@
 1981nmht.book	C	Numerical Methods in Heat Transfer
 1981nmlt.proc	C	Numerical Methods in Laminar and Turbulent Flow
 1981nmtp.conf	C	Numerical Methods in Thermal Problems
-1981nppb.conf	C	NATO ASIB Proc. 75: Nonlinear Phenomena in Physics and Biology
 1981nssy.book	C	The New Solar System
 1981ntc.....1	C	NTC '81; National Telecommunications Conference, Volume 1
 1981ntc.....2	C	NTC '81; National Telecommunications Conference, Volume 2
@@ -8184,7 +8206,6 @@
 1981ppm..conf	C	Physics of Planetary Magnetospheres
 1981prao.rept	C	Problems of Atmospheric Optics
 1981psar.book	C	The Problem of Sun-Atmosphere Relationships: Sun-Atmosphere Experiment of 1976
-1981psbs.conf	C	Photometric and Spectroscopic Binary Systems
 1981psec.book	C	The Problem of the Search for Extraterrestrial Civilizations
 1981psrd.proc	C	Power sources 8: Research and development in non-mechanical electrical power sources
 1981pszs.conf	C	Probl. Soln.-Zemn. Svyazej. Dokl. Simpoz. KAPG, Ashkhabad
@@ -8262,7 +8283,6 @@
 1981spma.proc	C	Space manufacturing 4
 1981spod.conf	C	Satellite Perturbations and Orbital Determination
 1981sppt.rept	C	11th Czechoslovak Seminar on Plasma Physics and Technology
-1981spss.conf	C	NATO ASIC Proc. 68: Solar Phenomena in Stars and Stellar Systems
 1981spte.conf	C	Spectrometric Techniques, Volume II
 1981srca.conf	C	Southwest Regional Conference for Astronomy and Astrophysics, 6
 1981ssa..conf	C	Shanghai Symposium on Astrometry
@@ -8313,7 +8333,7 @@
 1982aafo.conf	C	Atmospheric Aerosols: Their Formation, Optical Properties, and Effects
 1982aasm.nasa	C	Advanced Automation for Space Missions
 1982ac...proc	C	Astrophysical Cosmology Proceedings
-1982acge...27	C	Advances in Cryogenic Engineering
+1982ACGE...27	C	Advances in Cryogenic Engineering, Volume 27
 1982acp..book	C	Astrophysics and Cosmic Physics
 1982aepc.rept	C	Atmospheric Effects and Potential Climatic Impact of the 1980 Eruptions of Mt. St. Helens
 1982aesc.proc	C	A Collection of Papers in the Aerospace Sciences
@@ -8336,8 +8356,6 @@
 1982akfm.conf	C	Astrofiz. Kosm. Fiz.
 1982alaf.symp	C	Applications of Laser-Doppler Anemometry to Fluid Mechanics
 1982als1.conf	C	Advances in Laser Spectroscopy, Volume 1
-1982amct.conf	C	NATO ASIB Proc. 71: Atomic and Molecular Collision Theory
-1982amdc.proc	C	NATO ASIC Proc. 82: Applications of Modern Dynamics to Celestial Mechanics and Astrodynamics
 1982anap.symp	C	Antenna Applications Symposium
 1982ang..proc	C	Active Nuclei of Galaxies
 1982ange.conf	C	6th Annual Geothermal Conference and Workshop
@@ -8353,6 +8371,11 @@
 1982asas.conf	C	Astronomy and Astrophysics for the 1980's
 1982asd..conf	C	Proc. Papers of the 2nd AFSC Avionics Standardization Conference
 1982asdy.conf	C	Astrodynamics 1981
+1982ASIB...71	C	Atomic and Molecular Collision Theory
+1982ASIC...82	C	Applications of Modern Dynamics to Celestial Mechanics and Astrodynamics
+1982ASIC...85	C	The Comparative Study of the Planets
+1982ASIC...90	C	Supernovae: A Survey of Current Research
+1982ASIC...97	C	The Origin and Evolution of Galaxies
 1982ASSL...92	C	IAU Colloq. 67: Instrumentation for Astronomy with Large Optical Telescopes
 1982ASSL...93	C	Regions of Recent Star Formation
 1982ASSL...94	C	IAU Colloq. 63: High-Precision Earth Rotation and Earth-Moon Dynamics: Lunar Distances and Related Observations
@@ -8388,7 +8411,6 @@
 1982cren.conf	C	Cryogenic Engineering Conference
 1982cris.book	C	Cosmic Rays in Interplanetary Space and the Earth's Ionosphere
 1982crre.proc	C	In CRREL Proc. of the 3d Intern. Symp. on Ground Freezing
-1982csp..proc	C	NATO ASIC Proc. 82: The Comparative Study of the Planets
 1982cstp.conf	C	Control Science and Technology for the Progress of Society
 1982ctfc.conf	C	Conference on Complex Turbulent Flows
 1982ctip.conf	C	Convective Transport and Instability Phenomena
@@ -8529,7 +8551,6 @@
 1982nspp.conf	C	National Symposium on Plasma Physics
 1982ntc..conf	C	NTC '82; National Telesystems Conference
 1982obvf.conf	C	Observational Basis for Velocity Fields in Stellar Atmospheres
-1982oeg..proc	C	The Origin and Evolution of Galaxies
 1982omsd.conf	C	Optimization Methods in Structural Design
 1982oras.rept	C	Optical and Radio Astrometric Sources and Inertial Reference Frames
 1982pari.iafc	C	Paris International Astronautical Federation Congress
@@ -8615,7 +8636,6 @@
 1982srca.conf	C	Southwest Regional Conference for Astronomy and Astrophysics, 7
 1982srs..work	C	Solar Radio Storms, CESRA Workshop #4
 1982srt..conf	C	6th Sounding Rocket Conference
-1982sscr.conf	C	NATO ASIC Proc. 90: Supernovae: A Survey of Current Research
 1982ssig.conf	C	IXth Vses. Simp. po Stabil. Izot. v Geokhim.
 1982sspf.conf	C	Solar System Plasmas and Fields
 1982sthm.book	C	Structure of turbulence in heat and mass transfer
@@ -8669,15 +8689,20 @@
 1983AIPC..103	C	Quantum Fluids and Solids-1983
 1983AIPC..104	C	Physics, Technology, and the Nuclear Arms Race
 1983AIPC..105	C	Physics of High Energy Particle Accelerators-1982
-1983als..conf	C	NATO ASIB Proc. 95: Advances in Laser Spectroscopy
 1983als2.conf	C	Advances in Laser Spectroscopy, Volume 2
 1983anme....8	C	Antarctic Meteorites VIII
 1983aooe....9	C	Applied Optics and Optical Engineering. Volume 9
-1983aphi.conf	C	NATO ASIB Proc. 96: Atomic Physics of Highly Ionized Atoms
 1983app..conf	C	Advances in Photoelectric Photometry, Vol. 1.
 1983appw.conf	C	Antiproton Proton Physics and the W Discovery
 1983apum.conf	C	Saas-Fee Advanced Course 13: Astrophysical Processes in Upper Main Sequence Stars
 1983arp..book	C	Asymptotic Realms of Physics
+1983ASIB...83	C	Physics of Ion-Ion and Electron-Ion Collisions
+1983ASIB...87	C	Relativistic Effects in Atoms, Molecules, and Solids
+1983ASIB...95	C	Advances in Laser Spectroscopy
+1983ASIB...96	C	Atomic Physics of Highly Ionized Atoms
+1983ASIB..103	C	Fundamental Processes in Energetic Atomic Collisions
+1983ASIC..107	C	Composition and Origin of Cosmic Rays
+1983ASIC..110	C	Diffuse Matter in Galaxies
 1983asmm.work	C	Astronomical Measuring Machines Workshop
 1983asph.conf	C	Astrophysics and Space Physics (High-Energy Astrophysics and Cosmogony)
 1983ASSL..100	C	Kinematics, Dynamics and Structure of the Milky Way
@@ -8709,7 +8734,6 @@
 1983clss.work	C	Nat. Charging of Large Space Structures in Near Earth Polar Orbit
 1983clun.proc	C	Clustering in the Universe
 1983coae.conf	C	4th Computers in Aerospace Conference
-1983cocr.proc	C	NATO ASIC Proc. 107: Composition and Origin of Cosmic Rays
 1983code.work	C	Proc. of the 1983 DPF Workshop on Collider Detectors
 1983coex....1	C	Cometary Exploration
 1983coex....2	C	Cometary Exploration, Volume 2
@@ -8722,7 +8746,6 @@
 1983csds.rept	C	Charge States and Dyn. Screening of Swift Ions in Solids
 1983cvet.conf	C	Commemorative Volume on the Occasion of Erik Tengstr&ouml;m's 70th Birthday
 1983deme...12	C	Developments in Mechanics. Volume 12
-1983dmg..proc	C	NATO ASIC Proc. 110: Diffuse Matter in Galaxies
 1983dmhd.work	C	Workshop on 3-D MHD Simulation
 1983dnpc.conf	C	Dialektika v Nauk. o Prir. i Cheloveke. Tr. 3 Vses. Soveshch. po Filos. Vopr. Sovrem. Estestvozn.
 1983dnws.proc	C	Data Networks with Satellites
@@ -8746,7 +8769,6 @@
 1983fepm.rept	C	Fachinformationszentrum fuer Energie, Phys., Math. GmbH Inform. Package on Photovoltaics
 1983flrs.rept	C	Flames, Lasers, and Reactive Systems
 1983fpdy.conf	C	16th Fluid and Plasma Dynamics Conference
-1983fpea.conf	C	NATO ASIB Proc. 103: Fundamental Processes in Energetic Atomic Collisions
 1983fpsa.proc	C	Flat-Plate Solar Array Res. Forum on Photovoltaic Metallization Systems
 1983fubl.rept	C	Fondazione Ugo Bordoni  Land Mobile Radio Services:  Acts of the 2nd Conv.
 1983gatu.conf	C	28th International Gas Turbine Conference and Exhibit
@@ -8860,7 +8882,6 @@
 1983phse.proc	C	Passive and Hybrid Solar Energy Update
 1983pig..conf	C	Phenomena in Ionized Gases, XVI International Conference, Invited Papers
 1983pig1.conf	C	Phenomena in Ionized Gases, XVI International Conference, Volume 1
-1983piie.conf	C	NATO ASIB Proc. 83: Physics of Ion-Ion and Electron-Ion Collisions
 1983pmge.conf	C	Precision Measurement and Gravity Experiment
 1983ppdr.book	C	Problems in Present-Day Radio Technology and Electronics
 1983ppes.conf	C	PESC '83; 14th Annual Power Electronics Specialists Conference
@@ -8884,7 +8905,6 @@
 1983rcc..work	C	Range Commanders Council  Twelfth Transducer Workshop
 1983rcgs.nasa	C	Refrig. for for Cryogenic Sensors
 1983rctm.proc	C	Relativity, Cosmology, Topological Mass and Supergravity; SILARG IV
-1983ream.conf	C	NATO ASIB Proc. 87: Relativistic Effects in Atoms, Molecules, and Solids
 1983reg..conf	C	Rotation of the Earth and Geodynamics
 1983rocb.conf	C	Relativistic Objects in Close Binary Systems
 1983royc.conf	C	Reports on Observations made in Yunnan, China on the Total Solar Eclipse of February 16, 1980
@@ -8990,7 +9010,7 @@
 1984aacp....2	C	Applied Atomic Collision Physics, Volume 2: Plasmas
 1984aars.conf	C	Archaeoastronomy and the Roots of Science
 1984abas.symp	C	Airborne Astronomy Symposium
-1984acge...29	C	Advances in Cryogenic Engineering
+1984ACGE...29	C	Advances in Cryogenic Engineering, Volume 29
 1984acm..proc	C	Asteroids, Comets, Meteors
 1984adas.conf	C	L'Avenir des Donn&eacute;es Astronomiques Non Stellaires
 1984aeap.conf	C	Aerospace Applications Conference
@@ -9033,6 +9053,8 @@
 1984aprm.conf	C	Second Asian-Pacific Regional Meeting on Astronomy
 1984army.rept	C	Army Materials and Mechanics Research Center Proc. of the Ion Implantation for Army Needs Workshop
 1984asdy.conf	C	Astrodynamics 1983
+1984ASIC..117	C	Formation and Evolution of Galaxies and Large Structures in the Universe
+1984ASIC..134	C	Problems of Collapse and Numerical Relativity
 1984asmd.conf	C	Astronomical Microdensitometry Conference
 1984asph.conf	C	Astronomical Photography 1984
 1984ASSL..108	C	Galactic and Extragalactic Infrared Spectroscopy
@@ -9094,7 +9116,6 @@
 1984eyra.book	C	The Early Years of Radio Astronomy - Reflections Fifty Years after Jansky's Discovery
 1984faa..conf	C	Frontiers of Astronomy and Astrophysics
 1984fdpd.conf	C	17th Fluid Dynamics, Plasma Dynamics, and Lasers Conference
-1984fegl.proc	C	NATO ASIC Proc. 117: Formation and Evolution of Galaxies and Large Structures in the Universe
 1984ffp..conf	C	Frontiers of Fundamental Physics
 1984fiue.rept	C	Future of Ultraviolet Astronomy Based on Six Years of IUE Research
 1984fnad.proc	C	19th Finnish Astronomers' Days
@@ -9221,7 +9242,6 @@
 1984pagr.conf	C	Particles and Gravity
 1984pas..conf	C	Practical Absorption Spectrometry
 1984pcee.conf	C	Patterns of Change in Earth Evolution
-1984pcnr.conf	C	NATO ASIC Proc. 134: Problems of Collapse and Numerical Relativity
 1984pdlr.conf	C	Plasma Double Layers and Related Topics
 1984pdrw.rept	C	Propagation and Diffraction of Radio Waves in the Millimeter and Submillimeter Ranges
 1984pdst.rept	C	5th Parabolic Dish Solar Thermal Power Program
@@ -9391,6 +9411,15 @@
 1985ap...conf	C	Antennas and Propagation (ICAP 85)
 1985aro..meet	C	Transactions of the 2nd Army Conference on Applied Mathematics and Computing
 1985ashc.rept	C	The European Astrometry Satellite HIPPARCOS: Scientific Aspects of the Input Catalog Preparation
+1985ASIB..118	C	Regular and Chaotic Motions in Dynamic Systems
+1985ASIB..120	C	Chaotic Behavior in Quantum Systems: Theory and Applications
+1985ASIB..134	C	Fundamental Processes in Atomic Collision Physics
+1985ASIC..142	C	Photophysics and Photochemistry in the Vacuum Ultraviolet
+1985ASIC..150	C	Interacting Binaries
+1985ASIC..152	C	Progress in Stellar Spectral Line Formation Theory
+1985ASIC..154	C	Stability of the Solar System and its Minor Natural and Artificial Bodies
+1985ASIC..156	C	Ices in the Solar System
+1985ASIC..161	C	Compendium in Astronomy
 1985asme.conf	C	Fluid-Structure Interaction and Aerodynamics Damping
 1985asme.symp	C	2nd International Symposium on Laser Anemometry
 1985asom.conf	C	Atmospheric Studies by Optical Methods
@@ -9410,14 +9439,12 @@
 1985biof.conf	C	Birth and the Infancy of Stars
 1985bis..conf	C	Birth and Infancy of Stars
 1985bsfg.book	C	Balloon Studies of Fluxes of Gamma Rays and Charged Particles in the Equatorial Region
-1985cbqs.conf	C	NATO ASIB Proc. 120: Chaotic Behavior in Quantum Systems: Theory and Applications
 1985cca..proc	C	The Carbon Cycle and Atmospheric CO2: Natural Variations Archean to Present
 1985ccev.conf	C	La Composition Chimique des &Eacute;toiles dans le Voisinage Solaire
 1985cdm..proc	C	Chromospheric Diagnostics and Modelling
 1985cfd..conf	C	7th Computational Fluid Dynamics Conference
 1985cgd..conf	C	Cosmical Gas Dynamics
 1985chas.conf	C	Chaos in Astrophysics
-1985cia..conf	C	NATO ASIC Proc. 161: Compendium in Astronomy
 1985cias.conf	C	Climate Impact Assessment
 1985cmar.conf	C	The Case for Mars II
 1985cmmc.proc	C	Computational Mathematics and Mathematical Computer Software
@@ -9466,7 +9493,6 @@
 1985fic..conf	C	Fundamental Interactions and Cosmology
 1985flvi.proc	C	Flow Visualization III
 1985fmcv.conf	C	Flavour Mixing and CP Violation
-1985fpac.conf	C	NATO ASIB Proc. 134: Fundamental Processes in Atomic Collision Physics
 1985fps..conf	C	XIX Annual Conference of the Finnish Physical Society
 1985fpsa.proc	C	Flat-Plate Solar Array Proj. Res. Forum on High-Efficiency Crystalline Silicon Solar Cells
 1985fsgf.book	C	From SU(3) to gravity
@@ -9502,7 +9528,6 @@
 1985IAUS..111	C	Calibration of Fundamental Stellar Quantities
 1985IAUS..112	C	The Search for Extraterrestrial Life: Recent Developments
 1985IAUS..113	C	Dynamics of Star Clusters
-1985ib...proc	C	NATO ASIC Proc. 150: Interacting Binaries
 1985ibs..book	C	Interacting Binary Stars
 1985icc..conf	C	ICC '85; International Conference on Communications
 1985icia.cong	C	ICIASF '85 - 11th International Congress on Instrumentation in Aerospace Simulation Facilities
@@ -9532,7 +9557,6 @@
 1985isa..conf	C	ITC/USA/'85; Proceedings of the International Telemetering Conference
 1985isa..symp	C	31st International Instrumentation Symposium
 1985isap....3	C	ISAP Japan 1985, Vol. 3
-1985iss..work	C	NATO ASIC Proc. 156: Ices in the Solar System
 1985ivnt.book	C	Infinite Vistas : New Tools for Astronomy
 1985jann.conf	C	22nd JANNAF Combustion Meeting
 1985jpmc.conf	C	AIAA, SAE, ASME, and ASEE, 21st Joint Propulsion Conference
@@ -9578,19 +9602,16 @@
 1985pggp.rept	C	Reports of Planetary Geology and Geophysics Program
 1985pldi.conf	C	Planetarium Directors Conference
 1985ppic.conf	C	Photometric and Polarimetric Investigations of Celestial Bodies
-1985ppvu.conf	C	Photophysics and Photochemistry in the Vacuum Ultraviolet
 1985pre1.conf	C	Planetary Radio Emissions I
 1985prpl.conf	C	Protostars and Planets II
 1985psde.conf	C	Processing of Scientific Data from the ESA Astrometry Satellite HIPPARCOS
 1985psf..conf	C	Physics of Solar Flares
 1985psk..conf	C	Die Physik des Sonnensystems und der Kometen
-1985pssl.conf	C	Progress in Stellar Spectral Line Formation Theory
 1985ptuf.conf	C	Phase Transition in the Universe and Formation of the Hierarchical structure
 1985qugr.conf	C	Quantum Gravity
 1985rapm.book	C	Recent Advances in Planetary Meteorology
 1985rapr.conf	C	Results of the ARCAD 3 Project and of Recent Programs in Magnetospheric and Ionospheric Physics
 1985rbcc.conf	C	Relations Between Chromospheric-Coronal Heating and Mass Loss in Stars
-1985rcmd.conf	C	Regular and Chaotic Motions in Dynamic Systems
 1985rmps.conf	C	Resonances in the Motion of Planets, Satellites and Asteroids
 1985rsc..conf	C	Relative Supersymmetry and Cosmology
 1985rwrc.conf	C	A Random Walk in Relativity and Cosmology
@@ -9656,7 +9677,6 @@
 1985ssmf.conf	C	Solar System Magnetic Fields
 1985ssor.proc	C	Spectral Signatures of Objects in Remote Sensing
 1985ssrt.conf	C	Supersymmetry, Supergravity and Related Topics
-1985sssm.proc	C	NATO ASIC Proc. 154: Stability of the Solar System and its Minor Natural and Artificial Bodies
 1985sssp.book	C	Space Stations and Space Platforms - Concepts, Design, Infrastructure and Uses
 1985sstc.nasa	C	Space Shuttle Technology Conference
 1985stoc.iafc	C	Stockholm International Astronautical Federation Congress
@@ -9694,7 +9714,7 @@
 1986abd..proc	C	Astrophysics of Brown Dwarfs
 1986acae.symp	C	Aircraft Computational Aerodynamics
 1986acec.symp	C	Army Communications-Electronics Command
-1986acge...31	C	Advances in Cryogenic Engineering. Volume 31
+1986ACGE...31	C	Advances in Cryogenic Engineering. Volume 31
 1986acim.book	C	Aspects of the Complex Investigation of the Moon
 1986acm..proc	C	Asteroids, Comets, Meteors II
 1986adss.conf	C	Analit. Dvizheniya tel Soln. Sistemy i Ikh Nablyud.
@@ -9730,12 +9750,20 @@
 1986anme.work	C	International Workshop on Antarctic Meteorites
 1986ansp.conf	C	Anatomy of Space-'86
 1986apa..proc	C	Accretion Processes in Astrophysics
-1986apei.conf	C	NATO ASIB Proc. 145: Atomic Processes in Electron-Ion and Ion-Ion Collisions
 1986apg.....1	C	NASA Tech. Memo., NASA TM-88784
 1986aprm.conf	C	Astronomical Education in the Asian-Pacific Region
 1986apt..conf	C	Automatic Photoelectric Telescopes
 1986arh..conf	C	Astrophysical Radiation Hydrodynamics
 1986asdy.conf	C	Astrodynamics 1985
+1986ASIB..130	C	Heavy Ion Collisions
+1986ASIB..138	C	Topological Structure of Space-Time
+1986ASIB..143	C	Atoms in Unusual Situations
+1986ASIB..145	C	Atomic Processes in Electron-Ion and Ion-Ion Collisions
+1986ASIC..162	C	Cosmic Radiation in Contemporary Astrophysics
+1986ASIC..163	C	Nucleosynthesis and its Implications on Nuclear and Particle Physics
+1986ASIC..167	C	The Evolution of Galactic X-Ray Binaries
+1986ASIC..169	C	Seismology of the Sun and the Distant Stars
+1986ASIC..180	C	Galaxy Distances and Deviations from Universal Expansion
 1986ASSL..121	C	Structure and Evolution of Active Galactic Nuclei
 1986ASSL..122	C	Spectral Evolution of Galaxies
 1986ASSL..123	C	The Sun and the Heliosphere in Three Dimensions
@@ -9749,7 +9777,6 @@
 1986atra.conf	C	6th Conference on Atmospheric Radiation
 1986aucs.book	C	Automatic Control in Space 1985
 1986aumr.nasa	C	Analytical Ultrasonics in Materials Research and Testing
-1986aus..conf	C	NATO ASIB Proc. 143: Atoms in Unusual Situations
 1986avas.conf	C	28th Israel Annual Conference on Aviation and Astronautics
 1986awph.conf	C	Aspen Winter Physics Conference
 1986batt.work	C	1985 Goddard Space Flight Center Battery Workshop (date)
@@ -9776,7 +9803,6 @@
 1986cqag.conf	C	Classical and Quantum Aspects of Gravitation
 1986cqee.book	C	Classical and Quantum Effects in Electrodynamics
 1986crca.conf	C	Cosmic Radiation in Contemporary Astrophysics
-1986crca.proc	C	NATO ASIC Proc. 162: Cosmic Radiation in Contemporary Astrophysics
 1986crgr...15	C	Crystal Growth. Volume 15
 1986csit.nasa	C	Control/Structures Interaction Technology, 1986
 1986csms.coll	C	Comparative Study of Magnetospheric Systems
@@ -9797,7 +9823,6 @@
 1986efm.....1	C	Encyclopedia of Fluid Mechanics. Volume 1
 1986efm.....2	C	Encyclopedia of Fluid Mechanics. Volume 2
 1986egor.work	C	Early Crustal Genesis: The World's Oldest Rocks
-1986egxb.work	C	NATO ASIC Proc. 167: The Evolution of Galactic X-Ray Binaries
 1986emc..proc	C	Electromagnetic Compatibility 1986
 1986emco.symp	C	1986 IEEE International Symposium on Electromagnetic Compatibility
 1986eoma.work	C	MECA Workshop on the Evolution of the Martian Atmosphere
@@ -9829,7 +9854,6 @@
 1986gawe.symp	C	The 1985 Get Away Special Experimenter's Symposium
 1986gcoe.conf	C	Global Climate and Our Environment
 1986gcr..conf	C	Gravitational Collapse and Relativity
-1986gddu.work	C	NATO ASIC Proc. 180: Galaxy Distances and Deviations from Universal Expansion
 1986ghg..conf	C	Gaseous halos of Galaxies
 1986glaa.conf	C	Gagarin lectures on Aeronautics and Aviation
 1986gmis.rept	C	The Giotto Mission: Its Scientific Investigations
@@ -9844,7 +9868,6 @@
 1986guco.proc	C	Guidance and Control 1986
 1986hep..conf	C	High Energy Physics, 1985, Vol. 2.
 1986hetr.conf	C	Heat transfer 1986; Proceedings of the Eighth International Conference
-1986hic..conf	C	NATO ASIB Proc. 130: Heavy Ion Collisions
 1986hmac.book	C	Highlights of Modern Astrophysics: Concepts and Controversies
 1986hmps.conf	C	Hydrodynamic and Magnetodynamic Problems in the Sun and Stars
 1986hspp.conf	C	High Speed Photography and Photonics, 17th
@@ -9932,7 +9955,6 @@
 1986nepl.conf	C	Les N&eacute;buleuses Plan&eacute;taires
 1986nggc.conf	C	Numerical Grid Generation in Computational Fluid Dynamics
 1986niia.conf	C	New Insights in Astrophysics. Eight Years of UV Astronomy with IUE
-1986ninp.proc	C	NATO ASIC Proc. 163: Nucleosynthesis and its Implications on Nuclear and Particle Physics
 1986nma..book	C	Numerical Modeling in Aerohydrodynamics
 1986nmfm.conf	C	Numerical Methods in Fluid Mechanics
 1986nmht.proc	C	Numerical Methods in Heat Transfer
@@ -10093,7 +10115,6 @@
 1986srmm.rept	C	Spectral Radiometry: Methods, Measuring Techniques, and Applications
 1986ssap.book	C	Space Science and Applications: Progress and Potential
 1986ssau.work	C	Superstrings, Supergravity, and Unified Theories
-1986ssds.proc	C	NATO ASIC Proc. 169: Seismology of the Sun and the Distant Stars
 1986ssma.work	C	Spaceborne Submillimeter Astronomy Mission. A Cornerstone of the ESA Long Term Science Program
 1986ssmf.conf	C	Small Scale Magnetic Flux Concentrations in the Solar Photosphere
 1986ssoi.conf	C	The Solar System. Observations and Interpretations
@@ -10118,7 +10139,6 @@
 1986teih.conf	C	Theoretical and Experimental Investigations of Hadronic Few-Body Systems
 1986tesp.nasa	C	Tethers in Space
 1986thdy.work	C	Thermosphere Dynamics Workshop II
-1986tpgs.conf	C	NATO ASIB Proc. 138: Topological Structure of Space-Time
 1986tpps.nasa	C	Testing for a Permanent Presence in Space
 1986tswo.work	C	SHIRSOG Workshop on Prospects for a New Synoptic High Resolution Spectroscopic Observing Facility
 1986ttka.conf	C	Tartu T&auml;hetorni Kalender 1987
@@ -10150,13 +10170,23 @@
 1987AIPC..162	C	Few-Body Systems and Multiparticle Dynamics
 1987AIPC..163	C	Pion-Nucleus Physics: Future Directions and New Facilities at LAMPF
 1987AIPC..164	C	Nuclei Far From Stability: 5th International Conference
-1987ajte.proc	C	NATO ASIC Proc. 208: Astrophysical Jets and their Engines
 1987anap.conf	C	Antenna Applications Symposium
 1987anba.conf	C	2nd Annual Battery Conference on Applications and Advances
 1987anme...12	C	Antarctic Meteorites XII
 1987ansc.conf	C	Active Nuclei and Stellar Cosmogony
 1987apge.conf	C	Applied Geodesy
 1987ardi.nasa	C	Automated Reduction of Data from Images and Holograms
+1987ASIB..151	C	Giant Resonances in Atoms, Molecules, and Solids
+1987ASIB..153	C	Physics of Strong Fields
+1987ASIB..154	C	Strongly Coupled Plasma Physics
+1987ASIB..158	C	Physics and Chemistry of Small Clusters
+1987ASIB..164	C	Techinques and Concepts of High-Energy Physics IV
+1987ASIC..191	C	Polycyclic Aromatic Hydrocarbons and Astrophysics
+1987ASIC..195	C	High Energy Phenomena Around Collapsed Stars
+1987ASIC..199	C	Very High Energy Gamma Ray Astronomy
+1987ASIC..207	C	The Galaxy
+1987ASIC..208	C	Astrophysical Jets and their Engines
+1987ASIC..210	C	Physical Processes in Interstellar Clouds
 1987asme.conf	C	ASME, AIChE, and ANS, 24th National Heat Transfer Conference and Exhibition
 1987asme.proc	C	10th U.S. National Congress of Applied Mechanics
 1987asme.symp	C	3rd International Symposium on Laser Anemometry
@@ -10233,13 +10263,11 @@
 1987fuas.conf	C	IAU Colloq. 100: Fundamentals of Astrometry
 1987fufs.proc	C	Forum on Unsteady Flow Separation
 1987gac..conf	C	Gravitation in Astrophysics - Carg&egrave;se 1986
-1987gal..proc	C	NATO ASIC Proc. 207: The Galaxy
 1987gala.conf	C	The Galaxy
 1987gatu.conf	C	32nd International Gas Turbine Conference and Exhibition
 1987gawe.symp	C	1986 Get Away Special Experimenter's Symposium
 1987geko.conf	C	Geschichte der Kometenforschung
 1987gnc..conf	C	Navigation and Control Conference
-1987gram.conf	C	NATO ASIB Proc. 151: Giant Resonances in Atoms, Molecules, and Solids
 1987grg..conf	C	General Relativity and Gravitation
 1987grgp.conf	C	General Relativity and Gravitational Physics
 1987grs..conf	C	IGARSS '87 - International Geoscience and Remote Sensing Symposium
@@ -10248,7 +10276,6 @@
 1987haco.conf	C	Symposium on Halley's Comet
 1987hao..conf	C	Histoire et Avenir de l'OHP
 1987hep.....1	C	High Energy Physics, Vol. 1
-1987hepa.conf	C	NATO ASIC Proc. 195: High Energy Phenomena Around Collapsed Stars
 1987hooa.coll	C	IAU Colloq. 91: History of Oriental Astronomy
 1987hrpg.work	C	High Redshift and Primeval Galaxies
 1987htff.proc	C	Heat Transfer and Fluid Flow in Rotating Machinery
@@ -10347,13 +10374,11 @@
 1987osa..meet	C	Optical Society of America, Topical Meeting on Picosecond Electronics and Optoelectronics
 1987pac..conf	C	12th IEEE Particle Accelerator Conference
 1987paco.conf	C	Particles and Cosmology
-1987paha.proc	C	NATO ASIC Proc. 191: Polycyclic Aromatic Hydrocarbons and Astrophysics
 1987pas..conf	C	Progress in Atomic Spectroscopy, part D
 1987pbes.coll	C	IAU Colloq. 92: Physics of Be Stars
 1987pbsc.conf	C	Progress in Batteries and Solar Cells. Volume 6
 1987pcre.book	C	Problems in Contemporary Radio Engineering and Electronics
 1987pcrp.book	C	Problems in Cosmic-Ray Physics
-1987pcsc.conf	C	NATO ASIB Proc. 158: Physics and Chemistry of Small Clusters
 1987pegf.conf	C	The Physical Effects in the Gravitational Field of Black Holes
 1987penm.conf	C	Protostars and Molecular Clouds
 1987pggp.rept	C	NASA Tech. Memo., NASA TM-89810
@@ -10366,10 +10391,8 @@
 1987pmfd.conf	C	Particle Methods in Fluid Dynamics and Plasma Physics
 1987ppcs.work	C	Physical Processes in Comets, Stars and Active Galaxies
 1987ppes.conf	C	PESC '87 - Annual IEEE Power Electronics Specialists Conference
-1987ppic.proc	C	NATO ASIC Proc. 210: Physical Processes in Interstellar Clouds
 1987ppns.conf	C	Protsessy na Poverkhnosti i v Nedrakh Solntsa
 1987pras.conf	C	Probl. Astron. Ch. 2. Odes. Univ. Odessa
-1987psf..conf	C	NATO ASIB Proc. 153: Physics of Strong Fields
 1987ptes.conf	C	Physics at TeV Energy Scale
 1987ptfl.book	C	Problems of Turbulent Flows
 1987ptus.proc	C	Perspectives in Turbulence Studies
@@ -10400,7 +10423,6 @@
 1987sccs.conf	C	Superstrings, Cosmology Composite Structures
 1987schd....9	C	6th International Conference on Physicochemical Hydrodynamics
 1987scos.conf	C	19th Annual Summer Computer Simulation Conference
-1987scpp.conf	C	NATO ASIB Proc. 154: Strongly Coupled Plasma Physics
 1987scse.book	C	Stoichiometry in Crystalline Compounds and its Effect on their Physical Properties
 1987sedo.work	C	Stellar Evolution and Dynamics in the Outer Halo of the Galaxy
 1987sem..conf	C	1987 SEM Spring Conference on Experimental Mechanics
@@ -10527,7 +10549,6 @@
 1987svdf.proc	C	Studies of Vortex Dominated Flows
 1987swe..conf	C	The Solar Wind and the Earth
 1987syta.proc	C	Symposium on Thermal Anemometry
-1987tche.conf	C	NATO ASIB Proc. 164: Techinques and Concepts of High-Energy Physics IV
 1987tdar.nasa	C	The Telecommunications and Data Acquisition Report
 1987tdrp.conf	C	Turbulent Drag Reduction by Passive Means
 1987tehs.nasa	C	Turbine Engine Hot Section Technology, 1987
@@ -10544,7 +10565,6 @@
 1987umad.nasa	C	Upper and Middle Atmospheric Density Modeling Requirements for Spacecraft Design and Operations
 1987uvmm.conf	C	A Unified View of the Macro- and the Micro- Cosmos
 1987vgex.conf	C	Variability of Galactic and Extragalactic X-ray Sources
-1987vheg.proc	C	NATO ASIC Proc. 199: Very High Energy Gamma Ray Astronomy
 1987vmtd.conf	C	Vopr. Mekh. Tverd. i Deformiruem. Tela
 1987vtro.conf	C	Vortr&auml;ge beim Theodor Ritter von Oppolzer-Ged&auml;chtnissymposium
 1987wfs..conf	C	Windsurfing the Fermi Sea
@@ -10554,8 +10574,8 @@
 1988aacf.proc	C	Advances and Applications in Computational Fluid Dynamics
 1988aaei.proc	C	Aerospace Avionics Equipment and Integration
 1988aafr.rept	C	Advanced Analytical Facilities: Report of the Planetary Materials and Geochemistry Working Group
-1988acge...33	C	Advances in Cryogenic Engineering. Volume 33
-1988acge...34	C	Advances in Cryogenic Engineering (Materials). Volume 34
+1988ACGE...33	C	Advances in Cryogenic Engineering. Volume 33
+1988ACGE...34	C	Advances in Cryogenic Engineering (Materials). Volume 34
 1988aeap.conf	C	1988 IEEE Aerospace Applications Conference
 1988agfm.conf	C	Advances in Gravity Field Modelling
 1988agic.rept	C	Astronaut's Guide to Terrestrial Impact Craters
@@ -10597,6 +10617,15 @@
 1988asdy.conf	C	Astrodynamics 1987
 1988asgc.conf	C	The Abundance Spread within Globular Clusters: Spectroscopy of Individual Stars JCM 5 and CM 37/3
 1988ashc.rept	C	The European Astrometry Satellite HIPPARCOS. Scientific Aspects of the Input Catalogue Preparation II
+1988ASIB..181	C	Fundamental Processes of Atomic Dynamics
+1988ASIB..187	C	X-ray Spectroscopy in Atomic and Solid State Physics
+1988ASIC..219	C	The Early Universe
+1988ASIC..220	C	Genesis and Propagation of Cosmic Rays
+1988ASIC..229	C	Cooling Flows in Clusters and Galaxies
+1988ASIC..232	C	Galactic and Extragalactic Star Formation
+1988ASIC..234	C	Frontiers of Laser Spectroscopy of Gases
+1988ASIC..241	C	Formation and Evolution of Low Mass Stars
+1988ASIC..249	C	Hot Thin Plasmas in Astrophysics
 1988asme.conf	C	ASME, Gas Turbine and Aeroengine Congress and Exposition
 1988asme.meet	C	ASME, Heat Transfer Division. New York, American Society of Mechanical Engineers
 1988ASPC....1	C	Progress and Opportunities in Southern Hemisphere Optical Astronomy.  The CTIO 25th Anniversary Symposium
@@ -10627,7 +10656,6 @@
 1988cdcf.work	C	Progress Toward a Cosmic Dust Collection Facility on Space Station
 1988ceme.symp	C	Twenty-First Symposium on Celestial Mechanics
 1988cerf.work	C	Communication Engineering Reports. Fundamental Developments. Theoretical Work
-1988cfcg.work	C	NATO ASIC Proc. 229: Cooling Flows in Clusters and Galaxies
 1988cfd..proc	C	Computational Fluid Dynamics
 1988cgrs.conf	C	Capture Gamma-Ray Spectroscopy 1987
 1988chts.proc	C	Chemistry of High-Temperature Superconductors II
@@ -10658,7 +10686,6 @@
 1988duun.conf	C	Dust in the Universe
 1988eaa..conf	C	Elemental Abundance Analyses
 1988easc.conf	C	EASCON '88; Proceedings of the Twenty-first Annual Electronics and Aerospace Conference
-1988eaun.proc	C	NATO ASIC Proc. 219: The Early Universe
 1988ecos.proc	C	Engineering, Construction, and Operations in Space
 1988egp..conf	C	Experimental Gravitational Physics
 1988ehc..conf	C	Exploration of Halley's Comet
@@ -10671,18 +10698,16 @@
 1988ESASP.287	C	Spectral Signatures of Objects in Remote Sensing
 1988esms.symp	C	Europe in Space: The Manned Space System
 1988esna.conf	C	Extra Solar Neutrino Astronomy
+1988ESOC...30	C	Very Large Telescopes and their Instrumentation, Vol. 2
 1988eur..book	C	The Early Universe: Reprints
 1988evga.conf	C	European VLBI for Geodesy and Astrometry
 1988exme.conf	C	6th International Congress on Experimental Mechanics
 1988faom.work	C	Future Astronomical Observatories on the Moon
-1988felm.conf	C	NATO ASIC Proc. 241: Formation and Evolution of Low Mass Stars
 1988feta.conf	C	From Einstein to AXAF, A Symposium to Celebrate the 10th Anniversary of the launch of HEAO-2, the Einstein Observatory
 1988ffnp.conf	C	5th Force: Neutrino Physics
-1988flsg.conf	C	NATO ASIC Proc. 234: Frontiers of Laser Spectroscopy of Gases
 1988flws.rept	C	Flows with Separation
 1988fmet.symp	C	Flight Mechanics/Estimation Theory Symposium 1988
 1988fnsm.work	C	Flare Research at the Next Solar Maximum
-1988fpad.conf	C	NATO ASIB Proc. 181: Fundamental Processes of Atomic Dynamics
 1988fsa..conf	C	Fiz. Soln. Aktivnosti
 1988fsra.conf	C	Finnish-Soviet Symposium on Radio Astronomy
 1988fute.symp	C	Fifteenth Symposium on Fusion Technology
@@ -10691,14 +10716,12 @@
 1988gceh.conf	C	Global Catastrophes in Earth History: An Interdisciplinary Conference on Impacts, Volcanism, and Mass Mortality
 1988gein.work	C	Workshop on Geophysical Informatics
 1988gera.book	C	Galactic and Extragalactic Radio Astronomy
-1988gesf.conf	C	NATO ASIC Proc. 232: Galactic and Extragalactic Star Formation
 1988get..rept	C	Gravitation Electromagnetic Theory
 1988gimo.conf	C	Gradient-Index Optics and Miniature Optics
 1988gmfm.work	C	Gravitational Measurements, Fundamental Metrology and Constants
 1988gnc..conf	C	AIAA Guidance, Navigation and Control Conference
 1988gnwq.rept	C	Generation of Nonlinear Waves and Quasi-Steady Currents in Plasmas
 1988gocc.work	C	Workshop on the Growth of Continental Crust
-1988gpcr.proc	C	NATO ASIC Proc. 220: Genesis and Propagation of Cosmic Rays
 1988gqfs.conf	C	Gravitation, Quantum Fields, and Superstrings
 1988grci.rept	C	In Groupement de Recherches Coordonnees Interaction Laser Matiere, Activities Report in Laser Matter Interactions
 1988grco.conf	C	Gravitation and Cosmology
@@ -10716,7 +10739,6 @@
 1988hmas.conf	C	Symposium in Honour of R. W. P. McWhirter on Atomic and Solar Physics
 1988hrii.conf	C	High-Resolution Imaging by Interferometry
 1988htgt.symp	C	Heat Transfer in Gas Turbine Engines and Three-Dimensional Flows
-1988htpa.conf	C	NATO ASIC Proc. 249: Hot Thin Plasmas in Astrophysics
 1988iaia.conf	C	Image Analysis in Astronomy
 1988IAUS..123	C	Advances in Helio- and Asteroseismology
 1988IAUS..126	C	The Harlow-Shapley Symposium on Globular Cluster Systems in Galaxies
@@ -11017,12 +11039,10 @@
 1988uvai....1	C	A Decade of UV Astronomy with the IUE Satellite, Volume 1
 1988uvai....2	C	A Decade of UV Astronomy with the IUE Satellite, Volume 2
 1988vlti....1	C	Very Large Telescopes and their Instrumentation, Vol. 1
-1988vlti....2	C	Very Large Telescopes and their Instrumentation, Vol. 2
 1988vltt.conf	C	Very Large Telescopes and their Instrumentation
 1988voma.meet	C	NASA MEVTV Program Working Group Meeting: Volcanism on Mars
 1988xia..conf	C	X-Ray Instrumentation in Astronomy
 1988xraw.book	C	X-ray Astronomy with EXOSAT
-1988xsas.conf	C	NATO ASIB Proc. 187: X-ray Spectroscopy in Atomic and Solid State Physics
 1988ybas.conf	C	1989 Yearbook of Astronomy
 1988ycs..work	C	Yale Cosmic String Workshop
 1989aaaf.meet	C	AAAF, DGLR, Royal Aeronautical Society, and ESA, European Aerospace Conference on Progress in Space Transportation
@@ -11064,6 +11084,19 @@
 1989arsa.proc	C	Applications of Remote Sensing to Agrometeorology
 1989asee.nasa	C	1989 NASA-ASEE Summer Faculty Fellowship Program in Aeronautics and Research
 1989asgc.conf	C	The Abundance Spread within Globular Clusters: Spectroscopy of Individual Stars
+1989ASIB..186	C	Simple Molecular Systems at Very High Density
+1989ASIB..205	C	Nuclear Matter and Heavy Ion Collisions
+1989ASIB..209	C	New Aspects of Nuclear Dynamics
+1989ASIB..216	C	  The Nuclear Equation of State.  Part B: QCD and the Formation of the Quark-Gluon Plasma
+1989ASIB..216	C	 The Nuclear Equation of State.  Part A: Discovery of Nuclear Shock Waves and the EOS
+1989ASIC..253	C	Gravitational Wave Data Analysis
+1989ASIC..262	C	Timing Neutron Stars
+1989ASIC..263	C	Solar and Stellar Granulation
+1989ASIC..264	C	The Epoch of Galaxy Formation
+1989ASIC..271	C	Numerical Determination of the Electronic Structure of Atoms, Diatomic and Polyatomic Molecules
+1989ASIC..274	C	Diffraction-Limited Imaging with Very Large Telescopes
+1989ASIC..283	C	Techniques and Applications of Very Long Baseline Interferometry
+1989ASIC..290	C	Theory of Accretion Disks
 1989asme.proc	C	12th ASME Conference on Structural Vibration and Acoustics
 1989ASPC....6	C	Synthesis Imaging in Radio Astronomy
 1989ASSL..150	C	Dynamics and Structure of Quiescent Solar Prominences
@@ -11101,7 +11134,6 @@
 1989dad..conf	C	Dynamics of Astrophysical Discs
 1989ddcm.proc	C	Domain Decomposition Methods
 1989ddse.work	C	Dynamics of Dense Stellar Systems
-1989dli..conf	C	NATO ASIC Proc. 274: Diffraction-Limited Imaging with Very Large Telescopes
 1989dmsu.conf	C	Dark Matter and the Structure of the Universe
 1989dots.work	C	Developments in Observations and Theory for Solar Cycle 22
 1989drte.conf	C	Dissociative Recombination: Theory, Experiment and Applications
@@ -11113,7 +11145,6 @@
 1989eeda.conf	C	ESO/ST-ECF Data Analysis Workshop
 1989eeo..conf	C	Exobiology in Earth Orbit
 1989egao.conf	C	Evolution of Galaxies Astronomical Observations
-1989egf..conf	C	NATO ASIC Proc. 264: The Epoch of Galaxy Formation
 1989ehgr.conf	C	Einstein and the History of General Relativity
 1989eidr.proc	C	Evolution of Interstellar Dust and Related Topics
 1989eiut.conf	C	'89 Electroweak Interactions and Unified Theories
@@ -11175,7 +11206,6 @@
 1989gtc..conf	C	GLOBECOM '89 - IEEE Global Telecommunications Conference and Exhibition
 1989guco.conf	C	Guidance and Control Conference
 1989guco.proc	C	Guidance and Control 1989
-1989gwda.conf	C	NATO ASIC Proc. 253: Gravitational Wave Data Analysis
 1989hep..conf	C	High Energy Physics
 1989hfur.book	C	Wegweiser f&uuml;r die praktische astronomische
 1989hipn.conf	C	Heavy Ion Physics and Nuclear Astrophysical Problems
@@ -11277,17 +11307,12 @@
 1989musi.work	C	MUSICOS Workshop
 1989mwdm.work	C	Dust on Mars III
 1989naec.conf	C	NAECON 89; Proceedings of the IEEE National Aerospace and Electronics Conference
-1989nand.conf	C	NATO ASIB Proc. 209: New Aspects of Nuclear Dynamics
 1989nara.conf	C	4th IEEE National Radar Conference
 1989nce..conf	C	Inter-Noise 89 - Engineering for Environmental Noise Control
 1989ndao.conf	C	New Developments and Applications in Optical Radiometry
-1989ndes.conf	C	Numerical Determination of the Electronic Structure of Atoms, Diatomic and Polyatomic Molecules
-1989nesa.conf	C	NATO ASIB Proc. 216A: The Nuclear Equation of State.  Part A: Discovery of Nuclear Shock Waves and the EOS
-1989nesb.conf	C	NATO ASIB Proc. 216B: The Nuclear Equation of State.  Part B: QCD and the Formation of the Quark-Gluon Plasma
 1989newp.conf	C	The New Physics
 1989nme.....1	C	5th International Symposium on Numerical Methods in Engineering, Volume 1
 1989nme.....2	C	5th International Symposium on Numerical Methods in Engineering, Volume 2
-1989nmhi.conf	C	NATO ASIB Proc. 205: Nuclear Matter and Heavy Ion Collisions
 1989nmlt.conf	C	Numerical Methods in Laminar and Turbulent Flow
 1989npa..conf	C	Neutrino Physics and Astrophysics
 1989npvp.conf	C	Nonlinear Phenomena in Vlasov Plasmas
@@ -11367,7 +11392,6 @@
 1989siam.conf	C	4th Copper Mountain Conference on Multigrid Methods
 1989sidr.nasa	C	Structural Integrity and Durability of Reusable Space Propulsion Systems
 1989smsa.proc	C	3rd Utah State University Conference on Small Satellites
-1989smsv.conf	C	NATO ASIB Proc. 186: Simple Molecular Systems at Very High Density
 1989snco.proc	C	Space - A New Community of Opportunity
 1989sntm.work	C	Second Noncontact Temperature Measurement Workshop
 1989sote...36	C	Solar-Terrestrial Events in February-March 1986
@@ -11531,7 +11555,6 @@
 1989sprt.nasa	C	Space Photovoltaic Research and Technology, 1988. High Efficiency, Space Environment, and Array Technology
 1989ssdm.conf	C	30th Structures, Structural Dynamics and Materials Conference
 1989sser.proc	C	Space Science and Engineering Research Forum
-1989ssg..conf	C	NATO ASIC Proc. 263: Solar and Stellar Granulation
 1989ssmt.rept	C	Spacecraft Structures and Mechanical Testing
 1989stct.conf	C	Star Catalogues: A Centennial Tribute to A. N. Vyssotsky
 1989stct.proc	C	Star Catalogues: A Centennial Tribute To A. N. Vyssotsky
@@ -11539,9 +11562,7 @@
 1989stq..conf	C	From Stars to Quasars
 1989stss.work	C	Solar-Terrestrial Science Strategy Workshop
 1989sxsr.rept	C	Solar X-Ray Astronomy Sounding Rocket Program
-1989tad..conf	C	NATO ASIC Proc. 290: Theory of Accretion Disks
 1989taup.conf	C	TAUP 89 - Theoretical and Phenomenological Aspects of Underground Physics
-1989tavl.conf	C	Techniques and Applications of Very Long Baseline Interferometry
 1989tdar.nasa	C	The Telecommunications and Data Acquisition Report
 1989tesp.conf	C	3rd International Conference on Tethers in Space - Toward Flight
 1989tflp.conf	C	Tests of Fundamental Laws in Physics
@@ -11551,7 +11572,6 @@
 1989thyg.book	C	Three Hundred Years of Gravitation
 1989tidt.work	C	Third Infrared Detector Technology Workshop
 1989tndm.conf	C	Turbulence and Nonlinear Dynamics in MHD Flows
-1989tns..conf	C	Timing Neutron Stars
 1989tnti.conf	C	Thermal-Non-Thermal Interactions in Solar Flares
 1989tsf.....1	C	7th Symposium on Turbulent Shear Flows, Volume 1
 1989tsf.....2	C	7th Symposium on Turbulent Shear Flows, Volume 2
@@ -11572,9 +11592,8 @@
 1989xras.rept	C	Contributions of the X Ray Astronomy Group of the Max-Planck-Institut fuer Extraterrestrische Physik
 1990aadm.conf	C	Astrophysical Ages and Dating Methods
 1990acae.proc	C	8th NAL Symposium on Aircraft Computational Aerodynamics
-1990acb..proc	C	NATO ASIC Proc. 319: Active Close Binaries Proceedings, NATO Advanced Study Institute
-1990acge...35	C	Advances in Cryogenic Engineering. Vol. 35B - Proceedings of the 1989 Cryogenic Engineering Conference
-1990acge...36	C	Advances in Cryogenic Engineering - Materials. Vol. 36
+1990ACGE...35	C	Advances in Cryogenic Engineering. Vol. 35B - Proceedings of the 1989 Cryogenic Engineering Conference
+1990ACGE...36	C	Advances in Cryogenic Engineering - Materials. Vol. 36
 1990acm..proc	C	Asteroids, Comets, Meteors III
 1990aeme.symp	C	24th Aerospace Mechanisms Symposium
 1990aepr.nasa	C	Aeropropulsion 1987
@@ -11607,7 +11626,6 @@
 1990aira.proc	C	i-SAIRAS '90; Proceedings of the International Symposium on Artificial Intelligence
 1990aita.proc	C	Artificial Intelligence Techniques for Astronomy
 1990ajns.proc	C	Advances in Joining Newer Structural Materials
-1990amml.conf	C	NATO ASIC Proc. 316: Angular Momentum and Mass Loss for Hot Stars
 1990amsa.nasa	C	AMSAHTS 1990: Advances in Materials Science and Applications of High Temperature Superconductors
 1990amss.conf	C	Antarctic Meteorite Stranding Surfaces
 1990anam.work	C	Differences Between Antarctic and Non-Antarctic Meteorites
@@ -11621,6 +11639,14 @@
 1990arpf.conf	C	Astrophysics - Recent Progress and Future Possibilities
 1990arpf.symp	C	Astrophysics: Recent Progress and Future Possibilities
 1990asdy.conf	C	Astrodynamics 1989
+1990ASIB..224	C	Probabilistic Methods in Quantum Field Theory and Quantum Gravity
+1990ASIB..230	C	Quantum Mechanics in Curved Space-Time
+1990ASIC..296	C	Dark Matter in the Universe
+1990ASIC..300	C	Physical Processes in Hot Cosmic Plasmas
+1990ASIC..305	C	Baryonic Dark Matter
+1990ASIC..306	C	Neutron Stars and Their Birth Events
+1990ASIC..316	C	Angular Momentum and Mass Loss for Hot Stars
+1990ASIC..319	C	Active Close Binaries Proceedings, NATO Advanced Study Institute
 1990asme.conf	C	Heat Transfer in Space Systems; Proceedings of the Symposium, AIAA/ASME Thermophysics and Heat Transfer Conference
 1990asos.conf	C	3rd International Collogium of the Royal Netherlands Academy of Arts and Sciences
 1990ASPC....7	C	Properties of Hot Luminous Stars
@@ -11644,7 +11670,6 @@
 1990atop.book	C	Atmospheric Optics
 1990atp..conf	C	Advances in Theoretical Physics
 1990auca.symp	C	Automatic Control in Aerospace
-1990bdm..proc	C	NATO ASIC Proc. 305: Baryonic Dark Matter
 1990bg...work	C	Workshop on Bulges of Galaxies
 1990boaq.conf	C	Bol. Obs. Astron. Quito.
 1990bola.rept	C	The Boundary Layer
@@ -11679,7 +11704,6 @@
 1990dig..book	C	Dynamics and Interactions of Galaxies
 1990dipp.symp	C	Development of Intensed Pulsed Particle Beams and Its Applications
 1990dmiu.conf	C	Dark Matter in the Universe
-1990dmu..conf	C	NATO ASIC Proc. 296: Dark Matter in the Universe
 1990dpgs.book	C	Dynamic Processes in Gases and Solid Bodies
 1990dppp.rept	C	Dynamic Processes in the Powerplants and Power-Generating Equipment of Flight Vehicles
 1990dres.iafc	C	Dresden International Astronautical Federation Congress
@@ -11852,7 +11876,6 @@
 1990nowa.conf	C	Nonlinear Waves III
 1990nrw..book	C	Near-Wall Turbulence
 1990nssy.book	C	The New Solar System
-1990nstb.conf	C	NATO ASIC Proc. 306: Neutron Stars and Their Birth Events
 1990ntns.proc	C	Numerical Treatment of the Navier-Stokes Equations
 1990nuas.symp	C	Nuclear Astrophysics, 5th Workshop
 1990nuco.conf	C	Nuclei in the Cosmos
@@ -11877,10 +11900,8 @@
 1990pihl.book	C	Physics of the Inner Heliosphere I
 1990pimo.conf	C	Proceedings of the International Meteor Conference,  8th IMC, Balatonf&ouml;ldv&aacute;r, Hungary, 1989
 1990plma.book	C	Planetary Mapping
-1990pmqf.conf	C	NATO ASIB Proc. 224: Probabilistic Methods in Quantum Field Theory and Quantum Gravity
 1990ppcn.conf	C	Plasma Physics and Controlled Nuclear Fusion: Next Generation Experiments in Helical Systems
 1990ppgd.rept	C	Problems in Physical Gas Dynamics
-1990pphc.conf	C	NATO ASIC Proc. 300: Physical Processes in Hot Cosmic Plasmas
 1990ppln.symp	C	IEEE PLANS '90 - Position Location and Navigation Symposium
 1990ppsa.conf	C	Plasma Phenomena in the Solar Atmosphere
 1990ppst.conf	C	Physical Processes in the Solar Transition-Region and Corona
@@ -11894,7 +11915,6 @@
 1990pvs..conf	C	21st IEEE Photovoltaic Specialists Conference
 1990qfcc.proc	C	The Quest for the Fundamental Constants in Cosmology
 1990qgp..conf	C	Quark-Gluon Plasma
-1990qmcs.conf	C	NATO ASIB Proc. 230: Quantum Mechanics in Curved Space-Time
 1990qnde....9	C	Review of Progress in Quantitative Nondestructive Evaluation. Vol. 9B
 1990qslo.rept	C	Quality of the Surface Layer and Operating Properties of Aircraft Engine Components
 1990radr.conf	C	IEEE 1990 International Radar Conference
@@ -12164,7 +12184,7 @@
 1991aatd.rept	C	Algorithms and Automated Techniques for the Design of Control Systems for Moving Objects
 1991abe..conf	C	10th Symposium on Air Breathing Engines
 1991acae.proc	C	9th NAL Symposium on Aircraft Computational Aerodynamics
-1991acge...37	C	Advances in Cryogenic Engineering. Vol. 37B - Proceedings of the 1991 Cryogenic Engineering Conference
+1991ACGE...37	C	Advances in Cryogenic Engineering. Vol. 37B - Proceedings of the 1991 Cryogenic Engineering Conference
 1991acy..conf	C	Astronomical Calendar for the Year 1991
 1991adcm.proc	C	Advanced Composite Materials II
 1991adfr.proc	C	Applications of Diamond Films and Related Materials
@@ -12210,7 +12230,6 @@
 1991AIPC..242	C	Strong, weak, and electromagnetic interactions in Nuclei, Atoms, and AstroPhysics
 1991AIPC..265	C	Gamma-ray Bursts
 1991AIPC..270	C	Time reversal - the Arthur Rich memorial Symposium
-1991amey.conf	C	NATO ASIC Proc. 340: Angular Momentum Evolution of Young Stars
 1991amp..conf	C	Atomic and Molecular Physics
 1991amsa.nasa	C	AMSARTS '90: Advanced in Materials Science and Applications of High Temperature Superconductors
 1991amva.conf	C	Advances in Molecular Vibrations and Collision Dynamics
@@ -12226,6 +12245,16 @@
 1991arcr.nasa	C	Automated Rendezvous and Capture Review. Executive Summary
 1991arm..symp	C	Annual Reliability and Maintainability Symposium
 1991asei.conf	C	Advanced SEI Technologies
+1991ASIB..272	C	Predictability, Stability, and Chaos in N-Body Dynamical Systems
+1991ASIB..275	C	Techniques and Concepts of High-Energy Physics VI
+1991ASIC..323	C	Chemistry in Space
+1991ASIC..336	C	White Dwarfs
+1991ASIC..337	C	Cosmic Rays, Supernovae and the Interstellar Medium
+1991ASIC..340	C	Angular Momentum Evolution of Young Stars
+1991ASIC..341	C	Stellar Atmospheres - Beyond Classical Models
+1991ASIC..342	C	The Physics of Star Formation and Early Stellar Evolution
+1991ASIC..344	C	Neutron Stars
+1991ASIC..348	C	Observational Tests of Cosmological Inflation
 1991ASPC...13	C	The Formation and Evolution of Star Clusters
 1991ASPC...15	C	Large-scale Structures and Peculiar Motions in the Universe
 1991ASPC...16	C	Atoms, Ions and Molecules: New Results in Spectral Line Astrophysics
@@ -12265,7 +12294,6 @@
 1991cfld.symp	C	Computational Fluid Dynamics Symposium on Aeropropulsion
 1991cgsr.proc	C	Crystal Growth in Space and Related Optical Diagnostics
 1991chas.book	C	The Comet Halley archive: Summary volume
-1991chsp.conf	C	NATO ASIC Proc. 323: Chemistry in Space
 1991cie..proc	C	CIE 1991 International Conference on Radar (CICR-91)
 1991cmff.conf	C	Composite Materials: Fatigue and Fracture. Vol. 3
 1991cmmt.proc	C	Composite Material Technology - 1991
@@ -12278,7 +12306,6 @@
 1991cpdm.rept	C	Certain Problems of the Dynamics of Mechanical Systems
 1991cphe.conf	C	Comets in the Post-Halley Era
 1991cpqg.conf	C	Conceptual Problems of Quantum Gravity
-1991crsi.conf	C	NATO ASIC Proc. 337: Cosmic Rays, Supernovae and the Interstellar Medium
 1991csas.rept	C	Canadian Space Agency, Spacebound 1991
 1991csc..symp	C	Center for Space Construction Third Annual Symposium
 1991csg..conf	C	Clusters and Superclusters of Galaxies
@@ -12453,13 +12480,11 @@
 1991nlt..work	C	National Large Telescope Workshop: Scientific Requirements and Requirement of Site
 1991nmlt.conf	C	Numerical Methods in Laminar and Turbulent Flow
 1991nrc..symp	C	Eighteenth Symposium on Naval Hydrodynamics
-1991nsto.conf	C	NATO ASIC Proc. 344: Neutron Stars
 1991nuas.symp	C	Nuclear Astrophysics, 6th Workshop
 1991nuco.conf	C	Nuclei in the Cosmos
 1991oca..book	C	Organic Chemistry of the Atmosphere
 1991okml.book	C	The Oskar Klein Memorial Lectures, Vol. 1
 1991opos.conf	C	Objective-Prism and Other Surveys
-1991otci.conf	C	NATO ASIC Proc. 348: Observational Tests of Cosmological Inflation
 1991ottm.rept	C	Orbital Transport: Technical, Meteorological and Chemical Aspects
 1991oulu.work	C	Oulu Univ., Fifth EISCAT Scientific Workshop
 1991pac..conf	C	1991 IEEE Particle Accelerator Conference (APS Beam Physics)
@@ -12485,9 +12510,7 @@
 1991pqgh.conf	C	Particles, Quantum Groups, High Tc, Phase Transitions and All That
 1991prex.meet	C	15th NASA Propagation Experimenters Meeting (NAPEX 15)
 1991psc..conf	C	Particles, Strings and Cosmology
-1991pscn.proc	C	Predictability, Stability, and Chaos in N-Body Dynamical Systems
 1991psf..conf	C	The Physics of Solar Flares
-1991psfe.conf	C	NATO ASIC Proc. 342: The Physics of Star Formation and Early Stellar Evolution
 1991pslb.rept	C	Primary and Secondary Lithium Batteries
 1991ptht.rept	C	Physics and Technology of High-Temperature Gases
 1991ptpa.conf	C	Theoretical Problems in Astro- and Fusion Physics
@@ -12514,7 +12537,6 @@
 1991rsti.tran	C	Rocket and Space Technology - The Ideas of K.E. Tsiolkovsky and Modern Development; Lectures Devoted to K.E. Tsiolkovsky's Ideas
 1991rvos.conf	C	Rapid Variability of OB-stars: Nature and Diagnostic Value
 1991saaj.conf	C	Supercomputing Astronomy and Astrophysics in Japan
-1991sabc.conf	C	NATO ASIC Proc. 341: Stellar Atmospheres - Beyond Classical Models
 1991saea.conf	C	SAE, Aerospace Technology Conference and Exposition
 1991saei.conf	C	SAE, 21st International Conference on Environmental Systems
 1991samp.work	C	International Workshop on Stratospheric Aerosols: Measurements, Properties, and Effects
@@ -12777,7 +12799,6 @@
 1991suti.conf	C	The Sun in Time
 1991syen.conf	C	IEEE International Conference on Systems Engineering
 1991syic.proc	C	23rd Symposium (International) on Combustion
-1991tche.conf	C	NATO ASIB Proc. 275: Techniques and Concepts of High-Energy Physics VI
 1991tcs..book	C	Turbulence and Coherent Structures; Selected Papers from Turbulence 89
 1991tdar.nasa	C	The Telecommunications and Data Acquisition Report
 1991tech....1	C	NASA Technology 2000, Volume 1
@@ -12802,7 +12823,6 @@
 1991vlsi.symp	C	3rd NASA Symposium on VLSI Design
 1991vmvm.proc	C	Vortex Methods and Vortex Motion
 1991wdir.conf	C	Warped Disks and Inclined Rings around Galaxies
-1991whdw.conf	C	NATO ASIC Proc. 336: White Dwarfs
 1991wsal.rept	C	A Wall Stabilized Arc as Light Source for Spectroscopic Techniques
 1991wscs.proc	C	Welding in Space and the Construction of Space Vehicles by Welding
 1991ybas.conf	C	1992 Yearbook of Astronomy
@@ -12811,7 +12831,7 @@
 1992aasa.conf	C	Aging Aircraft and Structural Airworthiness
 1992acae.proc	C	10th NAL Symposium on Aircraft Computational Aerodynamics
 1992acc..conf	C	11th American Control Conference
-1992acge...38	C	Advances in Cryogenic Engineering
+1992ACGE...38	C	Advances in Cryogenic Engineering, Volume 38
 1992acim.symp	C	19th International Symposium on Acoustical Imaging
 1992acin.work	C	Fourth Aircraft Interior Noise Workshop
 1992acm..proc	C	Asteroids, Comets, Meteors 1991
@@ -12875,6 +12895,13 @@
 1992army.rept	C	Instruction Report Army Engineer Waterways Experiment Station
 1992asdy.conf	C	Astrodynamics 1991
 1992asgt.conf	C	AIAA, 17th Aerospace Ground Testing Conference
+1992ASIB..299	C	Time-Dependent Quantum Molecular Dynamics
+1992ASIC..359	C	The Infrared and Submillimetre Sky after COBE
+1992ASIC..364	C	Black Hole Physics
+1992ASIC..366	C	Clusters and Superclusters of Galaxies
+1992ASIC..373	C	The Sun: A Laboratory for Astrophysics
+1992ASIC..375	C	Sunspots. Theory and Observations
+1992ASIC..377	C	X-Ray Binaries and Recycled Pulsars
 1992asme.meet	C	Fluid Mechanics Phenomena in Microgravity; ASME Winter Annual Meeting
 1992ASPC...22	C	Nonisotropic and Variable Outflows from Stars
 1992ASPC...23	C	Astronomical CCD Observing and Reduction Techniques
@@ -12895,7 +12922,6 @@
 1992ASSL..180	C	The Center, Bulge, and Disk of the Milky Way
 1992atc..book	C	Astrophysics on the Threshold of the 21st Century
 1992batt.work	C	The 1991 NASA Aerospace Battery Workshop
-1992bhp..conf	C	NATO ASIC Proc. 364: Black Hole Physics
 1992boaq.conf	C	Bol. Obs. Astron. Quito
 1992btsf.work	C	Binaries as Tracers of Star Formation
 1992cacm...13	C	16th Annual Conference on Composites and Advanced Ceramic Materials
@@ -12915,7 +12941,6 @@
 1992como.work	C	The Compton Observatory Science Workshop
 1992cqg..conf	C	Classical and Quantum Gravity
 1992crat.conf	C	Cosmic Rays Above 10^19 eV
-1992csg..conf	C	NATO ASIC Proc. 366: Clusters and Superclusters of Galaxies
 1992csim.conf	C	Chemistry and Spectroscopy of Interstellar Molecules
 1992csta.nasa	C	Computational Structures Technology for Airframes and Propulsion Systems
 1992ctap.conf	C	Current Topics in Astrofundamental Physics
@@ -13013,7 +13038,6 @@
 1992inpe.conf	C	Intelligent Processing Equipment
 1992isa..symp	C	38th International Instrumentation Symposium
 1992isaa.conf	C	Israel Society of Aeronautics and Astronautics, 32nd Annual Conference on Aviation and Astronautics
-1992issa.proc	C	NATO ASIC Proc. 359: The Infrared and Submillimetre Sky after COBE
 1992isyp.proc	C	International Space Year in the Pacific Basin
 1992itap.conf	C	International Trends in Astroparticle Physics
 1992iwrn.conf	C	International Weather Radar Networking
@@ -13148,7 +13172,6 @@
 1992sfss.conf	C	Star Formation in Stellar Systems
 1992shwa....1	C	Shock Waves, Volume 1
 1992shwa.conf	C	Shock waves; Proceedings of the 18th International Symposium
-1992sla..conf	C	NATO ASIC Proc. 373: The Sun: A Laboratory for Astrophysics
 1992slew.rept	C	Einstein All-Sky Slew Survey
 1992sme..conf	C	Society of Manufacturing Engineers
 1992sml..conf	C	The Sky in Mayan Literature
@@ -13368,7 +13391,6 @@
 1992stas.book	C	Stellar Astrophysics
 1992stas.work	C	Science and Technology Agency, The 14th Space Station Utilization Workshop in Japan
 1992stma.conf	C	Stellar Magnetism
-1992sto..work	C	NATO ASIC Proc. 375: Sunspots. Theory and Observations
 1992stsc.conf	C	Advances in Solar-Terrestrial Science of China
 1992stsw.proc	C	Strong Shock Waves
 1992stt..conf	C	Third International Symposium on Space Terahertz Technology
@@ -13378,7 +13400,6 @@
 1992tabessymp	C	TABES 92: 8th Annual Technical and Business Exhibition and Symposium
 1992tap..proc	C	Testing the AGN Paradigm
 1992tdar.nasa	C	The Telecommunications and Data Acquisition Report
-1992tdqm.conf	C	NATO ASIB Proc. 299: Time-Dependent Quantum Molecular Dynamics
 1992tfla.work	C	4th Annual Thermal and Fluids Analysis Workshop
 1992thph.conf	C	AIAA, 27th Thermophysics Conference
 1992tmac.conf	C	Towards a Major Atmospheric Cerenkov Detector for TeV Astro/particle Physics
@@ -13402,7 +13423,6 @@
 1992vsr..conf	C	Variable Star Research
 1992wadc.iafc	C	Washington, DC International Astronautical Federation Congress
 1992wttt.proc	C	Wind Tunnels and Wind Tunnel Test Techniques
-1992xbfb.work	C	X-Ray Binaries and the Formation of Binary and Millisecond Radio Pulsars
 1992xrb..work	C	The X-ray Background
 1992xrea.conf	C	X-ray Emission from Active Galactic Nuclei and the Cosmic X-ray Background
 1992ybas.conf	C	1993 Yearbook of Astronomy
@@ -13447,6 +13467,11 @@
 1993arb..nasa	C	Annual Research Briefs, 1992
 1993ars..conf	C	Atmospheric Remote Sensing By Microwave Radiometry
 1993asd..conf	C	Aerospace Design Conference
+1993ASIB..316	C	Super-Intense Laser-Atom Physics
+1993ASIC..393	C	The Origin of Structure in the Universe
+1993ASIC..394	C	Particle Astrophysics and Cosmology
+1993ASIC..403	C	White Dwarfs: Advances in Observation and Theory
+1993ASIC..416	C	The Chemistry of Life's Origins
 1993ASPC...35	C	Massive Stars:  Their Lives in the Interstellar Medium
 1993ASPC...36	C	Planets Around Pulsars
 1993ASPC...37	C	Fiber Optics in Astronomy II
@@ -13489,7 +13514,6 @@
 1993cfda.work	C	11th Workshop for Computational Fluid Dynamic Applications in Rocket Propulsion
 1993cgr..conf	C	Classical General Relativity
 1993chwe.work	C	Chemical Weathering on Mars
-1993clo..conf	C	NATO ASIC Proc. 416: The Chemistry of Life's Origins
 1993cmcw.nasa	C	Computational Methods for Crashworthiness
 1993cmfa.nasa	C	Computational Methods for Failure Analysis and Life Prediction
 1993cmps.rept	C	Cluster: Mission, Payload, and Supporting Activities
@@ -13618,9 +13642,7 @@
 1993olss.conf	C	Optimization of Large Structural Systems
 1993ossk.conf	C	Origin of the Solar System. Kinetic and Thermodynamic Problems
 1993ossr.proc	C	Operation of Segmented Solid Rocket Motors for Space Launchers
-1993osu..conf	C	The Origin of Structure in the Universe
 1993paas.conf	C	Particle Astrophysics
-1993pac..conf	C	Particle Astrophysics and Cosmology
 1993pacm.conf	C	Positional Astronomy and Celestial Mechanics
 1993pavc.conf	C	Perfectionnement de l'Association Vaudoise des Chercheurs en Physique
 1993pdl..conf	C	AIAA, 24th Plasmadynamics and Lasers Conference
@@ -13670,7 +13692,6 @@
 1993sfcd.work	C	The 1992 Seals Flow Code Development Workshop
 1993sfgi.conf	C	Star Formation, Galaxies and the Interstellar Medium
 1993shml.conf	C	Scientific Highlights in Memory of L&eacute;on van Hove
-1993sila.conf	C	NATO ASIB Proc. 316: Super-Intense Laser-Atom Physics
 1993sisp.conf	C	Small Instruments for Space Physics
 1993skwa.book	C	Sky Watcher's Handbook
 1993snm..conf	C	Spectroscopy of New Materials
@@ -14011,7 +14032,6 @@
 1993vurp.conf	C	Vacuum Ultraviolet Radiation Physics X
 1993waap.conf	C	Wavelets and Applications
 1993wais.work	C	West Antarctic Ice Sheet (WAIS) Science Workshop
-1993wdao.conf	C	NATO ASIC Proc. 403: White Dwarfs: Advances in Observation and Theory
 1993wprm.conf	C	Wave Propagation in Random Media (Scintillation)
 1993wpst.conf	C	Wave Phenomena in Solar Terrestrial Plasmas
 1993wwms.conf	C	Women at Work: A Meeting on the Status of Women in Astronomy
@@ -14050,9 +14070,19 @@
 1994amva.conf	C	Advances in Molecular Vibrations and Collision Dynamics, A Research Annual, Volume 2A
 1994amvb.conf	C	Advances in Molecular Vibrations and Collision Dynamics, A Research Annual, Volume 2B
 1994anme...19	C	Antarctic Meteorites XIX
-1994aoa..conf	C	NATO ASIC Proc. 423: Adaptive Optics for Astronomy
 1994arb..nasa	C	Annual Research Briefs, 1994
 1994aret.conf	C	Archeoastronomy &amp; Ethnoastronomy
+1994ASIB..321	C	Topics in Atomic and Nuclear Collisions
+1994ASIB..335	C	Hot and Dense Nuclear Matter
+1994ASIB..338	C	Electroweak Physics and the Early Universe
+1994ASIC..417	C	Theory of Accretion Disks - 2
+1994ASIC..422	C	Cosmical Magnetism
+1994ASIC..423	C	Adaptive Optics for Astronomy
+1994ASIC..427	C	Cosmology and Particle Physics
+1994ASIC..433	C	Solar Surface Magnetism
+1994ASIC..436	C	The Impact of Long-Term Monitoring on Variable Star Research: Astrophysics
+1994ASIC..441	C	Cosmological Aspects of X-Ray Clusters of Galaxies
+1994ASIC..445	C	The Nuclei of Normal Galaxies: Lessons from the Galactic Center
 1994asim.nasa	C	Advanced Structural Integrity Methods for Airframe Durability and Damage Tolerance, Part 2
 1994ASPC...54	C	The Physics of Active Galaxies
 1994ASPC...55	C	Optical Astronomy from the Earth and Moon
@@ -14079,7 +14109,6 @@
 1994batt.work	C	1993 NASA Aerospace Battery Workshop
 1994bbc..conf	C	Building Blocks of Creation, From Microfermis to Megaparsecs
 1994caty.conf	C	CMB Anisotropies Two Years after COBE: Observations, Theory and the Future
-1994caxc.conf	C	Cosmological Aspects of X-Ray Clusters of Galaxies
 1994cddp.conf	C	Circumstellar Dust Disks and Planet Formation
 1994cdm..conf	C	Cosmological Dark Matter
 1994ceme.symp	C	26th Symposium on Celestial Mechanics,
@@ -14091,10 +14120,8 @@
 1994cmcp.conf	C	Cosmical Magnetism
 1994cmls.conf	C	Circumstellar Media in Late Stages of Stellar Evolution
 1994cogr.conf	C	Cosmology and Gravitation
-1994coma.conf	C	NATO ASIC Proc. 422: Cosmical Magnetism
 1994coun.conf	C	The Cold Universe
 1994cpms.conf	C	Chemically Peculiar and Magnetic Stars
-1994cpp..conf	C	NATO ASIC Proc. 427: Cosmology and Particle Physics
 1994ctds.conf	C	Charge-transfer Devices in Spectroscopy
 1994dana.conf	C	Dynamics and Astrometry of Natural and Artificial Celestial Bodies
 1994ddpn.conf	C	Dusty and Dirty Plasmas, Noise, and Chaos in Space and in the Laboratory
@@ -14112,7 +14139,6 @@
 1994eiut.conf	C	'94 Electroweak Interactions and Unified Theories
 1994ems..conf	C	Evolution of Massive Stars
 1994emsp.conf	C	Seventh European Meeting on Solar Physics
-1994epeu.conf	C	NATO ASIB Proc. 338: Electroweak Physics and the Early Universe
 1994ept..conf	C	21st JANNAF Exhaust Plume Technology Meeting
 1994esa..conf	C	IAU Colloq. 147: The Equation of State in Astrophysics
 1994ESASP.363	C	Euro-Latin American Space Days
@@ -14135,7 +14161,6 @@
 1994gss..conf	C	Gravitation: the Spacetime Structure, SILARG VIII
 1994gsso.conf	C	Galactic and Solar System Optical Astrometry
 1994hadg.conf	C	Handling and Archiving Data from Ground-Based Telescopes
-1994hdnm.conf	C	NATO ASIB Proc. 335: Hot and Dense Nuclear Matter
 1994hdtc.conf	C	Hazards Due to Comets and Asteroids
 1994heam.book	C	High Energy Astrophysics
 1994hhvg.conf	C	Der Himmel hat Viele Gesichter. Winfried Petri zum 80
@@ -14148,7 +14173,6 @@
 1994IAUS..161	C	Astronomy from Wide-Field Imaging
 1994IAUS..162	C	Pulsation; Rotation; and Mass Loss in Early-Type Stars
 1994ilce.work	C	International Lighting in Controlled Environments Workshop
-1994iltm.conf	C	NATO ASIC Proc. 436: The Impact of Long-Term Monitoring on Variable Star Research: Astrophysics
 1994imfm.conf	C	Instrumentation for Magnetic Field Measurements
 1994imoj.conf	C	Intensive Monitoring of OJ 287
 1994inbi.conf	C	Saas-Fee Advanced Course 22: Interacting Binaries
@@ -14200,7 +14224,6 @@
 1994ncoa.conf	C	The Nature of Compact Objects in Active Galactic Nuclei
 1994ndrk.rept	C	New Developments Regarding the KT Event and Other Catastrophes in Earth History
 1994nhxr.conf	C	New Horizon of X-Ray Astronomy. First Results from ASCA
-1994nngl.conf	C	NATO ASIC Proc. 445: The Nuclei of Normal Galaxies: Lessons from the Galactic Center
 1994nsa..book	C	Numerical Simulations in Astrophysics
 1994nsns.conf	C	Nuclear Shapes and Nuclear Structure At Low Excitation Energies
 1994oga..book	C	The Observer's Guide to Astronomy
@@ -14522,7 +14545,6 @@
 1994spmt.nasa	C	Astrophysical Science with a Spaceborne Photometric Telescope
 1994sprt.nasa	C	13th Space Photovoltaic Research and Technology Conference (SPRAT 13)
 1994spub.rept	C	Sao Paulo Univ. Brazil Conference Paper
-1994ssm..work	C	Solar Surface Magnetism
 1994ssoe.conf	C	2nd ERS-1 Symposium on Space at the Service of Our Environment
 1994ssur.work	C	3rd International Workshop on Squeezed States and Uncertainty Relations
 1994step.conf	C	Solar-Terrestrial Energy Program
@@ -14534,8 +14556,6 @@
 1994svsp.coll	C	Invited Papers from IAU Colloquium 143: The Sun as a Variable Star: Solar and Stellar Irradiance Variations
 1994swms.conf	C	The Solar Wind-Magnetosphere System
 1994swsm.conf	C	Solar Wind Sources of Magnetospheric Ultra-Low-Frequency Waves
-1994tad..conf	C	NATO ASIC Proc. 417: Theory of Accretion Disks - 2
-1994tanc.conf	C	NATO ASIB Proc. 321: Topics in Atomic and Nuclear Collisions
 1994tapp.conf	C	Trends in Astroparticle-Physics
 1994tdar.nasa	C	In its The Telecommunications and Data Acquisition Report
 1994tetr....1	C	Technology 2003: The Fourth National Technology Transfer Conference and Exposition, Volume 1
@@ -14598,6 +14618,13 @@
 1995AnIPS..11	C	Asymmetrical Planetary Nebulae
 1995anme...20	C	Antarctic Meteorites XX
 1995aokt.conf	C	Astronomical Observatory of the Kiev Taras Shevchenko University - 150 years
+1995ASIB..336	C	From Newton to Chaos
+1995ASIB..348	C	Physics with Mutiply Charged Ions
+1995ASIB..350	C	Frontiers in Particle Physics
+1995ASIC..450	C	The Lives of the Neutron Stars
+1995ASIC..458	C	Currents in High-Energy Astrophysics
+1995ASIC..467	C	Current Topics in Astrofundamental Physics : The Early Universe
+1995ASIC..469	C	The Opacity of Spiral Disks
 1995ASPC...70	C	Groups of Galaxies
 1995ASPC...71	C	IAU Colloq. 149: Tridimensional Optical Spectroscopic Methods in Astrophysics
 1995ASPC...72	C	Millisecond Pulsars.  A Decade of Surprise
@@ -14624,13 +14651,11 @@
 1995bpca.work	C	ICASE/LaRC Workshop on Benchmark Problems in Computational Aeroacoustics (CAA)
 1995cdhs.conf	C	Chaos and diffusion in Hamiltonian systems
 1995ceme.symp	C	27th Symposium on Celestial Mechanics,
-1995chea.conf	C	Currents in High-Energy Astrophysics
 1995chst.conf	C	Calibrating Hubble Space Telescope.  Post Servicing Mission
 1995clun.conf	C	Clustering in the Universe
 1995cmt..nasa	C	Computational Modeling of Tires
 1995cpvl.conf	C	CP Violation and the Limits of the Standard Model
 1995cscs.conf	C	Cross-Scale Coupling in Space Plasmas, Geophysical Monograph 93
-1995ctap.conf	C	NATO ASIC Proc. 467: Current Topics in Astrofundamental Physics : The Early Universe
 1995ctm..work	C	Industry-Wide Workshop on Computational Turbulence Modeling
 1995cuhe.conf	C	Calibrating and Understanding HST and ESO Instruments
 1995deps.rept	C	Diffuse Emission and Pathological Seyfert Spectra
@@ -14656,10 +14681,8 @@
 1995ESOC...53	C	Calibrating and Understanding HST and ESO Instruments
 1995fmet.symp	C	Flight Mechanics/Estimation Theory Symposium 1995
 1995fmw..conf	C	The Formation of the Milky Way
-1995fntc.conf	C	NATO ASIB Proc. 336: From Newton to Chaos
 1995foap.conf	C	Frontier Objects in Astrophysics and Particle Physics
 1995fpa..conf	C	Future Physics and Accelerators
-1995fpp..conf	C	NATO ASIB Proc. 350: Frontiers in Particle Physics
 1995fras.conf	C	Frontiers of Astrophysics
 1995fthe.conf	C	Field Theory, High Energy and Astroparticle Physics
 1995fvmr.conf	C	The Face of Venus. The Magellan Radar-Mapping Mission
@@ -14708,7 +14731,6 @@
 1995LNP...459	R	The Physics and Chemistry of Interstellar Molecular Clouds
 1995LNP...462	R	Small-Scale Structures in Three-Dimensional Hydrodynamic and Magnetohydrodynamic Turbulence
 1995LNP...463	R	Galaxies in the Young Universe
-1995lns..conf	C	The Lives of the Neutron Stars
 1995lssu.conf	C	Large Scale Structure in the Universe
 1995maa..conf	C	The Modern Amateur Astronomer
 1995mbrt.conf	C	Mass Balance and Related Topics of the Greenland Ice Sheet
@@ -14726,7 +14748,6 @@
 1995NYASA.755	C	Fundamental Problems in Quantum Theory
 1995NYASA.759	C	Seventeeth Texas Symposium on Relativistic Astrophysics and Cosmology
 1995oaa..conf	C	The Observational Amateur Astronomer
-1995osd..conf	C	NATO ASIC Proc. 469: The Opacity of Spiral Disks
 1995otw..conf	C	Oxford Torus Workshop
 1995parr.conf	C	Planetary Astronomy from the Renaissance to the Rise of Astrophysics. Part B: The Eighteenth and Nineteenth Centuries
 1995pcc..conf	C	Second Paris Cosmology Colloquium
@@ -14734,7 +14755,6 @@
 1995pig..conf	C	Physics of Ionized Gases, XV International Symposium
 1995pimo.conf	C	Proceedings of the International Meteor Conference, 13th IMC, Belogradchik, Bulgaria, 1994
 1995pist.conf	C	Total Solar Eclipse of November 3, 1994
-1995pmci.conf	C	NATO ASIB Proc. 348: Physics with Mutiply Charged Ions
 1995pnac.conf	C	Particle and Nuclear Astrophysics and Cosmology in the Next Millenium
 1995pns..book	C	Physics of Neutron Stars
 1995ppap.conf	C	Physical Processes in Astrophysics
@@ -15117,6 +15137,9 @@
 1996anme...21	C	Antarctic Meteorites XXI
 1996app..conf	C	Astro-Particle Physics
 1996asbi.work	C	Astrobiology Workshop: Leadership in Astrobiology
+1996ASIC..476	C	String Gravity and Physics at the Planck Energy Scale
+1996ASIC..477	C	Evolutionary Processes in Binary Stars
+1996ASIC..481	C	Solar and Astrophysical Magnetohydrodynamic Flows
 1996ASPC...87	C	New Observing Modes for the Next Century
 1996ASPC...88	C	Clusters, Lensing, and the Future of the Universe
 1996ASPC...89	C	Astronomy Education: Current Developments, Future Coordination
@@ -15172,7 +15195,6 @@
 1996eaun.book	C	The Early Universe
 1996eiaf.conf	C	Evolution of Igneous Asteroids: Focus on Vesta and the HED Meterorites
 1996emv..work	C	Evolution of Martian Volatiles
-1996epbs.conf	C	NATO ASIC Proc. 477: Evolutionary Processes in Binary Stars
 1996eppp.conf	C	Elementary Particle Physics: Present and Future
 1996erca....2	C	Physics and Chemistry of the Atmospheres of the Earth and Other Objects of the Solar System
 1996ESASP.375	C	On-board Real-time Software - ISOBRTS
@@ -15259,10 +15281,8 @@
 1996rexs.conf	C	Raman Emission by X-ray Scattering
 1996rftu.proc	C	Roentgenstrahlung from the Universe
 1996rscc.conf	C	Relativity and Scientific Computing. Computer Algebra, Numerics, Visualization
-1996samf.conf	C	Solar and Astrophysical Magnetohydrodynamic Flows
 1996scmj.book	C	Stars in a Cluster: MT John University Observatory
 1996sgni.conf	C	Spiral Galaxies in the Near-IR
-1996sgpp.conf	C	String Gravity and Physics at the Planck Energy Scale
 1996sgte.conf	C	The SGTE Casebook: Thermodynamics at Work
 1996slma.conf	C	Science with Large Millimetre Arrays
 1996smao.conf	C	Small Astronomical Observatories
@@ -15639,6 +15659,14 @@
 1997asca.conf	C	The Art and Science of CCD Astronomy
 1997ascu.conf	C	Astronomy and Culture
 1997ase..work	C	Advances in Stellar Evolution
+1997ASIB..363	C	Masses of Fundamental Particles
+1997ASIB..364	C	Quantum Fields and Quantum Space Time
+1997ASIC..486	C	Thermonuclear Supernovae
+1997ASIC..487	C	The Cosmic Dust Connection
+1997ASIC..494	C	Theoretical and Observational Problems Related to Solar Eclipses
+1997ASIC..501	C	High angular resolution in astrophysics
+1997ASIC..502	C	The Cosmic Microwave Background
+1997ASIC..503	C	Generation of Cosmological Large-Scale Structure.
 1997ASPC..111	C	Magnetic Reconnection in the Solar Atmosphere
 1997ASPC..113	C	IAU Colloq. 159: Emission Lines in Active Galaxies: New Methods and Techniques
 1997ASPC..114	C	Young Galaxies and QSO Absorption-Line Systems
@@ -15675,10 +15703,8 @@
 1997bsm..conf	C	Beyond the Standard Model V.
 1997cbr..conf	C	Cosmological Background Radiation
 1997cdc..conf	C	Critical Dialogues in Cosmology
-1997cduc.conf	C	NATO ASIC Proc. 487: The Cosmic Dust Connection
 1997ceme.symp	C	29th Symposium on Celestial Mechanics,
 1997ciha.book	C	The Cambridge Illustrated History of Astronomy
-1997cmb..conf	C	NATO ASIC Proc. 502: The Cosmic Microwave Background
 1997coel.conf	C	Comets and the Origin and Evolution of Life
 1997como.conf	C	Atti Del SVI Congresso Nazionale Di Storia Della Fisica E Dell'Astornomia
 1997cpp..conf	C	Critical Problems in Physics
@@ -15731,7 +15757,6 @@
 1997fose.conf	C	Four Seas Conference
 1997fqqf.conf	C	Fluctuations Quantiques/Quantum Fluctuations
 1997gash.conf	C	Geomagnetism and Aeronomy with Special Historical Case Studies
-1997gcls.conf	C	NATO ASIC Proc. 503: Generation of Cosmological Large-Scale Structure.
 1997ghrs.rept	C	GHRS Instrument Science Report
 1997gpsc.conf	C	Gigahertz Peaked Spectrum and Compact Steep Spectrum Radio Sources
 1997grg..conf	C	General Relativity and Gravitation
@@ -15740,7 +15765,6 @@
 1997gsr..proc	C	Galaxy Scaling Relations: Origins, Evolution and Applications
 1997gwd..conf	C	Gravitational Wave Detection
 1997gwsd.conf	C	Gravitational Waves: Sources and Detectors
-1997hara.conf	C	NATO ASIC Proc. 501: High angular resolution in astrophysics
 1997hecn.conf	C	High Energy Cosmic Neutrinos: Origin, Production and Detection
 1997hep..conf	C	High-Energy Physics
 1997hepc.conf	C	High-Energy Physics and Cosmology: Celebrating the Impact of 25 Years of Coral Gables Conferences
@@ -15778,7 +15802,6 @@
 1997lrc..rept	C	NASA Langley Research Center Report
 1997mast.book	C	Magnetic Storms, Geophysical Monograph Series, Vol. 98
 1997mba..conf	C	Microwave Background Anisotropies
-1997mfp..conf	C	NATO ASIB Proc. 363: Masses of Fundamental Particles
 1997msma.conf	C	Millimeter and Submillimeter Astronomy at 10 Milli-arcseconds Resolution
 1997mto..work	C	Mars Telescopic Observations Workshop II
 1997mtsr.work	C	LPI Technical Report No. 97-01: Mars 2005 Sample Return Workshop
@@ -15801,7 +15824,6 @@
 1997ppvs.conf	C	Past and present variability of the solar-terrestrial system: measurement, data analysis and theoretical models
 1997pre4.conf	C	Planetary Radio Emission IV
 1997ptfc.conf	C	Physics in the 21st Century
-1997qfqs.conf	C	NATO ASIB Proc. 364: Quantum Fields and Quantum Space Time
 1997quho.conf	C	Quasar Hosts
 1997raco.conf	C	Relativistic Astrophysics and Cosmology
 1997raqm.book	C	Recent Advances in Quantum Monte Carlo Methods
@@ -16129,9 +16151,7 @@
 1997svlt.work	C	Science with the VLT Interferometer
 1997tcca.conf	C	Proceedings of the 21st Century Chinese Astronomy Conference
 1997tewp.conf	C	Topics in Electroweak Physics,
-1997thsu.conf	C	NATO ASIC Proc. 486: Thermonuclear Supernovae
 1997tiph.conf	C	Tidal Phenomena.
-1997topr.conf	C	NATO ASIC Proc. 494: Theoretical and Observational Problems Related to Solar Eclipses
 1997ttp..conf	C	Topics in Theoretical Physics
 1997tuwi.conf	C	Technologieprojekte zur Unterst&uuml;tzung von Weltraum-Interferometrie-Missionen
 1997uiia.conf	C	Uncooled Infrared Imaging Arrays and Systems
@@ -16196,6 +16216,8 @@
 1998asal.conf	C	Astrophysics and Algorithms
 1998ascr.conf	C	Applied Spectroscopy: A compact reference for practitioners
 1998asct.conf	C	Advances in Solar Connection with Transient Interplanetary Phenomena
+1998ASIC..511	C	Current Topics in Astrofundamental Physics: Primordial Cosmology
+1998ASIC..515	C	The Many Faces of Neutron Stars.
 1998ASPC..131	C	Properties of Hot Luminous Stars
 1998ASPC..132	C	Star Formation with the Infrared Space Observatory
 1998ASPC..133	C	Science With The NGST
@@ -16248,7 +16270,6 @@
 1998cpmg.conf	C	Chemistry and Physics of Molecules and Grains in Space.  Faraday Discussions No. 109
 1998cqdc.conf	C	CLassical and Quantum Dynamics in Condensed Phase Simulations
 1998csat.conf	C	Color for Science, Art and Technology
-1998ctap.conf	C	NATO ASIC Proc. 511: Current Topics in Astrofundamental Physics: Primordial Cosmology
 1998ctcr.conf	C	Current Topics of Cosmic Ray Research with EAS Research
 1998ctmc.conf	C	Current Topics in Mathematical Cosmology
 1998cvsw.conf	C	Cyclical Variability in Stellar Winds
@@ -16314,11 +16335,9 @@
 1998lsst.conf	C	Large Scale Structure:  Tracks and Traces
 1998masg.conf	C	The Molecular Astrophysics of Stars and Galaxies
 1998mcdg.proc	C	Magellanic Clouds and Other Dwarf Galaxies
-1998mcod.conf	C	The Magellanic Clouds and Other Dwarf Galaxies
 1998mdis.conf	C	Mission Design and Implementation of Satellite Constellations
 1998mebm.conf	C	Maximum Entropy and Bayesian Methods
 1998mfgb.work	C	Mars Field Geology, Biology. and Paleontology Workshop
-1998mfns.conf	C	NATO ASIC Proc. 515: The Many Faces of Neutron Stars.
 1998mico.conf	C	Telescope Mirror Coating and Cleaning Conference
 1998mmb..proc	C	Multifrequency Monitoring of Blazars
 1998mmws.work	C	Martian Meteorites: Where do we Stand and Where are we Going?  Abstracts from a workshop
@@ -16782,6 +16801,12 @@
 1999aoa..book	C	Adaptive Optics in Astronomy
 1999aphi.conf	C	Atomic Physics with Heavy Ions
 1999arse.conf	C	International Symposium on Astrophysics Research and Science Education
+1999ASIC..522	C	The Dynamics of Small Bodies in the Solar System, A Major Key to Solar System Studies
+1999ASIC..523	C	Formation and Evolution of Solids in Space
+1999ASIC..532	C	Planets Outside the Solar System: Theory and Observations
+1999ASIC..537	C	Interball in the ISTP Program : Studies of the Solar Wind-Magnetosphere-Ionosphere Interaction
+1999ASIC..540	C	The Origin of Stars and Planetary Systems
+1999ASIC..541	C	Theoretical and Observational Cosmology
 1999asmm.conf	C	The Abdus Salam Memorial Meeting
 1999ASPC..156	C	Highly Redshifted Radio Lines
 1999ASPC..157	C	Annapolis Workshop on Magnetic Cataclysmic Variables
@@ -16845,7 +16870,6 @@
 1999dmap.conf	C	Dark matter in Astrophysics and Particle Physics
 1999DPS....31	C	AAS/Division for Planetary Sciences Meeting Abstracts #31
 1999drtb.conf	C	DFG-Rundgespr&auml;ch zum Thema Bezugssysteme
-1999dsbs.conf	C	NATO ASIC Proc. 522: The Dynamics of Small Bodies in the Solar System, A Major Key to Solar System Studies
 1999dtrp.conf	C	Diffuse Thermal and Relativistic Plasma in Galaxy Clusters
 1999elss.conf	C	Evolution of Large Scale Structure : From Recombination to Garching
 1999ESASP.426	C	Aerothermodynamics for space vehicles
@@ -16866,7 +16890,6 @@
 1999evga.conf	C	European VLBI for Geodesy and Astrometry
 1999ewgr.book	C	The Expanding Worlds of General Relativity
 1999fbpp.conf	C	Few-Body Problems in Physics '98
-1999fess.conf	C	NATO ASIC Proc. 523: Formation and Evolution of Solids in Space
 1999fftq.conf	C	Horizons in World Physics 227: Frontiers of Field Theory, Quantum Gravity and Strings
 1999fgb..conf	C	The Formation of Galactic Bulges
 1999ficm.conf	C	The Fifth International Conference on Mars
@@ -16902,7 +16925,6 @@
 1999ICRC....7	C	26th International Cosmic Ray Conference (ICRC26), Volume 7
 1999ICRC...26	C	26th International Cosmic Ray Conference (ICRC26)
 1999idm..conf	C	The Identification of Dark Matter
-1999iip..conf	C	NATO ASIC Proc. 537: Interball in the ISTP Program : Studies of the Solar Wind-Magnetosphere-Ionosphere Interaction
 1999imda.coll	C	Impact of Modern Dynamics in Astronomy
 1999intu.conf	C	Interstellar Turbulence
 1999iprs.conf	C	Information Processing for Remote Sensing
@@ -16953,7 +16975,6 @@
 1999nwap.conf	C	New Worlds in Astroparticle Physics II
 1999oaaf.conf	C	Observational Astrophysics in Asia and its Future
 1999oep..conf	C	On Einstein's Path: essays in honor of Engelbert Schucking
-1999osps.conf	C	NATO ASIC Proc. 540: The Origin of Stars and Planetary Systems
 1999ouwo.book	C	Our Worlds
 1999pac..conf	C	18th IEEE Particle Accelerator Conference
 1999pafi.conf	C	Particles and Fields, Eighth Mexican School
@@ -16961,7 +16982,6 @@
 1999pcim.conf	C	The Physics and Chemistry of the Interstellar Medium
 1999pf...conf	C	Particles and Fields
 1999pimo.conf	C	Proceedings of the International Meteor Conference, 17th IMC, Stara Lesna, Slovakia, 1998
-1999poss.conf	C	NATO ASIC Proc. 532: Planets Outside the Solar System: Theory and Observations
 1999psc..conf	C	Particles, Strings and Cosmology (PASCOS 98)
 1999ptep.proc	C	Plasma Turbulence and Energetic Particles in Astrophysics
 1999ptgr.conf	C	Pulsar Timing, General Relativity and the Internal Structure of Neutron Stars
@@ -17337,7 +17357,6 @@
 1999tcra.conf	C	Topics in Cosmic-Ray Astrophysics
 1999ters.conf	C	Tackling the Engineering Resources Shortage, Creating New Paradigms for Developing and Retaining Women Engineers
 1999thci.conf	C	Trapping Highly Charged Ions: Fundamentals and Applications
-1999toc..conf	C	NATO ASIC Proc. 541: Theoretical and Observational Cosmology
 1999tpme.conf	C	Transfer Phenomena in Magnetohydrodynamic and Electroconducting Flows
 1999upse.conf	C	STScI Symp. Ser.12: Unsolved Problems in Stellar Evolution
 1999usra.proc	C	Undergraduate Symposium on Research in Astronomy
@@ -17403,6 +17422,10 @@
 2000aprs.conf	C	Astrophysical Phenomena Revealed by Space VLBI
 2000arxt.conf	C	Rossi2000: Astrophysics with the Rossi X-ray Timing Explorer
 2000asfb.proc	C	Proceedings of the Sixth SFB-375 Ringberg Workshop Astroteilchenphysik
+2000ASIC..544	C	Variable Stars as Essential Astrophysical Tools
+2000ASIC..549	C	Topological Defects and the Non-Equilibrium Dynamics of Symmetry Breaking Phase Transitions
+2000ASIC..551	C	Laser Guide Star Adaptive Optics for Astronomy
+2000ASIC..558	C	Advances in Solar Research at Eclipses from Ground and from Space
 2000ASPC..195	C	Imaging the Universe in Three Dimensions
 2000ASPC..196	R	Thermal Emission Spectroscopy and Analysis of Dust, Disks, and Regoliths
 2000ASPC..197	C	Dynamics of Galaxies: from the Early Universe to the Present
@@ -17431,7 +17454,6 @@
 2000ASPC..220	C	Amateur - Professional Partnerships in Astronomy
 2000ASPC..221	C	Stars, Gas and Dust in Galaxies: Exploring the Links
 2000asqu.book	C	Allen's Astrophysical Quantities
-2000asre.conf	C	NATO ASIC Proc. 558: Advances in Solar Research at Eclipses from Ground and from Space
 2000ASSL..250	R	Information Handling in Astronomy
 2000ASSL..256	R	Organizations and Strategies in Astronomy
 2000astu.conf	C	KITP Conference: Astrophysical Turbulence
@@ -17519,7 +17541,6 @@
 2000jsrs.meet	C	Journ&eacute;es 1999 - syst&egrave;mes de r&eacute;f&eacute;rence spatio-temporels &amp; IX. Lohrmann-Kolloquium. Motion of celestial bodies, astrometry and astronomical reference frames
 2000kfz..book	C	Karl Friedrich Zollner and the Historical Dimension of Astronomical Photometry : a Collection of Papers on the History of Photometry
 2000kthr.conf	C	The Kth Reunion
-2000lgsa.conf	C	Laser Guide Star Adaptive Optics for Astronomy
 2000lina.conf	C	Linac 2000
 2000LNP...534	R	Light Scattering from Microstructure
 2000LNP...535	R	Electronic Structure and Physical Properties of Solids. The Use of the LMTO Method
@@ -17920,14 +17941,12 @@
 2000stas.conf	C	Stellar Astrophysics
 2000stt..conf	C	Eleventh International Symposium on Space Terahertz Technology
 2000tcsp.conf	R	Terrestrial and Cosmic Spherules
-2000tdne.conf	C	Topological Defects and the Non-Equilibrium Dynamics of Symmetry Breaking Phase Transitions
 2000tias.conf	C	Type Ia Supernovae, Theory and Cosmology
 2000tjab.conf	C	300 Jahre Astronomie in Berlin und Potsdam
 2000tmcs.conf	C	IAU Colloq. 180: Towards Models and Constants for Sub-Microarcsecond Astrometry
 2000udq..conf	C	Understanding Deconfinement in QCD
 2000upse.conf	C	Unsolved Problems in Stellar Evolution
 2000vlms.conf	C	Very Low-Mass Stars and Brown Dwarfs
-2000vsea.conf	C	NATO ASIC Proc. 544: Variable Stars as Essential Astrophysical Tools
 2000win..conf	C	Weak Interactions and Neutrinos
 2000yera.conf	C	Young European Radio Astronomers' Conference (YERAC)
 2001aard.conf	C	Astronomy and Astrophysics. Recent Developments
@@ -18000,6 +18019,8 @@
 2001appc.conf	C	APPC 2000
 2001aprs.conf	C	2001 Asia-Pacific Radio Science Conference AP-RASC '01
 2001ashe.conf	C	Astrophysical Sources of High Energy Particles and Radiation
+2001ASIB..42:	C	osmic Radiations: From Astronomy to Particle Physics
+2001ASIC..565	C	Structure Formation in the Universe
 2001ASPC..222	C	The Physics of Galaxy Formation
 2001ASPC..223	C	11th Cambridge Workshop on Cool Stars, Stellar Systems and the Sun
 2001ASPC..224	C	Probing the Physics of Active Galactic Nuclei
@@ -18055,7 +18076,6 @@
 2001coev.conf	C	Cosmic evolution
 2001cosm.conf	C	COSMO-2000
 2001cpgl.conf	C	Cosmological Physics with Gravitational Lensing
-2001crfa.conf	C	NATO ASIB Proc. 42: Cosmic Radiations: From Astronomy to Particle Physics
 2001csqp.conf	C	Conference on Compact Stars in the QCD Phase Diagram
 2001ctap.conf	C	Current Topics in Astrofundamental Physics: the Cosmic Microwave Background
 2001ctc..conf	C	Challenges for the 21st Century
@@ -18230,7 +18250,6 @@
 2001sddm.symp	C	Sources and Detection of Dark Matter and Dark Energy in the Universe
 2001sem..conf	C	Strong and Electroweak Matter 2000
 2001sf2a.conf	C	SF2A-2001: Semaine de l'Astrophysique Francaise
-2001sfu..conf	C	NATO ASIC Proc. 565: Structure Formation in the Universe
 2001sgnf.conf	C	Starburst Galaxies: Near and Far
 2001sgrb.conf	C	Supernovae and Gamma-Ray Bursts: the Greatest Explosions since the Big Bang
 2001shem.work	C	Science and the Human Explorations of Mars
@@ -19232,6 +19251,7 @@
 2003ala..conf	C	Astronomy in Latin America
 2003and..book	C	Advances in Nonlinear Dynamics
 2003asdu.conf	C	Astrophysics of Dust
+2003ASIB..105	C	White Dwarfs
 2003ASPC..286	C	Current Theoretical Models and Future High Resolution Solar Observations: Preparing for ATST
 2003ASPC..287	C	Galactic Star Formation Across the Stellar Mass Spectrum
 2003ASPC..288	C	Stellar Atmosphere Modeling
@@ -19773,7 +19793,6 @@
 2003ver..conf	C	Vacuum Energy - Renormalization
 2003ves..book	C	Vortex Electronis and SQUIDs
 2003vhep.conf	C	Very High Energy Phenomena in the Universe
-2003whdw.conf	C	NATO ASIB Proc. 105: White Dwarfs
 2003xseh.proc	C	XEUS - studying the evolution of the hot universe
 2004AAS...203	C	American Astronomical Society Meeting Abstracts #203
 2004AAS...204	C	American Astronomical Society Meeting Abstracts #204
@@ -20510,6 +20529,9 @@
 2005AIPC..805	C	Particles, Strings, and Cosmology
 2005aoim.book	C	Complex Computing-Networks: Brain-like and Wave-oriented Electrodynamic Algorithms
 2005apcn.book	C	Applied Physics of Carbon Nanotubes: Fundamentals of Theory, Optics and Transport Devices, NanoScience and Technology
+2005ASIB..188	C	Particle Physics and Cosmology: the Interface
+2005ASIB..198	C	Optics in astrophysics
+2005ASIB..210	C	The Electromagnetic Spectrum of Neutron Stars
 2005asli.symp	C	Astrophysics of Life
 2005ASPC..328	C	Binary Radio Pulsars
 2005ASPC..329	C	Nearby Large-Scale Structures and the Zone of Avoidance
@@ -20588,7 +20610,6 @@
 2005ESASP.603	C	'i-SAIRAS 2005' - The 8th International Symposium on Artificial Intelligence, Robotics and Automation in Space
 2005ESASP.609	C	The Concluding Workshop The Extended ESA History Project
 2005ESASP1281	C	Topical Teams in Life & Physical Sciences: Towards New Research Applications
-2005esns.conf	C	NATO ASIB Proc. 210: The Electromagnetic Spectrum of Neutron Stars
 2005etqs.conf	C	Endophysics, Time, Quantum and the Subjective
 2005etsm.conf	R	High Energy Gamma-ray Experiments
 2005evlb.conf	C	Proceedings of the 4th eVLBI workshop
@@ -20703,7 +20724,6 @@
 2005odti.book	C	Optical Imaging Sensors and Systems for Homeland Security Applications
 2005oicc.conf	C	Open Issues in Core Collapse Supernova Theory
 2005omeg.conf	C	Origin of Matter and Evolution of Galaxies
-2005opas.conf	C	NATO ASIB Proc. 198: Optics in astrophysics
 2005pac..conf	C	21st Particle Accelerator Conference (PAC 05)
 2005paoa.conf	C	KITP Conference: Physics of Astrophysical Outflows and Accretion Disks
 2005paoa.prog	C	KITP Program: Physics of Astrophysical Outflows and Accretion Disks
@@ -20720,7 +20740,6 @@
 2005pmds.book	C	Payload and Mission Definition in Space Sciences
 2005pne3.book	C	Progress in Nano-Electro-Optics III: Industrial Applications and Dynamics of the Nano-Optical System
 2005pnsr.conf	C	Progress in Neutron Star Research
-2005ppci.conf	C	NATO ASIB Proc. 188: Particle Physics and Cosmology: the Interface
 2005ppls.conf	C	Particle Physics in Laboratory, Space and Universe
 2005ppu..conf	C	Particle Physics and the Universe
 2005prpl.conf	C	Protostars and Planets V Posters
@@ -21751,6 +21770,7 @@
 2007blho.conf	C	Space Telescope Science Institute Symposium: Black Holes
 2007bllm.book	C	Brilliant Light in Life and Material Sciences
 2007bmic.book	C	Biological Membrane Ion Channels: Dynamics, Structure, and Applications, Biological And Medical Physics Biomedical Engineering
+2007caih.book	C	Comet/Asteroid Impacts and Human Society: An Interdisciplinary Approach
 2007caq..conf	C	Continuous Advances in QCD 2006
 2007cdt..conf	C	Condensed Matter Theories &ndash; volume 22
 2007chdy.conf	C	Chiral Dynamics 2006
@@ -24757,8 +24777,8 @@
 2011aogs...23	R	Advances in Geosciences, Volume 23: Hydrological Science (HS)
 2011aogs...24	R	Advances in Geosciences, Volume 24: Ocean Science (OS)
 2011aogs...25	R	Advances in Geosciences, Volume 25: Planetary Science (PS)
-2011aogs...26	R	Advances in Geosciences, Volume 26: Solid Earth (SE)
-2011aogs...27	R	Advances in Geosciences, Volume 27: Solar Terrestrial (ST)
+2011aogs...26	R	Advances in Geosciences, Volume 26: Solid Earth Science (SE)
+2011aogs...27	R	Advances in Geosciences, Volume 27: Solar Terrestrial Science (ST)
 2011apce.conf	C	AGN Physics in the CTA Era (AGN 2011)
 2011apn5.conf	C	Asymmetric Planetary Nebulae 5 Conference
 2011ApSSP...1	C	Future Professional Communication in Astronomy II
@@ -25384,6 +25404,10 @@
 2012AIPC.1509	C	14th International Workshop on Targetry and Target Chemistry
 2012amld.book	C	Advances in Machine Learning and Data Mining for Astronomy
 2012amos.conf	C	Advanced Maui Optical and Space Surveillance Technologies Conference
+2012aogs...28	R	Advances in Geosciences, Volume 28: Atmostpheric Science (AS)
+2012aogs...29	R	Advances in Geosciences, Volume 29: Hydrological Science (HS)
+2012aogs...30	R	Advances in Geosciences, Volume 30: Planetary Science (PS)
+2012aogs...31	R	Advances in Geosciences, Volume 31: Solid Earth Science (SE)
 2012aska.conf	C	From Antikythera to the Square Kilometre Array: Lessons from the Ancients
 2012ASPC..452	C	Fifth Meeting on Hot Subdwarf Stars and Related Objects
 2012ASPC..453	C	Advances in Computational Astrophysics: Methods, Tools, and Outcome
@@ -25942,7 +25966,7 @@
 2013ASSL..396	C	The First Galaxies
 2013ASSP...31	C	Stellar Pulsations: Impact of New Instrumentation and New Insights
 2013ASSP...32	C	Protection of Materials and Structures From the Space Environment
-2013ASSP...34	C	Cosmic Rays in Star-Forming Environments
+2013ASSP...34	R	Cosmic Rays in Star-Forming Environments
 2013ASSP...35	C	The Early Evolution of the Atmospheres of Terrestrial Planets
 2013ASSP...37	C	Thirty Years of Astronomical Discovery with UKIRT
 2013aste.book	R	Asteroids: Prospective Energy and Material Resources
@@ -28572,7 +28596,7 @@
 2018neos.conf	C	Neutrino Oscillation Workshop
 2018npa..conf	C	XXVIII International Conference on Neutrino Physics and Astrophysics
 2018obha.book	C	Royal Astronomical Society of Canada Observer's Handbook 2018
-2018oeps.book	C	Oxford Research Encyclopedia of Planetary Science
+2018oeps.book	R	Oxford Research Encyclopedia of Planetary Science
 2018oss..book	C	Outer Solar System
 2018pas6.conf	C	The RR Lyrae 2017 Conference. Revival of the Classical Pulsators: from Galactic Structure to Stellar Interior Diagnostics
 2018pas7.conf	C	XXXVIII Polish Astronomical Society Meeting
@@ -28913,6 +28937,7 @@
 2018SPIE10802	C	Counterterrorism, Crime Fighting, Forensics, and Surveillance Technologies II
 2018SPIE10803	C	Quantum Information Science and Technology IV
 2018SPIE10804	C	Advanced Manufacturing Technologies for Micro- and Nanosystems in Security and Defence
+2018SPIE10805	C	Laser-Induced Damage in Optical Materials 2018: 50th Anniversary Conference
 2018SPIE10806	C	Tenth International Conference on Digital Image Processing (ICDIP 2018)
 2018SPIE10807	C	Photomask Japan 2018: XXV Symposium on Photomask and Next-Generation Lithography Mask Technology
 2018SPIE10808	C	Photonics Applications in Astronomy, Communications, Industry, and High-Energy Physics Experiments 2018
@@ -28939,6 +28964,7 @@
 2018SPIE10830	C	13th Conference on Integrated Optics: Sensors, Sensing Structures, and Methods
 2018SPIE10831	C	Seventh International Conference on Lasers in Medicine
 2018SPIE10832	C	Fifth Conference on Frontiers in Optical Imaging Technology and Applications
+2018SPIE10833	C	24th International Symposium on Atmospheric and Ocean Optics: Atmospheric Physics
 2018SPIE10834	C	Speckle 2018: VII International Conference on Speckle Metrology
 2018SPIE10835	C	Global Intelligence Industry Conference (GIIC 2018)
 2018SPIE10836	C	2018 International Conference on Image and Video Processing, and Artificial Intelligence
@@ -29134,15 +29160,18 @@
 2019bias.book	C	Biosignatures for Astrobiology
 2019csic.conf	C	3rd Cosmology School, Introduction to Cosmology
 2019cwdb.conf	C	Compact White Dwarf Binaries
+2019cxro.book	C	The Chandra X-ray Observatory
 2019disr.conf	C	Deep-Inelastic Scattering and Related Subjects
 2019eati.book	C	Encyclopedic Atlas of Terrestrial Impact Craters
 2019eeu..conf	C	The Extragalactic Explosive Universe: the New Era of Transient Surveys and Data-Driven Discovery
 2019EPSC...13	C	EPSC-DPS Joint Meeting 2019
+2019esps.book	C	Extreme Solar Particle Storms
 2019evga.conf	C	Proceedings of the 24th European VLBI Group for Geodesy and Astrometry Working Meeting
 2019ffbh.book	C	Formation of the First Black Holes
 2019gage.conf	C	Galactic Archaeology in the Gaia Era
 2019gaia.conf	C	The Gaia Universe
 2019hepr.conf	C	High Energy Phenomena in Relativistic Outflows VII
+2019hppl.conf	C	13th International Workshop in High pT Physics in the RHIC and LHC Era
 2019hsax.conf	C	Highlights on Spanish Astrophysics X
 2019IAUS..339	C	Southern Horizons in Time-Domain Astronomy
 2019IAUS..344	C	Dwarf Galaxies: From the Deep Universe to the Present
@@ -29152,6 +29181,7 @@
 2019isgc.conf	C	International Symposium on Grids &amp; Clouds 2019
 2019isms.conf	C	74th International Symposium on Molecular Spectroscopy
 2019isrc.conf	C	14th International Symposium on Radiative Corrections
+2019iwna.conf	C	21st International Workshop on Neutrinos from Accelerators
 2019lasc.book	C	Legal Aspects Around Satellite Constellations
 2019lgei.conf	C	Linking Galaxies from the Epoch of Initial Star Formation to Today
 2019LPICo2109	C	First International Orbital Debris Conference
@@ -29166,12 +29196,14 @@
 2019mmag.conf	C	The Multi-Messenger Astronomy: Gamma-Ray Bursts, Search for Electromagnetic Counterparts to Neutrino Events and Gravitational Waves
 2019most.conf	C	Preparing for 4MOST 
 2019msme.book	R	Meteoroids: Sources of Meteors on Earth and Beyond
+2019msmp.conf	C	XV Modave Summer School in Mathematical Physics
 2019npd..conf	C	5th International Workshop on New Photon-Detectors (PD18)
 2019ntac.conf	C	New Trends in Astrophysics, Cosmology and HEP after Gamow
 2019ppfc.conf	C	International Conference on Precision Physics and Fundamental Physical Constants
 2019qbsb.conf	C	Quantum Beam Science in Biology and Soft Materials
 2019qnp..conf	C	8th International Conference on Quarks and Nuclear Physics (QNP2018)
 2019qopu.conf	C	Quest for the Origin of Particles and the Universe (KMI2019)
+2019rca..book	C	Remote Compositional Analysis: Techniques for Understanding Spectroscopy, Mineralogy, and Geochemistry of Planetary Surfaces
 2019rgfa.book	C	Relativistic Geodesy, Fundamental Theories of Physics
 2019scta.book	C	Science with the Cherenkov Telescope Array
 2019sf2a.conf	C	SF2A-2019: Proceedings of the Annual meeting of the French Society of Astronomy and Astrophysics
@@ -29180,8 +29212,6 @@
 2019siau.conf	C	Astronomy in Serbia and Serbia in the International Astronomical Union
 2019simi.conf	C	Solar Influences on the Magnetosphere, Ionosphere and Atmosphere
 2019sone.conf	C	Solar Neutrinos
-2019SPIE10805	C	Laser-Induced Damage in Optical Materials 2018: 50th Anniversary Conference
-2019SPIE10833	C	24th International Symposium on Atmospheric and Ocean Optics: Atmospheric Physics
 2019SPIE10837	C	9th International Symposium on Advanced Optical Manufacturing and Testing Technologies: Large Mirrors and Telescopes
 2019SPIE10838	C	9th International Symposium on Advanced Optical Manufacturing and Testing Technologies: Advanced Optical Manufacturing Technologies
 2019SPIE10839	C	9th International Symposium on Advanced Optical Manufacturing and Testing Technologies: Optical Test, Measurement Technology, and Equipment
@@ -29265,6 +29295,7 @@
 2019SPIE10924	C	Optical Interconnects XIX
 2019SPIE10925	C	Photonic Instrumentation Engineering VI
 2019SPIE10926	C	Quantum Sensing and Nano Electronics and Photonics XVI
+2019SPIE10927	C	Photonic and Phononic Properties of Engineered Nanostructures IX
 2019SPIE10928	C	High Contrast Metastructures VIII
 2019SPIE10929	C	Quantum Dots and Nanostructures: Growth, Characterization, and Modeling XVI
 2019SPIE10930	C	Advanced Fabrication Technologies for Micro/Nano Optics and Photonics XII
@@ -29299,6 +29330,7 @@
 2019SPIE10961	C	Optical Microlithography XXXII
 2019SPIE10962	C	Design-Process-Technology Co-optimization for Manufacturability XIII
 2019SPIE10963	C	Advanced Etch Technology for Nanopatterning VIII
+2019SPIE10964	C	Tenth International Conference on Information Optics and Photonics
 2019SPIE10965	C	Bioinspiration, Biomimetics, and Bioreplication IX
 2019SPIE10966	C	Electroactive Polymer Actuators and Devices (EAPAD) XXI
 2019SPIE10967	C	Active and Passive Smart Structures and Integrated Systems XIII
@@ -29308,7 +29340,10 @@
 2019SPIE10971	C	Nondestructive Characterization and Monitoring of Advanced Materials, Aerospace, Civil Infrastructure, and Transportation XIII
 2019SPIE10972	C	Health Monitoring of Structural and Biological Systems XIII
 2019SPIE10973	C	Smart Structures and NDE for Energy Systems and Industry 4.0
+2019SPIE10974	C	Laser Technology 2018: Progress and Applications of Lasers
 2019SPIE10975	C	14th International Symposium on Medical Information Processing and Analysis
+2019SPIE10976	C	21st Czech-Polish-Slovak Optical Conference on Wave and Quantum Aspects of Contemporary Optics
+2019SPIE10977	C	Advanced Topics in Optoelectronics, Microelectronics, and Nanotechnologies IX
 2019SPIE10978	C	Advanced Photon Counting Techniques XIII
 2019SPIE10979	C	Energy Harvesting and Storage: Materials, Devices, and Applications IX
 2019SPIE10980	C	Image Sensing Technologies: Materials, Devices, Systems, and Applications VI
@@ -29407,6 +29442,7 @@
 2019SPIE11074	C	Diffuse Optical Spectroscopy and Imaging VII
 2019SPIE11077	C	Opto-Acoustic Methods and Applications in Biophotonics IV
 2019SPIE11078	C	Optical Coherence Imaging Techniques and Imaging in Scattering Media III
+2019SPIE11079	C	Medical Laser Applications and Laser-Tissue Interactions IX
 2019SPIE11080	C	Metamaterials, Metadevices, and Metasystems 2019
 2019SPIE11081	C	Active Photonic Platforms XI
 2019SPIE11082	C	Plasmonics: Design, Materials, Fabrication, Characterization, and Applications XVII
@@ -29463,6 +29499,7 @@
 2019SPIE11149	C	Remote Sensing for Agriculture, Ecosystems, and Hydrology XXI
 2019SPIE11150	C	Remote Sensing of the Ocean, Sea Ice, Coastal Waters, and Large Water Regions 2019
 2019SPIE11151	C	Sensors, Systems, and Next-Generation Satellites XXIII
+2019SPIE11152	C	Remote Sensing of Clouds and the Atmosphere XXIV
 2019SPIE11153	C	Environmental Effects on Light Propagation and Adaptive Systems II
 2019SPIE11154	C	Active and Passive Microwave Remote Sensing for Environmental Monitoring III
 2019SPIE11155	C	Image and Signal Processing for Remote Sensing XXV
@@ -29472,6 +29509,7 @@
 2019SPIE11159	C	Electro-Optical and Infrared Systems: Technology and Applications XVI
 2019SPIE11160	C	Electro-Optical Remote Sensing XIII
 2019SPIE11161	C	Technologies for Optical Countermeasures XVI
+2019SPIE11162	C	High Power Lasers: Technology and Systems, Platforms, Effects III
 2019SPIE11163	C	Emerging Imaging and Sensing Technologies for Security and Defence IV
 2019SPIE11164	C	Millimetre Wave and Terahertz Sensors and Technology XII
 2019SPIE11166	C	Counterterrorism, Crime Fighting, Forensics, and Surveillance Technologies III
@@ -29488,23 +29526,36 @@
 2019SPIE11178	C	Photomask Japan 2019: XXVI Symposium on Photomask and Next-Generation Lithography Mask Technology
 2019SPIE11179	C	Eleventh International Conference on Digital Image Processing (ICDIP 2019)
 2019SPIE11180	C	International Conference on Space Optics &mdash; ICSO 2018
+2019SPIE11181	C	High-Power Lasers and Applications X
 2019SPIE11182	C	Semiconductor Lasers and Applications IX
 2019SPIE11183	C	Advanced Laser Processing and Manufacturing III
 2019SPIE11184	C	Optoelectronic Devices and Integration VIII
 2019SPIE11185	C	Optical Design and Testing IX
 2019SPIE11186	C	Advanced Optical Imaging Technologies II
+2019SPIE11187	C	Optoelectronic Imaging and Multimedia Technology VI
+2019SPIE11188	C	Holography, Diffractive Optics, and Applications IX
+2019SPIE11190	C	Optics in Health Care and Biomedical Optics IX
+2019SPIE11191	C	Advanced Sensor Systems and Applications IX
 2019SPIE11192	C	Real-time Photonic Measurements, Data Management, and Processing IV
+2019SPIE11193	C	Nanophotonics and Micro/Nano Optics V
+2019SPIE11194	C	Plasmonics IV
+2019SPIE11195	C	Quantum and Nonlinear Optics VI
+2019SPIE11196	C	Infrared, Millimeter-Wave, and Terahertz Technologies VI
 2019SPIE11197	C	SPIE Future Sensing Technologies
 2019SPIE11198	C	Fourth International Workshop on Pattern Recognition
 2019SPIE11199	C	Seventh European Workshop on Optical Fibre Sensors
+2019SPIE11202	C	Biophotonics Australasia 2019
 2019SPIE11204	C	14th Conference on Integrated Optics: Sensors, Sensing Structures, and Methods
 2019SPIE11205	C	Seventh International Conference on Optical and Photonic Engineering (icOPEN 2019)
+2019SPIE11206	C	Sixth International Workshop on Specialty Optical Fibers and Their Applications (WSOF 2019)
 2019SPIE11208	C	25th International Symposium on Atmospheric and Ocean Optics: Atmospheric Physics
 2019SPIE11209	C	Eleventh International Conference on Information Optics and Photonics (CIOP 2019)
 2019SPIE11210	C	Fourteenth School on Acousto-Optics and Applications
+2019SPIE11249	C	Quantitative Phase Imaging VI
 2019SPIE11311	C	Sixth Geoinformation Science Symposium
 2019SPIE11321	C	2019 International Conference on Image and Video Processing, and Artificial Intelligence
 2019SPIE11322	C	XIV International Conference on Pulsed Lasers and Laser Applications
+2019SPIE11332	C	International Conference on Quantum, Nonlinear, and Nanophotonics 2019
 2019SPIE11333	C	AOPC 2019: Advanced Laser Materials and Laser Technology
 2019SPIE11334	C	AOPC 2019: Optoelectronic Devices and Integration; and Terahertz Technology and Applications
 2019SPIE11335	C	AOPC 2019: Display Technology and Optical Storage
@@ -29516,7 +29567,11 @@
 2019SPIE11341	C	AOPC 2019: Space Optics, Telescopes, and Instrumentation
 2019SPIE11342	C	AOPC 2019: AI in Optics and Photonics
 2019SPIE11343	C	Ninth International Symposium on Precision Mechanical Measurements
+2019SPIE11370	C	Ultrafast Optics 2019
 2019SPIE11371	C	International Workshop on Thin Films for Electronics, Electro-Optics, Energy, and Sensors 2019
+2019SPIE11372	C	Sixth International Symposium on LAPAN-IPB Satellite
+2019SPIE11384	C	Eleventh International Conference on Signal Processing Systems
+2019SPIE11385	C	Optics and Measurement International Conference 2019
 2019spw..conf	C	Proceedings of the 9th Solar Polarization Workshop SPW9
 2019sros.conf	C	Supernova Remnants: An Odyssey in Space after Stellar Death II
 2019ssla.book	C	Space Security and Legal Aspects of Active Debris Removal
@@ -29531,15 +29586,254 @@
 2020AIPC.2204	C	2nd International Conference on Emerging Research in Civil, Aeronautical and Mechanical Engineering (ERCAM)-2019
 2020AIPC.2205	C	35th International Conference of the Polymer Processing Society (PPS-35)
 2020anms.conf	C	The 35th Annual New Mexico Symposium
+2020ASPC..522	C	Astronomical Data Analysis Software and Systems XXVII
 2020ASPC..525	C	2020 Compendium of Undergraduate Research in Astronomy and Space Science
+2020bugm.conf	C	The Build-Up of Galaxies through Multiple Tracers and Facilities
+2020IAUS..341	C	Panchromatic Modelling with Next Generation Facilities
 2020IAUS..342	C	Perseus in Sicily: From Black Hole to Cluster Outskirts
 2020IAUS..345	C	Origins: From the Protosun to the First Steps of Life
 2020IAUS..351	C	Star Clusters: From the Milky Way to the Early Universe
+2020IAUS..352	C	Uncovering Early Galaxy Evolution in the ALMA and JWST Era
+2020IAUS..353	C	Galactic Dynamics in the Era of Large Surveys
 2020imsa.book	C	Ionospheric Multi-Spacecraft Analysis Tools: Approaches for Deriving Ionospheric Parameters
+2020kdbd.book	C	Knowledge Discovery in Big Data from Astronomy and Earth Observation
 2020LPICo2141	C	The Impact of Lunar Dust on Human Exploration
+2020LPICo2188	C	Sixth International Planetary Dunes Workshop
+2020LPICo2194	C	Outer Planets Assessment Group (OPAG) Meeting
 2020LPICo2195	C	Exoplanets in Our Backyard:  Solar System and Exoplanet Synergies on Planetary Formation, Evolution, and Habitability
 2020LPICo2197	C	3rd International Planetary Caves Conference
+2020LPICo2241	C	Lunar Surface Science Workshop
 2020mdps.conf	C	Multi-Dimensional Processes In Stellar Physics
+2020nnc..conf	C	13th International Conference on Nucleus-Nucleus Collisions
+2020rfma.book	R	Reviews in Frontiers of Modern Astrophysics; From Space Debris to Cosmology
 2020sces.conf	C	International Conference on Strongly Correlated Electron Systems (SCES2019)
+2020sea..conf	C	XIV.0 Scientific Meeting (virtual) of the Spanish Astronomical Society
 2020smt..conf	C	14th International Workshop on Spallation Materials Technology
+2020SPIE11203	C	Advances in Optical Astronomical Instrumentation 2019
+2020SPIE11211	C	Photonics in Dermatology and Plastic Surgery 2020
+2020SPIE11212	C	Therapeutics and Diagnostics in Urology 2020
+2020SPIE11213	C	Imaging, Therapeutics, and Advanced Technology in Head and Neck Surgery and Otolaryngology 2020
+2020SPIE11214	C	Endoscopic Microscopy XV
+2020SPIE11215	C	Diagnostic and Therapeutic Applications of Light in Cardiology 2020
+2020SPIE11216	C	Multiscale Imaging and Spectroscopy
+2020SPIE11217	C	Lasers in Dentistry XXVI
+2020SPIE11219	C	Visualizing and Quantifying Drug Distribution in Tissue IV
+2020SPIE11221	C	Mechanisms of Photobiomodulation Therapy XV
+2020SPIE11222	C	Molecular-Guided Surgery: Molecules, Devices, and Applications VI
+2020SPIE11223	C	Photonic Diagnosis, Monitoring, Prevention, and Treatment of Infections and Inflammatory Diseases 2020
+2020SPIE11224	C	Optics and Ionizing Radiation
+2020SPIE11225	C	Clinical and Translational Neurophotonics 2020
+2020SPIE11226	C	Neural Imaging and Sensing 2020
+2020SPIE11227	C	Optogenetics and Optical Manipulation 2020
+2020SPIE11228	C	Optical Coherence Tomography and Coherence Domain Optical Methods in Biomedicine XXIV
+2020SPIE11229	C	Advanced Biomedical and Clinical Diagnostic and Surgical Guidance Systems XVIII
+2020SPIE11230	C	Optics and Biophotonics in Low-Resource Settings VI
+2020SPIE11231	C	Design and Quality for Biomedical Technologies XIII
+2020SPIE11232	C	Multimodal Biomedical Imaging XV
+2020SPIE11233	C	Optical Fibers and Sensors for Medical Diagnostics and Treatment Applications XX
+2020SPIE11235	C	Microfluidics, BioMEMS, and Medical Microsystems XVIII
+2020SPIE11236	C	Biomedical Vibrational Spectroscopy 2020: Advances in Research and Industry
+2020SPIE11237	C	Biophotonics in Exercise Science, Sports Medicine, Health Monitoring Technologies, and Wearables
+2020SPIE11238	C	Optical Interactions with Tissue and Cells XXXI
+2020SPIE11239	C	Dynamics and Fluctuations in Biomedical Photonics XVII
+2020SPIE11240	C	Photons Plus Ultrasound: Imaging and Sensing 2020
+2020SPIE11241	C	Biophotonics and Immune Responses XV
+2020SPIE11242	C	Optical Elastography and Tissue Biomechanics VII
+2020SPIE11243	C	Imaging, Manipulation, and Analysis of Biomolecules, Cells, and Tissues XVIII
+2020SPIE11244	C	Multiphoton Microscopy in the Biomedical Sciences XX
+2020SPIE11245	C	Three-Dimensional and Multidimensional Microscopy: Image Acquisition and Processing XXVII
+2020SPIE11246	C	Single Molecule Spectroscopy and Superresolution Imaging XIII
+2020SPIE11247	C	Optical Diagnostics and Sensing XX: Toward Point-of-Care Diagnostics
+2020SPIE11248	C	Adaptive Optics and Wavefront Control for Biological Systems VI
+2020SPIE11249	C	Quantitative Phase Imaging VI
+2020SPIE11250	C	High-Speed Biomedical Imaging and Spectroscopy V
+2020SPIE11251	C	Label-free Biomedical Imaging and Sensing (LBIS) 2020
+2020SPIE11252	C	Advanced Chemical Microscopy for Life Science and Translational Medicine
+2020SPIE11253	C	Biomedical Applications of Light Scattering X
+2020SPIE11254	C	Nanoscale Imaging, Sensing, and Actuation for Biomedical Applications XVII
+2020SPIE11255	C	Colloidal Nanoparticles for Biomedical Applications XV
+2020SPIE11256	C	Reporters, Markers, Dyes, Nanoparticles, and Molecular Probes for Biomedical Applications XII
+2020SPIE11257	C	Plasmonics in Biology and Medicine XVII
+2020SPIE11258	C	Frontiers in Biological Detection: From Nanosensors to Systems XII
+2020SPIE11259	C	Solid State Lasers XXIX: Technology and Devices
+2020SPIE11260	C	Fiber Lasers XVII: Technology and Systems
+2020SPIE11261	C	Components and Packaging for Laser Systems VI
+2020SPIE11262	C	High-Power Diode Laser Technology XVIII
+2020SPIE11263	C	Vertical External Cavity Surface Emitting Lasers (VECSELs) X
+2020SPIE11264	C	Nonlinear Frequency Generation and Conversion: Materials and Devices XIX
+2020SPIE11265	C	Real-time Measurements, Rogue Phenomena, and Single-Shot Applications V
+2020SPIE11266	C	Laser Resonators, Microresonators, and Beam Control XXII
+2020SPIE11267	C	Laser Applications in Microelectronic and Optoelectronic Manufacturing (LAMOM) XXV
+2020SPIE11268	C	Laser-based Micro- and Nanoprocessing XIV
+2020SPIE11269	C	Synthesis and Photonics of Nanoscale Materials XVII
+2020SPIE11271	C	Laser 3D Manufacturing VII
+2020SPIE11272	C	Free-Space Laser Communications XXXII
+2020SPIE11273	C	High-Power Laser Materials Processing: Applications, Diagnostics, and Systems IX
+2020SPIE11274	C	Physics and Simulation of Optoelectronic Devices XXVIII
+2020SPIE11275	C	Physics, Simulation, and Photonic Engineering of Photovoltaic Devices IX
+2020SPIE11276	C	Optical Components and Materials XVII
+2020SPIE11277	C	Organic Photonic Materials and Devices XXII
+2020SPIE11278	C	Ultrafast Phenomena and Nanophotonics XXIV
+2020SPIE11279	C	Terahertz, RF, Millimeter, and Submillimeter-Wave Technology and Applications XIII
+2020SPIE11280	C	Gallium Nitride Materials and Devices XV
+2020SPIE11281	C	Oxide-based Materials and Devices XI
+2020SPIE11282	C	2D Photonic Materials and Devices III
+2020SPIE11283	C	Integrated Optics: Devices, Materials, and Technologies XXIV
+2020SPIE11284	C	Smart Photonic and Optoelectronic Integrated Circuits XXII
+2020SPIE11285	C	Silicon Photonics XV
+2020SPIE11286	C	Optical Interconnects XX
+2020SPIE11287	C	Photonic Instrumentation Engineering VII
+2020SPIE11290	C	High Contrast Metastructures IX
+2020SPIE11291	C	Quantum Dots, Nanostructures, and Quantum Materials: Growth, Characterization, and Modeling XVII
+2020SPIE11292	C	Advanced Fabrication Technologies for Micro/Nano Optics and Photonics XIII
+2020SPIE11293	C	MOEMS and Miniaturized Systems XIX
+2020SPIE11294	C	Emerging Digital Micromirror Device Based Systems and Applications XII
+2020SPIE11295	C	Advanced Optical Techniques for Quantum Information, Sensing, and Metrology
+2020SPIE11296	C	Optical, Opto-Atomic, and Entanglement-Enhanced Precision Metrology II
+2020SPIE11297	C	Complex Light and Optical Forces XIV
+2020SPIE11298	C	Photonic Heat Engines: Science and Applications II
+2020SPIE11299	C	AI and Optical Data Sciences
+2020SPIE11300	C	Vertical-Cavity Surface-Emitting Lasers XXIV
+2020SPIE11301	C	Novel In-Plane Semiconductor Lasers XIX
+2020SPIE11302	C	Light-Emitting Devices, Materials, and Applications XXIV
+2020SPIE11303	C	Emerging Liquid Crystal Technologies XV
+2020SPIE11304	C	Advances in Display Technologies X
+2020SPIE11305	C	Ultra-High-Definition Imaging Systems III
+2020SPIE11306	C	Practical Holography XXXIV: Displays, Materials, and Applications
+2020SPIE11307	C	Broadband Access Communication Technologies XIV
+2020SPIE11308	C	Metro and Data Center Optical Networks and Short-Reach Links III
+2020SPIE11309	C	Next-Generation Optical Communication: Components, Sub-Systems, and Systems IX
+2020SPIE11310	C	Optical Architectures for Displays and Sensing in Augmented, Virtual, and Mixed Reality (AR, VR, MR)
+2020SPIE11311	C	Sixth Geoinformation Science Symposium
+2020SPIE11312	C	Medical Imaging 2020: Physics of Medical Imaging
+2020SPIE11314	C	Medical Imaging 2020: Computer-Aided Diagnosis
+2020SPIE11315	C	Medical Imaging 2020: Image-Guided Procedures, Robotic Interventions, and Modeling
+2020SPIE11316	C	Medical Imaging 2020: Image Perception, Observer Performance, and Technology Assessment
+2020SPIE11317	C	Medical Imaging 2020: Biomedical Applications in Molecular, Structural, and Functional Imaging
+2020SPIE11318	C	Medical Imaging 2020: Imaging Informatics for Healthcare, Research, and Applications
+2020SPIE11319	C	Medical Imaging 2020: Ultrasonic Imaging and Tomography
+2020SPIE11320	C	Medical Imaging 2020: Digital Pathology
+2020SPIE11321	C	2019 International Conference on Image and Video Processing, and Artificial Intelligence
+2020SPIE11322	C	XIV International Conference on Pulsed Lasers and Laser Applications
+2020SPIE11323	C	Extreme Ultraviolet (EUV) Lithography XI
+2020SPIE11324	C	Novel Patterning Technologies for Semiconductors, MEMS/NEMS and MOEMS 2020
+2020SPIE11325	C	Metrology, Inspection, and Process Control for Microlithography XXXIV
+2020SPIE11326	C	Advances in Patterning Materials and Processes XXXVII
+2020SPIE11327	C	Optical Microlithography XXXIII
+2020SPIE11328	C	Design-Process-Technology Co-optimization for Manufacturability XIV
+2020SPIE11329	C	Advanced Etch Technology for Nanopatterning IX
+2020SPIE11330	C	15th International Symposium on Medical Information Processing and Analysis
+2020SPIE11331	C	Fourth International Conference on Photonics Solutions (ICPS2019)
+2020SPIE11332	C	International Conference on Quantum, Nonlinear, and Nanophotonics 2019 (ICQNN 2019)
+2020SPIE11333	C	AOPC 2019: Advanced Laser Materials and Laser Technology
+2020SPIE11334	C	AOPC 2019: Optoelectronic Devices and Integration; and Terahertz Technology and Applications
+2020SPIE11335	C	AOPC 2019: Display Technology and Optical Storage
+2020SPIE11336	C	AOPC 2019: Nanophotonics
+2020SPIE11337	C	AOPC 2019: Optical Spectroscopy and Imaging
+2020SPIE11338	C	AOPC 2019: Optical Sensing and Imaging Technology
+2020SPIE11339	C	AOPC 2019: Quantum Information Technology
+2020SPIE11340	C	AOPC 2019: Optical Fiber Sensors and Communication
+2020SPIE11341	C	AOPC 2019: Space Optics, Telescopes, and Instrumentation
+2020SPIE11342	C	AOPC 2019: AI in Optics and Photonics
+2020SPIE11343	C	Ninth International Symposium on Precision Mechanical Measurements
+2020SPIE11344	C	Metamaterials XII
+2020SPIE11345	C	Nanophotonics VIII
+2020SPIE11346	C	Advances in Ultrafast Condensed Phase Physics II
+2020SPIE11347	C	Quantum Technologies 2020
+2020SPIE11348	C	Terahertz Photonics
+2020SPIE11349	C	3D Printed Optics and Additive Photonic Manufacturing II
+2020SPIE11350	C	Digital Optics for Immersive Displays II
+2020SPIE11351	C	Unconventional Optical Imaging II
+2020SPIE11352	C	Optics and Photonics for Advanced Dimensional Metrology
+2020SPIE11353	C	Optics, Photonics and Digital Technologies for Imaging Applications VI
+2020SPIE11354	C	Optical Sensing and Detection VI
+2020SPIE11355	C	Micro-Structured and Specialty Optical Fibres VI
+2020SPIE11356	C	Semiconductor Lasers and Laser Dynamics IX
+2020SPIE11357	C	Fiber Lasers and Glass Photonics:  Materials through Applications II
+2020SPIE11358	C	Nonlinear Optics and its Applications 2020
+2020SPIE11359	C	Biomedical Spectroscopy, Microscopy, and Imaging
+2020SPIE11360	C	Neurophotonics
+2020SPIE11361	C	Biophotonics in Point-of-Care
+2020SPIE11362	C	Clinical Biophotonics
+2020SPIE11363	C	Tissue Optics and Photonics
+2020SPIE11365	C	Organic Electronics and Photonics: Fundamentals and Devices II
+2020SPIE11366	C	Photonics for Solar Energy Systems VIII
+2020SPIE11367	C	Photosensitive Materials and their Applications
+2020SPIE11368	C	Photonics and Plasmonics at the Mesoscale
+2020SPIE11370	C	Ultrafast Optics 2019
+2020SPIE11371	C	International Workshop on Thin Films for Electronics, Electro-Optics, Energy, and Sensors 2019
+2020SPIE11372	C	Sixth International Symposium on LAPAN-IPB Satellite
+2020SPIE11373	C	Eleventh International Conference on Graphics and Image Processing (ICGIP 2019)
+2020SPIE11374	C	Bioinspiration, Biomimetics, and Bioreplication X
+2020SPIE11375	C	Electroactive Polymer Actuators and Devices (EAPAD) XXII
+2020SPIE11376	C	Active and Passive Smart Structures and Integrated Systems IX
+2020SPIE11377	C	Behavior and Mechanics of Multifunctional Materials IX
+2020SPIE11379	C	Sensors and Smart Structures Technologies for Civil, Mechanical, and Aerospace Systems 2020
+2020SPIE11380	C	Nondestructive Characterization and Monitoring of Advanced Materials, Aerospace, Civil Infrastructure, and Transportation IX
+2020SPIE11381	C	Health Monitoring of Structural and Biological Systems XIV
+2020SPIE11382	C	Smart Structures and NDE for Industry 4.0, Smart Cities, and Energy Systems
+2020SPIE11383	C	Sixth Asia Pacific Conference on Optics Manufacture
+2020SPIE11384	C	Eleventh International Conference on Signal Processing Systems
+2020SPIE11385	C	Optics and Measurement International Conference 2019
+2020SPIE11386	C	Advanced Photon Counting Techniques XIV
+2020SPIE11387	C	Energy Harvesting and Storage: Materials, Devices, and Applications X
+2020SPIE11388	C	Image Sensing Technologies: Materials, Devices, Systems, and Applications VII
+2020SPIE11389	C	Micro- and Nanotechnology Sensors, Systems, and Applications XII
+2020SPIE11390	C	Next-Generation Spectroscopic Technologies XIII
+2020SPIE11391	C	Quantum Information Science, Sensing, and Computation XII
+2020SPIE11392	C	Algorithms, Technologies, and Applications for Multispectral and Hyperspectral Imagery XXVI
+2020SPIE11393	C	Algorithms for Synthetic Aperture Radar Imagery XXVII
+2020SPIE11394	C	Automatic Target Recognition XXX
+2020SPIE11395	C	Big Data II: Learning, Analytics, and Applications
+2020SPIE11396	C	Computational Imaging V
+2020SPIE11397	C	Dimensional Optical Metrology and Inspection for Practical Applications IX
+2020SPIE11398	C	Geospatial Informatics X
+2020SPIE11399	C	Mobile Multimedia/Image Processing, Security, and Applications 2020
+2020SPIE11400	C	Pattern Recognition and Tracking XXXI
+2020SPIE11401	C	Real-Time Image Processing and Deep Learning 2020
+2020SPIE11402	C	Three-Dimensional Imaging, Visualization, and Display 2020
+2020SPIE11403	C	Advanced Optics for Imaging Applications: UV through LWIR V
+2020SPIE11404	C	Anomaly Detection and Imaging with X-Rays (ADIX) V
+2020SPIE11405	C	Optical Waveguide and Laser Sensors
+2020SPIE11406	C	Infrared Imaging Systems: Design, Analysis, Modeling, and Testing XXXI
+2020SPIE11407	C	Infrared Technology and Applications XLVI
+2020SPIE11408	C	Radar Sensor Technology XXIV
+2020SPIE11409	C	Thermosense: Thermal Infrared Applications XLII
+2020SPIE11410	C	Laser Radar Technology and Applications XXV
+2020SPIE11411	C	Passive and Active Millimeter-Wave Imaging XXIII
+2020SPIE11412	C	Polarization: Measurement, Analysis, and Remote Sensing XIV
+2020SPIE11413	C	Artificial Intelligence and Machine Learning for Multi-Domain Operations Applications II
+2020SPIE11414	C	Autonomous Air and Ground Sensing Systems for Agricultural Optimization and Phenotyping V
+2020SPIE11415	C	Autonomous Systems: Sensors, Processing, and Security for Vehicles and Infrastructure 2020
+2020SPIE11416	C	Chemical, Biological, Radiological, Nuclear, and Explosives (CBRNE) Sensing XXI
+2020SPIE11417	C	Cyber Sensing 2020
+2020SPIE11418	C	Detection and Sensing of Mines, Explosive Objects, and Obscured Targets XXV
+2020SPIE11419	C	Disruptive Technologies in Information Sciences IV
+2020SPIE11420	C	Ocean Sensing and Monitoring XII
+2020SPIE11421	C	Sensing for Agriculture and Food Quality and Safety XII
+2020SPIE11422	C	Sensors and Systems for Space Applications XIII
+2020SPIE11423	C	Signal Processing, Sensor/Information Fusion, and Target Recognition XXIX
+2020SPIE11424	C	Situation Awareness in Degraded Environments 2020
+2020SPIE11425	C	Unmanned Systems Technology XXII
+2020SPIE11426	C	Virtual, Augmented, and Mixed Reality (XR) Technology for Multi-Domain Operations
+2020SPIE11429	C	MIPPR 2019: Automatic Target Recognition and Navigation
+2020SPIE11430	C	MIPPR 2019: Pattern Recognition and Computer Vision
+2020SPIE11431	C	MIPPR 2019: Parallel Processing of Images and Optimization Techniques; and Medical Imaging
+2020SPIE11432	C	MIPPR 2019: Remote Sensing Image Processing, Geographic Information Systems, and Other Applications
+2020SPIE11433	C	Twelfth International Conference on Machine Vision (ICMV 2019)
+2020SPIE11434	C	2019 International Conference on Optical Instruments and Technology: Optical Systems and Modern Optoelectronic Instruments
+2020SPIE11435	C	2019 International Conference on Optical Instruments and Technology: Optical Communication and Optical Signal Processing
+2020SPIE11436	C	2019 International Conference on Optical Instruments and Technology: Optical Sensors and Applications
+2020SPIE11438	C	2019 International Conference on Optical Instruments and Technology: Optoelectronic Imaging/Spectroscopy and Signal Processing Technology
+2020SPIE11439	C	2019 International Conference on Optical Instruments and Technology: Optoelectronic Measurement Technology and Systems
+2020SPIE11440	C	2019 International Conference on Optical Instruments and Technology: Micro/Nano Photonics: Materials and Devices
+2020SPIE11441	C	2019 International Conference on Optical Instruments and Technology: IRMMW-THz Technologies and Applications
+2020SPIE11442	C	Radioelectronic Systems Conference 2019
+2020SPIE11455	C	Sixth Symposium on Novel Optoelectronic Detection Technology and Applications
+2020SPIE11456	C	Optical Fibers and Their Applications 2020
+2020SPIE11457	C	Saratov Fall Meeting 2019: Optical and Nano-Technologies for Biology and Medicine
+2020SPIE11458	C	Saratov Fall Meeting 2019: Laser Physics, Photonic Technologies, and Molecular Modeling
+2020SPIE11459	C	Saratov Fall Meeting 2019: Computations and Data Analysis: from Nanoscale Tools to Brain Functions
+2020svos.conf	C	Stars and their Variability Observed from Space
 2020tnss.book	R	The Trans-Neptunian Solar System
+2020vstb.conf	C	VST Beyond 2021

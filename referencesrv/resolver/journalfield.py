@@ -41,7 +41,7 @@ def get_best_bibstem_for(sourceSpec):
     """
     current_app.logger.debug("sourceSpec=%s"%(sourceSpec))
     try:
-        return SOURCE_MATCHER.bestmatches(sourceSpec.upper(), 1)[0][1].strip('.')
+        return SOURCE_MATCHER.bestmatches(sourceSpec.upper(), 1)[0][1][:5].strip('.')
     except IndexError:
         raise KeyError(sourceSpec)
 
@@ -240,7 +240,7 @@ def compute_page_delta(ref_page, ads_page, ref_qualifier=None):
     return delta
 
 
-def add_page_evidence(evidences, ref_page, ads_page, ads_page_range="", ads_eid=None, ref_qualifier=None):
+def add_page_evidence(evidences, ref_page, ads_page, ads_page_range="", ads_eid=None, ref_qualifier=None, ref_str=""):
     """
     adds evidence from comparing reference and ADS page specs.
 
@@ -337,20 +337,32 @@ def compute_pubstring_statistics(ref_pub, ads_pub, suggested_bibcode):
     return len(ref_words), missing_words
 
 
-def string_similarity(value_a, value_b):
+def string_similarity(str_a, str_b):
     """
-    Relative similarity of two strings, based on edit distance.
+    find how many words from str_a exists in str_b
 
-    :param value_a:
-    :param value_b:
+    :param str_a:
+    :param str_b:
     :return:
     """
-    if value_a is None or value_b is None:
+    if str_a is None or str_b is None:
         return current_app.config['EVIDENCE_SCORE_RANGE'][0]
-    N_max = max(len(value_a), len(value_b))
-    if N_max == 0:
+    if max(len(str_a), len(str_b)) == 0:
         return current_app.config['EVIDENCE_SCORE_RANGE'][0]
-    return (N_max - float(editdistance.eval(value_a, value_b)))/N_max
+
+    str_a = str_a.lower()
+    str_b = str_b.lower()
+
+    missing_words = 0
+    words = re.findall("\w\w+", str_b or "")
+    if len(words) == 0:
+        return current_app.config['EVIDENCE_SCORE_RANGE'][0]
+
+    for word in words:
+        if word not in str_a:
+            missing_words += 1
+
+    return (len(words)-2*missing_words)/float(len(words))
 
 
 def add_publication_evidence(evidences, ref_pub, ref_bibstem, ads_pub, ads_bibcode, ads_bibstem):

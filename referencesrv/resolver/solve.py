@@ -13,9 +13,12 @@ from referencesrv.resolver.solrquery import Querier
 from referencesrv.resolver.hypotheses import Hypotheses
 from referencesrv.resolver.authors import normalize_author_list
 
-
 # metacharacters and reserved words of the ADS solr parser
-SOLR_ESCAPABLE = re.compile(r"""(?i)([()\[\]:\\*?"+~^,=#'-]|\bto\b|\band\b|\bor\b|\bnot\b|\bnear\b)""")
+SOLR_ESCAPABLE = re.compile(r"""(?i)([-]|\bto\b|\band\b|\bor\b|\bnot\b|\bnear\b)""")
+# remove punctuations in title since it is causing error in solr query, keep only -
+REMOVE_PUNCTUATION = re.compile(r"[()\[\]:\\/*?\"+~^,=#']")
+
+AUTHOR_LAST_NAME = re.compile(r"([A-Z][a-z]+)")
 
 # mappings from standard hint keys to actual solr keywords
 # this is so that renaming solr indices would not affect hypothesis generation.
@@ -30,10 +33,27 @@ def make_solr_condition_author(value):
     """
     value = re.sub(r"\.( ?[A-Z]\.)*", "",
                    # ... and silly "double initials"
-                   re.sub("-[A-Z]\.", "", normalize_author_list(value, initials='.' in value)))
+                   re.sub(r"-[A-Z]\.", "", normalize_author_list(value, initials='.' in value)))
+    # something went wrong with normalization,
+    # so grab all last names and insert semicolon between them
+    if ";" not in value:
+        value = '; '.join(AUTHOR_LAST_NAME.findall(value))
     # authors fields have special serialization rules
     return " AND ".join('"%s"' % s.strip() for s in value.split(";"))
 
+def make_solr_condition_first_author(value):
+    """
+
+    :param value:
+    :return:
+    """
+    # something went wrong, multiple authors here
+    if ',' in value:
+        try:
+            value = AUTHOR_LAST_NAME.findall(value)[0]
+        except:
+            value = value.split(',')[0]
+    return value
 
 def make_solr_condition(key, value):
     """
@@ -56,13 +76,13 @@ def make_solr_condition(key, value):
     # 7/15/2019 first_author_norm cannot be approximated, go back to first_author
     # 5/7/2020 for now map both first_author_norm and first_author approximation to first_author approximation
     if key =='first_author_norm~' or key == 'first_author~':
-        return 'first_author:"%s"~'%(value)
+        return 'first_author:"%s"~'%(make_solr_condition_first_author(value))
     if key == 'first_author_norm':
-        return 'first_author_norm:"%s"'%(value)
+        return 'first_author_norm:"%s"'%(make_solr_condition_first_author(value))
 
     # both author and author_norm
     if 'author' in key:
-        return '%s:(%s)' % (key, make_solr_condition_author(value).replace('.',''))
+        return '%s:(%s)' % (key, make_solr_condition_author(value))
 
     if 'pub' in key:
         return '%s:%s' % (key, value)
@@ -93,11 +113,11 @@ def make_solr_condition(key, value):
                                   " or ".join('"%s"'%(value[:i]+'?'+value[i+1:]) for i in range(1,len(value))))
 
     if key=='title':
-        return '%s:(%s)' % (key, " AND ".join(SOLR_ESCAPABLE.sub(r"\\\1", value).split()))
+        return '%s:(%s)' % (key, " AND ".join(SOLR_ESCAPABLE.sub(r"\\\1", REMOVE_PUNCTUATION.sub('', value)).split()))
 
     # approximate search
     if key=='title~':
-        return 'title:"%s"~' % (SOLR_ESCAPABLE.sub(r"\\\1", value))
+        return 'title:"%s"~' % (SOLR_ESCAPABLE.sub(r"\\\1", REMOVE_PUNCTUATION.sub('', value)))
 
     # becasue of ApJ oring with ApJL need to put in parentheses
     if key=='bibstem':
@@ -275,6 +295,9 @@ def solve_reference(ref):
     :param ref:
     :return:
     """
+    if not ref.enough_to_proceed():
+        raise NoSolution("Not enough information to resolve the record.", ref)
+
     possible_solutions = []
     for hypothesis in Hypotheses.iter_hypotheses(ref):
         try:

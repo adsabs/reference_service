@@ -93,6 +93,7 @@ class TrigIndex(object):
         # Don't waste CPU cycles on items that don't have at least
         # half the number of trigrams compared to the top candidates, i.e.,
         min_hits = candidates[0][1]//2 or 1
+        candidates = [c for c in candidates if c[1] >= min_hits]
 
         # Do some normalisation by the lengths of the search and
         # matched strings (this is badly heuristic and could do
@@ -101,14 +102,20 @@ class TrigIndex(object):
         term_length = float(len(search_term))
         for exp_ind, hits in candidates:
             exp = self.expansions[exp_ind]
-            delta = max(0, abs((len(exp)-term_length))/term_length)
-            scaled.append((exp, hits/term_length-delta))
-        
+            # 8/19/2020 on the c code side delta is computed as integer
+            # division and becomes zero. That code has worked for a long
+            # time so shall continue with it and keep delta = 0
+            # delta = abs(len(exp)-term_length)/term_length
+            # scaled.append((exp, hits/term_length-delta))
+            scaled.append((exp, hits / term_length))
+
         # finally, the most ad-hoc thing: compute levenshein distances,
-        # fudge in our old score, and scale again.  Ahem.
+        # fudge in our old score, and scale again.
         candidates = []
         for expansion, score in scaled:
-            candidates.append((expansion, 1-(1-score)*editdistance.eval(expansion, search_term)/term_length))
+            current_hit = 1-(1-score)*editdistance.eval(expansion, search_term)/term_length
+            if current_hit > 0:
+                candidates.append((expansion, current_hit))
 
         # crop and adjust order for our horrible score; the sort by key
         # is so results are stable.

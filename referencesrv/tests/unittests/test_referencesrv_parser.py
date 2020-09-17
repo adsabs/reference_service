@@ -7,7 +7,7 @@ from flask_testing import TestCase
 import unittest
 
 import referencesrv.app as app
-from referencesrv.parser.crf import CRFClassifierText, CRFClassifierXML
+from referencesrv.parser.crf import CRFClassifierText
 from referencesrv.parser.getDataXML import get_xml_tagged_data, get_xml_tagged_data_training, crossref_extract_volume_from_journal
 from stubdata import dataXML
 
@@ -20,7 +20,7 @@ class TestCRFClassifier(TestCase):
         """ test num states """
         crf_text = CRFClassifierText()
         crf_text.create_crf()
-        self.assertEqual(crf_text.get_num_states(), 41)
+        self.assertEqual(crf_text.get_num_states(), 43)
 
 
 class TestCRFClassifierText(TestCase):
@@ -46,7 +46,7 @@ class TestCRFClassifierText(TestCase):
         self.assertEqual(self.crf_text.parse(reference_str),
                          {'title': u'GW170817: Observation Gravitational Waves Binary Neutron Star',
                           'journal': u'Phys Rev Lett',
-                          'arxiv': u'arxiv:1710.05832',
+                          'arxiv': u'arXiv:1710.05832',
                           'refstr': 'C. Virgo, B. Abbott et al., GW170817: Observation of Gravitational Waves from a Binary Neutron Star, Phys. Rev. Lett. 119 (2017) 161101, [1710.05832].',
                           'volume': '119',
                           'authors': u'C. Virgo, B. Abbott et al.',
@@ -60,7 +60,7 @@ class TestCRFClassifierText(TestCase):
                          {'doi': u'doi:10.1017/pasa.2017.41',
                           'title': u'Taipan Galaxy Survey: Scientific Goals Observing Strategy',
                           'journal': u'Publications Astronomical Society Australia',
-                          'arxiv': u'arxiv:1706.01246',
+                          'arxiv': u'arXiv:1706.01246',
                           'refstr': u'Elisabete da Cunha et al. "The Taipan Galaxy Survey: Scientific Goals and Observing Strat- egy". In: Publications of the Astronomical Society of Australia 34, e047 (2017), e047. DOI: 10. 1017/ pasa. 2017.41. arXiv: 1706.01246.',
                           'volume': u'34',
                           'authors': u'Elisabete da Cunha et al.',
@@ -110,7 +110,7 @@ class TestCRFClassifierText(TestCase):
         self.assertEqual(self.crf_text.parse(reference_str),
                          {'title': u'Halo properties cosmological simulations selfinteracting cold dark matter',
                           'journal': u'Astrophys J',
-                          'arxiv': u'arxiv:astro-ph/0006218',
+                          'arxiv': u'arXiv:astro-ph/0006218',
                           'refstr': u'R. Dave, D. N. Spergel, P. J. Steinhardt, and B. D. Wandelt, "Halo properties in cosmological simulations of selfinteracting cold dark matter", "Astrophys. J." 547 (2001) 574-589, [astro-ph/0006218].',
                           'volume': u'547',
                           'authors': u'R. Dave, D. N. Spergel, P. J. Steinhardt, and B. D. Wandelt',
@@ -243,7 +243,7 @@ class TestCRFClassifierText(TestCase):
         """ another more complicated reference string, just to be sure.... """
         reference_str = 'Murayama, M., Nakahashi, K., and Obayashi, S., "Numerical simulation of vortical flows using vorticity confinement with unstructured grid." In 39th Aerospace Sciences Meeting and Exhibit, Reno, NV, Jan. 2001, AIAA paper 2001-0606.'
         self.assertEqual(self.crf_text.parse(reference_str),
-                         {'title': u'Numerical simulation vortical flows using vorticity confinement unstructured grid AIAA paper 2001-0606',
+                         {'title': u'Numerical simulation vortical flows using vorticity confinement unstructured grid',
                           'journal': u'39th Aerospace Sciences Meeting Exhibit',
                           'authors': u'Murayama, M., Nakahashi, K., and Obayashi, S.',
                           'refstr': u'Murayama, M., Nakahashi, K., and Obayashi, S., "Numerical simulation of vortical flows using vorticity confinement with unstructured grid." In 39th Aerospace Sciences Meeting and Exhibit, Reno, NV, Jan. 2001, AIAA paper 2001-0606.',
@@ -358,12 +358,12 @@ class TestCRFClassifierText(TestCase):
         """ journal information appear twice """
         # when there are some errors in reference, still enough information can be extracted
         # to allow matching with records in solr
-        reference_str = 'Madec, P. Y., Kolb, J., Oberti, S., Paufique, J., La Penna, P., Hackenberg, W., Kuntschner, H., Argomedo, J., Kiekebusch, M., Donaldson, R., Suarez, M., and Arsenault, R., "Adaptive Optics Facility: control strategy and first on-sky results of the acquisition sequence," in [""Proc. SPIE""], "Society of Photo-Optical Instrumentation Engineers (SPIE) Conference Series" 9909, 99090Z (Jul 2016).'
+        reference_str = 'Madec, P. Y., Kolb, J., Oberti, S., Paufique, J., La Penna, P., Hackenberg, W., Kuntschner, H., Argomedo, J., Kiekebusch, M., Donaldson, R., Suarez, M., and Arsenault, R., "Adaptive Optics Facility: control strategy and first on-sky results of the acquisition sequence Photo-Optical," in [""Proc. SPIE""], "Society of Photo-Optical Instrumentation Engineers (SPIE) Conference Series" 9909, 99090Z (Jul 2016).'
         self.assertEqual(self.crf_text.parse(reference_str),
-                         {'title': 'Adaptive Optics Facility: control strategy first on-sky results acquisition sequence Photo-Optical',
+                         {'title': 'Adaptive Optics Facility: control strategy first results acquisition sequence Photo-Optical',
                           'journal': 'Proc SPIE Society Instrumentation Engineers Conference Series',
                           'authors': 'Madec, P. Y., Kolb, J., Oberti, S., Paufique, J., La Penna, P., Hackenberg, W., Kuntschner, H., Argomedo, J., Kiekebusch, M., Donaldson, R., Suarez, M., and Arsenault, R.',
-                          'refstr': 'Madec, P. Y., Kolb, J., Oberti, S., Paufique, J., La Penna, P., Hackenberg, W., Kuntschner, H., Argomedo, J., Kiekebusch, M., Donaldson, R., Suarez, M., and Arsenault, R., "Adaptive Optics Facility: control strategy and first on-sky results of the acquisition sequence," in [""Proc. SPIE""], "Society of Photo-Optical Instrumentation Engineers (SPIE) Conference Series" 9909, 99090Z (Jul 2016).',
+                          'refstr': 'Madec, P. Y., Kolb, J., Oberti, S., Paufique, J., La Penna, P., Hackenberg, W., Kuntschner, H., Argomedo, J., Kiekebusch, M., Donaldson, R., Suarez, M., and Arsenault, R., "Adaptive Optics Facility: control strategy and first on-sky results of the acquisition sequence Photo-Optical," in [""Proc. SPIE""], "Society of Photo-Optical Instrumentation Engineers (SPIE) Conference Series" 9909, 99090Z (Jul 2016).',
                           'volume': '9909',
                           'year': '2016',
                           'page': '99090Z'})
@@ -413,7 +413,7 @@ class TestCRFClassifierText(TestCase):
         self.assertEqual(self.crf_text.parse(reference_str),
                          {'doi': u'doi:10.1016/j.icarus.2019.113397',
                           'journal': u'Icarus',
-                          'arxiv': u'arxiv:1904.09036',
+                          'arxiv': u'arXiv:1904.09036',
                           'refstr': u'K.E. Mesick, W.C. Feldman, E.R. Mullin, L.C. Stonehill, 2020, Icarus, 335, 113397, arXiv:1904.09036, doi:10.1016/j.icarus.2019.113397.',
                           'volume': u'335',
                           'authors': u'K. E. Mesick, W. C. Feldman, E. R. Mullin, L. C. Stonehill',
@@ -506,7 +506,7 @@ class TestCRFClassifierText(TestCase):
         self.assertEqual(self.crf_text.parse(reference_str),
                          {'title': 'ASTROPHYSICAL IMPLICATIONS BINARY BLACK HOLE MERGER GW150914',
                           'journal': 'Astrophys J Lett',
-                          'authors': 'B. P. Abbott, et al., LIGO/ Virgo Collaborations',
+                          'authors': 'B. P. Abbott, et al., LIGO / Virgo Collaborations',
                           'refstr': 'B.P. Abbott, et al., [LIGO/Virgo Collaborations], AS- TROPHYSICAL IMPLICATIONS OF THE BINARY BLACK HOLE MERGER GW150914, Astrophys. J. Lett. 818, L22 (2016)',
                           'volume': '818',
                           'year': '2016',
@@ -573,16 +573,16 @@ class TestCRFClassifierText(TestCase):
         reference_str = 'Keaton J. Burns, Geoffrey M. Vasil, Jeffrey S. Oishi, Daniel Lecoanet, and Benjamin P. Brown, "Dedalus: A Flexible Framework for Numerical Simulations with Spectral Methods," arXiv e-prints , arXiv:1905.10388 (2019), arXiv:1905.10388 [astro-ph.IM]'
         self.assertEqual(self.crf_text.parse(reference_str),
                          {'title': u'Dedalus: Flexible Framework Numerical Simulations Spectral Methods',
-                          'journal': u'arXiv e-prints',
-                          'arxiv': u'arxiv:1905.10388',
+                          'journal': u'e-prints',
+                          'arxiv': u'arXiv:1905.10388',
                           'refstr': u'Keaton J. Burns, Geoffrey M. Vasil, Jeffrey S. Oishi, Daniel Lecoanet, and Benjamin P. Brown, "Dedalus: A Flexible Framework for Numerical Simulations with Spectral Methods," arXiv e-prints , arXiv:1905.10388 (2019), arXiv:1905.10388 [astro-ph.IM]',
                           'authors': u'Keaton J. Burns, Geoffrey M. Vasil, Jeffrey S. Oishi, Daniel Lecoanet, and Benjamin P. Brown',
                           'year': u'2019'})
 
     def test_049(self):
         """ test splitting the reference when there are doi/arxiv identifiers """
-        reference = "K.E. Mesick, W.C. Feldman, E.R. Mullin, L.C. Stonehill, 2020, Icarus, 335, 113397, arXiv:1904.09036, doi:10.1016/j.icarus.2019.113397."
-        self.assertEqual(self.crf_text.tokenize(reference),
+        reference_str = "K.E. Mesick, W.C. Feldman, E.R. Mullin, L.C. Stonehill, 2020, Icarus, 335, 113397, arXiv:1904.09036, doi:10.1016/j.icarus.2019.113397."
+        self.assertEqual(self.crf_text.tokenize(reference_str),
                          ['K', '.', 'E', '.', 'Mesick', ',', 'W', '.', 'C', '.', 'Feldman', ',', 'E', '.', 'R', '.',
                           'Mullin', ',', 'L', '.', 'C', '.', 'Stonehill', ',', '2020', ',', 'Icarus', ',', '335', ',',
                           '113397', ',', 'arXiv', ':', '1904.09036', ',', 'doi', ':', '10.1016/j.icarus.2019.113397',
@@ -590,78 +590,24 @@ class TestCRFClassifierText(TestCase):
 
     def test_050(self):
         """ test splitting the reference when there are no identifiers """
-        reference = "K.E. Mesick, W.C. Feldman, E.R. Mullin, L.C. Stonehill, 2020, Icarus, 335."
-        self.assertEqual(self.crf_text.tokenize(reference),
+        reference_str = "K.E. Mesick, W.C. Feldman, E.R. Mullin, L.C. Stonehill, 2020, Icarus, 335."
+        self.assertEqual(self.crf_text.tokenize(reference_str),
                          ['K', '.', 'E', '.', 'Mesick', ',', 'W', '.', 'C', '.', 'Feldman', ',', 'E', '.', 'R', '.',
                           'Mullin', ',', 'L', '.', 'C', '.', 'Stonehill', ',', '2020', ',', 'Icarus', ',', '335', '.'])
 
+    def test_051(self):
+        """ test identifying `volume(issue):page_start-page_end` pattern """
+        reference_str = 'M. Wang, J. Y. Lu, K. Kabin, H. Z. Yuan, X. Ma, Z. Q. Liu, Y. F. Yang, J. S. Zhao, and G. Li. The influence of IMF clock angle on the cross section of the tail bow shock. "Journal of Geophysical Research (Space Physics)", 121(11):11,077-11,085, Nov 2016.'
+        self.assertEqual(self.crf_text.parse(reference_str),
+                         {'title': u'influence IMF clock angle cross section tail bow shock',
+                          'journal': u'Journal Geophysical Research Space Physics',
+                          'authors': u'M. Wang, J. Y. Lu, K. Kabin, H. Z. Yuan, X. Ma, Z. Q. Liu, Y. F. Yang, J. S. Zhao, and G. Li.',
+                          'refstr': u'M. Wang, J. Y. Lu, K. Kabin, H. Z. Yuan, X. Ma, Z. Q. Liu, Y. F. Yang, J. S. Zhao, and G. Li. The influence of IMF clock angle on the cross section of the tail bow shock. "Journal of Geophysical Research (Space Physics)", 121(11):11,077-11,085, Nov 2016.',
+                          'volume': u'121',
+                          'year': u'2016',
+                          'issue': u'11',
+                          'page': u'11,077-11,085'})
 
-class TestCRFClassifierXML(TestCase):
-    def create_app(self):
-        app_ = app.create_app()
-        return app_
-
-    def test_a_reference(self):
-        """
-
-        """
-        crf_xml = CRFClassifierXML()
-        crf_xml.create_crf()
-
-        raw_references = [u'<ADSBIBCODE>2013SoPh..287..441T</ADSBIBCODE>',
-                          u'<citation_list doi="10.1007/s11207-012-0088-4" file="doi/10.1007/./s1/12/07/-0/12/-0/08/8-/4//metadata.xml" bibcode="2013SoPh..287..441T"><citation key="88_CR1"><journal_title>Astrophys. J.</journal_title><author>A. Bemporad</author><volume>720</volume><first_page>130</first_page><cyear>2010</cyear><unstructured_citation>Bemporad, A., Mancuso, S.: 2010, Astrophys. J. 720, 130. doi: 10.1088/0004-637X/720/1/130 .</unstructured_citation></citation></citation_list>']
-
-        # self.assertEqual(crf_xml.parse(raw_references),
-        #                  [{'refplaintext': u'Bemporad, A., Mancuso, S.: 2010, Astrophys. J. 720, 130. doi: 10.1088/0004-637X/720/1/130 .',
-        #                    'journal': u'Astrophys J',
-        #                    'refstr': "{u'unstructured_citation': u'Bemporad, A., Mancuso, S.: 2010, Astrophys. J. 720, 130. doi: 10.1088/0004-637X/720/1/130 .', u'author': u'A. Bemporad', u'journal_title': u'Astrophys. J.', u'cyear': u'2010', u'volume': u'720', u'@key': u'88_CR1', u'first_page': u'130'}",
-        #                    'volume': u'720',
-        #                    'authors': u'Bemporad, A',
-        #                    'page': u'130',
-        #                    'year': u'2010'}])
-
-
-class TestDataXML(TestCase):
-    def create_app(self):
-        app_ = app.create_app()
-        return app_
-
-    def test_extract_volume_from_journal(self):
-        """
-
-        """
-        journal, volume = crossref_extract_volume_from_journal('Annual Review of Biophysics and Biophysical Chemistry, vol. 15')
-        self.assertTrue(journal == 'Annual Review of Biophysics and Biophysical Chemistry' and volume == '15')
-
-    def test_get_xml_tagged_data(self):
-        """
-
-        """
-        training_files_path = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')), 'parser/training_files/')
-        xml_ref_filenames = [training_files_path + 'S0019103517302440.xml',
-                             training_files_path + '10.1073_pnas.1205221109.xref.xml']
-
-        for i, xml_ref_filename in enumerate(xml_ref_filenames):
-            with open(xml_ref_filename) as f:
-                self.assertTrue(dataXML.train_1[i] == get_xml_tagged_data(f.read().splitlines()))
-
-        # test springer read routine
-        with open(training_files_path + 'iss5.springer.xml') as f:
-            self.assertTrue(dataXML.train_3 == get_xml_tagged_data(f.read().splitlines()))
-
-        # test when no buffer is passed in
-        self.assertTrue(get_xml_tagged_data('') == None)
-
-    def test_get_xml_tagged_data_training(self):
-        """
-
-        """
-        training_files_path = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')), 'parser/training_files/')
-        xml_ref_filenames = [training_files_path + 'S0019103517303470.xml',
-                             training_files_path + '10.1371_journal.pone.0048146.xref.xml']
-
-        for i, xml_ref_filename in enumerate(xml_ref_filenames):
-            self.assertTrue(dataXML.train_2[i] == get_xml_tagged_data_training(xml_ref_filename))
 
 if __name__ == "__main__":
     unittest.main()

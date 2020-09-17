@@ -12,10 +12,10 @@ from referencesrv.resolver.common import Undecidable
 
 # all author lists coming in need to be case-folded
 # replaced van(?: der) with van|van der
-SINGLE_NAME_RE = "(?:(?:d|de|De|des|Des|in '[a-z]|van|van der|van den|von|Mc|[A-Z]')[' ]?)?[A-Z][a-z][A-Za-z]*"
+SINGLE_NAME_RE = "(?:(?:d|de|de la|De|des|Des|in '[a-z]|van|van der|van den|von|Mc|[A-Z]')[' ]?)?[A-Z][a-z]['A-Za-z]*"
 LAST_NAME_PAT = re.compile(r"%s(?:[- ]%s)*" % (SINGLE_NAME_RE, SINGLE_NAME_RE))
 
-ETAL = r"([\s,]*[Ee][Tt][.\s]*[Aa][Ll][.\s]*)?"
+ETAL = r"(([\s,]*and)?[\s,]+[Ee][Tt][.\s]*[Aa][Ll][.\s]+)?"
 LAST_NAME_SUFFIX = r"([,\s]*[Jj][Rr][.,\s]+)?"
 
 # This pattern should match author names with initials behind the last
@@ -39,23 +39,24 @@ TRAILING_INIT_AUTHORS_PAT = re.compile("%s(%s%s)*%s"%(
     NAMED_GROUP_PAT.sub("?:", TRAILING_INIT_PAT.pattern), REF_GLUE_RE,
     NAMED_GROUP_PAT.sub("?:", TRAILING_INIT_PAT.pattern), ETAL))
 
-COLLABORATION_PAT = re.compile(r"(?P<collaboration>[\(\[][A-Za-z\s\-\/]*Collaboration[s,]*[\)\]])")
+COLLABORATION_PAT = re.compile(r"(?P<collaboration>[(\[]?[A-Za-z\s\-\/]+[Cc]ollaboration[s]?[.,)\]]+)")
 COLLEAGUES_PAT = re.compile(r"(?P<andcolleagues>and\s\d+\s(co-authors|colleagues))")
 
 REFERENCE_LAST_NAME_EXTRACTOR = re.compile(r"(\w\w+\s*\w\w+\s*\w{0,1}\w+)")
 SINGLE_WORD_EXTRACTOR = re.compile(r"\w+")
 
-FIRST_CAPTIAL = re.compile(r"^([^A-Z]*[A-Z])")
+FIRST_CAPTIAL = re.compile(r"^([^A-Z0-9\"""]*[A-Z])")
 
 # when first name is spelled out
-FIRST_NAME_PAT = r"[A-Z][a-z][A-Za-z]*"
+FIRST_NAME_PAT = r"[A-Z][a-z][A-Za-z]*(\-[A-Z][a-z][A-Za-z]*)?"
 FULLNAME_PAT = re.compile(r"(?P<first>%s\s+(?:[A-Z]\.[\s-]*)?)"
                           r"(?P<last>%s%s),?" %(FIRST_NAME_PAT, LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
 FULLNAME_AUTHORS_PAT = re.compile("%s(%s%s)*(%s)?"%(
     NAMED_GROUP_PAT.sub("?:", FULLNAME_PAT.pattern), REF_GLUE_RE,
     NAMED_GROUP_PAT.sub("?:", FULLNAME_PAT.pattern), ETAL))
 
-AND_BETWEEN_LAST_TWO = re.compile(r"(,?\s*and)", re.IGNORECASE)
+REMOVE_AND = re.compile(r"(,?\s+and)", re.IGNORECASE)
+COMMA_BEFORE_AND = re.compile(r"(,)?(\s+and)", re.IGNORECASE)
 
 
 def get_author_pattern(ref_string):
@@ -88,9 +89,11 @@ def get_author_pattern(ref_string):
     else:
         return LEADING_INIT_PAT
 
+
 def get_authors_recursive(ref_string, start_idx, author_pat):
     """
-    if there is a comma missing between the authors, RE gets confused,
+    if there is a comma missing between the authors, or there is a out of place character,
+    (ie, P. Bosetti, N. Brand t, M. Caleno, ...) RE gets confused,
     once substring is identified as author, continue on with the rest of ref_string
     to make sure all the authors are identified
 
@@ -101,16 +104,17 @@ def get_authors_recursive(ref_string, start_idx, author_pat):
     """
     author_len = 0
     while True:
-        first_capital = FIRST_CAPTIAL.match(ref_string[start_idx+author_len:])
-        if first_capital:
-            start_idx += len(first_capital.group()) - 1
+        if author_len > 0:
+            first_capital = FIRST_CAPTIAL.match(ref_string[start_idx+author_len:])
+            if first_capital:
+                author_len += len(first_capital.group()) - 1
         author_match = author_pat.match(ref_string[start_idx+author_len:])
         if author_match:
             author_len += len(author_match.group())
         else:
             break
-        author_len += len(ref_string) - len(ref_string.lstrip())
     return author_len
+
 
 def get_authors_fullnames(ref_string):
     """
@@ -123,6 +127,7 @@ def get_authors_fullnames(ref_string):
     if author_match:
         return len(author_match.group())
     return 0
+
 
 def get_authors(ref_string):
     """
@@ -159,7 +164,8 @@ def get_authors(ref_string):
         if authors_len < 3:
             raise Undecidable("No discernible authors in '%s'"%ref_string)
         authors_len += collaborators_len
-    return ref_string[:authors_len].strip(',')
+    authors = ref_string[:authors_len].strip().strip(',')
+    return authors
 
 
 def get_editors(ref_string):
@@ -191,9 +197,9 @@ def get_collaborators(ref_string):
     :param ref_string:
     :return:
     """
-    match = COLLABORATION_PAT.search(ref_string)
-    if match:
-        collaboration = match.group('collaboration')
+    match = COLLABORATION_PAT.findall(COMMA_BEFORE_AND.sub(',\2', ref_string))
+    if len(match) > 0:
+        collaboration = match[-1]
         return ref_string.find(collaboration), len(collaboration)
 
     return 0, 0
@@ -238,23 +244,22 @@ def normalize_author_list(author_string, initials=True):
     :param initials:
     :return:
     """
-    author_string = AND_BETWEEN_LAST_TWO.sub(',', author_string)
+    author_string = REMOVE_AND.sub(',', author_string)
     try:
         pat = get_author_pattern(author_string)
+        if initials:
+            return "; ".join("%s, %s" % (match.group("last"), match.group("inits"))
+                             for match in pat.finditer(author_string)).strip()
+        else:
+            return "; ".join("%s" % (match.group("last"))
+                             for match in pat.finditer(author_string)).strip()
     except Undecidable:
-        if not initials:
-            # is first name spelled out
+        # is first name spelled out
+        if get_authors_fullnames(author_string) > 0:
             if get_authors_fullnames(author_string) > 0:
-                return "; ".join("%s, %s" % (mat.group("last"), mat.group("first")[0])
-                                 for mat in FULLNAME_PAT.finditer(author_string)).strip()
+                return "; ".join("%s, %s" % (match.group("last"), match.group("first")[0])
+                                 for match in FULLNAME_PAT.finditer(author_string)).strip()
         return author_string
-
-    if initials:
-        return "; ".join("%s, %s" % (mat.group("last"), mat.group("inits"))
-                         for mat in pat.finditer(author_string)).strip()
-    else:
-        return "; ".join("%s" % (mat.group("last"))
-                         for mat in pat.finditer(author_string)).strip()
 
 
 def get_first_author(author_string, initials=False):
@@ -268,11 +273,11 @@ def get_first_author(author_string, initials=False):
     :return:
     """
     pat = get_author_pattern(author_string)
-    mat = pat.search(author_string)
+    match = pat.search(author_string)
     if initials:
-        return "%s, %s" % (mat.group("last"), mat.group("inits"))
+        return "%s, %s" % (match.group("last"), match.group("inits"))
     else:
-        return mat.group("last")
+        return match.group("last")
 
 
 def get_first_author_last_name(author_string):
@@ -287,6 +292,19 @@ def get_first_author_last_name(author_string):
         if parts:
             return parts[0].split(",")[0]
     return None
+
+def get_author_last_name_only(author_string):
+    """
+
+    :param author_string:
+    :return:
+    """
+    try:
+        get_author_pattern(author_string)
+        return [lastname.lower().replace('-', ' ') for lastname in LAST_NAME_PAT.findall(author_string)]
+    except Undecidable:
+        # we are here since we have full first names, hence return every other matches
+        return [single_name.lower() for name in LAST_NAME_PAT.findall(author_string) for single_name in name.split()][1::2]
 
 def count_matching_authors(ref_authors, ads_authors, ads_first_author=None):
     """
@@ -315,13 +333,11 @@ def count_matching_authors(ref_authors, ads_authors, ads_first_author=None):
     matching_authors, missing_in_ref, first_author_missing = 0, 0, False
 
     # clean up ADS authors to only contain surnames and be lowercased
-    # golnaz: remove the punctuations,
-    # also if there is etal or and or ed (editor) in ref_authors remove them too
     ads_authors_lastname = [a.split(',')[0].strip().lower().replace('-', ' ')
                             for a in ads_authors]
 
-    ref_authors = EXTRAS_PAT.sub('', ref_authors.lower().replace('.', ' ').replace('-', ' '))
-    ref_authors_lastname = REFERENCE_LAST_NAME_EXTRACTOR.findall(ref_authors)
+    ref_authors_lastname = get_author_last_name_only(ref_authors)
+    ref_authors = EXTRAS_PAT.sub('', ref_authors.lower().replace('.', ' '))
 
     if ads_first_author is None:
         ads_first_author = ads_authors_lastname[0]
@@ -331,8 +347,7 @@ def count_matching_authors(ref_authors, ads_authors, ads_first_author=None):
 
     different = []
     for ads_auth in ads_authors_lastname:
-        if ads_auth in ref_authors or (
-                        " " in ads_auth and ads_auth.split()[-1] in ref_authors):
+        if ads_auth in ref_authors or (" " in ads_auth and ads_auth.split()[-1] in ref_authors):
             matching_authors += 1
         else:
             # see if there is actually no match (check for misspelling here)
@@ -351,11 +366,6 @@ def count_matching_authors(ref_authors, ads_authors, ads_first_author=None):
     # Now try to figure out if the reference has additional authors
     # (we assume ADS author lists are complete)
     ads_authors_lastname_pattern = "|".join(ads_authors_lastname)
-
-    # just to be on the safe side, nuke some RE characters that sometimes
-    # sneak into ADS author lists (really, the respective records should
-    # be fixed)
-    ads_authors_lastname_pattern = re.sub("[()]", "", ads_authors_lastname_pattern)
 
     wordsNotInADS = SINGLE_WORD_EXTRACTOR.findall(re.sub(ads_authors_lastname_pattern, "", '; '.join(ref_authors_lastname)))
     # remove recognized misspelled authors

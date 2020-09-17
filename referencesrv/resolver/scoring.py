@@ -78,32 +78,59 @@ def get_volume_page_score_for_input_fields(result_record, hypothesis):
 
     evidences = Evidences()
 
-    # references can eliminate volume and include only page
+    # references can eliminate volume and include only page, or only volume can be included
     # parser can not differentiate between if only page was included or only volume,
-    # so if there is only value, most of the time volume is populated
-    # compare it against both volume and page
-    exist = bool("volume" in input_fields) + bool("page" in input_fields)
-    if exist > 0:
-        if exist == 1:
-            if "volume" in input_fields:
-                page = volume = input_fields["volume"]
-            if "page" in input_fields:
-                volume = page = input_fields["page"]
-        else: # == 2
-            page = input_fields["page"]
-            volume = input_fields["volume"]
+    # so if there is only one value, do a reverse engineering, see if the page and or volume in ads 
+    # matches this one value, or if it can be matched in the ref_str
+    exist = bool('volume' in input_fields) + bool('page' in input_fields)
 
+    ads_volume = result_record.get('volume', '')
+    ads_page = result_record.get('page', '')
+
+    ref_str = input_fields.get('refstr', '')
+
+    if exist == 0:
+        # see if ads_volume is in the ref_str
+        ref_volume = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
+        # see if ads_page is in the ref_str
+        ref_page = ads_page if re.search(r'(\b%s)' % ads_page, ref_str) else None
+    elif exist == 1:
+        if 'volume' in input_fields:
+            if input_fields['volume'] == ads_page:
+                ref_volume = ads_page
+                # see if ads_volume is in the ref_str
+                ref_page = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
+            elif input_fields['volume'] == ads_volume:
+                # volume matches, see if ads_page is in the ref_str
+                ref_volume = ads_volume
+                ref_page = ads_page if re.search(r'(\b%s)' % ads_page, ref_str) else None
+        elif 'page' in input_fields:
+            if input_fields['page'] == ads_volume:
+                ref_page = ads_volume
+                # see if ads_page is in the ref_str
+                ref_volume = ads_page if re.search(r'(\b%s)' % ads_page, ref_str) else None
+            elif input_fields['page'] == ads_page:
+                # page matches, see if ads_volume is in the ref_str
+                ref_page = ads_page
+                ref_volume = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
+    else: # == 2
+        ref_page = input_fields['page']
+        ref_volume = input_fields['volume']
+
+    if ref_volume:
         add_volume_evidence(evidences,
-                            volume,
-                            result_record.get("volume"),
-                            result_record.get("issue"),
-                            result_record.get("pub_raw"))
+                            ref_volume,
+                            ads_volume,
+                            result_record.get('issue'),
+                            result_record.get('pub_raw'))
+    if ref_page:
         add_page_evidence(evidences,
-                          page,
-                          result_record.get('page', []),
+                          ref_page,
+                          ads_page,
                           result_record.get('page_range', ''),
                           result_record.get('eid', None),
-                          ref_qualifier=hypothesis.get_detail('page_qualifier'))
+                          hypothesis.get_detail('page_qualifier'),
+                          input_fields.get('refstr', ''))
 
     return evidences
 
@@ -136,12 +163,21 @@ def get_basic_score_for_input_fields(result_record, hypothesis):
 
     input_fields = hypothesis.get_detail('input_fields')
 
+    if 'page' not in input_fields:
+        ads_page = result_record.get('page', '')
+        # reverse engineering, see if ads_page is in the ref_str
+        # some xmls are unable to parse page out
+        ref_page = ads_page if re.search(r'(\b%s)' % ads_page, input_fields('refstr', '')) else None
+    else:
+        ref_page = input_fields.get('page')
+        ads_page = result_record.get('page', '')
+
     add_page_evidence(evidences,
-        input_fields.get('page'),
-        result_record.get('page', []),
+        ref_page,
+        ads_page,
         result_record.get('page_range', ''),
         result_record.get('eid', None),
-        ref_qualifier=hypothesis.get_detail('page_qualifier'))
+        hypothesis.get_detail('page_qualifier'))
 
     add_title_evidence(evidences,
         input_fields.get('title'),

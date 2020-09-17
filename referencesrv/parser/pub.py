@@ -6,24 +6,18 @@ The module keeps track of journal/title/publisher substrings
 import re
 import nltk
 from itertools import groupby
-from collections import OrderedDict
 
 from flask import current_app
 
-from referencesrv.parser.common import concatenate, spot, strip, append_unique
+from referencesrv.parser.common import concatenate, spot, strip, append_unique, PUNCTUATION_TOKEN, is_punctuation
 from referencesrv.resolver.journalfield import is_page_number
 
 class PubToken():
 
-    PUNCTUATION_TOKEN = OrderedDict(
-        [('PUNCTUATION_BRACKETS', ['[', ']']), ('PUNCTUATION_COLON', [':']), ('PUNCTUATION_COMMA', [',']),
-         ('PUNCTUATION_DOT', ['.']), ('PUNCTUATION_PARENTHESIS', ['(', ')']), ('PUNCTUATION_QUOTES', ['"', '\'']),
-         ('PUNCTUATION_NUM', ['#']), ('PUNCTUATION_HYPEN', ['-']), ('PUNCTUATION_FORWARD_SLASH', ['/']),
-         ('PUNCTUATION_SEMICOLON', [';'])])
-
     PLACEHOLDER = {'title': '|title_%d|', 'journal': '|journal_%d|', 'publisher': '|publisher_%d|'}
 
     PRE_TITLE_JOURNAL_PATTERN = r'(?:(\.|\,|\:|\s|\(?\d{4}[a-z][.,)]*|\(?\d[.,)]*)*\s*)'
+    TITLE_JOURNAL_FREE_FALL_PATTERN = r'[A-Z]+.+'
     TITLE_PATTERN = r'[A-Z]+[A-Za-z\d\'\s\:\-\+\?]+'
     TITLE_MULTI_PART_PATTERN = r'[A-Z]+[A-Za-z\d\'\s\-\+\?\.\:]+'
     TITLE_FREE_FALL_PATTERN = r'[A-Z]+[A-Za-z\d\'\s\:\-\+]+(\(.*\)||(\d+\.\d+\-?)*)?[A-Za-z\d\'\s\:\-\+]+' # can have parenthesis and numeric value
@@ -35,7 +29,7 @@ class PubToken():
     PUBLISHER_PATTERN = r'[A-Z]+[A-Za-z0-9\.\:\s\'\-&()]+[A-Za-z]+'
     YEAR_PATTERN = "[12][089]\d\d[a-z]?"
     TITLE_JOURNAL_PUBLISHER_EXTRACTOR = re.compile(r'^%s[\"\']*(?P<title>%s)[.,\"\']+\s+(:?[Ii][Nn][:\s])?(?P<journal>%s)%s\(?(?P<publisher>%s)\)?[\s\d,;.]*$'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_PATTERN, JOURNAL_PATTERN, POST_JOURNAL_PATTERN, PUBLISHER_PATTERN))
-    TITLE_JOURNAL_QUOTE_JOURNAL_ONLY = r'^%s(?P<title>%s)[.,()\s\d\w]+[\"\']\s*(?P<journal>%s)%s*[\"\']'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_PATTERN, JOURNAL_PATTERN, TITLE_JOURNAL_GLUE_PATTERN)
+    TITLE_JOURNAL_QUOTE_JOURNAL_ONLY = r'^%s(?P<title>%s)[\"\']\s*(?P<journal>%s)%s*[\"\']'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_JOURNAL_FREE_FALL_PATTERN, TITLE_JOURNAL_FREE_FALL_PATTERN, TITLE_JOURNAL_GLUE_PATTERN)
     TITLE_JOURNAL_BOTH_QUOTED = r'^%s[\"\']\s*(?P<title>%s)%s*[\"\'].*[\"\']\s*(?P<journal>%s)%s*[\"\']'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_PATTERN, TITLE_JOURNAL_GLUE_PATTERN, JOURNAL_PATTERN, TITLE_JOURNAL_GLUE_PATTERN)
     TITLE_JOURNAL_QUOTE_TITLE_IN_BEFORE_JOURNAL = r'^%s[\"\']\s*(?P<title>.*)%s*[\"\']%s*(?:[Ii][Nn][:\s])?(?P<journal>%s)+%s+$' % (PRE_TITLE_JOURNAL_PATTERN, TITLE_JOURNAL_GLUE_PATTERN, TITLE_JOURNAL_GLUE_PATTERN, JOURNAL_MIXED_PATTERN, POST_JOURNAL_PATTERN_ALL)
     TITLE_JOURNAL_MUTI_PART_TITLE = r'^%s(?P<title>%s)\,\s+(?P<journal>%s)%s.*$'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_MULTI_PART_PATTERN, JOURNAL_PATTERN, POST_JOURNAL_PATTERN)
@@ -70,6 +64,8 @@ class PubToken():
 
     TOKENS_IDENTIFIED = re.compile(r'\|[a-z\_]+\|')
 
+    REMOVE_PUNCTUATION = re.compile(r"[()\[\]\\/*?\"+~^,=#']")
+
     def __init__(self):
         """
 
@@ -82,7 +78,15 @@ class PubToken():
             current_app.config['REFERENCE_SERVICE_ACADEMIC_PUBLISHERS'] +
             current_app.config['REFERENCE_SERVICE_ACADEMIC_PUBLISHERS_LOCATIONS']))
         self.stopwords = current_app.config['REFERENCE_SERVICE_STOP_WORDS']
-        self.punctuations = ''.join([inner for outer in self.PUNCTUATION_TOKEN.values() for inner in outer])
+        self.punctuations = ''.join([inner for outer in PUNCTUATION_TOKEN.values() for inner in outer])
+
+
+    def clear(self):
+        """
+
+        :return:
+        """
+        self.segment_dict = {}
 
 
     def identified_title(self):
@@ -127,7 +131,6 @@ class PubToken():
         # nested quotes messes up RE that relies on quotes to segment title/journal,
         # if there are any nested quotes go to nltk segmentation directly
         if not self.detect_nested_quotes(reference_str_tmp):
-
             # attempt to extract title, journal, and publisher
             extractor = self.TITLE_JOURNAL_PUBLISHER_EXTRACTOR.match(reference_str_tmp)
             if extractor:
@@ -164,7 +167,8 @@ class PubToken():
                 extractor = je.match(reference_str_tmp)
                 if extractor:
                     journal = extractor.group('journal').strip()
-                    if len(journal) > 0:
+                    # do not accept partial journal name (ie, only J)
+                    if len(journal) > 1:
                         if self.segment_dict.get('have_editor', None):
                             # it is actually title, when there is an editor
                             title = journal
@@ -216,7 +220,7 @@ class PubToken():
                                      for word, tag in subtree.leaves())
                     aleaf = self.SPACE_BEFORE_DOT_REMOVER.sub(r'\1',
                                         self.SPACE_AROUND_AMPERSAND_REMOVER.sub(r'\1&\2', picks)).strip(' ')
-                    if len(aleaf) >= 1 and self.is_punctuation(aleaf) == 0:
+                    if len(aleaf) >= 1 and is_punctuation(aleaf) == 0:
                         nps.append(aleaf)
 
             # check for possible publisher in the segmented nps
@@ -312,6 +316,8 @@ class PubToken():
                 publisher = [publisher]
             else:
                 publisher = []
+        # remove unnecessary punctuations in title, keep `:` and `-`
+        title = [self.REMOVE_PUNCTUATION.sub(' ', t).strip() for t in title]
         self.segment_dict.update({'title': title, 'journal': journal, 'publisher': publisher})
 
 
@@ -487,34 +493,9 @@ class PubToken():
 
         if ref_word is None:
             return 0
+        if spot(ref_word, self.identified_journal()):
+            return 0
         return int(self.academic_publishers_locations.search(ref_word) is not None)
-
-
-    def is_punctuation(self, ref_word):
-        """
-
-        :param ref_word:
-        :return: 0 if not a punctuation
-                 1 if brackets, 2 if colon, 3 if comma, 4 if dot, 5 if parenthesis,
-                 6 if quotes (both single and double), 7 if num sign, 8 if hypen, 9 if forward slash,
-                 10 if semicolon
-        """
-        found = [i for i, p in enumerate(self.PUNCTUATION_TOKEN.values()) if ref_word in p]
-        return found[0]+1 if len(found) > 0 else 0
-
-
-    def which_punctuation(self, ref_word, ref_label):
-        """
-        verify if ref_word is a punctuation, and determine which one
-
-        :param ref_word:
-        :param ref_label:
-        :return:
-        """
-        if ref_label:
-            return self.PUNCTUATION_TOKEN.keys().index(ref_label)+1 if ref_label in self.PUNCTUATION_TOKEN.keys() else 0
-
-        return self.is_punctuation(ref_word)
 
 
     def is_stopword(self, ref_word):
@@ -665,12 +646,16 @@ class PubToken():
         :return: 1 if the first word in journal string,
                  2 if the last word in journal string,
                  3 if the middle words in journal string,
+                 4 if there is only one word in journal string
                  0 not in author string
         """
         if ref_label_list:
             if 'JOURNAL' in ref_label_list:
                 idx_first = next(i for i, v in enumerate(ref_label_list) if v == 'JOURNAL')
                 if index == idx_first:
+                    # one token journal
+                    if len([i for i, v in enumerate(ref_label_list) if v == 'JOURNAL']) == 1:
+                        return 4
                     return 1
                 idx_last = len(ref_label_list) - next(i for i, v in enumerate(reversed(ref_label_list)) if v == 'JOURNAL')
                 if index == idx_last:
@@ -689,6 +674,8 @@ class PubToken():
             tokens = self.tokenize(self.identified_journal())
             if len(tokens) > 0:
                 if ref_word == tokens[0]:
+                    if len(tokens) == 1:
+                        return 4
                     return 1
                 if ref_word == tokens[-1]:
                     return 2
@@ -710,7 +697,7 @@ class PubToken():
         current_word = ref_word_list[index] if index >= 0 and index < len(ref_word_list) else ''
         current_label = ref_label_list[index] if index >= 0 and index < len(ref_label_list) else None
         exist = self.is_title(current_word, current_label, index)
-        where = self.where_in_title(ref_word_list, ref_label_list, index)
+        where = self.where_in_title(ref_word_list, ref_label_list, index) if exist == 1 else 0
         return [
             exist,  # is it more likely part of title?
             1 if where == 1 else 0,  # first word in title
@@ -732,38 +719,25 @@ class PubToken():
         current_word = ref_word_list[index] if index >= 0 and index < len(ref_word_list) else ''
         current_label = ref_label_list[index] if index >= 0 and index < len(ref_label_list) else None
         exist = self.is_journal(current_word, current_label, index)
-        where = self.where_in_journal(ref_word_list, ref_label_list, index)
+        where = self.where_in_journal(ref_word_list, ref_label_list, index) if exist == 1 else 0
         return [
             exist,  # is it more likely part of journal?
-            1 if where == 1 else 0,  # first word in journal
-            1 if where == 2 else 0,  # last word in journal
-            1 if where == 3 else 0,  # middle words in journal
+            1 if where == 1 or where == 4 else 0,  # first word in journal, or single word journal
+            1 if where == 2 or where == 4 else 0,  # last word in journal, or single word journal
+            1 if where == 3 or where == 4 else 0,  # middle words in journal, or single word journal
         ]
 
 
-    def punctuation_features(self, ref_word, ref_label):
+    def publisher_features(self, ref_word, ref_label):
         """
-        return a feature vector that has 1 in the first cell if ref_word is a punctuation
-        followed by 1 in the position corresponding to which one
 
         :param ref_word:
         :param ref_label:
         :return:
         """
-        which = self.which_punctuation(ref_word, ref_label)
-        return [
-            int(self.is_punctuation(ref_word) > 0),
-            1 if which == 1 else 0,   # 1 if brackets,
-            1 if which == 2 else 0,   # 2 if colon,
-            1 if which == 3 else 0,   # 3 if comma,
-            1 if which == 4 else 0,   # 4 if dot,
-            1 if which == 5 else 0,   # 5 if parenthesis,
-            1 if which == 6 else 0,   # 6 if quotes (both single and double),
-            1 if which == 7 else 0,   # 7 if num signs,
-            1 if which == 8 else 0,   # 8 if hypen,
-            1 if which == 9 else 0,   # 9 if forward slash,
-            1 if which == 10 else 0,  # 10 if semicolon,
-        ]
+        location = self.is_location(ref_word, ref_label)    # is it city or country name
+        publisher = self.is_publisher(ref_word, ref_label)  # is it the publisher name
+        return [location | publisher, location, publisher]
 
 
     def indices(self, ref_label_list, tag):

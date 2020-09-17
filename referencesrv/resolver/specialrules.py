@@ -68,8 +68,12 @@ def get_score_for_baas_match(result_record, hypothesis):
 
     input_fields = hypothesis.get_detail('input_fields')
 
+    normalized_authors = hypothesis.get_detail('normalized_authors')
+    if normalized_authors is None:
+        normalized_authors = normalize_author_list(input_fields.get('author', ''))
+
     add_author_evidence(evidences,
-        normalize_author_list(input_fields.get('author', '')),
+        normalized_authors,
         result_record['author_norm'],
         result_record['first_author_norm'])
 

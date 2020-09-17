@@ -6,17 +6,20 @@ This module keeps track of author and editor list
 import re
 from collections import OrderedDict
 
+from referencesrv.parser.common import PUNCTUATION_TOKEN
 from referencesrv.resolver.authors import get_authors, get_editors
 
 class OriginatorToken():
 
-    IDENTIFYING_WORDS = OrderedDict([('EDITOR_IDENTIFIER', ['editor', 'edited', 'eds', 'ed'])])
+    IDENTIFYING_WORDS = OrderedDict([('AUTHOR_COLLABORATION_IDENTIFIER', ['collaboration', 'collaboration', 'team', 'teams']),
+                                     ('EDITOR_IDENTIFIER', ['editor', 'edited', 'eds', 'ed'])])
 
     AUTHOR_TAGS = ['AUTHOR_LAST_NAME', 'AUTHOR_FIRST_NAME', 'AUTHOR_MIDDLE_NAME', 'AUTHOR_COLLABORATION',
-                   'AUTHOR_FIRST_NAME_FULL',
-                   'PUNCTUATION_COMMA', 'PUNCTUATION_DOT', 'PUNCTUATION_BRACKETS',
-                    'AND', 'ET_AL', 'STOPWORD']
-    EDITOR_TAGS = ['EDITOR_LAST_NAME', 'EDITOR_FIRST_NAME', 'EDITOR_MIDDLE_NAME']
+                   'AUTHOR_FIRST_NAME_FULL', 'AND_AUTHOR', 'ETAL_AUTHOR', 'THE_AUTHOR', 'EDITORS_AUTHOR',
+                   'AUTHOR_COLLABORATION_IDENTIFIER']
+    EDITOR_TAGS = ['EDITOR_LAST_NAME', 'EDITOR_FIRST_NAME', 'EDITOR_MIDDLE_NAME', 'EDITOR_IDENTIFIER',
+                   'AND_EDITOR', 'ETAL_EDITOR']
+    PUNCTUATION_TAGS = ['PUNCTUATION_COMMA', 'PUNCTUATION_DOT', 'PUNCTUATION_BRACKETS', 'PUNCTUATION_QUOTES']
 
     PLACEHOLDER = {'authors':'|authors|', 'editors':'|editors|', 'pre_editors':'|pre_editors|', 'post_editors':'|post_editors|'}
 
@@ -47,6 +50,15 @@ class OriginatorToken():
         """
         self.segment_dict = {}
         self.reference_tokenizer = reference_tokenizer
+        self.punctuations = ''.join([inner for outer in PUNCTUATION_TOKEN.values() for inner in outer])
+
+
+    def clear(self):
+        """
+
+        :return:
+        """
+        self.segment_dict = {}
 
 
     def identify(self, reference_str):
@@ -219,7 +231,7 @@ class OriginatorToken():
                 idx_first = next(i for i,v in enumerate(ref_label_list) if v in ['AUTHOR_LAST_NAME', 'AUTHOR_FIRST_NAME', 'AUTHOR_FIRST_NAME_FULL', 'AUTHOR_COLLABORATION'])
                 if index == idx_first:
                     return 1
-                idx_last =  len(ref_label_list) - next(i for i,v in enumerate(reversed(ref_label_list)) if v in ['AUTHOR_LAST_NAME', 'AUTHOR_FIRST_NAME', 'AUTHOR_FIRST_NAME_FULL', 'ET_AL', 'AUTHOR_COLLABORATION']) - 1
+                idx_last =  len(ref_label_list) - next(i for i,v in enumerate(reversed(ref_label_list)) if v in ['AUTHOR_LAST_NAME', 'AUTHOR_FIRST_NAME', 'AUTHOR_FIRST_NAME_FULL', 'AUTHOR_COLLABORATION', 'ETAL_AUTHOR']) - 1
                 if index == idx_last:
                     return 2
                 if index > idx_first and index < idx_last:
@@ -249,11 +261,11 @@ class OriginatorToken():
                  0 not in editor string
         """
         if len(ref_label_list) > 0:
-            if next((l for l in ref_label_list if l in self.EDITOR_TAGS), None) is not None:
+            if next((l for l in ref_label_list if 'EDITOR_' in l), None) is not None:
                 idx_first = next(i for i,v in enumerate(ref_label_list) if v in ['EDITOR_LAST_NAME', 'EDITOR_FIRST_NAME'])
                 if index == idx_first:
                     return 1
-                idx_last =  len(ref_label_list) - next(i for i,v in enumerate(reversed(ref_label_list)) if v in ['EDITOR_LAST_NAME', 'EDITOR_FIRST_NAME', 'ET_AL']) - 1
+                idx_last =  len(ref_label_list) - next(i for i,v in enumerate(reversed(ref_label_list)) if v in ['EDITOR_LAST_NAME', 'EDITOR_FIRST_NAME', 'ETAL_EDITOR']) - 1
                 if index == idx_last:
                     return 2
                 if index > idx_first and index < idx_last:
@@ -270,23 +282,30 @@ class OriginatorToken():
         return 0
 
 
-    def author_features(self, ref_label_list, index):
+    def author_features(self, ref_word_list, ref_label_list, index):
         """
         return a feature vector that has 1 in the first cell if token is author
         followed by 1 in the position corresponding to where it is first, last, or middle
 
+        :param ref_word_list:
         :param ref_label_list:
         :param index:
         :return:
         """
+        current_word = ref_word_list[index] if index >= 0 and index < len(ref_word_list) else ''
         current_label = ref_label_list[index] if index >= 0 and index < len(ref_label_list) else None
-        exist = self.is_author(current_label, index)
-        where = self.where_in_author(ref_label_list, index)
+        if current_word in self.punctuations:
+            exist = where = identifier = 0
+        else:
+            exist = self.is_author(current_label, index)
+            where = self.where_in_author(ref_label_list, index)
+            identifier = self.is_author_collaboration_identifier(current_word, current_label)
         return [
             exist,  # is it more likely author
             1 if where == 1 else 0,  # if it is author determine if first word (usually lastname, but can be firstname or first initial, or collaborator)
             1 if where == 2 else 0,  # any author tags appearing in the middle
             1 if where == 3 else 0,  # or the last (could be et al)
+            identifier,  # is it identifier
         ]
 
 
@@ -302,9 +321,12 @@ class OriginatorToken():
         """
         current_word = ref_word_list[index] if index >= 0 and index < len(ref_word_list) else ''
         current_label = ref_label_list[index] if index >= 0 and index < len(ref_label_list) else None
-        exist = self.is_editor(current_label, index)
-        where = self.where_in_editor(ref_word_list, index)
-        identifier = self.is_editor_identifier(current_word, current_label)
+        if current_word in self.punctuations:
+            exist = where = identifier = 0
+        else:
+            exist = self.is_editor(current_label, index)
+            where = self.where_in_editor(ref_label_list, index)
+            identifier = self.is_editor_identifier(current_word, current_label)
         return [
             exist,  # is it more likely editor
             1 if where == 1 else 0,  # if it is editor determine if first word (usually lastname, but can be firstname or first initial)
@@ -312,6 +334,20 @@ class OriginatorToken():
             1 if where == 3 else 0,  # or the last (could be et al)
             identifier,  # is it identifier
         ]
+
+
+    def is_author_collaboration_identifier(self, ref_word, ref_label):
+        """
+
+        :param ref_word:
+        :param ref_label:
+        :return:
+        """
+        if ref_label:
+            if ref_label == 'AUTHOR_COLLABORATION_IDENTIFIER':
+                return 1
+            return 0
+        return int(any(ref_word.lower() == id for id in self.IDENTIFYING_WORDS['AUTHOR_COLLABORATION_IDENTIFIER']))
 
 
     def is_editor_identifier(self, ref_word, ref_label):
@@ -338,17 +374,18 @@ class OriginatorToken():
         """
         name = []
         for i, (w, l) in enumerate(zip(ref_word_list, ref_label_list)):
-            if l in self.AUTHOR_TAGS:
+            if l in self.AUTHOR_TAGS + self.PUNCTUATION_TAGS + ['STOPWORD']:
                 # skip brackets and stopword
                 # `and` between the last two authors should not be tagged as stopword,
                 # but sometimes if there is an `and` in title/journal
                 # then all ands gets tagged by crf as stopword,
                 # the other stopword that can appear in author list is `the` (ie, before collabrations name)
                 # we can skip 'the` but not `and`
-                if l in ['PUNCTUATION_BRACKETS', 'STOPWORD'] and w != 'and':
+                if l in ['PUNCTUATION_BRACKETS', 'STOPWORD', 'PUNCTUATION_QUOTES'] and w != 'and':
                     continue
                 # add space between tokens, unless it is dot or comma that does not need a space insert it before it
-                if l not in ['PUNCTUATION_COMMA', 'PUNCTUATION_DOT'] and len(name) > 0:
+                # also do not insert space before and after single quote
+                if l not in ['PUNCTUATION_COMMA', 'PUNCTUATION_DOT'] and ref_label_list[i-1] != 'PUNCTUATION_QUOTES' and len(name) > 0:
                     name.append(' ')
                 name.append(w)
             # remove last comma(s)
@@ -381,6 +418,7 @@ class OriginatorToken():
         :return: True if editor(s) identified
         """
         return self.segment_dict.get('editor_indices', None) != None
+
 
     def remove_editors(self, reference_str):
         """

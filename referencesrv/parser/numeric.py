@@ -13,21 +13,21 @@ class NumericToken():
 
     # note that there is no identifier for year, but need to have line up labels and values
     IDENTIFYING_TOKEN = OrderedDict(
-        [('DOI_IDENTIFIER', ['doi']), ('ARXIV_IDENTIFIER', ['arXiv']), ('ASCL_IDENTIFIER', ['ascl']),
+        [('DOI_IDENTIFIER', ['doi']), ('ARXIV_IDENTIFIER', ['arxiv']), ('ASCL_IDENTIFIER', ['ascl']),
          ('YEAR_IDENTIFIER', ['']), ('VOLUME_IDENTIFIER', ['volume', 'vol']), ('PAGE_IDENTIFIER', ['page', 'pages', 'pp', 'p']),
          ('ISSN__IDENTIFIER', ['issn']), ('VERSION_IDENTIFIER', ['version']), ('ISSUE_IDENTIFIER', ['issue'])])
 
     # numeric labels
     NUMERIC_TAGS = ['DOI', 'ARXIV', 'ASCL', 'YEAR', 'VOLUME', 'PAGE', 'ISSN', 'VERSION', 'ISSUE']
 
-    PLACEHOLDER = {'doi': '|doi_%d|', 'arXiv': '|arXiv_%d|', 'ascl': '|ascl|',
+    PLACEHOLDER = {'doi': '|doi_%d|', 'arxiv': '|arxiv_%d|', 'ascl': '|ascl|',
                    'year': '|year|', 'volume': '|volume|', 'page': '|page|', 'issue': '|issue|',
                    'volume_identifier':'|volume_identifier|', 'page_identifier':'|page_identifier|'}
 
     DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>((?i)doi)?[\s\.\:]{0,2}\b10\.\s*\d{4}[\d\:\.\-\_\/\(\)A-Za-z\s]+)')
     DOI_INDICATOR = re.compile(r'(?i)doi:')
     DOI_INDICATOR_CAPTURE = re.compile(r'((?i)doi:\s*)')
-    ARXIV_ID_EXTRACTOR = re.compile(r'(?P<arXiv>((?i)(arXiv))?[\s\:]*('
+    ARXIV_ID_EXTRACTOR = re.compile(r'(?P<arxiv>((?i)(arxiv))?[\s\:]*('
                                     r'[A-Za-z]+\-[A-Za-z]+\/\d{4}\.\d{5}|[A-Za-z]+\/\d{4}\.\d{5}'       # new format with unneccesary class name
                                     r'|\d{4}\.\d{4,5}'                                                  # new format
                                     r'|[A-Za-z]+\-[A-Za-z]+\/\d{7}|[A-Za-z]+\/\d{7}'                    # old format
@@ -43,8 +43,10 @@ class NumericToken():
     # two specific formats for matching volume, page, issue
     # note that in the first expression issue matches a space, there is no issue in this format,
     # it is included to have all three groups present
-    MULTI_TOKEN_EXTRACTOR = [re.compile(r'(?P<volume>[A-Z]?\d+)\s+(?P<issue>\d+)\s*:(?P<page>[A-Z]?\d+\-?[A-Z]?\d*)'),
-                             re.compile(r'(?P<volume>[A-Z]?\d+):(?P<page>[A-Z]?\d+\-?[A-Z]?\d*)(?P<issue>\s*)')]
+    # also consider page pattern like 121(11):11,077-11,085
+    MULTI_TOKEN_EXTRACTOR = [re.compile(r'(?P<volume>[A-Z]?\d+)\s+(?P<issue>\d+)\s*\:(?P<page>[ABHPL]?\d+\-?[ABHPL]?\d*)'),
+                             re.compile(r'(?P<volume>[A-Z]?\d+)\:(?P<page>[A-Z]?\d+\-?[ABHPL]?\d*)(?P<issue>\s*)'),
+                             re.compile(r'(?P<volume>[A-Z]?\d+)\((?P<issue>\d+)\)\:(?P<page>\d+\,?\d*\-?\d*\,?\d*|[ABHPL]?\d+\-?[ABHPL]?\d*)')]
 
     # should star with a digit, or end with a digit, or be all digits
     IS_MOSTLY_DIGIT = re.compile(r'(\b[A-Za-z0-9]+[0-9]\b|\b[0-9]+[0-9A-Za-z]\b|\b[0-9]\b)')
@@ -64,6 +66,14 @@ class NumericToken():
 
         self.volume_identifying_words = re.compile(r'\b(%s)\b' % '|'.join(self.IDENTIFYING_TOKEN['VOLUME_IDENTIFIER']), re.IGNORECASE)
         self.page_identifying_words = re.compile(r'\b(%s)\b' % '|'.join(self.IDENTIFYING_TOKEN['PAGE_IDENTIFIER']), re.IGNORECASE)
+
+
+    def clear(self):
+        """
+
+        :return:
+        """
+        self.segment_dict = {}
 
 
     def segment_ids(self, reference_str):
@@ -86,17 +96,17 @@ class NumericToken():
 
         # extract arXiv id if there are any
         # note that there could be more than one arxiv num
-        arXiv = []
+        arxiv = []
         matches = self.ARXIV_ID_EXTRACTOR.findall(reference_str, re.DOTALL)
         if matches:
             for match in matches:
-                arXiv.append(match[0])
+                arxiv.append(match[0])
             # remove duplicates if any
-            arXiv = list(set(arXiv))
-            reference_str = self.remove_value(reference_str, 'arXiv', arXiv)
-            arXiv = [a.split(':')[-1] for a in arXiv]
+            arxiv = list(set(arxiv))
+            reference_str = self.remove_value(reference_str, 'arxiv', arxiv)
+            arxiv = [a.split(':')[-1] for a in arxiv]
 
-        # extract arXiv id if there is one
+        # extract arxiv id if there is one
         ascl_id = self.ASCL_ID_EXTRACTOR.search(reference_str)
         if ascl_id:
             ascl_id = ascl_id.group('ascl')
@@ -108,7 +118,7 @@ class NumericToken():
         # for now just included it to be compatible with the xml side
         # TODO: version has been tagged in a training file, we are not
         # using that to identify reference yet, so have the PLACEHOLDER for it now
-        self.segment_dict.update({'doi': doi, 'arXiv': arXiv, 'ascl': ascl_id.replace(' ', '').split(':')[-1],
+        self.segment_dict.update({'doi': doi, 'arxiv': arxiv, 'ascl': ascl_id.replace(' ', '').split(':')[-1],
                                   'issn': '', 'version': ''})
         return reference_str
 
@@ -128,7 +138,7 @@ class NumericToken():
             extractor = ne.search(reference_str)
             if extractor:
                 volume = extractor.group('volume')
-                page = extractor.group('page')
+                page = extractor.group('page').strip(',')
                 issue = extractor.group('issue').strip()
                 reference_str = self.mark_identified_numerals(reference_str, volume, page, issue)
                 self.segment_dict.update({'page': page, 'year': year, 'volume': volume, 'issue': issue})
@@ -316,9 +326,9 @@ class NumericToken():
         if len(self.segment_dict.get('doi', [])) > 0:
             for i in range(1, len(self.segment_dict.get('doi'))+1):
                 reference_str = reference_str.replace(self.PLACEHOLDER['doi']%i, ' doi:'+self.PLACEHOLDER['doi']%i)
-        if len(self.segment_dict.get('arXiv', [])) > 0:
-            for i in range(1, len(self.segment_dict.get('arXiv'))+1):
-                reference_str = reference_str.replace(self.PLACEHOLDER['arXiv']%i, ' arXiv:'+self.PLACEHOLDER['arXiv']%i)
+        if len(self.segment_dict.get('arxiv', [])) > 0:
+            for i in range(1, len(self.segment_dict.get('arxiv'))+1):
+                reference_str = reference_str.replace(self.PLACEHOLDER['arxiv']%i, ' arXiv:'+self.PLACEHOLDER['arxiv']%i)
         if len(self.segment_dict.get('ascl', '')) > 0:
             reference_str = reference_str.replace(self.PLACEHOLDER['ascl'], ' ascl:' + self.PLACEHOLDER['ascl'])
         return reference_str
@@ -337,8 +347,8 @@ class NumericToken():
                 ref_word_list[idx] = ref_word_list[idx].replace(self.PLACEHOLDER['page'], self.segment_dict.get('page'))
         if len(self.segment_dict.get('doi', '')) > 0:
             ref_word_list = self.fill_value(ref_word_list, 'doi')
-        if len(self.segment_dict.get('arXiv', '')) > 0:
-            ref_word_list = self.fill_value(ref_word_list, 'arXiv')
+        if len(self.segment_dict.get('arxiv', '')) > 0:
+            ref_word_list = self.fill_value(ref_word_list, 'arxiv')
         if len(self.segment_dict.get('ascl', '')) > 0:
             ref_word_list[ref_word_list.index(self.PLACEHOLDER['ascl'])] = self.segment_dict.get('ascl')
         return ref_word_list
@@ -407,7 +417,7 @@ class NumericToken():
         return None
 
 
-    def is_tagged_token_arXiv(self, ref_word):
+    def is_tagged_token_arxiv(self, ref_word):
         """
         verify what has been tagged as arxiv is actually arxiv id
 
@@ -416,9 +426,9 @@ class NumericToken():
         :param tagged_as: this is single value
         :return:
         """
-        arXiv = self.ARXIV_ID_EXTRACTOR.search(ref_word)
-        if arXiv:
-            return 'arxiv:%s'%arXiv.group('arXiv').split(':')[-1]
+        arxiv = self.ARXIV_ID_EXTRACTOR.search(ref_word)
+        if arxiv:
+            return 'arXiv:%s'%arxiv.group('arxiv').split(':')[-1]
         return None
 
 
@@ -448,7 +458,10 @@ class NumericToken():
         """
         if ref_label:
             return 1 if ref_label == this_label else 0
-        return 1 if ref_word == self.segment_dict.get(this_label.lower(), None) else 0
+        this_token = self.segment_dict.get(this_label.lower())
+        if isinstance(this_token, list):
+            return 1 if any(ref_word == one for one in this_token) else 0
+        return 1 if ref_word == this_token else 0
 
 
     def is_token_year(self, ref_word, ref_label):
@@ -623,7 +636,7 @@ class NumericToken():
         """
         which = self.which_identifying_word(ref_word, ref_label)
         return [
-            int(self.is_identifying_word(ref_word) > 0),
+            1 if which == 0 else 0,   # 0 is one of the identifying words
             1 if which == 1 else 0,   # 1 if doi,
             1 if which == 2 else 0,   # 2 if arXiv,
             1 if which == 3 else 0,   # 3 if ascl,
@@ -646,7 +659,7 @@ class NumericToken():
         :return:
         """
         functions = {'DOI': self.is_tagged_token_doi,
-                     'ARXIV': self.is_tagged_token_arXiv,
+                     'ARXIV': self.is_tagged_token_arxiv,
                      'ASCL': self.is_tagged_token_ascl}
         for tag in tagged_list:
             id = functions[tag](ref_word)

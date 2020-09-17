@@ -20,20 +20,13 @@ try:
 except ImportError:
     import pickle
 
-from referencesrv.parser.getDataXML import get_xml_tagged_data_training, get_xml_tagged_data
 from referencesrv.parser.getDataText import get_arxiv_tagged_data
 from referencesrv.parser.numeric import NumericToken
 from referencesrv.parser.originator import OriginatorToken
 from referencesrv.parser.pub import PubToken
+from referencesrv.parser.common import which_punctuation
 
-
-class CRFClassifier(object):
-
-    SEGMENT_DICT_KEYS = ['year', 'title', 'journal', 'publisher', 'volume', 'issue', 'page', 'doi', 'arxiv', 'issn', 'unknown', 'version', 'ascl', 'unknown_url']
-
-    # these are used to tag training references and so crf decodes identify words to these labels
-    # author labels
-    AUTHOR_TAGS = ['AUTHOR_LAST_NAME', 'PUNCTUATION_COMMA', 'AUTHOR_FIRST_NAME', 'AUTHOR_FIRST_NAME_FULL', 'PUNCTUATION_DOT', 'AUTHOR_MIDDLE_NAME', 'AND', 'ET_AL', 'PUNCTUATION_HYPEN', 'AUTHOR_COLLABORATION']
+class CRFClassifierText(object):
 
     IGNORE_IF = re.compile(r'(in press|submitted|to appear)', flags=re.IGNORECASE)
 
@@ -41,7 +34,7 @@ class CRFClassifier(object):
     TO_ADD_DOT_AFTER_LEAD_INITIAL = re.compile(r'\b([A-Z])(\s,?[A-Z][A-Za-z]+,)')
     TO_ADD_DOT_AFTER_TRAIL_INITIAL = re.compile(r'\b([A-Z][A-Za-z]+,\s[A-Z],)\s')
     TO_ADD_DOT_AFTER_CONNECTED_INITIALS = re.compile(r'\b([A-Z])\s*([A-Z])(\s,?[A-Z][A-Za-z]+,)')
-    TO_REMOVE_HYPEN_BETWEEN_INITIALS = re.compile(r'([A-Z]\.)(\-)([A-Z]\.)')
+    TO_REMOVE_HYPEN_NEAR_INITIAL = [re.compile(r'([A-Z]\.)(\-)([A-Z]\.)'), re.compile(r'([A-Z])(\-)(\.)')]
 
     URL_EXTRACTOR = re.compile(r'((url\s*)?(http)s?://[A-z0-9\-\.\/\={}?&%]+)', re.IGNORECASE)
     MONTH_NAME_EXTRACTOR = re.compile(r'\b([Jj]an(?:uary)?|[Ff]eb(?:ruary)?|[Mm]ar(?:ch)?|[Aa]pr(?:il)?|[Mm]ay|[Jj]un(?:e)?|[Jj]ul(?:y)?|[Aa]ug(?:ust)?|[Ss]ep(?:tember)?|[Oo]ct(?:ober)?|([Nn]ov|[Dd]ec)(?:ember)?)\b')
@@ -86,6 +79,7 @@ class CRFClassifier(object):
         self.numeric_token = NumericToken()
         self.pub_token = PubToken()
         self.unknown_tokens = []
+        self.filename = os.path.dirname(__file__) + '/serialized_files/crfModelText.pkl'
 
     def create_crf(self):
         """
@@ -229,25 +223,48 @@ class CRFClassifier(object):
                     label_code[l] = numeric
         return label_code
 
-    def save(self, filename):
+    def load_training_data(self):
+        """
+        load training/test data
+        :return:
+        """
+        training_files_path = os.path.dirname(__file__) + '/training_files/'
+        arXiv_text_ref_filenames = [training_files_path + 'arxiv.raw',]
+        references= []
+        for f in arXiv_text_ref_filenames:
+            references = references + get_arxiv_tagged_data(f)
+
+        X, y, label_code = self.format_training_data(references)
+
+        # for now use static division. see comments in foldModelText.dat
+        generate_fold = False
+        if generate_fold:
+            folds = list(np.random.choice(range(0, 9), len(y)))
+        else:
+            folds = self.get_folds_array(training_files_path + 'foldModelText.dat')
+
+        return np.array(X), np.array(y), label_code, np.array(folds), generate_fold
+
+
+    def save(self):
         """
         save object to a pickle file
         :return:
         """
         try:
-            with open(filename, "wb") as f:
+            with open(self.filename, "wb") as f:
                 pickler = pickle.Pickler(f, -1)
                 pickler.dump(self.crf)
                 pickler.dump(self.label_code)
                 pickler.dump(self.nltk_tagger)
-            current_app.logger.info("saved crf in %s."%filename)
+            current_app.logger.info("saved crf in %s."%self.filename)
             return True
         except Exception as e:
             current_app.logger.error('Exception: %s' % (str(e)))
             current_app.logger.error(traceback.format_exc())
             return False
 
-    def load(self, filename):
+    def load(self):
         """
 
         :return:
@@ -258,7 +275,7 @@ class CRFClassifier(object):
                 self.crf = unpickler.load()
                 self.label_code = unpickler.load()
                 self.nltk_tagger = unpickler.load()
-            current_app.logger.info("loaded crf from %s."%filename)
+            current_app.logger.info("loaded crf from %s."%self.filename)
             return self.crf
         except Exception as e:
             current_app.logger.error('Exception: %s' % (str(e)))
@@ -312,280 +329,86 @@ class CRFClassifier(object):
         ref_dict['refstr'] = refstr
         return ref_dict
 
-    def is_unknown(self, ref_word):
+    def punctuation_features(self, ref_word, ref_label):
         """
+        return a feature vector that has 1 in the first cell if ref_word is a punctuation
+        followed by 1 in the position corresponding to which one
+
+        :param ref_word:
+        :param ref_label:
+        :return:
+        """
+        which = which_punctuation(ref_word, ref_label)
+        return [
+            1 if which == 0 else 0,   # 0 if punctuation,
+            1 if which == 1 else 0,   # 1 if brackets,
+            1 if which == 2 else 0,   # 2 if colon,
+            1 if which == 3 else 0,   # 3 if comma,
+            1 if which == 4 else 0,   # 4 if dot,
+            1 if which == 5 else 0,   # 5 if parenthesis,
+            1 if which == 6 else 0,   # 6 if quotes (both single and double),
+            1 if which == 7 else 0,   # 7 if num signs,
+            1 if which == 8 else 0,   # 8 if hypen,
+            1 if which == 9 else 0,   # 9 if forward slash,
+            1 if which == 10 else 0,  # 10 if semicolon,
+        ]
+
+
+    def is_token_unknown(self, ref_word, ref_label):
+        """
+
+        :param ref_word:
+        :param ref_label:
+        :return:
+        """
+        if ref_label:
+            return 1 if ref_label == 'NA' else 0
+
+        if ref_word is None:
+            return 0
+        return int(any(ref_word == token for token in self.unknown_tokens))
+
+
+    def length_features(self, ref_word):
+        """
+        distinguish between token of length 1, and longer
 
         :param ref_word:
         :return:
         """
-        if ref_word is None:
-            return 0
-        return any(ref_word == token for token in self.unknown_tokens)
+        return [1 if len(ref_word) == 1 else 0,
+                1 if len(ref_word) > 1 else 0]
 
 
     def get_data_features(self, ref_word_list, index, ref_label_list=None):
         """
 
         :param ref_word_list: has the form [e1,e2,e3,..]
-        :param index: the position of the word in the set
+        :param index: the position of the word in the set, assume it is valid
         :param ref_label_list: labels for ref_word_list available during training only
-        :param noun_phrase
         :return:
         """
-        last_index = len(ref_word_list) - 1
-
-        current_word = ref_word_list[index]
-        current_label = ref_label_list[index] if ref_label_list else None
-
-        prev_word = ref_word_list[index-1] if index > 0 else ''
-        next_word = ref_word_list[index+1] if index < last_index else ''
-
-        prev_label = ref_label_list[index-1] if ref_label_list and index > 0 else None
-        next_label = ref_label_list[index+1] if ref_label_list and index < last_index else None
-
-        return [
-            len(current_word),                                                          # length of element
-            len(prev_word),                                                             # length of previous element if any
-            len(next_word),                                                             # length of next element if any
-            int(self.IS_ALL_CAPITAL.match(current_word) is not None),                   # is element all capital
-            int(self.IS_ALL_CAPITAL.match(prev_word) is not None),                      # is previous element, if any, all capital
-            int(self.IS_ALL_CAPITAL.match(next_word) is not None),                      # is next element, if any, all capital
-            int(self.IS_FIRST_CAPITAL.match(current_word) is not None),                 # is first character capital
-            int(self.IS_FIRST_CAPITAL.match(prev_word) is not None),                    # is previous element, if any, first character capital
-            int(self.IS_FIRST_CAPITAL.match(next_word) is not None),                    # is next element's, if any, first character capital
-            int(self.IS_ALPHABET.match(current_word) is not None),                      # is alphabet only, consider hyphenated words also
-            int(self.IS_ALPHABET.match(prev_word) is not None),                         # what about previous word, if any
-            int(self.IS_ALPHABET.match(next_word) is not None),                         # and next word, if any
-            int(self.IS_NUMERIC.match(current_word) is not None),                       # is numeric only, consider the page range with - being also numeric
-            int(self.IS_NUMERIC.match(prev_word) is not None),                          # what about previous word, if any
-            int(self.IS_NUMERIC.match(next_word) is not None),                          # and next word, if any
-            self.numeric_token.exist(current_word, current_label),                      # is numeric only, also is part of numeric feature
-            self.numeric_token.exist(prev_word, prev_label),                            # what about previous word, if any
-            self.numeric_token.exist(next_word, next_label),                            # and next word, if any
-            int(self.IS_ALPHANUMERIC.match(current_word) is not None),                  # is alphanumeric, must at least one digit and one alphabet character
-            int(self.IS_ALPHANUMERIC.match(prev_word) is not None),                     # what about previous word, if any
-            int(self.IS_ALPHANUMERIC.match(next_word) is not None),                     # and next word, if any
-            self.pub_token.is_token_stopword(current_word, current_label),              # is it one of tagged stopwords
-            self.pub_token.is_token_stopword(prev_word, prev_label),                    # what about previous word, if any
-            self.pub_token.is_token_stopword(next_word, next_label),                    # and next word, if any
-            self.pub_token.is_location(current_word, current_label),                    # is it city or country name
-            self.pub_token.is_location(prev_word, prev_label),                          # what about previous word, if any
-            self.pub_token.is_location(next_word, next_label),                          # and next word, if any
-            self.pub_token.is_publisher(current_word, current_label),                   # is it the publisher name
-            self.pub_token.is_publisher(prev_word, prev_label),                         # what about previous word, if any
-            self.pub_token.is_publisher(next_word, next_label),                         # and next word, if any
-            self.is_unknown(current_word),                                              # is it one of the words unable to guess
-            self.is_unknown(prev_word),                                                 # what about previous word, if any
-            self.is_unknown(next_word),                                                 # and next word, if any
-        ] \
-            + self.originator_token.author_features(ref_label_list, index)              \
-            + self.pub_token.title_features(ref_word_list, ref_label_list, index)       \
-            + self.pub_token.journal_features(ref_word_list, ref_label_list, index)     \
-            + self.numeric_token.numeric_features(current_word, current_label)          \
-            + self.numeric_token.identifying_word_features(current_word, current_label) \
-            + self.pub_token.punctuation_features(current_word, current_label)          \
-            + self.originator_token.editor_features(ref_word_list, ref_label_list, index)
-
-
-class CRFClassifierXML(CRFClassifier):
-    def __init__(self):
-        CRFClassifier.__init__(self)
-
-    def load_training_data(self):
-        """
-        load training/test data
-        :return:
-        """
-        training_files_path = os.path.dirname(__file__) + '/training_files/'
-        xml_ref_filenames = [training_files_path + 'S0019103517302440.xml',
-                             training_files_path + 'S0019103517303470.xml',
-                             training_files_path + '10.1371_journal.pone.0048146.xref.xml',
-                             training_files_path + '10.1073_pnas.1205221109.xref.xml',
-                             training_files_path + 'iss5.springer.xml']
-        references= []
-        for f in xml_ref_filenames:
-            references = references + get_xml_tagged_data_training(f)
-
-        X, y, label_code = self.format_training_data(references)
-
-        # for now use static division. see comments in foldModelText.dat
-        generate_fold = False
-        if generate_fold:
-            folds = list(np.random.choice(range(0, 9), len(y)))
-        else:
-            folds = self.get_folds_array(training_files_path + 'foldModelXML.dat')
-
-        return np.array(X), np.array(y), label_code, np.array(folds), generate_fold
-
-    def merge_authors(self, reference_list):
-        """
-        merge the tagged authors into a single string
-
-        :param reference_list:
-        :return:
-        """
-        name = []
-        for l, w in reference_list:
-            if l in self.AUTHOR_TAGS:
-                name.append(w)
-                if l == 'AUTHOR_LAST_NAME':
-                    name.append(' ')
-                elif l in ['AUTHOR_FIRST_NAME', 'AUTHOR_FIRST_NAME_FULL', 'AUTHOR_MIDDLE_NAME', 'ET_AL']:
-                    name.append(' ')
-        if len(name) > 0 and name[-1] == ' ':
-            name.pop()
-        return ''.join(name)
-
-    def extract_doi(self, reference_str):
-        """
-        just need this to be compatible to the text model
-        in the xml side, just need to return the string
-        :param reference_str:
-        :return:
-        """
-        return reference_str
-
-    def get_labeled_multi_words(self, words, labels, current_label):
-        """
-        get all the words that have the same label (ie, journal, title, publisher can be multiple words, compared
-        to numeric words, year, volume, that are single words)
-
-        :param words:
-        :param labels:
-        :param current_label
-        :return:
-        """
-        indices = [i for i in range(len(words)) if labels[i] == current_label]
-        if len(indices) == 0:
-            return []
-        if len(indices) == 1:
-            return [words[indices[0]]]
-        return [words[i] for i in indices]
-
-    def tokenize_identified_multi_words(self, text):
-        """
-        tokenzie section of reference that has been identified, these include author, title, journal, and publisher
-        basically this is used to be able to tell if word is the beginning of identified section, in the middle, or the
-        last word
-
-        :param text:
-        :return:
-        """
-        return filter(None, [w.strip() for w in self.TAGGED_MULTI_WORD_TOKENIZER.split(text)])
-
-
-    def segment(self, reference_list):
-        """
-
-        :param reference_list:
-        :return:
-        """
-        if not isinstance(reference_list, list):
-            return []
-
-        # get label, words from the tagged list
-        labels = []
-        words = []
-        for elem in reference_list:
-            # in xml format the dot at the end of first/middle initial and journal is attached to the field
-            # separate them here
-            if elem[0] in ['AUTHOR_FIRST_NAME', 'AUTHOR_FIRST_NAME_FULL', 'AUTHOR_MIDDLE_NAME', 'JOURNAL'] and elem[1].endswith('.'):
-                labels += [elem[0], 'PUNCTUATION_DOT']
-                words += [elem[1][:-1], '.']
-            else:
-                labels.append(elem[0])
-                words.append(elem[1])
-
-        segment_dict = {}
-        segment_dict['authors'] = self.merge_authors(reference_list)
-        ref_words = self.tokenize_identified_multi_words(segment_dict.get('authors', '')) if len(segment_dict.get('authors', ''))>0 else []
-        for key in self.SEGMENT_DICT_KEYS:
-            if key.upper() in labels:
-                words_for_label = self.get_labeled_multi_words(words, labels, key.upper())
-                segment_dict[key] = ' '.join(words_for_label)
-                ref_words += words_for_label
-            else:
-                segment_dict[key] = ''
-        segment_dict['refstr'] = words[labels.index('REFSTR')]
-        segment_dict['refplaintext'] = words[labels.index('REFPLAINTEXT')] if 'REFPLAINTEXT' in labels else None
-        return segment_dict, ref_words
-
-    def classify(self, reference_str):
-        """
-        Run the classifier on input data
-        :param reference_str:
-        :return: list of words and the corresponding list of labels
-        """
-        segment_dict, ref_words = self.segment(reference_str)
-        features = []
-        if len(ref_words) > 0:
-            for i in range(len(ref_words)):
-                features.append(self.get_data_features(ref_words, i, []))
-            ref_labels = self.decoder(self.crf.predict([np.array(features)])[0])
-            return segment_dict['refstr'], segment_dict['refplaintext'], ref_words, ref_labels
-        return segment_dict['refstr'], segment_dict['refplaintext'], None, None
-
-    def parse(self, raw_references):
-        """
-
-        :param raw_references:
-        :return:
-        """
-        parsed_references = []
-        tagged_references = get_xml_tagged_data(raw_references)
-        for tagged_reference in tagged_references:
-            refstr, refplaintext, words, labels = self.classify(tagged_reference)
-            if words and labels:
-                parsed_reference = self.reference(refstr, words, labels)
-            else:
-                parsed_reference = {'refstr':refstr}
-            if refplaintext:
-                parsed_reference['refplaintext'] =  refplaintext
-            parsed_references.append(parsed_reference)
-        return parsed_references
-
-
-class CRFClassifierText(CRFClassifier):
-
-    def __init__(self):
-        CRFClassifier.__init__(self)
-        self.filename = os.path.dirname(__file__) + '/serialized_files/crfModelText.pkl'
-
-    def load_training_data(self):
-        """
-        load training/test data
-        :return:
-        """
-        training_files_path = os.path.dirname(__file__) + '/training_files/'
-        arXiv_text_ref_filenames = [training_files_path + 'arxiv.raw',]
-        references= []
-        for f in arXiv_text_ref_filenames:
-            references = references + get_arxiv_tagged_data(f)
-
-        X, y, label_code = self.format_training_data(references)
-
-        generate_fold = False
-        # for now use static division. see comments in foldModelText.dat
-        if generate_fold:
-            folds = list(np.random.choice(range(0, 9), len(y)))
-        else:
-            folds = self.get_folds_array(training_files_path + 'foldModelText.dat')
-
-        return np.array(X), np.array(y), label_code, np.array(folds), generate_fold
-
-    def save(self):
-        """
-
-        :return:
-        """
-        return CRFClassifier.save(self, self.filename)
-
-    def load(self):
-        """
-
-        :return:
-        """
-        return CRFClassifier.load(self, self.filename)
+        ref_word = ref_word_list[index]
+        ref_label = ref_label_list[index] if ref_label_list else None
+        return \
+              self.length_features(ref_word)                                                \
+            + self.originator_token.author_features(ref_word_list, ref_label_list, index)   \
+            + self.pub_token.title_features(ref_word_list, ref_label_list, index)           \
+            + self.pub_token.journal_features(ref_word_list, ref_label_list, index)         \
+            + self.numeric_token.numeric_features(ref_word, ref_label)                      \
+            + self.numeric_token.identifying_word_features(ref_word, ref_label)             \
+            + self.punctuation_features(ref_word, ref_label)                                \
+            + self.pub_token.publisher_features(ref_word, ref_label)                        \
+            + self.originator_token.editor_features(ref_word_list, ref_label_list, index)   \
+            + [
+                int(self.IS_ALL_CAPITAL.match(ref_word) is not None),                       # is element all capital
+                int(self.IS_FIRST_CAPITAL.match(ref_word) is not None),                     # is first character capital
+                int(self.IS_ALPHABET.match(ref_word) is not None),                          # is alphabet only, consider hyphenated words also
+                int(self.IS_NUMERIC.match(ref_word) is not None),                           # is numeric only, consider the page range with - being also numeric
+                int(self.IS_ALPHANUMERIC.match(ref_word) is not None),                      # is alphanumeric, must at least one digit and one alphabet character
+                self.is_token_unknown(ref_word, ref_label),                                 # is it one of the words unable to guess
+                self.pub_token.is_token_stopword(ref_word, ref_label),                      # is it one of tagged stopwords
+              ]
 
 
     def segment(self, reference_str):
@@ -601,6 +424,13 @@ class CRFClassifierText(CRFClassifier):
         if isinstance(reference_str, list):
             return []
 
+        # start fresh
+        self.numeric_token.clear()
+        self.originator_token.clear()
+        self.pub_token.clear()
+        na_url = None
+        na_month = None
+
         # step 1: remove any non essential tokens (ie, urls, months, etc)
         matches = self.URL_EXTRACTOR.findall(reference_str)
         if len(matches) > 0:
@@ -608,14 +438,10 @@ class CRFClassifierText(CRFClassifier):
             for i, url in enumerate(matches, start=1):
                 na_url.append(url[0])
                 reference_str = reference_str.replace(url[0], '|na_url_%d|'%i)
-        else:
-            na_url = None
         extractor = self.MONTH_NAME_EXTRACTOR.search(reference_str)
         if extractor:
             na_month = extractor.group()
             reference_str = reference_str.replace(na_month, '|na_month|')
-        else:
-            na_month = None
 
         # step 2: identify doi/arxiv/ascl
         reference_str = self.numeric_token.segment_ids(reference_str)
@@ -687,8 +513,9 @@ class CRFClassifierText(CRFClassifier):
         reference_str = self.TO_ADD_DOT_AFTER_TRAIL_INITIAL.sub(r"\1.", reference_str)
         # there are some references that first and middle initials are specified together without the dot
         reference_str = self.TO_ADD_DOT_AFTER_CONNECTED_INITIALS.sub(r"\1.\2.\3", reference_str)
-        # if there is a hypen between intials remove it
-        reference_str = self.TO_REMOVE_HYPEN_BETWEEN_INITIALS.sub(r"\1 \3", reference_str)
+        # if there is a hypen either between initials, or after initials and before dot, remove it
+        for rhni, replace in zip(self.TO_REMOVE_HYPEN_NEAR_INITIAL, [r"\1 \3", r"\1\3"]):
+            reference_str = rhni.sub(replace, reference_str)
         # if no colon after the identifer, add it in
         reference_str = self.ADD_COLON_TO_IDENTIFIER.sub(r"\1:", reference_str)
         # if there is a url for DOI turned it to recognizable DOI

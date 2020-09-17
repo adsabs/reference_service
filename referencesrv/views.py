@@ -11,7 +11,7 @@ import urllib
 import re
 import time
 
-from referencesrv.parser.crf import CRFClassifierText, CRFClassifierXML, create_text_model, load_text_model
+from referencesrv.parser.crf import CRFClassifierText, create_text_model, load_text_model
 from referencesrv.resolver.solve import solve_reference
 from referencesrv.resolver.hypotheses import Hypotheses
 from referencesrv.resolver.sourcematchers import create_source_matcher, load_source_matcher
@@ -42,21 +42,6 @@ def text_parser(reference):
     """
 
     return current_app.extensions['text_crf'].parse(reference)
-
-
-def xml_parser(reference_buffer):
-    """
-
-    :return:
-    """
-    if not hasattr(xml_parser, "crf"):
-        xml_parser.status = False
-        xml_parser.crf = CRFClassifierXML()
-    if not xml_parser.status:
-        xml_parser.status = xml_parser.crf.get_ready()
-    if xml_parser.status:
-        return xml_parser.crf.parse(reference_buffer)
-    raise Exception
 
 
 def return_response(results, status, content_type='application/json'):
@@ -106,6 +91,7 @@ def cache_resolved_get(reference):
     :param reference:
     :return:
     """
+    return None
     try:
         reference_md5 = md5(reference).hexdigest()
         resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5)
@@ -149,10 +135,12 @@ def text_resolve(reference, returned_format):
 
         if bool(RE_NUMERIC_VALUE.search(reference)):
             parsed_ref = text_parser(reference)
-            return format_resolved_reference(returned_format,
-                                             resolved=str(solve_reference(Hypotheses(parsed_ref))),
-                                             reference=reference,
-                                             cache=True)
+            if parsed_ref:
+                return format_resolved_reference(returned_format,
+                                                 resolved=str(solve_reference(Hypotheses(parsed_ref))),
+                                                 reference=reference,
+                                                 cache=True)
+            raise NoSolution("NotParsed")
         else:
             raise ValueError('Reference with no year and volume cannot be resolved.')
     except (NoSolution, ValueError) as e:
@@ -231,39 +219,46 @@ def xml_post():
     except:
         payload = dict(request.form)  # post data in form encoding
 
+
     if not payload:
         return {'error': 'no information received'}, 400
-    if 'reference' not in payload:
+    if 'parsed_reference' not in payload:
         return {'error': 'no reference found in payload (parameter name is `reference`)'}, 400
 
-    references = payload['reference']
+    parsed_references = payload['parsed_reference']
 
-    current_app.logger.debug('received POST request with references={references} to resolve in xml mode'.format(references=' '.join(references)[:250]))
+    current_app.logger.debug('received POST request with {count} references to resolve in xml mode.'.format(count=len(parsed_references)))
 
     returned_format = request.headers.get('Accept', 'text/plain')
 
     results = []
-    parsed_references = xml_parser(references)
     for parsed_reference in parsed_references:
         try:
+            start_time = time.time()
             resolved = str(solve_reference(Hypotheses(parsed_reference)))
             if resolved.startswith('0.0'):
-                raise
+                raise "Not Resolved"
             result = format_resolved_reference(returned_format, resolved=resolved, reference=parsed_reference['refstr'])
         except Exception as e:
             current_app.logger.error('Exception: {error}'.format(error=str(e)))
             # lets attempt to resolve using the text model
             if 'refplaintext' in parsed_reference:
                 reference = urllib.unquote(parsed_reference['refplaintext'])
-                current_app.logger.info('attempting to resolve the reference=`{reference}` in text mode now'.format(reference=reference))
-                try:
-                    parsed_ref = text_parser(reference)
-                    result = format_resolved_reference(returned_format,
-                                                       resolved=str(solve_reference(Hypotheses(parsed_ref))),
-                                                       reference=reference)
-                except Exception as e:
-                    current_app.logger.error('Exception: {error}'.format(error=str(e)))
-                    result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
+                if bool(RE_NUMERIC_VALUE.search(reference)):
+                    current_app.logger.info('attempting to resolve the reference=`{reference}` in text mode now'.format(reference=reference))
+                    try:
+                        parsed_ref = text_parser(reference)
+                        if parsed_ref:
+                            result = format_resolved_reference(returned_format,
+                                                               resolved=str(solve_reference(Hypotheses(parsed_ref))),
+                                                               reference=reference,
+                                                               cache=True)
+                    except Exception as e:
+                        current_app.logger.error('Exception: {error}'.format(error=str(e)))
+                        result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
+                        continue
+                else:
+                    result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=parsed_reference['refstr'])
                     continue
             else:
                 result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=parsed_reference['refstr'])
@@ -271,7 +266,7 @@ def xml_post():
         finally:
             results.append(result)
 
-    if len(results) == len(references):
+    if len(results) == len(parsed_reference):
         if returned_format == 'application/json':
             return return_response({'resolved': results}, 200, 'application/json; charset=UTF8')
         return return_response({'resolved':'\n'.join(results)}, 200, 'application/json; charset=UTF8')
@@ -300,7 +295,9 @@ def pickle_source_matcher():
 
     :return:
     """
-    # to save a new source matcher()
-    create_source_matcher()
-
-    return return_response({'OK': 'objects saved'}, 200, 'text/plain; charset=UTF8')
+    try:
+        # to save a new source matcher()
+        create_source_matcher()
+        return return_response({'OK': 'objects saved'}, 200, 'text/plain; charset=UTF8')
+    except Exception as e:
+        return return_response({'Error: %s'%str(e)}, 400, 'text/plain; charset=UTF8')

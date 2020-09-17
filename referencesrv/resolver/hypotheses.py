@@ -24,7 +24,8 @@ class Hypotheses(object):
         ("refstr", "refstr"),
         ("doi", "doi"),
         ("arxiv", "arxiv"),
-        ("ascl", "ascl")
+        ("ascl", "ascl"),
+        ("issn", "issn")
     ]
 
     ETAL_PAT = re.compile(r"((?i)[\s,]*et\.?\s*al\.?)")
@@ -35,6 +36,7 @@ class Hypotheses(object):
     ARXIV_ID_EXTRACTOR = [re.compile(r'(?P<class_name>\w+\-?\w*)?/?(?P<new_pattern>\d{4}\.\d{5})'),
                           re.compile(r'(?P<class_name>\w+\-?\w*)/(?P<old_pattern>\d{7})'),
                           re.compile(r'(?P<old_pattern>\d{7})\s*\[?(?P<class_name>\w+\-?\w*)\]?'), ]
+    TITLE_MAIN = re.compile(r"[:]")
 
     def __init__(self, ref):
         """
@@ -82,7 +84,7 @@ class Hypotheses(object):
         if self.digested_record.get("page", None):
             if "-" in self.digested_record.get("page"):
                 # we are querying on page stat, for now through out the page end
-                pages = self.digested_record["page"].split("-")[0]
+                self.digested_record["page"] = self.digested_record["page"].split("-")[0]
             qualifier, self.digested_record["page"] = self.tokenize_page(self.digested_record["page"])
             if qualifier is not None:
                 self.digested_record["qualifier"] = qualifier
@@ -95,6 +97,10 @@ class Hypotheses(object):
             if match:
                 self.digested_record["pub"] = '%s %s'%(self.digested_record["pub"], self.digested_record["volume"][0])
                 self.digested_record["volume"] = self.digested_record["volume"][1:]
+
+        if "title" in self.digested_record:
+            # remove too much information
+            self.digested_record["title"] = self.TITLE_MAIN.split(self.digested_record["title"])[0]
 
         if "pub" in self.digested_record:
             try:
@@ -144,6 +150,27 @@ class Hypotheses(object):
             if self.digested_record.get(key):
                 return False
         return True
+
+    def enough_to_proceed(self):
+        """
+        check to see if there are enough information to setup queries
+        do not blindly create unsuccessful queries
+
+        :return:
+        """
+        # check authors first
+        authors = self.digested_record.get("author", None)
+        if authors is not None and len(authors) > 0:
+            return True
+        # check identifiers next
+        if self.digested_record.get("doi", None) is not None:
+            return True
+        if self.digested_record.get("arxiv", None) is not None:
+            return True
+        if self.digested_record.get("ascl", None) is not None:
+            return True
+        return False
+
 
     def any_qualifier(self, bibstem, pub):
         """
@@ -222,11 +249,7 @@ class Hypotheses(object):
         return bibcode
 
     def iter_hypotheses(self):
-        match = self.ETAL_PAT.search(str(self.ref))
-        has_etal = match is not None
-
-        # has_etal = self.ETAL_PAT.search(
-        #     self.digested_record.get("author", ""))
+        has_etal = self.ETAL_PAT.search(str(self.ref)) is not None
 
         # If there's a DOI, use it.
         if self.has_keys("doi"):
@@ -358,7 +381,7 @@ class Hypotheses(object):
             input_fields=self.digested_record,
             page_qualifier='',
             has_etal=False,
-            normalized_authors='')
+            normalized_authors=self.normalized_authors)
 
         # try some reference type-specific hypotheses
         if "pub" in self.digested_record:
@@ -422,7 +445,7 @@ class Hypotheses(object):
                 input_fields=self.digested_record,
                 page_qualifier='',
                 has_etal=False,
-                normalized_authors='')
+                normalized_authors=self.normalized_authors)
 
         # last effort, if no year!
         # try author-bibstem-volume-page

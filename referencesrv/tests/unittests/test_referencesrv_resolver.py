@@ -31,6 +31,7 @@ from referencesrv.resolver.sourcematchers import load_source_matcher
 
 
 class TestResolver(TestCase):
+
     def create_app(self):
         self.current_app = app.create_app(**{
             'REFERENCE_SERVICE_LIVE': False
@@ -61,7 +62,7 @@ class TestResolver(TestCase):
         # when there is no comma before the and
         self.assertEqual(get_authors(u'S. Kung and F. Bayer: "Collected Junk", A&A 2009'), 'S. Kung and F. Bayer')
         # when there is a comma after both lasat name and first initials
-        self.assertEqual(get_authors(u'Przybilla, N., & Maeder, A. 2010'), 'Przybilla, N., & Maeder, A. ')
+        self.assertEqual(get_authors(u'Przybilla, N., & Maeder, A. 2010'), 'Przybilla, N., & Maeder, A.')
         with self.assertRaises(Exception) as context:
             get_authors('Przybilla N & Maeder A 2010')
         self.assertTrue("No discernible authors in 'Przybilla N & Maeder A 2010'" in context.exception)
@@ -176,7 +177,7 @@ class TestResolver(TestCase):
         """
         ti = TrigIndex(["abcd", "bcde", "zzy cde"])
         self.assertEqual(ti.lookup("abc cde", 4),
-                        [('abcd', 0.44897959183673475), ('bcde', 0.44897959183673475), ('zzy cde', 0.6938775510204082)])
+                        [('abcd', 0.6326530612244898), ('bcde', 0.6326530612244898), ('zzy cde', 0.6938775510204082)])
         self.assertEqual(ti.lookup("abc cde", 1),
                          [('zzy cde', 0.6938775510204082)])
         self.assertEqual(ti.lookup("knall", 10), [])
@@ -190,9 +191,9 @@ class TestResolver(TestCase):
         d["AKLOM"], d["PKLOP"], d["PKLOA"] = "Hillo", "Hullo", "pHullo"
         self.assertEqual(d["KL"], [(1, 'Short')])
         self.assertEqual(d["KLOM"], [(1.0, 'Hallo'), (1.0, 'Second')])
-        self.assertEqual(d["PKLOOO"], [(0.7222222222222222, 'Hullo')])
+        self.assertEqual(d["PKLOOO"], [(0.7777777777777778, 'Hullo')])
         self.assertEqual(str(d.bestmatches("KLOMA", 3)),
-                         "[(0.6799999999999999, 'pHullo'), (0.76, 'Hillo'), (0.84, 'Hallo'), (0.84, 'Second')]")
+                         "[(0.6799999999999999, 'pHullo'), (0.76, 'Hillo'), (0.88, 'Hallo'), (0.88, 'Second')]")
         self.assertEqual(d.exactmatch("PKLOA"), [(1, 'pHullo')])
         self.assertEqual(d.exactmatch("PKLOOO"), None)
         self.assertEqual(d.values(), set(['Hallo', 'Second', 'Hullo', 'pHullo', 'Hillo']))
@@ -253,24 +254,30 @@ class TestResolver(TestCase):
         """
         test best matches, verify that best matches for Astronomy and Astrophysics Supplement
         includes the following:
-        [(0.8319941563184806, 'A&AS.....', 'ASTRON AND ASTROPHYS SUPPL SER'),
-         (0.8480642804967129, 'asas.conf', 'ASTRONOMY AND ASTROPHYSICS FOR THE 1980 S'),
-         (0.8487947406866325, 'A&AS.....', 'ASTRON & ASTROPHYS SUPPLEMENT'),
-         (0.8860482103725347, 'A&AS.....', 'ASTRON AND ASTROPHYS SUPPLEMENT SERIES'),
-         (0.8904309715120526, 'aap..rept', 'ASTRONOMY AND ASTROPHYSICS PANEL REPORTS'),
-         (0.8948137326515705, 'A&ARv....', 'ASTRONOMY AND ASTROPHYSICS REVIEW'),
-         (0.9050401753104456, 'AASPP....', 'ASTRONONOMY AND ASTROPHYSICS SERIES'),
-         (0.9254930606281958, 'A&AS.....', 'ASTRON AND ASTROPHYS SUPPLEMENT'),
-         (0.9539810080350621, 'A&AS.....', 'ASTRONOMY AND ASTROPHYSICS SUPPLEMENT SERIES'),
+        [(0.8977355734112491, 'aard.conf', 'ASTRONOMY AND ASTROPHYSICS RECENT DEVELOPMENTS'),
+         (0.9013878743608473, 'A&AS.....', 'ASTRON & ASTROPHYS SUPPLEMENT'),
+         (0.912344777209642,  'aap..rept', 'ASTRONOMY AND ASTROPHYSICS PANEL REPORTS'),
+         (0.912344777209642,  'aap..rept', 'ASTRONOMY AND ASTROPHYSICS PANEL REPORTS'),
+         (0.9196493791088386, 'AASPP....', 'ASTRONONOMY AND ASTROPHYSICS SERIES'),
+         (0.9196493791088386, 'AASPP....', 'ASTRONONOMY AND ASTROPHYSICS SERIES'),
+         (0.9211102994886778, 'A&ARv....', 'ASTRONOMY AND ASTROPHYSICS REVIEW'),
+         (0.9211102994886778, 'A&ARv....', 'ASTRONOMY AND ASTROPHYSICS REVIEW'),
+         (0.9211102994886778, 'A&ARv....', 'ASTRONOMY AND ASTROPHYSICS REVIEW'),
+         (0.9298758217677137, 'JApAS....', 'JOURNAL OF ASTROPHYSICS AND ASTRONOMY SUPPLEMENT'),
+         (0.9517896274653032, 'A&AS.....', 'ASTRON AND ASTROPHYS SUPPLEMENT'),
+         (0.9722425127830533, 'ChJAS....', 'CHINESE JOURNAL OF ASTRONOMY AND ASTROPHYSICS SUPPLEMENT'),
+         (0.9897735573411249, 'A&AS.....', 'ASTRONOMY AND ASTROPHYSICS SUPPLEMENT SERIES'),
+         (0.9897735573411249, 'A&AS.....', 'ASTRONOMY AND ASTROPHYSICS SUPPLEMENT SERIES'),
          (1.0,                'A&AS.....', 'ASTRONOMY AND ASTROPHYSICS SUPPLEMENT')]
         """
         s = TrigdictSourceMatcher()
         best_matches = s.bestmatches("Astronomy and Astrophysics Supplement", 10)
+        print best_matches
         self.assertTrue(len(filter(lambda x: x[1] == 'A&AS.....', best_matches)) > 0)
-        self.assertTrue(len(filter(lambda x: x[1] == 'asas.conf', best_matches)) > 0)
+        self.assertTrue(len(filter(lambda x: x[1] == 'ChJAS....', best_matches)) > 0)
+        self.assertTrue(len(filter(lambda x: x[1] == 'JApAS....', best_matches)) > 0)
         self.assertTrue(len(filter(lambda x: x[1] == 'aap..rept', best_matches)) > 0)
-        self.assertTrue(len(filter(lambda x: x[1] == 'A&ARv....', best_matches)) > 0)
-        self.assertTrue(len(filter(lambda x: x[1] == 'AASPP....', best_matches)) > 0)
+        self.assertTrue(len(filter(lambda x: x[1] == 'aard.conf', best_matches)) > 0)
         bestmatches = s.bestmatches("Ap J", 3)
         self.assertTrue(len(filter(lambda x: x[0] == 1.0 and x[1] == 'ApJ......', bestmatches)) == 1)
 
@@ -280,8 +287,11 @@ class TestResolver(TestCase):
         test that if there is any problem in the authority files it is captured
         """
         s = TrigdictSourceMatcher()
-        self.assertEqual(s.load_one_source(os.path.dirname(__file__) + '/stubdata/conferences.dat'), True)
         self.assertEqual(s.load_one_source(os.path.dirname(__file__) + '/stubdata/bibstems.dat'), True)
+        filename = os.path.dirname(__file__) + '/stubdata/conferences.dat'
+        with self.assertRaises(Exception) as context:
+            s.load_one_source(filename)
+        self.assertTrue('Some entries in %s have errors and were skipped'%(filename) in context.exception)
         filename = os.path.dirname(__file__) + '/stubdata/foo.dat'
         with self.assertRaises(Exception) as context:
             s.load_one_source(filename)
@@ -422,14 +432,14 @@ class TestResolver(TestCase):
         test rearranging authors for solr query
         """
         self.assertEqual(make_solr_condition("title", "Far: From here to there (and back)"),
-                         'title:(Far\\: AND From AND here AND \\to AND there AND \\(\\and AND back\\))')
+                         'title:(Far AND From AND here AND \\to AND there AND \\and AND back)')
         self.assertEqual(make_solr_condition("title~", "Meteorological Journal Kept Apartments Royal Society"),
                          'title:"Meteorological Journal Kept Apartments Royal Society"~')
         self.assertEqual(make_solr_condition("title", ""), None)
         self.assertEqual(make_solr_condition("author", "B. Traven and D. d'Vaucouleurs"),
                          'author:("Traven, B" AND "d\'Vaucouleurs, D")')
         self.assertEqual(make_solr_condition("first_author_norm~", "frisken gibson, s"),
-                         'first_author:"frisken gibson, s"~')
+                         'first_author:"frisken gibson"~')
         self.assertEqual(make_solr_condition("arxiv", "1904.07238"), 'identifier:("arxiv:1904.07238")')
         self.assertEqual(make_solr_condition("ascl", "1906.010"), 'identifier:("ascl:1906.010")')
         self.assertEqual(make_solr_condition("doi","10.1364/JOSAA.9.000154"), 'doi:"10.1364/JOSAA.9.000154"')
@@ -619,25 +629,25 @@ class TestResolver(TestCase):
         with self.assertRaises(Exception) as context:
             solve_reference(Hypotheses(ref))
         self.assertTrue('Hypotheses exhausted' in context.exception)
-        # when journal, volume, and year match
-        # use title from first record and authors from the second record,
-        # however the first record is authored by the only one author and
-        # it is the same first author of the second record
-        # verify that the first record is returned
+        # when we have multiple solutions and not enough reference information to decide which
         ref = {'title': "The NASA Astrophysics Data System's Decadal Plan for the 2020s",
                'authors': 'Accomazzi, A., Kurtz, M., Henneken, E., et al',
                'volume': '233',
                'year': '2019'}
-        self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.7 2019AAS...23320704A')
-        # when we have multiple solutions and not enough reference information to decide which
+        with self.assertRaises(Exception) as context:
+            solve_reference(Hypotheses(ref))
+        self.assertTrue('Hypotheses exhausted' in context.exception)
         ref = {'authors': 'Accomazzi, A., et al',
                'journal': 'AAS233 Meeting',
                'volume': '233',
                'year': '2019',
                'page': '0'}
-        with self.assertRaises(Exception) as context:
-            solve_reference(Hypotheses(ref))
-        self.assertTrue('Hypotheses exhausted' in context.exception)
+        # when journal, volume, and year match
+        # use title from first record and authors from the second record,
+        # however the first record is authored by the only one author and
+        # it is the same first author of the second record
+        # verify that the first record is returned
+        self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.8 2019AAS...23320704A')
 
 
     def test_add_volume_evidence(self):
@@ -669,7 +679,7 @@ class TestResolver(TestCase):
         # when not integer, unmatched
         evidences = Evidences()
         self.assertEqual(add_volume_evidence(evidences, '223-3', '233-3', '', ''), None)
-        self.assertEqual(evidences.get_score(), 0.8)
+        self.assertEqual(evidences.get_score(), -1)
         # when volume is year and there is an issue
         evidences = Evidences()
         self.assertEqual(add_volume_evidence(evidences, '233', '2018', '233', ''), None)
@@ -1128,7 +1138,7 @@ class TestResolver(TestCase):
                        get_score_for_input_fields,
                        input_fields=input_fields,
                        expected_bibstem=get_best_bibstem_for(input_fields["pub"]))
-        self.assertEqual(get_score_for_baas_match(solution, hypothesis).get_score(), 0.8)
+        self.assertEqual(get_score_for_baas_match(solution, hypothesis).get_score(), 1.0)
         # no matching expected_bibcode
         hypothesis = Hypothesis("testing", None,
                        get_score_for_input_fields,

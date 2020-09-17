@@ -105,8 +105,9 @@ class TrigdictSourceMatcher(SourceMatcher):
                               'conferences.dat',
                               'conferences_abbrev.dat',
                               'preprints.dat',
-                              'aps_abbrev.dat',
-                              'bibstems.dat' ]]
+                              'bibstems.dat',
+                              'new_abbrev.dat',
+                              'journals_not_ADS.dat' ]]
         if load_sources:
             self.bibstem_words = {}
             self.load_sources()
@@ -152,6 +153,8 @@ class TrigdictSourceMatcher(SourceMatcher):
             except ValueError:
                 current_app.logger.error('sourcematchers.py: %s (%d): skipping source line: %s'%(source_filename,lineno,ln))
                 read_with_errors = True
+        if read_with_errors:
+            raise Error, 'Some entries in %s have errors and were skipped' % (source_filename)
         return read_with_errors
 
     def load_three_part_source(self, source_filename, source_lines):
@@ -209,7 +212,8 @@ class TrigdictSourceMatcher(SourceMatcher):
             self.load_one_source(filename)
         # We want to allow naked bibstems in references, too
         for stem in list(self.source_dict.values()):
-            clean_stem = stem.replace('.', '').upper()
+            # clean_stem = stem.replace('.', '').upper()
+            clean_stem = stem.strip('.').upper()
             self.add_pub(clean_stem, stem)
 
     def exactmatch(self, source_spec):
@@ -284,7 +288,7 @@ def create_source_matcher():
     except Exception as e:
         current_app.logger.error('Exception: %s' % (str(e)))
         current_app.logger.error(traceback.format_exc())
-        return None
+        raise e
 
 def load_source_matcher():
     """
