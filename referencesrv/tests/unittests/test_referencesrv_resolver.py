@@ -1158,41 +1158,41 @@ class TestResolver(TestCase):
         self.assertEqual(get_score_for_baas_match(solution, hypothesis).get_score(), 1.0)
 
 
-    def test_get_score_for_baas_no_match(self):
-        """
-        test get_score_for_baas_match
-        """
-        # "bibcode":"2019BAAS...51c.440B"
-        solution = {u"identifier":[u"2019astro2020T.440B", u"2019BAAS...51c.440B",
-                      u"https://baas.aas.org/wp-content/uploads/2019/05/440_becker.pdf",
-                      u"https://baas.aas.org/wp-content/uploads/2019/05/440_becker.pdf",
-                      u"2019astro2020T.440B"],
-                    u"year":u"2019",
-                    u"page":u"440",
-                    u"bibcode":"2019BAAS...51c.440B",
-                    u"author":[u"Becker, George", u"D'Aloisio, Anson", u"Davies, Frederick B.", u"Hennawi, Joseph F.", u"Simcoe, Robert A."],
-                    u"pub":"Bulletin of the American Astronomical Society",
-                    u"volume":"51",
-                    u"first_author_norm":"Becker, G",
-                    u"doctype":"abstract",
-                    u"pub_raw":"Astro2020: Decadal Survey on Astronomy and Astrophysics, science white papers, no. 440; Bulletin of the American Astronomical Society, Vol. 51, Issue 3, id. 440 (2019)",
-                    u"eid":u"440",
-                    u"title":u"Studying the Reionization Epoch with QSO Absorption Lines",
-                    u"author_norm":[u"Becker, G", u"D'Aloisio, A", u"Davies, F", u"Hennawi, J", u"Simcoe, R"]}
-        input_fields = {'title': "Studying the Reionization Epoch with QSO Absorption Lines",
-                        'author': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R.",
-                        'volume': "51",
-                        'year': "2019",
-                        'page': "440",
-                        'pub': "Bulletin of the American Astronomical Society",
-                        'refstr': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R. (2019). Studying the Reionization Epoch with QSO Absorption Lines. Bulletin of the American Astronomical Society, Vol. 51, p.440."}
-        hypothesis = Hypothesis("testing", None,
-                       get_score_for_input_fields,
-                       input_fields=input_fields,
-                       expected_bibstem="no match")
-        self.assertEqual(get_score_for_baas_match(solution, hypothesis), -1)
-
-
+    # def test_get_score_for_baas_no_match(self):
+    #     """
+    #     test get_score_for_baas_match
+    #     """
+    #     # "bibcode":"2019BAAS...51c.440B"
+    #     solution = {u"identifier":[u"2019astro2020T.440B", u"2019BAAS...51c.440B",
+    #                   u"https://baas.aas.org/wp-content/uploads/2019/05/440_becker.pdf",
+    #                   u"https://baas.aas.org/wp-content/uploads/2019/05/440_becker.pdf",
+    #                   u"2019astro2020T.440B"],
+    #                 u"year":u"2019",
+    #                 u"page":u"440",
+    #                 u"bibcode":"2019BAAS...51c.440B",
+    #                 u"author":[u"Becker, George", u"D'Aloisio, Anson", u"Davies, Frederick B.", u"Hennawi, Joseph F.", u"Simcoe, Robert A."],
+    #                 u"pub":"Bulletin of the American Astronomical Society",
+    #                 u"volume":"51",
+    #                 u"first_author_norm":"Becker, G",
+    #                 u"doctype":"abstract",
+    #                 u"pub_raw":"Astro2020: Decadal Survey on Astronomy and Astrophysics, science white papers, no. 440; Bulletin of the American Astronomical Society, Vol. 51, Issue 3, id. 440 (2019)",
+    #                 u"eid":u"440",
+    #                 u"title":u"Studying the Reionization Epoch with QSO Absorption Lines",
+    #                 u"author_norm":[u"Becker, G", u"D'Aloisio, A", u"Davies, F", u"Hennawi, J", u"Simcoe, R"]}
+    #     input_fields = {'title': "Studying the Reionization Epoch with QSO Absorption Lines",
+    #                     'author': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R.",
+    #                     'volume': "51",
+    #                     'year': "2019",
+    #                     'page': "440",
+    #                     'pub': "Bulletin of the American Astronomical Society",
+    #                     'refstr': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R. (2019). Studying the Reionization Epoch with QSO Absorption Lines. Bulletin of the American Astronomical Society, Vol. 51, p.440."}
+    #     hypothesis = Hypothesis("testing", None,
+    #                    get_score_for_input_fields,
+    #                    input_fields=input_fields,
+    #                    expected_bibstem="no match")
+    #     self.assertEqual(get_score_for_baas_match(solution, hypothesis), -1)
+    #
+    #
     # def test_identify_incomplete(self):
     #     """
     #     test when parsed reference is incomplete
