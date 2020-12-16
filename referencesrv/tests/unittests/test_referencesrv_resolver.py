@@ -743,62 +743,62 @@ class TestResolver(TestCase):
                         < 0.15)
 
 
-    # def test_add_publication_evidence(self):
-    #     """
-    #     test add_publication_evidence
-    #     """
-    #     evidences = Evidences()
-    #     add_publication_evidence(evidences,
-    #                              'The NASA Astrophysics Data System’s Decadal Plan for the 2020s',
-    #                              'AAS',
-    #                              '',
-    #                              'The NASA Astrophysics Data System’s Decadal Plan for the 2020s',
-    #                              '2019AAS...23320704A',
-    #                              'AAS')
-    #     self.assertEqual(evidences.get_score(), 1)
-    #     evidences = Evidences()
-    #     add_publication_evidence(evidences,
-    #                              'Nucl. Instrum. Methods Phys. Res. A',
-    #                              '',
-    #                              '',
-    #                              'Nuclear Instruments and Methods in Physics Research A',
-    #                              '1997NIMPA.389...81B',
-    #                              'NIMPA')
-    #     self.assertEqual(evidences.get_score(), 0.6)
-    #     evidences = Evidences()
-    #     add_publication_evidence(evidences,
-    #                              'The NASA Astrophysics Data System’s Decadal Plan for the 2020s',
-    #                              '',
-    #                              '',
-    #                              '',
-    #                              '2019AAS...23320704A',
-    #                              'AAS')
-    #     self.assertEqual(evidences.get_score(), -1)
-    #     evidences = Evidences()
-    #     add_publication_evidence(evidences,
-    #                              '',
-    #                              '',
-    #                              '',
-    #                              'Nuclear Instruments and Methods in Physics Research A',
-    #                              '1997NIMPA.389...81B',
-    #                              'NIMPA')
-    #     self.assertEqual(evidences.get_score(), None)
-    #     # when there is an error in reference, the author is not parsed properly,
-    #     # and hence journal is not identified correctly, if ads bibstem is in ref_str, do not penalize
-    #     evidences = Evidences()
-    #     add_publication_evidence(evidences,
-    #                              'iaz',
-    #                              '',
-    #                              'Simon-D iaz, S., Castro, N., Garc ia, M., & Herrero, A. 2011a, in IAUS, Vol. 272, 310-312',
-    #                              'Active OB Stars: Structure, Evolution, Mass Loss, and Critical Limits',
-    #                              '2011IAUS..272..310S',
-    #                              'IAUS')
-    #     self.assertEqual(evidences.get_score(), None)
-    #     evidences = Evidences()
-    #     add_publication_evidence(evidences, '', '', '', '', '', '')
-    #     self.assertEqual(evidences.get_score(), None)
-    #
-    #
+    def test_add_publication_evidence(self):
+        """
+        test add_publication_evidence
+        """
+        evidences = Evidences()
+        add_publication_evidence(evidences,
+                                 'The NASA Astrophysics Data System’s Decadal Plan for the 2020s',
+                                 'AAS',
+                                 '',
+                                 'The NASA Astrophysics Data System’s Decadal Plan for the 2020s',
+                                 '2019AAS...23320704A',
+                                 'AAS')
+        self.assertEqual(evidences.get_score(), 1)
+        evidences = Evidences()
+        add_publication_evidence(evidences,
+                                 'Nucl. Instrum. Methods Phys. Res. A',
+                                 '',
+                                 '',
+                                 'Nuclear Instruments and Methods in Physics Research A',
+                                 '1997NIMPA.389...81B',
+                                 'NIMPA')
+        self.assertEqual(evidences.get_score(), 0.6)
+        evidences = Evidences()
+        add_publication_evidence(evidences,
+                                 'The NASA Astrophysics Data System’s Decadal Plan for the 2020s',
+                                 '',
+                                 '',
+                                 '',
+                                 '2019AAS...23320704A',
+                                 'AAS')
+        self.assertEqual(evidences.get_score(), -1)
+        evidences = Evidences()
+        add_publication_evidence(evidences,
+                                 '',
+                                 '',
+                                 '',
+                                 'Nuclear Instruments and Methods in Physics Research A',
+                                 '1997NIMPA.389...81B',
+                                 'NIMPA')
+        self.assertEqual(evidences.get_score(), None)
+        # when there is an error in reference, the author is not parsed properly,
+        # and hence journal is not identified correctly, if ads bibstem is in ref_str, do not penalize
+        evidences = Evidences()
+        add_publication_evidence(evidences,
+                                 'iaz',
+                                 '',
+                                 'Simon-D iaz, S., Castro, N., Garc ia, M., & Herrero, A. 2011a, in IAUS, Vol. 272, 310-312',
+                                 'Active OB Stars: Structure, Evolution, Mass Loss, and Critical Limits',
+                                 '2011IAUS..272..310S',
+                                 'IAUS')
+        self.assertEqual(evidences.get_score(), None)
+        evidences = Evidences()
+        add_publication_evidence(evidences, '', '', '', '', '', '')
+        self.assertEqual(evidences.get_score(), None)
+
+
     # def test_has_word(self):
     #     """
     #     test has_word
