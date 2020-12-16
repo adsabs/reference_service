@@ -1177,46 +1177,46 @@ class TestResolverHypotheses(TestCase):
         self.assertEqual(get_score_for_baas_match(solution, hypothesis), -1)
 
 
-    # def test_identify_incomplete(self):
-    #     """
-    #     test when parsed reference is incomplete
-    #     """
-    #     ref = {'year': '2020',
-    #            'refstr': '[4] Bennett, J. S., & Sijacki, D. 2020, arXiv e-prints,',
-    #            'authors': 'Bennett, J. S., and Sijacki, D.'}
-    #     with self.assertRaises(Exception) as context:
-    #         solve_reference(Hypotheses(ref))
-    #     self.assertTrue('Not enough information to resolve the record.' in context.exception)
-    #
-    #
-    # def test_build_bibcode(self):
-    #     """
-    #     test building bibcode to query solr with it
-    #     """
-    #     ref = {'journal': u'a&a',
-    #            'authors': u'Verela et al.',
-    #            'refstr': u'Verela et al., 2016, a&a, 589, 37',
-    #            'volume': u'589',
-    #            'year': u'2016',
-    #            'page': u'37'}
-    #     self.assertEqual(Hypotheses(ref).construct_bibcode(),
-    #                      ['2016A&A...589...37V', '2016?????.589...37V', '2016A&A...589?..37V', '2016?????.589?..37V'])
-    #     ref = {'journal': u'A&A',
-    #            'authors': u'Shakura N. I., Sunyaev R. A.',
-    #            'refstr': u'Shakura N. I., Sunyaev R. A., 1973, A&A, 24, 337',
-    #            'volume': u'24',
-    #            'year': u'1973',
-    #            'page': u'337'}
-    #     self.assertEqual(Hypotheses(ref).construct_bibcode(),
-    #                      ['1973A&A....24..337S', '1973?????..24..337S', '1973A&A....24?.337S', '1973?????..24?.337S'])
-    #     ref = {'journal': u'A&A',
-    #            'authors': u'N. Aghanim et al., Planck Collaboration',
-    #            'refstr': u'N. Aghanim et al., Planck Collaboration, "A&A" 641 (2020) A6.',
-    #            'volume': u'641',
-    #            'year': u'2020',
-    #            'page': u'A6'}
-    #     self.assertEqual(Hypotheses(ref).construct_bibcode(),
-    #                      ['2020A&A...641A...6A', '2020?????.641A...6A'])
+    def test_identify_incomplete(self):
+        """
+        test when parsed reference is incomplete
+        """
+        ref = {'year': '2020',
+               'refstr': '[4] Bennett, J. S., & Sijacki, D. 2020, arXiv e-prints,',
+               'authors': 'Bennett, J. S., and Sijacki, D.'}
+        with self.assertRaises(Exception) as context:
+            solve_reference(Hypotheses(ref))
+        self.assertTrue('Not enough information to resolve the record.' in context.exception)
+
+
+    def test_build_bibcode(self):
+        """
+        test building bibcode to query solr with it
+        """
+        ref = {'journal': u'a&a',
+               'authors': u'Verela et al.',
+               'refstr': u'Verela et al., 2016, a&a, 589, 37',
+               'volume': u'589',
+               'year': u'2016',
+               'page': u'37'}
+        self.assertEqual(Hypotheses(ref).construct_bibcode(),
+                         ['2016A&A...589...37V', '2016?????.589...37V', '2016A&A...589?..37V', '2016?????.589?..37V'])
+        ref = {'journal': u'A&A',
+               'authors': u'Shakura N. I., Sunyaev R. A.',
+               'refstr': u'Shakura N. I., Sunyaev R. A., 1973, A&A, 24, 337',
+               'volume': u'24',
+               'year': u'1973',
+               'page': u'337'}
+        self.assertEqual(Hypotheses(ref).construct_bibcode(),
+                         ['1973A&A....24..337S', '1973?????..24..337S', '1973A&A....24?.337S', '1973?????..24?.337S'])
+        ref = {'journal': u'A&A',
+               'authors': u'N. Aghanim et al., Planck Collaboration',
+               'refstr': u'N. Aghanim et al., Planck Collaboration, "A&A" 641 (2020) A6.',
+               'volume': u'641',
+               'year': u'2020',
+               'page': u'A6'}
+        self.assertEqual(Hypotheses(ref).construct_bibcode(),
+                         ['2020A&A...641A...6A', '2020?????.641A...6A'])
 
 
 
