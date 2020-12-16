@@ -1164,18 +1164,18 @@ class TestResolver(TestCase):
         self.assertEqual(get_score_for_baas_match(solution, hypothesis), -1)
 
 
-    def test_identify_incomplete(self):
-        """
-        test when parsed reference is incomplete
-        """
-        ref = {'year': '2020',
-               'refstr': '[4] Bennett, J. S., & Sijacki, D. 2020, arXiv e-prints,',
-               'authors': 'Bennett, J. S., and Sijacki, D.'}
-        with self.assertRaises(Exception) as context:
-            solve_reference(Hypotheses(ref))
-        self.assertTrue('Not enough information to resolve the record.' in context.exception)
-
-
+    # def test_identify_incomplete(self):
+    #     """
+    #     test when parsed reference is incomplete
+    #     """
+    #     ref = {'year': '2020',
+    #            'refstr': '[4] Bennett, J. S., & Sijacki, D. 2020, arXiv e-prints,',
+    #            'authors': 'Bennett, J. S., and Sijacki, D.'}
+    #     with self.assertRaises(Exception) as context:
+    #         solve_reference(Hypotheses(ref))
+    #     self.assertTrue('Not enough information to resolve the record.' in context.exception)
+    #
+    #
     # def test_build_bibcode(self):
     #     """
     #     test building bibcode to query solr with it
