@@ -94,6 +94,7 @@ class TestResolver(TestCase):
         self.assertEqual(normalize_author_list("Lastname maybe or not", initials=False), "Lastname")
         self.assertEqual(normalize_author_list("lastname maybe or not", initials=False), "lastname maybe or not")
 
+
     def test_get_first_author(self):
         """
         Ensure that the return value is the last name of the first author in authorString.
@@ -751,292 +752,291 @@ class TestResolverHypotheses(TestCase):
                                        query_string='the_query', hypothesis=hypothesis)
         self.assertTrue('Try again if desperate' in context.exception)
 
-    # def test_inspect_ambiguous_solutions(self):
-    #     """
-    #     test inspect_ambiguous_solutions
-    #     :return:
-    #     """
-    #     e1 = Evidences()
-    #     e1.add_evidence(0.11, 'authors')
-    #     e1.add_evidence(0.15, 'year')
-    #     e2 = Evidences()
-    #     e2.add_evidence(0.05, 'authors')
-    #     e2.add_evidence(0.21, 'year')
-    #     e2.add_evidence(0.1, 'volume')
-    #     e3 = Evidences()
-    #     e3.add_evidence(0.05, 'authors')
-    #     e3.add_evidence(0.21, 'year')
-    #     e3.add_evidence(-1, 'page')
-    #     e4 = Evidences()
-    #     e4.add_evidence(0.05, 'authors')
-    #     e4.add_evidence(0.21, 'year')
-    #
-    #     input_fields = {u'bibcode': u'1992JOSAA...9..154F',
-    #                     u'author': [u'Frisken Gibson, Sarah', u'Lanni, Frederick'],
-    #                     u'year': u'1992',
-    #                     u'volume': u'9'}
-    #     hypothesis = Hypothesis("testing-fielded-author/year", {
-    #                         "author": input_fields["author"],
-    #                         "year": input_fields["year"]},
-    #                    get_score_for_input_fields,
-    #                    input_fields=input_fields,
-    #                    has_etal=False)
-    #     scored_solutions = [(e1, {u'bibcode': u'1992JOSAA...9..154F'})]
-    #     self.assertEqual(inspect_ambiguous_solutions(scored_solutions=scored_solutions,
-    #                                     query_string='the_query', hypothesis=hypothesis),
-    #                      scored_solutions[0])
-    #     with self.assertRaises(Exception) as context:
-    #         inspect_ambiguous_solutions(scored_solutions=[(e3, {u'bibcode': u'1992JOSAA...9..154F'})],
-    #                                     query_string='the_query', hypothesis=hypothesis)
-    #     self.assertTrue('Try again if desperate' in context.exception)
-    #     scored_solutions = [(e1, {u'bibcode': u'1992JOSAA...9..154F'}), (e2, {u'bibcode': u'1992JOSAA...9..154F'})]
-    #     self.assertEqual(inspect_ambiguous_solutions(scored_solutions=scored_solutions,
-    #                                     query_string='the_query', hypothesis=hypothesis),
-    #                      scored_solutions[1])
-    #     e1.add_evidence(0.05, 'title')
-    #     e4.add_evidence(0.05, 'title')
-    #     scored_solutions = [(e1, {u'bibcode': u'1992JOSAA...9..154F', u'title': u'Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy', u'year': u'1992'}),
-    #                         (e4, {u'bibcode': u'1992JOSAA...9..154F', u'title': u'Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy'})]
-    #     self.assertEqual(inspect_ambiguous_solutions(scored_solutions=scored_solutions,
-    #                                     query_string='the_query', hypothesis=hypothesis),
-    #                      scored_solutions[1])
-    #     scored_solutions = [(e1, {u'bibcode': u'1992JOSAA...9..154F', u'title': u'title1 Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy', u'year': u'1992'}),
-    #                         (e4, {u'bibcode': u'1992JOSAA...9..154F', u'title': u'title2 Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy'})]
-    #     with self.assertRaises(Exception) as context:
-    #         inspect_ambiguous_solutions(scored_solutions=scored_solutions,
-    #                                     query_string='the_query', hypothesis=hypothesis)
-    #     self.assertTrue('Ambiguous the_query.' in context.exception)
+
+    def test_inspect_ambiguous_solutions(self):
+        """
+        test inspect_ambiguous_solutions
+        """
+        e1 = Evidences()
+        e1.add_evidence(0.11, 'authors')
+        e1.add_evidence(0.15, 'year')
+        e2 = Evidences()
+        e2.add_evidence(0.05, 'authors')
+        e2.add_evidence(0.21, 'year')
+        e2.add_evidence(0.1, 'volume')
+        e3 = Evidences()
+        e3.add_evidence(0.05, 'authors')
+        e3.add_evidence(0.21, 'year')
+        e3.add_evidence(-1, 'page')
+        e4 = Evidences()
+        e4.add_evidence(0.05, 'authors')
+        e4.add_evidence(0.21, 'year')
+
+        input_fields = {u'bibcode': u'1992JOSAA...9..154F',
+                        u'author': [u'Frisken Gibson, Sarah', u'Lanni, Frederick'],
+                        u'year': u'1992',
+                        u'volume': u'9'}
+        hypothesis = Hypothesis("testing-fielded-author/year", {
+                            "author": input_fields["author"],
+                            "year": input_fields["year"]},
+                       get_score_for_input_fields,
+                       input_fields=input_fields,
+                       has_etal=False)
+        scored_solutions = [(e1, {u'bibcode': u'1992JOSAA...9..154F'})]
+        self.assertEqual(inspect_ambiguous_solutions(scored_solutions=scored_solutions,
+                                        query_string='the_query', hypothesis=hypothesis),
+                         scored_solutions[0])
+        with self.assertRaises(Exception) as context:
+            inspect_ambiguous_solutions(scored_solutions=[(e3, {u'bibcode': u'1992JOSAA...9..154F'})],
+                                        query_string='the_query', hypothesis=hypothesis)
+        self.assertTrue('Try again if desperate' in context.exception)
+        scored_solutions = [(e1, {u'bibcode': u'1992JOSAA...9..154F'}), (e2, {u'bibcode': u'1992JOSAA...9..154F'})]
+        self.assertEqual(inspect_ambiguous_solutions(scored_solutions=scored_solutions,
+                                        query_string='the_query', hypothesis=hypothesis),
+                         scored_solutions[1])
+        e1.add_evidence(0.05, 'title')
+        e4.add_evidence(0.05, 'title')
+        scored_solutions = [(e1, {u'bibcode': u'1992JOSAA...9..154F', u'title': u'Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy', u'year': u'1992'}),
+                            (e4, {u'bibcode': u'1992JOSAA...9..154F', u'title': u'Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy'})]
+        self.assertEqual(inspect_ambiguous_solutions(scored_solutions=scored_solutions,
+                                        query_string='the_query', hypothesis=hypothesis),
+                         scored_solutions[1])
+        scored_solutions = [(e1, {u'bibcode': u'1992JOSAA...9..154F', u'title': u'title1 Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy', u'year': u'1992'}),
+                            (e4, {u'bibcode': u'1992JOSAA...9..154F', u'title': u'title2 Experimental test of an analytical model of aberration in an oil-immersion objective lens used in three-dimensional light microscopy'})]
+        with self.assertRaises(Exception) as context:
+            inspect_ambiguous_solutions(scored_solutions=scored_solutions,
+                                        query_string='the_query', hypothesis=hypothesis)
+        self.assertTrue('Ambiguous the_query.' in context.exception)
 
 
-    # def test_choose_solution(self):
-    #     """
-    #
-    #     :return:
-    #     """
-    #     e1 = Evidences()
-    #     e1.add_evidence(0.0, 'authors')
-    #     e1.add_evidence(0.3, 'year')
-    #     e1.add_evidence(0, 'page')
-    #     e1.add_evidence(-0.6, 'pubstring')
-    #     e1.add_evidence(0, 'volume')
-    #     e2 = Evidences()
-    #     e2.add_evidence(1.0, 'authors')
-    #     e2.add_evidence(1.0, 'year')
-    #     e2.add_evidence(0, 'page')
-    #     e2.add_evidence(0.6, 'pubstring')
-    #     e2.add_evidence(1, 'volume')
-    #     e3 = Evidences()
-    #     e3.add_evidence(1.0, 'authors')
-    #     e3.add_evidence(1.0, 'year')
-    #     e3.add_evidence(1.0, 'page')
-    #     e3.add_evidence(0.8, 'pubstring')
-    #     e3.add_evidence(0.8, 'volume')
-    #
-    #     solution = {u'bibcode': u'2013JARS....7.3461V',
-    #                 u'author': [u'Vasuki, Perumal', u'Mohamed Mansoor Roomi, S.'],
-    #                 u'title': u'Particle swarm optimization-based despeckling and decluttering of wavelet packet transformed synthetic aperture radar images',
-    #                 u'doctype': u'article', u'pub': u'Journal of Applied Remote Sensing',
-    #                 u'pub_raw': u'Journal of Applied Remote Sensing, Volume 7, id. 073461 (2013).',
-    #                 u'volume': u'7', u'author_norm': ['vasuki, p', 'mohamed mansoor roomi, s'], u'year': u'2013',
-    #                 u'first_author_norm': 'vasuki, p',
-    #                 u'identifier': [u'2013JARS....7.3461V', u'10.1117/1.JRS.7.073461', u'10.1117/1.JRS.7.073461'],
-    #                 u'page': u'073461'}
-    #
-    #     hypothesis = Hypothesis("testing-fielded-author/year", {
-    #                                 "author": solution["author"],
-    #                                 "year": solution["year"]},
-    #                             get_score_for_input_fields,
-    #                             input_fields=solution,
-    #                             has_etal=False)
-    #
-    #     with self.assertRaises(Exception) as context:
-    #         choose_solution(candidates=[], query_string='the_query', hypothesis=hypothesis)
-    #     self.assertTrue('Not even a doubtful solution' in context.exception)
-    #     with self.assertRaises(Exception) as context:
-    #         choose_solution(candidates=[(e1, solution)], query_string='the_query', hypothesis=hypothesis)
-    #     self.assertEqual('No unique non-vetoed doubtful solution: the_query', str(context.exception))
-    #     candidates = [(e2, solution)]
-    #     self.assertTrue(choose_solution(candidates=candidates, query_string='the_query', hypothesis=hypothesis),
-    #                     candidates[0])
-    #     with self.assertRaises(Exception) as context:
-    #         choose_solution(candidates=[(e2, solution), (e2, solution)], query_string='the_query', hypothesis=hypothesis)
-    #     self.assertTrue('2 solutions with equal (good) score.' in context.exception)
-    #     candidates = [(e2, solution), (e3, solution)]
-    #     self.assertTrue(choose_solution(candidates=candidates, query_string='the_query', hypothesis=hypothesis),
-    #                     candidates[0])
+    def test_choose_solution(self):
+        """
+
+        """
+        e1 = Evidences()
+        e1.add_evidence(0.0, 'authors')
+        e1.add_evidence(0.3, 'year')
+        e1.add_evidence(0, 'page')
+        e1.add_evidence(-0.6, 'pubstring')
+        e1.add_evidence(0, 'volume')
+        e2 = Evidences()
+        e2.add_evidence(1.0, 'authors')
+        e2.add_evidence(1.0, 'year')
+        e2.add_evidence(0, 'page')
+        e2.add_evidence(0.6, 'pubstring')
+        e2.add_evidence(1, 'volume')
+        e3 = Evidences()
+        e3.add_evidence(1.0, 'authors')
+        e3.add_evidence(1.0, 'year')
+        e3.add_evidence(1.0, 'page')
+        e3.add_evidence(0.8, 'pubstring')
+        e3.add_evidence(0.8, 'volume')
+
+        solution = {u'bibcode': u'2013JARS....7.3461V',
+                    u'author': [u'Vasuki, Perumal', u'Mohamed Mansoor Roomi, S.'],
+                    u'title': u'Particle swarm optimization-based despeckling and decluttering of wavelet packet transformed synthetic aperture radar images',
+                    u'doctype': u'article', u'pub': u'Journal of Applied Remote Sensing',
+                    u'pub_raw': u'Journal of Applied Remote Sensing, Volume 7, id. 073461 (2013).',
+                    u'volume': u'7', u'author_norm': ['vasuki, p', 'mohamed mansoor roomi, s'], u'year': u'2013',
+                    u'first_author_norm': 'vasuki, p',
+                    u'identifier': [u'2013JARS....7.3461V', u'10.1117/1.JRS.7.073461', u'10.1117/1.JRS.7.073461'],
+                    u'page': u'073461'}
+
+        hypothesis = Hypothesis("testing-fielded-author/year", {
+                                    "author": solution["author"],
+                                    "year": solution["year"]},
+                                get_score_for_input_fields,
+                                input_fields=solution,
+                                has_etal=False)
+
+        with self.assertRaises(Exception) as context:
+            choose_solution(candidates=[], query_string='the_query', hypothesis=hypothesis)
+        self.assertTrue('Not even a doubtful solution' in context.exception)
+        with self.assertRaises(Exception) as context:
+            choose_solution(candidates=[(e1, solution)], query_string='the_query', hypothesis=hypothesis)
+        self.assertEqual('No unique non-vetoed doubtful solution: the_query', str(context.exception))
+        candidates = [(e2, solution)]
+        self.assertTrue(choose_solution(candidates=candidates, query_string='the_query', hypothesis=hypothesis),
+                        candidates[0])
+        with self.assertRaises(Exception) as context:
+            choose_solution(candidates=[(e2, solution), (e2, solution)], query_string='the_query', hypothesis=hypothesis)
+        self.assertTrue('2 solutions with equal (good) score.' in context.exception)
+        candidates = [(e2, solution), (e3, solution)]
+        self.assertTrue(choose_solution(candidates=candidates, query_string='the_query', hypothesis=hypothesis),
+                        candidates[0])
 
 
-    # def test_get_score_for_reference_identifier(self):
-    #     """
-    #     test get_score_for_reference_identifier
-    #     """
-    #     # reference is DOI
-    #     solution = {u"bibcode": u"2019NatNa..14...89C",
-    #                 u"doi":[u"10.1038/s41565-018-0319-4"]}
-    #
-    #     ref = {"doi":"10.1038/s41565-018-0319-4"}
-    #     hypothesis = Hypothesis("testing-fielded-DOI", {
-    #                                 "doi": ref["doi"]},
-    #                             get_score_for_reference_identifier,
-    #                             input_fields=ref)
-    #     self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), 1)
-    #
-    #     # if it does not match
-    #     ref = {"doi":"no match"}
-    #     hypothesis = Hypothesis("testing-fielded-DOI", {
-    #                                 "doi": ref["doi"]},
-    #                             get_score_for_reference_identifier,
-    #                             input_fields=ref)
-    #     self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), -1)
-    #
-    #     # reference is arxiv id which is available in eid in solr
-    #     solution = {u"bibcode": u"2019arXiv190501258L",
-    #                 u"identifier": [u"arXiv:1905.01258"]}
-    #
-    #     ref = {"arxiv":"1905.01258"}
-    #     hypothesis = Hypothesis("testing-fielded-arxiv", {
-    #                                 "arxiv": ref["arxiv"]},
-    #                             get_score_for_reference_identifier,
-    #                             input_fields=ref)
-    #     self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), 1)
-    #
-    #     # if it does not match
-    #     ref = {"arxiv":"no match"}
-    #     hypothesis = Hypothesis("testing-fielded-arxiv", {
-    #                                 "arxiv": ref["arxiv"]},
-    #                             get_score_for_reference_identifier,
-    #                             input_fields=ref)
-    #     self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), -1)
-    #
-    #
-    # def test_get_book_score_for_input_fields(self):
-    #     """
-    #     test get_book_score_for_input_fields
-    #     """
-    #     solution = {
-    #         u"doctype":u"book",
-    #         u"year":u"2019",
-    #         u"bibcode":u"2019msme.book.....R",
-    #         u"bibstem":u"msme",
-    #         u"identifier":[u"2019msme.book.....R"],
-    #         u"pub_raw":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova, David J. Asher and Margaret D. Campbell-Brown. ISBN 9781108426718. Cambridge University Press, 2019",
-    #         u"pub":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova",
-    #         u"first_author_norm":u"Ryabova, G",
-    #         u"author":[u"Ryabova, Galina O.", u"Asher, David J.", u"Campbell-Brown, Margaret J."],
-    #         u"title":u"Meteoroids: Sources of Meteors on Earth and Beyond",
-    #         u"author_norm":["Ryabova, G", "Asher, D", "Campbell-Brown, M"]
-    #     }
-    #     # note passing in a mistaken year by a character
-    #     ref = {"authors": "Ryabova, G., Asher, D., Campbell Brown, M.",
-    #            "title": "Meteoroids: Sources of Meteors on Earth and Beyond",
-    #            "year": "2009"}
-    #     normalized_authors = normalize_author_list(ref["authors"], initials=True)
-    #     # note that specifying hints here is useless since we are passing the solution in already
-    #     # put it here to know what information was used in the query corresponding to the scare function called
-    #     hypothesis = Hypothesis("test-fielded-book-title", {
-    #                        "author": normalized_authors,
-    #                         "title": ref["title"],
-    #                         "year": ref["year"]},
-    #                     get_book_score_for_input_fields,
-    #                     input_fields=ref,
-    #                     page_qualifier=ref.get("qualifier"),
-    #                     has_etal=False,
-    #                     normalized_authors=normalized_authors)
-    #     self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
-    #
-    #
-    # def test_get_thesis_score_for_input_fields(self):
-    #     """
-    #     test get_thesis_score_for_input_fields
-    #     """
-    #     solution = {
-    #         u"first_author_norm": u"Rowden, P",
-    #         u"year":u"2019",
-    #         u"bibcode":u"2019PhDT........11R",
-    #         u"identifier":[u"2019PhDT........11R"],
-    #         u"author":[u"Rowden, Pamela M."],
-    #         u"pub":u"Ph.D. Thesis",
-    #         u"doctype":u"phdthesis",
-    #         u"pub_raw":u"PhD These, The Open University, 2019",
-    #         u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
-    #         u"author_norm":[u"Rowden, P"]
-    #     }
-    #     ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
-    #     # note that specifying hints here is useless since we are passing the solution in already
-    #     # put it here to know what information was used in the query corresponding to the scare function called
-    #     normalized_authors = normalize_author_list(ref["authors"], initials=True)
-    #     hypothesis = Hypothesis("test-fielded-thesis", {
-    #                         "author": normalized_authors,
-    #                         "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
-    #                         "year": ref["year"]},
-    #                     get_thesis_score_for_input_fields,
-    #                     input_fields=ref,
-    #                     normalized_authors=normalized_authors)
-    #     self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 3)
-    #
-    #     # wrong initial
-    #     ref = {"authors": "Rowden, R.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
-    #     # note that specifying hints here is useless since we are passing the solution in already
-    #     # put it here to know what information was used in the query corresponding to the scare function called
-    #     normalized_authors = normalize_author_list(ref["authors"], initials=True)
-    #     hypothesis = Hypothesis("test-fielded-thesis", {
-    #                         "author": normalized_authors,
-    #                         "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
-    #                         "year": ref["year"]},
-    #                     get_thesis_score_for_input_fields,
-    #                     input_fields=ref,
-    #                     normalized_authors=normalized_authors)
-    #     self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1)
-    #
-    #     # mistaken year
-    #     ref = {"authors": "Rowden, P.", "year": "2018", "refstr": "PhD These, The Open University, 2019"}
-    #     normalized_authors = normalize_author_list(ref["authors"], initials=True)
-    #     hypothesis = Hypothesis("test-fielded-thesis", {
-    #                         "author": normalized_authors,
-    #                         "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
-    #                         "year": ref["year"]},
-    #                     get_thesis_score_for_input_fields,
-    #                     input_fields=ref,
-    #                     normalized_authors=normalized_authors)
-    #     self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
-    #
-    #     # no thesis indication
-    #     solution = {
-    #         u"first_author_norm": u"Rowden, P",
-    #         u"year": u"2019",
-    #         u"bibcode": u"2019PhDT........11R",
-    #         u"identifier":[u"2019PhDT........11R"],
-    #         u"author":[u"Rowden, Pamela M."],
-    #         u"pub": u"Ph.D. Thesis",
-    #         u"doctype": u"phdthesis",
-    #         u"pub_raw": u"no indicator, The Open University, 2019",
-    #         u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
-    #         u"author_norm":[u"Rowden, P"]
-    #     }
-    #     ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
-    #     hypothesis = Hypothesis("test-fielded-thesis", {
-    #                         "author": normalized_authors,
-    #                         "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
-    #                         "year": ref["year"]},
-    #                     get_thesis_score_for_input_fields,
-    #                     input_fields=ref,
-    #                     normalized_authors=normalized_authors)
-    #     self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1)
-    #
-    #     # if solution contians multiple authors, penalize
-    #     solution = {
-    #         u"first_author_norm": u"Rowden, P",
-    #         u"year": u"2019",
-    #         u"bibcode": u"2019PhDT........11R",
-    #         u"identifier":[u"2019PhDT........11R"],
-    #         u"author":[u"Rowden, Pamela M.", u"Grady, M. M."],
-    #         u"pub": u"Ph.D. Thesis",
-    #         u"doctype": u"phdthesis",
-    #         u"pub_raw": u"PhD These, The Open University, 2019",
-    #         u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
-    #         u"author_norm":[u"Rowden, P", u"Grady, M"]
-    #     }
-    #     self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.9)
+    def test_get_score_for_reference_identifier(self):
+        """
+        test get_score_for_reference_identifier
+        """
+        # reference is DOI
+        solution = {u"bibcode": u"2019NatNa..14...89C",
+                    u"doi":[u"10.1038/s41565-018-0319-4"]}
+
+        ref = {"doi":"10.1038/s41565-018-0319-4"}
+        hypothesis = Hypothesis("testing-fielded-DOI", {
+                                    "doi": ref["doi"]},
+                                get_score_for_reference_identifier,
+                                input_fields=ref)
+        self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), 1)
+
+        # if it does not match
+        ref = {"doi":"no match"}
+        hypothesis = Hypothesis("testing-fielded-DOI", {
+                                    "doi": ref["doi"]},
+                                get_score_for_reference_identifier,
+                                input_fields=ref)
+        self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), -1)
+
+        # reference is arxiv id which is available in eid in solr
+        solution = {u"bibcode": u"2019arXiv190501258L",
+                    u"identifier": [u"arXiv:1905.01258"]}
+
+        ref = {"arxiv":"1905.01258"}
+        hypothesis = Hypothesis("testing-fielded-arxiv", {
+                                    "arxiv": ref["arxiv"]},
+                                get_score_for_reference_identifier,
+                                input_fields=ref)
+        self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), 1)
+
+        # if it does not match
+        ref = {"arxiv":"no match"}
+        hypothesis = Hypothesis("testing-fielded-arxiv", {
+                                    "arxiv": ref["arxiv"]},
+                                get_score_for_reference_identifier,
+                                input_fields=ref)
+        self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), -1)
+
+
+    def test_get_book_score_for_input_fields(self):
+        """
+        test get_book_score_for_input_fields
+        """
+        solution = {
+            u"doctype":u"book",
+            u"year":u"2019",
+            u"bibcode":u"2019msme.book.....R",
+            u"bibstem":u"msme",
+            u"identifier":[u"2019msme.book.....R"],
+            u"pub_raw":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova, David J. Asher and Margaret D. Campbell-Brown. ISBN 9781108426718. Cambridge University Press, 2019",
+            u"pub":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova",
+            u"first_author_norm":u"Ryabova, G",
+            u"author":[u"Ryabova, Galina O.", u"Asher, David J.", u"Campbell-Brown, Margaret J."],
+            u"title":u"Meteoroids: Sources of Meteors on Earth and Beyond",
+            u"author_norm":["Ryabova, G", "Asher, D", "Campbell-Brown, M"]
+        }
+        # note passing in a mistaken year by a character
+        ref = {"authors": "Ryabova, G., Asher, D., Campbell Brown, M.",
+               "title": "Meteoroids: Sources of Meteors on Earth and Beyond",
+               "year": "2009"}
+        normalized_authors = normalize_author_list(ref["authors"], initials=True)
+        # note that specifying hints here is useless since we are passing the solution in already
+        # put it here to know what information was used in the query corresponding to the scare function called
+        hypothesis = Hypothesis("test-fielded-book-title", {
+                           "author": normalized_authors,
+                            "title": ref["title"],
+                            "year": ref["year"]},
+                        get_book_score_for_input_fields,
+                        input_fields=ref,
+                        page_qualifier=ref.get("qualifier"),
+                        has_etal=False,
+                        normalized_authors=normalized_authors)
+        self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
+
+
+    def test_get_thesis_score_for_input_fields(self):
+        """
+        test get_thesis_score_for_input_fields
+        """
+        solution = {
+            u"first_author_norm": u"Rowden, P",
+            u"year":u"2019",
+            u"bibcode":u"2019PhDT........11R",
+            u"identifier":[u"2019PhDT........11R"],
+            u"author":[u"Rowden, Pamela M."],
+            u"pub":u"Ph.D. Thesis",
+            u"doctype":u"phdthesis",
+            u"pub_raw":u"PhD These, The Open University, 2019",
+            u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
+            u"author_norm":[u"Rowden, P"]
+        }
+        ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
+        # note that specifying hints here is useless since we are passing the solution in already
+        # put it here to know what information was used in the query corresponding to the scare function called
+        normalized_authors = normalize_author_list(ref["authors"], initials=True)
+        hypothesis = Hypothesis("test-fielded-thesis", {
+                            "author": normalized_authors,
+                            "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
+                            "year": ref["year"]},
+                        get_thesis_score_for_input_fields,
+                        input_fields=ref,
+                        normalized_authors=normalized_authors)
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 3)
+
+        # wrong initial
+        ref = {"authors": "Rowden, R.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
+        # note that specifying hints here is useless since we are passing the solution in already
+        # put it here to know what information was used in the query corresponding to the scare function called
+        normalized_authors = normalize_author_list(ref["authors"], initials=True)
+        hypothesis = Hypothesis("test-fielded-thesis", {
+                            "author": normalized_authors,
+                            "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
+                            "year": ref["year"]},
+                        get_thesis_score_for_input_fields,
+                        input_fields=ref,
+                        normalized_authors=normalized_authors)
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1)
+
+        # mistaken year
+        ref = {"authors": "Rowden, P.", "year": "2018", "refstr": "PhD These, The Open University, 2019"}
+        normalized_authors = normalize_author_list(ref["authors"], initials=True)
+        hypothesis = Hypothesis("test-fielded-thesis", {
+                            "author": normalized_authors,
+                            "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
+                            "year": ref["year"]},
+                        get_thesis_score_for_input_fields,
+                        input_fields=ref,
+                        normalized_authors=normalized_authors)
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
+
+        # no thesis indication
+        solution = {
+            u"first_author_norm": u"Rowden, P",
+            u"year": u"2019",
+            u"bibcode": u"2019PhDT........11R",
+            u"identifier":[u"2019PhDT........11R"],
+            u"author":[u"Rowden, Pamela M."],
+            u"pub": u"Ph.D. Thesis",
+            u"doctype": u"phdthesis",
+            u"pub_raw": u"no indicator, The Open University, 2019",
+            u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
+            u"author_norm":[u"Rowden, P"]
+        }
+        ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
+        hypothesis = Hypothesis("test-fielded-thesis", {
+                            "author": normalized_authors,
+                            "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
+                            "year": ref["year"]},
+                        get_thesis_score_for_input_fields,
+                        input_fields=ref,
+                        normalized_authors=normalized_authors)
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1)
+
+        # if solution contians multiple authors, penalize
+        solution = {
+            u"first_author_norm": u"Rowden, P",
+            u"year": u"2019",
+            u"bibcode": u"2019PhDT........11R",
+            u"identifier":[u"2019PhDT........11R"],
+            u"author":[u"Rowden, Pamela M.", u"Grady, M. M."],
+            u"pub": u"Ph.D. Thesis",
+            u"doctype": u"phdthesis",
+            u"pub_raw": u"PhD These, The Open University, 2019",
+            u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
+            u"author_norm":[u"Rowden, P", u"Grady, M"]
+        }
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.9)
 
 
     def test_add_publication_evidence_error(self):
