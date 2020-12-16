@@ -38,6 +38,7 @@ class TestResolver(TestCase):
            })
         return self.current_app
 
+
     def test_get_author_pattern(self):
         """
         Test the return value to be re.compile
@@ -710,45 +711,45 @@ class TestResolverHypotheses(TestCase):
         self.assertEqual(evidences.get_score(), 4)
 
 
-    # def test_inspect_doubtful_solutions(self):
-    #     """
-    #     test doubtful solutions, when there is more than one possible solution without a doubt (i.e., all fields have
-    #     in evidences have positive values
-    #     :return:
-    #     """
-    #     e1 = Evidences()
-    #     e1.add_evidence(0.11, 'authors')
-    #     e1.add_evidence(0.15, 'year')
-    #     e2 = Evidences()
-    #     e2.add_evidence(0.05, 'authors')
-    #     e2.add_evidence(0.21, 'year')
-    #     e3 = Evidences()
-    #     e3.add_evidence(0.05, 'authors')
-    #     e3.add_evidence(0.21, 'year')
-    #     e3.add_evidence(-1, 'page')
-    #
-    #     input_fields = {u'bibcode': u'1992JOSAA...9..154F',
-    #                     u'author': [u'Frisken Gibson, Sarah', u'Lanni, Frederick'],
-    #                     u'year': u'1992'}
-    #     hypothesis = Hypothesis("testing-fielded-author/year", {
-    #                         "author": input_fields["author"],
-    #                         "year": input_fields["year"]},
-    #                    get_score_for_input_fields,
-    #                    input_fields=input_fields,
-    #                    has_etal=False)
-    #
-    #     with self.assertRaises(Exception) as context:
-    #         inspect_doubtful_solutions(scored_solutions=[(e1, {u'bibcode': u'1992JOSAA...9..154F'})],
-    #                                    query_string='the_query', hypothesis=hypothesis)
-    #     self.assertTrue('Try again if desperate' in context.exception)
-    #     with self.assertRaises(Exception) as context:
-    #         inspect_doubtful_solutions(scored_solutions=[(e1, {u'bibcode': u'1992JOSAA...9..154F'}),(e2, {u'bibcode': u'1992JOSAA...9..154F'})],
-    #                                    query_string='the_query', hypothesis=hypothesis)
-    #     self.assertEqual('No unique non-vetoed doubtful solution: the_query', str(context.exception))
-    #     with self.assertRaises(Exception) as context:
-    #         inspect_doubtful_solutions(scored_solutions=[(e3, {u'bibcode': u'1992JOSAA...9..154F'})],
-    #                                    query_string='the_query', hypothesis=hypothesis)
-    #     self.assertTrue('Try again if desperate' in context.exception)
+    def test_inspect_doubtful_solutions(self):
+        """
+        test doubtful solutions, when there is more than one possible solution without a doubt (i.e., all fields have
+        in evidences have positive values
+        :return:
+        """
+        e1 = Evidences()
+        e1.add_evidence(0.11, 'authors')
+        e1.add_evidence(0.15, 'year')
+        e2 = Evidences()
+        e2.add_evidence(0.05, 'authors')
+        e2.add_evidence(0.21, 'year')
+        e3 = Evidences()
+        e3.add_evidence(0.05, 'authors')
+        e3.add_evidence(0.21, 'year')
+        e3.add_evidence(-1, 'page')
+
+        input_fields = {u'bibcode': u'1992JOSAA...9..154F',
+                        u'author': [u'Frisken Gibson, Sarah', u'Lanni, Frederick'],
+                        u'year': u'1992'}
+        hypothesis = Hypothesis("testing-fielded-author/year", {
+                            "author": input_fields["author"],
+                            "year": input_fields["year"]},
+                       get_score_for_input_fields,
+                       input_fields=input_fields,
+                       has_etal=False)
+
+        with self.assertRaises(Exception) as context:
+            inspect_doubtful_solutions(scored_solutions=[(e1, {u'bibcode': u'1992JOSAA...9..154F'})],
+                                       query_string='the_query', hypothesis=hypothesis)
+        self.assertTrue('Try again if desperate' in context.exception)
+        with self.assertRaises(Exception) as context:
+            inspect_doubtful_solutions(scored_solutions=[(e1, {u'bibcode': u'1992JOSAA...9..154F'}),(e2, {u'bibcode': u'1992JOSAA...9..154F'})],
+                                       query_string='the_query', hypothesis=hypothesis)
+        self.assertEqual('No unique non-vetoed doubtful solution: the_query', str(context.exception))
+        with self.assertRaises(Exception) as context:
+            inspect_doubtful_solutions(scored_solutions=[(e3, {u'bibcode': u'1992JOSAA...9..154F'})],
+                                       query_string='the_query', hypothesis=hypothesis)
+        self.assertTrue('Try again if desperate' in context.exception)
 
     # def test_inspect_ambiguous_solutions(self):
     #     """
