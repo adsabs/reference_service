@@ -35,11 +35,13 @@
 ....AcCrA....	Acta Crystallographica Section A
 ....AcCrB....	Acta Crystallographica Section B-structural Science
 ....AcCrC....	Acta Crystallographica Section C-crystal Structure Communications
+....AcCrD....	Acta Crystallographica Section D
 ....AcElc....	Electrochimica Acta
 ....AcEle....	Acta Electronica
 ....AcElS....	Acta Electronica Sinica
 ....ACESJ....	Applied Computational Electromagnetics Society Journal
 ....AcFre....	Acta Frequenza
+....ACGE.....	Advances in Cryogenic Engineering
 ....AcGeP....	Acta Geophysica Polonica
 ....ACHA.....	Applied and Computational Harmonic Analysis
 ....AcHCh....	Helvetica Chimica Acta
@@ -94,7 +96,7 @@
 ....AdAtS....	Advances in Atmospheric Sciences
 ....AdBeh....	Adaptive Behaviour
 ....ADCBu....	Astronomical Data Center Bulletin
-....AdChP....	Advances In Chemical Physics
+....AdChP....	Advances in Chemical Physics
 ....AdCM.....	Advanced Ceramic Materials
 ....AdCoL....	Advanced Composites Letters
 ....AdCoM....	Advances in Computational Mathematics
@@ -106,9 +108,7 @@
 ....AdMUM....	Advances in Mechanics Uspekhi Mekhaniki
 ....ADNDT....	Atomic Data and Nuclear Data Tables
 ....AdPhy....	Advances in Physics
-....AdPhy....	Advances In Physics
 ....AdPoS....	Advances in Polymer Science
-....AdPoS....	Advances In Polymer Science
 ....Adsor....	Adsorption
 ....AdSpR....	Advances in Space Research
 ....AdSSP....	Advances in Solid State Physics
@@ -126,7 +126,6 @@
 ....AeMed....	Aerospace Medicine
 ....AeQ......	Aeronautical Quarterly
 ....AeRaG....	Aerodinamika Razrezhennykh Gazov
-....AerAs....	L'Aeronautique et l'Astronautique
 ....AerAs....	L'Aeronautique et L'Astronautique
 ....AerMS....	L'Aerotecnica Missili e Spazio
 ....Aero.....	Aerospace UK
@@ -147,7 +146,6 @@
 ....AHSJ.....	American Helicopter Society Journal
 ....AIAAJ....	AIAA Journal
 ....AIASJ....	AIAA Student Journal
-....AIChE....	Aiche Journal
 ....AIChE....	AIChE Journal
 ....AICSP....	Analog Integrated Circuits and Signal Processing
 ....AIH......	Acoustical Imaging and Holography
@@ -173,15 +171,11 @@
 ....AMGBS....	Archiv Meteorologie Geophysik und Bioklimatologie Serie Meteorologie und Geophysik
 ....AmJC.....	American Journal of Cardiology
 ....AmJM.....	American Journal of Mathematics
-....AmJM.....	American Journal Of Mathematics
 ....AmJPh....	American Journal of Physics
 ....AmJS.....	American Journal of Science
-....AmJS.....	American Journal Of Science
 ....AmMin....	American Mineralogist
 ....AMP......	Advanced Materials and Processes
 ....AMR......	Antartic Meteorite Research
-....AMSBu....	American Meteorological Society Bulletin
-....AMSBu....	Bulletin of the American Meteorological Society
 ....AmSci....	American Scientist
 ....AnaIn....	Analytical Instrumentation
 ....AnAp.....	Annales d'Astrophysique
@@ -216,7 +210,7 @@
 ....AnLow....	Annals of the Lowell Observatory
 ....AnLun....	Annals of the Observatory of Lund
 ....AnMAI....	Annals of Mathematics and Artificial Intelligence
-....AnMat....	Annals Of Mathematics
+....AnMat....	Annals of Mathematics
 ....AnMet....	Annalen Meteorologie
 ....AnMN.....	Antarctic Meteorite Newsletter
 ....AnMun....	Annalen der Koeniglichen Sternwarte bei Muenchen
@@ -226,7 +220,6 @@
 ....AnOR.....	Annals of Operations Research
 ....ANote....	Astronomical Notes University of Gothenburg Sweden Section of Astronomy
 ....AnP......	Annalen der Physik
-....AnP......	Annalen Der Physik
 ....AnPar....	Annales de l'Observatoire de Paris
 ....AnPCS....	Annales de Physique Colloque Supplement
 ....AnPh.....	Annales de Physique
@@ -235,10 +228,8 @@
 ....AnRE.....	Annual Review of Energy
 ....AnRev....	Ann Rev
 ....AnRFM....	Annual Review of Fluid Mechanics
-....AnRFM....	Annual Review Of Fluid Mechanics
 ....AnRio....	Annales de l'Observatoire Imperial de Rio de Janeiro
 ....AnRMS....	Annual Review of Materials Science
-....AnRMS....	Annual Review Of Materials Science
 ....AnSAO....	Annals of the Astrophysical Observatory of the Smithsonian Institution
 ....AnSci....	Annals of Science
 ....AnShO....	Shanghai Observatory Annals
@@ -287,7 +278,7 @@
 ....AppAn....	Applicable Analysis
 ....ApPhA....	Applied Physics A-materials Science &amp; Processing
 ....ApPhA....	Applied Physics A -- Solids and Surfaces
-....ApPhB....	Applied Physics B-lasers And Optics
+....ApPhB....	Applied Physics B-lasers and Optics
 ....ApPhB....	Applied Physics B -- Lasers and Optics
 ....ApPhC....	Applied Physics Communications
 ....ApPhL....	Applied Physics Letters
@@ -327,11 +318,10 @@
 ....ARNPS....	Annual Review of Nuclear and Particle Science
 ....ARNPS....	Annual Reviews of Nuclear and Particle Science
 ....ARNPS....	Annual Review of Nuclear Science
-....ARPC.....	Annual Review Of Physical Chemistry
+....ARPC.....	Annual Review of Physical Chemistry
 ....ARPM.....	Adgeziia Rasplavov i Paika Materialov
 ....ArPSp....	Archiwum Procesow Spalania
 ....ArRMA....	Archive for Rational Mechanics and Analysis
-....ArRMA....	Archive For Rational Mechanics And Analysis
 ....ArS......	Archives des Sciences
 ....ArtSa....	Artificial Satellites
 ....ArtSa....	Artificial Satellites - Planetary Geodesy
@@ -369,27 +359,42 @@
 ....AtEn.....	Atomnaia Energiia
 ....AtERv....	Atomic Energy Review
 ....ATi......	Astronomisk Tidsskrift
+....ATJAM....	ASME Journal of Applied Mechanics
 ....ATJAM....	ASME Transactions Journal of Applied Mechanics
 ....ATJAM....	ASME Transactions Series E Journal of Applied Mechanics
+....ATJDS....	ASME Journal of Dynamic Systems and Measurement Control B
 ....ATJDS....	ASME Transactions Journal of Dynamic Systems and Measurement Control B
+....ATJEG....	ASME Journal of Engineering for Gas Turbines and Power
 ....ATJEG....	ASME Transactions Journal of Engineering for Gas Turbines and Power
 ....ATJEG....	ASME Transactions Journal of Engineering Gas Turbines and Power
+....ATJEl....	ASME Journal of Electronic Packaging
 ....ATJEl....	ASME Transactions Journal of Electronic Packaging
+....ATJEM....	ASME Journal Engineering Materials and Technology
 ....ATJEM....	ASME Transactions Journal Engineering Materials and Technology
+....ATJEn....	ASME Journal of Engineering Power
 ....ATJEn....	ASME Transactions Journal of Engineering Power
+....ATJEP....	ASME Series Journal of Engineering Power
 ....ATJEP....	ASME Transactions Series Journal of Engineering Power
+....ATJFE....	ASME Journal of Fluids Engineering
 ....ATJFE....	ASME Transactions Journal of Fluids Engineering
+....ATJHT....	ASME Journal of Heat Transfer
 ....ATJHT....	ASME Transactions Journal of Heat Transfer
+....ATJLT....	ASME Journal of Lubrication Technology
 ....ATJLT....	ASME Transactions Journal of Lubrication Technology
+....ATJSE....	ASME Journal of Solar Energy and Engineering
 ....ATJSE....	ASME Transactions Journal of Solar Energy and Engineering
+....ATJTr....	ASME Journal of Tribology
 ....ATJTr....	ASME Transactions Journal of Tribology
+....ATJTu....	ASME Journal of Turbomachinery
 ....ATJTu....	ASME Transactions Journal of Turbomachinery
+....ATJVA....	ASME Journal of Vibration Acoustics
 ....ATJVA....	ASME Transactions Journal of Vibration Acoustics
 ....ATJVA....	ASME Transactions Journal of Vibration and Acoustics
 ....AtlSV....	Specola Astronomica Vaticana Atlas Stellarum Variabilium
 ....AtlVS....	Atlas Poiskovykh Kart Peremennykh Zvezd
 ....ATMAB....	Association Technique Maritime et Aeronautique Bulletin
 ....ATMAS....	Association Technique Maritime et Aeronautique Session Paris France ONERA TP
+....AtmEB....	Atmospheric Environment Part B
 ....AtmEn....	Atmospheric Environment
 ....Atmos....	Atmosphere
 ....AtmRe....	Atmospheric Research
@@ -432,6 +437,8 @@
 ....BAICz....	Bulletin of the Astronomical Institutes of Czechoslovakia
 ....BaltA....	Baltic Astronomy
 ....BamKV....	Bamberg Kleine Veroeffentlichungen der Remeis-Sternwarte
+....BAMS.....	American Meteorological Society Bulletin
+....BAMS.....	Bulletin of the American Meteorological Society
 ....BAN......	Bulletin of the Astronomical Institute of the Netherlands
 ....BAND.....	Bylgarska Akademiya Naukite Dokladi
 ....BANS.....	Bulletin of the Astronomical Institutes of the Netherlands Supplement Series
@@ -507,7 +514,6 @@
 ....BMBio....	Bulletin of Mathematical Biology
 ....BMOE.....	Boletin mensual del Observatorio del Ebro
 ....BOBeo....	Bulletin de l'Observatoire Astronomique de Belgrade
-....BoLMe....	Boundary-layer Meteorology
 ....BoLMe....	Boundary-Layer Meteorology
 ....BonD.....	Bonner Durchmusterung
 ....BOOde....	Odesskij Gosudarstvennyi Universitet im. I. I. Mechnikova Byulletin Astronomicheskoj Observatorii
@@ -527,7 +533,7 @@
 ....BSMT.....	Iasi Institutul Politehnic Buletinul Sectia Mecanica Tehnica
 ....BSolD....	Solnechnye Dann. Bull. Akad. Nauk SSSR
 ....BSRSL....	Bulletin de la Societe Royale des Sciences de Liege
-....BSSA.....	Bulletin Of The Seismological Society Of America
+....BSSA.....	Bulletin of the Seismological Society of America
 ....BSSA.....	Seismological Society America Bulletin
 ....BSSR.....	AN BSSR Institut Teplo i Massoobmena Vsesoiuznaia Konferentsiia Teplomassoobmenu Minsk Belorussian SSR Preprint
 ....BStaO....	Byulleten' Stalinabadskoj Astronomicheskoj Observatorii Akademiya Nauk Tadzhikskoj SSR
@@ -606,7 +612,7 @@
 ....ChJIR....	Chinese Journal of Infrared Research
 ....ChJL.....	Chinese Journal of Lasers
 ....ChJNP....	Chinese Journal of Nuclear Physics
-....ChJPh....	Chinese Journal Of Physics
+....ChJPh....	Chinese Journal of Physics
 ....ChJS.....	Chinese Journal of Semiconductors
 ....ChJSS....	Chinese Journal of Space Science
 ....ChNew....	Chandra News
@@ -632,16 +638,15 @@
 ....CiSSV....	Circolare Interna della Sezione Stelle Variabili dell'Unione Astrofili Italiani
 ....CITM.....	Chubu Institute Technology Memoirs
 ....CiUO.....	Circular of the Union Observatory Johannesburg
-....CJCh.....	Canadian Journal Of Chemistry-revue Canadienne De Chimie
+....CJCh.....	Canadian Journal of Chemistry-revue Canadienne De Chimie
 ....CJChE....	Canadian Journal of Chemical Engineering
 ....CJECE....	Canadian Journal of Electrical and Computer Engineering
 ....CJECE....	Canadian Journal of Electrical Computer Engineering
 ....CJLTP....	Chinese Journal of Low Temperature Physics
-....CJMat....	Canadian Journal Of Mathematics-journal Canadien De Mathematiques
+....CJMat....	Canadian Journal of Mathematics-journal Canadien De Mathematiques
 ....ClDy.....	Climate Dynamics
 ....CMAME....	Computer Methods in Applied Mechanics and Engineering
 ....CMaPh....	Communications in Mathematical Physics
-....CMaPh....	Communications In Mathematical Physics
 ....CMDRG....	Chislennye Metody Dinamike Razrezhennykh Gazov
 ....CmpEn....	Composites Engineering
 ....CmpMa....	Composites Manufacturing
@@ -742,7 +747,7 @@
 ....CoWat....	Contributions of the University of Waterloo Observatory
 ....CoWro....	Contributions from the Wroclaw Astronomical Observatory
 ....CPAM.....	Communications in Pure Applied Mathematics
-....CPAM.....	Communications On Pure And Applied Mathematics
+....CPAM.....	Communications on Pure and Applied Mathematics
 ....CPC......	Combinatorics, Probability and Computing
 ....CPhD.....	Cape Photographic Durchmusterung
 ....CPL......	Chemical Physics Letters
@@ -772,7 +777,6 @@
 ....CSMPA....	Ankara Universite Faculte des Sciences Communications Serie Mathematiques Physique et Astronomie
 ....CSSP.....	Circuits Systems and Signal Processing
 ....CST......	Combustion Science and Technology
-....CST......	Combustion Science And Technology
 ....CSVS.....	Catalogue of suspected variable stars. Acad. of Sciences USSR Shternberg.
 ....C&T......	Ciel et Terre
 ....C&T......	Ciel et Tierre
@@ -825,7 +829,7 @@
 ....DoUzb....	Akademiia Nauk Uzbekskoi SSR Doklady
 ....DPM......	Dinamika i Prochnost Mashin
 ....DPS......	AAS/Division for Planetary Sciences Meeting
-....DRM......	Diamond And Related Materials
+....DRM......	Diamond and Related Materials
 ....DSJ......	Defense Science Journal
 ....DSP......	Digital Signal Processing
 ....DSRMC....	Defense Systems Review Military Communications
@@ -935,7 +939,6 @@
 ....FACM.....	Functiones et Approximatio Commentarii Mathematici
 ....FaTr.....	Faraday Transactions
 ....FBP......	Food and Bioproducts Processing. Part C, Transactions of the Institution of Chemical Engineers
-....FBS......	Few-body Systems
 ....FBS......	Few-Body Systems
 ....FCPh.....	Fundamentals of Cosmic Physics
 ....F&CRe....	Flower and Cook Observatory Reprints
@@ -964,7 +967,6 @@
 ....FizKM....	Fiziko Khimicheskaia Mekhanika Materialov
 ....FizKO....	Fizika i Khimiia Obrabotki Materialov
 ....FizMM....	Fizika Metallov i Metallovedenie
-....FizMM....	Fizika Metallov I Metallovedenie
 ....FizMS....	Fizika Mnogochastichnykh Sistem
 ....FizNT....	Fizika Nizkikh Temperatur
 ....FizPl....	Fizika Plazmy
@@ -981,7 +983,7 @@
 ....F&M......	Feinwerktechnik und Messtechnik
 ....FNL......	Fluctuation and Noise Letters
 ....FoGeo....	Fotointerpretacja w Geografii
-....FoPh.....	Foundations Of Physics
+....FoPh.....	Foundations of Physics
 ....FPhL.....	Foundations of Physics Letters
 ....Freq.....	Frequenz
 ....FRFI.....	Flug Revue Flugwelt International
@@ -992,7 +994,6 @@
 ....Futur....	Future Spring
 ....GaMuM....	Gesellschaft Angewandte Mathematik und Mechanik Workshop Paris France
 ....GApFD....	Geophysical and Astrophysical Fluid Dynamics
-....GApFD....	Geophysical And Astrophysical Fluid Dynamics
 ....GATAN....	Gesellschaft Aerosolforschung Tagung ueber Aerosole Naturwissenschaft Medizin und Technik Messtechnik und technische Anwendung
 ....GazT.....	Gazodinamika i Teploobmen
 ....GBzG.....	Gerlands Beitraege zur Geophysik
@@ -1054,7 +1055,6 @@
 ....GPSW.....	GPS World
 ....GrAeH....	Grumman Aerospace Horizons
 ....GReGr....	General Relativity and Gravitation
-....GReGr....	General Relativity And Gravitation
 ....GriO.....	Griffith Observer
 ....GroR.....	Kapteyn Astronomical Laboratory Groningen Reports
 ....GrTOn....	Gravitatsiia i Teoriia Otnositel nosti
@@ -1115,22 +1115,21 @@
 ....IASSP....	IEEE ASSP Magazine
 ....IAUC.....	International Astronomical Union Circular
 ....IAUT.....	Transactions of the International Astronomical Union
-....IBMJ.....	Ibm Journal Of Research And Development
+....IBMJ.....	Ibm Journal of Research and Development
 ....IBMJ.....	IBM Journal Research Development
 ....IBSH.....	Informational Bulletin of the Southern Hemisphere
 ....IBVS.....	Informational Bulletin on Variable Stars
 ....ICAE.....	Integrated Computer-Aided Engineering
 ....ICAOB....	ICAO Bulletin
 ....Icar.....	Icarus
-....ICD......	Ieee Circuits &amp; Devices
-....ICGA....	Ieee Computer Graphics And Applications
+....ICD......	IEEE Circuits &amp; Devices
+....ICGA....	IEEE Computer Graphics and Applications
 ....ICGA.....	IEEE Computer Graphics Applications
 ....ICHMT....	International Communications in Heat and Mass Transfer
 ....ICiSM....	IEEE Circuits Systems Magazine
-....IComM....	Ieee Communications Magazine
 ....IComM....	IEEE Communications Magazine
 ....ICSE.....	Impact of Computing in Science and Engineering
-....ICSM.....	Ieee Control Systems Magazine
+....ICSM.....	IEEE Control Systems Magazine
 ....IDAQP....	Infinite Dimensional Analysis, Quantum Probability and Related Topics
 ....IDTC.....	IEEE Design Test Computers
 ....IEAEE....	Institution Engineers Australia Electrical Engineering Transactions
@@ -1138,8 +1137,6 @@
 ....IEEEN....	IEEE Network
 ....IEEEP....	IEEE Proceedings
 ....IEEEP....	Proceedings of the IEEE 
-....IEEEP....	Proceedings Of The Ieee
-....IEEES....	Ieee Spectrum
 ....IEEES....	IEEE Spectrum
 ....IEEP.....	Institution of Electrical Engineers Proceedings
 ....IEERv....	IEE Reviews
@@ -1164,7 +1161,6 @@
 ....IJApE....	International Journal of Applied Electromagnetics and Mechanics
 ....IJAP.....	International Journal of Aviation Psychology
 ....IJBC.....	International Journal of Bifurcation and Chaos
-....IJBC.....	International Journal Of Bifurcation And Chaos
 ....IJCES....	International Journal of Computational Engineering Science
 ....IJC......	International Journal of Control
 ....IJCMS....	International Journal of Computer Mathematics Section B
@@ -1173,13 +1169,11 @@
 ....IJEaS....	International Journal of Earth Sciences
 ....IJEFM....	International Journal of Engineering and Fluid Mechanics Spring
 ....IJE......	International Journal of Electronics
-....IJE......	International Journal Of Electronics
 ....IJER.....	International Journal of Energy Research
 ....IJES.....	International Journal of Engineering Science
 ....IJFa.....	International Journal of Fatigue
 ....IJFE.....	International Journal of Fusion Energy
 ....IJFr.....	International Journal of Fracture
-....IJFr.....	International Journal Of Fracture
 ....IJGS.....	International Journal of General Systems
 ....IJHE.....	International Journal of Hydrogen Energy
 ....IJHFF....	International Journal of Heat and Fluid Flow
@@ -1192,26 +1186,20 @@
 ....IJIE.....	International Journal of Impact Engineering
 ....IJIG.....	International Journal of Image and Graphics
 ....IJIMW....	International Journal of Infrared and Millimeter Waves
-....IJIMW....	International Journal Of Infrared And Millimeter Waves
 ....IJIMW....	International Journal of Infrared Millimeter Waves
 ....IJIST....	International Journal of Imaging Systems Technology
 ....IJLT.....	IEEE Journal of Lightwave Technology
 ....IJMES....	International Journal of Mathematical Education in Science and Technology
 ....IJMeS....	International Journal of Mechanical Sciences
-....IJMeS....	International Journal Of Mechanical Sciences
 ....IJMF.....	International Journal of Multiphase Flow
 ....IJMHG....	Indian Journal of Meteorology Hydrology and Geophysics
 ....IJM......	International Journal of Mathematics
 ....IJMM.....	International Journal of Mini Microcomputers
 ....IJMoS....	International Journal of Modelling and Simulation
 ....IJMPA....	International Journal of Modern Physics A
-....IJMPA....	International Journal Of Modern Physics A
 ....IJMPB....	International Journal of Modern Physics B
-....IJMPB....	International Journal Of Modern Physics B
 ....IJMPC....	International Journal of Modern Physics C
-....IJMPC....	International Journal Of Modern Physics C
 ....IJMPD....	International Journal of Modern Physics D
-....IJMPD....	International Journal Of Modern Physics D
 ....IJMPE....	International Journal of Modern Physics E
 ....IJMPE....	Int J Mod Phys E
 ....IJMSI....	International Journal of Mass Spectrometry and Ion Processes
@@ -1222,7 +1210,6 @@
 ....IJNMF....	International Journal for Numerical Methods in Fluids
 ....IJNMH....	International Journal of Numerical Methods for Heat & Fluid Flow
 ....IJNS.....	International Journal of Neural Systems
-....IJOE.....	Ieee Journal Of Oceanic Engineering
 ....IJOE.....	IEEE Journal of Oceanic Engineering
 ....IJOMS....	International Journal of Oral and Maxillofacial Surgery
 ....IJPAP....	Indian J Pure Ap Phy
@@ -1231,14 +1218,12 @@
 ....IJPM.....	International Journal of Polymeric Materials
 ....IJPR.....	International Journal of Production Research
 ....IJQC.....	International Journal of Quantum Chemistry
-....IJQC.....	International Journal Of Quantum Chemistry
 ....IJQE.....	IEEE Journal of Quantum Electronics
 ....IJRA.....	IEEE Journal of Robotics Automation
 ....IJRAI....	International Journal of Radiation Applications and Instrumentation D Nuclear Tracks and Radiation Measurements
 ....IJRB.....	International Journal of Radiation Biology
 ....IJRQS....	International Journal of Reliability, Quality and Safety Engineering
 ....IJRR.....	International Journal of Robotics Research
-....IJRR.....	International Journal Of Robotics Research
 ....IJRR.....	International Journal of Robotics Research Fall
 ....IJRS.....	International Journal of Remote Sensing
 ....IJRSP....	Indian Journal of Radio and Space Physics
@@ -1251,12 +1236,10 @@
 ....IJSSc....	International Journal of Systems Science
 ....IJSSD....	International Journal of Structural Stability and Dynamics
 ....IJSS.....	International Journal of Solids and Structures
-....IJSTQ....	Ieee Journal Of Selected Topics In Quantum Electronics
+....IJSTQ....	IEEE Journal of Selected Topics in Quantum Electronics
 ....IJT......	International Journal of Thermophysics
-....IJT......	International Journal Of Thermophysics
 ....IJTJE....	International Journal of Turbo Jet Engines
 ....IJTP.....	International Journal of Theoretical Physics
-....IJTP.....	International Journal Of Theoretical Physics
 ....ILCSM....	IEEE LCS Magazine
 ....IllOB....	Bulletin of the Astronomical Observatory of the University of Illinois
 ....ILTS.....	IEEE LTS
@@ -1271,7 +1254,6 @@
 ....IMEP.....	Institution Mechanical Engineers Proceedings Mechanical Engineering Science
 ....IMEPK....	IME Proceedings. Part K: Journal of Multibody Dynamics
 ....IMeRv....	International Metals Reviews
-....IMGWL....	Ieee Microwave And Guided Wave Letters
 ....IMGWL....	IEEE Microwave and Guided Wave Letters
 ....ImRv.....	Immunological Reviews
 ....IMRv.....	International Materials Reviews
@@ -1327,7 +1309,7 @@
 ....IPCSV....	IEE Proceedings, Part I: Communications, Speech and Vision
 ....IPCTA....	IEE Proceedings D: Control Theory Applications
 ....IPCTA....	IEE Proceedings, Part D: Control Theory and Applications
-....IPECS....	Iee Proceedings-circuits Devices And Systems
+....IPECS....	Iee Proceedings-circuits Devices and Systems
 ....IPECS....	IEE Proceedings G: Electronics Circuits and Systems
 ....IPEPA....	IEE Proceedings B: Electric Power Applications
 ....IPGTD....	IEE Proceedings C: Generation Transmission Distribution
@@ -1355,9 +1337,8 @@
 ....IsJT.....	Israel Journal of Technology
 ....ISKZ.....	Issledovaniya Solntsa i Krasnykh Zvezd
 ....IsMTD....	Issledovaniia Mekhanike i Teploobmenu Dvukhfaznykh Sred
-....ISPL.....	Ieee Signal Proc Let
+....ISPL.....	IEEE Signal Proc Let
 ....ISPM.....	IEEE Signal Processing Magazine
-....ISPM.....	Ieee Signal Proc Mag
 ....IsRvC....	Istanbul University Faculty Science Review Serie C
 ....ISRv.....	Interdisciplinary Science Reviews
 ....IsSRT....	Israel Space Research and Technology Information Bulletin
@@ -1368,13 +1349,9 @@
 ....ITAC.....	IEEE Transactions on Automatic Control
 ....ITAES....	IEEE Transactions on Aerospace and Electronic Systems
 ....ITAES....	IEEE Transactions on Aerospace Electronic Systems
-....ITAP.....	Ieee Antennas Propag
 ....ITAP.....	IEEE Transactions on Antennas and Propagation
-....ITAS.....	Ieee Transactions On Applied Superconductivity
 ....ITAS.....	IEEE Transactions on Applied Superconductivity
-....ITASS....	IEEE Transactions on Acoustics Speech and Signal Processing
 ....ITASS....	IEEE Transactions on Acoustics, Speech, and Signal Processing
-....ITBE.....	Ieee Transactions On Biomedical Engineering
 ....ITBE.....	IEEE Transactions on Biomedical Engineering
 ....ITB......	IEEE Transactions on Broadcasting
 ....ITCAD....	IEEE Transactions on Computer Aided Design
@@ -1384,54 +1361,47 @@
 ....ITCmp....	IEEE Transactions on Computers
 ....ITCom....	IEEE Transactions on Communications
 ....ITCS.....	IEEE Transactions on Circuits and Systems
-....ITCS.....	Ieee Transactions On Circuits And Systems I-fundamental Theory And Applications
-....ITCS.....	Ieee Transactions On Circuits And Systems Ii-analog And Digital Signal Processing
+....ITCS.....	IEEE Transactions on Circuits and Systems I-Fundamental Theory and Applications
+....ITCS.....	IEEE Transactions on Circuits and Systems II-Analog and Digital Signal Processing
 ....ITCS.....	IEEE Transactions on Circuits Systems
-....ITDEI....	Ieee Transactions On Dielectrics And Electrical Insulation
+....ITDEI....	IEEE Transactions on Dielectrics and Electrical Insulation
 ....ITED.....	IEEE Transactions on Electron Devices
 ....ITED.....	IEEE Transactions on Electronic Devices
 ....ITEdu....	IEEE Transactions on Education
 ....ITEI.....	IEEE Transactions on Electrical Insulation
 ....ITElC....	IEEE Transactions on Electromagnetic Compatibility
-....ITEM.....	Ieee Electr Insul M
 ....ITEM.....	IEEE Transactions on Engineering Management
 ....ITEnC....	IEEE Transactions on Energy Conversion
 ....ITGE.....	IEEE Transactions on Geoscience Electronics
 ....ITGRS....	IEEE Transactions on Geoscience and Remote Sensing
-....ITIA.....	Ieee Transactions On Industry Applications
 ....ITIA.....	IEEE Transactions on Industry Applications
 ....ITIEC....	IEEE Transactions on Industrial Electronics and Control Instrumentation
-....ITIE....	Ieee T Ind Electron
 ....ITIE.....	IEEE Transactions on Industrial Electronics
 ....ITIM.....	IEEE Transactions on Instrumentation and Measurement
 ....ITIM.....	IEEE Transactions on Instrumentation Measurement
-....ITIP.....	Ieee Transactions On Image Processing
 ....ITIP.....	IEEE Transactions on Image Processing
 ....ITIT.....	IEEE Transactions on Information Theory
 ....ITJSE....	Indian Institute of Technology Journal on Section Engineering Technology
 ....ITM......	IEEE Transactions on Magnetics
-....ITMI.....	Ieee Transactions On Medical Imaging
+....ITMI.....	IEEE Transactions on Medical Imaging
 ....ITMTT....	IEEE Transactions on Microwave Theory and Techniques
 ....ITMTT....	IEEE Transactions on Microwave Theory Techniques
-....ITNN.....	Ieee Transactions On Neural Networks
 ....ITNN.....	IEEE Transactions on Neural Networks
 ....ITNS.....	IEEE Transactions on Nuclear Science
 ....IToBu....	Instituto de Tonantzintla Boletin
 ....ITPAM....	IEEE Transactions on Pattern Analysis and Machine Intelligence
 ....ITPAS....	IEEE Transactions on Power Apparatus Systems
-....ITPD.....	Ieee Transactions On Power Delivery
+....ITPD.....	IEEE Transactions on Power Delivery
 ....ITPE.....	IEEE Transactions on Power Electronics
 ....ITPHP....	IEEE Transactions on Parts Hybrids and Packaging
 ....ITPS.....	IEEE Transactions on Plasma Science
-....ITRA.....	Ieee Transactions On Robotics And Automation
 ....ITRA.....	IEEE Transactions on Robotics Automation
 ....ITR......	IEEE Transactions on Reliability
 ....ITSE.....	IEEE Transactions on Software Engineering
 ....ITSF.....	Integral Transforms and Special Functions
 ....ITSMC....	IEEE Transactions on Systems Man and Cybernetics
 ....ITSMC....	IEEE Transactions on Systems, Man, and Cybernetics
-....ITSM.....	Ieee T Semiconduct M
-....ITSP.....	Ieee Transactions On Signal Processing
+....ITSM.....	IEEE T Semiconduct M
 ....ITSP.....	IEEE Transactions on Signal Processing
 ....ITSU.....	IEEE Transactions on Sonics Ultrasonics
 ....ITUFF....	IEEE Transactions on Ultrasonics Ferroelectrics and Frequency Control
@@ -1477,7 +1447,6 @@
 ....IzYer....	Vsesoiuznaia Konferentsiia Kosmicheskim Lucham Yerevan Armenian SSR Aademiia Nauk SSSR Izvestiia Seriia Fizicheskaia
 ....JAAS.....	Journal of Analytical Atomic Spectrometry
 ....JAChS....	American Chemical Society Journal
-....JAChS....	Journal Of The American Chemical Society
 ....JAco.....	Journal d'Acoustique
 ....JACS.....	Journal of American Ceramic Society
 ....JAD......	Journal of Astronomical Data
@@ -1486,7 +1455,6 @@
 ....JAER.....	Journal of Agricultural Engineering Research
 ....JAerP....	Journal of Aerospace Power
 ....JAerS....	Journal of Aerosol Science
-....JAerS....	Journal Of Aerosol Science
 ....JAES.....	Journal of Audio Engineering Society
 ....JAfES....	Journal of African Earth Sciences
 ....JAF......	Journal des Astronomes Francais
@@ -1497,13 +1465,12 @@
 ....JAlg.....	Journal of Algebra
 ....JAlgo....	Journal of Algorithms
 ....JAllC....	Journal of Alloys and Compounds
-....JAllC....	Journal Of Alloys And Compounds
 ....JAMS.....	Journal of the American Mathematical Society
 ....JAMTP....	Journal of Applied Mechanics and Technical Physics
 ....JAnSc....	Journal of Astronautical Sciences
 ....JAnSc....	Journal of the Astronautical Sciences
 ....JApA.....	Journal of Astrophysics and Astronomy
-....JApCr....	Journal Of Applied Crystallography
+....JApCr....	Journal of Applied Crystallography
 ....JAPE.....	Journal of Applied Photographic Engineering
 ....JApEl....	Journal of Applied Electrochemistry
 ....JAPh.....	Journal of Applied Physiology
@@ -1550,10 +1517,9 @@
 ....JChPh....	Chemical Physics
 ....JChPh....	Journal of Chemical Physics
 ....JChS.....	Journal of Chromatographic Science
-....JChTh....	Journal Of Chemical Thermodynamics
+....JChTh....	Journal of Chemical Thermodynamics
 ....JChTh....	The Journal of Chemical Thermodynamics
 ....JCIS.....	Journal of Colloid and Interface Science
-....JCIS.....	Journal Of Colloid And Interface Science
 ....JCli.....	Journal of Climate
 ....JClim....	Journal of Climatology
 ....JClP.....	Journal of Clinical Pharmacology
@@ -1562,9 +1528,7 @@
 ....JCoAM....	Journal of Computational and Applied Mathematics
 ....JCoB.....	Journal of Computational Biology
 ....JCoCh....	Journal of Computational Chemistry
-....JCoCh....	Journal Of Computational Chemistry
 ....JCoMa....	Journal of Composite Materials
-....JCoMa....	Journal Of Composite Materials
 ....JCom.....	Journal of Communications
 ....JComp....	Journal of Complexity
 ....JCoN.....	Journal of Computational Neuroscience
@@ -1580,7 +1544,6 @@
 ....JDCS.....	Journal of Dynamical and Control Systems
 ....JDDE.....	Journal of Dynamics and Differential Equations
 ....JDE......	Journal of Differential Equations
-....JDE......	Journal Of Differential Equations
 ....JDR......	Journal of Dairy Research
 ....JDST.....	Journal of Dispersion Science and Technology
 ....JEAS.....	Journal of Engineering and Applied Sciences
@@ -1595,7 +1558,6 @@
 ....JElM.....	Journal of Electronics Manufacturing
 ....JElS.....	Journal of the Electrochemical Society
 ....JEMat....	Journal of Electronic Materials
-....JEMat....	Journal Of Electronic Materials
 ....JEMT.....	Journal of Electron Microscopy Technique
 ....JEner....	Journal of Energy
 ....JEngM....	Journal of Engineering and Mechanics
@@ -1605,7 +1567,6 @@
 ....JenRv....	Jena Review
 ....JEnvS....	Journal of Environmental Sciences
 ....JESRP....	Journal of Electron Spectroscopy and Related Phenomena
-....JESRP....	Journal Of Electron Spectroscopy And Related Phenomena
 ....JETh.....	Journal of Engineering and Thermophysics
 ....JETh.....	Journal of Engineering Thermophysics
 ....JETP.....	Journal of Experimental and Theoretical Physics
@@ -1620,7 +1581,6 @@
 ....JFM......	Journal of Fluid Mechanics
 ....JFS......	Journal of Fluids and Structures
 ....JFuA.....	Journal of Functional Analysis
-....JFuA.....	Journal Of Functional Analysis
 ....JGCD.....	Journal Guidance Control Dynamics
 ....JGCD.....	Journal of Guidance, Control, and Dynamics
 ....JGG......	Journal Geomagnetism Geoelectricity
@@ -1656,7 +1616,7 @@
 ....JJAPR....	Japanese Journal of Applied Physics Regular Papers Short Notes and Review Papers
 ....JJAPS....	Japanese Journal of Applied Physics Supplement
 ....JKAS.....	Journal of Korean Astronomical Society
-....JKPS.....	Journal Of The Korean Physical Society
+....JKPS.....	Journal of the Korean Physical Society
 ....JKTR.....	Journal of Knot Theory and its Ramifications
 ....JLasA....	Journal of Laser Applications
 ....JLCMe....	Journal of Laboratory and Clinical Medicine
@@ -1664,35 +1624,30 @@
 ....JLMS.....	Journal of the London Mathematical Society
 ....JLTP.....	Journal of Low Temperature Physics
 ....JLTP.....	Journal of Low Temperature Physics 
-....JLTP.....	Journal Of Low Temperature Physics
-....JLum.....	Journal Of Luminescence
+....JLum.....	Journal of Luminescence
 ....JLwT.....	Journal of Lightwave Technology
 ....JMAA.....	Journal of Mathematical Analysis and Applications
-....JMAA.....	Journal Of Mathematical Analysis And Applications
 ....JMAA.....	Journal of Mathematical Analysis Applications
 ....JMaCh....	Journal of Mathematical Chemistry
 ....JMagR....	Journal of Magnetic Resonance
 ....JMA......	Journal of Multivariate Analysis
 ....JMatR....	Journal of Materials Research
 ....JMatS....	Journal of Materials Science
-....JMatS....	Journal Of Materials Science
 ....JMBio....	Journal of Molecular Biology
 ....JMBM.....	Journal of Mechanical Behavior and Materials
 ....JMCh.....	Journal of Materials Chemistry
-....JMCh.....	Journal Of Materials Chemistry
 ....JMecA....	Journal de Mecanique Appliquee
 ....JMecE....	Journal of Mechanical and Engineering Science
 ....JMec.....	Journal de Mecanique
 ....JMecT....	Journal de Mecanique Theorique et Appliquee
 ....JMemS....	Journal of Microelectromechanical Systems
-....JMemS....	Journal Of Microelectromechanical Systems
 ....JMeOp....	Jemna Mechanika Optika
 ....JMES.....	Journal of Materials and Energy Systems
 ....JMET.....	Journal of Medical Engineering & Technology
 ....JMet.....	Journal of Metals
 ....JMFM.....	Journal of Mathematical Fluid Mechanics
 ....JMic.....	Journal of Microscopy
-....JMic.....	Journal Of Microscopy-oxford
+....JMic.....	Journal of Microscopy-oxford
 ....JMiMi....	Journal of Micromechics and Microengineering
 ....JMiMi....	Journal of Micromechnics and Microengineering
 ....JMIV.....	Journal of Mathematical Imaging and Vision
@@ -1701,15 +1656,13 @@
 ....JMoEl....	Journal of Molecular Electronics
 ....JMolE....	Journal of Molecular Evolution
 ....JMOp.....	Journal of Modern Optics
-....JMOp.....	Journal Of Modern Optics
 ....JMoSp....	Journal of Molecular Spectroscopy
 ....JMoSt....	Journal of Molecular Structure
-....JMoSt....	Journal Of Molecular Structure
 ....JMP......	Journal of Mathematical Physics
 ....JMPMS....	Journal of Materials Processing and Manufacturing Science
 ....JMPS.....	Journal of Mathematical and Physical Sciences
 ....JMPSo....	Journal of Mechanics Physics and Solids
-....JMPSo....	Journal Of The Mechanics And Physics Of Solids
+....JMPSo....	Journal of the Mechanics and Physics of Solids
 ....JMPsy....	Journal of Mathematical Psychology
 ....JMSB.....	Journal of Macromolecular Science, Part B: Physics
 ....JMSC.....	Journal of Macromolecular Science, Part C: Reviews in Macromolecular Chemistry and Physics
@@ -1723,11 +1676,9 @@
 ....JMTAS....	Journal de Mecanique Theorique et Appliquee Supplement
 ....JNav.....	Journal of Navigation
 ....JNCS.....	Journal of Non Crystalline Solids
-....JNCS.....	Journal Of Non-crystalline Solids
 ....JNE......	Journal of Nondestructive Evaluation
 ....JNET.....	Journal of Non Equilibrium Thermodynamics
 ....JNET.....	Journal of Non-Equilibrium Thermodynamics
-....JNET.....	Journal Of Non-equilibrium Thermodynamics
 ....JNeur....	Journal of Neurochemistry
 ....JNIRE....	Journal NIRE
 ....JNLM.....	Journal of Non Linear Mechanics
@@ -1744,6 +1695,8 @@
 ....JOMS.....	Journal of Oral and Maxillofacial Surgery
 ....JOp......	Journal d'Optique
 ....JOpt.....	Journal of Optics
+....JOptA....	Journal of Optics A Pure Applied Optics
+....JOptB....	Journal of Optics B Quantum Semiclassical Optics
 ....JOptT....	Journal of Optical Technology
 ....JOR......	Journal of Oral Rehabilitation
 ....JORS.....	Journal of the Operational Research Society
@@ -1752,13 +1705,12 @@
 ....JPal.....	Journal of Paleontology
 ....JPApS....	Journal of Pure Applied Sciences
 ....JPAS.....	Journal of Practical Applications in Space
-....JPCA.....	Journal Of Physical Chemistry A
+....JPCA.....	Journal of Physical Chemistry A
 ....JPCM.....	Journal of Physics: Condensensed Matter
 ....JPCM.....	Journal of the Physics of Condensed Matter
 ....JPCRD....	Journal of Physical and Chemical Reference Data
 ....JPCRD....	Journal of Physical and Chemical Reference Data 
 ....JPCS.....	Journal of Physics and Chemistry of Solids
-....JPCS.....	Journal Of Physics And Chemistry Of Solids
 ....JPDC.....	Journal of Parallel and Distributed Computing
 ....JPDC.....	Journal of Parallel Distributed Computing
 ....JPet.....	Journal of Petrology
@@ -1767,7 +1719,7 @@
 ....JPhB.....	Journal of Physics B 
 ....JPhB.....	Journal of Physics B Atomic Molecular Physics
 ....JPhCh....	Journal of Physical Chemistry
-....JPhCh....	Journal Of Physical Chemistry B
+....JPhCB....	Journal of Physical Chemistry B
 ....JPhC.....	Journal of Physics C Solid State Physics
 ....JPhD.....	Journal of Physics D Applied Physics
 ....JPhD.....	Journal of Physics D: Applied Physics
@@ -1810,7 +1762,6 @@
 ....JRoS.....	Journal of Robotic Systems
 ....JRPC.....	Journal of Reinforced Plastics and Composites
 ....JRSp.....	Journal of Raman Spectroscopy
-....JRSp.....	Journal Of Raman Spectroscopy
 ....JRSSD....	Journal of the Royal Statistical Society: Series D (The Statistician)
 ....JSAED....	Journal of Strain Analysis for Engineering Design
 ....JSAPJ....	Japan Society of Air Pollution Journal
@@ -1839,7 +1790,6 @@
 ....JSM......	Journal of Structural Mechanics
 ....JSMSJ....	Japan Society of Materials Science Journal
 ....JSP......	Journal of Statistical Physics
-....JSP......	Journal Of Statistical Physics
 ....JSpRo....	Journal of Spacecraft and Rockets
 ....JSPS.....	Japan Society of Promotion Science
 ....JSpT.....	Journal of Spacecraft Technology
@@ -1866,7 +1816,7 @@
 ....JVE......	Journal of Vibration Engineering
 ....JVGR.....	Journal of Volcanology and Geothermal Research
 ....JVSTB....	Journal of Vacuum Science and Technology B
-....JVST.....	Journal of Vacuum Science and Technology A
+....JVSTA....	Journal of Vacuum Science and Technology A
 ....JVST.....	Journal of Vacuum Science Technology
 ....JWasA....	Journal of the Washington Academy of Sciences
 ....JXST.....	Journal of X-Ray Science and Technology
@@ -1952,7 +1902,6 @@
 ....LLabJ....	Lincoln Laboratory Journal
 ....LLabJ....	The Lincoln Laboratory Journal
 ....LMaPh....	Letters in Mathematical Physics
-....LMaPh....	Letters In Mathematical Physics
 ....LNEn.....	Berlin Springer Verlag Lecture Notes in Engineering
 ....LNES.....	Berlin Springer Verlag Lecture Notes in Earth Sciences
 ....LNM......	Berlin Springer Verlag Lecture Notes in Mathematics
@@ -1964,7 +1913,6 @@
 ....LOEle....	L'Onde Electrique
 ....LowOB....	Lowell Observatory Bulletin
 ....LPB......	Laser and Particle Beams
-....LPB......	Laser And Particle Beams
 ....LPICo....	LPI Contributions
 ....LPlaC....	Observatorio Astronomico de La Plata Circular
 ....LPlaS....	Observatorio Astronomico de La Plata Separata Astronomica
@@ -2198,13 +2146,12 @@
 ....M&P......	Moon and Planets
 ....M&PS.....	Meteoritics and Planetary Science
 ....MROVG....	Munich R Oldenbourg Verlag GmbH
-....MRSBu....	Mrs Bulletin
 ....MRSBu....	MRS Bulletin
 ....MSAIQ....	Societa Astronomica Italiana Memorie Quarter
 ....MSAIS....	Societa Astronomica Italiana Memorie Supplement
 ....MSCTN....	Meteorological Satellite Center Technical Note
-....MSEng....	Materials Science And Engineering A-structural Materials Properties
-....MSEng....	Materials Science And Engineering B-solid State Materials For Advanced
+....MSEng....	Materials Science and Engineering A-structural Materials Properties
+....MSEng....	Materials Science and Engineering B-solid State Materials For Advanced
 ....MSEng....	Materials Science Engineering
 ....MSF......	Materials Science Forum
 ....MSMFR....	Milano Seminario Matematico e Fisico Rendiconti
@@ -2216,7 +2163,7 @@
 ....Msngr....	The Messenger
 ....MSRSL....	Memoires of the Societe Royale des Sciences de Liege
 ....MSSP.....	Mechanical Systems and Signal Processing
-....MSTec....	Materials Science And Technology
+....MSTec....	Materials Science and Technology
 ....MTACI....	Magyar Tudomanyos Akademia Csillagvizsgalo Intezetenek koezlemenyei
 ....MTObM....	Metallovedenie i Termicheskaia Obrabotka Metallov
 ....MTPMM....	Metallurgical Transactions Physical Metallurgy Materials Science
@@ -2256,7 +2203,7 @@
 ....NBSTN....	National Bureau of Standards Technical Note
 ....NCE......	Noise Control Engineering Journal
 ....NCimA....	Nuovo Cimento A Serie
-....NCimA....	Nuovo Cimento Della Societa Italiana Di Fisica A-nuclei Particles And Fields
+....NCimA....	Nuovo Cimento Della Societa Italiana Di Fisica A-nuclei Particles and Fields
 ....NCimB....	Il Nuovo Cimento B
 ....NCimB....	Nuovo Cimento B Serie
 ....NCimC....	Il Nuevo Cimento C
@@ -2303,7 +2250,7 @@
 ....NRAOR....	National Radio Astronomy Observatory Reprints
 ....NROp.....	Nouvelle Revue d'Optique
 ....NRRv.....	Naval Research Reviews
-....NSE......	Nuclear Science And Engineering
+....NSE......	Nuclear Science and Engineering
 ....NSE......	Nuclear Science Engineering
 ....NSpEc....	Networks and Spatial Economics
 ....NTCo.....	Nondestructive Testing Communications
@@ -2331,7 +2278,7 @@
 ....NVS......	Nachrichtenblatt der Vereinigung der Sternfreunde
 ....NVVSR....	Nederlandse Vereiniging voor Weer en Sterrenkunde Werkgroep veranderlijke Sterren Reports
 ....NW.......	Naturwissenschaften
-....NYASA....	Annals Of The New York Academy Of Sciences
+....NYASA....	Annals of the New York Academy of Sciences
 ....NYASA....	New York Academy Sciences Annals
 ....NZJS.....	New Zealand Journal of Science
 ....OAP......	Odessa Astronomical Publications
@@ -2369,7 +2316,7 @@
 ....Optik....	Optik
 ....OptLE....	Optics and Lasers in Engineering
 ....OptL.....	Optics Letters
-....OptLT....	Optics And Laser Technology
+....OptLT....	Optics and Laser Technology
 ....OptLT....	Optics Laser Technology
 ....OptMa....	Optical Materials
 ....OptN.....	Optics News
@@ -2378,17 +2325,16 @@
 ....OptSp....	Optic and Spectroscopy
 ....OptSp....	Optics and Spectroscopy
 ....OQE......	Optical and Quantum Electronics
-....OQE......	Optical And Quantum Electronics
 ....OrGeo....	Organic Geochemistry
 ....Orion....	Orion
 ....OrLi.....	Origins of Life
 ....OrNav....	Ortung und Navigation
 ....ORROE....	Occasional Reports of the Royal Observatory Edinburgh
-....OSAJB....	Journal of the Optical Society of America B
-....OSAJB....	Optical Society of America Journal B Optical Physics
-....OSAJI....	Optical Society of America Journal Optics and Image Science
-....OSAJ.....	Journal of the Optical Society of America A
-....OSAJ.....	Optical Society of America Journal
+....JOSAB....	Journal of the Optical Society of America B
+....JOSAB....	Optical Society of America Journal B Optical Physics
+....JOSAB....	Optical Society of America Journal Optics and Image Science
+....JOSA.....	Journal of the Optical Society of America A
+....JOSA.....	Optical Society of America Journal
 ....OsCar....	Osteoarthritis and Cartilage
 ....OSJaJ....	Oceanographical Society of Japan Journal
 ....OslR.....	Institute of Theoretical Astrophysics Blindern Oslo Reports
@@ -2401,7 +2347,7 @@
 ....OzSE.....	Ozone: Science & Engineering
 ....PAAS.....	Publications of the American Astronomical Society
 ....PABei....	Progress in Astronomy
-....PAB......	Publications of The Astrophysics Branch Ottawa
+....PAB......	Publications of the Astrophysics Branch Ottawa
 ....PadCR....	Osservatorio Astronomico di Padova Comunicazioni e Rassegne
 ....PADEU....	Publications of the Astronomy Deparment of the Eotvos Lorand University
 ....PAIB.....	Publications of the Astronomy Institute of Bonn
@@ -2412,11 +2358,9 @@
 ....PalOc....	Paleoceanography
 ....PAMS.....	Proceedings of the American Mathematical Society
 ....PAN......	Physics of Atomic Nuclei
-....PApCh....	Pure And Applied Chemistry
+....PApCh....	Pure and Applied Chemistry
 ....PApCh....	Pure & Applied Chemistry
 ....PApGe....	Pure and Applied Geophysics
-....PApGe....	Pure And Applied Geophysics
-....PApO.....	Journal of Optics A: Pure Applied Optics
 ....PApOp....	Pure Applied Optics
 ....PA.......	Popular Astronomy
 ....Paras....	Parasitology
@@ -2443,17 +2387,15 @@
 ....PBrn.....	Publications of the Astronomical Institute of the University of Borneo
 ....PCat.....	Publications of Osservatorio Astrofisico di Catania
 ....PCCP.....	Physical Chemistry Chemical Physics (Incorporating Faraday Transactions)
+....PCE......	Physics and Chemistry of Earth
 ....PCinO....	Publications of the Cincinnati Observatory
 ....PCL......	Physics and Chemistry of Liquids
-....PCL......	Physics And Chemistry Of Liquids
 ....PCM......	Physics and Chemistry of Minerals
-....PCM......	Physics And Chemistry Of Minerals
 ....PCooO....	Publications of the Cook Observatory
 ....PCopO....	Publikationer og mindre Meddeler fra Kobenhavns Observatorium
 ....PcPb.....	Photochemistry and Photobiology
 ....PCPhy....	Plant and Cell Physiology
 ....PCPP.....	Plasma Chemistry and Plasma Processing
-....PCPP.....	Plasma Chemistry And Plasma Processing
 ....PCZNN....	Politechnika Czestochowska Zeszyty Naukowe Nauki Techniczne Mechanika
 ....PDAA.....	Publications of the Department of Astronomy Austin Texas
 ....PDAO.....	Publications of the Dominion Astrophysical Observatory Victoria
@@ -2483,14 +2425,12 @@
 ....PGZNM....	Politechnika Gdanska Zeszyty Naukowe Mechanika
 ....PhASp....	Physics and Astrophysics from Spacelab
 ....PhB......	Physics Bulletin
-....PhChE....	Physics and Chemistry of Earth
 ....PhChH....	PhysicoChemical Hydrodynamics
 ....PhDT.....	Ph.D. Thesis
 ....PhFlB....	Physics of Fluids B
 ....PhFl.....	Physics of Fluids
-....PhFl.....	Physics Of Fluids
 ....PhFl.....	Physics of Fluids A
-....PhiJR....	Philips Journal Of Research
+....PhiJR....	Philips Journal of Research
 ....PhiJR....	Philips Journal Research
 ....PhInt....	Photo Interpretation
 ....PhiRR....	Philips Research Reports
@@ -2556,12 +2496,12 @@
 ....PlRp.....	Planetary Report
 ....PLyoO....	Publications de l'Observatoire de Lyon
 ....PMad.....	Publicacion Facultad de Ciencias Madrid
-....PMagA....	Philosophical Magazine A-physics Of Condensed Matter Structure Defects And
+....PMagA....	Philosophical Magazine A-physics of Condensed Matter Structure Defects And
 ....PMagA....	Philosophical Magazine, Part A
-....PMagB....	Philosophical Magazine B-physics Of Condensed Matter Statistical Mechanics
+....PMagB....	Philosophical Magazine B-physics of Condensed Matter Statistical Mechanics
 ....PMagL....	Philosophical Magazine Letters
 ....PManO....	Publications of the Manila Observatory
-....PMB......	Physics In Medicine And Biology
+....PMB......	Physics in Medicine and Biology
 ....PMB......	Physics Medicine and Biology
 ....PMcCO....	Publications of the Leander McCormick Observatory
 ....PMetR....	Papers in Meteorological Research
@@ -2619,13 +2559,12 @@
 ....PPTEn....	Polymer-Plastics Technology and Engineering
 ....PPTE.....	Periodica Polytechnica Transportation Engineering
 ....PQE......	Progress in Quantum Electronics
-....PQE......	Progress In Quantum Electronics
 ....PraAc....	Prague Academia
 ....PrAA.....	Progress in Astronautics and Aeronautics
 ....PrAeS....	Progress in Aerospace Sciences
 ....PrAiA....	Problemy Arktiki i Antarktiki
 ....Prama....	Pramana
-....Prama....	Pramana-journal Of Physics
+....Prama....	Pramana-Journal of Physics
 ....PraP.....	Publications of the Astronomical Institute of the Charles University
 ....PrAtO....	Leningrad Gidrometeoizdat Sovremennye Problemy Atmosfernoi Optiki
 ....PrBio....	Problemy Bioniki
@@ -2652,12 +2591,12 @@
 ....PROE.....	Publications of the Royal Observatory of Edinburgh
 ....ProTe....	Promyshlennaia Teplotekhnika
 ....ProTe....	Promyshlennaia Teplotekhnika 
-....PrPh.....	Fortschritte Der Physik-progress Of Physics
+....PrPh.....	Fortschritte Der Physik-progress of Physics
 ....PrPh.....	Progress of Physics/Fortschritte der Physik
 ....PrPNP....	Progress in Particle and Nuclear Physics
 ....PrPro....	Problemy Prochnosti
 ....PrSP.....	Problemy Sluchainogo Poiska
-....PrSS.....	Progress In Surface Science
+....PrSS.....	Progress in Surface Science
 ....PrTE.....	Problemy Tekhnicheskoi Elektrodinamiki
 ....PrTGE....	Problemy Teorii Gravitatsii i Elementarnykh Chastits
 ....PrTPT....	Problemy Teploenergetiki i Prikladnoi Teplofiziki
@@ -2666,7 +2605,7 @@
 ....PSAIL....	Pubblicazioni della Stazione Astronomica Internazionale di Latitudine
 ....PSCDS....	Publication Speciale du Centre de Donnees Stellaires
 ....PSci.....	Pour la Science
-....PSEBM....	Proceedings of The Society for Experimental Biology and Medicine
+....PSEBM....	Proceedings of the Society for Experimental Biology and Medicine
 ....JPSJ.....	Journal of the Physical Society of Japan
 ....JPSJS....	Journal of the Physical Society of Japan Supplement
 ....JPSJ.....	Physical Society of Japan Journal
@@ -2684,11 +2623,8 @@
 ....PSZNM....	Politechnika Slaska Zeszyty Naukowe Mechanika
 ....PTarO....	Publications of the Tartuskoj Astrofizica Observatory
 ....PTasO....	Publications of the Tashkent Astronomical Observatory
-....PThPh....	Progress of theoretical physics
 ....PThPh....	Progress of Theoretical Physics
-....PThPh....	Progress Of Theoretical Physics
 ....PThPS....	Progress of Theoretical Physics Supplement
-....PThPS....	Progress Of Theoretical Physics Supplement
 ....PTMJ.....	Phase Transitions
 ....PTMJ.....	Phase Transitions: A Multinational Journal
 ....PUAMA....	Poznan Uniwersytet im Adama Mickiewicza Seria Akustyka
@@ -2713,9 +2649,8 @@
 ....PZ.......	Peremennye Zvezdy
 ....PZP......	Peremennye Zvezdy Prilozhenie
 ....QApMa....	Quarterly of Applied Mathematics
-....QApMa....	Quarterly Of Applied Mathematics
 ....QJMAM....	Quarterly Journal of Mechanics and Applied Mathematics
-....QJMat....	Quarterly Journal Of Mathematics
+....QJMat....	Quarterly Journal of Mathematics
 ....QJMat....	The Quarterly Journal of Mathematics
 ....QJRAS....	Quarterly Journal of the Royal Astronomical Society
 ....QJRMS....	Quarterly Journal of the Royal Meteorological Society
@@ -2726,7 +2661,6 @@
 ....QUnJ.....	Qinghua University Journal
 ....QuOpt....	Quantum Optics
 ....QuRes....	Quaternary Research
-....QuSOp....	Journal of Optics B: Quantum Semiclassical Optics
 ....QuSOp....	Quantum and Semiclassical Optics
 ....RadEf....	Radiation Effects
 ....Radel....	Radioelectronika
@@ -2758,7 +2692,6 @@
 ....ReAer....	La Recherche Aerospatiale
 ....Rech.....	La Recherche
 ....REDS.....	Radiation Effects and Defects in Solids
-....REDS.....	Radiation Effects And Defects In Solids
 ....ReNEv....	Research in Nondestructive Evaluation
 ....Renor....	Renormalization
 ....RERE.....	Radiotekhnika i Elektronika Radio Engineering Electronic Physics
@@ -2839,20 +2772,22 @@
 ....RScI.....	Review of Scientific Instruments
 ....RSEMS....	Remote Sensing Electro Magnetic Spectrum
 ....RSEnv....	Remote Sensing of Environment
-....RSEPS....	Proceedings Of The Royal Society Of Edinburgh Section A-mathematics
+....RSEPS....	Proceedings of the Royal Society of Edinburgh Section A-mathematics
 ....RSEPS....	Royal Society of Edinburgh Proceedings Section
-....RSPSA....	Proceedings Of The Royal Society Of London Series A-mathematical Physical And
+....RSPSA....	Proceedings of the Royal Society of London Series A
+....RSPSA....	Proceedings of the Royal Society of London Series A-mathematical Physical and Engineering Sciences
 ....RSPSA....	Royal Society of London Proceedings Series A
-....RSPSB....	Proceedings Of The Royal Society Of London Series B-biological Sciences
+....RSPSB....	Proceedings of the Royal Society of London Series B
+....RSPSB....	Proceedings of the Royal Society of London Series B-biological Sciences
 ....RSPSB....	Royal Society of London Proceedings Series B
 ....RSPS.....	Royal Society of London Proceedings Series I
 ....RSPTA....	Philosophical Transactions: Biological Sciences
 ....RSPTA....	Philosophical Transactions of the Royal Society of London A
-....RSPTA....	Philosophical Transactions Of The Royal Society Of London Series A-mathematical
+....RSPTA....	Philosophical Transactions of the Royal Society of London Series A-mathematical
 ....RSPTA....	Royal Society of London Philosophical Transactions Series A
 ....RSPTB....	Philosophical Transactions: Mathematical, Physical and Engineering Sciences
 ....RSPTB....	Philosophical Transactions of the Royal Society of London B
-....RSPTB....	Philosophical Transactions Of The Royal Society Of London Series B-biological
+....RSPTB....	Philosophical Transactions of the Royal Society of London Series B-biological
 ....RSPTB....	Royal Society of London Philosophical Transactions Series B
 ....RSPT.....	Philosophical Transactions Series I
 ....RSQ......	Remote Sensing Quarterly
@@ -2874,7 +2809,6 @@
 ....RvGSP....	Reviews of Geophysics and Space Physics
 ....RvMad....	Revista Real Acad. Ciencias Exact. Fis. Nat. Madrid
 ....RvMaP....	Reviews in Mathematical Physics
-....RvMaP....	Reviews In Mathematical Physics
 ....RvMA.....	Reviews of Modern Astronomy
 ....RvMin....	Reviews of Mineralogy
 ....RvMP.....	Reviews of Modern Physics
@@ -2926,9 +2860,9 @@
 ....ScTEn....	Science of the Total Environment
 ....Sc&Te....	Sciences et Techniques
 ....SDia.....	Seminars in Dialysis
-....SeAcB....	Sensors And Actuators B-chemical
+....SeAcB....	Sensors and Actuators B-chemical
 ....SeAc.....	Sensors and Actuators
-....SeAc.....	Sensors And Actuators A-physical
+....SeAc.....	Sensors and Actuators A-physical
 ....SECM.....	Science and Engineering of Composite Materials
 ....Sedim....	Sedimentology
 ....SEEJ.....	Society of Environmental Engineers Journal
@@ -2943,7 +2877,6 @@
 ....SGeo.....	Surveys in Geophysics
 ....SHEP.....	Surveys in High Energy Physics
 ....ShWav....	Shock Waves
-....SIAMR....	Siam Review
 ....SIAMR....	SIAM Review
 ....SIAM.....	Society of Industrial and Applied Mathematics
 ....SIBAN....	Sofia Izdatel Bolgarskoi Akademii Nauk
@@ -2960,14 +2893,13 @@
 ....Situ.....	Situ
 ....SJAM.....	SIAM Journal of Applied Mathematics
 ....SJAM.....	SIAM Journal on Applied Mathematics
-....SJAM.....	Siam Journal On Mathematical Analysis
+....SJAM.....	SIAM Journal on Mathematical Analysis
 ....SJCLI....	The Scandinavian Journal of Clinical and Laboratory Investigation
 ....SJCO.....	SIAM Journal of Control Optimization
-....SJCO.....	Siam Journal On Control And Optimization
+....SJCO.....	SIAM Journal on Control and Optimization
 ....SJMA.....	SIAM Journal of Mathematical Analysis
 ....SJMet....	Scandinavian Journal of Metallurgy
 ....SJNA.....	SIAM Journal of Numerical Analysis
-....SJNA.....	Siam Journal On Numerical Analysis
 ....SlaOb....	Slaboproudy Obzor
 ....SMArc....	Solid Mechanics Archives
 ....SMaS.....	Smart Materials Structure
@@ -3012,7 +2944,6 @@
 ....SpWdW....	Space World W
 ....SpWdY....	Space World Y
 ....SRL......	Surface Review and Letters
-....SRL......	Surface Review And Letters
 ....SRMO.....	Specula Regia Monachiensi Observationes astronomicae
 ....SRToh....	Sci. Rep. Tohoku Univ. Eighth Ser.
 ....SRT......	Skin Research and Technology
@@ -3041,7 +2972,6 @@
 ....SS&T.....	Separation Science and Technology
 ....SSWP.....	Springer Verlag Springer Series on Wave Phenomena
 ....StAM.....	Studies in Applied Mathematics
-....StAM.....	Studies In Applied Mathematics
 ....StARe....	University Observatory St. Andrews Scotland Reprints
 ....StCeF....	Studii si Cercetari de Fizica
 ....StCeM....	Studii si Cercetari Matematice
@@ -3071,7 +3001,7 @@
 ....SuCT.....	Surface &amp; Coatings Technology
 ....SuMi.....	Superlattices and Microstructures
 ....Sunwo....	Sunworld
-....SurIA....	Surface And Interface Analysis
+....SurIA....	Surface and Interface Analysis
 ....SurSc....	Surface Science
 ....SurSR....	Surface Science Reports
 ....SurSS....	Surface Science Spectra
@@ -3112,7 +3042,7 @@
 ....TecN.....	Technical News
 ....TecRv....	Technology Review
 ....Tecto....	Tectonics
-....Tecto....	Tectonophysics
+....Tectp....	Tectonophysics
 ....TeCu.....	Technology and Culture
 ....TekEl....	Tekhnicheskaia Elektrodinamika
 ....Telet....	Telettra S
@@ -3387,15 +3317,20 @@
 ....ZhPS.....	Zhurnal Prikladnoi Spektroskopii
 ....ZhTFi....	Zhurnal Tekhnicheskoi Fiziki
 ....ZiZa.....	Ziran Zazhi
-....ZKri.....	Zeitschrift Fur Kristallographie
+....ZK.......	Zeitschrift Fur Kristallographie
 ....ZMete....	Zeitschrift Meteorologie
 ....ZMetl....	Zeitschrift Fur Metallkunde
 ....ZMetl....	Zeitschrift Metallkunde
-....ZNatA....	Zeitschrift Fur Naturforschung Section A-a Journal Of Physical Sciences
+....ZNatA....	Zeitschrift Fur Naturforschung Section A-a Journal of Physical Sciences
 ....ZNatA....	Zeitschrift Naturforschung Teil A
-....ZNatB....	Zeitschrift Fur Naturforschung Section B-a Journal Of Chemical Sciences
+....ZNatB....	Zeitschrift Fur Naturforschung Section B-a Journal of Chemical Sciences
 ....ZNPFK....	Zhurnal Nauchnoi i Prikladnoi Fotografii i Kinematografii
-....ZPhy.....	Zeitschrift Physik D Atoms Molecules Clusters
+....ZPhy.....	Zeitschrift Physik 
+....ZPhy.....	Zeitschrift fur Physik 
+....ZPhyA....	Zeitschrift fur Physik A Hadrons and Nuclei
+....ZPhyB....	Zeitschrift fur Physik B Condensed Matter
+....ZPhyC....	Zeitschrift fur Physik C Particles and Fields
+....ZPhyD....	Zeitschrift fur Physik D Atoms Molecules Clusters
 ....Zprav....	Zpravodaj VZLU
 ....ZVMMF....	Zhurnal Vychislitel noi Matematiki i Matematicheskoi Fiziki
 ....ZVMMF....	Zhurnal Vychislitel'noi Matematiki i Matematicheskoi Fiziki 

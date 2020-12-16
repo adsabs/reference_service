@@ -50,7 +50,9 @@ class Querier(object):
             response = client().get(
                 url=self.endpoint,
                 headers={'Authorization': current_app.config.get('SERVICE_TOKEN', None) or request.headers.get('X-Forwarded-Authorization', request.headers.get('Authorization', ''))},
-                params=self.make_params(query))
+                params=self.make_params(query),
+                timeout=10
+            )
             current_app.logger.debug("Query executed in %s ms" % ((time.time() - start_time)*1000))
 
             # all non-200 responses
@@ -125,6 +127,17 @@ class Querier(object):
         # need the short bibstem only
         if 'bibstem' in raw_sol:
             raw_sol['bibstem'] = raw_sol.get('bibstem')[0]
+
+        # about 199 bibstems start off being published online only, without volume, having tmp for volume, and with eid
+        # later they are included in the volume of the publication, with page number that is different then eid, and correct volume
+        # see if we have one of those here and included the eid field, since some references use outdated eid
+        if 'identifier' in raw_sol:
+            bibcode_with_eid = next((b for b in
+                                     [i for i in raw_sol['identifier'] if len(i) == len(raw_sol['bibcode'])]
+                                     if 'tmp' in b), None)
+            if bibcode_with_eid:
+                # ('page', 14, 18, 'r', str)
+                raw_sol['eid'] = bibcode_with_eid[14:18].strip('.')
 
         # When you add query keys via resconfig, it's probably wise to add
         # them here, too

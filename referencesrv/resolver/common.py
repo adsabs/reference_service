@@ -1,3 +1,5 @@
+import traceback
+
 from flask import current_app
 
 class DeferredSourceMatcher(object):
@@ -50,6 +52,8 @@ class Evidences(object):
         self.labels = []
         # _score is cached; None means "not computed yet or invalid"
         self.score = None
+        self.min_score = current_app.config['EVIDENCE_SCORE_RANGE'][0]
+        self.max_score = current_app.config['EVIDENCE_SCORE_RANGE'][1]
 
     def __lt__(self, other):
         """
@@ -120,6 +124,19 @@ class Evidences(object):
         """
         return 'Evidences(%s)'%', '.join('%s=%s'%item for item in zip (self.labels, self.evidences))
 
+    def __add__(self, other):
+        """
+
+        :param other:
+        :return:
+        """
+        for ev in other.evidences:
+            assert self.min_score <= ev <= self.max_score
+        self.score = None
+        self.evidences += other.evidences
+        self.labels +=other.labels
+        return self
+
     def sum(self):
         """
 
@@ -145,7 +162,7 @@ class Evidences(object):
         :param label:
         :return:
         """
-        assert current_app.config['EVIDENCE_SCORE_RANGE'][0] <= evidence <= current_app.config['EVIDENCE_SCORE_RANGE'][1]
+        assert self.min_score <= evidence <= self.max_score
         self.score = None
         self.evidences.append(evidence)
         self.labels.append(label)
@@ -378,9 +395,19 @@ class Overflow(Error):
     It should be taken as "please try another, more specific hypothesis".
     """
 
+class OverflowOrNone(Error):
+    """
+    is rasided either if too many matches or no records come back from solr
+    """
+
 class Solr(Error):
     """
     is raised when solr returns an error.
+    """
+
+class Incomplete(Error):
+    """
+    is raised when parsed reference is incomplete.
     """
 
 def round_two_significant_digits(num):

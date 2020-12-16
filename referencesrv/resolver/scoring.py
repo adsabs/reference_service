@@ -20,20 +20,17 @@ def get_author_year_score_for_input_fields(result_record, hypothesis):
     """
     returns evidences based on just author and year.
 
-    For most sources, you should rather use get_basic_score_for_input_fields
-    -- see there for more information.
-    
-    :param result_record: 
+    :param result_record:
     :param hypothesis: 
     :return: 
     """
     input_fields = hypothesis.get_detail('input_fields')
 
-    evidences = Evidences()
-
     normalized_authors = hypothesis.get_detail('normalized_authors')
     if normalized_authors is None:
         normalized_authors = normalize_author_list(input_fields.get('author', ''))
+
+    evidences = Evidences()
 
     add_author_evidence(evidences,
         normalized_authors,
@@ -44,6 +41,103 @@ def get_author_year_score_for_input_fields(result_record, hypothesis):
     add_year_evidence(evidences,
         input_fields.get('year'),
         result_record.get('year'))
+
+    return evidences
+
+
+def get_author_year_pub_score_for_input_fields(result_record, hypothesis):
+    """
+    returns evidences based on just author, year and publication.
+
+    :param result_record:
+    :param hypothesis:
+    :return:
+    """
+    evidences = get_author_year_score_for_input_fields(result_record, hypothesis)
+
+    input_fields = hypothesis.get_detail("input_fields")
+
+    add_publication_evidence(evidences,
+        input_fields.get("pub", ""),
+        input_fields.get("bibstem",""),
+        input_fields.get("refstr", ""),
+        result_record.get("pub", ""),
+        result_record.get("bibcode", ""),
+        result_record.get("bibstem", ""))
+
+    return evidences
+
+
+def get_volume_page_score_for_input_fields(result_record, hypothesis):
+    """
+
+    :param result_record:
+    :param hypothesis:
+    :return:
+    """
+    input_fields = hypothesis.get_detail('input_fields')
+
+    evidences = Evidences()
+
+    # references can eliminate volume and include only page, or only volume can be included
+    # parser can not differentiate between if only page was included or only volume,
+    # so if there is only one value, do a reverse engineering, see if the page and or volume in ads 
+    # matches this one value, or if it can be matched in the ref_str
+    exist = bool('volume' in input_fields) + bool('page' in input_fields)
+
+    ads_volume = result_record.get('volume', '')
+    ads_page = result_record.get('page', '')
+
+    ref_str = input_fields.get('refstr', '')
+
+    ref_volume = ref_page = None
+
+    if exist == 0:
+        # see if ads_volume is in the ref_str
+        ref_volume = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
+        # see if ads_page is in the ref_str
+        ref_page = ads_page if re.search(r'(\b%s)' % ads_page, ref_str) else None
+    elif exist == 1:
+        if 'volume' in input_fields:
+            if input_fields['volume'] == ads_page:
+                ref_volume = ads_page
+                # see if ads_volume is in the ref_str
+                ref_page = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
+            elif input_fields['volume'] == ads_volume:
+                # volume matches, see if ads_page is in the ref_str
+                ref_volume = ads_volume
+                ref_page = ads_page if re.search(r'(\b%s)' % ads_page, ref_str) else None
+            else:
+                ref_volume = input_fields['volume']
+        elif 'page' in input_fields:
+            if input_fields['page'] == ads_volume:
+                ref_page = ads_volume
+                # see if ads_page is in the ref_str
+                ref_volume = ads_page if re.search(r'(\b%s)' % ads_page, ref_str) else None
+            elif input_fields['page'] == ads_page:
+                # page matches, see if ads_volume is in the ref_str
+                ref_page = ads_page
+                ref_volume = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
+            else:
+                ref_page = input_fields['page']
+    else: # == 2
+        ref_page = input_fields['page']
+        ref_volume = input_fields['volume']
+
+    if ref_volume:
+        add_volume_evidence(evidences,
+                            ref_volume,
+                            ads_volume,
+                            result_record.get('issue'),
+                            result_record.get('pub_raw'))
+    if ref_page:
+        add_page_evidence(evidences,
+                          ref_page,
+                          ads_page,
+                          result_record.get('page_range', ''),
+                          result_record.get('eid', None),
+                          hypothesis.get_detail('page_qualifier'),
+                          input_fields.get('refstr', ''))
 
     return evidences
 
@@ -72,22 +166,25 @@ def get_basic_score_for_input_fields(result_record, hypothesis):
     :param hypothesis: 
     :return: 
     """
-    evidences = get_author_year_score_for_input_fields(result_record, hypothesis)
+    evidences = get_author_year_pub_score_for_input_fields(result_record, hypothesis)
 
     input_fields = hypothesis.get_detail('input_fields')
 
-    add_page_evidence(evidences,
-        input_fields.get('page'),
-        result_record.get('page', []),
-        result_record.get('page_range', ''),
-        ref_qualifier=hypothesis.get_detail('page_qualifier'))
+    if 'page' not in input_fields:
+        ads_page = result_record.get('page', '')
+        # reverse engineering, see if ads_page is in the ref_str
+        # some xmls are unable to parse page out
+        ref_page = ads_page if re.search(r'(\b%s)' % ads_page, input_fields('refstr', '')) else None
+    else:
+        ref_page = input_fields.get('page')
+        ads_page = result_record.get('page', '')
 
-    add_publication_evidence(evidences,
-        input_fields.get('pub'),
-        input_fields.get('bibstem',''),
-        result_record.get('pub', ''),
-        result_record.get('bibcode', ''),
-        result_record.get('bibstem', ''))
+    add_page_evidence(evidences,
+        ref_page,
+        ads_page,
+        result_record.get('page_range', ''),
+        result_record.get('eid', None),
+        hypothesis.get_detail('page_qualifier'))
 
     add_title_evidence(evidences,
         input_fields.get('title'),
@@ -101,17 +198,18 @@ def get_serial_score_for_input_fields(result_record, hypothesis):
     returns Evidences for result_record matching hypothesis as a serial
     publication.
 
-    See get_basic_score_for_input_fields for what hypothesis needs to have.
-
     :param result_record:
     :param hypothesis:
     :return:
     """
-    evidences = get_basic_score_for_input_fields(result_record, hypothesis)
+    evidences = get_author_year_pub_score_for_input_fields(result_record, hypothesis) + \
+                get_volume_page_score_for_input_fields(result_record, hypothesis)
 
     input_fields = hypothesis.get_detail("input_fields")
 
-    add_volume_evidence(evidences, input_fields.get("volume"), result_record.get("volume"), result_record.get("issue"))
+    add_title_evidence(evidences,
+        input_fields.get('title'),
+        result_record.get('title', ''))
 
     return evidences
 
@@ -122,50 +220,26 @@ def get_book_score_for_input_fields(result_record, hypothesis):
 
     This means matching the pub against result_record's title field.
 
-    See get_basic_score_for_input_fields for what hypothesis needs to have.
-
     :param result_record:
     :param hypothesis:
     :return:
     """
     evidences = get_author_year_score_for_input_fields(result_record, hypothesis)
 
-    if result_record["doctype"]=="book":
-        evidences.add_evidence(1, "doctype")
+    if result_record["doctype"] in ["book", "inbook", "techreport"]:
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "doctype")
     else:
-        evidences.add_evidence(-1, "doctype")
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "doctype")
 
     input_fields = hypothesis.get_detail("input_fields")
 
     add_publication_evidence(evidences,
-        input_fields.get("pub"),
-        input_fields.get("bibstem"),
+        input_fields.get("pub", ""),
+        input_fields.get("bibstem", ""),
+        input_fields.get("refstr", ""),
         result_record.get("title", ""),
         result_record.get("bibcode", ""),
         result_record.get("bibstem", ""))
-
-    return evidences
-
-
-def get_score_for_reference_identifier(result_record, hypothesis):
-    """
-    returns Evidences for result_record matching if an identifier (doi or arXiv id) was matched
-    
-    :param result_record: 
-    :return: 
-    """
-    evidences = Evidences()
-
-    input_fields = hypothesis.get_detail("input_fields")
-
-    if compare_doi(input_fields.get("doi", None), result_record.get("doi", [])):
-        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
-    elif input_fields.get("arxiv", "not in ref") == get_arxiv_id(result_record):
-        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
-    elif compare_bibcode(input_fields.get("bibcode", None), result_record.get("bibcode", None)):
-        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
-    else:
-        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "bibcode")
 
     return evidences
 
@@ -218,7 +292,89 @@ def get_thesis_score_for_input_fields(result_record, hypothesis):
 
     return evidences
 
-def get_arxiv_id(result_record):
+
+def get_chapter_score_for_input_fields(result_record, hypothesis):
+    """
+    returns evidences based on author, year, volume and/or page, and publication or title,
+    when solr record is a chapter in a proceeding or in a book it comes here
+
+    :param result_record:
+    :param hypothesis:
+    :return:
+    """
+    evidences = get_author_year_score_for_input_fields(result_record, hypothesis) + \
+                get_volume_page_score_for_input_fields(result_record, hypothesis)
+
+    input_fields = hypothesis.get_detail("input_fields")
+
+    # if comparing against inproceedigns record in solr, compare both pub and title
+    # aginst both pub and title in solr
+    # inproceedings reference string, depending on the publications, interchanges the order of title and journal
+    # include the one with the highest score in the final score
+    ref_pubs = [input_fields.get("pub", ""), input_fields.get("pub", ""),
+                input_fields.get("title", ""), input_fields.get("title", "")]
+    ads_pubs = [result_record.get("title", ""), result_record.get("pub_raw", ""),
+                result_record.get("title", ""), result_record.get("pub_raw", "")]
+    track_evidence = Evidences()
+    for ref_pub, ads_pub in zip(ref_pubs, ads_pubs):
+        tmp_evidence = Evidences()
+        add_publication_evidence(tmp_evidence,
+                                 ref_pub,
+                                 input_fields.get("bibstem", ""),
+                                 input_fields.get("refstr", ""),
+                                 ads_pub,
+                                 result_record.get("bibcode", ""),
+                                 result_record.get("bibstem", ""))
+        if tmp_evidence.get_score() > track_evidence.get_score():
+            track_evidence = tmp_evidence
+    evidences = evidences + track_evidence
+    return evidences
+
+
+def get_score_for_input_fields(result_record, hypothesis):
+    """
+    computes the score based on the solr record doctype
+
+    :param result_record:
+    :param hypothesis:
+    :return:
+    """
+    if result_record["doctype"] in ["inproceedings", "inbook"]:
+        return get_chapter_score_for_input_fields(result_record, hypothesis)
+    if result_record["doctype"] == "book":
+        return get_book_score_for_input_fields(result_record, hypothesis)
+    if result_record["doctype"] == "catalog":
+        return get_author_year_pub_score_for_input_fields(result_record, hypothesis)
+    return get_serial_score_for_input_fields(result_record, hypothesis)
+
+
+def get_score_for_reference_identifier(result_record, hypothesis):
+    """
+    returns Evidences for result_record matching if an identifier (doi or arXiv id) was matched
+
+    :param result_record:
+    :return:
+    """
+    evidences = Evidences()
+
+    input_fields = hypothesis.get_detail("input_fields")
+
+    if compare_doi(input_fields.get("doi", None), result_record.get("doi", [])):
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
+    elif input_fields.get("arxiv", "not in ref") == get_arxiv_id_or_ascl_id(result_record):
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
+    elif input_fields.get("ascl", "not in ref") == get_arxiv_id_or_ascl_id(result_record):
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
+    elif compare_bibcode(input_fields.get("bibcode", None), result_record.get("bibcode", None),
+                         result_record.get("identifier", None)):
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
+    else:
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "bibcode")
+
+    return evidences
+
+
+def get_arxiv_id_or_ascl_id(result_record):
     """
 
     :param result_record:
@@ -231,6 +387,7 @@ def get_arxiv_id(result_record):
         if "ascl:" in identifier:
             return identifier.replace("ascl:", "")
     return ""
+
 
 def compare_doi(ref_doi, ads_doi):
     """
@@ -249,21 +406,15 @@ def compare_doi(ref_doi, ads_doi):
             return True
     return False
 
-def compare_bibcode(ref_bibcode, ads_bibcode):
-    """
-    BIBCODE_FIELDS = [
-        ('year', 0, 4, 'r', int),
-        ('journal', 4, 9, 'l', str),
-        ('volume', 9, 13, 'r', str),
-        ('qualifier', 13, 14, 'r', str),
-        ('page', 14, 18, 'r', str),
-        ('initial', 18, 19, 'r', str)
-    ]
 
-    compare bibcodes from reference and from solr
-    allow wildcard for volume page or author, however, only one can be missing at at a time
+def compare_bibcode(ref_bibcode, ads_bibcode, ads_identifiers):
+    """
+    compares bibcode built from reference string with the bibcode from solr,
+    reference bibcode can also be an identifier, so compare against identifier too
+
     :param ref_bibcode:
     :param ads_bibcode:
+    :param ads_identifiers:
     :return:
     """
     if ref_bibcode is None or ads_bibcode is None:
@@ -272,27 +423,10 @@ def compare_bibcode(ref_bibcode, ads_bibcode):
     ref_bibcode = ref_bibcode.upper()
     ads_bibcode = ads_bibcode.upper()
 
-    score = 0
-    # year has to match
-    if ref_bibcode[0:4] == ads_bibcode[0:4]:
-        score = score + 1
-    # journal has to match
-    if ref_bibcode[4:9] == ads_bibcode[4:9]:
-        score = score + 1
-    # volume can be wildcard, if not penalize
-    if ref_bibcode[9:13] == ads_bibcode[9:13]:
-        score = score + 1
-    elif ref_bibcode[9:13] != '????':
-        score = score -1
-    # page can be wildcard, if not penalize
-    if ref_bibcode[13:18] == ads_bibcode[13:18]:
-        score = score + 1
-    elif ref_bibcode[13:18] != '???':
-        score = score -1
-    # first author initial can be wildcard, if not penalize
-    if ref_bibcode[18] == ads_bibcode[18]:
-        score = score + 1
-    elif ref_bibcode[18] != '?':
-        score = score - 1
-    return score >= 4
+    if ref_bibcode == ads_bibcode:
+        return True
 
+    if ref_bibcode in [i.upper() for i in ads_identifiers]:
+        return True
+
+    return False
