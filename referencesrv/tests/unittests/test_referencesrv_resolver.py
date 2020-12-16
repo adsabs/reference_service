@@ -1001,73 +1001,73 @@ class TestResolver(TestCase):
         self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.9)
 
 
-    def test_add_publication_evidence_error(self):
-        """
-        test add_publication_evidence for when there is a typo in the reference journal
-        """
-        solution = {u'bibcode': u'2018AJ....156..102S',
-                    u'author': [u'Stassun, Keivan G.', u'Oelkers, Ryan J.', u'Pepper, Joshua', u'Paegert, Martin', u'De Lee, Nathan', u'Torres, Guillermo', u'Latham, David W.', u'Charpinet, St\xe9phane', u'Dressing, Courtney D.', u'Huber, Daniel', u'Kane, Stephen R.', u'L\xe9pine, S\xe9bastien', u'Mann, Andrew', u'Muirhead, Philip S.', u'Rojas-Ayala, B\xe1rbara', u'Silvotti, Roberto', u'Fleming, Scott W.', u'Levine, Al', u'Plavchan, Peter'],
-                    u'bibstem': u'AJ',
-                    u'doctype': u'article',
-                    u'pub': u'The Astronomical Journal',
-                    u'pub_raw': u'The Astronomical Journal, Volume 156, Issue 3, article id. 102, <NUMPAGES>39</NUMPAGES> pp. (2018).',
-                    u'volume': u'156',
-                    u'doi': [u'10.3847/1538-3881/aad050'],
-                    u'author_norm': ['stassun, k', 'oelkers, r', 'pepper, j', 'paegert, m', 'de lee, n', 'torres, g', 'latham, d', 'charpinet, s', 'dressing, c', 'huber, d', 'kane, s', 'lepine, s', 'mann, a', 'muirhead, p', 'rojas ayala, b', 'silvotti, r', 'fleming, s', 'levine, a', 'plavchan, p'],
-                    u'year': u'2018',
-                    u'first_author_norm': 'stassun, k',
-                    u'title': u'The TESS Input Catalog and Candidate Target List',
-                    u'identifier': [u'2017arXiv170600495S', u'2018AJ....156..102S', u'10.3847/1538-3881/aad050', u'2017arXiv170600495S', u'arXiv:1706.00495', u'10.3847/1538-3881/aad050'],
-                    u'issue': u'3',
-                    u'page': u'102'}
-        # note that journal was supposed to be AJ
-        ref = {'journal': u'ApJ',
-               'authors': u'Stassun, K. G., Oelkers, R. J., Pepper, J., et al.',
-               'refstr': u'Stassun, K. G., Oelkers, R. J., Pepper, J., et al. 2018, ApJ, 156, 102',
-               'volume': u'156',
-               'year': u'2018',
-               'page': u'102'}
-        normalized_authors = normalize_author_list(ref["authors"], initials=True)
-        hypothesis = Hypothesis("testing-fielded-author/year/volume/page", {
-                            "author": normalized_authors,
-                            "year": ref["year"],
-                            "volume": ref["volume"],
-                            "page": ref["page"]},
-                        get_score_for_input_fields,
-                        input_fields=ref,
-                        page_qualifier='',
-                        has_etal='et al' in ref["authors"],
-                        normalized_authors=normalized_authors)
-        self.assertEqual(get_score_for_input_fields(solution, hypothesis).get_score(), 4.0)
-
-    def test_Querier(self):
-        solrquery = Querier()
-        self.assertEqual(solrquery.make_params('author:("Accomazzi, A") AND year:"2019" AND bibstem:(AAS)'),
-                         {'q': 'author:("Accomazzi, A") AND year:"2019" AND bibstem:(AAS)',
-                          'rows': '100',
-                          'fl': u'author,author_norm,first_author_norm,year,title,pub,pub_raw,volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype'})
-
-        # no author_norm
-        solution = {u'bibcode': u'2013JARS....7.3461V',
-                    u'author': [u'Vasuki, Perumal', u'Mohamed Mansoor Roomi, S.'],
-                    u'title': [u'Particle swarm optimization-based despeckling and decluttering of wavelet packet transformed synthetic aperture radar images'],
-                    u'doctype': u'article', u'pub': u'Journal of Applied Remote Sensing',
-                    u'pub_raw': u'Journal of Applied Remote Sensing, Volume 7, id. 073461 (2013).',
-                    u'volume': u'7',
-                    u'year': u'2013',
-                    u'page': [u'073461']}
-        self.assertEqual(solrquery.massage_solution(solution),
-                         {u'pub': u'Journal of Applied Remote Sensing', u'volume': u'7',
-                          'author_norm': ['Vasuki, Perumal', 'Mohamed Mansoor Roomi, S.'], u'year': u'2013',
-                          'first_author_norm': 'vasuki, perumal', u'bibcode': u'2013JARS....7.3461V',
-                          u'author': [u'Vasuki, Perumal', u'Mohamed Mansoor Roomi, S.'],
-                          u'title': u'Particle swarm optimization-based despeckling and decluttering of wavelet packet transformed synthetic aperture radar images',
-                          u'doctype': u'article',
-                          u'pub_raw': u'Journal of Applied Remote Sensing, Volume 7, id. 073461 (2013).',
-                          u'page': u'073461'})
-
-
-    # def test_iter_journal_specific_hypotheses(self):
+    # def test_add_publication_evidence_error(self):
+    #     """
+    #     test add_publication_evidence for when there is a typo in the reference journal
+    #     """
+    #     solution = {u'bibcode': u'2018AJ....156..102S',
+    #                 u'author': [u'Stassun, Keivan G.', u'Oelkers, Ryan J.', u'Pepper, Joshua', u'Paegert, Martin', u'De Lee, Nathan', u'Torres, Guillermo', u'Latham, David W.', u'Charpinet, St\xe9phane', u'Dressing, Courtney D.', u'Huber, Daniel', u'Kane, Stephen R.', u'L\xe9pine, S\xe9bastien', u'Mann, Andrew', u'Muirhead, Philip S.', u'Rojas-Ayala, B\xe1rbara', u'Silvotti, Roberto', u'Fleming, Scott W.', u'Levine, Al', u'Plavchan, Peter'],
+    #                 u'bibstem': u'AJ',
+    #                 u'doctype': u'article',
+    #                 u'pub': u'The Astronomical Journal',
+    #                 u'pub_raw': u'The Astronomical Journal, Volume 156, Issue 3, article id. 102, <NUMPAGES>39</NUMPAGES> pp. (2018).',
+    #                 u'volume': u'156',
+    #                 u'doi': [u'10.3847/1538-3881/aad050'],
+    #                 u'author_norm': ['stassun, k', 'oelkers, r', 'pepper, j', 'paegert, m', 'de lee, n', 'torres, g', 'latham, d', 'charpinet, s', 'dressing, c', 'huber, d', 'kane, s', 'lepine, s', 'mann, a', 'muirhead, p', 'rojas ayala, b', 'silvotti, r', 'fleming, s', 'levine, a', 'plavchan, p'],
+    #                 u'year': u'2018',
+    #                 u'first_author_norm': 'stassun, k',
+    #                 u'title': u'The TESS Input Catalog and Candidate Target List',
+    #                 u'identifier': [u'2017arXiv170600495S', u'2018AJ....156..102S', u'10.3847/1538-3881/aad050', u'2017arXiv170600495S', u'arXiv:1706.00495', u'10.3847/1538-3881/aad050'],
+    #                 u'issue': u'3',
+    #                 u'page': u'102'}
+    #     # note that journal was supposed to be AJ
+    #     ref = {'journal': u'ApJ',
+    #            'authors': u'Stassun, K. G., Oelkers, R. J., Pepper, J., et al.',
+    #            'refstr': u'Stassun, K. G., Oelkers, R. J., Pepper, J., et al. 2018, ApJ, 156, 102',
+    #            'volume': u'156',
+    #            'year': u'2018',
+    #            'page': u'102'}
+    #     normalized_authors = normalize_author_list(ref["authors"], initials=True)
+    #     hypothesis = Hypothesis("testing-fielded-author/year/volume/page", {
+    #                         "author": normalized_authors,
+    #                         "year": ref["year"],
+    #                         "volume": ref["volume"],
+    #                         "page": ref["page"]},
+    #                     get_score_for_input_fields,
+    #                     input_fields=ref,
+    #                     page_qualifier='',
+    #                     has_etal='et al' in ref["authors"],
+    #                     normalized_authors=normalized_authors)
+    #     self.assertEqual(get_score_for_input_fields(solution, hypothesis).get_score(), 4.0)
+    #
+    # def test_Querier(self):
+    #     solrquery = Querier()
+    #     self.assertEqual(solrquery.make_params('author:("Accomazzi, A") AND year:"2019" AND bibstem:(AAS)'),
+    #                      {'q': 'author:("Accomazzi, A") AND year:"2019" AND bibstem:(AAS)',
+    #                       'rows': '100',
+    #                       'fl': u'author,author_norm,first_author_norm,year,title,pub,pub_raw,volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype'})
+    #
+    #     # no author_norm
+    #     solution = {u'bibcode': u'2013JARS....7.3461V',
+    #                 u'author': [u'Vasuki, Perumal', u'Mohamed Mansoor Roomi, S.'],
+    #                 u'title': [u'Particle swarm optimization-based despeckling and decluttering of wavelet packet transformed synthetic aperture radar images'],
+    #                 u'doctype': u'article', u'pub': u'Journal of Applied Remote Sensing',
+    #                 u'pub_raw': u'Journal of Applied Remote Sensing, Volume 7, id. 073461 (2013).',
+    #                 u'volume': u'7',
+    #                 u'year': u'2013',
+    #                 u'page': [u'073461']}
+    #     self.assertEqual(solrquery.massage_solution(solution),
+    #                      {u'pub': u'Journal of Applied Remote Sensing', u'volume': u'7',
+    #                       'author_norm': ['Vasuki, Perumal', 'Mohamed Mansoor Roomi, S.'], u'year': u'2013',
+    #                       'first_author_norm': 'vasuki, perumal', u'bibcode': u'2013JARS....7.3461V',
+    #                       u'author': [u'Vasuki, Perumal', u'Mohamed Mansoor Roomi, S.'],
+    #                       u'title': u'Particle swarm optimization-based despeckling and decluttering of wavelet packet transformed synthetic aperture radar images',
+    #                       u'doctype': u'article',
+    #                       u'pub_raw': u'Journal of Applied Remote Sensing, Volume 7, id. 073461 (2013).',
+    #                       u'page': u'073461'})
+    #
+    #
+    # # def test_iter_journal_specific_hypotheses(self):
     #     """
     #     test iter_journal_specific_hypotheses
     #     """
