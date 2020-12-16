@@ -799,114 +799,114 @@ class TestResolver(TestCase):
         self.assertEqual(evidences.get_score(), None)
 
 
-    # def test_has_word(self):
-    #     """
-    #     test has_word
-    #     """
-    #     self.assertEqual(has_word("Foo, 23, 123", "1"), False)
-    #     self.assertEqual(has_word("Foo, 23, 123", "Foo"), True)
-    #     self.assertEqual(has_word("Foo, 23, 123", "23"), True)
-    #     self.assertEqual(has_word("Foo, 23, 123", "123"), True)
-    #
-    #
-    # def test_has_thesis_indicators(self):
-    #     """
-    #     test has_thesis_indicators
-    #     """
-    #     self.assertEqual(has_thesis_indicators(u"2007b, PhD thesis , Cornell"), True)
-    #     self.assertEqual(has_thesis_indicators(u"Astrophdical Journal"), False)
-    #     self.assertEqual(has_thesis_indicators(u"CORNELL UNIVERSITY, 1969. Dissertation Abstracts International, Volume: 30-07, Section: B, page: 3319."), True)
-    #     #self.assertEqual(0, 1)
-    #
-    #
-    # def test_cook_title_string(self):
-    #     """
-    #     test cook_title_string
-    #     """
-    #     self.assertEqual(cook_title_string("Untimely results in atomic spec."), 'Untimely results atomic')
-    #     self.assertEqual(cook_title_string("a b c, a cat was in the snow"), '')
-    #
-    #
-    # def test_get_score_for_reference_identifier(self):
-    #     """
-    #     test get_score_for_reference_identifier
-    #     """
-    #     # reference is DOI
-    #     solution = {u"bibcode": u"2019NatNa..14...89C",
-    #                 u"doi":[u"10.1038/s41565-018-0319-4"]}
-    #
-    #     ref = {"doi":"10.1038/s41565-018-0319-4"}
-    #     hypothesis = Hypothesis("testing-fielded-DOI", {
-    #                                 "doi": ref["doi"]},
-    #                             get_score_for_reference_identifier,
-    #                             input_fields=ref)
-    #     self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), 1)
-    #
-    #     # if it does not match
-    #     ref = {"doi":"no match"}
-    #     hypothesis = Hypothesis("testing-fielded-DOI", {
-    #                                 "doi": ref["doi"]},
-    #                             get_score_for_reference_identifier,
-    #                             input_fields=ref)
-    #     self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), -1)
-    #
-    #
-    #     # reference is arxiv id which is available in eid in solr
-    #     solution = {u"bibcode": u"2019arXiv190501258L",
-    #                 u"identifier": [u"arXiv:1905.01258"]}
-    #
-    #     ref = {"arxiv":"1905.01258"}
-    #     hypothesis = Hypothesis("testing-fielded-arxiv", {
-    #                                 "arxiv": ref["arxiv"]},
-    #                             get_score_for_reference_identifier,
-    #                             input_fields=ref)
-    #     self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), 1)
-    #
-    #     # if it does not match
-    #     ref = {"arxiv":"no match"}
-    #     hypothesis = Hypothesis("testing-fielded-arxiv", {
-    #                                 "arxiv": ref["arxiv"]},
-    #                             get_score_for_reference_identifier,
-    #                             input_fields=ref)
-    #     self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), -1)
-    #
-    #
-    # def test_get_book_score_for_input_fields(self):
-    #     """
-    #     test get_book_score_for_input_fields
-    #     """
-    #     solution = {
-    #         u"doctype":u"book",
-    #         u"year":u"2019",
-    #         u"bibcode":u"2019msme.book.....R",
-    #         u"bibstem":u"msme",
-    #         u"identifier":[u"2019msme.book.....R"],
-    #         u"pub_raw":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova, David J. Asher and Margaret D. Campbell-Brown. ISBN 9781108426718. Cambridge University Press, 2019",
-    #         u"pub":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova",
-    #         u"first_author_norm":u"Ryabova, G",
-    #         u"author":[u"Ryabova, Galina O.", u"Asher, David J.", u"Campbell-Brown, Margaret J."],
-    #         u"title":u"Meteoroids: Sources of Meteors on Earth and Beyond",
-    #         u"author_norm":["Ryabova, G", "Asher, D", "Campbell-Brown, M"]
-    #     }
-    #     # note passing in a mistaken year by a character
-    #     ref = {"authors": "Ryabova, G., Asher, D., Campbell Brown, M.",
-    #            "title": "Meteoroids: Sources of Meteors on Earth and Beyond",
-    #            "year": "2009"}
-    #     normalized_authors = normalize_author_list(ref["authors"], initials=True)
-    #     # note that specifying hints here is useless since we are passing the solution in already
-    #     # put it here to know what information was used in the query corresponding to the scare function called
-    #     hypothesis = Hypothesis("test-fielded-book-title", {
-    #                        "author": normalized_authors,
-    #                         "title": ref["title"],
-    #                         "year": ref["year"]},
-    #                     get_book_score_for_input_fields,
-    #                     input_fields=ref,
-    #                     page_qualifier=ref.get("qualifier"),
-    #                     has_etal=False,
-    #                     normalized_authors=normalized_authors)
-    #     self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
-    #
-    #
+    def test_has_word(self):
+        """
+        test has_word
+        """
+        self.assertEqual(has_word("Foo, 23, 123", "1"), False)
+        self.assertEqual(has_word("Foo, 23, 123", "Foo"), True)
+        self.assertEqual(has_word("Foo, 23, 123", "23"), True)
+        self.assertEqual(has_word("Foo, 23, 123", "123"), True)
+
+
+    def test_has_thesis_indicators(self):
+        """
+        test has_thesis_indicators
+        """
+        self.assertEqual(has_thesis_indicators(u"2007b, PhD thesis , Cornell"), True)
+        self.assertEqual(has_thesis_indicators(u"Astrophdical Journal"), False)
+        self.assertEqual(has_thesis_indicators(u"CORNELL UNIVERSITY, 1969. Dissertation Abstracts International, Volume: 30-07, Section: B, page: 3319."), True)
+        #self.assertEqual(0, 1)
+
+
+    def test_cook_title_string(self):
+        """
+        test cook_title_string
+        """
+        self.assertEqual(cook_title_string("Untimely results in atomic spec."), 'Untimely results atomic')
+        self.assertEqual(cook_title_string("a b c, a cat was in the snow"), '')
+
+
+    def test_get_score_for_reference_identifier(self):
+        """
+        test get_score_for_reference_identifier
+        """
+        # reference is DOI
+        solution = {u"bibcode": u"2019NatNa..14...89C",
+                    u"doi":[u"10.1038/s41565-018-0319-4"]}
+
+        ref = {"doi":"10.1038/s41565-018-0319-4"}
+        hypothesis = Hypothesis("testing-fielded-DOI", {
+                                    "doi": ref["doi"]},
+                                get_score_for_reference_identifier,
+                                input_fields=ref)
+        self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), 1)
+
+        # if it does not match
+        ref = {"doi":"no match"}
+        hypothesis = Hypothesis("testing-fielded-DOI", {
+                                    "doi": ref["doi"]},
+                                get_score_for_reference_identifier,
+                                input_fields=ref)
+        self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), -1)
+
+
+        # reference is arxiv id which is available in eid in solr
+        solution = {u"bibcode": u"2019arXiv190501258L",
+                    u"identifier": [u"arXiv:1905.01258"]}
+
+        ref = {"arxiv":"1905.01258"}
+        hypothesis = Hypothesis("testing-fielded-arxiv", {
+                                    "arxiv": ref["arxiv"]},
+                                get_score_for_reference_identifier,
+                                input_fields=ref)
+        self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), 1)
+
+        # if it does not match
+        ref = {"arxiv":"no match"}
+        hypothesis = Hypothesis("testing-fielded-arxiv", {
+                                    "arxiv": ref["arxiv"]},
+                                get_score_for_reference_identifier,
+                                input_fields=ref)
+        self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), -1)
+
+
+    def test_get_book_score_for_input_fields(self):
+        """
+        test get_book_score_for_input_fields
+        """
+        solution = {
+            u"doctype":u"book",
+            u"year":u"2019",
+            u"bibcode":u"2019msme.book.....R",
+            u"bibstem":u"msme",
+            u"identifier":[u"2019msme.book.....R"],
+            u"pub_raw":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova, David J. Asher and Margaret D. Campbell-Brown. ISBN 9781108426718. Cambridge University Press, 2019",
+            u"pub":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova",
+            u"first_author_norm":u"Ryabova, G",
+            u"author":[u"Ryabova, Galina O.", u"Asher, David J.", u"Campbell-Brown, Margaret J."],
+            u"title":u"Meteoroids: Sources of Meteors on Earth and Beyond",
+            u"author_norm":["Ryabova, G", "Asher, D", "Campbell-Brown, M"]
+        }
+        # note passing in a mistaken year by a character
+        ref = {"authors": "Ryabova, G., Asher, D., Campbell Brown, M.",
+               "title": "Meteoroids: Sources of Meteors on Earth and Beyond",
+               "year": "2009"}
+        normalized_authors = normalize_author_list(ref["authors"], initials=True)
+        # note that specifying hints here is useless since we are passing the solution in already
+        # put it here to know what information was used in the query corresponding to the scare function called
+        hypothesis = Hypothesis("test-fielded-book-title", {
+                           "author": normalized_authors,
+                            "title": ref["title"],
+                            "year": ref["year"]},
+                        get_book_score_for_input_fields,
+                        input_fields=ref,
+                        page_qualifier=ref.get("qualifier"),
+                        has_etal=False,
+                        normalized_authors=normalized_authors)
+        self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
+
+
     # def test_get_thesis_score_for_input_fields(self):
     #     """
     #     test get_thesis_score_for_input_fields
