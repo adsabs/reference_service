@@ -178,6 +178,7 @@ class TestResolver(TestCase):
                          [('zzy cde', 0.6938775510204082)])
         self.assertEqual(ti.lookup("knall", 10), [])
 
+
     def test_Trigdict(self):
         """
         Test Trigdic class
