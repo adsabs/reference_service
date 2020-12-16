@@ -1,12 +1,15 @@
 # encoding=utf8
 # included included for the presense of unicode, for example `Akademiai Kiadò, in list of academic publishers
 
-LOGGING_LEVEL = 'DEBUG'
+LOGGING_LEVEL = 'INFO'
+
+# must be here for adsmutils to override it using env vars
+# but if left empty (resolving to False) it won't be used
+SERVICE_TOKEN = None
 
 # configuration for accessing solr db
 # these values can be overwritten by local_config values
 REFERENCE_SERVICE_SOLRQUERY_URL = "https://api.adsabs.harvard.edu/v1/search/query"
-REFERENCE_SERVICE_ADSWS_API_TOKEN = 'this is a secret api token!'
 REFERENCE_SERVICE_MAX_RECORDS_SOLR = 100
 
 REFERENCE_SERVICE_QUERY_FIELDS_SOLR = "author,author_norm,first_author_norm,year,title,pub,pub_raw," \

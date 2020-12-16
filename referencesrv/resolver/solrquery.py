@@ -3,7 +3,7 @@ import json
 import requests
 import time
 
-from flask import current_app
+from flask import current_app, request
 from referencesrv.client import client
 
 from referencesrv.resolver.common import Solr
@@ -17,7 +17,6 @@ class Querier(object):
         self.endpoint = current_app.config['REFERENCE_SERVICE_SOLRQUERY_URL']
         self.query_fields = current_app.config['REFERENCE_SERVICE_QUERY_FIELDS_SOLR']
         self.max_rows = current_app.config['REFERENCE_SERVICE_MAX_RECORDS_SOLR']
-        self.standard_headers = {'Authorization': 'Bearer ' + current_app.config['REFERENCE_SERVICE_ADSWS_API_TOKEN']}
         self.connect_solr = current_app.config['REFERENCE_SERVICE_LIVE']
 
     def make_params(self, query):
@@ -50,7 +49,7 @@ class Querier(object):
             start_time = time.time()
             response = client().get(
                 url=self.endpoint,
-                headers=self.standard_headers,
+                headers={'Authorization': current_app.config.get('SERVICE_TOKEN', None) or request.headers.get('X-Forwarded-Authorization', request.headers.get('Authorization', ''))},
                 params=self.make_params(query),
                 timeout=10
             )
