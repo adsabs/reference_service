@@ -1067,60 +1067,60 @@ class TestResolver(TestCase):
     #                       u'page': u'073461'})
     #
     #
-    # def test_iter_journal_specific_hypotheses(self):
-        """
-        test iter_journal_specific_hypotheses
-        """
-        # "bibcode":"2019BAAS...51c.440B"
-        ref = {'title': "Studying the Reionization Epoch with QSO Absorption Lines",
-               'authors': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R.",
-               'volume': "51",
-               'year': "2019",
-               'page': "440",
-               'journal': "Bulletin of the American Astronomical Society",
-               'refstr': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R. (2019). Studying the Reionization Epoch with QSO Absorption Lines. Bulletin of the American Astronomical Society, Vol. 51, p.440."}
-        hypothesis = iter_journal_specific_hypotheses('BAAS', ref['authors'], ref['year'], ref['journal'],
-                                                              ref['volume'], ref['page'], ref['refstr'])
-        tried_hypothesis = ['extra-BAAS->DDA', 'extra-BAAS->AAS', 'extra-BAAS->DPS']
-        for i, h in enumerate(hypothesis):
-            self.assertEqual(h.name, tried_hypothesis[i])
-
-        # "bibcode":"2009lpsc.book.....A"
-        ref = {'title': "Lectures on the Physics of Strongly Correlated Systems XIII",
-               'authors': "Avella, A., Mancini, F.",
-               'year': "2009",
-               'book': "Lectures on the Physics of Strongly Correlated Systems XIII by Adolfo Avella",
-               'refstr': "Avella, A., Mancini, F. (2009). Lectures on the Physics of Strongly Correlated Systems XIII by Adolfo Avella, Ferdinando Mancini, Springer, ISBN: 978-0-7354-0699-5"}
-        hypothesis = iter_journal_specific_hypotheses('LPSC', ref['authors'], ref['year'], ref['book'],
-                                                              None, None, ref['refstr'])
-        tried_hypothesis = ['LPSC-ignore-volume']
-        for i, h in enumerate(hypothesis):
-            self.assertEqual(h.name, tried_hypothesis[i])
-
-        # "bibcode":"2019ApJ...875L..24L"
-        ref = {'title': "Simulating the Dark Matter Decay Signal from the Perseus Galaxy Cluster",
-               'authors': "Lovell, M., Iakubovskyi, D., Barnes, D., Bose, S., Frenk, C., Theuns, T., Hellwing, W.",
-               'year': "2019",
-               'volume': "875",
-               'page': "L24",
-               'journal': "The Astrophysical Journal",
-               'refstr': "Lovell, M., Iakubovskyi, D., Barnes, D., Bose, S., Frenk, C., Theuns, T., Hellwing, W., The Astrophysical Journal Letters, Volume 875, Issue 2, article id. L24, 8 pp. (2019)."}
-        hypothesis = iter_journal_specific_hypotheses('ApJ', ref['authors'], ref['year'], ref['journal'],
-                                                              None, None, ref['refstr'])
-        tried_hypothesis = ['extra-ApJ->ApJL']
-        for i, h in enumerate(hypothesis):
-            self.assertEqual(h.name, tried_hypothesis[i])
-
-        # "bibcode":"2019SPIE10866E....M"
-        ref = {'title': "Optogenetics and Optical Manipulation 2019",
-               'authors': "Mohanty, S., Jansen, E.",
-               'year': "2019",
-               'volume': "10866",
-               'journal': "Society of Photo-Optical Instrumentation Engineers (SPIE) Conference Series",
-               'refstr': "Mohanty, S., Jansen, E., Optogenetics and Optical Manipulation 2019.  Edited by Mohanty, Samarendra K.; Jansen, E. Duco. Proceedings of the SPIE, Volume 10866 (2019)."}
-        hypothesis = iter_journal_specific_hypotheses(None, ref['authors'], ref['year'], ref['journal'],
-                                                              None, None, ref['refstr'])
-        self.assertEqual(next(hypothesis).name, 'fielded-confser-SPIE')
+    # # def test_iter_journal_specific_hypotheses(self):
+    #     """
+    #     test iter_journal_specific_hypotheses
+    #     """
+    #     # "bibcode":"2019BAAS...51c.440B"
+    #     ref = {'title': "Studying the Reionization Epoch with QSO Absorption Lines",
+    #            'authors': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R.",
+    #            'volume': "51",
+    #            'year': "2019",
+    #            'page': "440",
+    #            'journal': "Bulletin of the American Astronomical Society",
+    #            'refstr': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R. (2019). Studying the Reionization Epoch with QSO Absorption Lines. Bulletin of the American Astronomical Society, Vol. 51, p.440."}
+    #     hypothesis = iter_journal_specific_hypotheses('BAAS', ref['authors'], ref['year'], ref['journal'],
+    #                                                           ref['volume'], ref['page'], ref['refstr'])
+    #     tried_hypothesis = ['extra-BAAS->DDA', 'extra-BAAS->AAS', 'extra-BAAS->DPS']
+    #     for i, h in enumerate(hypothesis):
+    #         self.assertEqual(h.name, tried_hypothesis[i])
+    #
+    #     # "bibcode":"2009lpsc.book.....A"
+    #     ref = {'title': "Lectures on the Physics of Strongly Correlated Systems XIII",
+    #            'authors': "Avella, A., Mancini, F.",
+    #            'year': "2009",
+    #            'book': "Lectures on the Physics of Strongly Correlated Systems XIII by Adolfo Avella",
+    #            'refstr': "Avella, A., Mancini, F. (2009). Lectures on the Physics of Strongly Correlated Systems XIII by Adolfo Avella, Ferdinando Mancini, Springer, ISBN: 978-0-7354-0699-5"}
+    #     hypothesis = iter_journal_specific_hypotheses('LPSC', ref['authors'], ref['year'], ref['book'],
+    #                                                           None, None, ref['refstr'])
+    #     tried_hypothesis = ['LPSC-ignore-volume']
+    #     for i, h in enumerate(hypothesis):
+    #         self.assertEqual(h.name, tried_hypothesis[i])
+    #
+    #     # "bibcode":"2019ApJ...875L..24L"
+    #     ref = {'title': "Simulating the Dark Matter Decay Signal from the Perseus Galaxy Cluster",
+    #            'authors': "Lovell, M., Iakubovskyi, D., Barnes, D., Bose, S., Frenk, C., Theuns, T., Hellwing, W.",
+    #            'year': "2019",
+    #            'volume': "875",
+    #            'page': "L24",
+    #            'journal': "The Astrophysical Journal",
+    #            'refstr': "Lovell, M., Iakubovskyi, D., Barnes, D., Bose, S., Frenk, C., Theuns, T., Hellwing, W., The Astrophysical Journal Letters, Volume 875, Issue 2, article id. L24, 8 pp. (2019)."}
+    #     hypothesis = iter_journal_specific_hypotheses('ApJ', ref['authors'], ref['year'], ref['journal'],
+    #                                                           None, None, ref['refstr'])
+    #     tried_hypothesis = ['extra-ApJ->ApJL']
+    #     for i, h in enumerate(hypothesis):
+    #         self.assertEqual(h.name, tried_hypothesis[i])
+    #
+    #     # "bibcode":"2019SPIE10866E....M"
+    #     ref = {'title': "Optogenetics and Optical Manipulation 2019",
+    #            'authors': "Mohanty, S., Jansen, E.",
+    #            'year': "2019",
+    #            'volume': "10866",
+    #            'journal': "Society of Photo-Optical Instrumentation Engineers (SPIE) Conference Series",
+    #            'refstr': "Mohanty, S., Jansen, E., Optogenetics and Optical Manipulation 2019.  Edited by Mohanty, Samarendra K.; Jansen, E. Duco. Proceedings of the SPIE, Volume 10866 (2019)."}
+    #     hypothesis = iter_journal_specific_hypotheses(None, ref['authors'], ref['year'], ref['journal'],
+    #                                                           None, None, ref['refstr'])
+    #     self.assertEqual(next(hypothesis).name, 'fielded-confser-SPIE')
 
 
     def test_get_score_for_baas_match(self):
@@ -1156,7 +1156,36 @@ class TestResolver(TestCase):
                        input_fields=input_fields,
                        expected_bibstem=get_best_bibstem_for(input_fields["pub"]))
         self.assertEqual(get_score_for_baas_match(solution, hypothesis).get_score(), 1.0)
-        # no matching expected_bibcode
+
+
+    def test_get_score_for_baas_no_match(self):
+        """
+        test get_score_for_baas_match
+        """
+        # "bibcode":"2019BAAS...51c.440B"
+        solution = {u"identifier":[u"2019astro2020T.440B", u"2019BAAS...51c.440B",
+                      u"https://baas.aas.org/wp-content/uploads/2019/05/440_becker.pdf",
+                      u"https://baas.aas.org/wp-content/uploads/2019/05/440_becker.pdf",
+                      u"2019astro2020T.440B"],
+                    u"year":u"2019",
+                    u"page":u"440",
+                    u"bibcode":"2019BAAS...51c.440B",
+                    u"author":[u"Becker, George", u"D'Aloisio, Anson", u"Davies, Frederick B.", u"Hennawi, Joseph F.", u"Simcoe, Robert A."],
+                    u"pub":"Bulletin of the American Astronomical Society",
+                    u"volume":"51",
+                    u"first_author_norm":"Becker, G",
+                    u"doctype":"abstract",
+                    u"pub_raw":"Astro2020: Decadal Survey on Astronomy and Astrophysics, science white papers, no. 440; Bulletin of the American Astronomical Society, Vol. 51, Issue 3, id. 440 (2019)",
+                    u"eid":u"440",
+                    u"title":u"Studying the Reionization Epoch with QSO Absorption Lines",
+                    u"author_norm":[u"Becker, G", u"D'Aloisio, A", u"Davies, F", u"Hennawi, J", u"Simcoe, R"]}
+        input_fields = {'title': "Studying the Reionization Epoch with QSO Absorption Lines",
+                        'author': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R.",
+                        'volume': "51",
+                        'year': "2019",
+                        'page': "440",
+                        'pub': "Bulletin of the American Astronomical Society",
+                        'refstr': "Becker, G., D'Aloisio, A., Davies, F., Hennawi, J., Simcoe, R. (2019). Studying the Reionization Epoch with QSO Absorption Lines. Bulletin of the American Astronomical Society, Vol. 51, p.440."}
         hypothesis = Hypothesis("testing", None,
                        get_score_for_input_fields,
                        input_fields=input_fields,
