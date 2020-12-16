@@ -907,100 +907,100 @@ class TestResolver(TestCase):
         self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
 
 
-    def test_get_thesis_score_for_input_fields(self):
-        """
-        test get_thesis_score_for_input_fields
-        """
-        solution = {
-            u"first_author_norm": u"Rowden, P",
-            u"year":u"2019",
-            u"bibcode":u"2019PhDT........11R",
-            u"identifier":[u"2019PhDT........11R"],
-            u"author":[u"Rowden, Pamela M."],
-            u"pub":u"Ph.D. Thesis",
-            u"doctype":u"phdthesis",
-            u"pub_raw":u"PhD These, The Open University, 2019",
-            u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
-            u"author_norm":[u"Rowden, P"]
-        }
-        ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
-        # note that specifying hints here is useless since we are passing the solution in already
-        # put it here to know what information was used in the query corresponding to the scare function called
-        normalized_authors = normalize_author_list(ref["authors"], initials=True)
-        hypothesis = Hypothesis("test-fielded-thesis", {
-                            "author": normalized_authors,
-                            "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
-                            "year": ref["year"]},
-                        get_thesis_score_for_input_fields,
-                        input_fields=ref,
-                        normalized_authors=normalized_authors)
-        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 3)
-
-        # wrong initial
-        ref = {"authors": "Rowden, R.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
-        # note that specifying hints here is useless since we are passing the solution in already
-        # put it here to know what information was used in the query corresponding to the scare function called
-        normalized_authors = normalize_author_list(ref["authors"], initials=True)
-        hypothesis = Hypothesis("test-fielded-thesis", {
-                            "author": normalized_authors,
-                            "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
-                            "year": ref["year"]},
-                        get_thesis_score_for_input_fields,
-                        input_fields=ref,
-                        normalized_authors=normalized_authors)
-        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1)
-
-        # mistaken year
-        ref = {"authors": "Rowden, P.", "year": "2018", "refstr": "PhD These, The Open University, 2019"}
-        normalized_authors = normalize_author_list(ref["authors"], initials=True)
-        hypothesis = Hypothesis("test-fielded-thesis", {
-                            "author": normalized_authors,
-                            "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
-                            "year": ref["year"]},
-                        get_thesis_score_for_input_fields,
-                        input_fields=ref,
-                        normalized_authors=normalized_authors)
-        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
-
-        # no thesis indication
-        solution = {
-            u"first_author_norm": u"Rowden, P",
-            u"year": u"2019",
-            u"bibcode": u"2019PhDT........11R",
-            u"identifier":[u"2019PhDT........11R"],
-            u"author":[u"Rowden, Pamela M."],
-            u"pub": u"Ph.D. Thesis",
-            u"doctype": u"phdthesis",
-            u"pub_raw": u"no indicator, The Open University, 2019",
-            u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
-            u"author_norm":[u"Rowden, P"]
-        }
-        ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
-        hypothesis = Hypothesis("test-fielded-thesis", {
-                            "author": normalized_authors,
-                            "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
-                            "year": ref["year"]},
-                        get_thesis_score_for_input_fields,
-                        input_fields=ref,
-                        normalized_authors=normalized_authors)
-        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1)
-
-        # if solution contians multiple authors, penalize
-        solution = {
-            u"first_author_norm": u"Rowden, P",
-            u"year": u"2019",
-            u"bibcode": u"2019PhDT........11R",
-            u"identifier":[u"2019PhDT........11R"],
-            u"author":[u"Rowden, Pamela M.", u"Grady, M. M."],
-            u"pub": u"Ph.D. Thesis",
-            u"doctype": u"phdthesis",
-            u"pub_raw": u"PhD These, The Open University, 2019",
-            u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
-            u"author_norm":[u"Rowden, P", u"Grady, M"]
-        }
-        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.9)
-
-
+    # def test_get_thesis_score_for_input_fields(self):
+    #     """
+    #     test get_thesis_score_for_input_fields
+    #     """
+    #     solution = {
+    #         u"first_author_norm": u"Rowden, P",
+    #         u"year":u"2019",
+    #         u"bibcode":u"2019PhDT........11R",
+    #         u"identifier":[u"2019PhDT........11R"],
+    #         u"author":[u"Rowden, Pamela M."],
+    #         u"pub":u"Ph.D. Thesis",
+    #         u"doctype":u"phdthesis",
+    #         u"pub_raw":u"PhD These, The Open University, 2019",
+    #         u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
+    #         u"author_norm":[u"Rowden, P"]
+    #     }
+    #     ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
+    #     # note that specifying hints here is useless since we are passing the solution in already
+    #     # put it here to know what information was used in the query corresponding to the scare function called
+    #     normalized_authors = normalize_author_list(ref["authors"], initials=True)
+    #     hypothesis = Hypothesis("test-fielded-thesis", {
+    #                         "author": normalized_authors,
+    #                         "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
+    #                         "year": ref["year"]},
+    #                     get_thesis_score_for_input_fields,
+    #                     input_fields=ref,
+    #                     normalized_authors=normalized_authors)
+    #     self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 3)
+    #
+    #     # wrong initial
+    #     ref = {"authors": "Rowden, R.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
+    #     # note that specifying hints here is useless since we are passing the solution in already
+    #     # put it here to know what information was used in the query corresponding to the scare function called
+    #     normalized_authors = normalize_author_list(ref["authors"], initials=True)
+    #     hypothesis = Hypothesis("test-fielded-thesis", {
+    #                         "author": normalized_authors,
+    #                         "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
+    #                         "year": ref["year"]},
+    #                     get_thesis_score_for_input_fields,
+    #                     input_fields=ref,
+    #                     normalized_authors=normalized_authors)
+    #     self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1)
+    #
+    #     # mistaken year
+    #     ref = {"authors": "Rowden, P.", "year": "2018", "refstr": "PhD These, The Open University, 2019"}
+    #     normalized_authors = normalize_author_list(ref["authors"], initials=True)
+    #     hypothesis = Hypothesis("test-fielded-thesis", {
+    #                         "author": normalized_authors,
+    #                         "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
+    #                         "year": ref["year"]},
+    #                     get_thesis_score_for_input_fields,
+    #                     input_fields=ref,
+    #                     normalized_authors=normalized_authors)
+    #     self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
+    #
+    #     # no thesis indication
+    #     solution = {
+    #         u"first_author_norm": u"Rowden, P",
+    #         u"year": u"2019",
+    #         u"bibcode": u"2019PhDT........11R",
+    #         u"identifier":[u"2019PhDT........11R"],
+    #         u"author":[u"Rowden, Pamela M."],
+    #         u"pub": u"Ph.D. Thesis",
+    #         u"doctype": u"phdthesis",
+    #         u"pub_raw": u"no indicator, The Open University, 2019",
+    #         u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
+    #         u"author_norm":[u"Rowden, P"]
+    #     }
+    #     ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
+    #     hypothesis = Hypothesis("test-fielded-thesis", {
+    #                         "author": normalized_authors,
+    #                         "pub_escaped": "(%s)"%" or ".join(self.current_app.config["THESIS_INDICATOR_WORDS"]),
+    #                         "year": ref["year"]},
+    #                     get_thesis_score_for_input_fields,
+    #                     input_fields=ref,
+    #                     normalized_authors=normalized_authors)
+    #     self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1)
+    #
+    #     # if solution contians multiple authors, penalize
+    #     solution = {
+    #         u"first_author_norm": u"Rowden, P",
+    #         u"year": u"2019",
+    #         u"bibcode": u"2019PhDT........11R",
+    #         u"identifier":[u"2019PhDT........11R"],
+    #         u"author":[u"Rowden, Pamela M.", u"Grady, M. M."],
+    #         u"pub": u"Ph.D. Thesis",
+    #         u"doctype": u"phdthesis",
+    #         u"pub_raw": u"PhD These, The Open University, 2019",
+    #         u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
+    #         u"author_norm":[u"Rowden, P", u"Grady, M"]
+    #     }
+    #     self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.9)
+    #
+    #
     # def test_add_publication_evidence_error(self):
     #     """
     #     test add_publication_evidence for when there is a typo in the reference journal
