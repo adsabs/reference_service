@@ -875,40 +875,40 @@ class TestResolver(TestCase):
         self.assertEqual(get_score_for_reference_identifier(solution, hypothesis).get_score(), -1)
 
 
-    def test_get_book_score_for_input_fields(self):
-        """
-        test get_book_score_for_input_fields
-        """
-        solution = {
-            u"doctype":u"book",
-            u"year":u"2019",
-            u"bibcode":u"2019msme.book.....R",
-            u"bibstem":u"msme",
-            u"identifier":[u"2019msme.book.....R"],
-            u"pub_raw":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova, David J. Asher and Margaret D. Campbell-Brown. ISBN 9781108426718. Cambridge University Press, 2019",
-            u"pub":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova",
-            u"first_author_norm":u"Ryabova, G",
-            u"author":[u"Ryabova, Galina O.", u"Asher, David J.", u"Campbell-Brown, Margaret J."],
-            u"title":u"Meteoroids: Sources of Meteors on Earth and Beyond",
-            u"author_norm":["Ryabova, G", "Asher, D", "Campbell-Brown, M"]
-        }
-        # note passing in a mistaken year by a character
-        ref = {"authors": "Ryabova, G., Asher, D., Campbell Brown, M.",
-               "title": "Meteoroids: Sources of Meteors on Earth and Beyond",
-               "year": "2009"}
-        normalized_authors = normalize_author_list(ref["authors"], initials=True)
-        # note that specifying hints here is useless since we are passing the solution in already
-        # put it here to know what information was used in the query corresponding to the scare function called
-        hypothesis = Hypothesis("test-fielded-book-title", {
-                           "author": normalized_authors,
-                            "title": ref["title"],
-                            "year": ref["year"]},
-                        get_book_score_for_input_fields,
-                        input_fields=ref,
-                        page_qualifier=ref.get("qualifier"),
-                        has_etal=False,
-                        normalized_authors=normalized_authors)
-        self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
+    # def test_get_book_score_for_input_fields(self):
+    #     """
+    #     test get_book_score_for_input_fields
+    #     """
+    #     solution = {
+    #         u"doctype":u"book",
+    #         u"year":u"2019",
+    #         u"bibcode":u"2019msme.book.....R",
+    #         u"bibstem":u"msme",
+    #         u"identifier":[u"2019msme.book.....R"],
+    #         u"pub_raw":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova, David J. Asher and Margaret D. Campbell-Brown. ISBN 9781108426718. Cambridge University Press, 2019",
+    #         u"pub":u"Meteoroids: Sources of Meteors on Earth and Beyond. Editors: Galina O. Ryabova",
+    #         u"first_author_norm":u"Ryabova, G",
+    #         u"author":[u"Ryabova, Galina O.", u"Asher, David J.", u"Campbell-Brown, Margaret J."],
+    #         u"title":u"Meteoroids: Sources of Meteors on Earth and Beyond",
+    #         u"author_norm":["Ryabova, G", "Asher, D", "Campbell-Brown, M"]
+    #     }
+    #     # note passing in a mistaken year by a character
+    #     ref = {"authors": "Ryabova, G., Asher, D., Campbell Brown, M.",
+    #            "title": "Meteoroids: Sources of Meteors on Earth and Beyond",
+    #            "year": "2009"}
+    #     normalized_authors = normalize_author_list(ref["authors"], initials=True)
+    #     # note that specifying hints here is useless since we are passing the solution in already
+    #     # put it here to know what information was used in the query corresponding to the scare function called
+    #     hypothesis = Hypothesis("test-fielded-book-title", {
+    #                        "author": normalized_authors,
+    #                         "title": ref["title"],
+    #                         "year": ref["year"]},
+    #                     get_book_score_for_input_fields,
+    #                     input_fields=ref,
+    #                     page_qualifier=ref.get("qualifier"),
+    #                     has_etal=False,
+    #                     normalized_authors=normalized_authors)
+    #     self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
 
 
     # def test_get_thesis_score_for_input_fields(self):
