@@ -8,7 +8,7 @@ import traceback
 
 from flask import current_app
 
-from referencesrv.resolver.common import Undecidable, NoSolution, Solution, OverflowOrNone, Solr
+from referencesrv.resolver.common import Undecidable, NoSolution, Solution, OverflowOrNone, Solr, Incomplete
 from referencesrv.resolver.solrquery import Querier
 from referencesrv.resolver.hypotheses import Hypotheses
 from referencesrv.resolver.authors import normalize_author_list
@@ -16,9 +16,10 @@ from referencesrv.resolver.authors import normalize_author_list
 # metacharacters and reserved words of the ADS solr parser
 SOLR_ESCAPABLE = re.compile(r"""(?i)([-]|\bto\b|\band\b|\bor\b|\bnot\b|\bnear\b)""")
 # remove punctuations in title since it is causing error in solr query, keep only -
-REMOVE_PUNCTUATION = re.compile(r"[()\[\]:\\/*?\"+~^,=#']")
+REMOVE_PUNCTUATION = re.compile(r"[()\[\]:\\/*?\"+~^,=#'{}]")
 
 AUTHOR_LAST_NAME = re.compile(r"([A-Z][a-z]+)")
+AUTHOR_LAST_NAME_CASE_INSENSITIVE = re.compile(r"([A-Za-z]+)")
 
 # mappings from standard hint keys to actual solr keywords
 # this is so that renaming solr indices would not affect hypothesis generation.
@@ -37,7 +38,12 @@ def make_solr_condition_author(value):
     # something went wrong with normalization,
     # so grab all last names and insert semicolon between them
     if ";" not in value:
-        value = '; '.join(AUTHOR_LAST_NAME.findall(value))
+        lastname = '; '.join(AUTHOR_LAST_NAME.findall(value))
+        # most probably lastname is not capitalized
+        # so grab the words
+        if len(lastname) == 0:
+            lastname = '; '.join(AUTHOR_LAST_NAME_CASE_INSENSITIVE.findall(value))
+        value = lastname
     # authors fields have special serialization rules
     return " AND ".join('"%s"' % s.strip() for s in value.split(";"))
 
@@ -296,7 +302,7 @@ def solve_reference(ref):
     :return:
     """
     if not ref.enough_to_proceed():
-        raise NoSolution("Not enough information to resolve the record.", ref)
+        raise Incomplete("Not enough information to resolve the record.", ref)
 
     possible_solutions = []
     for hypothesis in Hypotheses.iter_hypotheses(ref):

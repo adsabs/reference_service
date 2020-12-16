@@ -365,7 +365,7 @@ def string_similarity(str_a, str_b):
     return (len(words)-2*missing_words)/float(len(words))
 
 
-def add_publication_evidence(evidences, ref_pub, ref_bibstem, ads_pub, ads_bibcode, ads_bibstem):
+def add_publication_evidence(evidences, ref_pub, ref_bibstem, ref_str, ads_pub, ads_bibcode, ads_bibstem):
     """
     adds evidence from comparing the publication string within the
     reference with ADS' one and the suspected bibcode.
@@ -378,6 +378,7 @@ def add_publication_evidence(evidences, ref_pub, ref_bibstem, ads_pub, ads_bibco
     :param evidences:
     :param ref_pub:
     :param ref_bibstem:
+    :param ref_str:
     :param ads_pub:
     :param ads_bibcode:
     :return:
@@ -401,6 +402,11 @@ def add_publication_evidence(evidences, ref_pub, ref_bibstem, ads_pub, ads_bibco
         if string_similarity(ref_pub, ads_bibstem) >= 0.5:
             evidences.add_evidence(0, 'pubstring')
             return
+
+    # if no match is found, as a last attempt, see if bibstem is in ref_str
+    # in that case do not score
+    if re.search(r"\b%s\b"%ads_bibstem, ref_str):
+        return
 
     total_ref_words, missing_ref_words = compute_pubstring_statistics(ref_pub, ads_pub, ads_bibcode)
     if total_ref_words:

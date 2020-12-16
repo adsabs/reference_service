@@ -91,7 +91,6 @@ def cache_resolved_get(reference):
     :param reference:
     :return:
     """
-    return None
     try:
         reference_md5 = md5(reference).hexdigest()
         resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5)
@@ -234,7 +233,6 @@ def xml_post():
     results = []
     for parsed_reference in parsed_references:
         try:
-            start_time = time.time()
             resolved = str(solve_reference(Hypotheses(parsed_reference)))
             if resolved.startswith('0.0'):
                 raise "Not Resolved"

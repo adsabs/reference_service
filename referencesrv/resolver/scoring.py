@@ -55,14 +55,15 @@ def get_author_year_pub_score_for_input_fields(result_record, hypothesis):
     """
     evidences = get_author_year_score_for_input_fields(result_record, hypothesis)
 
-    input_fields = hypothesis.get_detail('input_fields')
+    input_fields = hypothesis.get_detail("input_fields")
 
     add_publication_evidence(evidences,
-        input_fields.get('pub', ''),
-        input_fields.get('bibstem',''),
-        result_record.get('pub', ''),
-        result_record.get('bibcode', ''),
-        result_record.get('bibstem', ''))
+        input_fields.get("pub", ""),
+        input_fields.get("bibstem",""),
+        input_fields.get("refstr", ""),
+        result_record.get("pub", ""),
+        result_record.get("bibcode", ""),
+        result_record.get("bibstem", ""))
 
     return evidences
 
@@ -89,6 +90,8 @@ def get_volume_page_score_for_input_fields(result_record, hypothesis):
 
     ref_str = input_fields.get('refstr', '')
 
+    ref_volume = ref_page = None
+
     if exist == 0:
         # see if ads_volume is in the ref_str
         ref_volume = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
@@ -104,6 +107,8 @@ def get_volume_page_score_for_input_fields(result_record, hypothesis):
                 # volume matches, see if ads_page is in the ref_str
                 ref_volume = ads_volume
                 ref_page = ads_page if re.search(r'(\b%s)' % ads_page, ref_str) else None
+            else:
+                ref_volume = input_fields['volume']
         elif 'page' in input_fields:
             if input_fields['page'] == ads_volume:
                 ref_page = ads_volume
@@ -113,6 +118,8 @@ def get_volume_page_score_for_input_fields(result_record, hypothesis):
                 # page matches, see if ads_volume is in the ref_str
                 ref_page = ads_page
                 ref_volume = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
+            else:
+                ref_page = input_fields['page']
     else: # == 2
         ref_page = input_fields['page']
         ref_volume = input_fields['volume']
@@ -229,6 +236,7 @@ def get_book_score_for_input_fields(result_record, hypothesis):
     add_publication_evidence(evidences,
         input_fields.get("pub", ""),
         input_fields.get("bibstem", ""),
+        input_fields.get("refstr", ""),
         result_record.get("title", ""),
         result_record.get("bibcode", ""),
         result_record.get("bibstem", ""))
@@ -313,6 +321,7 @@ def get_chapter_score_for_input_fields(result_record, hypothesis):
         add_publication_evidence(tmp_evidence,
                                  ref_pub,
                                  input_fields.get("bibstem", ""),
+                                 input_fields.get("refstr", ""),
                                  ads_pub,
                                  result_record.get("bibcode", ""),
                                  result_record.get("bibstem", ""))

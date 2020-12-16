@@ -51,7 +51,9 @@ class Querier(object):
             response = client().get(
                 url=self.endpoint,
                 headers=self.standard_headers,
-                params=self.make_params(query))
+                params=self.make_params(query),
+                timeout=10
+            )
             current_app.logger.debug("Query executed in %s ms" % ((time.time() - start_time)*1000))
 
             # all non-200 responses

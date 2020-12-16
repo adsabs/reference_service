@@ -405,6 +405,11 @@ class Solr(Error):
     is raised when solr returns an error.
     """
 
+class Incomplete(Error):
+    """
+    is raised when parsed reference is incomplete.
+    """
+
 def round_two_significant_digits(num):
     """
 

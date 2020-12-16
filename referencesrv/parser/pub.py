@@ -22,11 +22,11 @@ class PubToken():
     TITLE_MULTI_PART_PATTERN = r'[A-Z]+[A-Za-z\d\'\s\-\+\?\.\:]+'
     TITLE_FREE_FALL_PATTERN = r'[A-Z]+[A-Za-z\d\'\s\:\-\+]+(\(.*\)||(\d+\.\d+\-?)*)?[A-Za-z\d\'\s\:\-\+]+' # can have parenthesis and numeric value
     TITLE_JOURNAL_GLUE_PATTERN = r'[.,\s]'
-    JOURNAL_PATTERN = r'[A-Z]+[A-Za-z0-9\.\s\'\-&]+[A-Za-z]+'
-    JOURNAL_MIXED_PATTERN = r'(((?i)arxiv:e-prints)|[A-Za-z0-9\.\s\'\-&]+[A-Za-z]+)'   # note that journal can start with a number (ie, 35th meeting), and number can in the juornal, but not at the end, since it is most likely volume
+    JOURNAL_PATTERN = r'[A-Z]+[A-Za-z0-9\.\s\'\-&]+[A-Za-z]+\b'
+    JOURNAL_MIXED_PATTERN = r'(((?i)arxiv:e-prints)|[A-Za-z0-9\.\s\'\-&:]+[A-Za-z]+\b)'   # note that journal can start with a number (ie, 35th meeting), and number can in the juornal, but not at the end, since it is most likely volume
     POST_JOURNAL_PATTERN = r'[\s\d.,;\-]+(\w\d+)?'              # note that there could be page qualifier that proceed by number only
     POST_JOURNAL_PATTERN_ALL = r'[\d\W\w\s]'
-    PUBLISHER_PATTERN = r'[A-Z]+[A-Za-z0-9\.\:\s\'\-&()]+[A-Za-z]+'
+    PUBLISHER_PATTERN = r'[A-Z]+[A-Za-z0-9\.\:\s\'\-&()]+[A-Za-z]+\b'
     YEAR_PATTERN = "[12][089]\d\d[a-z]?"
     TITLE_JOURNAL_PUBLISHER_EXTRACTOR = re.compile(r'^%s[\"\']*(?P<title>%s)[.,\"\']+\s+(:?[Ii][Nn][:\s])?(?P<journal>%s)%s\(?(?P<publisher>%s)\)?[\s\d,;.]*$'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_PATTERN, JOURNAL_PATTERN, POST_JOURNAL_PATTERN, PUBLISHER_PATTERN))
     TITLE_JOURNAL_QUOTE_JOURNAL_ONLY = r'^%s(?P<title>%s)[\"\']\s*(?P<journal>%s)%s*[\"\']'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_JOURNAL_FREE_FALL_PATTERN, TITLE_JOURNAL_FREE_FALL_PATTERN, TITLE_JOURNAL_GLUE_PATTERN)
@@ -45,10 +45,12 @@ class PubToken():
     JOURNAL_ONLY_WITH_EDITOR = r'^%s(?P<unknown>[Ee][Dd][Ss]?|[Ii][Nn][:\s]+)?\s*(?P<journal>%s)%s+%s+$'%(PRE_TITLE_JOURNAL_PATTERN, JOURNAL_MIXED_PATTERN, TITLE_JOURNAL_GLUE_PATTERN, POST_JOURNAL_PATTERN_ALL)
     JOURNAL_ONLY_FREE_FALL = r'^%s(?P<unknown>[a-z\s,]*)(?P<journal>(%s)|[%s])%s.*$'%(PRE_TITLE_JOURNAL_PATTERN, JOURNAL_MIXED_PATTERN, WORDS_IN_TITLE_NOT_CAPITAL, POST_JOURNAL_PATTERN)
     JOURNAL_ONLY_QUOTE = r'^%s(?P<unknown>.*)[\"\'](?P<journal>%s)[\"\'].*$'%(PRE_TITLE_JOURNAL_PATTERN, JOURNAL_MIXED_PATTERN)
+    JOURNAL_ONLY_QUOTE_MUST = r'^%s(?P<unknown>.*)[\"\']+(?P<journal>.*)[\"\']+.*$'%(PRE_TITLE_JOURNAL_PATTERN)
     JOURNAL_ONLY_ITS_TITLE = r'^%s(?P<journal>%s)%s'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_PATTERN, POST_JOURNAL_PATTERN)
     JOURNAL_ONLY_EXTRACTOR = [re.compile(JOURNAL_ONLY_MEETING), re.compile(JOURNAL_ONLY_WITH_EDITOR),
                               re.compile(JOURNAL_ONLY_LOWER_CASE), re.compile(JOURNAL_ONLY_FREE_FALL),
-                              re.compile(JOURNAL_ONLY_QUOTE), re.compile(JOURNAL_ONLY_ITS_TITLE)]
+                              re.compile(JOURNAL_ONLY_QUOTE), re.compile(JOURNAL_ONLY_ITS_TITLE),
+                              re.compile(JOURNAL_ONLY_QUOTE_MUST)]
     JOURNAL_ABBREVIATED_EXTRACTOR = re.compile(r'^([A-Z][A-Za-z\.]*\s*)+$')
 
     CAPITAL_FIRST_CHAR = re.compile(r'([A-Z].*$)')
@@ -65,6 +67,14 @@ class PubToken():
     TOKENS_IDENTIFIED = re.compile(r'\|[a-z\_]+\|')
 
     REMOVE_PUNCTUATION = re.compile(r"[()\[\]\\/*?\"+~^,=#']")
+
+    IS_JOURNAL = re.compile(r"\b(J\.?|Journal)\b")
+
+    IS_EDITION = re.compile(r"\b(ed|eds|edition)\.?\b", re.IGNORECASE)
+
+    LEFT_YEAR_RIGHT = re.compile(r"^(?P<left>.*?(?=[12][09]\d\d))(?P<year>[12][09]\d\d)(?P<right>.*)$")
+    ALPHA_WORDS = re.compile(r"(\b[A-Za-z\s\&]+\b)")
+    AUTHOR_RESIDUE = re.compile(r"([A-Z]+\.)")
 
     def __init__(self):
         """
@@ -113,6 +123,21 @@ class PubToken():
         return ' '.join(self.segment_dict.get('publisher', []))
 
 
+    def remove_residue(self, reference_str):
+        """
+
+        :param reference_str:
+        :return:
+        """
+        match = self.LEFT_YEAR_RIGHT.search(reference_str)
+        if match:
+            if self.ALPHA_WORDS.search(match.group('right')):
+                residue = match.group('left')
+                if self.AUTHOR_RESIDUE.findall(residue):
+                    return reference_str.replace(residue, '')
+        return reference_str
+
+
     def identify(self, reference_str, nltk_tagger, range_taken, have_editor):
         """
         journal, title, and publisher are multi word elements
@@ -127,6 +152,7 @@ class PubToken():
         self.segment_dict.update({'range_taken':range_taken, 'have_editor':have_editor})
 
         reference_str_tmp = self.TOKENS_IDENTIFIED.sub('', reference_str)
+        reference_str_tmp = self.remove_residue(reference_str_tmp)
 
         # nested quotes messes up RE that relies on quotes to segment title/journal,
         # if there are any nested quotes go to nltk segmentation directly
@@ -137,9 +163,11 @@ class PubToken():
                 title = extractor.group('title').strip()
                 journal = extractor.group('journal').strip()
                 publisher = extractor.group('publisher').strip()
-                reference_str = self.mark_identified(reference_str, title, journal, publisher)
-                self.save_identified(title, journal, publisher)
-                return reference_str
+                # make sure we have found publisher
+                if self.is_publisher_or_location(publisher):
+                    reference_str = self.mark_identified(reference_str, title, journal, publisher)
+                    self.save_identified(title, journal, publisher)
+                    return reference_str
 
             # attempt to extract title and journal
             for i, tje in enumerate(self.TITLE_JOURNAL_EXTRACTOR):
@@ -154,6 +182,20 @@ class PubToken():
                             if self.publisher_idx([journal]) == 0:
                                 publisher = [journal]
                                 journal = ''
+                            # make sure the second substring identified as journal is not edition number
+                            elif self.IS_EDITION.search(journal):
+                                publisher = [journal]
+                                journal = title
+                                title = ''
+                            # make sure two tokens identified is actually two tokens
+                            # sometimes an a comma between journal names breaks it erroneously
+                            # ie J. Phys. B: At., Mol. and Opt. Phys.
+                            elif self.IS_JOURNAL.search(title):
+                                match = re.search(r'(%s.*%s)'%(re.escape(title),re.escape(journal)), reference_str_tmp)
+                                if match:
+                                    journal = match.group()
+                                    title = ''
+                                    publisher = []
                             else:
                                 publisher = []
                             # any other tokens left that is part of the publisher
@@ -175,14 +217,18 @@ class PubToken():
                             journal = journal_save = ''
                         elif ':' in journal:
                             if journal.replace(' ','').lower() == 'arxiv:e-prints':
+                                title = ''
                                 # apprently crf gets confused with having arxiv both as arxiv identifier and
                                 # be part of journal, so remove it for journal, on the side of resolver
                                 # `eprints` is enough indication that it is `arxiv:e-prints`
                                 journal_save = 'eprints'
-                            else:
-                                # it is actually title, since the only journal with colon is eprint
+                            elif not self.IS_JOURNAL.findall(journal):
+                                # it is title, since journal with colon other than eprint, have J or Journal in them
                                 title = journal
                                 journal = journal_save = ''
+                            else:
+                                title = ''
+                                journal_save = journal
                         else:
                             title = ''
                             journal_save = journal
@@ -209,8 +255,7 @@ class PubToken():
         if match:
             reference_str_tmp = match.group()
             reference_str_tmp = self.TITLE_JOURNAL_PUNCTUATION_REMOVER.sub(' ', reference_str_tmp).replace(',', '.')
-            tree = NPChunker.parse(
-                nltk.tag._pos_tag(nltk.word_tokenize(reference_str_tmp), tagger=nltk_tagger, lang='eng'))
+            tree = NPChunker.parse(nltk.tag._pos_tag(nltk.word_tokenize(reference_str_tmp), tagger=nltk_tagger, lang='eng'))
 
             # identify noun phrases
             nps = []
@@ -222,6 +267,11 @@ class PubToken():
                                         self.SPACE_AROUND_AMPERSAND_REMOVER.sub(r'\1&\2', picks)).strip(' ')
                     if len(aleaf) >= 1 and is_punctuation(aleaf) == 0:
                         nps.append(aleaf)
+
+            # did not identify any fields
+            if len(nps) == 0:
+                self.save_identified([], [], [])
+                return reference_str
 
             # check for possible publisher in the segmented nps
             publisher = []
@@ -408,14 +458,16 @@ class PubToken():
         :param reference_str:
         :return:
         """
-        for pat in self.NESTED_QUOTE:
-            match = pat.findall(reference_str)
-            if len(match) >= 2:
-                for i in range(len(match)-1):
-                    inbetween = re.search(r"%s\W+(.*)\W+%s"%(match[i], match[i+1]), reference_str)
-                    if inbetween and len(inbetween.group(1).strip().split()) > 1:
-                        return True
-        return False
+        try:
+            for pat in self.NESTED_QUOTE:
+                match = pat.findall(reference_str)
+                if len(match) >= 2:
+                    for i in range(len(match)-1):
+                        inbetween = re.search(r"%s\W+(.*)\W+%s"%(match[i], match[i+1]), reference_str)
+                        if inbetween and len(inbetween.group(1).strip().split()) > 1:
+                            return True
+        except:
+            return False
 
 
     def crop_title(self, title):

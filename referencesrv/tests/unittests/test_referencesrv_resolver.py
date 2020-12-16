@@ -61,18 +61,18 @@ class TestResolver(TestCase):
         """
         # when there is no comma before the and
         self.assertEqual(get_authors(u'S. Kung and F. Bayer: "Collected Junk", A&A 2009'), 'S. Kung and F. Bayer')
-        # when there is a comma after both lasat name and first initials
+        # when there is a comma after both lastname and first initials
         self.assertEqual(get_authors(u'Przybilla, N., & Maeder, A. 2010'), 'Przybilla, N., & Maeder, A.')
-        with self.assertRaises(Exception) as context:
-            get_authors('Przybilla N & Maeder A 2010')
-        self.assertTrue("No discernible authors in 'Przybilla N & Maeder A 2010'" in context.exception)
+        # when initials are trailing and there is no dot, recognized first author lastname only
+        self.assertEqual(get_authors(u'Przybilla N & Maeder A 2010'), 'Przybilla')
+        # when initials are leading and there are no dots, recognized first author lastname only
+        self.assertTrue(get_authors('N Przybilla & A Maeder 2010'), 'Przybilla')
         # where there is a `Collaboration` and also `and xxx colleagues` in the list of authors
         self.assertEqual(get_authors(u'Gaia Collaboration, and 625 colleagues 2016. The Gaia mission. Astronomy and Astrophysics 595, A1.'),
                          'Gaia Collaboration, and 625 colleagues')
         # where there is a `co-authors` in the list of authors
         self.assertEqual(get_authors(u'N., Zhao, Y., Diaz-Santos, T., and 18 co-authors, 2017, "ApJS" 230, 1'),
                          'N., Zhao, Y., Diaz-Santos, T., and 18 co-authors')
-
 
 
     def test_normalize_single_author(self):
@@ -97,7 +97,8 @@ class TestResolver(TestCase):
         self.assertEqual(normalize_author_list("N.A. Foo and C. K. Bar", initials=False), 'Foo; Bar')
         self.assertEqual(normalize_author_list("M. de Alembert & K.V.U. vanBeuren", initials=False), 'de Alembert; vanBeuren')
         self.assertEqual(normalize_author_list("L. von Beethoven-Tschaikowski et al.", initials=False), 'von Beethoven-Tschaikowski')
-        self.assertEqual(normalize_author_list("Unable to decide", initials=False), "Unable to decide")
+        self.assertEqual(normalize_author_list("Lastname maybe or not", initials=False), "Lastname")
+        self.assertEqual(normalize_author_list("lastname maybe or not", initials=False), "lastname maybe or not")
 
     def test_get_first_author(self):
         """
@@ -235,8 +236,8 @@ class TestResolver(TestCase):
                                          'conferences.dat',
                                          'conferences_abbrev.dat',
                                          'preprints.dat',
-                                         'aps_abbrev.dat',
-                                         'bibstems.dat']]
+                                         'bibstems.dat',
+                                         'journals_not_ADS.dat']]
         s = TrigdictSourceMatcher(authority_files)
         self.assertEqual(s.exactmatch("A&A")[0][0], 1.0)
         self.assertEqual(s.exactmatch("Ap J"), None)
@@ -625,6 +626,7 @@ class TestResolver(TestCase):
         ref = {'authors': 'Accomazzi, A.',
                'journal': 'AAS233 Meeting',
                'volume': '0',
+               'page': '0',
                'year': '2019'}
         with self.assertRaises(Exception) as context:
             solve_reference(Hypotheses(ref))
@@ -749,6 +751,7 @@ class TestResolver(TestCase):
         add_publication_evidence(evidences,
                                  'The NASA Astrophysics Data System’s Decadal Plan for the 2020s',
                                  'AAS',
+                                 '',
                                  'The NASA Astrophysics Data System’s Decadal Plan for the 2020s',
                                  '2019AAS...23320704A',
                                  'AAS')
@@ -756,6 +759,7 @@ class TestResolver(TestCase):
         evidences = Evidences()
         add_publication_evidence(evidences,
                                  'Nucl. Instrum. Methods Phys. Res. A',
+                                 '',
                                  '',
                                  'Nuclear Instruments and Methods in Physics Research A',
                                  '1997NIMPA.389...81B',
@@ -766,6 +770,7 @@ class TestResolver(TestCase):
                                  'The NASA Astrophysics Data System’s Decadal Plan for the 2020s',
                                  '',
                                  '',
+                                 '',
                                  '2019AAS...23320704A',
                                  'AAS')
         self.assertEqual(evidences.get_score(), -1)
@@ -773,12 +778,24 @@ class TestResolver(TestCase):
         add_publication_evidence(evidences,
                                  '',
                                  '',
+                                 '',
                                  'Nuclear Instruments and Methods in Physics Research A',
                                  '1997NIMPA.389...81B',
                                  'NIMPA')
         self.assertEqual(evidences.get_score(), None)
+        # when there is an error in reference, the author is not parsed properly,
+        # and hence journal is not identified correctly, if ads bibstem is in ref_str, do not penalize
         evidences = Evidences()
-        add_publication_evidence(evidences, '', '', '', '', '')
+        add_publication_evidence(evidences,
+                                 'iaz',
+                                 '',
+                                 'Simon-D iaz, S., Castro, N., Garc ia, M., & Herrero, A. 2011a, in IAUS, Vol. 272, 310-312',
+                                 'Active OB Stars: Structure, Evolution, Mass Loss, and Critical Limits',
+                                 '2011IAUS..272..310S',
+                                 'IAUS')
+        self.assertEqual(evidences.get_score(), None)
+        evidences = Evidences()
+        add_publication_evidence(evidences, '', '', '', '', '', '')
         self.assertEqual(evidences.get_score(), None)
 
 
@@ -984,7 +1001,7 @@ class TestResolver(TestCase):
         self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.9)
 
 
-    def test_add_publication_evidence(self):
+    def test_add_publication_evidence_error(self):
         """
         test add_publication_evidence for when there is a typo in the reference journal
         """
@@ -1147,20 +1164,52 @@ class TestResolver(TestCase):
         self.assertEqual(get_score_for_baas_match(solution, hypothesis), -1)
 
 
+    def test_identify_incomplete(self):
+        """
+        test when parsed reference is incomplete
+        """
+        ref = {'year': '2020',
+               'refstr': '[4] Bennett, J. S., & Sijacki, D. 2020, arXiv e-prints,',
+               'authors': 'Bennett, J. S., and Sijacki, D.'}
+        with self.assertRaises(Exception) as context:
+            solve_reference(Hypotheses(ref))
+        self.assertTrue('Not enough information to resolve the record.' in context.exception)
+
+
     def test_build_bibcode(self):
         """
-
-        :return:
+        test building bibcode to query solr with it
         """
+        ref = {'journal': u'a&a',
+               'authors': u'Verela et al.',
+               'refstr': u'Verela et al., 2016, a&a, 589, 37',
+               'volume': u'589',
+               'year': u'2016',
+               'page': u'37'}
+        self.assertEqual(Hypotheses(ref).construct_bibcode(),
+                         ['2016A&A...589...37V', '2016?????.589...37V', '2016A&A...589?..37V', '2016?????.589?..37V'])
+        ref = {'journal': u'A&A',
+               'authors': u'Shakura N. I., Sunyaev R. A.',
+               'refstr': u'Shakura N. I., Sunyaev R. A., 1973, A&A, 24, 337',
+               'volume': u'24',
+               'year': u'1973',
+               'page': u'337'}
+        self.assertEqual(Hypotheses(ref).construct_bibcode(),
+                         ['1973A&A....24..337S', '1973?????..24..337S', '1973A&A....24?.337S', '1973?????..24?.337S'])
+        ref = {'journal': u'A&A',
+               'authors': u'N. Aghanim et al., Planck Collaboration',
+               'refstr': u'N. Aghanim et al., Planck Collaboration, "A&A" 641 (2020) A6.',
+               'volume': u'641',
+               'year': u'2020',
+               'page': u'A6'}
+        self.assertEqual(Hypotheses(ref).construct_bibcode(),
+                         ['2020A&A...641A...6A', '2020?????.641A...6A'])
 
-        # Verela et al., 2016, a&a, 589, 37
-        # Shakura N. I., Sunyaev R. A., 1973, A&A, 24, 337
-        # and one with qualifier
+
 
 class TestResolverSolrQueryCase(TestCase):
     """
     set max number of solr records processing from 100 to 2 to verify no solution is returned
-
     """
     def create_app(self):
         self.current_app = app.create_app(**{

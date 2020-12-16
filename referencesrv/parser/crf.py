@@ -31,10 +31,11 @@ class CRFClassifierText(object):
     IGNORE_IF = re.compile(r'(in press|submitted|to appear)', flags=re.IGNORECASE)
 
     QUOTES_AROUND_ETAL_REMOVE = re.compile(r'(.*)(")(et al\.?)(")(.*)', re.IGNORECASE)
-    TO_ADD_DOT_AFTER_LEAD_INITIAL = re.compile(r'\b([A-Z])(\s,?[A-Z][A-Za-z]+,)')
-    TO_ADD_DOT_AFTER_TRAIL_INITIAL = re.compile(r'\b([A-Z][A-Za-z]+,\s[A-Z],)\s')
-    TO_ADD_DOT_AFTER_CONNECTED_INITIALS = re.compile(r'\b([A-Z])\s*([A-Z])(\s,?[A-Z][A-Za-z]+,)')
-    TO_REMOVE_HYPEN_NEAR_INITIAL = [re.compile(r'([A-Z]\.)(\-)([A-Z]\.)'), re.compile(r'([A-Z])(\-)(\.)')]
+    TO_ADD_DOT_AFTER_INITIALS = re.compile(r'\b([A-Z]{1}(?!\.))([\s,]+)([A-Z12(]|and)')
+    TO_ADD_SEPARATE_INITIALS = re.compile(r'\b([A-Z]{1})([A-Z]{1})([,\s]{1})')
+    SEPARATE_AUTHOR = re.compile(r'^((.*?)([\d\":]+))(.*)$')
+    TO_REMOVE_HYPEN_NEAR_INITIAL = [re.compile(r'([A-Z]\.)(\-)([A-Z]\.)'), re.compile(r'([A-Z])(\-)(\.)'),
+                                    re.compile(r'([A-Z])(\-)([A-Z])\b')]
 
     URL_EXTRACTOR = re.compile(r'((url\s*)?(http)s?://[A-z0-9\-\.\/\={}?&%]+)', re.IGNORECASE)
     MONTH_NAME_EXTRACTOR = re.compile(r'\b([Jj]an(?:uary)?|[Ff]eb(?:ruary)?|[Mm]ar(?:ch)?|[Aa]pr(?:il)?|[Mm]ay|[Jj]un(?:e)?|[Jj]ul(?:y)?|[Aa]ug(?:ust)?|[Ss]ep(?:tember)?|[Oo]ct(?:ober)?|([Nn]ov|[Dd]ec)(?:ember)?)\b')
@@ -440,7 +441,7 @@ class CRFClassifierText(object):
                 reference_str = reference_str.replace(url[0], '|na_url_%d|'%i)
         extractor = self.MONTH_NAME_EXTRACTOR.search(reference_str)
         if extractor:
-            na_month = extractor.group()
+            na_month = extractor.group().strip()
             reference_str = reference_str.replace(na_month, '|na_month|')
 
         # step 2: identify doi/arxiv/ascl
@@ -494,6 +495,27 @@ class CRFClassifierText(object):
         return ref_words
 
 
+
+    def dots_after_initials(self, reference_str):
+        """
+
+        :param reference_str:
+        :return:
+        """
+        try:
+            author_part = self.SEPARATE_AUTHOR.search(reference_str).group(1)
+            # separate first and middle initials if there are any attached, add dot after each
+            # make sure there is a dot after single character, repeat to capture middle name
+            reference_str = reference_str.replace(author_part,
+                                self.TO_ADD_SEPARATE_INITIALS.sub(r"\1. \2. \3",
+                                    self.TO_ADD_DOT_AFTER_INITIALS.sub(r"\1.\2\3",
+                                        self.TO_ADD_DOT_AFTER_INITIALS.sub(r"\1.\2\3", author_part))))
+        except:
+            pass
+
+        return reference_str
+
+
     def pre_processing(self, reference_str):
         """
         
@@ -507,15 +529,11 @@ class CRFClassifierText(object):
 
         # also if for some reason et al. has been put in double quoted! remove them
         reference_str = self.QUOTES_AROUND_ETAL_REMOVE.sub(r"\1\3\5", reference_str)
-        # make sure there is a dot after first initial, when initial lead
-        reference_str = self.TO_ADD_DOT_AFTER_LEAD_INITIAL.sub(r"\1.\2", reference_str)
-        # make sure there is a dot after first initial, when initial trail
-        reference_str = self.TO_ADD_DOT_AFTER_TRAIL_INITIAL.sub(r"\1.", reference_str)
-        # there are some references that first and middle initials are specified together without the dot
-        reference_str = self.TO_ADD_DOT_AFTER_CONNECTED_INITIALS.sub(r"\1.\2.\3", reference_str)
         # if there is a hypen either between initials, or after initials and before dot, remove it
-        for rhni, replace in zip(self.TO_REMOVE_HYPEN_NEAR_INITIAL, [r"\1 \3", r"\1\3"]):
+        for rhni, replace in zip(self.TO_REMOVE_HYPEN_NEAR_INITIAL, [r"\1 \3", r"\1\3", r"\1. \3"]):
             reference_str = rhni.sub(replace, reference_str)
+        # add dots after initials, separate first and middle if needed
+        reference_str = self.dots_after_initials(reference_str)
         # if no colon after the identifer, add it in
         reference_str = self.ADD_COLON_TO_IDENTIFIER.sub(r"\1:", reference_str)
         # if there is a url for DOI turned it to recognizable DOI
@@ -525,7 +543,7 @@ class CRFClassifierText(object):
 
         for rwb in self.WORD_BREAKER_REMOVE:
             reference_str = rwb.sub(r'\1\3', reference_str)
-        
+
         return reference_str
     
 

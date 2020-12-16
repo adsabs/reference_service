@@ -8,8 +8,6 @@ import unittest
 
 import referencesrv.app as app
 from referencesrv.parser.crf import CRFClassifierText
-from referencesrv.parser.getDataXML import get_xml_tagged_data, get_xml_tagged_data_training, crossref_extract_volume_from_journal
-from stubdata import dataXML
 
 class TestCRFClassifier(TestCase):
     def create_app(self):
@@ -57,7 +55,7 @@ class TestCRFClassifierText(TestCase):
         """ test having a doi """
         reference_str = u'Elisabete da Cunha et al. "The Taipan Galaxy Survey: Scientific Goals and Observing Strat- egy". In: Publications of the Astronomical Society of Australia 34, e047 (2017), e047. DOI: 10. 1017/ pasa. 2017.41. arXiv: 1706.01246.'
         self.assertEqual(self.crf_text.parse(reference_str),
-                         {'doi': u'doi:10.1017/pasa.2017.41',
+                         {'doi': u'10.1017/pasa.2017.41',
                           'title': u'Taipan Galaxy Survey: Scientific Goals Observing Strategy',
                           'journal': u'Publications Astronomical Society Australia',
                           'arxiv': u'arXiv:1706.01246',
@@ -374,7 +372,7 @@ class TestCRFClassifierText(TestCase):
         # still enough information can be extracted to allow matching with records in solr
         reference_str = 'Colwell, J.E., Esposito, L.W.:  Journal of Geophysical Research: Planets 98(E4), 7387 (1993)'
         self.assertEqual(self.crf_text.parse(reference_str),
-                         {'journal': u'Journal Geophysical',
+                         {'journal': u'Journal Geophysical Research Planets',
                           'authors': u'Colwell, J. E., Esposito, L. W.',
                           'refstr': u'Colwell, J.E., Esposito, L.W.:  Journal of Geophysical Research: Planets 98(E4), 7387 (1993)',
                           'volume': u'98',
@@ -387,7 +385,7 @@ class TestCRFClassifierText(TestCase):
         also when there is month of publication which we do not need and want to get tagged as NA """
         reference_str = 'Maxim Pospelov and Yanwen Shang. Lorentz violation in horava-lifshitz-type theories. Phys. Rev. D, 85:105001, May 2012. doi:10.1103/PhysRevD.85.105001. URL https://link.aps.org/doi/10.1103/PhysRevD.85.105001.'
         self.assertEqual(self.crf_text.parse(reference_str),
-                         {'doi': u'doi:10.1103/PhysRevD.85.105001',
+                         {'doi': u'10.1103/PhysRevD.85.105001',
                           'title': u'Lorentz violation horava-lifshitz-type theories',
                           'journal': u'Phys Rev D',
                           'authors': u'Maxim Pospelov and Yanwen Shang.',
@@ -411,7 +409,7 @@ class TestCRFClassifierText(TestCase):
         """ test for having both doi and arxiv nums """
         reference_str = 'K.E. Mesick, W.C. Feldman, E.R. Mullin, L.C. Stonehill, 2020, Icarus, 335, 113397, arXiv:1904.09036, doi:10.1016/j.icarus.2019.113397.'
         self.assertEqual(self.crf_text.parse(reference_str),
-                         {'doi': u'doi:10.1016/j.icarus.2019.113397',
+                         {'doi': u'10.1016/j.icarus.2019.113397',
                           'journal': u'Icarus',
                           'arxiv': u'arXiv:1904.09036',
                           'refstr': u'K.E. Mesick, W.C. Feldman, E.R. Mullin, L.C. Stonehill, 2020, Icarus, 335, 113397, arXiv:1904.09036, doi:10.1016/j.icarus.2019.113397.',
@@ -424,7 +422,7 @@ class TestCRFClassifierText(TestCase):
         """ test for having ascl id """
         reference_str = 'Czesla, S., Schroter, S., Schneider, C. P., et al. 2019, PyA: Python astronomy-related packages, ascl:1906.010'
         self.assertEqual(self.crf_text.parse(reference_str),
-                         {'ascl': 'ascl:1906.010',
+                         {'ascl': '1906.010',
                           'year': '2019',
                           'title': 'PyA: Python astronomy-related packages',
                           'refstr': 'Czesla, S., Schroter, S., Schneider, C. P., et al. 2019, PyA: Python astronomy-related packages, ascl:1906.010',
@@ -441,7 +439,7 @@ class TestCRFClassifierText(TestCase):
                           'page': '471-474'})
 
     def test_035(self):
-        """ only last name with multi parts, note that the first """
+        """ only the last name which is multi parts """
         reference_str = 'van der Klis 2000, ARA&A 38, 717'
         self.assertEqual(self.crf_text.parse(reference_str),
                          {'journal': 'ARA&A',
@@ -607,6 +605,63 @@ class TestCRFClassifierText(TestCase):
                           'year': u'2016',
                           'issue': u'11',
                           'page': u'11,077-11,085'})
+
+    def test_052(self):
+        """ test when token that is not author appears right after (multiple authors) """
+        reference_str = 'T.A. Heim, J. Hinze and A. R. P. Rau, J. Phys. A: Math. Theor. 42, 175203 (2009).'
+        self.assertEqual(self.crf_text.parse(reference_str),
+                         {'journal': u'J Phys Math Theor',
+                          'authors': u'T. A. Heim, J. Hinze and A. R. P. Rau',
+                          'refstr': u'T.A. Heim, J. Hinze and A. R. P. Rau, J. Phys. A: Math. Theor. 42, 175203 (2009).',
+                          'volume': u'42',
+                          'year': u'2009',
+                          'page': u'175203'})
+
+    def test_053(self):
+        """ test when token that is not author appears following author (one author) """
+        reference_str = 'S.K. Suslov, J. Phys. B: At. Mol. Opt. Phys. 42, 185003 (2009).'
+        self.assertEqual(self.crf_text.parse(reference_str),
+                         {'journal': u'J Phys B Mol Opt',
+                          'authors': u'S. K. Suslov',
+                          'refstr': u'S.K. Suslov, J. Phys. B: At. Mol. Opt. Phys. 42, 185003 (2009).',
+                          'volume': u'42',
+                          'year': u'2009', 'page': u'185003'})
+
+    def test_054(self):
+        """ test having encoded doi """
+        reference_str = 'W. Nortershauser, R. Sanchez, Laser spectroscopy at storage rings, Physica Scripta T166 (2015) 014020. doi:10.1088/0031-8949/2015/t166/014020. URL https://doi.org/10.1088%2F0031-8949%2F2015%2Ft166%2F014020'
+        self.assertEqual(self.crf_text.parse(reference_str),
+                         {'doi': u'10.1088/0031-8949/2015/t166/014020',
+                          'title': u'Laser spectroscopy storage rings',
+                          'journal': u'Physica Scripta',
+                          'authors': u'W. Nortershauser, R. Sanchez',
+                          'refstr': u'W. Nortershauser, R. Sanchez, Laser spectroscopy at storage rings, Physica Scripta T166 (2015) 014020. doi:10.1088/0031-8949/2015/t166/014020. URL https://doi.org/10.1088%2F0031-8949%2F2015%2Ft166%2F014020',
+                          'volume': u'T166',
+                          'year': u'2015',
+                          'page': u'014020'})
+
+    def test_055(self):
+        """ test when there is no dot after first initials """
+        reference_str = 'Qiu Z, Chen L and Zonca F 2016 "Physics of Plasmas (1994-present)" 23 090702'
+        self.assertEqual(self.crf_text.parse(reference_str),
+                         {'journal': u'Physics Plasmas 1994-present',
+                          'authors': u'Qiu Z., Chen L. and Zonca F.',
+                          'refstr': u'Qiu Z, Chen L and Zonca F 2016 "Physics of Plasmas (1994-present)" 23 090702',
+                          'volume': u'23',
+                          'year': u'2016',
+                          'page': u'090702'})
+
+    def test_056(self):
+        """ test when collabration has some kind of ID """
+        reference_str = 'Planck Collaboration Int. XLVI. 2016, A&A, 596, A1072'
+        self.assertEqual(self.crf_text.parse(reference_str),
+                         {'journal': u'A&A',
+                          'authors': u'Planck Collaboration Int.',
+                          'refstr': u'Planck Collaboration Int. XLVI. 2016, A&A, 596, A1072',
+                          'volume': u'596',
+                          'year': u'2016',
+                          'page': u'A1072'})
+
 
 
 if __name__ == "__main__":

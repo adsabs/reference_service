@@ -6,6 +6,7 @@ This module keeps track of numeric tokens doi/arxiv/ascl/year/volume/page/issue
 import re
 import datetime
 from collections import OrderedDict
+import urllib
 
 from referencesrv.parser.common import concatenate, replace
 
@@ -15,16 +16,17 @@ class NumericToken():
     IDENTIFYING_TOKEN = OrderedDict(
         [('DOI_IDENTIFIER', ['doi']), ('ARXIV_IDENTIFIER', ['arxiv']), ('ASCL_IDENTIFIER', ['ascl']),
          ('YEAR_IDENTIFIER', ['']), ('VOLUME_IDENTIFIER', ['volume', 'vol']), ('PAGE_IDENTIFIER', ['page', 'pages', 'pp', 'p']),
-         ('ISSN__IDENTIFIER', ['issn']), ('VERSION_IDENTIFIER', ['version']), ('ISSUE_IDENTIFIER', ['issue'])])
+         ('ISSN__IDENTIFIER', ['issn']), ('ISBN__IDENTIFIER', ['isbn']),
+         ('VERSION_IDENTIFIER', ['version']), ('ISSUE_IDENTIFIER', ['issue'])])
 
     # numeric labels
-    NUMERIC_TAGS = ['DOI', 'ARXIV', 'ASCL', 'YEAR', 'VOLUME', 'PAGE', 'ISSN', 'VERSION', 'ISSUE']
+    NUMERIC_TAGS = ['DOI', 'ARXIV', 'ASCL', 'YEAR', 'VOLUME', 'PAGE', 'ISSN', 'ISBN', 'VERSION', 'ISSUE']
 
     PLACEHOLDER = {'doi': '|doi_%d|', 'arxiv': '|arxiv_%d|', 'ascl': '|ascl|',
                    'year': '|year|', 'volume': '|volume|', 'page': '|page|', 'issue': '|issue|',
                    'volume_identifier':'|volume_identifier|', 'page_identifier':'|page_identifier|'}
 
-    DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>((?i)doi)?[\s\.\:]{0,2}\b10\.\s*\d{4}[\d\:\.\-\_\/\(\)A-Za-z\s]+)')
+    DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>((?i)doi)?[\s\.\:]{0,2}\b10\.\s*\d{4}[\d\:\.\-\_\/\(\)%A-Za-z\s]+)')
     DOI_INDICATOR = re.compile(r'(?i)doi:')
     DOI_INDICATOR_CAPTURE = re.compile(r'((?i)doi:\s*)')
     ARXIV_ID_EXTRACTOR = re.compile(r'(?P<arxiv>((?i)(arxiv))?[\s\:]*('
@@ -54,6 +56,16 @@ class NumericToken():
     MATCH_INSIDE_PARENTHESIS = r'(\(%s\))'
 
     MATCH_A_WORD = re.compile(r'\w+')
+
+    WITH_QUALIFIER_PATTERN = r'\b[A-Z]%s\b'
+
+    # from adspy
+    # # regex for ISBN
+    # ISBNregex = re.compile(r'\b([\d\-]+)\b')
+
+    ISBN_EXTRACTOR = re.compile(r'(?P<isbn>ISBN(?:-)?:?\ (978-?|979-?)?\d{1,5}-?\d{1,7}-?\d{1,6}-?\d{1,3})')
+    ISSN_EXTRACTOR = re.compile(r'(?P<issn>ISSN[:\s]+\d{4}-?\d{3}[\d\w]{1})')
+
 
     def __init__(self):
         """
@@ -90,7 +102,7 @@ class NumericToken():
             # remove duplicates if any
             doi = list(set(doi))
             reference_str = self.remove_value(reference_str, 'doi', doi)
-            doi = [d.replace(' ', '').split(':')[-1] for d in doi]
+            doi = [urllib.unquote(d.replace(' ', '').split(':')[-1]) for d in doi]
         else:
             doi = []
 
@@ -104,7 +116,7 @@ class NumericToken():
             # remove duplicates if any
             arxiv = list(set(arxiv))
             reference_str = self.remove_value(reference_str, 'arxiv', arxiv)
-            arxiv = [a.split(':')[-1] for a in arxiv]
+            arxiv = [a.split(':')[-1].strip() for a in arxiv]
 
         # extract arxiv id if there is one
         ascl_id = self.ASCL_ID_EXTRACTOR.search(reference_str)
@@ -114,12 +126,22 @@ class NumericToken():
         else:
             ascl_id = ''
 
-        # TODO: once seen issn in the text reference implement it,
-        # for now just included it to be compatible with the xml side
+        issn = isbn = ''
+        # extract issn if there is one
+        issn_match = self.ISSN_EXTRACTOR.search(reference_str)
+        if issn_match:
+            issn = issn_match.group('issn')
+            reference_str = reference_str.replace(issn, '')
+        # extract isbn if there is one
+        isbn_match = self.ISBN_EXTRACTOR.search(reference_str)
+        if isbn_match:
+            isbn = isbn_match.group('isbn')
+            reference_str = reference_str.replace(isbn, '')
+
         # TODO: version has been tagged in a training file, we are not
         # using that to identify reference yet, so have the PLACEHOLDER for it now
         self.segment_dict.update({'doi': doi, 'arxiv': arxiv, 'ascl': ascl_id.replace(' ', '').split(':')[-1],
-                                  'issn': '', 'version': ''})
+                                  'issn': issn, 'isbn': isbn, 'version': ''})
         return reference_str
 
 
@@ -223,6 +245,8 @@ class NumericToken():
                             issue = the_rest[0]
                     else:
                         unknown = concatenate(unknown, ' '.join(the_rest))
+            volume = self.numeric_with_qualifier(reference_str, volume)
+            page = self.numeric_with_qualifier(reference_str, page)
             reference_str = self.mark_identified_numerals(reference_str, volume, page, issue)
 
         self.segment_dict.update({'page': page, 'year': year, 'volume': volume, 'issue': issue})
@@ -282,6 +306,20 @@ class NumericToken():
             reference_str = reference_str.replace(v, self.PLACEHOLDER[token_label] % i)
         return reference_str
 
+
+    def numeric_with_qualifier(self, reference_str, value):
+        """
+        for fields with qualifier, check to see if there is a one and return the token
+        otherwise return the value
+
+        :param reference_str:
+        :param value:
+        :return:
+        """
+        match = re.findall(self.WITH_QUALIFIER_PATTERN % value, reference_str)
+        if len(match) > 0:
+            return match[0]
+        return value
 
     def mark_identified_numerals(self, reference_str, volume, page, issue):
         """
@@ -524,14 +562,15 @@ class NumericToken():
         return self.is_token_this_label(ref_word, ref_label, 'DOI')
 
 
-    def is_token_issn(self, ref_word, ref_label):
+    def is_token_issn_isbn(self, ref_word, ref_label):
         """
 
         :param ref_word:
         :param ref_label:
         :return:
         """
-        return self.is_token_this_label(ref_word, ref_label, 'ISSN')
+        return self.is_token_this_label(ref_word, ref_label, 'ISSN') or \
+               self.is_token_this_label(ref_word, ref_label, 'ISBN')
 
 
     def is_token_ascl(self, ref_word, ref_label):
@@ -562,16 +601,16 @@ class NumericToken():
         :return: 
         """
         return [
-            self.exist(ref_word, ref_label),            # is it numeric?
-            self.is_token_doi(ref_word, ref_label),     # is it more likely doi?
-            self.is_token_arxiv(ref_word, ref_label),   # is it more likely arXiv id?
-            self.is_token_ascl(ref_word, ref_label),    # is it more likely ascl?
-            self.is_token_year(ref_word, ref_label),    # is it more likely year?
-            self.is_token_volume(ref_word, ref_label),  # is it more likely volume?
-            self.is_token_page(ref_word, ref_label),    # is it more likely page?
-            self.is_token_issn(ref_word, ref_label),    # is it more likely issn?
-            self.is_token_version(ref_word, ref_label), # is it more likely issue?
-            self.is_token_issue(ref_word, ref_label),   # is it more likely issue?
+            self.exist(ref_word, ref_label),                # is it numeric?
+            self.is_token_doi(ref_word, ref_label),         # is it more likely doi?
+            self.is_token_arxiv(ref_word, ref_label),       # is it more likely arXiv id?
+            self.is_token_ascl(ref_word, ref_label),        # is it more likely ascl?
+            self.is_token_year(ref_word, ref_label),        # is it more likely year?
+            self.is_token_volume(ref_word, ref_label),      # is it more likely volume?
+            self.is_token_page(ref_word, ref_label),        # is it more likely page?
+            self.is_token_issn_isbn(ref_word, ref_label),   # is it more likely issn/isbn?
+            self.is_token_version(ref_word, ref_label),     # is it more likely issue?
+            self.is_token_issue(ref_word, ref_label),       # is it more likely issue?
         ]
 
 
@@ -618,7 +657,7 @@ class NumericToken():
         
         :param ref_word:
         :param ref_label:
-        :return: 1 if doi, 2 if arXiv, 3 if ascl, 4 if volume, 5 if page, 6 if issn, 7 if version, 8 if issue
+        :return: 1 if doi, 2 if arXiv, 3 if ascl, 4 if volume, 5 if page, 6 if issn/isbn, 7 if version, 8 if issue
         """
         if ref_label:
             return self.IDENTIFYING_TOKEN.keys().index(ref_label)+1 if ref_label in self.IDENTIFYING_TOKEN.keys() else 0
@@ -642,7 +681,7 @@ class NumericToken():
             1 if which == 3 else 0,   # 3 if ascl,
             1 if which == 4 else 0,   # 4 if volume,
             1 if which == 5 else 0,   # 5 if page,
-            1 if which == 6 else 0,   # 6 if issn
+            1 if which == 6 else 0,   # 6 if issn/isbn,
             1 if which == 7 else 0,   # 7 if version,
             1 if which == 8 else 0,   # 8 if issue,
         ]
@@ -685,9 +724,10 @@ class NumericToken():
         for i in idx:
             id_tag, id = self.cycle_tagged_token(ref_word_list[i], order_to_match[ref_label_list[i]])
             # TODO: return multiple tagged doi and arxiv
-            # for now return the first one
+            # for now return the first one and make sure the id_tag is not included
+            # some references included and hence it is parsed, some do not, so remove it if included
             if id_tag:
-                matches.update({id_tag: id})
+                matches.update({id_tag: id.replace('%s:'%id_tag,'')})
         return matches
 
 
