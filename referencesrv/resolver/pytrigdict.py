@@ -178,7 +178,7 @@ class Trigdict(object):
         :param expansion: 
         :return: 
         """
-        if self.val_dict.has_key(expansion):
+        if expansion in self.val_dict:
             return [(1, b) for b in self.val_dict[expansion]]
         else:
             return None

@@ -23,7 +23,7 @@ class OriginatorToken():
 
     PLACEHOLDER = {'authors':'|authors|', 'editors':'|editors|', 'pre_editors':'|pre_editors|', 'post_editors':'|post_editors|'}
 
-    ETAL_PAT_EXTRACTOR = re.compile(r"([\w\W]+(?i)[\s,]*et\.?\s*al\.?)")
+    ETAL_PAT_EXTRACTOR = re.compile(r"([\w\W]+(?i:[\s,]*et\.?\s*al\.?))")
     ETAL_PAT_ENDSWITH = re.compile(r"(.*et\.?\s*al\.?\s*)$")
 
     # to capture something like `Trujillo and Sheppard, 2014. Nature 507, p. 471-474.`
@@ -71,7 +71,7 @@ class OriginatorToken():
         # identify authors
         authors = self.identify_authors(reference_str)
         if len(authors) > 0:
-            len_authors = len(filter(None, [a.strip() for a in self.reference_tokenizer.split(authors)]))
+            len_authors = len(list(filter(None, [a.strip() for a in self.reference_tokenizer.split(authors)])))
             author_indices = [0, len_authors-1]
             self.segment_dict.update({'authors':authors.replace("&", "and"), 'author_indices':author_indices})
 
@@ -83,8 +83,8 @@ class OriginatorToken():
             # following editor identifications
             before_and_after = reference_str.split(editors)
             if len(before_and_after) == 2:
-                num_tokens_before = len(filter(None, [a.strip() for a in self.reference_tokenizer.split(before_and_after[0])]))
-                len_editors = len(filter(None, [a.strip() for a in self.reference_tokenizer.split(editors)]))
+                num_tokens_before = len(list(filter(None, [a for a in self.reference_tokenizer.split(before_and_after[0])])))
+                len_editors = len(list(filter(None, [a for a in self.reference_tokenizer.split(editors)])))
                 editor_indices = [num_tokens_before, num_tokens_before+len_editors-1]
             else:
                 editor_indices = [-1, -1]

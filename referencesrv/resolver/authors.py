@@ -166,7 +166,7 @@ def get_authors(ref_string):
     :param ref_string:
     :return:
     """
-    if isinstance(ref_string, unicode):
+    if isinstance(ref_string, str):
         ref_string = unidecode.unidecode(ref_string)
 
     # if there are any collaborator(s) listed in the reference
@@ -224,7 +224,7 @@ def get_editors(ref_string):
     :param ref_string:
     :return:
     """
-    if isinstance(ref_string, unicode):
+    if isinstance(ref_string, str):
         ref_string = unidecode.unidecode(ref_string)
 
     lead_match = LEADING_INIT_AUTHORS_PAT.search(ref_string)
@@ -247,7 +247,7 @@ def get_collaborators(ref_string):
     :param ref_string:
     :return:
     """
-    match = COLLABORATION_PAT.findall(COMMA_BEFORE_AND.sub(',\2', ref_string))
+    match = COLLABORATION_PAT.findall(COMMA_BEFORE_AND.sub(r',\2', ref_string))
     if len(match) > 0:
         collaboration = match[-1]
         return ref_string.find(collaboration), len(collaboration)
@@ -298,7 +298,7 @@ def normalize_author_list(author_string, initials=True):
     try:
         pat = get_author_pattern(author_string)
         if initials:
-            return "; ".join("%s, %s" % (match.group("last"), match.group("inits"))
+            return "; ".join("%s, %s" % (match.group("last"), match.group("inits")[0])
                              for match in pat.finditer(author_string)).strip()
         else:
             return "; ".join("%s" % (match.group("last"))
@@ -402,8 +402,9 @@ def count_matching_authors(ref_authors, ads_authors, ads_first_author=None):
     if ads_first_author is None:
         ads_first_author = ads_authors_lastname[0]
     first_author_missing = ads_first_author.lower() not in ref_authors
-    if first_author_missing and " " in ads_first_author:
-        first_author_missing = ads_first_author.split()[-1] not in ref_authors
+    # compare the last name only
+    if first_author_missing:
+        first_author_missing = ads_first_author.split(',')[0] not in ref_authors
 
     different = []
     for ads_auth in ads_authors_lastname:
@@ -470,7 +471,7 @@ def add_author_evidence(evidences, ref_authors, ads_authors, ads_first_author, h
         matching_authors *= current_app.config['MISSING_FIRST_AUTHOR_FACTOR']
 
     if normalizer != 0:
-        score = (matching_authors - missing_in_ads) / normalizer
+        score = round((matching_authors - missing_in_ads) / normalizer, 2)
     else:
         score = 0
 

@@ -40,14 +40,15 @@ class CRFClassifierText(object):
     URL_EXTRACTOR = re.compile(r'((url\s*)?(http)s?://[A-z0-9\-\.\/\={}?&%]+)', re.IGNORECASE)
     MONTH_NAME_EXTRACTOR = re.compile(r'\b([Jj]an(?:uary)?|[Ff]eb(?:ruary)?|[Mm]ar(?:ch)?|[Aa]pr(?:il)?|[Mm]ay|[Jj]un(?:e)?|[Jj]ul(?:y)?|[Aa]ug(?:ust)?|[Ss]ep(?:tember)?|[Oo]ct(?:ober)?|([Nn]ov|[Dd]ec)(?:ember)?)\b')
 
-    URL_TO_DOI = re.compile(r'((url\s*)?(https\s*:\s*//\s*|http\s*:\s*//\s*)((.*?)doi(.*?)org/))', flags=re.IGNORECASE)
+    URL_TO_DOI = re.compile(r'((url\s*)?(https\s*:\s*//\s*|http\s*:\s*//\s*)((.*?)doi(.*?)org/))|(DOI:https\s*://\s*)', flags=re.IGNORECASE)
     URL_TO_ARXIV = re.compile(r'((url\s*)?(https://|http://)(arxiv.org/(abs|pdf)/))', flags=re.IGNORECASE)
+    URL_TO_ASCL = re.compile(r'((url\s*)?(https://|http://)(ascl.net/))', flags=re.IGNORECASE)
     ADD_COLON_TO_IDENTIFIER = re.compile(r'(\s+(DOI|arXiv|ascl))(:?\s*)', flags=re.IGNORECASE)
 
     IS_START_WITH_YEAR = re.compile(r'(^[12][089]\d\d)')
     START_WITH_AUTHOR = re.compile(r'([A-Za-z].*$)')
 
-    WORD_BREAKER_REMOVE = [re.compile(r'([A-Za-z]*)([\-]+\s+)([A-Za-z]*)')]
+    WORD_BREAKER_REMOVE = [re.compile(r'([A-Za-z]+)([\-]+\s+)([A-Za-z]+)')]
 
     TOKENS_NOT_IDENTIFIED = re.compile(r'\w+\b(?!\|)')
 
@@ -71,6 +72,9 @@ class CRFClassifierText(object):
     ADD_SPACE_BETWEEN_TWO_IDENTIFIED_TOKENS = re.compile(r'(\|[a-z\_]+\|)(\|[a-z\_]+\|)')
     REGEX_PATTERN_WHOLE_WORD_ONLY = r'(?:\b|\B)%s(?:\b|\B)'
 
+    nltk_tagger = None
+    crf = None
+    X = y = label_code = folds = None
 
     def __init__(self):
         """
@@ -244,7 +248,7 @@ class CRFClassifierText(object):
         else:
             folds = self.get_folds_array(training_files_path + 'foldModelText.dat')
 
-        return np.array(X), np.array(y), label_code, np.array(folds), generate_fold
+        return np.array(X, dtype=object), np.array(y, dtype=object), label_code, np.array(folds), generate_fold
 
 
     def save(self):
@@ -479,8 +483,8 @@ class CRFClassifierText(object):
         reference_str = self.originator_token.assemble(reference_str)
 
         # tokenize
-        ref_words = filter(None, [w.strip() for w in self.REFERENCE_TOKENIZER.split(
-                                            self.ADD_SPACE_BETWEEN_TWO_IDENTIFIED_TOKENS.sub(r'\1 \2', reference_str))])
+        ref_words = list(filter(None, [w.strip() for w in self.REFERENCE_TOKENIZER.split(
+                                            self.ADD_SPACE_BETWEEN_TWO_IDENTIFIED_TOKENS.sub(r'\1 \2', reference_str))]))
 
         # step 2 reverse
         ref_words = self.numeric_token.assemble_stage2(ref_words)
@@ -540,6 +544,8 @@ class CRFClassifierText(object):
         reference_str = self.URL_TO_DOI.sub(r"DOI:", reference_str)
         # if there is a url for arxiv turned it to recognizable arxiv
         reference_str = self.URL_TO_ARXIV.sub(r"arXiv:", reference_str)
+        # if there is a url for ascl turned it to recognizable ascl
+        reference_str = self.URL_TO_ASCL.sub(r"ascl:", reference_str)
 
         for rwb in self.WORD_BREAKER_REMOVE:
             reference_str = rwb.sub(r'\1\3', reference_str)

@@ -99,7 +99,7 @@ def add_volume_evidence(evidences, ref_volume, ads_volume, ads_issue, ads_pub_ra
             if re.search(r'\b(%s)\b'%ref_volume, ads_pub_raw):
                 evidences.add_evidence(current_app.config['EVIDENCE_SCORE_RANGE'][1] * current_app.config['MISSING_VOLUME_FACTORY'], 'volume')
                 return
-        evidences.add_evidence(current_app.config['EVIDENCE_SCORE_RANGE'][0], 'volume')
+        evidences.add_evidence(current_app.config['EVIDENCE_SCORE_RANGE'][0] if ads_volume else 0, 'volume')
         return
 
     try:
@@ -257,7 +257,7 @@ def add_page_evidence(evidences, ref_page, ads_page, ads_page_range="", ads_eid=
     if not ref_page and (not (ads_page or ads_page_range or ads_eid) or ads_page == '0'):
         return
     # if reference is a page range compare to ads_page range
-    if isinstance(ref_page, basestring) and '-' in ref_page:
+    if isinstance(ref_page, str) and '-' in ref_page:
         delta = compute_page_delta(ref_page, ads_page_range, ref_qualifier)
     else:
         delta = compute_page_delta(ref_page, ads_page, ref_qualifier)

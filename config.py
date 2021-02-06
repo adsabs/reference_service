@@ -12,7 +12,8 @@ SERVICE_TOKEN = None
 REFERENCE_SERVICE_SOLRQUERY_URL = "https://api.adsabs.harvard.edu/v1/search/query"
 REFERENCE_SERVICE_MAX_RECORDS_SOLR = 100
 
-REFERENCE_SERVICE_QUERY_FIELDS_SOLR = "author,author_norm,first_author_norm,year,title,pub,pub_raw," \
+REFERENCE_SERVICE_QUERY_FIELDS_SOLR = "author,[fields author=10]author_norm,[fields author_norm=10],first_author_norm," \
+                                      "year,title,pub,pub_raw,aff_raw,[fields aff_raw=1]," \
                                       "volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype"
 
 EVIDENCE_SCORE_RANGE = [-1,1]
@@ -129,6 +130,7 @@ REFERENCE_SERVICE_ACADEMIC_PUBLISHERS = [
     "Wolters-Noordhoff","Worth","Wright","Yale University Press","Year Book","Yorke"
 ] + [
     "Springer", "World Scientific", "Kluwer", "Chicago Univ. Press", "Chicago University Press", "Imperial College Press",
+    "Addison-Wesley"
 ]
 
 # source: http://www.apsstylemanual.org/oldmanual/resources/publishers.htm

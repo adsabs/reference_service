@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
 from flask import current_app, request, Blueprint, Response
 from flask_discoverer import advertise
 from flask_redis import FlaskRedis
@@ -7,7 +10,7 @@ from redis import RedisError
 from hashlib import md5
 
 import json
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import re
 import time
 
@@ -15,7 +18,7 @@ from referencesrv.parser.crf import CRFClassifierText, create_text_model, load_t
 from referencesrv.resolver.solve import solve_reference
 from referencesrv.resolver.hypotheses import Hypotheses
 from referencesrv.resolver.sourcematchers import create_source_matcher, load_source_matcher
-from referencesrv.resolver.common import NoSolution
+from referencesrv.resolver.common import NoSolution, Incomplete
 
 
 bp = Blueprint('reference_service', __name__)
@@ -142,7 +145,7 @@ def text_resolve(reference, returned_format):
             raise NoSolution("NotParsed")
         else:
             raise ValueError('Reference with no year and volume cannot be resolved.')
-    except (NoSolution, ValueError) as e:
+    except (NoSolution, Incomplete, ValueError) as e:
         current_app.logger.error('Exception: {error}'.format(error=str(e)))
         return format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
     except Exception as e:
@@ -160,7 +163,7 @@ def text_get(reference):
     """
     returned_format = request.headers.get('Accept', 'text/plain')
 
-    reference = urllib.unquote(reference)
+    reference = urllib.parse.unquote(reference)
 
     current_app.logger.info('received GET request with reference=`{reference}` to resolve in text mode'.format(reference=reference))
 
@@ -241,7 +244,7 @@ def xml_post():
             current_app.logger.error('Exception: {error}'.format(error=str(e)))
             # lets attempt to resolve using the text model
             if 'refplaintext' in parsed_reference:
-                reference = urllib.unquote(parsed_reference['refplaintext'])
+                reference = urllib.parse.unquote(parsed_reference['refplaintext'])
                 if bool(RE_NUMERIC_VALUE.search(reference)):
                     current_app.logger.info('attempting to resolve the reference=`{reference}` in text mode now'.format(reference=reference))
                     try:

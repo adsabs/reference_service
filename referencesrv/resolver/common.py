@@ -64,7 +64,10 @@ class Evidences(object):
         if hasattr(other, 'get_score'):
             return self.get_score()<other.get_score()
         else:
-            return self.get_score()<other
+            try:
+                return self.get_score()<int(other)
+            except:
+                return False
 
     def __le__(self, other):
         """
@@ -75,7 +78,10 @@ class Evidences(object):
         if hasattr(other, 'get_score'):
             return self.get_score()<=other.get_score()
         else:
-            return self.get_score()<=other
+            try:
+                return self.get_score()<=int(other)
+            except:
+                return False
 
     def __gt__(self, other):
         """
@@ -86,7 +92,10 @@ class Evidences(object):
         if hasattr(other, 'get_score'):
             return self.get_score()>other.get_score()
         else:
-            return self.get_score()>other
+            try:
+                return self.get_score()>int(other)
+            except:
+                return False
 
     def __ge__(self, other):
         """
@@ -97,7 +106,10 @@ class Evidences(object):
         if hasattr(other, 'get_score'):
             return self.get_score()>=other.get_score()
         else:
-            return self.get_score()>=other
+            try:
+                return self.get_score()>=int(other)
+            except:
+                return False
 
     def __eq__(self, other):
         """
@@ -108,7 +120,10 @@ class Evidences(object):
         if hasattr(other, 'get_score'):
             return self.get_score()==other.get_score()
         else:
-            return self.get_score()==other
+            try:
+                return self.get_score()==int(other)
+            except:
+                return False
 
     def __len__(self):
         """
@@ -329,6 +344,17 @@ class Hypothesis(object):
         if detail_name in self.details:
             return self.details.get(detail_name)
         return None
+
+    def get_hint(self, hint_name):
+        """
+
+        :param hint_name:
+        :return:
+        """
+        if hint_name in self.hints:
+            return self.hints.get(hint_name)
+        return None
+
 
 class NotResolved(object):
     """

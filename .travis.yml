@@ -1,15 +1,17 @@
 language: python
 
 python:
-  - "2.7"
+  - "3.8"
 
 install:
   - "pip install --upgrade pip"
+  - "pip install wheel"
   - "pip install --upgrade setuptools"
   - "pip install -r requirements.txt"
   - "pip install -r dev-requirements.txt"
   - "python -m nltk.downloader punkt"
   - "python -m nltk.downloader averaged_perceptron_tagger"
+  - "./upgrade_pystruct"
 
 script:
   - "py.test"

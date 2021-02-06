@@ -107,7 +107,7 @@ def get_conf_series_indicators():
         "SAAS": r"Saas[\s-]?Fee",
         "ASSL": r"Astrophys(ics|\.)?\s+(and\s+)?Space\s+Sci(ence|\.)?\s+Lib(rary|\.)?"
     }
-    return [(re.compile(pat), stem) for stem, pat in conf_series_indicators.iteritems()]
+    return [(re.compile(pat), stem) for stem, pat in conf_series_indicators.items()]
 
 
 def iter_journal_specific_hypotheses(bibstem, year, author, journal, volume, page, full_reference):

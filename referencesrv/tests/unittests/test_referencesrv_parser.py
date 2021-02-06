@@ -216,8 +216,8 @@ class TestCRFClassifierText(TestCase):
         """ reference with NA sections """
         reference_str = 'B. A. Trubnikov, Particle Interactions in a Fully Ionized Plasma, Reviews of Plasma Physics, Vol. 1 (Consultants Bureau, New York, 1965) p. 105'
         self.assertEqual(self.crf_text.parse(reference_str),
-                         {'title': u'Particle Interactions Fully Ionized',
-                          'journal': u'Plasma Reviews Physics',
+                         {'title': u'Particle Interactions Fully Ionized Plasma',
+                          'journal': u'Reviews Plasma Physics',
                           'authors': u'B. A. Trubnikov',
                           'refstr': u'B. A. Trubnikov, Particle Interactions in a Fully Ionized Plasma, Reviews of Plasma Physics, Vol. 1 (Consultants Bureau, New York, 1965) p. 105',
                           'volume': u'1',
@@ -229,8 +229,8 @@ class TestCRFClassifierText(TestCase):
         # note the same word in title and journal that has been tagged to be in journal both times
         reference_str = 'B. A. Trubnikov, Particle Interactions in a Fully Ionized Plasma, Reviews of Plasma Physics, Vol. 1 (Consultants Bureau, New York, 1965) p. 105'
         self.assertEqual(self.crf_text.parse(reference_str),
-                         {'title': u'Particle Interactions Fully Ionized',
-                          'journal': u'Plasma Reviews Physics',
+                         {'title': u'Particle Interactions Fully Ionized Plasma',
+                          'journal': u'Reviews Plasma Physics',
                           'authors': u'B. A. Trubnikov',
                           'refstr': u'B. A. Trubnikov, Particle Interactions in a Fully Ionized Plasma, Reviews of Plasma Physics, Vol. 1 (Consultants Bureau, New York, 1965) p. 105',
                           'volume': u'1',
@@ -504,7 +504,7 @@ class TestCRFClassifierText(TestCase):
         self.assertEqual(self.crf_text.parse(reference_str),
                          {'title': 'ASTROPHYSICAL IMPLICATIONS BINARY BLACK HOLE MERGER GW150914',
                           'journal': 'Astrophys J Lett',
-                          'authors': 'B. P. Abbott, et al., LIGO / Virgo Collaborations',
+                          'authors': 'B. P. Abbott, et al., LIGO/ Virgo Collaborations',
                           'refstr': 'B.P. Abbott, et al., [LIGO/Virgo Collaborations], AS- TROPHYSICAL IMPLICATIONS OF THE BINARY BLACK HOLE MERGER GW150914, Astrophys. J. Lett. 818, L22 (2016)',
                           'volume': '818',
                           'year': '2016',
