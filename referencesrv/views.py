@@ -83,7 +83,7 @@ def cache_resolved_set(reference, resolved):
     try:
         # save it to cache in MD5 format
         reference_md5 = md5(reference.encode('utf-8')).hexdigest()
-        redis_db.set(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5, value=resolved,
+        redis_db.set(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5, value=resolved.encode('utf-8'),
                      ex=current_app.config['REDIS_EXPIRATION_TIME'])
     except RedisError as e:
         current_app.logger.error('exception on caching reference={reference}: {error}'.format(reference=reference, error=str(e)))
