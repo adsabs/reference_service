@@ -82,7 +82,7 @@ def cache_resolved_set(reference, resolved):
     """
     try:
         # save it to cache in MD5 format
-        reference_md5 = md5(reference).hexdigest()
+        reference_md5 = md5(reference.encode('utf-8')).hexdigest()
         redis_db.set(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5, value=resolved,
                      ex=current_app.config['REDIS_EXPIRATION_TIME'])
     except RedisError as e:
@@ -95,8 +95,8 @@ def cache_resolved_get(reference):
     :return:
     """
     try:
-        reference_md5 = md5(reference).hexdigest()
-        resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5)
+        reference_md5 = md5(reference.encode('utf-8')).hexdigest()
+        resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5).decode('utf-8')
         current_app.logger.debug('fetched reference={reference} from cache'.format(reference=reference))
     except RedisError:
         resolved = None
