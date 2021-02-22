@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+echo pwd
 mkdir pystruct
 cd pystruct
 git clone https://github.com/pystruct/pystruct
@@ -18,4 +19,4 @@ cd pystruct-0.3.2 && python ./setup.py install
 cd .. && cp -rf pystruct-0.3.2 ~/virtualenv/python3.8/lib/python3.8/site-packages/pystruct
 cd ..
 rm -rf pystruct
-
+echo pwd
