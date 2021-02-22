@@ -33,7 +33,7 @@ class OriginatorToken():
     MULTI_LAST_NAME = "%s(?:[- ]%s)*" % (SINGLE_LAST_NAME, SINGLE_LAST_NAME)
     AUTHOR_PATTERN = r"(^({MULTI_LAST_NAME}\s*(?:and|&)?\s*(?:{MULTI_LAST_NAME})?[\s,]*))(:?[\.,\s]*\(?{YEAR_PATTERN}\)?)|" \
                      r"(^{MULTI_LAST_NAME}\s*(?:and|&)?\s*(?:{MULTI_LAST_NAME})?)[\.,\s]*{YEAR_PATTERN}"\
-        .format(MULTI_LAST_NAME=MULTI_LAST_NAME, YEAR_PATTERN="[12][089]\d\d")
+        .format(MULTI_LAST_NAME=MULTI_LAST_NAME, YEAR_PATTERN=r"[12][089]\d\d")
     LAST_NAME_EXTRACTOR = re.compile(AUTHOR_PATTERN)
 
     # to capture something like `CS Casari, M Tommasini, RR Tykwinski, A Milani, Carbon-atom wires: 1-D systems with tunable properties, Nanoscale 2016; 8: 4414-35. DOI:10.1039/C5NR06175J.`

@@ -25,7 +25,7 @@ POSTPAGE_CHARS = "BHPL"
 # indicators, P, L, A), possibly with ranges, or they can be
 # more or less random identifiers.  I'm saying they are pages if they
 # match the following pattern:
-ADS_NUMERIC_PAGE_PATTERN = re.compile("(?P<lchar>[%s])?(?P<pageno>\d+\.?\d*)(?P<postchar>[%s])?(?:-[%s]?\d+[%s]?)?"
+ADS_NUMERIC_PAGE_PATTERN = re.compile(r"(?P<lchar>[%s])?(?P<pageno>\d+\.?\d*)(?P<postchar>[%s])?(?:-[%s]?\d+[%s]?)?"
                                       %(LETTER_CHARS, POSTPAGE_CHARS, LETTER_CHARS, POSTPAGE_CHARS))
 
 YEAR_PATTERN = re.compile(r'^([12][089]\d\d)')
@@ -328,7 +328,7 @@ def compute_pubstring_statistics(ref_pub, ads_pub, suggested_bibcode):
     ads_pub = cook_reference_pub(ads_pub.lower()+' '+suggested_bibcode.lower())
 
     missing_words = 0
-    ref_words = re.findall("\w\w+", ref_pub or "")
+    ref_words = re.findall(r"\w\w+", ref_pub or "")
 
     for ref_word in ref_words:
         if ref_word not in ads_pub:
@@ -354,7 +354,7 @@ def string_similarity(str_a, str_b):
     str_b = str_b.lower()
 
     missing_words = 0
-    words = re.findall("\w\w+", str_b or "")
+    words = re.findall(r"\w\w+", str_b or "")
     if len(words) == 0:
         return current_app.config['EVIDENCE_SCORE_RANGE'][0]
 

@@ -78,7 +78,7 @@ class Hypotheses(object):
         if "author" in self.digested_record:
             self.digested_record["author"] = self.ETAL_PAT.sub('', self.digested_record["author"])
             self.normalized_authors = normalize_author_list(self.digested_record["author"], initials='.' in self.digested_record["author"])
-            self.normalized_first_author = re.sub(r"\.( ?[A-Z]\.)*", "", re.sub("-[A-Z]\.", "", self.normalized_authors)).split(";")[0].strip()
+            self.normalized_first_author = re.sub(r"\.( ?[A-Z]\.)*", "", re.sub(r"-[A-Z]\.", "", self.normalized_authors)).split(";")[0].strip()
             if len(self.normalized_first_author) <= 3:
                 self.digested_record.pop("author")
         if "year" in self.digested_record and len(self.digested_record["year"]) > 4:
