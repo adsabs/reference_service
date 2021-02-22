@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#cython: language_level=3
 
 mkdir pystruct
 cd pystruct
