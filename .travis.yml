@@ -4,7 +4,7 @@ python:
   - "3.8"
 
 compiler:
-  - clang
+  - "clang"
 
 install:
   - "pip install --upgrade pip"
