@@ -13,7 +13,7 @@ install:
   - "pip install -r dev-requirements.txt"
   - "python -m nltk.downloader punkt"
   - "python -m nltk.downloader averaged_perceptron_tagger"
-  - "pip install --install-option=""--no-cython-compile"" cython"
+  - "pip install --install-option=--no-cython-compile cython"
   - "./upgrade_pystruct"
 
 script:
