@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#cython: language_level=3
 
 mkdir pystruct
 cd pystruct
@@ -8,7 +7,7 @@ git clone https://github.com/pystruct/pystruct
 tar xzf pystruct-0.3.2.tar.gz
 mv pystruct-0.3.2/src/utils.c pystruct-0.3.2/src/utils.save
 cp pystruct/src/utils.pyx pystruct-0.3.2/src/
-cython pystruct-0.3.2/src/utils.pyx
+cython -3 pystruct-0.3.2/src/utils.pyx
 sed -i '' 's/tstate->exc_type/tstate->exc_state.exc_type/' pystruct-0.3.2/src/utils.c
 sed -i '' 's/tstate->exc_value/tstate->exc_state.exc_value/' pystruct-0.3.2/src/utils.c
 sed -i '' 's/tstate->exc_traceback/tstate->exc_state.exc_traceback/' pystruct-0.3.2/src/utils.c
