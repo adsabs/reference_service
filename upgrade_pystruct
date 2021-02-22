@@ -4,7 +4,7 @@ mkdir pystruct
 cd pystruct
 git clone https://github.com/pystruct/pystruct
 pip download pystruct==0.3.2
-tar xzf /pystruct-0.3.2.tar.gz
+tar xzf ./pystruct-0.3.2.tar.gz
 mv /pystruct-0.3.2/src/utils.c pystruct-0.3.2/src/utils.save
 cp /pystruct/src/utils.pyx /pystruct-0.3.2/src/
 cython -3 /pystruct-0.3.2/src/utils.pyx
