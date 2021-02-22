@@ -4,9 +4,9 @@ mkdir pystruct
 cd pystruct
 git clone https://github.com/pystruct/pystruct
 pip download pystruct==0.3.2
-sudo tar xzf pystruct-0.3.2.tar.gz
-mv /pystruct-0.3.2/src/utils.c pystruct-0.3.2/src/utils.save
-cp /pystruct/src/utils.pyx /pystruct-0.3.2/src/
+sudo tar xzvf pystruct-0.3.2.tar.gz
+mv pystruct-0.3.2/src/utils.c pystruct-0.3.2/src/utils.save
+cp pystruct/src/utils.pyx /pystruct-0.3.2/src/
 cython -3 /pystruct-0.3.2/src/utils.pyx
 sed -i '' 's/tstate->exc_type/tstate->exc_state.exc_type/' /pystruct-0.3.2/src/utils.c
 sed -i '' 's/tstate->exc_value/tstate->exc_state.exc_value/' /pystruct-0.3.2/src/utils.c
