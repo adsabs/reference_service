@@ -3,6 +3,9 @@ language: python
 python:
   - "3.8"
 
+compiler:
+  - clang
+
 install:
   - "pip install --upgrade pip"
   - "pip install --upgrade setuptools"
