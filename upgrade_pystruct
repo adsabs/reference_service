@@ -15,8 +15,7 @@ sed -i '' 's/from sklearn.externals.joblib import Parallel, delayed/from joblib 
 sed -i '' 's/from sklearn.externals.joblib import Parallel, delayed/from joblib import Parallel, delayed/g' pystruct-0.3.2/pystruct/learners/*.py
 sed -i '' 's/from sklearn.externals.joblib import Parallel, delayed, cpu_count/from joblib import Parallel, delayed, cpu_count/g' pystruct-0.3.2/pystruct/learners/*.py
 cd pystruct-0.3.2 && python ./setup.py install
-cd .. && cp -rf pystruct-0.3.2 ../python*/lib/python3.8/site-packages/pystruct
+cd .. && cp -rf pystruct-0.3.2 ~/virtualenv/python3.8/lib/python3.8/site-packages/pystruct
 cd ..
 rm -rf pystruct
-
 
