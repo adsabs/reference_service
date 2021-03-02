@@ -129,7 +129,8 @@ class Hypotheses(object):
                         self.digested_record["bibstem"] = '%s*'%bibstem
                     else:
                         self.digested_record["bibstem"] = bibstem
-            except:
+            except KeyError:
+                # when bibstem can not be infered from pub, get_best_bibstem_for raises this exception
                 self.digested_record["bibstem"] = ''
 
         if "arxiv" in self.digested_record:

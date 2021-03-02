@@ -512,6 +512,9 @@ class PubToken():
                         if inbetween and len(inbetween.group(1).strip().split()) > 1:
                             return True
         except:
+            # nested quotes causes exception
+            # if there are any nested quotes just return false
+            # so the calling routine would behave accordingly
             return False
 
 

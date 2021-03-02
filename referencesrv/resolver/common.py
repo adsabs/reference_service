@@ -66,7 +66,7 @@ class Evidences(object):
         else:
             try:
                 return self.get_score()<int(other)
-            except:
+            except TypeError:
                 return False
 
     def __le__(self, other):
@@ -80,7 +80,7 @@ class Evidences(object):
         else:
             try:
                 return self.get_score()<=int(other)
-            except:
+            except TypeError:
                 return False
 
     def __gt__(self, other):
@@ -94,7 +94,7 @@ class Evidences(object):
         else:
             try:
                 return self.get_score()>int(other)
-            except:
+            except TypeError:
                 return False
 
     def __ge__(self, other):
@@ -108,7 +108,7 @@ class Evidences(object):
         else:
             try:
                 return self.get_score()>=int(other)
-            except:
+            except TypeError:
                 return False
 
     def __eq__(self, other):
@@ -122,7 +122,7 @@ class Evidences(object):
         else:
             try:
                 return self.get_score()==int(other)
-            except:
+            except TypeError:
                 return False
 
     def __len__(self):
