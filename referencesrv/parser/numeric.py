@@ -26,21 +26,22 @@ class NumericToken():
                    'year': '|year|', 'volume': '|volume|', 'page': '|page|', 'issue': '|issue|',
                    'volume_identifier':'|volume_identifier|', 'page_identifier':'|page_identifier|'}
 
-    DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>((?i)doi)?[\s\.\:]{0,2}\b10\.\s*\d{4}[\d\:\.\-\_\/\(\)%A-Za-z\s]+)')
-    DOI_INDICATOR = re.compile(r'(?i)doi:')
-    DOI_INDICATOR_CAPTURE = re.compile(r'((?i)doi:\s*)')
-    ARXIV_ID_EXTRACTOR = re.compile(r'(?P<arxiv>((?i)(arxiv))?[\s\:]*('
+    DOI_ID_EXTRACTOR = re.compile(r'(?P<doi>((?i:doi))?[\s\.\:]{0,2}\b10\.\s*\d{4}[\d\:\.\-\_\/\(\)%A-Za-z\s]+)')
+    DOI_INDICATOR = re.compile(r'(?i:doi:)')
+    DOI_INDICATOR_CAPTURE = re.compile(r'((?i:doi:)\s*)')
+    ARXIV_ID_EXTRACTOR = re.compile(r'(?P<arxiv>((?i:(arxiv)))?[\s\:]*('
                                     r'[A-Za-z]+\-[A-Za-z]+\/\d{4}\.\d{5}|[A-Za-z]+\/\d{4}\.\d{5}'       # new format with unneccesary class name
                                     r'|\d{4}\.\d{4,5}'                                                  # new format
                                     r'|[A-Za-z]+\-[A-Za-z]+\/\d{7}|[A-Za-z]+\/\d{7}'                    # old format
                                     r'|\d{7}\s*\[?([A-Za-z]+-[A-Za-z]+|[A-Za-z]+)\]?)'                  # old format with class name in wrong place
                                     r'(v?\d*))')                                                        # version
     ASCL_ID_EXTRACTOR = re.compile(r'(?P<ascl>(ascl)?[\s\:]*(\d{4}\.\d{3}))')
-    ARXIV_ASCL_INDICATOR = re.compile(r'((?i)arXiv):|(?i)ascl:')
+    ARXIV_ASCL_INDICATOR = re.compile(r'((?i:arXiv)):|(?i:ascl):')
 
     YEAR_EXTRACTOR = re.compile(r'[(\s]*\b([12][089]\d\d[a-z]?)[)\s.,]+')
     VOLUME_EXTRACTOR = re.compile(r'(vol|volume)[.\s]+(?P<volume>\w+)')
-    PAGE_EXTRACTOR = re.compile(r'(?=.*[0-9])(?P<page>[BHPL0-9]+[-.][BHPL0-9]+)')
+    PAGE_EXTRACTOR_QUALIFIER = re.compile(r'(?=.*[0-9])(?P<page>[BHPL0-9]+[-.][BHPL0-9]+)')
+    PAGE_EXTRACTOR_INDICATOR = re.compile(r'(\|page_identifier\|[.\s]+(?P<page>\d+))')
 
     # two specific formats for matching volume, page, issue
     # note that in the first expression issue matches a space, there is no issue in this format,
@@ -102,14 +103,14 @@ class NumericToken():
             # remove duplicates if any
             doi = list(set(doi))
             reference_str = self.remove_value(reference_str, 'doi', doi)
-            doi = [urllib.unquote(d.replace(' ', '').split(':')[-1]) for d in doi]
+            doi = [urllib.parse.unquote(d.replace(' ', '').split(':')[-1]) for d in doi]
         else:
             doi = []
 
         # extract arXiv id if there are any
         # note that there could be more than one arxiv num
         arxiv = []
-        matches = self.ARXIV_ID_EXTRACTOR.findall(reference_str, re.DOTALL)
+        matches = self.ARXIV_ID_EXTRACTOR.findall(reference_str)
         if matches:
             for match in matches:
                 arxiv.append(match[0])
@@ -167,12 +168,18 @@ class NumericToken():
                 return reference_str
 
         # if there is page in the form of start-end or eid in the format of number.number
-        page = self.PAGE_EXTRACTOR.search(reference_str)
+        page = self.PAGE_EXTRACTOR_QUALIFIER.search(reference_str)
         if page:
             page = page.group('page')
             reference_str = replace(page, reference_str, self.PLACEHOLDER['page'])
         else:
-            page = ''
+            # if there is an indicator
+            page = self.PAGE_EXTRACTOR_INDICATOR.search(reference_str)
+            if page:
+                page = page.group('page')
+                reference_str = replace(page, reference_str, self.PLACEHOLDER['page'])
+            else:
+                page = ''
 
         # if there is a volume indicator
         volume = self.VOLUME_EXTRACTOR.search(reference_str)
@@ -316,9 +323,10 @@ class NumericToken():
         :param value:
         :return:
         """
-        match = re.findall(self.WITH_QUALIFIER_PATTERN % value, reference_str)
-        if len(match) > 0:
-            return match[0]
+        if len(value) > 0:
+            match = re.findall(self.WITH_QUALIFIER_PATTERN % value, reference_str)
+            if len(match) > 0:
+                return match[0]
         return value
 
     def mark_identified_numerals(self, reference_str, volume, page, issue):
@@ -416,7 +424,7 @@ class NumericToken():
                 # and then see for each doi, did we got only a doi or arxiv/ascl following it as well
                 is_doi_indicator = self.DOI_INDICATOR_CAPTURE.findall(is_doi)
                 is_doi = [self.ARXIV_ASCL_INDICATOR.split(item)[0].strip()
-                            for item in filter(None, self.DOI_INDICATOR.split(is_doi))]
+                            for item in list(filter(None, self.DOI_INDICATOR.split(is_doi)))]
                 if len(is_doi_indicator) == 0:
                     is_doi_indicator = [''] * len(is_doi)
                 for item, indicator in zip(is_doi, is_doi_indicator):
@@ -660,7 +668,7 @@ class NumericToken():
         :return: 1 if doi, 2 if arXiv, 3 if ascl, 4 if volume, 5 if page, 6 if issn/isbn, 7 if version, 8 if issue
         """
         if ref_label:
-            return self.IDENTIFYING_TOKEN.keys().index(ref_label)+1 if ref_label in self.IDENTIFYING_TOKEN.keys() else 0
+            return list(self.IDENTIFYING_TOKEN.keys()).index(ref_label)+1 if ref_label in self.IDENTIFYING_TOKEN.keys() else 0
         return self.is_identifying_word(ref_word)
 
 

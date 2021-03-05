@@ -25,7 +25,7 @@ POSTPAGE_CHARS = "BHPL"
 # indicators, P, L, A), possibly with ranges, or they can be
 # more or less random identifiers.  I'm saying they are pages if they
 # match the following pattern:
-ADS_NUMERIC_PAGE_PATTERN = re.compile("(?P<lchar>[%s])?(?P<pageno>\d+\.?\d*)(?P<postchar>[%s])?(?:-[%s]?\d+[%s]?)?"
+ADS_NUMERIC_PAGE_PATTERN = re.compile(r"(?P<lchar>[%s])?(?P<pageno>\d+\.?\d*)(?P<postchar>[%s])?(?:-[%s]?\d+[%s]?)?"
                                       %(LETTER_CHARS, POSTPAGE_CHARS, LETTER_CHARS, POSTPAGE_CHARS))
 
 YEAR_PATTERN = re.compile(r'^([12][089]\d\d)')
@@ -99,7 +99,7 @@ def add_volume_evidence(evidences, ref_volume, ads_volume, ads_issue, ads_pub_ra
             if re.search(r'\b(%s)\b'%ref_volume, ads_pub_raw):
                 evidences.add_evidence(current_app.config['EVIDENCE_SCORE_RANGE'][1] * current_app.config['MISSING_VOLUME_FACTORY'], 'volume')
                 return
-        evidences.add_evidence(current_app.config['EVIDENCE_SCORE_RANGE'][0], 'volume')
+        evidences.add_evidence(current_app.config['EVIDENCE_SCORE_RANGE'][0] if ads_volume else 0, 'volume')
         return
 
     try:
@@ -257,7 +257,7 @@ def add_page_evidence(evidences, ref_page, ads_page, ads_page_range="", ads_eid=
     if not ref_page and (not (ads_page or ads_page_range or ads_eid) or ads_page == '0'):
         return
     # if reference is a page range compare to ads_page range
-    if isinstance(ref_page, basestring) and '-' in ref_page:
+    if isinstance(ref_page, str) and '-' in ref_page:
         delta = compute_page_delta(ref_page, ads_page_range, ref_qualifier)
     else:
         delta = compute_page_delta(ref_page, ads_page, ref_qualifier)
@@ -328,7 +328,7 @@ def compute_pubstring_statistics(ref_pub, ads_pub, suggested_bibcode):
     ads_pub = cook_reference_pub(ads_pub.lower()+' '+suggested_bibcode.lower())
 
     missing_words = 0
-    ref_words = re.findall("\w\w+", ref_pub or "")
+    ref_words = re.findall(r"\w\w+", ref_pub or "")
 
     for ref_word in ref_words:
         if ref_word not in ads_pub:
@@ -354,7 +354,7 @@ def string_similarity(str_a, str_b):
     str_b = str_b.lower()
 
     missing_words = 0
-    words = re.findall("\w\w+", str_b or "")
+    words = re.findall(r"\w\w+", str_b or "")
     if len(words) == 0:
         return current_app.config['EVIDENCE_SCORE_RANGE'][0]
 

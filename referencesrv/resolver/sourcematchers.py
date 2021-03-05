@@ -35,7 +35,7 @@ class SourceMatcher(object):
         :param source_spec: 
         :return: 
         """
-        raise Error, 'exactmatch not implemented for this SourceMatcher'
+        raise Error('exactmatch not implemented for this SourceMatcher')
 
     def bestmatches(self, source_spec, num_best):
         """
@@ -47,7 +47,7 @@ class SourceMatcher(object):
         :param num_best: 
         :return: 
         """
-        raise Error, 'bestmatches not implemented for this SourceMatcher'
+        raise Error('bestmatches not implemented for this SourceMatcher')
 
     def is_conf_stem(self, stem):
         """
@@ -59,7 +59,7 @@ class SourceMatcher(object):
         :param stem: 
         :return: 
         """
-        raise Error, 'is_conf_stem not implemented for this SourceMatcher'
+        raise Error('is_conf_stem not implemented for this SourceMatcher')
 
     def __getitem__(self, source_spec):
         """
@@ -68,7 +68,7 @@ class SourceMatcher(object):
         :param source_spec: 
         :return: 
         """
-        raise Error, '__getitem__ not implemented for this SourceMatcher'
+        raise Error('__getitem__ not implemented for this SourceMatcher')
 
 class TrigdictSourceMatcher(SourceMatcher):
     """A SourceMatcher using a combined trigram and Levenshtein string edit 
@@ -154,7 +154,7 @@ class TrigdictSourceMatcher(SourceMatcher):
                 current_app.logger.error('sourcematchers.py: %s (%d): skipping source line: %s'%(source_filename,lineno,ln))
                 read_with_errors = True
         if read_with_errors:
-            raise Error, 'Some entries in %s have errors and were skipped' % (source_filename)
+            raise Error('Some entries in %s have errors and were skipped' % (source_filename))
         return read_with_errors
 
     def load_three_part_source(self, source_filename, source_lines):
@@ -191,14 +191,14 @@ class TrigdictSourceMatcher(SourceMatcher):
         :param source_filename:
         :return:
         """
-        source_lines = open(source_filename).readlines()
+        source_lines = open(source_filename, encoding='ISO-8859-1').readlines()
         del source_lines[0]
         if len(source_lines[0].split('\t'))==2:
             return self.load_two_part_source(source_filename, source_lines)
         elif len(source_lines[0].split('\t'))==3:
             return self.load_three_part_source(source_filename, source_lines)
         else:
-            raise Error, '%s does not appear to be a source authority file'%(source_filename)
+            raise Error('%s does not appear to be a source authority file'%(source_filename))
 
     def load_sources(self):
         """
@@ -245,7 +245,7 @@ class TrigdictSourceMatcher(SourceMatcher):
         :param stem:
         :return:
         """
-        return self.confstems.has_key(stem)
+        return stem in self.confstems
 
     def __getitem__(self, source_spec):
         """

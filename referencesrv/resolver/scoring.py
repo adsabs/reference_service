@@ -90,36 +90,36 @@ def get_volume_page_score_for_input_fields(result_record, hypothesis):
 
     ref_str = input_fields.get('refstr', '')
 
-    ref_volume = ref_page = None
-
     if exist == 0:
         # see if ads_volume is in the ref_str
-        ref_volume = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
+        ref_volume = ads_volume if re.search(r'\b(%s)\b' % ads_volume, ref_str) else None
         # see if ads_page is in the ref_str
-        ref_page = ads_page if re.search(r'(\b%s)' % ads_page, ref_str) else None
+        ref_page = ads_page if re.search(r'\b(%s)\b' % ads_page, ref_str) else None
     elif exist == 1:
         if 'volume' in input_fields:
             if input_fields['volume'] == ads_page:
                 ref_volume = ads_page
                 # see if ads_volume is in the ref_str
-                ref_page = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
+                ref_page = ads_volume if re.search(r'\b(%s)\b' % ads_volume, ref_str) else None
             elif input_fields['volume'] == ads_volume:
                 # volume matches, see if ads_page is in the ref_str
                 ref_volume = ads_volume
-                ref_page = ads_page if re.search(r'(\b%s)' % ads_page, ref_str) else None
+                ref_page = ads_page if re.search(r'\b(%s)\b' % ads_page, ref_str) else None
             else:
                 ref_volume = input_fields['volume']
+                ref_page = None
         elif 'page' in input_fields:
             if input_fields['page'] == ads_volume:
                 ref_page = ads_volume
                 # see if ads_page is in the ref_str
-                ref_volume = ads_page if re.search(r'(\b%s)' % ads_page, ref_str) else None
+                ref_volume = ads_page if re.search(r'\b(%s)\b' % ads_page, ref_str) else None
             elif input_fields['page'] == ads_page:
                 # page matches, see if ads_volume is in the ref_str
                 ref_page = ads_page
-                ref_volume = ads_volume if re.search(r'(\b%s)' % ads_volume, ref_str) else None
+                ref_volume = ads_volume if re.search(r'\b(%s)\b' % ads_volume, ref_str) else None
             else:
                 ref_page = input_fields['page']
+                ref_volume = None
     else: # == 2
         ref_page = input_fields['page']
         ref_volume = input_fields['volume']
@@ -233,13 +233,48 @@ def get_book_score_for_input_fields(result_record, hypothesis):
 
     input_fields = hypothesis.get_detail("input_fields")
 
+    # book does not have volume and page number
+    # but if reference has score it so that we would not have false positive
+    add_volume_evidence(evidences,
+                        input_fields.get('volume', None),
+                        result_record.get('volume', None),
+                        result_record.get('issue'),
+                        result_record.get('pub_raw'))
+    add_page_evidence(evidences,
+                      input_fields.get('page', None),
+                      result_record.get('page', None),
+                      result_record.get('page_range', ''),
+                      result_record.get('eid', None),
+                      hypothesis.get_detail('page_qualifier'),
+                      input_fields.get('refstr', ''))
+
     add_publication_evidence(evidences,
-        input_fields.get("pub", ""),
+        hypothesis.get_hint("title") or input_fields.get("pub", ""),
         input_fields.get("bibstem", ""),
         input_fields.get("refstr", ""),
         result_record.get("title", ""),
         result_record.get("bibcode", ""),
         result_record.get("bibstem", ""))
+
+    return evidences
+
+
+def get_catalog_score_for_input_fields(result_record, hypothesis):
+    """
+
+    :param result_record:
+    :param hypothesis:
+    :return:
+    """
+    evidences = get_author_year_pub_score_for_input_fields(result_record, hypothesis)
+
+    input_fields = hypothesis.get_detail("input_fields")
+
+    # if there is a page or volume in the input penalize since catalog should not have page or volume
+    if input_fields.get('page', None):
+        evidences.add_evidence(0, "page")
+    if input_fields.get('volume', None):
+        evidences.add_evidence(0, "volume")
 
     return evidences
 
@@ -260,35 +295,35 @@ def get_thesis_score_for_input_fields(result_record, hypothesis):
     """
     evidences = Evidences()
 
-    # Theses should only have one author
-    if len(result_record["author_norm"])>1:
-        evidences.add_evidence(-0.1, "thesis with multiple authors?")
+    # consider only thesis records
+    if result_record["doctype"] in ["phdthesis", "mastersthesis"]:
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "doctype")
+    else:
+        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "doctype")
 
     input_fields = hypothesis.get_detail("input_fields")
 
-    # compare authors manually to have initials included.
-    ref_last, ref_first_init = re.sub(r"[\s.]", "", hypothesis.get_detail("normalized_authors")).lower().split(",")
-    ref_first_init = ref_first_init[0]
-    ads_last, ads_first_init = re.sub(r"[\s.]", "", result_record["author_norm"][0].lower()).split(",")
-
-    if ref_last==ads_last and ref_first_init==ads_first_init:
-        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "author")
+    # consider number of authors
+    if len(result_record["author_norm"]) == 1:
+        # compare authors manually to have initials included.
+        ref_lastname, ref_first_init = re.sub(r"[\s.]", "", hypothesis.get_detail("normalized_authors")).lower().split(",")
+        ads_lastname, ads_first_init = re.sub(r"[\s.]", "", result_record["author_norm"][0].lower()).split(",")
+        # lastname match is worth 0.7, first inital 0.3
+        author_score = int(ref_lastname==ads_lastname) * current_app.config["EVIDENCE_SCORE_RANGE"][1] * 0.7 + \
+                       int(ref_first_init==ads_first_init) * current_app.config["EVIDENCE_SCORE_RANGE"][1] * 0.3
     else:
-        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "author")
+        author_score = current_app.config["EVIDENCE_SCORE_RANGE"][0]
+    evidences.add_evidence(author_score, "author")
 
     add_year_evidence(evidences,
         input_fields.get('year'),
         result_record.get('year'))
 
-    if has_thesis_indicators(result_record["pub_raw"]):
-        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "thesisString")
-    else:
-        evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "thesisString")
-    # XXX TODO: When we have pub_raw, we could also check for places;
-    # ideally, there would be -1 for a place in refstring not in ADS
-    # and +1 for a place in ADS that's also in the refstring.  We'd
-    # need a list of places then, though.  I'd have that as a seperate
-    # evidence.
+    # count how many words of affiliation is in reference string
+    ref_str = input_fields.get('refstr')
+    aff_raw = ' '.join(result_record["aff_raw"]).split()
+    aff_score = sum([1.0 for word in aff_raw if word in ref_str]) / len(aff_raw)
+    evidences.add_evidence(aff_score, "affiliation")
 
     return evidences
 
@@ -344,7 +379,7 @@ def get_score_for_input_fields(result_record, hypothesis):
     if result_record["doctype"] == "book":
         return get_book_score_for_input_fields(result_record, hypothesis)
     if result_record["doctype"] == "catalog":
-        return get_author_year_pub_score_for_input_fields(result_record, hypothesis)
+        return get_catalog_score_for_input_fields(result_record, hypothesis)
     return get_serial_score_for_input_fields(result_record, hypothesis)
 
 

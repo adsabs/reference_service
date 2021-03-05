@@ -1,10 +1,11 @@
 
+from builtins import object
 from flask import current_app
 
 client = lambda: Client(current_app.config).session
 
 
-class Client:
+class Client(object):
     """
     The Client class is a thin wrapper around adsmutils ADSFlask client; Use it as a centralized
     place to set application specific parameters, such as the oauth2

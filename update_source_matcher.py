@@ -27,5 +27,5 @@ the three entries have been added to journals_not_ADS.dat included in source mat
 
 url = "http://localhost:5000/pickle_source_matcher"
 r = requests.put(url)
-print 'code=',r.status_code,'reason=',r.reason
-print r.text
+print('code=',r.status_code,'reason=',r.reason)
+print(r.text)

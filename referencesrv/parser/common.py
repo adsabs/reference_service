@@ -107,7 +107,7 @@ def which_punctuation(ref_word, ref_label):
     :return:
     """
     if ref_label:
-        return PUNCTUATION_TOKEN.keys().index(ref_label)+1 if ref_label in PUNCTUATION_TOKEN.keys() else 0
+        return list(PUNCTUATION_TOKEN.keys()).index(ref_label)+1 if ref_label in PUNCTUATION_TOKEN.keys() else 0
 
     return is_punctuation(ref_word)
 

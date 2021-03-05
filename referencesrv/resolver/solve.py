@@ -32,9 +32,11 @@ def make_solr_condition_author(value):
     :param value:
     :return:
     """
-    value = re.sub(r"\.( ?[A-Z]\.)*", "",
-                   # ... and silly "double initials"
-                   re.sub(r"-[A-Z]\.", "", normalize_author_list(value, initials='.' in value)))
+    # only if not already normalized
+    if ";" not in value:
+        value = re.sub(r"\.( ?[A-Z]\.)*", "",
+                       # ... and silly "double initials"
+                       re.sub(r"-[A-Z]\.", "", normalize_author_list(value, initials='.' in value)))
     # something went wrong with normalization,
     # so grab all last names and insert semicolon between them
     if ";" not in value:
@@ -271,7 +273,7 @@ def solve_for_fields(hypothesis):
     current_app.logger.debug("HINTS IN %s: %s"%(hypothesis.name, hypothesis.hints))
 
     query_string = " AND ".join(cond for cond in (make_solr_condition(*item)
-                                                  for item in hypothesis.hints.iteritems()) if cond is not None)
+                                                  for item in hypothesis.hints.items()) if cond is not None)
 
     solutions = query(query_string)
 
@@ -292,6 +294,30 @@ def solve_for_fields(hypothesis):
     raise OverflowOrNone("Got either too many or no records from solr")
 
 
+def enough_to_proceed(ref):
+    """
+    check to see if there are enough information to setup queries
+    do not blindly create unsuccessful queries
+
+    :param ref:
+    :return:
+    """
+    input_fields = ref.get_detail()
+
+    # need to have at least 3 fields to match
+    available = sum([1 for field in ["author", "pub", "title", "volume", "page", "year"] if len(input_fields.get(field, "")) > 0])
+    if available >= 3:
+        return True
+    # check identifiers next
+    if input_fields.get("doi", None) is not None:
+        return True
+    if input_fields.get("arxiv", None) is not None:
+        return True
+    if input_fields.get("ascl", None) is not None:
+        return True
+    return False
+
+
 def solve_reference(ref):
     """
     returns a solution for what record is presumably meant by ref.
@@ -301,16 +327,17 @@ def solve_reference(ref):
     :param ref:
     :return:
     """
-    if not ref.enough_to_proceed():
+    if not enough_to_proceed(ref):
+        current_app.logger.error("Not enough information to resolve the record")
         raise Incomplete("Not enough information to resolve the record.", ref)
 
     possible_solutions = []
     for hypothesis in Hypotheses.iter_hypotheses(ref):
         try:
             return solve_for_fields(hypothesis)
-        except Undecidable, ex:
+        except Undecidable as ex:
             possible_solutions.extend(ex.considered_solutions)
-        except (NoSolution, OverflowOrNone), ex:
+        except (NoSolution, OverflowOrNone) as ex:
             current_app.logger.debug("(%s)"%ex.__class__.__name__)
         except (Solr, KeyboardInterrupt):
             raise

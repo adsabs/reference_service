@@ -17,27 +17,35 @@ class PubToken():
     PLACEHOLDER = {'title': '|title_%d|', 'journal': '|journal_%d|', 'publisher': '|publisher_%d|'}
 
     PRE_TITLE_JOURNAL_PATTERN = r'(?:(\.|\,|\:|\s|\(?\d{4}[a-z][.,)]*|\(?\d[.,)]*)*\s*)'
-    TITLE_JOURNAL_FREE_FALL_PATTERN = r'[A-Z]+.+'
+    TITLE_JOURNAL_FREE_FALL_PATTERN_JOURNAL = r'[A-Z]+.+'
+    TITLE_JOURNAL_FREE_FALL_PATTERN_TITLE = r'[A-Z]+[a-z\s]+.+'
     TITLE_PATTERN = r'[A-Z]+[A-Za-z\d\'\s\:\-\+\?]+'
     TITLE_MULTI_PART_PATTERN = r'[A-Z]+[A-Za-z\d\'\s\-\+\?\.\:]+'
     TITLE_FREE_FALL_PATTERN = r'[A-Z]+[A-Za-z\d\'\s\:\-\+]+(\(.*\)||(\d+\.\d+\-?)*)?[A-Za-z\d\'\s\:\-\+]+' # can have parenthesis and numeric value
     TITLE_JOURNAL_GLUE_PATTERN = r'[.,\s]'
     JOURNAL_PATTERN = r'[A-Z]+[A-Za-z0-9\.\s\'\-&]+[A-Za-z]+\b'
-    JOURNAL_MIXED_PATTERN = r'(((?i)arxiv:e-prints)|[A-Za-z0-9\.\s\'\-&:]+[A-Za-z]+\b)'   # note that journal can start with a number (ie, 35th meeting), and number can in the juornal, but not at the end, since it is most likely volume
+    JOURNAL_MIXED_PATTERN = r'(((?i:arxiv:e-prints))|[A-Za-z0-9\.\s\'\-&:]+[A-Za-z]+\b)'   # note that journal can start with a number (ie, 35th meeting), and number can in the juornal, but not at the end, since it is most likely volume
     POST_JOURNAL_PATTERN = r'[\s\d.,;\-]+(\w\d+)?'              # note that there could be page qualifier that proceed by number only
+    POST_JOURNAL_MIGHT_BE_EMPTY = r'[\s\d.,;\-]*(\w\d+)?'              # there might not be anything after the last token
     POST_JOURNAL_PATTERN_ALL = r'[\d\W\w\s]'
     PUBLISHER_PATTERN = r'[A-Z]+[A-Za-z0-9\.\:\s\'\-&()]+[A-Za-z]+\b'
-    YEAR_PATTERN = "[12][089]\d\d[a-z]?"
+    YEAR_PATTERN = r'[12][089]\d\d[a-z]?'
     TITLE_JOURNAL_PUBLISHER_EXTRACTOR = re.compile(r'^%s[\"\']*(?P<title>%s)[.,\"\']+\s+(:?[Ii][Nn][:\s])?(?P<journal>%s)%s\(?(?P<publisher>%s)\)?[\s\d,;.]*$'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_PATTERN, JOURNAL_PATTERN, POST_JOURNAL_PATTERN, PUBLISHER_PATTERN))
-    TITLE_JOURNAL_QUOTE_JOURNAL_ONLY = r'^%s(?P<title>%s)[\"\']\s*(?P<journal>%s)%s*[\"\']'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_JOURNAL_FREE_FALL_PATTERN, TITLE_JOURNAL_FREE_FALL_PATTERN, TITLE_JOURNAL_GLUE_PATTERN)
+    TITLE_ONLY = r'^%s[\"\']*\s*(?P<title>[A-Za-z\s]+)[\"\'.,\s]*$'%(PRE_TITLE_JOURNAL_PATTERN)
+    TITLE_PUBLISHER = r'^%s[\"\']*\s*(?P<title>[A-Za-z\s]+)[\"\'.,\s]*\((?P<publisher>%s)\)\s*$'%(PRE_TITLE_JOURNAL_PATTERN, PUBLISHER_PATTERN)
+    TITLE_ONLY_EXTRACTOR = [re.compile(TITLE_ONLY), re.compile(TITLE_PUBLISHER)]
+    TITLE_JOURNAL_QUOTE_JOURNAL_ONLY = r'^%s(?P<title>%s)[\"\']\s*(?P<journal>%s)%s*[\"\']'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_JOURNAL_FREE_FALL_PATTERN_TITLE, TITLE_JOURNAL_FREE_FALL_PATTERN_JOURNAL, TITLE_JOURNAL_GLUE_PATTERN)
     TITLE_JOURNAL_BOTH_QUOTED = r'^%s[\"\']\s*(?P<title>%s)%s*[\"\'].*[\"\']\s*(?P<journal>%s)%s*[\"\']'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_PATTERN, TITLE_JOURNAL_GLUE_PATTERN, JOURNAL_PATTERN, TITLE_JOURNAL_GLUE_PATTERN)
-    TITLE_JOURNAL_QUOTE_TITLE_IN_BEFORE_JOURNAL = r'^%s[\"\']\s*(?P<title>.*)%s*[\"\']%s*(?:[Ii][Nn][:\s])?(?P<journal>%s)+%s+$' % (PRE_TITLE_JOURNAL_PATTERN, TITLE_JOURNAL_GLUE_PATTERN, TITLE_JOURNAL_GLUE_PATTERN, JOURNAL_MIXED_PATTERN, POST_JOURNAL_PATTERN_ALL)
+    TITLE_JOURNAL_QUOTE_TITLE_IN_BEFORE_JOURNAL = r'^%s[\"\']\s*(?P<title>.*)%s*[\"\']%s*(?:[Ii][Nn][:\s])?(?P<journal>%s)+%s*$' % (PRE_TITLE_JOURNAL_PATTERN, TITLE_JOURNAL_GLUE_PATTERN, TITLE_JOURNAL_GLUE_PATTERN, JOURNAL_MIXED_PATTERN, POST_JOURNAL_PATTERN_ALL)
     TITLE_JOURNAL_MUTI_PART_TITLE = r'^%s(?P<title>%s)\,\s+(?P<journal>%s)%s.*$'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_MULTI_PART_PATTERN, JOURNAL_PATTERN, POST_JOURNAL_PATTERN)
     TITLE_JOURNAL_YEAR_IN_MIDDLE = r'^%s(?P<title>%s)[\s+\(]+%s[\)\s]+(?P<journal>%s)%s.*$'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_PATTERN, YEAR_PATTERN, JOURNAL_PATTERN, POST_JOURNAL_PATTERN)
-    TITLE_JOURNAL_FREE_FALL = r'^%s(?P<title>%s)(\.|\,|\/)+\s+(?P<journal>%s)%s.*$'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_FREE_FALL_PATTERN, JOURNAL_PATTERN, POST_JOURNAL_PATTERN)
-    TITLE_JOURNAL_EXTRACTOR = [re.compile(TITLE_JOURNAL_QUOTE_JOURNAL_ONLY), re.compile(TITLE_JOURNAL_BOTH_QUOTED),
-                               re.compile(TITLE_JOURNAL_QUOTE_TITLE_IN_BEFORE_JOURNAL), re.compile(TITLE_JOURNAL_MUTI_PART_TITLE),
-                               re.compile(TITLE_JOURNAL_YEAR_IN_MIDDLE), re.compile(TITLE_JOURNAL_FREE_FALL),]
+    TITLE_JOURNAL_FREE_FALL = r'^%s(?P<title>%s)(\.|\,|\/)+\s+(?P<journal>%s)%s.*$'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_FREE_FALL_PATTERN, JOURNAL_PATTERN, POST_JOURNAL_MIGHT_BE_EMPTY)
+    TITLE_JOURNAL_EXTRACTOR = [re.compile(TITLE_JOURNAL_QUOTE_JOURNAL_ONLY),
+                               re.compile(TITLE_JOURNAL_BOTH_QUOTED),
+                               re.compile(TITLE_JOURNAL_QUOTE_TITLE_IN_BEFORE_JOURNAL),
+                               re.compile(TITLE_JOURNAL_MUTI_PART_TITLE),
+                               re.compile(TITLE_JOURNAL_YEAR_IN_MIDDLE),
+                               re.compile(TITLE_JOURNAL_FREE_FALL),]
     TITLE_JOURNAL_PUNCTUATION_REMOVER = re.compile(r'[:\(\)\-\[\]]')
     WORDS_IN_TITLE_NOT_CAPITAL = r'a|an|the|for|and|nor|but|or|yet|so|at|around|by|after|along|for|from|of|on|to|with|without'
     JOURNAL_ONLY_MEETING = r'^%s(?P<unknown>[a-z\s]*)(?P<journal>(%s)%s+(\d+[th]*\s[A-Z]+\s[Mm]eeting)).*$'%(PRE_TITLE_JOURNAL_PATTERN, JOURNAL_PATTERN, TITLE_JOURNAL_GLUE_PATTERN)
@@ -47,9 +55,12 @@ class PubToken():
     JOURNAL_ONLY_QUOTE = r'^%s(?P<unknown>.*)[\"\'](?P<journal>%s)[\"\'].*$'%(PRE_TITLE_JOURNAL_PATTERN, JOURNAL_MIXED_PATTERN)
     JOURNAL_ONLY_QUOTE_MUST = r'^%s(?P<unknown>.*)[\"\']+(?P<journal>.*)[\"\']+.*$'%(PRE_TITLE_JOURNAL_PATTERN)
     JOURNAL_ONLY_ITS_TITLE = r'^%s(?P<journal>%s)%s'%(PRE_TITLE_JOURNAL_PATTERN, TITLE_PATTERN, POST_JOURNAL_PATTERN)
-    JOURNAL_ONLY_EXTRACTOR = [re.compile(JOURNAL_ONLY_MEETING), re.compile(JOURNAL_ONLY_WITH_EDITOR),
-                              re.compile(JOURNAL_ONLY_LOWER_CASE), re.compile(JOURNAL_ONLY_FREE_FALL),
-                              re.compile(JOURNAL_ONLY_QUOTE), re.compile(JOURNAL_ONLY_ITS_TITLE),
+    JOURNAL_ONLY_EXTRACTOR = [re.compile(JOURNAL_ONLY_MEETING),
+                              re.compile(JOURNAL_ONLY_WITH_EDITOR),
+                              re.compile(JOURNAL_ONLY_LOWER_CASE),
+                              re.compile(JOURNAL_ONLY_FREE_FALL),
+                              re.compile(JOURNAL_ONLY_QUOTE),
+                              re.compile(JOURNAL_ONLY_ITS_TITLE),
                               re.compile(JOURNAL_ONLY_QUOTE_MUST)]
     JOURNAL_ABBREVIATED_EXTRACTOR = re.compile(r'^([A-Z][A-Za-z\.]*\s*)+$')
 
@@ -57,6 +68,8 @@ class PubToken():
 
     SPACE_BEFORE_DOT_REMOVER = re.compile(r'\s+(\.)')
     SPACE_AROUND_AMPERSAND_REMOVER = re.compile(r'\b(\w)\s&\s(\w+)')
+
+    YEAR_TOKEN = re.compile(r'\b([12][089]\d\d[a-z]?)')
 
     NESTED_QUOTE = [re.compile(r'\"(.+?)\"'), re.compile(r"\'(.+?)\'")]
 
@@ -68,6 +81,8 @@ class PubToken():
 
     REMOVE_PUNCTUATION = re.compile(r"[()\[\]\\/*?\"+~^,=#']")
 
+    REMOVE_DOT_AFTER_SINGLE_CHAR = re.compile(r"(\b[A-Z]+|\b[A-Z]+[a-z]{1,3})(\.)")
+
     IS_JOURNAL = re.compile(r"\b(J\.?|Journal)\b")
 
     IS_EDITION = re.compile(r"\b(ed|eds|edition)\.?\b", re.IGNORECASE)
@@ -75,6 +90,8 @@ class PubToken():
     LEFT_YEAR_RIGHT = re.compile(r"^(?P<left>.*?(?=[12][09]\d\d))(?P<year>[12][09]\d\d)(?P<right>.*)$")
     ALPHA_WORDS = re.compile(r"(\b[A-Za-z\s\&]+\b)")
     AUTHOR_RESIDUE = re.compile(r"([A-Z]+\.)")
+
+    WORDS = re.compile(r"([A-Za-z\-]+)")
 
     def __init__(self):
         """
@@ -138,6 +155,18 @@ class PubToken():
         return reference_str
 
 
+    def validate_title(self, title, reference_str):
+        """
+
+        :param title:
+        :param reference_str:
+        :return:
+        """
+        # make sure year has not been included in title
+        if self.YEAR_TOKEN.search(title) and not self.YEAR_TOKEN.search(reference_str.replace(title, '')):
+            return ''
+        return title
+
     def identify(self, reference_str, nltk_tagger, range_taken, have_editor):
         """
         journal, title, and publisher are multi word elements
@@ -151,6 +180,7 @@ class PubToken():
         # save it to be used in the is_* methods
         self.segment_dict.update({'range_taken':range_taken, 'have_editor':have_editor})
 
+        reference_str = self.REMOVE_DOT_AFTER_SINGLE_CHAR.sub(r'\1', reference_str)
         reference_str_tmp = self.TOKENS_IDENTIFIED.sub('', reference_str)
         reference_str_tmp = self.remove_residue(reference_str_tmp)
 
@@ -169,6 +199,20 @@ class PubToken():
                     self.save_identified(title, journal, publisher)
                     return reference_str
 
+            # attempt to extract title only, for books
+            for i, te in enumerate(self.TITLE_ONLY_EXTRACTOR):
+                extractor = te.match(reference_str_tmp)
+                if extractor:
+                    title = extractor.group('title').strip()
+                    journal = ''
+                    if 'publisher' in extractor.groupdict():
+                        publisher = extractor.group('publisher').strip()
+                    else:
+                        publisher = []
+                    reference_str = self.mark_identified(reference_str, title, journal, publisher)
+                    self.save_identified(title, journal, publisher)
+                    return reference_str
+
             # attempt to extract title and journal
             for i, tje in enumerate(self.TITLE_JOURNAL_EXTRACTOR):
                 extractor = tje.match(reference_str_tmp)
@@ -178,8 +222,9 @@ class PubToken():
                         title= extractor.group('title').strip()
                         journal = extractor.group('journal').strip('"').strip() if extractor.group('journal') is not None else ''
                         if len(title) > 0 and len(journal) > 0:
+                            title = self.validate_title(title, reference_str_tmp)
                             # make sure the second substring identified as journal is not publisher
-                            if self.publisher_idx([journal]) == 0:
+                            if self.publisher_idx([journal]) >= 0:
                                 publisher = [journal]
                                 journal = ''
                             # make sure the second substring identified as journal is not edition number
@@ -314,7 +359,7 @@ class PubToken():
 
             # we have more than one substring, the first is most likely title
             # do not accept title of length one token, let crf figure it out
-            title = filter(None, nps_merge[0].split())
+            title = list(filter(None, nps_merge[0].split()))
             if len(title) <= 1:
                 title = ''
                 journal = nps_merge[1:]
@@ -467,6 +512,9 @@ class PubToken():
                         if inbetween and len(inbetween.group(1).strip().split()) > 1:
                             return True
         except:
+            # nested quotes causes exception
+            # if there are any nested quotes just return false
+            # so the calling routine would behave accordingly
             return False
 
 
@@ -493,11 +541,17 @@ class PubToken():
         :param ref_words:
         :return:
         """
-        for i, tokens in enumerate(ref_words):
-            match = self.academic_publishers_and_locations.search(tokens)
-            if match:
-                if match.group() == tokens:
+        try:
+            for i, tokens in enumerate(ref_words):
+                match = self.academic_publishers_and_locations.findall(tokens)
+                # concatenate all the matched words, then split into words
+                match = ' '.join([' '.join([word for word in list(filter(None, m))]) for m in match]).split()
+                # then compare all the words, make sure all the words in tokens were matched
+                token_words = self.WORDS.findall(tokens)
+                if len(set(match) & set(token_words)) >= len(token_words):
                     return i
+        except:
+            pass
         return -1
 
 
@@ -599,7 +653,7 @@ class PubToken():
         :param text:
         :return:
         """
-        return filter(None, [w.strip() for w in self.TOKENIZER.split(ref_word)])
+        return list(filter(None, [w.strip() for w in self.TOKENIZER.split(ref_word)]))
 
 
     def is_title(self, ref_word, ref_label, index):
@@ -843,7 +897,9 @@ class PubToken():
         journal = []
         for i in self.indices(ref_label_list, ['JOURNAL']):
             # skip words of length 1, unless it is capital
-            if len(ref_word_list[i]) > 1 or ref_word_list[i].isupper():
+            # also skip tokens that are all punctuations, unless it is in the middle
+            if (len(ref_word_list[i]) > 1 or ref_word_list[i].isupper()) and \
+               (not (all(c in self.punctuations for c in ref_word_list[i])) or i != self.indices(ref_label_list, ['JOURNAL'])[-1]):
                 journal = append_unique(journal, ref_word_list[i])
         return ' '.join(journal)
 

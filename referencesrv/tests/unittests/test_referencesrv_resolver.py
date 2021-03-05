@@ -82,11 +82,11 @@ class TestResolver(TestCase):
         """
         Ensure that authorString is returned in the form AuthorLast1; AuthorLast2
         """
-        self.assertEqual(normalize_author_list("Foo, N.A., Bar, C. K. "), 'Foo, N.A.; Bar, C. K.')
-        self.assertEqual(normalize_author_list("N.A. Foo and C. K. Bar"), 'Foo, N.A.; Bar, C. K.')
-        self.assertEqual(normalize_author_list("M. d'Alembert & K.V.U. vanBeuren"), "d'Alembert, M.; vanBeuren, K.V.U.")
-        self.assertEqual(normalize_author_list("L. von Beethoven-Tschaikowski et al."), 'von Beethoven-Tschaikowski, L.')
-        self.assertEqual(normalize_author_list("Abazajian, K. N., Adelman-McCarthy, J. K."), 'Abazajian, K. N.; Adelman-McCarthy, J. K.')
+        self.assertEqual(normalize_author_list("Foo, N.A., Bar, C. K. "), 'Foo, N; Bar, C')
+        self.assertEqual(normalize_author_list("N.A. Foo and C. K. Bar"), 'Foo, N; Bar, C')
+        self.assertEqual(normalize_author_list("M. d'Alembert & K.V.U. vanBeuren"), "d'Alembert, M; vanBeuren, K")
+        self.assertEqual(normalize_author_list("L. von Beethoven-Tschaikowski et al."), 'von Beethoven-Tschaikowski, L')
+        self.assertEqual(normalize_author_list("Abazajian, K. N., Adelman-McCarthy, J. K."), 'Abazajian, K; Adelman-McCarthy, J')
         self.assertEqual(normalize_author_list("Foo, N.A., Bar, C. K. ", initials=False), 'Foo; Bar')
         self.assertEqual(normalize_author_list("N.A. Foo and C. K. Bar", initials=False), 'Foo; Bar')
         self.assertEqual(normalize_author_list("M. de Alembert & K.V.U. vanBeuren", initials=False), 'de Alembert; vanBeuren')
@@ -101,7 +101,7 @@ class TestResolver(TestCase):
         """
         with self.assertRaises(Exception) as context:
             get_first_author("")
-        self.assertTrue('Both leading and trailing found without a majority' in context.exception)
+        self.assertTrue('Both leading and trailing found without a majority' in str(context.exception))
 
         self.assertEqual(get_first_author("Joy, K.-C."), 'Joy')
         self.assertEqual(get_first_author("K.-C. Joy", initials=True), 'Joy, K.-C.')
@@ -133,7 +133,7 @@ class TestResolver(TestCase):
                          (0, 0, 2, False))
         with self.assertRaises(Exception) as context:
             count_matching_authors("Abraham, Z ; Iben, I", None)
-        self.assertTrue('ADS paper without authors -- what should we do?' in context.exception)
+        self.assertTrue('ADS paper without authors -- what should we do?' in str(context.exception))
 
 
     def test_add_author_evidence(self):
@@ -203,16 +203,16 @@ class TestResolver(TestCase):
         s = SourceMatcher()
         with self.assertRaises(Exception) as context:
             s.exactmatch("A&A")
-        self.assertTrue('exactmatch not implemented for this SourceMatcher' in context.exception)
+        self.assertTrue('exactmatch not implemented for this SourceMatcher' in str(context.exception))
         with self.assertRaises(Exception) as context:
             s.bestmatches("A&A", 2)
-        self.assertTrue('bestmatches not implemented for this SourceMatcher' in context.exception)
+        self.assertTrue('bestmatches not implemented for this SourceMatcher' in str(context.exception))
         with self.assertRaises(Exception) as context:
             s.is_conf_stem("A&A")
-        self.assertTrue('is_conf_stem not implemented for this SourceMatcher' in context.exception)
+        self.assertTrue('is_conf_stem not implemented for this SourceMatcher' in str(context.exception))
         with self.assertRaises(Exception) as context:
             s["A&A"]
-        self.assertTrue('__getitem__ not implemented for this SourceMatcher' in context.exception)
+        self.assertTrue('__getitem__ not implemented for this SourceMatcher' in str(context.exception))
 
 
     def test_TrigdictSourceMatcher(self):
@@ -270,14 +270,13 @@ class TestResolver(TestCase):
         """
         s = TrigdictSourceMatcher()
         best_matches = s.bestmatches("Astronomy and Astrophysics Supplement", 10)
-        print best_matches
-        self.assertTrue(len(filter(lambda x: x[1] == 'A&AS.....', best_matches)) > 0)
-        self.assertTrue(len(filter(lambda x: x[1] == 'ChJAS....', best_matches)) > 0)
-        self.assertTrue(len(filter(lambda x: x[1] == 'JApAS....', best_matches)) > 0)
-        self.assertTrue(len(filter(lambda x: x[1] == 'aap..rept', best_matches)) > 0)
-        self.assertTrue(len(filter(lambda x: x[1] == 'aard.conf', best_matches)) > 0)
+        self.assertTrue(len(list(filter(lambda x: x[1] == 'A&AS.....', best_matches))) > 0)
+        self.assertTrue(len(list(filter(lambda x: x[1] == 'ChJAS....', best_matches))) > 0)
+        self.assertTrue(len(list(filter(lambda x: x[1] == 'JApAS....', best_matches))) > 0)
+        self.assertTrue(len(list(filter(lambda x: x[1] == 'aap..rept', best_matches))) > 0)
+        self.assertTrue(len(list(filter(lambda x: x[1] == 'aard.conf', best_matches))) > 0)
         bestmatches = s.bestmatches("Ap J", 3)
-        self.assertTrue(len(filter(lambda x: x[0] == 1.0 and x[1] == 'ApJ......', bestmatches)) == 1)
+        self.assertTrue(len(list(filter(lambda x: x[0] == 1.0 and x[1] == 'ApJ......', bestmatches))) == 1)
 
 
     def test_authority_files_errors(self):
@@ -289,11 +288,11 @@ class TestResolver(TestCase):
         filename = os.path.dirname(__file__) + '/stubdata/conferences.dat'
         with self.assertRaises(Exception) as context:
             s.load_one_source(filename)
-        self.assertTrue('Some entries in %s have errors and were skipped'%(filename) in context.exception)
+        self.assertTrue('Some entries in %s have errors and were skipped'%(filename) in str(context.exception))
         filename = os.path.dirname(__file__) + '/stubdata/foo.dat'
         with self.assertRaises(Exception) as context:
             s.load_one_source(filename)
-        self.assertTrue('%s does not appear to be a source authority file'%(filename) in context.exception)
+        self.assertTrue('%s does not appear to be a source authority file'%(filename) in str(context.exception))
 
 
     def test_DeferredSourceMatcher(self):
@@ -319,9 +318,9 @@ class TestResolver(TestCase):
         self.assertEqual(e1 <= e2, False)
         self.assertEqual(e1 <= None, False)
         self.assertEqual(e1 > e2, True)
-        self.assertEqual(e1 > None, True)
+        self.assertEqual(e1 > None, False)
         self.assertEqual(e1 >= e2, True)
-        self.assertEqual(e1 >= None, True)
+        self.assertEqual(e1 >= None, False)
         self.assertEqual(e1 == e2, False)
         self.assertEqual(e1 == None, False)
         self.assertEqual(len(e1), 1)
@@ -419,31 +418,39 @@ class TestResolver(TestCase):
                'year': '2019',
                'page': '207.04'}
         self.assertEqual(str(solve_reference(Hypotheses(ref))), '1.0 2019AAS...23320704A')
-        # testing with author, publication name, and year
+        # testing with first author only and page
+        # eventhough other authors are missing but because of page match is found
         ref = {'authors': 'Accomazzi, A.',
                'journal': 'AAS233 Meeting',
-               'volume': '0',
-               'page': '0',
-               'year': '2019'}
-        with self.assertRaises(Exception) as context:
-            solve_reference(Hypotheses(ref))
-        self.assertTrue('Hypotheses exhausted' in context.exception)
-        # when we have multiple solutions and not enough reference information to decide which
-        ref = {'title': "The NASA Astrophysics Data System's Decadal Plan for the 2020s",
-               'authors': 'Accomazzi, A., Kurtz, M., Henneken, E., et al',
                'volume': '233',
-               'year': '2019'}
+               'year': '2019',
+               'page': '381.08'}
+        self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.8 2019AAS...23338108A')
+        # testing with first author only and no page, hence record with only the first author is returned
+        ref = {'authors': 'Accomazzi, A.',
+               'journal': 'AAS233 Meeting',
+               'volume': '233',
+               'year': '2019',
+               'page': '0'}
+        self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.8 2019AAS...23320704A')
+        # when we have multiple solutions and not enough reference information to decide which
+        # page and author are the deciding factor between these two test records
+        # here first author and page are wrong
+        ref = {'authors': 'Acomazi, A., et al',
+               'volume': '233',
+               'year': '2019',
+               'page': '0'}
         with self.assertRaises(Exception) as context:
             solve_reference(Hypotheses(ref))
-        self.assertTrue('Hypotheses exhausted' in context.exception)
+        self.assertTrue('Hypotheses exhausted' in str(context.exception))
+        # when journal, volume, and year match
         ref = {'authors': 'Accomazzi, A., et al',
                'journal': 'AAS233 Meeting',
                'volume': '233',
                'year': '2019',
                'page': '0'}
-        # when journal, volume, and year match
-        # use title from first record and authors from the second record,
-        # however the first record is authored by the only one author and
+        # note that the title is from the first record of test data and authors from the second record,
+        # however the first record is authored by one author only and
         # it is the same first author of the second record
         # verify that the first record is returned
         self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.8 2019AAS...23320704A')
@@ -459,7 +466,7 @@ class TestResolver(TestCase):
         # when one is missing
         evidences = Evidences()
         self.assertEqual(add_volume_evidence(evidences, '233', '', '', ''), None)
-        self.assertEqual(evidences.get_score(), -1)
+        self.assertEqual(evidences.get_score(), 0)
         evidences = Evidences()
         self.assertEqual(add_volume_evidence(evidences, '', '233', '', ''), None)
         self.assertEqual(evidences.get_score(), -1)
@@ -629,7 +636,7 @@ class TestResolver(TestCase):
         self.assertEqual(solrquery.make_params('author:("Accomazzi, A") AND year:"2019" AND bibstem:(AAS)'),
                          {'q': 'author:("Accomazzi, A") AND year:"2019" AND bibstem:(AAS)',
                           'rows': '100',
-                          'fl': u'author,author_norm,first_author_norm,year,title,pub,pub_raw,volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype'})
+                          'fl': u'author,[fields author=10]author_norm,[fields author_norm=10],first_author_norm,year,title,pub,pub_raw,aff_raw,[fields aff_raw=1],volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype'})
 
         # no author_norm
         solution = {u'bibcode': u'2013JARS....7.3461V',
@@ -666,6 +673,13 @@ class TestResolverHypotheses(TestCase):
         load the necessary objects
         """
         self.current_app.extensions['source_matcher'] = load_source_matcher()
+
+
+    def tearDown(self):
+        """
+        cleanup
+        """
+        self.current_app.extensions['source_matcher'] = None
 
 
     def test_a_Hypothesis(self):
@@ -710,7 +724,7 @@ class TestResolverHypotheses(TestCase):
                        has_etal=False)
         evidences = get_score_for_input_fields(result_record, hypothesis)
         # matches are authors, year, pub, and volume
-        self.assertEqual(evidences.get_score(), 4)
+        self.assertEqual(evidences.get_score(), 3.3)
 
 
     def test_inspect_doubtful_solutions(self):
@@ -743,7 +757,7 @@ class TestResolverHypotheses(TestCase):
         with self.assertRaises(Exception) as context:
             inspect_doubtful_solutions(scored_solutions=[(e1, {u'bibcode': u'1992JOSAA...9..154F'})],
                                        query_string='the_query', hypothesis=hypothesis)
-        self.assertTrue('Try again if desperate' in context.exception)
+        self.assertTrue('Try again if desperate' in str(context.exception))
         with self.assertRaises(Exception) as context:
             inspect_doubtful_solutions(scored_solutions=[(e1, {u'bibcode': u'1992JOSAA...9..154F'}),(e2, {u'bibcode': u'1992JOSAA...9..154F'})],
                                        query_string='the_query', hypothesis=hypothesis)
@@ -751,7 +765,7 @@ class TestResolverHypotheses(TestCase):
         with self.assertRaises(Exception) as context:
             inspect_doubtful_solutions(scored_solutions=[(e3, {u'bibcode': u'1992JOSAA...9..154F'})],
                                        query_string='the_query', hypothesis=hypothesis)
-        self.assertTrue('Try again if desperate' in context.exception)
+        self.assertTrue('Try again if desperate' in str(context.exception))
 
 
     def test_inspect_ambiguous_solutions(self):
@@ -790,7 +804,7 @@ class TestResolverHypotheses(TestCase):
         with self.assertRaises(Exception) as context:
             inspect_ambiguous_solutions(scored_solutions=[(e3, {u'bibcode': u'1992JOSAA...9..154F'})],
                                         query_string='the_query', hypothesis=hypothesis)
-        self.assertTrue('Try again if desperate' in context.exception)
+        self.assertTrue('Try again if desperate' in str(context.exception))
         scored_solutions = [(e1, {u'bibcode': u'1992JOSAA...9..154F'}), (e2, {u'bibcode': u'1992JOSAA...9..154F'})]
         self.assertEqual(inspect_ambiguous_solutions(scored_solutions=scored_solutions,
                                         query_string='the_query', hypothesis=hypothesis),
@@ -807,7 +821,7 @@ class TestResolverHypotheses(TestCase):
         with self.assertRaises(Exception) as context:
             inspect_ambiguous_solutions(scored_solutions=scored_solutions,
                                         query_string='the_query', hypothesis=hypothesis)
-        self.assertTrue('Ambiguous the_query.' in context.exception)
+        self.assertTrue('Ambiguous the_query.' in str(context.exception))
 
 
     def test_choose_solution(self):
@@ -852,7 +866,7 @@ class TestResolverHypotheses(TestCase):
 
         with self.assertRaises(Exception) as context:
             choose_solution(candidates=[], query_string='the_query', hypothesis=hypothesis)
-        self.assertTrue('Not even a doubtful solution' in context.exception)
+        self.assertTrue('Not even a doubtful solution' in str(context.exception))
         with self.assertRaises(Exception) as context:
             choose_solution(candidates=[(e1, solution)], query_string='the_query', hypothesis=hypothesis)
         self.assertEqual('No unique non-vetoed doubtful solution: the_query', str(context.exception))
@@ -861,7 +875,7 @@ class TestResolverHypotheses(TestCase):
                         candidates[0])
         with self.assertRaises(Exception) as context:
             choose_solution(candidates=[(e2, solution), (e2, solution)], query_string='the_query', hypothesis=hypothesis)
-        self.assertTrue('2 solutions with equal (good) score.' in context.exception)
+        self.assertTrue('2 solutions with equal (good) score.' in str(context.exception))
         candidates = [(e2, solution), (e3, solution)]
         self.assertTrue(choose_solution(candidates=candidates, query_string='the_query', hypothesis=hypothesis),
                         candidates[0])
@@ -943,7 +957,8 @@ class TestResolverHypotheses(TestCase):
                         page_qualifier=ref.get("qualifier"),
                         has_etal=False,
                         normalized_authors=normalized_authors)
-        self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
+        # Evidences(authors=0.67, year=0.75, doctype=1, pubstring=1.0)
+        self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 3.42)
 
 
     def test_get_thesis_score_for_input_fields(self):
@@ -960,7 +975,8 @@ class TestResolverHypotheses(TestCase):
             u"doctype":u"phdthesis",
             u"pub_raw":u"PhD These, The Open University, 2019",
             u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
-            u"author_norm":[u"Rowden, P"]
+            u"author_norm":[u"Rowden, P"],
+            u"aff_raw": [u"The Open University"]
         }
         ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
         # note that specifying hints here is useless since we are passing the solution in already
@@ -973,7 +989,8 @@ class TestResolverHypotheses(TestCase):
                         get_thesis_score_for_input_fields,
                         input_fields=ref,
                         normalized_authors=normalized_authors)
-        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 3)
+        # Evidences(doctype=1, author=1.0, year=1.0, affiliation=1.0)
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 4)
 
         # wrong initial
         ref = {"authors": "Rowden, R.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
@@ -987,7 +1004,8 @@ class TestResolverHypotheses(TestCase):
                         get_thesis_score_for_input_fields,
                         input_fields=ref,
                         normalized_authors=normalized_authors)
-        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1)
+        # Evidences(doctype=1, author=0.7, year=1.0, affiliation=1.0)
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 3.7)
 
         # mistaken year
         ref = {"authors": "Rowden, P.", "year": "2018", "refstr": "PhD These, The Open University, 2019"}
@@ -999,7 +1017,8 @@ class TestResolverHypotheses(TestCase):
                         get_thesis_score_for_input_fields,
                         input_fields=ref,
                         normalized_authors=normalized_authors)
-        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.75)
+        # Evidences(doctype=1, author=1.0, year=0.75, affiliation=1.0)
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 3.75)
 
         # no thesis indication
         solution = {
@@ -1012,7 +1031,8 @@ class TestResolverHypotheses(TestCase):
             u"doctype": u"phdthesis",
             u"pub_raw": u"no indicator, The Open University, 2019",
             u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
-            u"author_norm":[u"Rowden, P"]
+            u"author_norm":[u"Rowden, P"],
+            u"aff_raw": [u"The Open University"]
         }
         ref = {"authors": "Rowden, P.", "year": "2019", "refstr": "PhD These, The Open University, 2019"}
         hypothesis = Hypothesis("test-fielded-thesis", {
@@ -1022,7 +1042,8 @@ class TestResolverHypotheses(TestCase):
                         get_thesis_score_for_input_fields,
                         input_fields=ref,
                         normalized_authors=normalized_authors)
-        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1)
+        # Evidences(doctype=1, author=1.0, year=1.0, affiliation=1.0)
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 4)
 
         # if solution contians multiple authors, penalize
         solution = {
@@ -1035,9 +1056,29 @@ class TestResolverHypotheses(TestCase):
             u"doctype": u"phdthesis",
             u"pub_raw": u"PhD These, The Open University, 2019",
             u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
-            u"author_norm":[u"Rowden, P", u"Grady, M"]
+            u"author_norm":[u"Rowden, P", u"Grady, M"],
+            u"aff_raw": [u"The Open University"]
         }
-        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.9)
+        # Evidences(doctype=1, author=-1, year=1.0, affiliation=1.0)
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 2.0)
+
+
+        # if no aff_raw
+        solution = {
+            u"first_author_norm": u"Rowden, P",
+            u"year": u"2019",
+            u"bibcode": u"2019PhDT........11R",
+            u"identifier":[u"2019PhDT........11R"],
+            u"author":[u"Rowden, Pamela M.", u"Grady, M. M."],
+            u"pub": u"Ph.D. Thesis",
+            u"doctype": u"phdthesis",
+            u"pub_raw": u"PhD These, The Open University, 2019",
+            u"title":u"False Positives and Shallow Eclipsing Binaries in Transiting Exoplanet Surveys",
+            u"author_norm":[u"Rowden, P", u"Grady, M"],
+            u"aff_raw": [u"-"]
+        }
+        # Evidences(doctype=1, author=-1, year=1.0, affiliation=0)
+        self.assertEqual(get_thesis_score_for_input_fields(solution, hypothesis).get_score(), 1.0)
 
 
     def test_add_publication_evidence_error(self):
@@ -1187,7 +1228,7 @@ class TestResolverHypotheses(TestCase):
                'authors': 'Bennett, J. S., and Sijacki, D.'}
         with self.assertRaises(Exception) as context:
             solve_reference(Hypotheses(ref))
-        self.assertTrue('Not enough information to resolve the record.' in context.exception)
+        self.assertTrue('Not enough information to resolve the record.' in str(context.exception))
 
 
     def test_build_bibcode(self):
@@ -1201,7 +1242,7 @@ class TestResolverHypotheses(TestCase):
                'year': u'2016',
                'page': u'37'}
         self.assertEqual(Hypotheses(ref).construct_bibcode(),
-                         ['2016A&A...589...37V', '2016?????.589...37V', '2016A&A...589?..37V', '2016?????.589?..37V'])
+                         ['2016A&A...589...37V', '2016?????.589...37?', '2016A&A...589?..37V', '2016?????.589?..37?'])
         ref = {'journal': u'A&A',
                'authors': u'Shakura N. I., Sunyaev R. A.',
                'refstr': u'Shakura N. I., Sunyaev R. A., 1973, A&A, 24, 337',
@@ -1209,7 +1250,7 @@ class TestResolverHypotheses(TestCase):
                'year': u'1973',
                'page': u'337'}
         self.assertEqual(Hypotheses(ref).construct_bibcode(),
-                         ['1973A&A....24..337S', '1973?????..24..337S', '1973A&A....24?.337S', '1973?????..24?.337S'])
+                         ['1973A&A....24..337S', '1973?????..24..337?', '1973A&A....24?.337S', '1973?????..24?.337?'])
         ref = {'journal': u'A&A',
                'authors': u'N. Aghanim et al., Planck Collaboration',
                'refstr': u'N. Aghanim et al., Planck Collaboration, "A&A" 641 (2020) A6.',
@@ -1217,7 +1258,7 @@ class TestResolverHypotheses(TestCase):
                'year': u'2020',
                'page': u'A6'}
         self.assertEqual(Hypotheses(ref).construct_bibcode(),
-                         ['2020A&A...641A...6A', '2020?????.641A...6A'])
+                         ['2020A&A...641A...6A', '2020?????.641A...6?'])
 
 
 
