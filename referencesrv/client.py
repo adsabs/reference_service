@@ -1,5 +1,4 @@
 
-from builtins import object
 from flask import current_app
 
 client = lambda: Client(current_app.config).session
