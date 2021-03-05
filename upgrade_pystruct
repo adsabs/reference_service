@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-echo pwd
 mkdir pystruct
 cd pystruct
 git clone https://github.com/pystruct/pystruct
 pip download pystruct==0.3.2
-sudo tar xzvf pystruct-0.3.2.tar.gz
+tar xzvf pystruct-0.3.2.tar.gz
 mv pystruct-0.3.2/src/utils.c pystruct-0.3.2/src/utils.save
 cp pystruct/src/utils.pyx pystruct-0.3.2/src/
 cython -3 pystruct-0.3.2/src/utils.pyx
@@ -16,7 +15,6 @@ sed -i 's/from sklearn.externals.joblib import Parallel, delayed/from joblib imp
 sed -i 's/from sklearn.externals.joblib import Parallel, delayed/from joblib import Parallel, delayed/g' pystruct-0.3.2/pystruct/learners/*.py
 sed -i 's/from sklearn.externals.joblib import Parallel, delayed, cpu_count/from joblib import Parallel, delayed, cpu_count/g' pystruct-0.3.2/pystruct/learners/*.py
 cd pystruct-0.3.2 && python ./setup.py install
-cd .. && cp -rf pystruct-0.3.2 ~/virtualenv/python3.8/lib/python3.8/site-packages/pystruct
+cd .. && cp -rf pystruct-0.3.2 $LD_LIBRARY_PATH/python3.8/site-packages/pystruct
 cd ..
 rm -rf pystruct
-echo pwd
