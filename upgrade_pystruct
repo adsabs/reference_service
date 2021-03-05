@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+pip install --install-option=--no-cython-compile cython
 mkdir pystruct
 cd pystruct
 git clone https://github.com/pystruct/pystruct
