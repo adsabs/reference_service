@@ -23,6 +23,10 @@ jobs:
         python -m nltk.downloader punkt
         python -m nltk.downloader averaged_perceptron_tagger
 
+    - name: Upgrade pystruct
+      run: |
+        ./upgrade_pystruct
+
     - name: Test with pytest
       run: |
         py.test
