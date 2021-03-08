@@ -15,7 +15,7 @@ sed -i 's/tstate->exc_traceback/tstate->exc_state.exc_traceback/' pystruct-0.3.2
 sed -i 's/from sklearn.externals.joblib import Parallel, delayed/from joblib import Parallel, delayed/g' pystruct-0.3.2/pystruct/utils/*.py
 sed -i 's/from sklearn.externals.joblib import Parallel, delayed/from joblib import Parallel, delayed/g' pystruct-0.3.2/pystruct/learners/*.py
 sed -i 's/from sklearn.externals.joblib import Parallel, delayed, cpu_count/from joblib import Parallel, delayed, cpu_count/g' pystruct-0.3.2/pystruct/learners/*.py
-cd pystruct-0.3.2 && python ./setup.py install
+cd pystruct-0.3.2 && python3 ./setup.py install
 cd .. && cp -rf pystruct-0.3.2 $LD_LIBRARY_PATH/python3.8/site-packages/pystruct
 cd ..
 rm -rf pystruct
