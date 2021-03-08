@@ -15,6 +15,8 @@ class Querier(object):
 
         """
         self.endpoint = current_app.config['REFERENCE_SERVICE_SOLRQUERY_URL']
+        self.Authorization = 'Bearer:'%current_app.config.get('SERVICE_TOKEN', None) or \
+                             request.headers.get('X-Forwarded-Authorization', request.headers.get('Authorization', ''))
         self.query_fields = current_app.config['REFERENCE_SERVICE_QUERY_FIELDS_SOLR']
         self.max_rows = current_app.config['REFERENCE_SERVICE_MAX_RECORDS_SOLR']
         self.connect_solr = current_app.config['REFERENCE_SERVICE_LIVE']
@@ -49,7 +51,7 @@ class Querier(object):
             start_time = time.time()
             response = client().get(
                 url=self.endpoint,
-                headers={'Authorization': current_app.config.get('SERVICE_TOKEN', None) or request.headers.get('X-Forwarded-Authorization', request.headers.get('Authorization', ''))},
+                headers={'Authorization': self.Authorization},
                 params=self.make_params(query),
                 timeout=10
             )

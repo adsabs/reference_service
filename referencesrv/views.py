@@ -54,7 +54,6 @@ def return_response(results, status, content_type='application/json'):
     :param status: status code
     :return:
     """
-
     if 'application/json' in content_type:
         response = json.dumps(results)
     else:
@@ -83,7 +82,7 @@ def cache_resolved_set(reference, resolved):
     try:
         # save it to cache in MD5 format
         reference_md5 = md5(reference.encode('utf-8')).hexdigest()
-        redis_db.set(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5, value=resolved,
+        redis_db.set(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5, value=resolved.encode('utf-8'),
                      ex=current_app.config['REDIS_EXPIRATION_TIME'])
     except RedisError as e:
         current_app.logger.error('exception on caching reference={reference}: {error}'.format(reference=reference, error=str(e)))
@@ -96,9 +95,12 @@ def cache_resolved_get(reference):
     """
     try:
         reference_md5 = md5(reference.encode('utf-8')).hexdigest()
-        resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5)
+        resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5).decode('utf-8')
         current_app.logger.debug('fetched reference={reference} from cache'.format(reference=reference))
     except RedisError:
+        resolved = None
+    except AttributeError:
+        # when redis server is not activated
         resolved = None
 
     return resolved
@@ -132,16 +134,14 @@ def text_resolve(reference, returned_format):
         if resolved:
             return format_resolved_reference(returned_format,
                                              resolved=resolved,
-                                             reference=reference,
-                                             cache=False)
+                                             reference=reference)
 
         if bool(RE_NUMERIC_VALUE.search(reference)):
             parsed_ref = text_parser(reference)
             if parsed_ref:
                 return format_resolved_reference(returned_format,
                                                  resolved=str(solve_reference(Hypotheses(parsed_ref))),
-                                                 reference=reference,
-                                                 cache=True)
+                                                 reference=reference)
             raise NoSolution("NotParsed")
         else:
             raise ValueError('Reference with no year and volume cannot be resolved.')
