@@ -184,7 +184,7 @@ def iter_journal_specific_hypotheses(bibstem, year, author, journal, volume, pag
             get_serial_score_for_input_fields,
             input_fields=input_fields)
 
-    if full_reference:
+    if full_reference and year:
         if full_reference.count(year) > 1:
             # some pubications do not have a volume number, actually the volume number equals the year
             # when parsed if multiple year encountered, it is ignored, and hence the first numeric value is

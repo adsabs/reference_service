@@ -519,6 +519,9 @@ class CRFClassifierText(object):
             middle_initial = match.group('middle_initial').upper() if match.group('middle_initial') else None
             glue = match.group('glue').lstrip('.') if match.group('glue') else None
             if middle_initial:
+                # negative lookahead did not work in re, so have to go this way
+                if (first_initial + middle_initial).lower() == 'jr':
+                    return match.groups(0)
                 return r"{lastname}{first_initial}. {middle_initial}.{glue}".format(
                     lastname=lastname, first_initial=first_initial, middle_initial=middle_initial, glue=glue)
             return r"{lastname}{first_initial}.{glue}".format(
@@ -536,6 +539,9 @@ class CRFClassifierText(object):
             glue = match.group('glue') if match.group('glue') else None
             lastname = match.group('lastname').lstrip().capitalize()
             if middle_initial:
+                # negative lookahead did not work in re, so have to go this way
+                if (first_initial + middle_initial).lower() == 'jr':
+                    return match.groups(0)
                 return r"{first_initial}. {middle_initial}. {lastname}{glue}".format(
                     first_initial=first_initial, middle_initial=middle_initial, lastname=lastname, glue=glue)
             return r"{first_initial}. {lastname}{glue}".format(
