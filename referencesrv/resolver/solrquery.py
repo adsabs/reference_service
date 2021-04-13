@@ -22,7 +22,7 @@ class Querier(object):
         # so grab the one that is available, remove the Bearer if present, to add it at the end
         Authorization = current_app.config.get('SERVICE_TOKEN', None) or \
                         request.headers.get('X-Forwarded-Authorization', request.headers.get('Authorization', ''))
-        self.Authorization = 'Bearer:%s'%Authorization.split(':')[-1]
+        self.Authorization = Authorization if 'Bearer' in Authorization else 'Bearer:%s'%Authorization
 
     def make_params(self, query):
         """
