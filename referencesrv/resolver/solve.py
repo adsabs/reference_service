@@ -8,7 +8,7 @@ import traceback
 
 from flask import current_app
 
-from referencesrv.resolver.common import Undecidable, NoSolution, Solution, OverflowOrNone, Solr, Incomplete
+from referencesrv.resolver.common import Undecidable, NoSolution, Solution, OverflowOrNone, Solr, Incomplete, sorted2
 from referencesrv.resolver.solrquery import Querier
 from referencesrv.resolver.hypotheses import Hypotheses
 from referencesrv.resolver.authors import normalize_author_list
@@ -281,10 +281,10 @@ def solve_for_fields(hypothesis):
         if len(solutions) > 0:
             current_app.logger.debug("solutions: %s"%(solutions))
 
-            scored = list(sorted((hypothesis.get_score(s, hypothesis), s) for s in solutions))
+            scored = list(sorted2((hypothesis.get_score(s, hypothesis), s) for s in solutions))
 
             current_app.logger.debug("evidences from %s"%(hypothesis.name))
-            for score, sol in sorted(scored):
+            for score, sol in sorted2(scored):
                 current_app.logger.debug("score %s %s %s"%(sol['bibcode'], score.get_score(), score))
 
             score, sol = choose_solution(scored, query_string, hypothesis)
@@ -329,7 +329,7 @@ def solve_reference(ref):
     """
     if not enough_to_proceed(ref):
         current_app.logger.error("Not enough information to resolve the record")
-        raise Incomplete("Not enough information to resolve the record.", ref)
+        raise Incomplete("Not enough information to resolve the record.", str(ref))
 
     possible_solutions = []
     for hypothesis in Hypotheses.iter_hypotheses(ref):
@@ -341,9 +341,8 @@ def solve_reference(ref):
             current_app.logger.debug("(%s)"%ex.__class__.__name__)
         except (Solr, KeyboardInterrupt):
             raise
-        except Exception as e:
-            current_app.logger.error("Unhandled exception killing a single hypothesis.")
-            current_app.logger.error("Exception %s"%e)
+        except Exception as ex:
+            current_app.logger.error("Unhandled exception of type {0} occurred with arguments:{1!r}, thus killing a single hypothesis.".format(type(ex).__name__, ex.args))
             current_app.logger.error(traceback.format_exc())
 
     # if we have collected possible solutions for which we didn't want
@@ -365,4 +364,4 @@ def solve_reference(ref):
             return Solution(scored[0][1], scored[0][0], "best tied solution")
         else:
             current_app.logger.debug("Remaining ties, giving up")
-    raise NoSolution("Hypotheses exhausted", ref)
+    raise NoSolution("Hypotheses exhausted", str(ref))

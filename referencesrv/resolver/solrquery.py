@@ -15,11 +15,14 @@ class Querier(object):
 
         """
         self.endpoint = current_app.config['REFERENCE_SERVICE_SOLRQUERY_URL']
-        self.Authorization = 'Bearer:%s'%current_app.config.get('SERVICE_TOKEN', None) or \
-                             request.headers.get('X-Forwarded-Authorization', request.headers.get('Authorization', ''))
         self.query_fields = current_app.config['REFERENCE_SERVICE_QUERY_FIELDS_SOLR']
         self.max_rows = current_app.config['REFERENCE_SERVICE_MAX_RECORDS_SOLR']
         self.connect_solr = current_app.config['REFERENCE_SERVICE_LIVE']
+        # some options return with the Bearer keyword and some do not
+        # so grab the one that is available, remove the Bearer if present, to add it at the end
+        Authorization = current_app.config.get('SERVICE_TOKEN', None) or \
+                        request.headers.get('X-Forwarded-Authorization', request.headers.get('Authorization', ''))
+        self.Authorization = 'Bearer:%s'%Authorization.split(':')[-1]
 
     def make_params(self, query):
         """

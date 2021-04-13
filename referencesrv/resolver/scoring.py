@@ -12,7 +12,7 @@ import re
 from flask import current_app
 
 from referencesrv.resolver.authors import add_author_evidence, normalize_author_list
-from referencesrv.resolver.common import Evidences
+from referencesrv.resolver.common import Evidences, Hypothesis
 from referencesrv.resolver.journalfield import add_year_evidence, add_page_evidence, \
     add_publication_evidence, add_volume_evidence, has_thesis_indicators, add_title_evidence
 
@@ -68,6 +68,45 @@ def get_author_year_pub_score_for_input_fields(result_record, hypothesis):
     return evidences
 
 
+def match_ads_numeric_in_ref_str(ads_value, ref_str):
+    """
+
+    :param ads_value: either ads_volume or ads_page
+    :param ref_str:
+    :return:
+    """
+    return ads_value if re.search(r'\b(%s)\b' % ads_value, ref_str) else None
+
+
+def match_ads_numerics_with_ref_numeric(ads_numeric, ref_numeric, ads_numeric_other, ref_str):
+    """
+    references can eliminate volume and include only page, or only volume can be included
+    parser can not differentiate between if page was included only or if volume was included,
+    usually it tags the first numeric value as volume,
+    so if there is only one value, do a reverse engineering, see if the page and or volume in ads
+    matches the one value tagged in reference, or if it can be matched in the ref_str
+
+    :param ads_numeric: either ads_volume or ads_page
+    :param ref_numeric: either ref_volume or ref_page
+    :param ads_numeric_other: the other numeric value of ads
+    :param ref_str:
+    :return: numeric value identical between ads and ref, and what was matched in ref_str
+    """
+    # tagged numeric value actually matches the other? see if ads_numeric is in ref_str?
+    if ref_numeric == ads_numeric_other:
+        ref_matched = ads_numeric_other
+        ref_found = match_ads_numeric_in_ref_str(ads_numeric, ref_str)
+    # tagged numeric matches ads numeric? see if the other is in ref_str?
+    elif ref_numeric == ads_numeric:
+        ref_matched = ads_numeric
+        ref_found = match_ads_numeric_in_ref_str(ads_numeric_other, ref_str)
+    # tagged numeric value did not match ads, no need to search ref_str
+    else:
+        ref_matched = ref_numeric
+        ref_found = None
+
+    return ref_matched, ref_found
+
 def get_volume_page_score_for_input_fields(result_record, hypothesis):
     """
 
@@ -79,10 +118,6 @@ def get_volume_page_score_for_input_fields(result_record, hypothesis):
 
     evidences = Evidences()
 
-    # references can eliminate volume and include only page, or only volume can be included
-    # parser can not differentiate between if only page was included or only volume,
-    # so if there is only one value, do a reverse engineering, see if the page and or volume in ads 
-    # matches this one value, or if it can be matched in the ref_str
     exist = bool('volume' in input_fields) + bool('page' in input_fields)
 
     ads_volume = result_record.get('volume', '')
@@ -90,36 +125,18 @@ def get_volume_page_score_for_input_fields(result_record, hypothesis):
 
     ref_str = input_fields.get('refstr', '')
 
+    # neither page nor volume were tagged
     if exist == 0:
-        # see if ads_volume is in the ref_str
-        ref_volume = ads_volume if re.search(r'\b(%s)\b' % ads_volume, ref_str) else None
-        # see if ads_page is in the ref_str
-        ref_page = ads_page if re.search(r'\b(%s)\b' % ads_page, ref_str) else None
+        # see if ads_volume/ads_page is in the ref_str
+        ref_volume = match_ads_numeric_in_ref_str(ads_volume, ref_str)
+        ref_page = match_ads_numeric_in_ref_str(ads_page, ref_str)
+    # one value was tagged, see what matches what?
     elif exist == 1:
         if 'volume' in input_fields:
-            if input_fields['volume'] == ads_page:
-                ref_volume = ads_page
-                # see if ads_volume is in the ref_str
-                ref_page = ads_volume if re.search(r'\b(%s)\b' % ads_volume, ref_str) else None
-            elif input_fields['volume'] == ads_volume:
-                # volume matches, see if ads_page is in the ref_str
-                ref_volume = ads_volume
-                ref_page = ads_page if re.search(r'\b(%s)\b' % ads_page, ref_str) else None
-            else:
-                ref_volume = input_fields['volume']
-                ref_page = None
+            ref_volume, ref_page = match_ads_numerics_with_ref_numeric(ads_volume, input_fields['volume'], ads_page, ref_str)
         elif 'page' in input_fields:
-            if input_fields['page'] == ads_volume:
-                ref_page = ads_volume
-                # see if ads_page is in the ref_str
-                ref_volume = ads_page if re.search(r'\b(%s)\b' % ads_page, ref_str) else None
-            elif input_fields['page'] == ads_page:
-                # page matches, see if ads_volume is in the ref_str
-                ref_page = ads_page
-                ref_volume = ads_volume if re.search(r'\b(%s)\b' % ads_volume, ref_str) else None
-            else:
-                ref_page = input_fields['page']
-                ref_volume = None
+            ref_volume, ref_page = match_ads_numerics_with_ref_numeric(ads_page, input_fields['page'], ads_volume, ref_str)
+    # both values were tagged
     else: # == 2
         ref_page = input_fields['page']
         ref_volume = input_fields['volume']
@@ -343,7 +360,7 @@ def get_chapter_score_for_input_fields(result_record, hypothesis):
     input_fields = hypothesis.get_detail("input_fields")
 
     # if comparing against inproceedigns record in solr, compare both pub and title
-    # aginst both pub and title in solr
+    # against both pub and title in solr
     # inproceedings reference string, depending on the publications, interchanges the order of title and journal
     # include the one with the highest score in the final score
     ref_pubs = [input_fields.get("pub", ""), input_fields.get("pub", ""),
@@ -380,6 +397,9 @@ def get_score_for_input_fields(result_record, hypothesis):
         return get_book_score_for_input_fields(result_record, hypothesis)
     if result_record["doctype"] == "catalog":
         return get_catalog_score_for_input_fields(result_record, hypothesis)
+    if result_record["doctype"] == "article":
+        return get_serial_score_for_input_fields(result_record, adjust_volume_when_identical_year(result_record, hypothesis))
+
     return get_serial_score_for_input_fields(result_record, hypothesis)
 
 
@@ -400,8 +420,7 @@ def get_score_for_reference_identifier(result_record, hypothesis):
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
     elif input_fields.get("ascl", "not in ref") == get_arxiv_id_or_ascl_id(result_record):
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
-    elif compare_bibcode(input_fields.get("bibcode", None), result_record.get("bibcode", None),
-                         result_record.get("identifier", None)):
+    elif compare_bibcode(input_fields.get("bibcode", None), result_record.get("bibcode", None), result_record.get("identifier", None)):
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "bibcode")
     else:
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "bibcode")
@@ -465,3 +484,27 @@ def compare_bibcode(ref_bibcode, ads_bibcode, ads_identifiers):
         return True
 
     return False
+
+def adjust_volume_when_identical_year(result_record, hypothesis):
+    """
+    this is to cover when volume and year are identical, but volume was not specified in the reference string
+    hence reverse engineer, using information from ads (result_record)
+
+    :param result_record:
+    :param hypothesis:
+    :return:
+    """
+    if result_record["year"] == result_record["volume"]:
+        input_fields = hypothesis.get_detail("input_fields")
+        if 'volume' in input_fields and 'page' not in input_fields:
+            new_input_fields = input_fields.copy()
+            for key in ['volume', 'page']:
+                if key in new_input_fields:
+                    del new_input_fields[key]
+            new_input_fields.update({'volume':input_fields['year'], 'page':input_fields['volume']})
+            new_hypothesis = Hypothesis('volume-year-identical',
+                                        new_input_fields,
+                                        get_serial_score_for_input_fields,
+                                        input_fields=input_fields)
+            return new_hypothesis
+    return hypothesis

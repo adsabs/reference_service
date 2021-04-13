@@ -31,9 +31,10 @@ class CRFClassifierText(object):
     IGNORE_IF = re.compile(r'(in press|submitted|to appear)', flags=re.IGNORECASE)
 
     QUOTES_AROUND_ETAL_REMOVE = re.compile(r'(.*)(")(et al\.?)(")(.*)', re.IGNORECASE)
-    TO_ADD_DOT_AFTER_INITIALS = re.compile(r'\b([A-Z]{1}(?!\.))([\s,]+)([A-Z12(]|and)')
-    TO_ADD_SEPARATE_INITIALS = re.compile(r'\b([A-Z]{1})([A-Z]{1})([,\s]{1})')
-    SEPARATE_AUTHOR = re.compile(r'^((.*?)([\d\":]+))(.*)$')
+    LASTNAME_FIRST = re.compile(r'(^[A-Za-z]{3,})')
+    TO_FORMAT_INITIALS_PROPER_LASTNAME_FIRST = re.compile(r'\b(?P<lastname>[A-Za-z]{3,}[,\s]+)(?P<first_initial>[A-Za-z]{1})(?P<middle_initial>[A-Za-z]{1})?(?P<glue>[.,]{1}|\sand)')
+    TO_FORMAT_INITIALS_PROPER_LASTNAME_LAST = re.compile(r'\b(?P<first_initial>[A-Za-z]{1})(?P<middle_initial>[A-Za-z]{1})?(?P<lastname>\s[A-Za-z]{3,})(?P<glue>[.,]{1}|\sand)')
+    SEPARATE_AUTHOR = re.compile(r'^(.*?)([\d\":]+|et al)(.*)$', flags=re.IGNORECASE)
     TO_REMOVE_HYPEN_NEAR_INITIAL = [re.compile(r'([A-Z]\.)(\-)([A-Z]\.)'), re.compile(r'([A-Z])(\-)(\.)'),
                                     re.compile(r'([A-Z])(\-)([A-Z])\b')]
 
@@ -499,26 +500,68 @@ class CRFClassifierText(object):
         return ref_words
 
 
-
-    def dots_after_initials(self, reference_str):
+    def author_initials_proper(self, reference_str):
         """
+        make sure author initials is formatted properly, capitalized, with dot, first and middle separate
 
         :param reference_str:
         :return:
         """
+        def replacement_lastname_first(match):
+            """
+            add space and dots after initials if need to
+
+            :param match:
+            :return:
+            """
+            lastname = match.group('lastname').capitalize()
+            first_initial = match.group('first_initial').upper()
+            middle_initial = match.group('middle_initial').upper() if match.group('middle_initial') else None
+            glue = match.group('glue').lstrip('.') if match.group('glue') else None
+            if middle_initial:
+                # negative lookahead did not work in re, so have to go this way
+                if (first_initial + middle_initial).lower() == 'jr':
+                    return match.groups(0)
+                return r"{lastname}{first_initial}. {middle_initial}.{glue}".format(
+                    lastname=lastname, first_initial=first_initial, middle_initial=middle_initial, glue=glue)
+            return r"{lastname}{first_initial}.{glue}".format(
+                lastname=lastname, first_initial=first_initial, glue=glue)
+
+        def replacement_lastname_last(match):
+            """
+            add space and dots after initials if need to
+
+            :param match:
+            :return:
+            """
+            first_initial = match.group('first_initial').upper()
+            middle_initial = match.group('middle_initial').upper() if match.group('middle_initial') else None
+            glue = match.group('glue') if match.group('glue') else None
+            lastname = match.group('lastname').lstrip().capitalize()
+            if middle_initial:
+                # negative lookahead did not work in re, so have to go this way
+                if (first_initial + middle_initial).lower() == 'jr':
+                    return match.groups(0)
+                return r"{first_initial}. {middle_initial}. {lastname}{glue}".format(
+                    first_initial=first_initial, middle_initial=middle_initial, lastname=lastname, glue=glue)
+            return r"{first_initial}. {lastname}{glue}".format(
+                first_initial=first_initial, lastname=lastname, glue=glue)
+
         try:
-            author_part = self.SEPARATE_AUTHOR.search(reference_str).group(1)
+            author_part = self.SEPARATE_AUTHOR.search(reference_str).group(1).rstrip('.')
             # separate first and middle initials if there are any attached, add dot after each
             # make sure there is a dot after single character, repeat to capture middle name
-            reference_str = reference_str.replace(author_part,
-                                self.TO_ADD_SEPARATE_INITIALS.sub(r"\1. \2. \3",
-                                    self.TO_ADD_DOT_AFTER_INITIALS.sub(r"\1.\2\3",
-                                        self.TO_ADD_DOT_AFTER_INITIALS.sub(r"\1.\2\3", author_part))))
+            # first see what pattern do we have, last name first, or initials first
+            if self.LASTNAME_FIRST.search(author_part):
+                reference_str = reference_str.replace(author_part,
+                                    self.TO_FORMAT_INITIALS_PROPER_LASTNAME_FIRST.sub(replacement_lastname_first, author_part))
+            else:
+                reference_str = reference_str.replace(author_part,
+                                    self.TO_FORMAT_INITIALS_PROPER_LASTNAME_LAST.sub(replacement_lastname_last, author_part))
         except:
             pass
 
         return reference_str
-
 
     def pre_processing(self, reference_str):
         """
@@ -537,7 +580,7 @@ class CRFClassifierText(object):
         for rhni, replace in zip(self.TO_REMOVE_HYPEN_NEAR_INITIAL, [r"\1 \3", r"\1\3", r"\1. \3"]):
             reference_str = rhni.sub(replace, reference_str)
         # add dots after initials, separate first and middle if needed
-        reference_str = self.dots_after_initials(reference_str)
+        reference_str = self.author_initials_proper(reference_str)
         # if no colon after the identifer, add it in
         reference_str = self.ADD_COLON_TO_IDENTIFIER.sub(r"\1:", reference_str)
         # if there is a url for DOI turned it to recognizable DOI

@@ -5,6 +5,8 @@ if project_home not in sys.path:
 
 from flask_testing import TestCase
 import unittest
+import mock
+import json
 
 import referencesrv.app as app
 from referencesrv.parser.crf import CRFClassifierText
@@ -642,11 +644,11 @@ class TestCRFClassifierText(TestCase):
 
     def test_055(self):
         """ test when there is no dot after first initials """
-        reference_str = 'Qiu Z, Chen L and Zonca F 2016 "Physics of Plasmas (1994-present)" 23 090702'
+        reference_str = 'Qiu Z, Chen L and Zonca F, 2016 "Physics of Plasmas (1994-present)" 23 090702'
         self.assertEqual(self.crf_text.parse(reference_str),
                          {'journal': u'Physics Plasmas 1994-present',
                           'authors': u'Qiu Z., Chen L. and Zonca F.',
-                          'refstr': u'Qiu Z, Chen L and Zonca F 2016 "Physics of Plasmas (1994-present)" 23 090702',
+                          'refstr': u'Qiu Z, Chen L and Zonca F, 2016 "Physics of Plasmas (1994-present)" 23 090702',
                           'volume': u'23',
                           'year': u'2016',
                           'page': u'090702'})
@@ -662,7 +664,146 @@ class TestCRFClassifierText(TestCase):
                           'year': u'2016',
                           'page': u'A1072'})
 
+    def test_057(self):
+        """
+        Test that author initials is pre processed properly when lastname is first
+        """
+        # initials lower case, first and middle attached
+        reference_str = "kundu mr, shevgaonkar rk. 1988. ap. j. 334:1001-7"
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        "Kundu M. R., Shevgaonkar R. K. 1988. ap. j. 334:1001-7")
+        # first initials lower case
+        reference_str = "kundu m, shevgaonkar r. 1988. ap. j. 334:1001-7"
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        "Kundu M., Shevgaonkar R. 1988. ap. j. 334:1001-7")
+        # initials upper case, first and middle attached
+        reference_str = "Kundu MR, Shevgaonkar RK. 1988. ap. j. 334:1001-7"
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        "Kundu M. R., Shevgaonkar R. K. 1988. ap. j. 334:1001-7")
+        # first initials upper case, no dot
+        reference_str = "Kundu M, Shevgaonkar R. 1988. ap. j. 334:1001-7"
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        "Kundu M., Shevgaonkar R. 1988. ap. j. 334:1001-7")
+        # when correct
+        reference_str = "Kundu M.R., Shevgaonkar R.K. 1988. ap. j. 334:1001-7"
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        "Kundu M.R., Shevgaonkar R.K. 1988. ap. j. 334:1001-7")
+        # when there is an and
+        reference_str = 'Qiu Z, Chen L and Zonca F, 2016 "Physics of Plasmas (1994-present)" 23 090702'
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        'Qiu Z., Chen L. and Zonca F., 2016 "Physics of Plasmas (1994-present)" 23 090702')
 
+    def test_058(self):
+        """
+        Test that author initials is pre processed properly when lastname is last
+        """
+        # initials lower case, first and middle attached
+        reference_str = "mr kundu, rk shevgaonkar. 1988. ap. j. 334:1001-7"
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        "M. R. Kundu, R. K. Shevgaonkar. 1988. ap. j. 334:1001-7")
+        # first initials lower case
+        reference_str = "m kundu, r shevgaonkar. 1988. ap. j. 334:1001-7"
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        "M. Kundu, R. Shevgaonkar. 1988. ap. j. 334:1001-7")
+        # initials upper case, first and middle attached
+        reference_str = "MR Kundu, RK Shevgaonkar. 1988. ap. j. 334:1001-7"
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        "M. R. Kundu, R. K. Shevgaonkar. 1988. ap. j. 334:1001-7")
+        # first initials upper case, no dot
+        reference_str = "M Kundu, R Shevgaonkar. 1988. ap. j. 334:1001-7"
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        "M. Kundu, R. Shevgaonkar. 1988. ap. j. 334:1001-7")
+        # when correct
+        reference_str = "M.R. Kundu, R.K. Shevgaonkar. 1988. ap. j. 334:1001-7"
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        "M.R. Kundu, R.K. Shevgaonkar. 1988. ap. j. 334:1001-7")
+        # when there is an and
+        reference_str = 'Z Qiu, L Chen and F Zonca, 2016 "Physics of Plasmas (1994-present)" 23 090702'
+        self.assertEqual(self.crf_text.author_initials_proper(reference_str),
+                        'Z. Qiu, L. Chen and F. Zonca, 2016 "Physics of Plasmas (1994-present)" 23 090702')
+
+
+
+class TestEndpoints(TestCase):
+
+    maxDiff = None
+
+    def create_app(self):
+        # self.current_app = app.create_app(**{'TESTING': True})
+        self.current_app = app.create_app()
+        return self.current_app
+
+    def setUp(self):
+        """ executed before each test """
+        self.crf_text = CRFClassifierText()
+        self.crf_text.load()
+
+    def tearDown(self):
+        """ executed after each test """
+        pass
+
+    def test_01(self):
+        """ test text endpoint when request is to return in string format """
+
+        # the mock is for solr call
+        with mock.patch.object(self.current_app.client, 'get') as get_mock:
+            get_mock.return_value = mock_response = mock.Mock()
+            mock_response.status_code = 200
+            mock_response.text = json.dumps({u'responseHeader': {u'status': 0, u'QTime': 60, u'params': {}},
+                                             u'response': {u'start': 0, u'numFound': 1,
+                                                           u'docs': [{u'identifier': [u'2019arXiv190508255P', u'2020JHEP...09..002P', u'10.1007/JHEP09(2020)002', u'10.1007/JHEP09(2020)002', u'arXiv:1905.08255', u'2019arXiv190508255P'],
+                                                                      u'first_author_norm': u'penington, g',
+                                                                      u'year': u'2020',
+                                                                      u'page': u'2',
+                                                                      u'bibcode': u'2020JHEP...09..002P',
+                                                                      u'author': [u'Penington, Geoffrey'], u'issue': u'9',
+                                                                      u'aff_raw': u'Stanford Institute for Theoretical Physics, Stanford University, 450 Jane Stanford Way, 94305, Stanford, CA, USA',
+                                                                      u'pub': u'Journal of High Energy Physics',
+                                                                      u'volume': u'2020',
+                                                                      u'doi': [u'10.1007/JHEP09(2020)002'],
+                                                                      u'bibstem': u'JHEP',
+                                                                      u'doctype': u'article',
+                                                                      u'pub_raw': u'Journal of High Energy Physics, Volume 2020, Issue 09, article id. 2',
+                                                                      u'title': u'Entanglement wedge reconstruction and the information paradox',
+                                                                      u'author_norm': [u'penington, g']}]
+                                                          }
+                                            })
+            r = self.client.post(path='/text', data=json.dumps({'reference': ['Penington, G, 2020, JHEP, 9']}))
+            self.assertEqual(r.data, b"1.0 2020JHEP...09..002P -- Penington, G, 2020, JHEP, 9")
+
+    def test_02(self):
+        """ test text endpoint when request is to return in json format """
+
+        # the mock is for solr call
+        with mock.patch.object(self.current_app.client, 'get') as get_mock:
+            get_mock.return_value = mock_response = mock.Mock()
+            mock_response.status_code = 200
+            mock_response.text = json.dumps({u'responseHeader': {u'status': 0, u'QTime': 60, u'params': {}},
+                                             u'response': {u'start': 0, u'numFound': 1,
+                                                           u'docs': [{u'identifier': [u'2019arXiv190508255P', u'2020JHEP...09..002P', u'10.1007/JHEP09(2020)002', u'10.1007/JHEP09(2020)002', u'arXiv:1905.08255', u'2019arXiv190508255P'],
+                                                                      u'first_author_norm': u'penington, g',
+                                                                      u'year': u'2020',
+                                                                      u'page': u'2',
+                                                                      u'bibcode': u'2020JHEP...09..002P',
+                                                                      u'author': [u'Penington, Geoffrey'], u'issue': u'9',
+                                                                      u'aff_raw': u'Stanford Institute for Theoretical Physics, Stanford University, 450 Jane Stanford Way, 94305, Stanford, CA, USA',
+                                                                      u'pub': u'Journal of High Energy Physics',
+                                                                      u'volume': u'2020',
+                                                                      u'doi': [u'10.1007/JHEP09(2020)002'],
+                                                                      u'bibstem': u'JHEP',
+                                                                      u'doctype': u'article',
+                                                                      u'pub_raw': u'Journal of High Energy Physics, Volume 2020, Issue 09, article id. 2',
+                                                                      u'title': u'Entanglement wedge reconstruction and the information paradox',
+                                                                      u'author_norm': [u'penington, g']}]
+                                                          }
+                                            })
+            # this is also test reference that has a volume equal to year that is not specified in the string
+            r = self.client.post(path='/text',
+                                 data=json.dumps({'reference': ['Penington, G, 2020, JHEP, 9']}),
+                                 headers={'accept':'application/json'})
+            self.assertEqual(json.loads(r.data), {"resolved": [{"refstring": "Penington, G, 2020, JHEP, 9",
+                                                                "score": "1.0",
+                                                                "bibcode": "2020JHEP...09..002P"}]})
 
 if __name__ == "__main__":
     unittest.main()
