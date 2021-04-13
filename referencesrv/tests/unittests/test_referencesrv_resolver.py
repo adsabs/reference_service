@@ -448,7 +448,8 @@ class TestResolver(TestCase):
                'journal': 'AAS233 Meeting',
                'volume': '233',
                'year': '2019',
-               'page': '0'}
+               'page': '0',
+               'refstr': 'Accomazzi, A., et al., 2019. AAS233 Meeting 233'}
         # note that the title is from the first record of test data and authors from the second record,
         # however the first record is authored by one author only and
         # it is the same first author of the second record
@@ -1175,6 +1176,16 @@ class TestResolverHypotheses(TestCase):
         hypothesis = iter_journal_specific_hypotheses(None, ref['authors'], ref['year'], ref['journal'],
                                                               None, None, ref['refstr'])
         self.assertEqual(next(hypothesis).name, 'fielded-confser-SPIE')
+
+        # "bibcode":"2020JHEP...09..002P"
+        ref = {'authors': "Penington, G.",
+               'year': "2020",
+               'journal': "JHEP",
+               'volume': "9",
+               'refstr': "Penington, G, 2020, JHEP, 2020, 9"}
+        hypothesis = iter_journal_specific_hypotheses(bibstem=None, year=ref['year'], author=ref['authors'], journal=ref['journal'],
+                                                      volume=ref['volume'], page=None, full_reference=ref['refstr'])
+        self.assertEqual(next(hypothesis).name, 'volume-year-identical')
 
 
     def test_get_score_for_baas_match(self):

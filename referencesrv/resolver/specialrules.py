@@ -184,6 +184,17 @@ def iter_journal_specific_hypotheses(bibstem, year, author, journal, volume, pag
             get_serial_score_for_input_fields,
             input_fields=input_fields)
 
+    if full_reference:
+        if full_reference.count(year) > 1:
+            # some pubications do not have a volume number, actually the volume number equals the year
+            # when parsed if multiple year encountered, it is ignored, and hence the first numeric value is
+            # considered volume, and the next one, if any is considered the page
+            # so shift that, assign the year to volume, whatever is assigned to volume assign to page
+            yield Hypothesis('volume-year-identical',
+                change_dict(input_fields, ['volume', 'page'], volume=year, page=volume),
+                get_serial_score_for_input_fields,
+                input_fields=input_fields)
+
     if journal:
         for pattern, conf_bibstem in get_conf_series_indicators():
             if pattern.search(journal):
@@ -194,4 +205,3 @@ def iter_journal_specific_hypotheses(bibstem, year, author, journal, volume, pag
                     change_dict(input_fields, ['pub'], bibstem=conf_bibstem),
                     get_basic_score_for_input_fields,
                     input_fields=input_fields)
-

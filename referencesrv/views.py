@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from future import standard_library
-standard_library.install_aliases()
 from builtins import str
 from flask import current_app, request, Blueprint, Response
 from flask_discoverer import advertise
@@ -57,7 +55,7 @@ def return_response(results, status, content_type='application/json'):
     if 'application/json' in content_type:
         response = json.dumps(results)
     else:
-        response = results
+        response = results['resolved']
 
     if status != 200:
         current_app.logger.error('sending response status={status}'.format(status=status))
@@ -102,10 +100,9 @@ def cache_resolved_get(reference):
     except AttributeError:
         # when redis server is not activated
         resolved = None
-
     return resolved
 
-def format_resolved_reference(returned_format, resolved, reference, cache=True):
+def format_resolved_reference(returned_format, resolved, reference, cache=True, comment=None):
     """
 
     :param returned_format:
@@ -118,8 +115,35 @@ def format_resolved_reference(returned_format, resolved, reference, cache=True):
         cache_resolved_set(reference, resolved)
     if 'application/json' in returned_format:
         resolved = resolved.split()
-        return {'score': resolved[0], 'bibcode': resolved[1], 'reference': reference}
-    return '%s -- %s' % (resolved, reference)
+        result = {'refstring': reference, 'score': resolved[0], 'bibcode': resolved[1]}
+        if comment:
+            result['comment'] = comment
+        return result
+    result = '%s -- %s' % (resolved, reference)
+    if comment:
+        result = '%s ;; %s'%(result, comment)
+    return result
+
+
+def check_number_references(references, reference_type):
+    """
+    truncate number of references if more than what is allowed for one processing call
+
+    :param references:
+    :param reference_type: reference string or parsed reference
+    :return:
+    """
+    num_references = len(references)
+    max_num_references = current_app.config['REFERENCE_SERVICE_MAX_REFERENCE']
+    truncated_message = None
+    if num_references > max_num_references:
+        current_app.logger.error('received {num_references} {reference_type} to resolve, maximum number of references that can be resolved in one call is {max_num_references} which shall be resolved'.format(
+            num_references=num_references,
+            reference_type = reference_type,
+            max_num_references=max_num_references))
+        references = references[:max_num_references]
+        truncated_message = 'Resolved maximum number of references allowed {max_num_references}.'.format(max_num_references=max_num_references)
+    return references, truncated_message
 
 
 def text_resolve(reference, returned_format):
@@ -129,6 +153,7 @@ def text_resolve(reference, returned_format):
     :param returned_format:
     :return:
     """
+    not_resolved = '0.0 %s' % (19 * '.')
     try:
         resolved = cache_resolved_get(reference)
         if resolved:
@@ -142,15 +167,33 @@ def text_resolve(reference, returned_format):
                 return format_resolved_reference(returned_format,
                                                  resolved=str(solve_reference(Hypotheses(parsed_ref))),
                                                  reference=reference)
-            raise NoSolution("NotParsed")
+            error_comment = 'NoSolution: unable to parse'
+            current_app.logger.error('Exception: {error}'.format(error=error_comment))
+            return format_resolved_reference(returned_format,
+                                             resolved=not_resolved,
+                                             reference=reference,
+                                             comment=error_comment)
         else:
-            raise ValueError('Reference with no year and volume cannot be resolved.')
+            error_comment = 'ValueError: reference with no year and volume cannot be resolved.'
+            current_app.logger.error('Exception: {error}'.format(error=error_comment))
+            return format_resolved_reference(returned_format,
+                                             resolved=not_resolved,
+                                             reference=reference,
+                                             comment=error_comment)
     except (NoSolution, Incomplete, ValueError) as e:
-        current_app.logger.error('Exception: {error}'.format(error=str(e)))
-        return format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
+        error_comment = 'Exception: {error}'.format(error=str(e))
+        current_app.logger.error(error_comment)
+        return format_resolved_reference(returned_format,
+                                         resolved=not_resolved,
+                                         reference=reference,
+                                         comment=error_comment)
     except Exception as e:
-        current_app.logger.error('Exception: {error}'.format(error=str(e)))
-        raise
+        error_comment = 'Exception: {error}'.format(error=str(e))
+        current_app.logger.error(error_comment)
+        return format_resolved_reference(returned_format,
+                                         resolved=not_resolved,
+                                         reference=reference,
+                                         comment=error_comment)
 
 
 @advertise(scopes=[], rate_limit=[1000, 3600 * 24])
@@ -169,6 +212,7 @@ def text_get(reference):
 
     start_time = time.time()
     result = text_resolve(reference, returned_format)
+
     current_app.logger.debug("GET request processed in {duration} ms".format(duration=(time.time() - start_time) * 1000))
 
     return return_response({'resolved': result}, 200, 'application/json; charset=UTF8')
@@ -192,6 +236,7 @@ def text_post():
         return {'error': 'no reference found in payload (parameter name is `reference`)'}, 400
 
     references = payload['reference']
+    references, truncated_message = check_number_references(references, reference_type="references")
 
     current_app.logger.info('received POST request with references={references} to resolve in text mode'.format(references=','.join(references)[:250]))
 
@@ -205,8 +250,15 @@ def text_post():
                                                                                                       duration=(time.time() - start_time) * 1000))
 
     if returned_format == 'application/json':
-        return return_response({'resolved': results}, 200, 'application/json; charset=UTF8')
-    return return_response({'resolved':'\n'.join(results)}, 200, 'application/json; charset=UTF8')
+        response = {'resolved': results}
+        if truncated_message:
+            response['message'] = truncated_message
+        return return_response(response, 200, 'application/json; charset=UTF8')
+
+    response = {'resolved':'\n'.join([str(result) for result in results])}
+    if truncated_message:
+        response['message'] = truncated_message
+    return return_response(response, 200, 'text/plain; charset=UTF8')
 
 
 @advertise(scopes=[], rate_limit=[1000, 3600 * 24])
@@ -228,6 +280,7 @@ def xml_post():
         return {'error': 'no reference found in payload (parameter name is `reference`)'}, 400
 
     parsed_references = payload['parsed_reference']
+    references, truncated_message = check_number_references(parsed_references, reference_type="parsed references")
 
     current_app.logger.debug('received POST request with {count} references to resolve in xml mode.'.format(count=len(parsed_references)))
 
@@ -269,8 +322,14 @@ def xml_post():
 
     if len(results) == len(parsed_reference):
         if returned_format == 'application/json':
-            return return_response({'resolved': results}, 200, 'application/json; charset=UTF8')
-        return return_response({'resolved':'\n'.join(results)}, 200, 'application/json; charset=UTF8')
+            response = {'resolved': results}
+            if truncated_message:
+                response['message'] = truncated_message
+            return return_response(response, 200, 'application/json; charset=UTF8')
+        response = {'resolved': '\n'.join(results)}
+        if truncated_message:
+            response['message'] = truncated_message
+        return return_response(response, 200, 'application/text; charset=UTF8')
     return return_response({'error': 'unable to resolve any references'}, 400, 'text/plain; charset=UTF8')
 
 

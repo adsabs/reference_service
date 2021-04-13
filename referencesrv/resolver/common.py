@@ -2,6 +2,11 @@ import traceback
 
 from flask import current_app
 
+from numbers import Real
+from decimal import Decimal
+from itertools import tee, filterfalse
+
+
 class DeferredSourceMatcher(object):
     """
     # Defer loading of the actual source matcher to runtime to save on
@@ -65,7 +70,7 @@ class Evidences(object):
             return self.get_score()<other.get_score()
         else:
             try:
-                return self.get_score()<int(other)
+                return self.get_score()<float(other)
             except TypeError:
                 return False
 
@@ -79,7 +84,7 @@ class Evidences(object):
             return self.get_score()<=other.get_score()
         else:
             try:
-                return self.get_score()<=int(other)
+                return self.get_score()<=float(other)
             except TypeError:
                 return False
 
@@ -93,7 +98,7 @@ class Evidences(object):
             return self.get_score()>other.get_score()
         else:
             try:
-                return self.get_score()>int(other)
+                return self.get_score()>float(other)
             except TypeError:
                 return False
 
@@ -107,7 +112,7 @@ class Evidences(object):
             return self.get_score()>=other.get_score()
         else:
             try:
-                return self.get_score()>=int(other)
+                return self.get_score()>=float(other)
             except TypeError:
                 return False
 
@@ -121,7 +126,7 @@ class Evidences(object):
             return self.get_score()==other.get_score()
         else:
             try:
-                return self.get_score()==int(other)
+                return self.get_score()==float(other)
             except TypeError:
                 return False
 
@@ -443,3 +448,20 @@ def round_two_significant_digits(num):
     :return:
     """
     return float('%s' % float('%.1g' % num))
+
+def sorted2(iterable):
+    """
+    source: https://stackoverflow.com/a/43456510
+
+    :param iterable: An iterable (array or alike) entity which elements should be sorted.
+    :return: List with sorted elements.
+    """
+    def predicate(x):
+        return isinstance(x, (Real, Decimal))
+
+    t1, t2 = tee(iterable)
+    numbers = filter(predicate, t1)
+    non_numbers = filterfalse(predicate, t2)
+    sorted_numbers = sorted(numbers)
+    sorted_non_numbers = sorted(non_numbers, key=str)
+    return sorted_numbers + sorted_non_numbers

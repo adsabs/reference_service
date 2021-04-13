@@ -49,6 +49,17 @@ class Hypotheses(object):
         self.ref = ref
         self.make_digested_record()
 
+    def __str__(self):
+        """
+
+        :return: reference string if available, otherwise attempt to built it from the fields
+        """
+        ref_str = self.ref.get('refstr', None)
+        if ref_str:
+            return ref_str
+        return '%s, %s. %s %s %s'%(self.ref.get('author', ''), self.ref.get('year', ''), self.ref.get('pub', ''),
+                                   self.ref.get('volume', ''), self.ref.get('page', ''))
+
     def tokenize_page(self, page):
         """
         see if there is a qualifier attached to the page
@@ -117,9 +128,9 @@ class Hypotheses(object):
             try:
                 if len(pub) <= 2:
                     if self.digested_record.get("pub", None):
-                        self.digested_record.remove("pub")
+                        self.digested_record.pop("pub")
                     elif self.digested_record.get("title", None):
-                        self.digested_record.remove("title")
+                        self.digested_record.pop("title")
                 else:
                     bibstem = get_best_bibstem_for(pub)
                     # if bibstem is one of the multi-section journal,

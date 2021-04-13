@@ -16,6 +16,9 @@ REFERENCE_SERVICE_QUERY_FIELDS_SOLR = "author,[fields author=10]author_norm,[fie
                                       "year,title,pub,pub_raw,aff_raw,[fields aff_raw=1]," \
                                       "volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype"
 
+# maximum references that can be resolved in one call
+REFERENCE_SERVICE_MAX_REFERENCE = 16
+
 EVIDENCE_SCORE_RANGE = [-1,1]
 
 REFERENCE_SERVICE_STOP_WORDS = [
