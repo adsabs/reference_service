@@ -1,7 +1,7 @@
 # encoding=utf8
 # included included for the presense of unicode, for example `Akademiai Kiadò, in list of academic publishers
 
-LOGGING_LEVEL = 'INFO'
+LOGGING_LEVEL = 'DEBUG'
 
 # must be here for adsmutils to override it using env vars
 # but if left empty (resolving to False) it won't be used
