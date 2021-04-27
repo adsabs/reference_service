@@ -277,9 +277,9 @@ def xml_post():
     if not payload:
         return {'error': 'no information received'}, 400
     if 'parsed_reference' not in payload:
-        return {'error': 'no reference found in payload (parameter name is `reference`)'}, 400
+        return {'error': 'no reference found in payload (parameter name is `parsed_reference`)'}, 400
 
-    parsed_references = payload['parsed_reference']
+    parsed_references = [eval(parsed_reference) for parsed_reference in payload['parsed_reference']]
     references, truncated_message = check_number_references(parsed_references, reference_type="parsed references")
 
     current_app.logger.debug('received POST request with {count} references to resolve in xml mode.'.format(count=len(parsed_references)))
@@ -320,7 +320,7 @@ def xml_post():
         finally:
             results.append(result)
 
-    if len(results) == len(parsed_reference):
+    if len(results) == len(parsed_references):
         if returned_format == 'application/json':
             response = {'resolved': results}
             if truncated_message:
