@@ -196,7 +196,7 @@ class Evidences(object):
         """
         if not self.evidences:
             current_app.logger.error('No evidence, rejecting')
-            return None
+            return 0
         if self.score is None:
             self.score = sum(self.evidences)
         return self.score
