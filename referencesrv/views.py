@@ -84,6 +84,8 @@ def cache_resolved_set(reference, resolved):
                      ex=current_app.config['REDIS_EXPIRATION_TIME'])
     except RedisError as e:
         current_app.logger.error('exception on caching reference={reference}: {error}'.format(reference=reference, error=str(e)))
+    except AttributeError as e:
+        current_app.logger.error('exception on caching reference={reference}: {error}'.format(reference=reference, error=str(e)))
 
 def cache_resolved_get(reference):
     """
@@ -102,7 +104,7 @@ def cache_resolved_get(reference):
         resolved = None
     return resolved
 
-def format_resolved_reference(returned_format, resolved, reference, cache=True, comment=None):
+def format_resolved_reference(returned_format, resolved, reference, id, cache=True, comment=None):
     """
 
     :param returned_format:
@@ -118,10 +120,14 @@ def format_resolved_reference(returned_format, resolved, reference, cache=True, 
         result = {'refstring': reference, 'score': resolved[0], 'bibcode': resolved[1]}
         if comment:
             result['comment'] = comment
+        if id:
+            result['id'] = id
         return result
     result = '%s -- %s' % (resolved, reference)
     if comment:
         result = '%s ;; %s'%(result, comment)
+    if id:
+        result = '%s ;; %s' % (result, id)
     return result
 
 
@@ -146,7 +152,7 @@ def check_number_references(references, reference_type):
     return references, truncated_message
 
 
-def text_resolve(reference, returned_format):
+def text_resolve(reference, returned_format, id):
     """
 
     :param reference:
@@ -159,19 +165,22 @@ def text_resolve(reference, returned_format):
         if resolved:
             return format_resolved_reference(returned_format,
                                              resolved=resolved,
-                                             reference=reference)
+                                             reference=reference,
+                                             id=id)
 
         if bool(RE_NUMERIC_VALUE.search(reference)):
             parsed_ref = text_parser(reference)
             if parsed_ref:
                 return format_resolved_reference(returned_format,
                                                  resolved=str(solve_reference(Hypotheses(parsed_ref))),
-                                                 reference=reference)
+                                                 reference=reference,
+                                                 id=id)
             error_comment = 'NoSolution: unable to parse'
             current_app.logger.error('Exception: {error}'.format(error=error_comment))
             return format_resolved_reference(returned_format,
                                              resolved=not_resolved,
                                              reference=reference,
+                                             id=id,
                                              comment=error_comment)
         else:
             error_comment = 'ValueError: reference with no year and volume cannot be resolved.'
@@ -179,6 +188,7 @@ def text_resolve(reference, returned_format):
             return format_resolved_reference(returned_format,
                                              resolved=not_resolved,
                                              reference=reference,
+                                             id=id,
                                              comment=error_comment)
     except (NoSolution, Incomplete, ValueError) as e:
         error_comment = 'Exception: {error}'.format(error=str(e))
@@ -186,6 +196,7 @@ def text_resolve(reference, returned_format):
         return format_resolved_reference(returned_format,
                                          resolved=not_resolved,
                                          reference=reference,
+                                         id=id,
                                          comment=error_comment)
     except Exception as e:
         error_comment = 'Exception: {error}'.format(error=str(e))
@@ -193,7 +204,70 @@ def text_resolve(reference, returned_format):
         return format_resolved_reference(returned_format,
                                          resolved=not_resolved,
                                          reference=reference,
+                                         id=id,
                                          comment=error_comment)
+
+def xml_resolve(parsed_reference, returned_format):
+    """
+
+    :param parsed_reference:
+    :param returned_format:
+    :return:
+    """
+    not_resolved = '0.0 %s' % (19 * '.')
+    try:
+        resolved = str(solve_reference(Hypotheses(parsed_reference)))
+        if resolved.startswith('0.0'):
+            raise "Not Resolved"
+        reference_str = parsed_reference.get('refstr', None) or parsed_reference.get('refplaintext', None)
+        return format_resolved_reference(returned_format,
+                                         resolved=resolved,
+                                         reference=reference_str,
+                                         id=parsed_reference.get('id', None))
+    except Exception as e:
+        current_app.logger.error('Exception: {error}'.format(error=str(e)))
+        # lets attempt to resolve using the text model
+        reference_str = parsed_reference.get('refplaintext', None)
+        if reference_str:
+            current_app.logger.info('attempting to resolve the reference=`{reference_str}` in text mode now'.format(reference_str=reference_str))
+            if bool(RE_NUMERIC_VALUE.search(reference_str)):
+                try:
+                    parsed_ref = text_parser(reference_str)
+                    if parsed_ref:
+                        return format_resolved_reference(returned_format,
+                                                         resolved=str(solve_reference(Hypotheses(parsed_ref))),
+                                                         reference=reference_str,
+                                                         id=parsed_reference.get('id', None),
+                                                         cache=True)
+                    error_comment = 'NoSolution: unable to parse'
+                    current_app.logger.error('Exception: {error}'.format(error=error_comment))
+                    return format_resolved_reference(returned_format,
+                                                     resolved=not_resolved,
+                                                     reference=reference_str,
+                                                     id=parsed_reference.get('id', None),
+                                                     comment=error_comment)
+
+                except (NoSolution, Incomplete, ValueError) as e:
+                    error_comment = 'Exception: {error}'.format(error=str(e))
+                    current_app.logger.error(error_comment)
+                    return format_resolved_reference(returned_format,
+                                                     resolved=not_resolved,
+                                                     reference=reference_str,
+                                                     id=parsed_reference.get('id', None),
+                                                     comment=error_comment)
+            else:
+                error_comment = 'ValueError: reference with no year and volume cannot be resolved.'
+                current_app.logger.error('Exception: {error}'.format(error=error_comment))
+                return format_resolved_reference(returned_format,
+                                                 resolved=not_resolved,
+                                                 reference=reference_str,
+                                                 id=parsed_reference.get('id', None),
+                                                 comment=error_comment)
+        else:
+            return format_resolved_reference(returned_format,
+                                             resolved=not_resolved,
+                                             reference=parsed_reference.get('refstr', None),
+                                             id=parsed_reference.get('id', None))
 
 
 @advertise(scopes=[], rate_limit=[1000, 3600 * 24])
@@ -211,7 +285,7 @@ def text_get(reference):
     current_app.logger.info('received GET request with reference=`{reference}` to resolve in text mode'.format(reference=reference))
 
     start_time = time.time()
-    result = text_resolve(reference, returned_format)
+    result = text_resolve(reference, returned_format, None)
 
     current_app.logger.debug("GET request processed in {duration} ms".format(duration=(time.time() - start_time) * 1000))
 
@@ -242,10 +316,15 @@ def text_post():
 
     returned_format = request.headers.get('Accept', 'text/plain')
 
+    if 'id' in payload:
+        ids = payload['id']
+    else:
+        ids = [None]*len(references)
+
     start_time = time.time()
     results = []
-    for reference in references:
-        results.append(text_resolve(reference, returned_format))
+    for reference, id in zip(references, ids):
+        results.append(text_resolve(reference, returned_format, id))
     current_app.logger.debug("POST request with {num} reference(s) processed in {duration} ms".format(num=len(references),
                                                                                                       duration=(time.time() - start_time) * 1000))
 
@@ -279,7 +358,7 @@ def xml_post():
     if 'parsed_reference' not in payload:
         return {'error': 'no reference found in payload (parameter name is `parsed_reference`)'}, 400
 
-    parsed_references = [eval(parsed_reference) for parsed_reference in payload['parsed_reference']]
+    parsed_references = payload['parsed_reference']
     references, truncated_message = check_number_references(parsed_references, reference_type="parsed references")
 
     current_app.logger.debug('received POST request with {count} references to resolve in xml mode.'.format(count=len(parsed_references)))
@@ -288,49 +367,18 @@ def xml_post():
 
     results = []
     for parsed_reference in parsed_references:
-        try:
-            resolved = str(solve_reference(Hypotheses(parsed_reference)))
-            if resolved.startswith('0.0'):
-                raise "Not Resolved"
-            result = format_resolved_reference(returned_format, resolved=resolved, reference=parsed_reference['refstr'])
-        except Exception as e:
-            current_app.logger.error('Exception: {error}'.format(error=str(e)))
-            # lets attempt to resolve using the text model
-            if 'refplaintext' in parsed_reference:
-                reference = urllib.parse.unquote(parsed_reference['refplaintext'])
-                if bool(RE_NUMERIC_VALUE.search(reference)):
-                    current_app.logger.info('attempting to resolve the reference=`{reference}` in text mode now'.format(reference=reference))
-                    try:
-                        parsed_ref = text_parser(reference)
-                        if parsed_ref:
-                            result = format_resolved_reference(returned_format,
-                                                               resolved=str(solve_reference(Hypotheses(parsed_ref))),
-                                                               reference=reference,
-                                                               cache=True)
-                    except Exception as e:
-                        current_app.logger.error('Exception: {error}'.format(error=str(e)))
-                        result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=reference)
-                        continue
-                else:
-                    result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=parsed_reference['refstr'])
-                    continue
-            else:
-                result = format_resolved_reference(returned_format, resolved='0.0 %s' % (19 * '.'), reference=parsed_reference['refstr'])
-                continue
-        finally:
-            results.append(result)
+        results.append(xml_resolve(parsed_reference, returned_format))
 
-    if len(results) == len(parsed_references):
-        if returned_format == 'application/json':
-            response = {'resolved': results}
-            if truncated_message:
-                response['message'] = truncated_message
-            return return_response(response, 200, 'application/json; charset=UTF8')
-        response = {'resolved': '\n'.join(results)}
+    if returned_format == 'application/json':
+        response = {'resolved': results}
         if truncated_message:
             response['message'] = truncated_message
-        return return_response(response, 200, 'application/text; charset=UTF8')
-    return return_response({'error': 'unable to resolve any references'}, 400, 'text/plain; charset=UTF8')
+        return return_response(response, 200, 'application/json; charset=UTF8')
+
+    response = {'resolved': '\n'.join(results)}
+    if truncated_message:
+        response['message'] = truncated_message
+    return return_response(response, 200, 'application/text; charset=UTF8')
 
 
 @advertise(scopes=['ads:reference-service'], rate_limit=[1000, 3600 * 24])

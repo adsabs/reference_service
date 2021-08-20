@@ -438,7 +438,7 @@ class Solr(Error):
 
 class Incomplete(Error):
     """
-    is raised when parsed reference is incomplete.
+    is raised when parsed reference is incomplete and hence not able to resolve the reference.
     """
 
 def round_two_significant_digits(num):
