@@ -329,7 +329,7 @@ class TestResolver(TestCase):
         e2.add_evidence(0.5, 'author')
         self.assertEqual(e2.sum(), 1.5)
         e3 = Evidences()
-        self.assertEqual(e3.get_score(), None)
+        self.assertEqual(e3.get_score(), 0)
         self.assertEqual(e3.has_veto(), False)
         e3.add_evidence(0, 'bibcode')
         self.assertEqual(e3.has_veto(), True)
@@ -587,7 +587,7 @@ class TestResolver(TestCase):
                                  'Nuclear Instruments and Methods in Physics Research A',
                                  '1997NIMPA.389...81B',
                                  'NIMPA')
-        self.assertEqual(evidences.get_score(), None)
+        self.assertEqual(evidences.get_score(), 0)
         # when there is an error in reference, the author is not parsed properly,
         # and hence journal is not identified correctly, if ads bibstem is in ref_str, do not penalize
         evidences = Evidences()
@@ -598,10 +598,10 @@ class TestResolver(TestCase):
                                  'Active OB Stars: Structure, Evolution, Mass Loss, and Critical Limits',
                                  '2011IAUS..272..310S',
                                  'IAUS')
-        self.assertEqual(evidences.get_score(), None)
+        self.assertEqual(evidences.get_score(), 0)
         evidences = Evidences()
         add_publication_evidence(evidences, '', '', '', '', '', '')
-        self.assertEqual(evidences.get_score(), None)
+        self.assertEqual(evidences.get_score(), 0)
 
 
     def test_has_word(self):
