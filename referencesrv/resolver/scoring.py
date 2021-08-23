@@ -34,8 +34,8 @@ def get_author_year_score_for_input_fields(result_record, hypothesis):
 
     add_author_evidence(evidences,
         normalized_authors,
-        result_record['author_norm'],
-        result_record['first_author_norm'],
+        result_record.get('author_norm'),
+        result_record.get('first_author_norm'),
         has_etal=hypothesis.get_detail('has_etal'))
 
     add_year_evidence(evidences,
@@ -377,7 +377,7 @@ def get_chapter_score_for_input_fields(result_record, hypothesis):
                                  ads_pub,
                                  result_record.get("bibcode", ""),
                                  result_record.get("bibstem", ""))
-        if tmp_evidence.get_score() > track_evidence.get_score():
+        if tmp_evidence > track_evidence:
             track_evidence = tmp_evidence
     evidences = evidences + track_evidence
     return evidences
