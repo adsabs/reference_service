@@ -1,5 +1,6 @@
-import sys
+import sys, os, io
 import requests
+import argparse
 import json
 
 def resolve(references):
@@ -11,26 +12,49 @@ def resolve(references):
     payload = {'reference': references}
 
     response = requests.post(
-        url='https://dev.adsabs.harvard.edu/v1/reference/text',
-        headers={'Authorization': 'Bearer ' + 'your token here'},
-        data=payload
+        url='https://api.adsabs.harvard.edu/v1/reference/text',
+        headers={'Authorization': 'Bearer ' + 'your token here',
+                 'Content-Type': 'application/json',
+                 'Accept':'application/json'},
+        data=json.dumps(payload)
     )
 
-    result = {}
-    result['status_code'] = response.status_code
     if response.status_code == 200:
-        result['resolved'] = json.loads(response.content)['resolved'].split('\n')
+        return json.loads(response.content)['resolved'], 200
+    return None, response.status_code
+
+
+def output(results, status):
+    """
+
+    :param results:
+    :param status:
+    :return:
+    """
+    if results:
+        print('\n')
+        for result in results:
+            print(result)
+        print('\n')
     else:
-        result['resolved'] = None
-    return result
+        print('error code: ', status)
 
 
 if __name__ == "__main__":
-    result = resolve(sys.argv[1].split('\n'))
-    if result['status_code'] == 200:
-        print '\n'
-        for r in result['resolved']:
-            print r
-        print '\n'
-    else:
-        print 'error code: ', result['status_code']
+    parser = argparse.ArgumentParser(description='Test script for reference service')
+    parser.add_argument('-r', '--references', help='list of text references separated by `\n`')
+    parser.add_argument('-i', '--input', help='the path to input file containing list of text references, one per line.')
+    args = parser.parse_args()
+    if args.references:
+        references = args.references.split('\\n')
+        for i in range(0, len(references), 16):
+            results, status = resolve(references[i:i + 16])
+            output(results, status)
+    elif args.input:
+        with io.open(os.path.join(os.getcwd(), args.input), 'r', encoding="utf-8") as f:
+            references = list(reference[:-1] for reference in f)
+            for i in range(0, len(references), 16):
+                results, status = resolve(references[i:i+16])
+                output(results, status)
+    sys.exit(0)
+
