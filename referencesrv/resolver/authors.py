@@ -428,10 +428,13 @@ def count_matching_authors(ref_authors, ads_authors, ads_first_author=None):
     # (we assume ADS author lists are complete)
     ads_authors_lastname_pattern = "|".join(ads_authors_lastname)
 
-    wordsNotInADS = SINGLE_WORD_EXTRACTOR.findall(re.sub(ads_authors_lastname_pattern, "", '; '.join(ref_authors_lastname)))
-    # remove recognized misspelled authors
-    wordsNotInADS = [word for word in wordsNotInADS if word not in different]
-    missing_in_ads = len(wordsNotInADS)
+    if ref_authors_lastname:
+        wordsNotInADS = SINGLE_WORD_EXTRACTOR.findall(re.sub(ads_authors_lastname_pattern, "", '; '.join(ref_authors_lastname)))
+        # remove recognized misspelled authors
+        wordsNotInADS = [word for word in wordsNotInADS if word not in different]
+        missing_in_ads = len(wordsNotInADS)
+    else:
+        missing_in_ads = 0
 
     return (missing_in_ref, missing_in_ads, matching_authors, first_author_missing)
 

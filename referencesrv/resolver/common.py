@@ -66,13 +66,12 @@ class Evidences(object):
         :param other:
         :return:
         """
-        if hasattr(other, 'get_score'):
-            return self.get_score()<other.get_score()
-        else:
-            try:
-                return self.get_score()<float(other)
-            except TypeError:
-                return False
+        try:
+            return self.get_score() < other.get_score()
+        except (AttributeError, TypeError):
+            if other:
+                return self.get_score() < float(other)
+            return False
 
     def __le__(self, other):
         """
@@ -80,13 +79,12 @@ class Evidences(object):
         :param other:
         :return:
         """
-        if hasattr(other, 'get_score'):
-            return self.get_score()<=other.get_score()
-        else:
-            try:
-                return self.get_score()<=float(other)
-            except TypeError:
-                return False
+        try:
+            return self.get_score() <= other.get_score()
+        except (AttributeError, TypeError):
+            if other:
+                return self.get_score() <= float(other)
+            return False
 
     def __gt__(self, other):
         """
@@ -94,13 +92,12 @@ class Evidences(object):
         :param other:
         :return:
         """
-        if hasattr(other, 'get_score'):
-            return self.get_score()>other.get_score()
-        else:
-            try:
-                return self.get_score()>float(other)
-            except TypeError:
-                return False
+        try:
+            return self.get_score() > other.get_score()
+        except (AttributeError, TypeError):
+            if other:
+                return self.get_score() > float(other)
+            return False
 
     def __ge__(self, other):
         """
@@ -108,13 +105,12 @@ class Evidences(object):
         :param other:
         :return:
         """
-        if hasattr(other, 'get_score'):
-            return self.get_score()>=other.get_score()
-        else:
-            try:
-                return self.get_score()>=float(other)
-            except TypeError:
-                return False
+        try:
+            return self.get_score() >= other.get_score()
+        except (AttributeError, TypeError):
+            if other:
+                return self.get_score() >= float(other)
+            return False
 
     def __eq__(self, other):
         """
@@ -122,13 +118,12 @@ class Evidences(object):
         :param other:
         :return:
         """
-        if hasattr(other, 'get_score'):
-            return self.get_score()==other.get_score()
-        else:
-            try:
-                return self.get_score()==float(other)
-            except TypeError:
-                return False
+        try:
+            return self.get_score() == other.get_score()
+        except (AttributeError, TypeError):
+            if other:
+                return self.get_score() == float(other)
+            return False
 
     def __len__(self):
         """

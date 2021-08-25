@@ -1227,7 +1227,7 @@ class TestResolverHypotheses(TestCase):
                        get_score_for_input_fields,
                        input_fields=input_fields,
                        expected_bibstem="no match")
-        self.assertEqual(get_score_for_baas_match(solution, hypothesis), -1)
+        self.assertEqual(get_score_for_baas_match(solution, hypothesis).get_score(), -1)
 
 
     def test_identify_incomplete(self):
