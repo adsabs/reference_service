@@ -169,6 +169,7 @@ def compute_closeness_two_numbers(num1, num2):
             return round_two_significant_digits((len(num1) - 1.0) / len(num1))
         if len(num1) != len(num2):
             return 0
+        return -1
     elif int(num2) == 0:
         return 0
     else:

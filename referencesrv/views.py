@@ -30,10 +30,12 @@ def text_model():
 
     :return:
     """
+    start_time = time.time()
     # load only if in production mode
     if current_app.config['REFERENCE_SERVICE_LIVE']:
         current_app.extensions['text_crf'] = load_text_model()
         current_app.extensions['source_matcher'] = load_source_matcher()
+    current_app.logger.debug("Loading neccesary pickels in {duration} ms".format(duration=(time.time() - start_time) * 1000))
 
 
 def text_parser(reference):

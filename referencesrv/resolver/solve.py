@@ -160,7 +160,7 @@ def inspect_doubtful_solutions(scored_solutions, query_string, hypothesis):
     # hypotheses.  Always be aware that input_fields might be None
     input_fields = hypothesis.get_detail("input_fields")
 
-    if input_fields is not None:
+    if input_fields:
         # Some publications are cited without a page number, but have
         # a page number of 1 in ADS (e.g., IBVS).  So, without an input
         # page, we still accept a response page of 1
