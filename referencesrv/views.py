@@ -79,6 +79,8 @@ def cache_resolved_set(reference, resolved):
     :param resolved
     :return:
     """
+    # for experiment disable cache
+    return
     try:
         # save it to cache in MD5 format
         reference_md5 = md5(reference.encode('utf-8')).hexdigest()
@@ -95,6 +97,8 @@ def cache_resolved_get(reference):
     :param reference:
     :return:
     """
+    # for experiment disable cache
+    return None
     try:
         reference_md5 = md5(reference.encode('utf-8')).hexdigest()
         resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5).decode('utf-8')
