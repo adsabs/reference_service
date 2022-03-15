@@ -3,7 +3,7 @@ The module contains methods that are called from other modules
 
 """
 
-import re
+import regex as re
 from collections import OrderedDict
 
 MATCH_A_WORD = re.compile(r'(\w+\-\w+\-\w+|\w+\-\w+|\w+\&\w+|\w+)')

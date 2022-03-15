@@ -2,7 +2,7 @@
 Extra hypothesis generators (and verifiers) by individual publication types, given fields.
 """
 
-import re
+import regex as re
 
 from flask import current_app
 

@@ -2,7 +2,7 @@
 Evaluating hypotheses and working out which is acceptable.
 """
 
-import re
+import regex as re
 import urllib
 import traceback
 

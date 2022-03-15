@@ -5,7 +5,7 @@ people use to reference publications into bibstems.
 """
 
 import os
-import re
+import regex as re
 import time
 import traceback
 

@@ -3,7 +3,7 @@ The module keeps track of journal/title/publisher substrings
 
 """
 
-import re
+import regex as re
 import nltk
 from itertools import groupby
 

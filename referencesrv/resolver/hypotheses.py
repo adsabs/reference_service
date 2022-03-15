@@ -1,4 +1,4 @@
-import re
+import regex as re
 
 from referencesrv.resolver.common import Hypothesis
 from referencesrv.resolver.authors import normalize_author_list, get_first_author_last_name

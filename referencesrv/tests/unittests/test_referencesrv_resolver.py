@@ -7,7 +7,7 @@ if project_home not in sys.path:
 from flask_testing import TestCase
 import unittest
 
-import re
+import regex as re
 
 import referencesrv.app as app
 from referencesrv.resolver.authors import get_author_pattern, get_authors, normalize_single_author, \

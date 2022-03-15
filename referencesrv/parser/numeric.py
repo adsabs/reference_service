@@ -3,7 +3,7 @@ This module keeps track of numeric tokens doi/arxiv/ascl/year/volume/page/issue
 
 """
 
-import re
+import regex as re
 import datetime
 from collections import OrderedDict
 import urllib
