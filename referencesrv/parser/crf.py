@@ -7,7 +7,7 @@ conditional random field machine learning method
 import os
 import traceback
 import numpy as np
-import re
+import regex as re
 import nltk
 import time
 from pystruct.models import ChainCRF

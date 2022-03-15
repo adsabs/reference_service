@@ -7,7 +7,7 @@ volumes and pages.  For those, it's a demerit if either reference or
 ADS gives a field (i.e., not None or empty string) while the other does.
 """
 
-import re
+import regex as re
 import editdistance
 import unidecode
 import math

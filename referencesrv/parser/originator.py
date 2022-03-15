@@ -3,7 +3,7 @@ This module keeps track of author and editor list
 
 """
 
-import re
+import regex as re
 from collections import OrderedDict
 
 from referencesrv.parser.common import PUNCTUATION_TOKEN

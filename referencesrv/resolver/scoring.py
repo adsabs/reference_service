@@ -7,7 +7,7 @@ from the hypothesis, which must have been left there by the hypothesis
 generator.  The docstrings should say what kind of details they need.
 """
 
-import re
+import regex as re
 
 from flask import current_app
 

@@ -2,7 +2,7 @@
 Code to normalize and otherwise manipulate author lists.
 """
 
-import re
+import regex as re
 import editdistance
 import unidecode
 

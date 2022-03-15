@@ -9,7 +9,7 @@ from hashlib import md5
 
 import json
 import urllib.request, urllib.parse, urllib.error
-import re
+import regex as re
 import time
 
 from referencesrv.parser.crf import CRFClassifierText, create_text_model, load_text_model
@@ -30,12 +30,12 @@ def text_model():
 
     :return:
     """
-    start_time = time.time()
+    # start_time = time.time()
     # load only if in production mode
     if current_app.config['REFERENCE_SERVICE_LIVE']:
         current_app.extensions['text_crf'] = load_text_model()
         current_app.extensions['source_matcher'] = load_source_matcher()
-    current_app.logger.debug("Loading neccesary pickels in {duration} ms".format(duration=(time.time() - start_time) * 1000))
+    # current_app.logger.debug("Loading neccesary pickels in {duration} ms".format(duration=(time.time() - start_time) * 1000))
 
 
 def text_parser(reference):
@@ -79,8 +79,6 @@ def cache_resolved_set(reference, resolved):
     :param resolved
     :return:
     """
-    # for experiment disable cache
-    return
     try:
         # save it to cache in MD5 format
         reference_md5 = md5(reference.encode('utf-8')).hexdigest()
@@ -97,8 +95,6 @@ def cache_resolved_get(reference):
     :param reference:
     :return:
     """
-    # for experiment disable cache
-    return None
     try:
         reference_md5 = md5(reference.encode('utf-8')).hexdigest()
         resolved = redis_db.get(name=current_app.config['REDIS_NAME_PREFIX'] + reference_md5).decode('utf-8')
@@ -290,10 +286,9 @@ def text_get(reference):
 
     current_app.logger.info('received GET request with reference=`{reference}` to resolve in text mode'.format(reference=reference))
 
-    start_time = time.time()
+    # start_time = time.time()
     result = text_resolve(reference, returned_format, None)
-
-    current_app.logger.debug("GET request processed in {duration} ms".format(duration=(time.time() - start_time) * 1000))
+    # current_app.logger.debug("GET request processed in {duration} ms".format(duration=(time.time() - start_time) * 1000))
 
     return return_response({'resolved': result}, 200, 'application/json; charset=UTF8')
 
@@ -327,12 +322,11 @@ def text_post():
     else:
         ids = [None]*len(references)
 
-    start_time = time.time()
+    # start_time = time.time()
     results = []
     for reference, id in zip(references, ids):
         results.append(text_resolve(reference, returned_format, id))
-    current_app.logger.debug("POST request with {num} reference(s) processed in {duration} ms".format(num=len(references),
-                                                                                                      duration=(time.time() - start_time) * 1000))
+    # current_app.logger.debug("POST request with {num} reference(s) processed in {duration} ms".format(num=len(references), duration=(time.time() - start_time) * 1000))
 
     if returned_format == 'application/json':
         response = {'resolved': results}
