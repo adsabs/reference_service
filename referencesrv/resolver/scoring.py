@@ -243,12 +243,16 @@ def get_book_score_for_input_fields(result_record, hypothesis):
     """
     evidences = get_author_year_score_for_input_fields(result_record, hypothesis)
 
+    input_fields = hypothesis.get_detail("input_fields")
+
+    # if ads record is a book and reference record has no volume and page resolve it as if it is a book
     if result_record["doctype"] in ["book", "inbook", "techreport"]:
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "doctype")
+        if all([input_fields.get(key, None) == None for key in ['volume', 'page']]):
+            add_title_evidence(evidences, input_fields.get("title", ""), result_record.get("title", ""))
+            return evidences
     else:
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][0], "doctype")
-
-    input_fields = hypothesis.get_detail("input_fields")
 
     # book does not have volume and page number
     # but if reference has score it so that we would not have false positive
@@ -379,6 +383,9 @@ def get_chapter_score_for_input_fields(result_record, hypothesis):
                                  result_record.get("bibstem", ""))
         if tmp_evidence > track_evidence:
             track_evidence = tmp_evidence
+    # add in a neutral pubstring evidence, it is needed not to have false positive
+    if not track_evidence:
+        track_evidence.add_evidence(0, "pubstring")
     evidences = evidences + track_evidence
     return evidences
 
