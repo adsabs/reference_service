@@ -359,7 +359,6 @@ def get_author_last_name_only(author_string):
     :return:
     """
     try:
-        get_author_pattern(author_string)
         return [lastname.lower().replace('-', ' ') for lastname in LAST_NAME_PAT.findall(author_string)]
     except Undecidable:
         # we are here since we have full first names, hence return every other matches
@@ -457,6 +456,8 @@ def add_author_evidence(evidences, ref_authors, ads_authors, ads_first_author, h
     :param has_etal:
     :return:
     """
+    ref_authors = ref_authors.replace('-', ' ')
+
     # note that ref_authors is a string, and we need to have at least one name to match it to
     # ads_authors with is a list, that should contain at least one name
     if len(ref_authors) == 0 or len(ads_authors) == 0:

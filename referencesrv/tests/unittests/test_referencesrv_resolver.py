@@ -486,7 +486,7 @@ class TestResolver(TestCase):
         # when not integer, unmatched
         evidences = Evidences()
         self.assertEqual(add_volume_evidence(evidences, '223-3', '233-3', '', ''), None)
-        self.assertEqual(evidences.get_score(), -1)
+        self.assertEqual(evidences.get_score(), 0)
         # when volume is year and there is an issue
         evidences = Evidences()
         self.assertEqual(add_volume_evidence(evidences, '233', '2018', '233', ''), None)
@@ -725,7 +725,7 @@ class TestResolverHypotheses(TestCase):
                        has_etal=False)
         evidences = get_score_for_input_fields(result_record, hypothesis)
         # matches are authors, year, pub, and volume
-        self.assertEqual(evidences.get_score(), 3.3)
+        self.assertEqual(evidences.get_score(), 4.0)
 
 
     def test_inspect_doubtful_solutions(self):
@@ -958,8 +958,8 @@ class TestResolverHypotheses(TestCase):
                         page_qualifier=ref.get("qualifier"),
                         has_etal=False,
                         normalized_authors=normalized_authors)
-        # Evidences(authors=0.67, year=0.75, doctype=1, pubstring=1.0)
-        self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 3.42)
+        # Evidences(authors=1, year=0.75, doctype=1, pubstring=1.0)
+        self.assertEqual(get_book_score_for_input_fields(solution, hypothesis).get_score(), 3.75)
 
 
     def test_get_thesis_score_for_input_fields(self):

@@ -352,10 +352,10 @@ def string_similarity(str_a, str_b):
         return current_app.config['EVIDENCE_SCORE_RANGE'][0]
 
     # remove punctuation and turn lower case
-    str_a = "".join(re.split('\W+', str_a.lower()))
-    str_b = "".join(re.split('\W+', str_b.lower()))
+    str_a = " ".join(re.split('\W+', str_a.lower()))
+    str_b = " ".join(re.split('\W+', str_b.lower()))
 
-    words = re.findall(r"\w\w+", str_b or "")
+    words = re.findall(r"\w+", str_b or "")
     if len(words) == 0:
         return current_app.config['EVIDENCE_SCORE_RANGE'][0]
 
@@ -499,4 +499,9 @@ def add_title_evidence(evidences, ref_title, ads_title):
     """
     if not ref_title:
         return
+
+    # sometimes either referece or ads have subtitles that cause issues, so remove subtitles, if any
+    ref_title = ref_title.split('-')[0]
+    ads_title = ads_title.split('-')[0]
+
     evidences.add_evidence(string_similarity(ref_title, ads_title), "title")

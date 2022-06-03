@@ -18,7 +18,7 @@ SOLR_ESCAPABLE = re.compile(r"""(?i)([-]|\bto\b|\band\b|\bor\b|\bnot\b|\bnear\b)
 # remove punctuations in title since it is causing error in solr query, keep only -
 REMOVE_PUNCTUATION = re.compile(r"[()\[\]:\\/*?\"+~^,=#'{}]")
 
-AUTHOR_LAST_NAME = re.compile(r"([A-Z][a-z]+)")
+AUTHOR_LAST_NAME = re.compile(r"([A-Z][A-Za-z\-]+)")
 AUTHOR_LAST_NAME_CASE_INSENSITIVE = re.compile(r"([A-Za-z]+)")
 
 # mappings from standard hint keys to actual solr keywords
