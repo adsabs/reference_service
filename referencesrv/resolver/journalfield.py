@@ -351,19 +351,32 @@ def string_similarity(str_a, str_b):
     if max(len(str_a), len(str_b)) == 0:
         return current_app.config['EVIDENCE_SCORE_RANGE'][0]
 
-    str_a = str_a.lower()
-    str_b = str_b.lower()
+    # remove punctuation and turn lower case
+    str_a = "".join(re.split('\W+', str_a.lower()))
+    str_b = "".join(re.split('\W+', str_b.lower()))
 
-    missing_words = 0
     words = re.findall(r"\w\w+", str_b or "")
     if len(words) == 0:
         return current_app.config['EVIDENCE_SCORE_RANGE'][0]
 
+    # if the beginning matches, bring that score
+    # sometimes subtitle is missing in one string and is included in another
+    matching_chars = 0
+    for a, b in zip(str_a,str_b):
+        if a != b:
+            break
+        matching_chars += 1
+    # make sure there is at least one word
+    if str_a[:matching_chars].count(' ') >= 1:
+        len_matching_words = len(str_a[:matching_chars].split())
+        if len_matching_words:
+            return (len_matching_words/float(len(words)))
+
+    len_missing_words = 0
     for word in words:
         if word not in str_a:
-            missing_words += 1
-
-    return (len(words)-2*missing_words)/float(len(words))
+            len_missing_words += 1
+    return (len(words)-2*len_missing_words)/float(len(words))
 
 
 def add_publication_evidence(evidences, ref_pub, ref_bibstem, ref_str, ads_pub, ads_bibcode, ads_bibstem):

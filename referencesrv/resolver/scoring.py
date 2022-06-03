@@ -246,7 +246,7 @@ def get_book_score_for_input_fields(result_record, hypothesis):
     input_fields = hypothesis.get_detail("input_fields")
 
     # if ads record is a book and reference record has no volume and page resolve it as if it is a book
-    if result_record["doctype"] in ["book", "inbook", "techreport"]:
+    if result_record["doctype"] in ["book", "inbook", "techreport", "proceedings"]:
         evidences.add_evidence(current_app.config["EVIDENCE_SCORE_RANGE"][1], "doctype")
         if all([input_fields.get(key, None) == None for key in ['volume', 'page']]):
             add_title_evidence(evidences, input_fields.get("title", ""), result_record.get("title", ""))
@@ -398,9 +398,9 @@ def get_score_for_input_fields(result_record, hypothesis):
     :param hypothesis:
     :return:
     """
-    if result_record["doctype"] in ["inproceedings", "inbook"]:
+    if result_record["doctype"] in ["inbook", "inproceedings"]:
         return get_chapter_score_for_input_fields(result_record, hypothesis)
-    if result_record["doctype"] == "book":
+    if result_record["doctype"] in ["book", "proceedings"]:
         return get_book_score_for_input_fields(result_record, hypothesis)
     if result_record["doctype"] == "catalog":
         return get_catalog_score_for_input_fields(result_record, hypothesis)
