@@ -499,4 +499,9 @@ def add_title_evidence(evidences, ref_title, ads_title):
     """
     if not ref_title:
         return
+
+    # sometimes either referece or ads have subtitles that cause issues, so remove subtitles, if any
+    ref_title = ref_title.split('-')[0]
+    ads_title = ads_title.split('-')[0]
+
     evidences.add_evidence(string_similarity(ref_title, ads_title), "title")
