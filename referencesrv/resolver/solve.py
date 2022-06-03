@@ -136,6 +136,9 @@ def make_solr_condition(key, value):
     if key=='year~':
         return 'year:%s'%("[%s TO %s]"%(int(value)-5, int(value)+5))
 
+    if key=='doctype':
+        return '%s:(%s)'%(key, value)
+
     return '%s:"%s"'%(key, SOLR_ESCAPABLE.sub(r"\\\1", value))
 
 

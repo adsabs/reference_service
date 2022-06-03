@@ -338,13 +338,17 @@ class Hypotheses(object):
             if self.has_keys("title"):
                 yield Hypothesis("fielded-book-pub", {
                     "author": self.normalized_authors,
-                    "title": self.digested_record["title"],
-                    "year": self.digested_record["year"]},
+                    "year": self.digested_record["year"],
+                    "doctype": "book OR proceedings"},
                                  get_book_score_for_input_fields,
                                  input_fields=self.digested_record,
                                  page_qualifier=self.digested_record.get("qualifier", ""),
                                  has_etal=has_etal,
                                  normalized_authors=self.normalized_authors)
+                # having author-year-title is indication that this was a book,
+                # no match was found, if continue it would make a false positive match to an article
+                if self.lacks_keys("pub", "page"):
+                    return
 
             # is title in the pub
             if self.has_keys("pub"):
