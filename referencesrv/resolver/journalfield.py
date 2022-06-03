@@ -352,10 +352,10 @@ def string_similarity(str_a, str_b):
         return current_app.config['EVIDENCE_SCORE_RANGE'][0]
 
     # remove punctuation and turn lower case
-    str_a = "".join(re.split('\W+', str_a.lower()))
-    str_b = "".join(re.split('\W+', str_b.lower()))
+    str_a = " ".join(re.split('\W+', str_a.lower()))
+    str_b = " ".join(re.split('\W+', str_b.lower()))
 
-    words = re.findall(r"\w\w+", str_b or "")
+    words = re.findall(r"\w+", str_b or "")
     if len(words) == 0:
         return current_app.config['EVIDENCE_SCORE_RANGE'][0]
 
