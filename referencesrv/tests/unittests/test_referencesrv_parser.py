@@ -805,5 +805,16 @@ class TestEndpoints(TestCase):
                                                                 "score": "1.0",
                                                                 "bibcode": "2020JHEP...09..002P"}]})
 
+    def test_03(self):
+        """ test parse endpoint when request is to return the parsed reference """
+
+        r = self.client.post(path='/parse',
+                             data=json.dumps({'reference': ['Penington, G, 2020, JHEP, 9']}),
+                             headers={'accept': 'application/json'})
+        self.assertEqual(json.loads(r.data), {"parsed": [{"authors": "Penington, G.",
+                                                          "year": "2020", "volume": "9",
+                                                          "journal": "JHEP", "refstr": "Penington, G, 2020, JHEP, 9"}]})
+
+
 if __name__ == "__main__":
     unittest.main()

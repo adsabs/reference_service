@@ -409,3 +409,39 @@ def pickle_source_matcher():
         return return_response({'OK': 'objects saved'}, 200, 'text/plain; charset=UTF8')
     except Exception as e:
         return return_response({'Error: %s'%str(e)}, 400, 'text/plain; charset=UTF8')
+
+
+@advertise(scopes=[], rate_limit=[1000, 3600 * 24])
+@bp.route('/parse', methods=['POST'])
+def parse_text():
+    """
+
+    :return:
+    """
+    try:
+        payload = request.get_json(force=True)  # post data in json
+    except:
+        payload = dict(request.form)  # post data in form encoding
+
+    if not payload:
+        return {'error': 'no information received'}, 400
+    if 'reference' not in payload:
+        return {'error': 'no reference found in payload (parameter name is `reference`)'}, 400
+
+    references = payload['reference']
+    references, truncated_message = check_number_references(references, reference_type="references")
+
+    current_app.logger.info('received POST request with references={references} to parse text references'.format(references=','.join(references)[:250]))
+
+    returned_format = request.headers.get('Accept', 'text/plain')
+
+    # start_time = time.time()
+    results = []
+    for reference in references:
+        results.append(text_parser(reference))
+    # current_app.logger.debug("POST request with {num} reference(s) processed in {duration} ms".format(num=len(references), duration=(time.time() - start_time) * 1000))
+
+    response = {'parsed': results}
+    if truncated_message:
+        response['message'] = truncated_message
+    return return_response(response, 200, 'application/json; charset=UTF8')
