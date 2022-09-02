@@ -18,19 +18,25 @@ LAST_NAME_PAT = re.compile(r"%s(?:[- ]%s)*" % (SINGLE_NAME_RE, SINGLE_NAME_RE))
 ETAL = r"(([\s,]*and)?[\s,]*[Ee][Tt][.\s]*[Aa][Ll][.\s]+)?"
 LAST_NAME_SUFFIX = r"([,\s]*[Jj][Rr][.,\s]+)?"
 
-# This pattern should match author names with initials behind the last
-# name
+# This pattern should match author names with initials behind the last name
 TRAILING_INIT_PAT = re.compile(r"(?P<last>%s%s)\s*,?\s+"
-                               r"(?P<inits>(?:[A-Z]\.[\s-]*)+)" % (LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
-# This pattern should match author names with initals in front of the
-# last name
-LEADING_INIT_PAT = re.compile(r"(?P<inits>(?:[A-Z]\.[\s-]*)+) "
+                               r"(?P<first>(?:[A-Z]\.[\s-]*)+)" % (LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
+# This pattern should match author names with initals in front of the last name
+LEADING_INIT_PAT = re.compile(r"(?P<first>(?:[A-Z]\.[\s-]*)+) "
+                              r"(?P<last>%s%s)\s*,?" % (LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
+
+# This pattern should match author names with first/middle name behind the last name
+TRAILING_FULL_PAT = re.compile(r"(?P<last>%s%s)\s*,?\s+"
+                               r"(?P<first>(?:[A-Z][A-Za-z]+\s*)(?:[A-Z][.\s])*)" % (LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
+# This pattern should match author names with first/middle name in front of the last name
+LEADING_FULL_PAT = re.compile(r"(?P<first>(?:[A-Z][A-Za-z]+\s*)(?:[A-Z][.\s])*) "
                               r"(?P<last>%s%s)\s*,?" % (LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
 
 EXTRAS_PAT = re.compile(r"\b\s*(and|et\.? al\.?|jr)\b", re.I)
 
 REF_GLUE_RE = r"[,;]?(\s*(?:and|&))?\s+"
 NAMED_GROUP_PAT = re.compile(r"\?P<\w+>")
+
 LEADING_INIT_AUTHORS_PAT = re.compile("%s(%s%s)*%s"%(
     NAMED_GROUP_PAT.sub("?:", LEADING_INIT_PAT.pattern), REF_GLUE_RE,
     NAMED_GROUP_PAT.sub("?:", LEADING_INIT_PAT.pattern), ETAL))
@@ -42,18 +48,9 @@ TRAILING_INIT_AUTHORS_PAT = re.compile("%s(%s%s)*%s"%(
 COLLABORATION_PAT = re.compile(r"(?P<collaboration>[(\[]*[A-Za-z\s\-\/]+\s[Cc]ollaboration[s]?\s*[A-Z\.]*[\s.,)\]]+)")
 COLLEAGUES_PAT = re.compile(r"(?P<andcolleagues>and\s\d+\s(co-authors|colleagues))")
 
-REFERENCE_LAST_NAME_EXTRACTOR = re.compile(r"(\w\w+\s*\w\w+\s*\w{0,1}\w+)")
 SINGLE_WORD_EXTRACTOR = re.compile(r"\w+")
 
 FIRST_CAPTIAL = re.compile(r"^([^A-Z0-9\"""]*[A-Z])")
-
-# when first name is spelled out
-FIRST_NAME_PAT = r"[A-Z][a-z][A-Za-z]*(\-[A-Z][a-z][A-Za-z]*)?"
-FULLNAME_PAT = re.compile(r"(?P<first>%s\s*(?:[A-Z]\.[\s-]*)?)?"
-                          r"(?P<last>%s%s),?" %(FIRST_NAME_PAT, LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
-FULLNAME_AUTHORS_PAT = re.compile("%s(%s%s)*(%s)?"%(
-    NAMED_GROUP_PAT.sub("?:", FULLNAME_PAT.pattern), REF_GLUE_RE,
-    NAMED_GROUP_PAT.sub("?:", FULLNAME_PAT.pattern), ETAL))
 
 REMOVE_AND = re.compile(r"(,?\s+and\s+)", re.IGNORECASE)
 COMMA_BEFORE_AND = re.compile(r"(,)?(\s+and)", re.IGNORECASE)
@@ -61,7 +58,25 @@ COMMA_BEFORE_AND = re.compile(r"(,)?(\s+and)", re.IGNORECASE)
 CROP_IF_NEEDED = re.compile(r"((^(?!and|&).*(and|&)(?!,).*),)|((^(?!and|&).*(and|&)(?!,).*)$)|((^(?!,).*),)")
 
 ETAL_HOOK = re.compile(r"(.* et\.? al\.?)\b", re.I)
-AND_HOOK = re.compile(r"(.+?(?=\b[Aa]nd|\s&)(\b[Aa]nd|\s&)(%s%s\s*,?\s+(?:[A-Z]\.[\s-]*)+)|((?:[A-Z]\.[\s-]*)+ %s%s\s*,?))[,\d]+"%(LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX, LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
+AND_HOOK = re.compile(r"((?:[A-Z][.\s])?%s%s[,\s]+|%s%s[,\s]+(?:[A-Z][.\s])?)+(\b[Aa]nd|\s&)\s((?:[A-Z][.\s])?%s%s|%s%s(?:[A-Z][.\s])?)"
+                      %(LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX, LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX,
+                        LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX, LAST_NAME_PAT.pattern, LAST_NAME_SUFFIX))
+
+def get_length_matched_authors(ref_string, matches):
+    """
+    make sure the author was matched from the beginning of the reference
+
+    :param ref_string:
+    :param matched:
+    :return:
+    """
+    matched_str = ', '.join([' '.join(list(filter(None, author))).strip() for author in matches])
+    count = 0
+    for sub, full in zip(matched_str, ref_string):
+        if sub != full:
+            break
+        count += 1
+    return count
 
 def get_author_pattern(ref_string):
     """
@@ -78,23 +93,57 @@ def get_author_pattern(ref_string):
     # remove that to be able to decide if the author list is trailing or ending
     collaborators_idx, collaborators_len = get_collaborators(ref_string)
 
+    patterns = [TRAILING_INIT_PAT, LEADING_INIT_PAT, TRAILING_FULL_PAT, LEADING_FULL_PAT]
+    lengths = [0] * len(patterns)
+
     # if collaborator is listed before authors
     if collaborators_idx != 0:
-        n_trailing = len(TRAILING_INIT_PAT.findall(ref_string[collaborators_len:]))
-        n_leading = len(LEADING_INIT_PAT.findall(ref_string[collaborators_len:]))
+        for i, pattern in enumerate(patterns):
+            # lengths[i] = len(pattern.findall(ref_string[collaborators_len:]))
+            lengths[i] = get_length_matched_authors(ref_string[collaborators_len:], pattern.findall(ref_string[collaborators_len:]))
     else:
-        n_trailing = len(TRAILING_INIT_PAT.findall(ref_string))
-        n_leading = len(LEADING_INIT_PAT.findall(ref_string))
+        for i, pattern in enumerate(patterns):
+            # lengths[i] = len(pattern.findall(ref_string))
+            lengths[i] = get_length_matched_authors(ref_string, pattern.findall(ref_string))
 
-    if n_leading == n_trailing:
-        raise Undecidable('Both leading and trailing found without a majority')
-    if n_trailing > n_leading:
-        return TRAILING_INIT_PAT
-    else:
-        return LEADING_INIT_PAT
+    indices_max = [index for index, value in enumerate(lengths) if value == max(lengths)]
+    if len(indices_max) != 1:
+        indices_match = [index for index, value in enumerate(lengths) if value > 0]
+
+        # if there were multiple max and one min, pick the min
+        if len(indices_match) - len(indices_max) == 1:
+            return patterns[min(indices_match)]
+
+        # see which two or more patterns recognized this reference, turn the indices_max to on/off, convert to binary,
+        # and then decimal, note that 1, 2, 4, and 8 do not get there
+        on_off_value = int(''.join(['1' if i in indices_max else '0' for i in list(range(4))]),2)
+
+        # all off, all on, or contradiction (ie, TRAILING on from one set of INIT or FULL with LEADING on from the other)
+        if on_off_value in [0, 6, 9, 12, 15]:
+            return None
+
+        # 0011 pick fourth pattern
+        # this happens when there is no init and last-first is not distinguishable with first-last,
+        # so pick the latter one
+        if on_off_value == 3:
+            return patterns[3]
+        # 0101 and 0111 pick second pattern
+        if on_off_value in [5, 7]:
+            return patterns[1]
+        # 1010 and 1011 pick first pattern
+        if on_off_value in [10, 11]:
+            return patterns[0]
+        # 1101 pick fourth pattern
+        if on_off_value == 13:
+            return patterns[3]
+        # 1110 pick third pattern
+        if on_off_value == 14:
+            return patterns[2]
+
+    return patterns[indices_max[0]]
 
 
-def get_authors_recursive(ref_string, start_idx, author_pat):
+def get_authors_recursive(ref_string, start_idx, author_pattern):
     """
     if there is a comma missing between the authors, or there is a out of place character,
     (ie, P. Bosetti, N. Brand t, M. Caleno, ...) RE gets confused,
@@ -103,7 +152,7 @@ def get_authors_recursive(ref_string, start_idx, author_pat):
 
     :param ref_string:
     :param start_idx:
-    :param author_pat:
+    :param author_pattern:
     :return:
     """
     author_len = 0
@@ -112,29 +161,13 @@ def get_authors_recursive(ref_string, start_idx, author_pat):
             first_capital = FIRST_CAPTIAL.match(ref_string[start_idx+author_len:])
             if first_capital:
                 author_len += len(first_capital.group()) - 1
-        author_match = author_pat.match(ref_string[start_idx+author_len:])
+        author_match = author_pattern.match(ref_string[start_idx+author_len:])
         if author_match:
             author_len += len(author_match.group())
         else:
             break
 
     return author_len
-
-
-def get_authors_fullnames(ref_string):
-    """
-    if first name is not initial
-
-    :param ref_string:
-    :return:
-    """
-    try:
-        author_match = FULLNAME_AUTHORS_PAT.match(ref_string)
-        if author_match:
-            return len(author_match.group())
-    except:
-        pass
-    return 0
 
 
 def get_authors_last_attempt(ref_string):
@@ -147,7 +180,7 @@ def get_authors_last_attempt(ref_string):
     # if there is an and, used that as an anchor
     match = AND_HOOK.match(ref_string)
     if match:
-        return match.group(1).strip()
+        return match.group(0).strip()
     # grab first author's lastname and include etal
     match = LAST_NAME_PAT.search(ref_string)
     if match:
@@ -189,10 +222,12 @@ def get_authors(ref_string):
         if match:
             authors_len = len(match.group().strip())
         else:
-            lead_len = get_authors_recursive(ref_string, collaborators_len, LEADING_INIT_AUTHORS_PAT)
-            trail_len = get_authors_recursive(ref_string, collaborators_len, TRAILING_INIT_AUTHORS_PAT)
-            full_len = get_authors_fullnames(ref_string[collaborators_len:])
-            authors_len = max(full_len, max(lead_len, trail_len)) + collaborators_len + and_colleagues_len
+            author_pattern = get_author_pattern(ref_string)
+            if author_pattern:
+                authors_len = get_authors_recursive(ref_string, collaborators_len, author_pattern)
+            else:
+                # if unable to parse author, assign the len of collabrators, if any to authors_len
+                authors_len = collaborators_len
         if authors_len < 3:
             # the last attempt
             authors = get_authors_last_attempt(ref_string)
@@ -200,7 +235,7 @@ def get_authors(ref_string):
                 raise Undecidable("No discernible authors in '%s'"%ref_string)
             return authors
         # might have gone too far if initials are leading
-        if authors_len == lead_len and authors_len >= 3:
+        if author_pattern in [LEADING_INIT_PAT, LEADING_FULL_PAT] and authors_len >= 3:
             # if needs pruning, for example cases like
             # T.A. Heim, J. Hinze and A. R. P. Rau, J. Phys. A: Math. Theor. 42, 175203 (2009). or
             # S.K. Suslov, J. Phys. B: At. Mol. Opt. Phys. 42, 185003 (2009).
@@ -295,29 +330,18 @@ def normalize_author_list(author_string, initials=True):
     :return:
     """
     author_string = REMOVE_AND.sub(',', author_string)
-    try:
-        pat = get_author_pattern(author_string)
+    pattern = get_author_pattern(author_string)
+    if pattern:
         if initials:
-            return "; ".join("%s, %s" % (match.group("last"), match.group("inits")[0])
-                             for match in pat.finditer(author_string)).strip()
+            return "; ".join("%s, %s" % (match.group("last"), match.group("first")[0])
+                             for match in pattern.finditer(author_string)).strip()
         else:
             return "; ".join("%s" % (match.group("last"))
-                             for match in pat.finditer(author_string)).strip()
-    except Undecidable:
-        try:
-            # is first name spelled out
-            if get_authors_fullnames(author_string) > 0:
-                if get_authors_fullnames(author_string) > 0:
-                    return "; ".join("%s, %s" % (match.group("last"), match.group("first")[0])
-                                     for match in FULLNAME_PAT.finditer(author_string)).strip()
-            return author_string
-        except:
-            try:
-                # one last effort, grab the first lastname
-                return FULLNAME_PAT.search(author_string).group("last")
-            except:
-                pass
-    return ""
+                             for match in pattern.finditer(author_string)).strip()
+    authors = get_authors_last_attempt(author_string)
+    if authors:
+        return authors
+    return author_string
 
 
 def get_first_author(author_string, initials=False):
@@ -330,12 +354,15 @@ def get_first_author(author_string, initials=False):
     :param initials:
     :return:
     """
-    pat = get_author_pattern(author_string)
-    match = pat.search(author_string)
+    pattern = get_author_pattern(author_string)
+    if not pattern:
+        raise Undecidable('Both leading and trailing found without a majority')
+    match = pattern.search(author_string)
     if initials:
-        return "%s, %s" % (match.group("last"), match.group("inits"))
+        return "%s, %s" % (match.group("last"), match.group("first"))
     else:
         return match.group("last")
+
 
 
 def get_first_author_last_name(author_string):
