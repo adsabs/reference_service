@@ -227,6 +227,7 @@ def xml_resolve(parsed_reference, returned_format):
                                          reference=reference_str,
                                          id=parsed_reference.get('id', None))
     except Exception as e:
+        error_comment = 'Exception: {error}'.format(error=str(e))
         current_app.logger.error('Exception: {error}'.format(error=str(e)))
         # lets attempt to resolve using the text model
         reference_str = parsed_reference.get('refplaintext', None)
@@ -269,7 +270,8 @@ def xml_resolve(parsed_reference, returned_format):
             return format_resolved_reference(returned_format,
                                              resolved=not_resolved,
                                              reference=parsed_reference.get('refstr', None),
-                                             id=parsed_reference.get('id', None))
+                                             id=parsed_reference.get('id', None),
+                                             comment=error_comment)
 
 
 @advertise(scopes=[], rate_limit=[1000, 3600 * 24])
