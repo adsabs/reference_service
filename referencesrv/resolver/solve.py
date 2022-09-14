@@ -335,11 +335,13 @@ def solve_reference(ref):
         raise Incomplete("Not enough information to resolve the record.", str(ref))
 
     possible_solutions = []
+    reason = None
     for hypothesis in Hypotheses.iter_hypotheses(ref):
         try:
             return solve_for_fields(hypothesis)
         except Undecidable as ex:
             possible_solutions.extend(ex.considered_solutions)
+            reason = ex.reason
         except (NoSolution, OverflowOrNone) as ex:
             current_app.logger.debug("(%s)"%ex.__class__.__name__)
         except (Solr, KeyboardInterrupt):
@@ -367,4 +369,6 @@ def solve_reference(ref):
             return Solution(scored[0][1], scored[0][0], "best tied solution")
         else:
             current_app.logger.debug("Remaining ties, giving up")
+    if reason:
+        raise NoSolution("Hypotheses exhausted", "%s -- %s"%(reason, str(ref)))
     raise NoSolution("Hypotheses exhausted", str(ref))
