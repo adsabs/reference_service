@@ -1,5 +1,5 @@
 git+https://github.com/adsabs/ADSMicroserviceUtils.git@v1.1.9
-cvxopt==1.2.5
+cvxopt==1.2.7
 editdistance==0.5.3
 flask-redis==0.4.0
 itsdangerous==2.0.1
