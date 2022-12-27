@@ -10,6 +10,6 @@ redis==3.5.3
 scikit-learn==1.0.2
 scipy==1.6.0
 # is needed to be this version for pystruct
-setuptools==58
+setuptools==65.5.1
 unidecode==1.1.2
 werkzeug==2.0.2
