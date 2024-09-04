@@ -1,4 +1,18 @@
-whdw.conf	Vauclair, Sion, White Dwarfs, Kluwer
+AIPC.....	AIP Conf. Proc.
+ASSL...13	Mass loss from stars, Ed. M. Hack, Astrophysics and Space Science Library Vol. 13
+ASSL...88	Physical Processes in Red giants, Astrophysics and Space Library Vol. 88
+ASSL..132	The Late Stages of Stellar Evolution, Astrophysics and Space Library Vol. 132
+IAUS....4	Symp. IAU4
+IAUS...34	Deinzer, W., Proc. I.A.U. Symp. No.34 "Planetary Nebulae" (D. B. Osterbrock and C. B. O'Dell, ed.) 1968, p. 428, D.Beidel Pubi. Co., Dordrecht.
+IAUS...88	Close Binary Stars: Observations and Interpretation, ed. M. J. Plavec, D. M. Popper, and R. K. Ulrich
+IAUS..120	Astrochemistry, ed. M. S. Vardya & S. P. Tarafdar
+IAUS..120	Astrochemistry, ed. M. S. Vardya & S. P. Tarafdar 
+IAUS..131	Planetary Nebulae
+IAUS..139	The Galactic and Extra-galactic Background Radiation, ed. S Bowyer, C Leinert
+IAUS..155	In Planetary Nebulae , ed. R. Weinberger, A. Acker
+IAUS..155	In Planetary Nebulae: Proceedings of the 155th Symposium
+IAUS..155	Nebulae: Proceedings of the 155th Symposium
+LPSC.....	Proc. Lun. Plan. Sci. Conf.
 aagq.conf	ASTROPHYS. ACTIVE GALAX.&QSOS: STA.CRUZ 1985
 acfp.conf	ASTRONOMY COSMOLOGY & FUND.PHYSICS: 3RD ESO-CERN
 acm..conf	ASTEROIDS COMETS METEORS: UPPSALA:1983JUN20-22
@@ -12,6 +26,7 @@ adsx.conf	Accretion Driven Stellar X-Ray Sources, eds. W. H. G. Lewin, E. P. J. 
 adu..conf	200TH.ANNIV.DISC.URANUS:BATH/1982APR:IAU COLL.#60
 aeas.conf	ACCURACY / ELEMENT ABUND. / STELLAR ATMOSPHERES
 agn..conf	ACTIVE GALACTIC NUCLEI / GEORGIA STATE UNIV 1987
+agn..conf	Saas-Fee Advanced Course 20 Lecture Notes, Active Galactic Nuclei, ed. R. D. Blandford, H. Netzer, & L. Woltjer (Berlin: Springer)
 aia..conf	ATOMS IN ASTROPHYSICS
 aiaa.meet	Proc. AIAA
 ais..conf	ASTRONOMICAL INFRARED SPECTROSCOPY: FUT.OBS.DIR.
@@ -58,6 +73,7 @@ cira.conf	CLASSICS IN RADIO ASTRONOMY
 citu.conf	CLUSTERING IN THE UNIVERSE
 clga.meet	CLUSTERS OF GALAXIES MEETING: BALTIMORE,MD.
 clst.conf	CLASSIFICATION STELLAIRE - GOUTELAS 3RD APR1980 1980
+cmaf.conf	Computational Methods for Astrophysical Fluid Flow, lecture notes 1997/Saas-Fee Advanced Course 27, ed. O. Steiner & A. Gautschy (Berlin: Springer)
 coco.conf	COSMOLOGICAL CONSTANTS
 cocr.conf	COMPOSITION & ORIGIN OF COSMIC RAYS: 82
 cocr.conf	COMPOSITION & ORIGIN OF COSMIC RAYS:82
@@ -69,11 +85,11 @@ cpg..conf	COLORS AND POPULATIONS OF GALAXIES - PARIS 1981
 crca.conf	COSMIC RADIAT./CONTEMP.ASTROPHYSICS: NATO 1986
 cscg.conf	CLUSTERS AND SUPERCLUSTERS OF GALAXIES: NATO/ASI
 csim.conf	CHEMISTRY/SPECTROSCOPY / INTERSTELLAR MOLECULES
+csss....1	In Cool Stars, Stellar Systems, and the Sun, ed. AK Dupree
+csss....6	Cool Stars, Stellar Systems and the Sun, ed. G. Wallerstein
 csss.conf	COMETS / SPACE SCIENCE SERIES
 csss.conf	COOL STARS STELL.SYST. & SUN - CAMBRIDGE JAN1980
 csss.conf	COOL STARS STELL.SYST.&SUN: 2D CAMBRIDGE OCT1981:1,
-csss....1	In Cool Stars, Stellar Systems, and the Sun, ed. AK Dupree
-csss....6	Cool Stars, Stellar Systems and the Sun, ed. G. Wallerstein
 ctdm.conf	CURR.TECH.DOUBLE&MULT.STAR RESEARCH: IAU: COLL62
 cto..conf	CEPHEIDS: THEORY&OBS.:IAU COLL.82: TORONTO 84JUN
 cvro.conf	CATACLYS.VARIAB.&REL.OBJECTS: IAU.COLL72 - HAIFA
@@ -132,6 +148,7 @@ gein.work	PROC. WORKSHOP ON GEOPHYSICAL INFORMATICS MOSCOW
 geis.conf	GALACTIC & EXTRAGALACTIC INFRARED SPECTR.
 gfpg.conf	GRAVIT. FORCE PERPENDICULAR TO THE GALACTIC PLANE
 ghog.conf	GASEOUS HALOS OF GALAXIES / NRAO / GREEN BANK 85
+gim..conf	The Galactic Interstellar Medium, ed. D. Pfenniger & P. Bartholdi (Saas-Fee Advanced Course 21; Berlin: Springer)
 gmca.conf	GRAVIT. MAGNETO-CONVECTION & ACCRETION:TEGERNSEE
 gmcg.conf	GIANT MOLEC. CLOUDS IN GALAXY - 3 GREGYNOG 1980
 goco.conf	GAMOW COSMOLOGY: ENRICO FERMI COURSE 86
@@ -156,20 +173,13 @@ hrii.conf	HIGH RESOLUTION IMAGING BY INTERFEROMETRY
 hrxs.conf	HIGH RESOLUTION X-RAY SPECTROSC./ COSMIC PLASMAS
 iaia.conf	IMAGE ANALYSIS IN ASTRONOMY: FIRENZE
 iapp.rept	INT. AMATEUR-PROF. PHOTOELECT. PHOTOM. COMMUN.
-IAUS....4	Symp. IAU4
-IAUS...34	Deinzer, W., Proc. I.A.U. Symp. No.34 "Planetary Nebulae" (D. B. Osterbrock and C. B. O'Dell, ed.) 1968, p. 428, D.Beidel Pubi. Co., Dordrecht.
-IAUS...88	Close Binary Stars: Observations and Interpretation, ed. M. J. Plavec, D. M. Popper, and R. K. Ulrich
-IAUS..120	Astrochemistry, ed. M. S. Vardya & S. P. Tarafdar 
-IAUS..131	Planetary Nebulae
-IAUS..139	The Galactic and Extra-galactic Background Radiation, ed. S Bowyer, C Leinert
-IAUS..155	In Planetary Nebulae , ed. R. Weinberger, A. Acker
-IAUS..155	In Planetary Nebulae: Proceedings of the 155th Symposium
-IAUS..155	Nebulae: Proceedings of the 155th Symposium
 icii.conf	INTERREL/CIRCUMSTEL/INTERSTEL&INTERPLANET/DUST
 icrc.conf	1986 INT.COSMIC-RAY CONF.: LA JOLLA: 1985AUG
 ihs..conf	THE INTERNATIONAL HELIOSPHERIC STUDY: COSPAR27
 iia..conf	INTERFEROMETRIC IMAGING IN ASTRONOMY / ORACLE,AZ
 iie..conf	INTERFER. IDENT.& EXCISION: NRAO: GREENBANK 1982
+inbi.conf	Interacting Binaries, Saas-Fee Advanced Course 22, ed. H. Nussbaumer & A. Orr
+inbi.conf	Interacting Binaries, Saas-Fee Advanced Course 22, ed. H. Nussbaumer & A. Orr 
 inco.work	INTERSTELLAR COMETS: WORKSHOP: EDINBURGH 82APR
 inpr.conf	SUMMER SCHOOL ON INTERSTELLAR PROCESSES
 iop..conf	IDENT.OPTIM.&PROTECTION / OPTIC. TELESCOPE SITES
@@ -200,6 +210,7 @@ lisa.conf	LIBRARY & INFO. SERVICES ASTRONOMY: IAU COLL.110
 lmsf.conf	LOW MASS STAR FORM. & PRE-MAIN SEQUENCE OBJECTS
 lodm.conf	LIGHT ON DARK MATTER: 1ST IRAS CONF. 1986
 lois.conf	LAB.& OBS. INFRARED SPECTRA OF INTERSTELLAR DUST
+lssu.proc	Large-Scale Structure in the Universe, 17th Advanced Course of Swiss Society of Astrophysics (Saas-Fee), ed. L. Martinet and M. Mayor (Geneva: Geneva Observatory)
 lund.rept	REPORTS. OBSERVATORY OF LUND
 mads.conf	ESO - METH. ABUNDANCE DET. FOR STARS - GENEVA
 mads.conf	ESO: METH. ABUNDANCE DET. STARS - GENEVA MAR1980
@@ -214,15 +225,19 @@ mmmo.conf	MASERS/MOLEC.&MASS OUTFLOWS/STAR FORM. REGIONS
 mms..conf	THE MOST MASSIVE STARS: ESO: GARCHING: 1981NOV
 mnia.conf	'86 MASSIVE NEUTRINOS IN ASTROPHYSICS: MORIOND:6
 moas.conf	MOLECULAR ASTROPHYSICS: NATO: GERMANY: 1985
+modg.proc	Proc. 12th Saas-Fe Advanced Course Morphology and Dynamics of Galaxies (Geneva Obs. Pub.)
+modg.proc	Twelfth Advanced Course of the Swiss Society of Astronomy and Astrophysics (Saas-Fee): Morphology and Dynamics of Galaxies
 motc.conf	MODERN OBS. TECHNIQUES FOR COMETS JPL/81-68
 mpie.rept	MAX-PLANCK-INST./EXTRATERRESTRISCHE PHYS. REPORT
 mvs..conf	MAGNETIC & VAR. STARS, 5TH - SZOMBATHELY,HUNGARY
+mwag.conf	The Milky Way as a Galaxy, 19th Saas-Fee Course, ed. R. Buser & I. King
 nadg.conf	NOYAUX ACTIFS DES GALAXIES GOUTELAS 1981
 naic.rept	NATIONAL ASTRONOMY AND IONOSPHERE CENTER. CORNELL UNIVERSITY
 nam..conf	NORDIC ASTR.MTG.:OSLO / NORDIC OPTICAL TELESCOPE
 nam..conf	NORDIC ASTRONOMY MEETING IN OSLO: 1983AUG15-16
 nasa..tms	NASA Tech. Memo.
 nasa.rept	NASA TECHNICAL MEMORANDUM
+nce..conf	Nucleosynthesis and Stellar Evolution
 ncgo.conf	NEED/COORD.GROUNDBASED/OBS.HALLEY'S COMET: 82APR
 niia.conf	NEW INSIGHTS IN ASTROPHYSICS: 8 YEARS OF IUE
 nim..book	Nebulae and Interstellar Matter, ed. Middlehurst, B. M. and Aller, L. H.
@@ -250,14 +265,16 @@ opsi.conf	OSCILLATIONS/PROBE/SUN'S INTERIOR:CATANIA 83JUN
 oras.rept	OPT./RAD. ASTROMET. SOURCES / INERTIAL REF.FRAME
 orne.symp	SYMP. ON THE ORION NEBULA TO HONOR HENRY DRAPER
 oso..rept	ONSALA SPACE OBSERVATORY. RESEARCH REPORT
-paps.conf	PARTICLE ACCEL.PROC.SHOCKWAVES/NUCLEOSYNTHESIS...
 paha.proc	Leger A., d'Hendecourt L., Boccara N. (eds.) Polycyclic Aromatic Hydrocarbons and Astrophysics
+paps.conf	PARTICLE ACCEL.PROC.SHOCKWAVES/NUCLEOSYNTHESIS...
 pbes.coll	Physics of Be Stars, ed. A. Slettebak & T. Snow (Cambridge: Cambridge Univ. Press)
 pbs..work	WORKSHOP: PULSATING B-STARS: NICE,FRANCE JUL1981
 pccv.conf	PULSATIONS IN CLASSICAL & CATACLYS. VAR. STARS
 pffl.conf	PHYS. FORM. FEII LINES OUTSIDE LTE: IAU COLL.94
 pism.conf	PHASES INTERSTELL. MEDIUM - NRAO, GREENBANK 1981
 pkdg.conf	PHOTOMETRY KINEMATICS AND DYN. OF GALAXIES 1980
+plas.conf	Plasma Astrophysics, Saas-Fee Advanced Course 24 Lecture Notes
+plas.conf	Plasma Astrophysics, Saas-Fee Advanced Course 24 Lecture Notes 
 plri.conf	PLANETARY RINGS / SPACE SCIENCE SERIES
 podm.conf	PHYSICS OF DENSE MATTER - COLLOQUE:CNRS, SEP1980
 poeu.conf	PHYSICS OF THE EXPANDING UNIVERSE - CRACOW 1979
@@ -318,8 +335,8 @@ siso.conf	SCIENTIF. IMP. SUBMILLIMETRE OBS: ESA-SP-189: 82
 sma..work	ESO-IRAM-Onsala Workshop on (Sub)Millimeter Astronomy
 sn87.conf	SUPERNOVA 1987A: 1YEAR LATER:RESULTS&PERSPECTIVES
 soap.conf	SPECTROSCOPY OF ASTROPHYSICAL PLASMAS
-soia.book	Solar interior and atmosphere (A92-36201 14-92). Tucson, AZ, University of Arizona Press
 sofl.symp	HINOTORI SYMPOSIUM ON SOLAR FLARES - TOKYO:1982
+soia.book	Solar interior and atmosphere (A92-36201 14-92). Tucson, AZ, University of Arizona Press
 sowi.conf	SOLAR WIND 4 - BURGHAUSEN,FDR - AUG18-SEP1, 1981
 spie..264	APPL. DIGITAL IMAGE PROC. ASTRONOMY - SPIE
 spie..290	SOLID STATE IMAGERS FOR ASTRONOMY: SPIE#290 1981
@@ -362,10 +379,12 @@ swrc.conf	SOUTHWEST REG. CONF. ASTRONOMY & ASTROPHYS.:
 syim.conf	SYNTHESIS IMAGING / NRAO SCHOOL SOCORRO 1986AUG
 syma.work	NRAO/VLA WORKSHOP: SYNTHESIS MAPPING: 1982JUNE21
 syst.work	NORTH AMER. WORKSHOP SYMBIOTIC STARS - JUNE,1981
+taca.conf	International Conference on Tools and Algorithms for the Construction and Analysis of Systems
 tdp..conf	ESO: TWO-DIMENS. PHOTOM.: NOORDWIJKERHOUT, 1979
 tip..conf	5TH GEN.CONF.EUR.PHYS.SOC:TRENDS IN PHYSICS 1982
 tisn.work	TYPE-I SUPERNOVAE: PROC. TEXAS WORKSHOP - 1980MAR
 tphr.conf	THEO. PROB. HIGH RESOLUTION SOLAR PHYS.:
+ttxa.symp	in Proc. 23rd ESLAB Conference on X-Ray Astronomy, Vol. 1; X-Ray Binaries, ed. J. Hunt & B. Battrick
 ttxa.symp	in Proc. 23rd ESLAB Conference on X-Ray Astronomy, Vol. 1; X-Ray Binaries, ed. J. Hunt & B. Battrick 
 turk.rept	TURKU UNIV. OBS. REPORT SER. INFORMO
 turk.rept	TURKU UNIV. OBSERVATORY REPORT SERIES. INFORMO
@@ -391,23 +410,9 @@ vsg..conf	VARIAB. STARS&GALAX.: EUR.REG.MTG.#5:LIEGE1980
 vsg..conf	VARIAB. STARS&GALAX.: EUR.REG.MTG.#5:LIEGE1980 P. C
 vsr..conf	VARIABLE STAR RESEARCH: INTERNAT'L. PERSPECTIVE
 wdir.conf	WARPED DISKS AND INCLINED RINGS AROUND GALAXIES
+whdw.conf	Vauclair, Sion, White Dwarfs, Kluwer
 xaes.conf	X-RAY ASTRON. W/ EINSTEIN SAT. CAMBRIDGE 1981JAN
 xaes.conf	X-RAY ASTRONOMY WITH THE EINSTEIN SATELLITE 1981
 xra..symp	18TH ESLAB SYMP.: X-RAY ASTRONOMY / SCHEVENINGEN
 xray.symp	X-RAY SYMPOSIUM / COLGATE UNIV.:HAMILTON,NY 1982
 xue..conf	X-RAY & UV EMISSION FROM ACTIVE GALACTIC NUCLEI
-LPSC.....	Proc. Lun. Plan. Sci. Conf.
-AIPC.....	AIP Conf. Proc.
-modg.proc	Proc. 12th Saas-Fe Advanced Course Morphology and Dynamics of Galaxies (Geneva Obs. Pub.)
-modg.proc	Twelfth Advanced Course of the Swiss Society of Astronomy and Astrophysics (Saas-Fee): Morphology and Dynamics of Galaxies
-lssu.proc	Large-Scale Structure in the Universe, 17th Advanced Course of Swiss Society of Astrophysics (Saas-Fee), ed. L. Martinet and M. Mayor (Geneva: Geneva Observatory)
-mwag.conf	The Milky Way as a Galaxy, 19th Saas-Fee Course, ed. R. Buser & I. King
-nce..conf	Nucleosynthesis and Stellar Evolution
-agn..conf	Saas-Fee Advanced Course 20 Lecture Notes, Active Galactic Nuclei, ed. R. D. Blandford, H. Netzer, & L. Woltjer (Berlin: Springer)
-gim..conf	The Galactic Interstellar Medium, ed. D. Pfenniger & P. Bartholdi (Saas-Fee Advanced Course 21; Berlin: Springer)
-inbi.conf	Interacting Binaries, Saas-Fee Advanced Course 22, ed. H. Nussbaumer & A. Orr 
-plas.conf	Plasma Astrophysics, Saas-Fee Advanced Course 24 Lecture Notes 
-cmaf.conf	Computational Methods for Astrophysical Fluid Flow, lecture notes 1997/Saas-Fee Advanced Course 27, ed. O. Steiner & A. Gautschy (Berlin: Springer)
-ASSL...13	Mass loss from stars, Ed. M. Hack, Astrophysics and Space Science Library Vol. 13
-ASSL...88	Physical Processes in Red giants, Astrophysics and Space Library Vol. 88
-ASSL..132	The Late Stages of Stellar Evolution, Astrophysics and Space Library Vol. 132
