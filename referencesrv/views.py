@@ -56,8 +56,12 @@ def return_response(results, status, content_type='application/json'):
     """
     if 'application/json' in content_type:
         response = json.dumps(results)
-    else:
+    elif results.get('resolved'):
         response = results['resolved']
+    elif results.get('OK'):
+        response = results['OK']
+    else:
+        response = results['Error']
 
     if status != 200:
         current_app.logger.error('sending response status={status}'.format(status=status))
@@ -434,8 +438,6 @@ def parse_text():
     references, truncated_message = check_number_references(references, reference_type="references")
 
     current_app.logger.info('received POST request with references={references} to parse text references'.format(references=','.join(references)[:250]))
-
-    returned_format = request.headers.get('Accept', 'text/plain')
 
     # start_time = time.time()
     results = []
