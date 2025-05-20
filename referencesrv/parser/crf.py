@@ -39,7 +39,7 @@ class CRFClassifierText(object):
                                     re.compile(r'([A-Z])(\-)([A-Z])\b')]
 
     URL_EXTRACTOR = re.compile(r'((url\s*)?(http)s?://[A-z0-9\-\.\/\={}?&%]+)', re.IGNORECASE)
-    MONTH_NAME_EXTRACTOR = re.compile(r'\b([Jj]an(?:uary)?|[Ff]eb(?:ruary)?|[Mm]ar(?:ch)?|[Aa]pr(?:il)?|[Mm]ay|[Jj]un(?:e)?|[Jj]ul(?:y)?|[Aa]ug(?:ust)?|[Ss]ep(?:tember)?|[Oo]ct(?:ober)?|([Nn]ov|[Dd]ec)(?:ember)?)\b')
+    MONTH_NAME_EXTRACTOR = re.compile(r'\b([Jj]an(?:uary)?|[Ff]eb(?:ruary)?|[Mm]ar(?:ch)?|[Aa]pr(?:il)?|[Mm]ay|[Jj]un(?:e)?|[Jj]ul(?:y)?|[Aa]ug(?:ust)?|[Ss]ep(?:tember)?|[Oo]ct(?:ober)?|([Nn]ov|[Dd]ec)(?:ember)?)\b(?!-)')
 
     URL_TO_DOI = re.compile(r'((url\s*)?(https\s*:\s*//\s*|http\s*:\s*//\s*)((.*?)doi(.*?)org/))|(DOI:https\s*://\s*)', flags=re.IGNORECASE)
     URL_TO_ARXIV = re.compile(r'((url\s*)?(https://|http://)(arxiv.org/(abs|pdf)/))', flags=re.IGNORECASE)
