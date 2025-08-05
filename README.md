@@ -103,5 +103,5 @@ The API then responds in JSON the parsed references in the following format:
 
 ## Maintainers
 
-Golnaz
+Edwin Henneken; Thomas Allen
 
