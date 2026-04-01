@@ -756,6 +756,7 @@ class TestEndpoints(TestCase):
                                                                       u'year': u'2020',
                                                                       u'page': u'2',
                                                                       u'bibcode': u'2020JHEP...09..002P',
+                                                                      u'scix_id': u'scix:5KGH-MC98-7AYN',
                                                                       u'author': [u'Penington, Geoffrey'], u'issue': u'9',
                                                                       u'aff_raw': u'Stanford Institute for Theoretical Physics, Stanford University, 450 Jane Stanford Way, 94305, Stanford, CA, USA',
                                                                       u'pub': u'Journal of High Energy Physics',
@@ -769,7 +770,7 @@ class TestEndpoints(TestCase):
                                                           }
                                             })
             r = self.client.post(path='/text', data=json.dumps({'reference': ['Penington, G, 2020, JHEP, 9']}))
-            self.assertEqual(r.data, b"1.0 2020JHEP...09..002P -- Penington, G, 2020, JHEP, 9")
+            self.assertEqual(r.data, b"1.0 bibcode:2020JHEP...09..002P scixid:scix:5KGH-MC98-7AYN -- Penington, G, 2020, JHEP, 9")
 
     def test_02(self):
         """ test text endpoint when request is to return in json format """
@@ -785,6 +786,7 @@ class TestEndpoints(TestCase):
                                                                       u'year': u'2020',
                                                                       u'page': u'2',
                                                                       u'bibcode': u'2020JHEP...09..002P',
+                                                                      u'scix_id': u'scix:5KGH-MC98-7AYN',
                                                                       u'author': [u'Penington, Geoffrey'], u'issue': u'9',
                                                                       u'aff_raw': u'Stanford Institute for Theoretical Physics, Stanford University, 450 Jane Stanford Way, 94305, Stanford, CA, USA',
                                                                       u'pub': u'Journal of High Energy Physics',
@@ -802,6 +804,7 @@ class TestEndpoints(TestCase):
                                  data=json.dumps({'reference': ['Penington, G, 2020, JHEP, 9']}),
                                  headers={'accept':'application/json'})
             self.assertEqual(json.loads(r.data), {"resolved": [{"refstring": "Penington, G, 2020, JHEP, 9",
+                                                                "scix_id":"scix:5KGH-MC98-7AYN",
                                                                 "score": "1.0",
                                                                 "bibcode": "2020JHEP...09..002P"}]})
 

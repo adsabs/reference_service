@@ -123,7 +123,9 @@ def format_resolved_reference(returned_format, resolved, reference, id, cache=Tr
         cache_resolved_set(reference, resolved)
     if 'application/json' in returned_format:
         resolved = resolved.split()
-        result = {'refstring': reference, 'score': resolved[0], 'bibcode': resolved[1]}
+        bibcode = resolved[1].replace('bibcode:','').strip()
+        scix_id = resolved[2].replace('scixid:','').strip()
+        result = {'refstring': reference, 'score': resolved[0], 'bibcode': bibcode, 'scix_id':scix_id}
         if comment:
             result['comment'] = comment
         if id:
