@@ -288,10 +288,10 @@ def solve_for_fields(hypothesis):
 
             current_app.logger.debug("evidences from %s"%(hypothesis.name))
             for score, sol in sorted2(scored):
-                current_app.logger.debug("score %s %s %s"%(sol['bibcode'], score.get_score(), score))
+                current_app.logger.debug("score %s %s %s"%(sol.get('bibcode',None), score.get_score(), score))
 
             score, sol = choose_solution(scored, query_string, hypothesis)
-            return Solution(sol["bibcode"], score, hypothesis.name, scix_id=sol["scix_id"])
+            return Solution(sol.get("bibcode",None), score, hypothesis.name, scix_id=sol.get("scix_id",None))
 
     raise OverflowOrNone("Got either too many or no records from solr")
 
