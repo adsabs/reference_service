@@ -157,7 +157,7 @@ def inspect_doubtful_solutions(scored_solutions, query_string, hypothesis):
     non_veto_solutions = [(evidences, solution) for evidences, solution in scored_solutions if not evidences.has_veto()]
     if len(non_veto_solutions) == 1:
         sol = non_veto_solutions
-        raise Undecidable("Try again if desperate", considered_solutions=[(sol[0][0].get_score(), sol[0][1]["bibcode"])])
+        raise Undecidable("Try again if desperate", considered_solutions=[(sol[0][0].get_score(), sol[0][1].get("bibcode",None), sol[0][1].get("scix_id",None))])
 
     # Some of the following rules only make sense for fielded
     # hypotheses.  Always be aware that input_fields might be None
@@ -170,7 +170,7 @@ def inspect_doubtful_solutions(scored_solutions, query_string, hypothesis):
         # we should base this on the result bibstem, I guess.
         for evidences, solution in scored_solutions:
             if evidences.single_veto_from("page") and not input_fields.get("page"):
-                raise Undecidable("Try again if desperate", considered_solutions=[(evidences.get_score(), solution["bibcode"])])
+                raise Undecidable("Try again if desperate", considered_solutions=[(evidences.get_score(), solution.get("bibcode",None), solution.get("scix_id",None))])
 
     raise NoSolution(reason="No unique non-vetoed doubtful solution", ref=query_string)
 
@@ -212,7 +212,7 @@ def inspect_ambiguous_solutions(scored_solutions, query_string, hypothesis):
         current_app.logger.debug("Breaking ambiguity with %s suspecting it's a duplicate book"%non_vetoed[-2][1]["bibcode"])
         return non_vetoed[-1]
 
-    to_stash = [(score.get_score(), sol["bibcode"])
+    to_stash = [(score.get_score(), sol.get("bibcode", None), sol.get("scix_id", None))
                 for score, sol in non_vetoed if score>current_app.config['EVIDENCE_SCORE_RANGE'][0]]
     current_app.logger.debug("Unsolved ambiguity, stashing %s"%(to_stash))
     raise Undecidable("Ambiguous %s."%(query_string), considered_solutions=to_stash)
@@ -234,7 +234,6 @@ def choose_solution(candidates, query_string, hypothesis):
     """
     min_score = current_app.config['MIN_SCORE_FIRST_ROUND']
     filtered = [(score, solution) for score, solution in candidates if score >= min_score*len(score)]
-
     if len(filtered)==0:
         if candidates:
             current_app.logger.debug("No score above minimal score, inspecting doubtful solutions.")
@@ -339,6 +338,9 @@ def solve_reference(ref):
         try:
             return solve_for_fields(hypothesis)
         except Undecidable as ex:
+            # The list of possible solutions is the list of triples sent back
+            # when the Undecidable exception is thrown in the solve_for_fields call.
+            # These are generated in inspect_doubtful_solutions. 
             possible_solutions.extend(ex.considered_solutions)
             reason = ex.reason
         except (NoSolution, OverflowOrNone) as ex:
@@ -354,18 +356,25 @@ def solve_reference(ref):
     # all others and accept that
     if possible_solutions:
         current_app.logger.debug("Considering stashed ties: %s"%(possible_solutions))
-
         cands = {}
-        for score, sol in possible_solutions:
-            cands.setdefault(sol, []).append((score, sol))
-        for bibcode in cands:
-            cands[bibcode] = max(cands[bibcode])
+        scx2bbc = {}
+        for score, sol, scixid in possible_solutions:
+            # The entries in the possible_solutions will always have SciX IDs, but not
+            # necessarily bibcodes. So, the dictionary of candidates will be keyed on
+            # SciX IDs and a mapping is kept for bibcodes when appropriate.
+            if sol:
+                scx2bbc[scixid] = sol
+            cands.setdefault(scixid, []).append((score, scixid))
+        for scix in cands:
+            cands[scix] = max(cands[scix])
         scored = sorted(zip(cands.values(), cands.keys()))
-
         if len(scored)==1:
-            return Solution(scored[0][1], scored[0][0], "only remaining of tied solutions")
+            # Determine the bibcode (if any) from the correspondence created earlier
+            bibcode = scx2bbc.get(scored[0][1], None)
+            return Solution(bibcode, scored[0][0], "only remaining of tied solutions", scix_id=scored[0][1])
         elif scored[-1][0]>scored[-2][0]:
-            return Solution(scored[0][1], scored[0][0], "best tied solution")
+            bibcode = scx2bbc.get(scored[0][1], None)
+            return Solution(bibcode, scored[0][0], "best tied solution", scix_id=scored[0][1])
         else:
             current_app.logger.debug("Remaining ties, giving up")
     if reason:

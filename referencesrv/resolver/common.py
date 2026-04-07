@@ -264,7 +264,7 @@ class Solution(object):
     * score
     * source_hypothesis (the hypothesis that eventually got it right)
     """
-    def __init__(self, cited_bibcode, score, source_hypothesis='not given', cited_bibcode=None, citing_bibcode=None, scix_id=None):
+    def __init__(self, cited_bibcode, score, source_hypothesis='not given', citing_bibcode=None, scix_id=None):
         """
 
         :param cited_bibcode:

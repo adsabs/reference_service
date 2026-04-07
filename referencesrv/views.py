@@ -167,7 +167,7 @@ def text_resolve(reference, returned_format, id):
     :param returned_format:
     :return:
     """
-    not_resolved = '0.0 %s' % (19 * '.')
+    not_resolved = '0.0 bibcode:%s scixid:%s' % (19 * '.', 19 * '.')
     try:
         resolved = cache_resolved_get(reference)
         if resolved:
@@ -222,7 +222,7 @@ def xml_resolve(parsed_reference, returned_format):
     :param returned_format:
     :return:
     """
-    not_resolved = '0.0 %s' % (19 * '.')
+    not_resolved = '0.0 bibcode:%s scixid:%s' % (19 * '.', 19 * '.')
     try:
         resolved = str(solve_reference(Hypotheses(parsed_reference)))
         if resolved.startswith('0.0'):
