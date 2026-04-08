@@ -123,7 +123,9 @@ def format_resolved_reference(returned_format, resolved, reference, id, cache=Tr
         cache_resolved_set(reference, resolved)
     if 'application/json' in returned_format:
         resolved = resolved.split()
-        result = {'refstring': reference, 'score': resolved[0], 'bibcode': resolved[1]}
+        bibcode = resolved[1].replace('bibcode:','').strip()
+        scix_id = resolved[2].replace('scixid:','').strip()
+        result = {'refstring': reference, 'score': resolved[0], 'bibcode': bibcode, 'scix_id':scix_id}
         if comment:
             result['comment'] = comment
         if id:
@@ -165,7 +167,7 @@ def text_resolve(reference, returned_format, id):
     :param returned_format:
     :return:
     """
-    not_resolved = '0.0 %s' % (19 * '.')
+    not_resolved = '0.0 bibcode:%s scixid:%s' % (19 * '.', 19 * '.')
     try:
         resolved = cache_resolved_get(reference)
         if resolved:
@@ -220,7 +222,7 @@ def xml_resolve(parsed_reference, returned_format):
     :param returned_format:
     :return:
     """
-    not_resolved = '0.0 %s' % (19 * '.')
+    not_resolved = '0.0 bibcode:%s scixid:%s' % (19 * '.', 19 * '.')
     try:
         resolved = str(solve_reference(Hypotheses(parsed_reference)))
         if resolved.startswith('0.0'):

@@ -264,7 +264,7 @@ class Solution(object):
     * score
     * source_hypothesis (the hypothesis that eventually got it right)
     """
-    def __init__(self, cited_bibcode, score, source_hypothesis='not given', citing_bibcode=None):
+    def __init__(self, cited_bibcode, score, source_hypothesis='not given', citing_bibcode=None, scix_id=None):
         """
 
         :param cited_bibcode:
@@ -276,6 +276,7 @@ class Solution(object):
         self.score = score
         self.citing_bibcode = str(citing_bibcode)
         self.source_hypothesis = source_hypothesis
+        self.scix_id = scix_id
     
     def __str__(self):
         """
@@ -283,7 +284,7 @@ class Solution(object):
         :return:
         """
         if isinstance(self.score, Evidences):
-            return '%.1f %s'%(self.score.avg(),self.cited_bibcode)
+            return '%.1f bibcode:%s scixid:%s'%(self.score.avg(),self.cited_bibcode, self.scix_id)
         raise NoSolution("NotResolved")
 
     def __repr__(self):

@@ -356,8 +356,8 @@ class TestResolver(TestCase):
         """
         e = Evidences()
         e.add_evidence(1, 'bibcode')
-        s = Solution(cited_bibcode='2013SPIE.8004.2013Z', score=e)
-        self.assertEqual(str(s), '1.0 2013SPIE.8004.2013Z')
+        s = Solution(cited_bibcode='2013SPIE.8004.2013Z', scix_id='foo', score=e)
+        self.assertEqual(str(s), '1.0 bibcode:2013SPIE.8004.2013Z scixid:foo')
         self.assertEqual(repr(s), "'2013SPIE.8004.2013Z'")
 
 
@@ -417,7 +417,7 @@ class TestResolver(TestCase):
                'volume': '233',
                'year': '2019',
                'page': '207.04'}
-        self.assertEqual(str(solve_reference(Hypotheses(ref))), '1.0 2019AAS...23320704A')
+        self.assertEqual(str(solve_reference(Hypotheses(ref))), '1.0 bibcode:2019AAS...23320704A scixid:scix:6ANE-YQXJ-KRH0')
         # testing with first author only and page
         # eventhough other authors are missing but because of page match is found
         ref = {'authors': 'Accomazzi, A.',
@@ -425,14 +425,14 @@ class TestResolver(TestCase):
                'volume': '233',
                'year': '2019',
                'page': '381.08'}
-        self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.8 2019AAS...23338108A')
+        self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.8 bibcode:2019AAS...23338108A scixid:scix:AGA3-9D3P-Y7EF')
         # testing with first author only and no page, hence record with only the first author is returned
         ref = {'authors': 'Accomazzi, A.',
                'journal': 'AAS233 Meeting',
                'volume': '233',
                'year': '2019',
                'page': '0'}
-        self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.8 2019AAS...23320704A')
+        self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.8 bibcode:2019AAS...23320704A scixid:scix:6ANE-YQXJ-KRH0')
         # when we have multiple solutions and not enough reference information to decide which
         # page and author are the deciding factor between these two test records
         # here first author and page are wrong
@@ -454,7 +454,7 @@ class TestResolver(TestCase):
         # however the first record is authored by one author only and
         # it is the same first author of the second record
         # verify that the first record is returned
-        self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.8 2019AAS...23320704A')
+        self.assertEqual(str(solve_reference(Hypotheses(ref))), '0.8 bibcode:2019AAS...23320704A scixid:scix:6ANE-YQXJ-KRH0')
 
 
     def test_add_volume_evidence(self):
@@ -637,7 +637,7 @@ class TestResolver(TestCase):
         self.assertEqual(solrquery.make_params('author:("Accomazzi, A") AND year:"2019" AND bibstem:(AAS)'),
                          {'q': 'author:("Accomazzi, A") AND year:"2019" AND bibstem:(AAS)',
                           'rows': '100',
-                          'fl': u'author,[fields author=10]author_norm,[fields author_norm=10],first_author_norm,year,title,pub,pub_raw,aff_raw,[fields aff_raw=1],volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype'})
+                          'fl': u'author,[fields author=10]author_norm,[fields author_norm=10],first_author_norm,year,title,pub,pub_raw,aff_raw,[fields aff_raw=1],scix_id,volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype'})
 
         # no author_norm
         solution = {u'bibcode': u'2013JARS....7.3461V',

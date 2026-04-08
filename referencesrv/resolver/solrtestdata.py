@@ -20,6 +20,7 @@ def get_test_data():
                  u'numFound': 2,
                  u'docs': [
                      {u'bibcode': u'2019AAS...23320704A',
+                      u'scix_id': u'scix:6ANE-YQXJ-KRH0',
                       u'author': [u'Accomazzi, Alberto'],
                       u'title': [u'The NASA Astrophysics Data System\xe2\u20ac\u2122s Decadal Plan for the 2020s'],
                       u'doctype': u'abstract',
@@ -32,6 +33,7 @@ def get_test_data():
                       u'identifier': [u'2019AAS...23320704A'],
                       u'page': [u'207.04']},
                      {u'bibcode': u'2019AAS...23338108A',
+                      u'scix_id': u'scix:AGA3-9D3P-Y7EF',
                       u'author': [u'Accomazzi, Alberto', u'Kurtz, Michael J.', u'Henneken, Edwin', u'Grant, Carolyn S.', u'Thompson, Donna M.', u'Chyla, Roman', u'McDonald, Stephen', u'Blanco-Cuaresma, Sergi', u'Shapurian, Golnaz', u'Hostetler, Timothy', u'Templeton, Matthew', u'Lockhart, Kelly'],
                       u'title': [u'Transitioning from ADS Classic to the new ADS search platform'],
                       u'doctype': u'abstract',

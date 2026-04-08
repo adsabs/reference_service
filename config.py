@@ -13,7 +13,7 @@ REFERENCE_SERVICE_SOLRQUERY_URL = "https://api.adsabs.harvard.edu/v1/search/quer
 REFERENCE_SERVICE_MAX_RECORDS_SOLR = 100
 
 REFERENCE_SERVICE_QUERY_FIELDS_SOLR = "author,[fields author=10]author_norm,[fields author_norm=10],first_author_norm," \
-                                      "year,title,pub,pub_raw,aff_raw,[fields aff_raw=1]," \
+                                      "year,title,pub,pub_raw,aff_raw,[fields aff_raw=1],scix_id," \
                                       "volume,issue,page,page_range,bibstem,bibcode,identifier,doi,doctype"
 
 # maximum references that can be resolved in one call
