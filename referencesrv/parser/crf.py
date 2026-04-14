@@ -309,7 +309,10 @@ class CRFClassifierText(object):
         :return:
         """
         ref_dict = {}
-        ref_dict['authors'] = self.originator_token.collect_tagged_tokens(words, labels)
+        try:
+            ref_dict['authors'] = self.originator_token.collect_tagged_tokens(words, labels)
+        except Exception as err:
+            raise Exception('Failed to generate tagged tokens: {0}'.format(err))
         if 'DOI' in labels or 'ARXIV' in labels or 'ASCL' in labels:
             ref_dict.update(self.numeric_token.collect_id_tagged_tokens(words, labels))
         if 'YEAR' in labels:
