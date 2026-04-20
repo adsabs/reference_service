@@ -226,7 +226,7 @@ def xml_resolve(parsed_reference, returned_format):
     try:
         resolved = str(solve_reference(Hypotheses(parsed_reference)))
         if resolved.startswith('0.0'):
-            raise "Not Resolved"
+            raise ValueError("Not Resolved")
         reference_str = parsed_reference.get('refstr', None) or parsed_reference.get('refplaintext', None)
         return format_resolved_reference(returned_format,
                                          resolved=resolved,
@@ -257,6 +257,14 @@ def xml_resolve(parsed_reference, returned_format):
                                                      comment=error_comment)
 
                 except (NoSolution, Incomplete, ValueError) as e:
+                    error_comment = 'Exception: {error}'.format(error=str(e))
+                    current_app.logger.error(error_comment)
+                    return format_resolved_reference(returned_format,
+                                                     resolved=not_resolved,
+                                                     reference=reference_str,
+                                                     id=parsed_reference.get('id', None),
+                                                     comment=error_comment)
+                except Exception as e:
                     error_comment = 'Exception: {error}'.format(error=str(e))
                     current_app.logger.error(error_comment)
                     return format_resolved_reference(returned_format,
@@ -443,11 +451,18 @@ def parse_text():
 
     # start_time = time.time()
     results = []
+    rejected = []
     for reference in references:
-        results.append(text_parser(reference))
+        try:
+            results.append(text_parser(reference))
+        except Exception as err:
+            rejected.append(reference)
+            current_app.logger.error('Failed to parse reference: {0} (reason: {1})'.format(reference, err))
     # current_app.logger.debug("POST request with {num} reference(s) processed in {duration} ms".format(num=len(references), duration=(time.time() - start_time) * 1000))
 
     response = {'parsed': results}
+    if rejected:
+        response = {'parsed': results, 'rejected': rejected}
     if truncated_message:
         response['message'] = truncated_message
     return return_response(response, 200, 'application/json; charset=UTF8')
