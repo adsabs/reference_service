@@ -816,7 +816,7 @@ class TestEndpoints(TestCase):
                              headers={'accept': 'application/json'})
         self.assertEqual(json.loads(r.data), {"parsed": [{"authors": "Penington, G.",
                                                           "year": "2020", "volume": "9",
-                                                          "journal": "JHEP", "refstr": "Penington, G, 2020, JHEP, 9"}], "rejected":[]})
+                                                          "journal": "JHEP", "refstr": "Penington, G, 2020, JHEP, 9"}]})
 
     def test_04(self):
         """ test that an exception is properly caught """
@@ -825,12 +825,13 @@ class TestEndpoints(TestCase):
                              data=json.dumps({'reference': ["They are, I find, contained in a paper of some length in vol. vi of \" Taylor's Scientific Memoirs \", 1853, pp. 114--162."]}),
                              headers={'accept': 'application/json'})
         self.assertEqual(json.loads(r.data), {"parsed": [], "rejected":["They are, I find, contained in a paper of some length in vol. vi of \" Taylor's Scientific Memoirs \", 1853, pp. 114--162."]})
+        self.assertEqual(r.status_code, 200)
 
     def test_05(self):
         """ test XML endpoint with refstring that will generate exception """
 
         # the mock is for solr call
-        with mock.patch.object(self.current_app.client, 'post') as get_mock:
+        with mock.patch.object(self.current_app.client, 'get') as get_mock:
             get_mock.return_value = mock_response = mock.Mock()
             mock_response.status_code = 200
             mock_response.text = json.dumps({u'responseHeader': {u'status': 0, u'QTime': 60, u'params': {}},
@@ -839,6 +840,7 @@ class TestEndpoints(TestCase):
             payload = {"parsed_reference":[{"refplaintext": "They are, I find, contained in a paper of some length in vol. vi of \" Taylor\'s Scientific Memoirs \", 1853, pp. 114--162."}]}
             r = self.client.post(path='/xml',data=json.dumps(payload), headers={'accept': 'application/json'})
             self.assertEqual(json.loads(r.data),{'resolved': [{'refstring': 'They are, I find, contained in a paper of some length in vol. vi of " Taylor\'s Scientific Memoirs ", 1853, pp. 114--162.', 'score': '0.0', 'bibcode': '...................', 'scix_id': '...................', 'comment': 'Exception: Failed to generate tagged tokens: list index out of range'}]})
+            self.assertEqual(r.status_code, 200)
 
 if __name__ == "__main__":
     unittest.main()
